@@ -7,67 +7,64 @@
 <style>
   /* Base */
   *{box-sizing:border-box}
-  body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#0f172a;background:#ffffff}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#0f172a;background:#fff}
   .wrap{max-width:1200px;margin:24px auto;padding:0 20px}
   .topbar{height:8px;background:linear-gradient(90deg,#ec4899,#7c3aed);border-radius:999px}
   header{display:flex;align-items:center;justify-content:space-between;margin:12px 0 16px;gap:12px;flex-wrap:wrap}
   h1{margin:0;font-size:26px}
+  .tiny{font-size:12px;color:#64748b}
 
-  /* Candidate chips */
+  /* Candidate toggle */
   .toggle{display:flex;gap:8px;align-items:center}
   .chip{border:1px solid #e2e8f0;border-radius:999px;padding:8px 12px;background:#f8fafc;font-weight:700;cursor:pointer;font-size:13px}
   .chip.active{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
-  .tiny{font-size:12px;color:#64748b}
 
   /* Layout */
   .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
   @media (max-width:980px){.grid{grid-template-columns:1fr}}
+
+  /* Cards */
   .card{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:16px 18px;box-shadow:0 4px 20px rgba(15,23,42,.06)}
   .tab{display:inline-block;padding:8px 14px;border-radius:999px;color:#fff;font-weight:700;background:linear-gradient(90deg,#ec4899,#7c3aed);margin:-6px 0 12px}
 
-  /* Rows & status chips */
-  .row{display:grid;grid-template-columns:100px 220px 1fr;align-items:center;gap:10px;padding:8px 0}
+  /* Rows */
+  .row{display:grid;grid-template-columns:140px 220px 1fr;align-items:center;gap:10px;padding:8px 0}
   .row + .row{border-top:1px dashed #e2e8f0}
   .label{min-width:220px;font-weight:700}
+
+  /* Status chips (left column) */
   .status{display:inline-flex;align-items:center;justify-content:center;min-width:90px;height:26px;padding:4px 10px;font-size:12px;font-weight:700;border-radius:999px;border:1px solid transparent}
   .s-strong{color:#065f46;background:#ecfdf5;border-color:#a7f3d0}
   .s-average{color:#92400e;background:#fef3c7;border-color:#fde68a}
   .s-flag{color:#7f1d1d;background:#fee2e2;border-color:#fecaca}
 
-  /* Buttons & AI tags */
-  .btn{border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;background:#f8fafc;font-weight:600;margin:6px 6px 0 0;display:inline-block}
+  /* Inline pills in dropdown */
+  .pill{display:inline-block;padding:6px 10px;border:1px solid #e2e8f0;border-radius:999px;background:#f8fafc;font-size:12px;margin-right:6px}
+  .pill-neutral{background:#f1f5f9;border-color:#e2e8f0;color:#334155} /* gray */
+  .pill-good{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}  /* green for Match */
+  .pill-warn{background:#fff7ed;border-color:#fed7aa;color:#92400e} /* amber for Related */
+  .pill-bad{background:#fee2e2;border-color:#fecaca;color:#7f1d1d}  /* rose for Mismatch */
+
+  /* AI rec + buttons */
   .ai{display:inline-block;padding:8px 12px;border-radius:12px;font-weight:800;border:1px solid #e2e8f0}
   .ai.ok{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
   .ai.warn{background:#fef3c7;border-color:#fde68a;color:#92400e}
   .ai.no{background:#fee2e2;border-color:#fecaca;color:#7f1d1d}
+  .btn{border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;background:#f8fafc;font-weight:600;margin:6px 6px 0 0;display:inline-block}
+
   textarea{width:100%;min-height:80px;border:1px solid #e2e8f0;border-radius:12px;padding:10px;resize:vertical}
   ul{margin:0;padding-left:22px}
 
-  /* Tenure nested section */
+  /* Tenure dropdown elbow */
   details.tenure{grid-column:2 / span 2;margin:0 0 6px 30px;position:relative;padding-left:12px}
   details.tenure::before{content:"";position:absolute;left:-18px;top:-14px;width:18px;height:14px;border-left:2px solid #e2e8f0;border-bottom:2px solid #e2e8f0;border-radius:0 0 0 8px}
   details.tenure summary{list-style:none;cursor:pointer;font-size:12px;color:#475569}
   details.tenure summary::-webkit-details-marker{display:none}
-
-  /* Employer block */
-  .employer{border-left:2px solid #e2e8f0;padding-left:12px;margin-top:10px}
-  .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-  .pill{display:inline-block;padding:6px 10px;border:1px solid #e2e8f0;border-radius:999px;background:#f8fafc;font-size:12px;white-space:nowrap}
-
-  /* Colors for the two employer pills */
-  .tenure-high{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
-  .tenure-med{background:#fef3c7;border-color:#fde68a;color:#92400e}
-  .tenure-low{background:#fee2e2;border-color:#fecaca;color:#7f1d1d}
-
-  .comp-match{background:#ecfdf5;border-color:#86efac;color:#065f46}
-  .comp-related{background:#fff7ed;border-color:#fcd34d;color:#b45309}
-  .comp-mismatch{background:#f3f4f6;border-color:#e5e7eb;color:#6b7280}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="topbar"></div>
-
   <header>
     <h1>Screen Assist (HITL) - Demo</h1>
     <div class="toggle" id="candidateToggle">
@@ -121,14 +118,14 @@
 
       <div class="row" id="tenure-row">
         <span class="status" id="s_tenure">Strong</span>
-        <div class="label">Employer & Tenure:</div>
+        <div class="label">Employer &amp; Tenure:</div>
         <div>
           <div id="v_tenure">1 employer in last 5 yrs</div>
-          <div class="tiny" id="v_comp_score" style="margin-top:2px;">Competitor: —</div>
+          <div class="tiny" id="comp_score_summary" style="margin-top:4px">Competitor Score: —</div>
         </div>
       </div>
 
-      <!-- Nested dropdown under Tenure -->
+      <!-- Nested dropdown directly under Employer & Tenure -->
       <details class="tenure" open>
         <summary>Employer history (promotion-safe)</summary>
         <div class="card" style="margin-top:8px;padding:10px 12px">
@@ -143,9 +140,7 @@
       <div class="ai" id="ai_rec">AI Recommendation: Advance</div>
       <div class="tiny" style="margin-top:8px" id="why_rec">AI Decision Rationale: ...</div>
 
-      <!-- Competitor signal line (overall) -->
-      <div class="tiny" style="margin-top:6px" id="comp_sig">Competitor: Unknown (0.00) - Freshness: N/A</div>
-
+      <!-- Decision buttons -->
       <div style="margin-top:12px">
         <span class="btn">Advance</span>
         <span class="btn">HM-Review</span>
@@ -160,7 +155,7 @@
         <div class="tab">Recommended Recruiter Interview Questions</div>
         <ul id="rq_list">
           <li>Review salary bands and expectations</li>
-          <li>Percent of pipeline self-sourced in FY24</li>
+          <li>What percent of pipeline was self-sourced in FY24?</li>
           <li>Confirm length of sales cycle and ACV</li>
         </ul>
       </div>
@@ -169,7 +164,7 @@
 </div>
 
 <script>
-  /* Demo data (3 candidates) */
+  // Three sample candidates
   const CANDIDATES = {
     jordan: {
       status: {source:"s-strong", location:"s-strong", total:"s-strong", role:"s-strong", edu:"s-average", seniority:"s-flag", tenure:"s-strong"},
@@ -180,25 +175,19 @@
       edu: "Undergraduate Degree (BA, Economics)",
       seniority: "High end of band",
       tenure: "1 employer in last 5 yrs",
+      compGlobal: {score:"0.58", label:"Near"},
       employers: [
-        {company:"Acme Inc.", span:"2020-01 -> present",
-         notes:["2021-04: Associate AE -> AE (promotion)", "2022-06: AE -> Senior AE (promotion)"],
-         tenure_conf:"high", comp:{label:"Near", score:"0.58"}},
-
-        {company:"BetaSoft", span:"2018-01 -> 2019-12",
-         notes:["Single role"],
-         tenure_conf:"high", comp:{label:"None", score:"0.22"}}
+        {company:"Acme Inc.", span:"2020-01 -> present", notes:["2021-04: Associate AE -> AE (promotion)", "2022-06: AE -> Senior AE (promotion)"], tenureConf:"High", compClass:"related", compLabel:"Related", score:"0.58"},
+        {company:"BetaSoft", span:"2018-01 -> 2019-12", notes:["Single role"], tenureConf:"High", compClass:"mismatch", compLabel:"Mismatch", score:"0.22"}
       ],
       rec: {label:"Advance", cls:"ok"},
-      why: "Tenure PASS; Near-competitor (+); Resume coverage avg 0.98; SQS 0.78; Company data fresh 12d",
-      comp: {label:"Near", score:"0.58", freshness:"12d"},
+      why: "AI Decision Rationale: Resume coverage 0.98 • SQS 0.78 • Data freshness 12d • Tenure PASS",
       rq: [
         "Review salary bands and expectations",
         "Percent of pipeline self-sourced in FY24",
         "Confirm length of sales cycle and ACV"
       ]
     },
-
     taylor: {
       status: {source:"s-average", location:"s-strong", total:"s-average", role:"s-average", edu:"s-strong", seniority:"s-average", tenure:"s-flag"},
       source: "Inbound - Job Posting (SQS 0.31)",
@@ -208,22 +197,21 @@
       edu: "BS, Business Admin",
       seniority: "Within band",
       tenure: "4 employers in last 5 yrs",
+      compGlobal: {score:"0.22", label:"None"},
       employers: [
-        {company:"StartCo", span:"2024-01 -> present", notes:["BDR"],        tenure_conf:"med", comp:{label:"None", score:"0.20"}},
-        {company:"Grow.io", span:"2023-03 -> 2023-12", notes:["SDR"],        tenure_conf:"med", comp:{label:"None", score:"0.18"}},
-        {company:"Taskly",  span:"2021-05 -> 2023-02", notes:["SDR"],        tenure_conf:"low", comp:{label:"None", score:"0.15"}},
-        {company:"Retail PT", span:"2020-01 -> 2021-04", notes:["Associate"], tenure_conf:"high", comp:{label:"None", score:"0.05"}}
+        {company:"StartCo", span:"2024-01 -> present", notes:["BDR"], tenureConf:"Medium", compClass:"mismatch", compLabel:"Mismatch", score:"0.20"},
+        {company:"Grow.io", span:"2023-03 -> 2023-12", notes:["SDR"], tenureConf:"Medium", compClass:"related", compLabel:"Related", score:"0.42"},
+        {company:"Taskly", span:"2021-05 -> 2023-02", notes:["SDR"], tenureConf:"Low", compClass:"mismatch", compLabel:"Mismatch", score:"0.18"},
+        {company:"Retail PT", span:"2020-01 -> 2021-04", notes:["Associate"], tenureConf:"High", compClass:"mismatch", compLabel:"Mismatch", score:"0.10"}
       ],
       rec: {label:"HM-Review", cls:"warn"},
-      why: "Tenure FLAG; Competitor: None; Resume coverage avg 0.62; Low SQS 0.31; Consider for SDR pool",
-      comp: {label:"None", score:"0.22", freshness:"8d"},
+      why: "AI Decision Rationale: Resume coverage 0.62 • SQS 0.31 • Data freshness 8d • Tenure FLAG",
       rq: [
         "Discuss role seniority fit and ramp expectations",
         "Explore stability context for job changes",
         "Assess outbound motion depth and conversion rates"
       ]
     },
-
     sam: {
       status: {source:"s-strong", location:"s-strong", total:"s-strong", role:"s-strong", edu:"s-average", seniority:"s-strong", tenure:"s-strong"},
       source: "Sourced - Talent map (SQS 0.65)",
@@ -233,15 +221,13 @@
       edu: "BA, Communications",
       seniority: "Mid-band",
       tenure: "2 employers in last 5 yrs",
+      compGlobal: {score:"0.74", label:"Direct"},
       employers: [
-        {company:"Contenda",    span:"2022-02 -> present", notes:["Enterprise AE","2023-08: Club Winner"],
-         tenure_conf:"high", comp:{label:"Direct", score:"0.74"}},
-        {company:"Helios Data", span:"2019-01 -> 2022-01",  notes:["AE -> Sr AE"],
-         tenure_conf:"high", comp:{label:"Near", score:"0.44"}}
+        {company:"Contenda", span:"2022-02 -> present", notes:["Enterprise AE","2023-08: Club Winner"], tenureConf:"High", compClass:"match", compLabel:"Match", score:"0.74"},
+        {company:"Helios Data", span:"2019-01 -> 2022-01", notes:["AE -> Sr AE"], tenureConf:"High", compClass:"related", compLabel:"Related", score:"0.55"}
       ],
       rec: {label:"Advance", cls:"ok"},
-      why: "Tenure PASS; Competitor: Direct; Resume coverage avg 0.91; SQS 0.65; Deal sizes match 150k ACV",
-      comp: {label:"Direct", score:"0.74", freshness:"15d"},
+      why: "AI Decision Rationale: Resume coverage 0.91 • SQS 0.65 • Data freshness 15d • Tenure PASS",
       rq: [
         "Validate ACV and cycle for top 3 wins",
         "IC vs team-sourced pipeline split",
@@ -250,40 +236,27 @@
     }
   };
 
-  /* Helpers */
   function setStatus(elId, cls){
     var el = document.getElementById(elId);
     el.className = "status " + cls;
     el.textContent = (cls==="s-strong"?"Strong":cls==="s-average"?"Average":"Flag");
   }
 
-  // Map comp labels to display text + class
-  function compDisplay(label){
-    if(label==="Direct") return {text:"Match", cls:"comp-match"};
-    if(label==="Near")   return {text:"Related", cls:"comp-related"};
-    return {text:"Mismatch", cls:"comp-mismatch"};
-  }
-
-  function tenureClass(level){
-    if(level==="high") return "tenure-high";
-    if(level==="med")  return "tenure-med";
-    return "tenure-low";
+  // Map comp class -> pill class
+  function compPillClass(c){
+    if(c==="match") return "pill-good";
+    if(c==="related") return "pill-warn";
+    if(c==="mismatch") return "pill-bad";
+    return "pill-neutral";
   }
 
   function renderEmployers(list){
     return list.map(function(e){
       var notes = e.notes.map(function(n){ return '<div class="tiny">• ' + n + '</div>'; }).join("");
-      var comp = compDisplay(e.comp && e.comp.label ? e.comp.label : "None");
-      var tcls = tenureClass(e.tenure_conf || "med");
-
-      return '<div class="employer">'
-           +   '<div><b>' + e.company + '</b> '
-           +       '<span class="tiny">' + e.span + '</span>'
-           +   '</div>'
-           +   '<div class="pillrow">'
-           +       '<span class="pill ' + tcls + '">Tenure Confidence: ' + (e.tenure_conf || "med") + '</span>'
-           +       '<span class="pill ' + comp.cls + '">Competitor: ' + comp.text + '</span>'
-           +   '</div>'
+      var tenurePill = '<span class="pill pill-neutral" title="Model confidence in promotion-safe tenure at this employer">Tenure: ' + e.tenureConf + '</span>';
+      var compPill = '<span class="pill ' + compPillClass(e.compClass) + '" title="Competitor relationship score ' + (e.score||"") + '"> ' + e.compLabel + '</span>';
+      return '<div style="border-left:2px solid #e2e8f0;padding-left:12px;margin-top:8px">'
+           +   '<div><b>' + e.company + '</b> ' + tenurePill + compPill + ' <span class="tiny">' + e.span + '</span></div>'
            +   notes
            + '</div>';
     }).join("");
@@ -291,7 +264,6 @@
 
   function renderCandidate(id){
     var c = CANDIDATES[id];
-
     // Statuses
     setStatus("s_source", c.status.source);
     setStatus("s_location", c.status.location);
@@ -309,33 +281,32 @@
     document.getElementById("v_edu").textContent = c.edu;
     document.getElementById("v_seniority").textContent = c.seniority;
     document.getElementById("v_tenure").textContent = c.tenure;
-    // Competitor score under tenure
-    document.getElementById("v_comp_score").textContent =
-      "Competitor: " + c.comp.label + " (" + c.comp.score + ")";
 
-    // Employer details
+    // Competitor Score (aggregated)
+    var compLine = "Competitor Score: " + (c.compGlobal?.score || "—") + (c.compGlobal?.label ? " (" + c.compGlobal.label + ")" : "");
+    document.getElementById("comp_score_summary").textContent = compLine;
+
+    // Employers
     document.getElementById("employers").innerHTML = renderEmployers(c.employers);
 
-    // Recommendation + rationale
+    // Recommendation
     var ai = document.getElementById("ai_rec");
     ai.textContent = "AI Recommendation: " + c.rec.label;
     ai.className = "ai " + (c.rec.cls || "");
-    document.getElementById("why_rec").textContent = "AI Decision Rationale: " + c.why;
 
-    // Overall competitor signal line
-    document.getElementById("comp_sig").textContent =
-      "Competitor: " + c.comp.label + " (" + c.comp.score + ") - Freshness: " + c.comp.freshness;
+    // Why (no competitor mention)
+    document.getElementById("why_rec").textContent = c.why;
 
     // Questions
-    document.getElementById("rq_list").innerHTML = c.rq.map(function(x){ return "<li>"+x+"</li>"; }).join("");
+    var rq = document.getElementById("rq_list");
+    rq.innerHTML = c.rq.map(function(x){ return "<li>"+x+"</li>"; }).join("");
 
-    // Toggle state
+    // Toggle pills
     Array.prototype.forEach.call(document.querySelectorAll(".chip"), function(ch){ ch.classList.remove("active"); });
-    var active = document.querySelector('.chip[data-id="'+id+'"]');
-    if(active) active.classList.add("active");
+    var active = document.querySelector('.chip[data-id="'+id+'"]'); if(active) active.classList.add("active");
   }
 
-  // Toggle handler
+  // Wire up toggle
   document.getElementById("candidateToggle").addEventListener("click", function(e){
     var t = e.target.closest(".chip");
     if(!t) return;
