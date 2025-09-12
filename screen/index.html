@@ -121,8 +121,11 @@
 
       <div class="row" id="tenure-row">
         <span class="status" id="s_tenure">Strong</span>
-        <div class="label">Tenure:</div>
-        <div id="v_tenure">1 employer in last 5 yrs</div>
+        <div class="label">Employer & Tenure:</div>
+        <div>
+          <div id="v_tenure">1 employer in last 5 yrs</div>
+          <div class="tiny" id="v_comp_score" style="margin-top:2px;">Competitor: —</div>
+        </div>
       </div>
 
       <!-- Nested dropdown under Tenure -->
@@ -256,7 +259,6 @@
 
   // Map comp labels to display text + class
   function compDisplay(label){
-    // Direct -> Match; Near -> Related; None -> Mismatch
     if(label==="Direct") return {text:"Match", cls:"comp-match"};
     if(label==="Near")   return {text:"Related", cls:"comp-related"};
     return {text:"Mismatch", cls:"comp-mismatch"};
@@ -307,6 +309,9 @@
     document.getElementById("v_edu").textContent = c.edu;
     document.getElementById("v_seniority").textContent = c.seniority;
     document.getElementById("v_tenure").textContent = c.tenure;
+    // Competitor score under tenure
+    document.getElementById("v_comp_score").textContent =
+      "Competitor: " + c.comp.label + " (" + c.comp.score + ")";
 
     // Employer details
     document.getElementById("employers").innerHTML = renderEmployers(c.employers);
