@@ -6,85 +6,147 @@
 <title>Screen Assist (HITL) — Demo</title>
 <style>
   :root{
-    --bg:#f7f7fb;
+    --bg:#f5f7fb;
     --card:#ffffff;
     --ink:#111827;
     --muted:#6b7280;
     --line:#ececf2;
+    --shadow: 0 8px 24px rgba(17,24,39,.06);
+    --radius:14px;
+
     --pill-strong:#16a34a;
     --pill-avg:#f59e0b;
     --pill-flag:#ef4444;
-    --accent-start:#8b5cf6; /* gradient headers */
+
+    --accent-start:#8b5cf6; /* gradient chips */
     --accent-end:#ec4899;
-    --shadow: 0 8px 24px rgba(17,24,39,.06);
-    --radius:16px;
+
+    --chip-bg:#f1f5f9;
+    --chip-border:#e5e7eb;
   }
+
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
-  body{font:16px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
-  .wrap{max-width:1200px;margin:28px auto;padding:0 20px}
-  h1{font-size:28px;margin:0 0 16px 0}
-  .subtle{color:var(--muted)}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  body{
+    font:14px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+  }
+
+  /* Top gradient bar (classic) */
+  .topbar{
+    height:6px;
+    background:linear-gradient(90deg,var(--accent-start),var(--accent-end));
+    border-radius:0 0 8px 8px;
+  }
+
+  .wrap{max-width:1120px;margin:14px auto 28px;padding:0 18px}
+
+  /* Page title row + candidates group */
+  .titlebar{
+    display:flex;align-items:center;justify-content:space-between;margin:10px 0 10px;
+  }
+  h1{font-size:22px;margin:0;font-weight:800}
+
+  .seg-wrap{
+    display:flex;align-items:center;gap:8px;color:var(--muted);
+    font-size:13px;
+  }
+  .seg{
+    display:inline-flex;gap:6px;background:var(--chip-bg);border:1px solid var(--chip-border);
+    padding:5px;border-radius:999px;
+  }
+  .seg button{
+    padding:4px 10px;border:0;background:transparent;border-radius:999px;font-weight:700;
+    color:#334155;cursor:pointer;font-size:13px;
+  }
+  .seg button.active{background:#fff;border:1px solid #d1d5db;color:#111827}
+
+  /* Layout */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   @media (max-width: 980px){.grid{grid-template-columns:1fr}}
 
-  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line)}
-  .card .body{padding:18px}
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+  .card .body{padding:14px 16px}
+
+  /* Gradient chip headers */
   .header{
-    display:inline-block;padding:8px 14px;margin:18px 18px 0;border-radius:999px;
-    color:#fff;font-weight:700;letter-spacing:.2px;
+    display:inline-block;
+    padding:6px 12px;margin:14px 14px 0;border-radius:12px;
+    color:#fff;font-weight:800;letter-spacing:.2px;font-size:13px;
     background:linear-gradient(135deg,var(--accent-start),var(--accent-end));
   }
 
-  .row{display:grid;grid-template-columns:160px 1fr;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  /* Rows in Application Review */
+  .row{
+    display:grid;grid-template-columns:180px 1fr;
+    align-items:center;gap:10px;
+    padding:10px 0;border-bottom:1px solid var(--line)
+  }
   .row:last-child{border-bottom:none}
-  .label{font-weight:700}
-  .kvs{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-  .pill{font-size:12px;padding:6px 10px;border-radius:999px;color:#fff;font-weight:700;letter-spacing:.2px}
+  .label{font-weight:800}
+
+  .kvs{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .pill{
+    font-size:11px;padding:4px 8px;border-radius:999px;color:#fff;font-weight:800;letter-spacing:.2px
+  }
   .pill.strong{background:var(--pill-strong)}
   .pill.avg{background:var(--pill-avg)}
   .pill.flag{background:var(--pill-flag)}
 
-  .nested{margin-top:8px;border-left:3px solid #d6d6e7;padding:10px 12px;border-radius:10px;background:#fafafe}
+  /* Employer history nested */
+  .toggle{
+    display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-weight:700;
+    cursor:pointer;margin-top:2px
+  }
   .chev{display:inline-block;transform:rotate(-90deg);transition:transform .2s ease}
   .open .chev{transform:rotate(0)}
-  .toggle{display:flex;align-items:center;gap:8px;color:var(--muted);font-weight:600;cursor:pointer;margin:6px 0 2px 0}
-  .emp{margin:10px 0 6px;font-weight:800}
-  .meta{color:var(--muted);font-size:14px;margin:0}
 
-  .r-stack{display:flex;flex-direction:column;gap:20px}
-  .ai-pill{display:inline-block;border-radius:999px;padding:8px 12px;font-weight:800}
+  .nested{
+    margin-top:8px;border-left:3px solid #d6d6e7;padding:10px 12px;border-radius:10px;background:#fafafe;
+    border:1px solid var(--line);
+  }
+  .emp{margin:6px 0;font-weight:800}
+  .muted{color:var(--muted)}
+  ul.clean{margin:6px 0 0 18px}
+
+  /* Decision panel */
+  .ai-pill{
+    display:inline-block;border-radius:999px;padding:6px 10px;font-weight:800;font-size:13px
+  }
   .rec-Advance{background:#e9f9ee;color:#0f5132;border:1px solid #a7e3bf}
   .rec-HM-Review{background:#fff7e6;color:#7a4d00;border:1px solid #ffd48a}
   .rec-Hold{background:#f5f6f8;color:#334155;border:1px solid #d1d5db}
   .rec-Decline{background:#fde8e8;color:#7f1d1d;border:1px solid #fecaca}
 
-  .btns{display:flex;gap:10px;flex-wrap:wrap}
+  .btns{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
   .btn{
-    padding:10px 14px;border:1px solid #d1d5db;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;
-    transition:all .15s ease
+    padding:8px 12px;border:1px solid #d1d5db;border-radius:10px;background:#fff;font-weight:800;cursor:pointer;
+    transition:all .15s ease;font-size:14px
   }
   .btn:hover{box-shadow:var(--shadow)}
   .btn.active{background:#111827;color:#fff;border-color:#111827}
 
   textarea{
-    width:100%;min-height:110px;border:1px solid #d1d5db;border-radius:12px;padding:10px 12px;font:inherit;resize:vertical;background:#fff
+    width:100%;min-height:90px;border:1px solid #d1d5db;border-radius:12px;padding:10px 12px;font:inherit;resize:vertical;background:#fff
   }
-  .hint{color:var(--muted);font-size:13px;margin-left:6px}
-  .hstack{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .seg{display:inline-flex;gap:8px;background:#f1f5f9;border:1px solid #e5e7eb;padding:6px;border-radius:999px}
-  .seg button{padding:6px 10px;border:0;background:transparent;border-radius:999px;font-weight:700;color:#334155;cursor:pointer}
-  .seg button.active{background:#fff;border:1px solid #d1d5db;color:#111827}
-  .muted{color:var(--muted)}
-  ul.clean{margin:12px 0 0 22px}
+  .hint{color:var(--muted);font-size:12px;margin-left:6px}
+
 </style>
 </head>
 <body>
+  <div class="topbar"></div>
+
   <div class="wrap">
-    <div class="hstack" style="justify-content:space-between;margin-bottom:6px;">
+    <div class="titlebar">
       <h1>Screen Assist (HITL) — Demo</h1>
-      <div class="hstack">
-        <span class="muted">Sample candidates:</span>
+      <div class="seg-wrap">
+        <span>Sample candidates:</span>
         <div class="seg" id="seg">
           <button data-id="jordan" class="active">Jordan</button>
           <button data-id="taylor">Taylor</button>
@@ -94,26 +156,28 @@
     </div>
 
     <div class="grid">
-      <section class="card" id="left">
+      <!-- Left: Application Review -->
+      <section class="card">
         <div class="header">Application Review</div>
         <div class="body" id="review"></div>
       </section>
 
-      <div class="r-stack">
+      <!-- Right stack -->
+      <div style="display:flex;flex-direction:column;gap:18px">
         <section class="card">
           <div class="header">Decision Recommendation</div>
           <div class="body">
-            <div class="hstack" style="justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
               <div id="aiRecPill" class="ai-pill rec-Advance">AI Recommendation: Advance</div>
             </div>
 
-            <div style="margin:10px 0 14px;">
-              <strong class="muted">AI Decision Rationale:</strong>
-              <div id="rationale" style="margin-top:6px"></div>
+            <div style="margin:8px 0 10px;font-size:13px">
+              <strong>AI Decision Rationale:</strong>
+              <span id="rationale" class="muted" style="margin-left:6px"></span>
             </div>
 
             <div>
-              <div class="hstack" style="margin:6px 0 10px"><strong>Your decision:</strong></div>
+              <div style="font-weight:800;margin:6px 0 6px">Your decision:</div>
               <div class="btns">
                 <button class="btn" id="btn-advance">Advance</button>
                 <button class="btn" id="btn-hm">HM-Review</button>
@@ -122,10 +186,9 @@
               </div>
             </div>
 
-            <div style="margin-top:12px">
-              <label for="notes"><strong>Notes (saved to ATS)</strong>
-                <span id="note-hint" class="hint">Optional — required only on overrides.</span>
-              </label>
+            <div style="margin-top:6px">
+              <label for="notes" style="font-weight:800">Notes (saved to ATS)</label>
+              <span id="note-hint" class="hint">Optional — required with override.</span>
               <textarea id="notes" placeholder="Add context, risks, or follow-ups…"></textarea>
             </div>
           </div>
@@ -142,6 +205,7 @@
   </div>
 
 <script>
+/* ---------- Sample Data ---------- */
 const DATA = {
   jordan: {
     name: "Jordan",
@@ -245,6 +309,7 @@ const DATA = {
   }
 };
 
+/* ---------- Helpers & Rendering ---------- */
 const $ = sel => document.querySelector(sel);
 function pill(str){return `<span class="pill ${str}">${str==='strong'?'Strong':str==='avg'?'Average':'Flag'}</span>`}
 
@@ -252,9 +317,8 @@ function renderReview(list){
   const rows = list.map((item,i)=>{
     const nested = item.nested ? `
       <div class="nested" id="nest-${i}" hidden>
-        <div class="emp">Employer history</div>
         ${item.nested.history.map(h => `
-          <div style="margin:10px 0 6px;">
+          <div style="margin:6px 0 8px">
             <div><strong>${h.employer}</strong> <span class="muted">Confidence: ${h.confidence}${h.range?` • ${h.range}`:''}</span></div>
             <ul class="clean">
               ${h.lines.map(l=>`<li>${l}</li>`).join('')}
@@ -285,15 +349,15 @@ function renderReview(list){
     t.addEventListener('click', ()=>{
       const id = t.getAttribute('data-target');
       const block = document.getElementById(id);
-      const open = block.hasAttribute('hidden') ? false : true;
+      const open = !block.hasAttribute('hidden');
       block.toggleAttribute('hidden');
-      t.classList.toggle('open');
+      t.classList.toggle('open', !open);
     });
   });
 }
 
 function renderRationale(list){
-  $("#rationale").innerHTML = list.map(x=>`• ${x}`).join(' • ');
+  $("#rationale").innerHTML = list.join(" • ");
 }
 
 function setRecPill(rec){
@@ -306,6 +370,7 @@ function renderQuestions(list){
   $("#rq").innerHTML = list.map(q=>`<li>${q}</li>`).join('');
 }
 
+/* ---------- Decision logic & state ---------- */
 const noteBox = $("#notes");
 const noteHint = $("#note-hint");
 let aiRec = "Advance";
@@ -315,10 +380,11 @@ function onDecision(decision){
   const map = {Advance:'#btn-advance','HM-Review':'#btn-hm',Hold:'#btn-hold',Decline:'#btn-decline'};
   document.querySelector(map[decision]).classList.add('active');
 
+  /* Require a note if recruiter overrides the AI rec */
   const override = decision !== aiRec;
   noteBox.required = override;
-  noteHint.textContent = override ? 'Required — explain the override (saved to ATS).'
-                                  : 'Optional — add context, risks, or follow-ups.';
+  noteHint.textContent = 'Optional — ' + (override ? 'required with override.' : 'required with override.');
+  // We keep the text constant per your instruction. The logic still toggles the "required" attribute.
 }
 
 function load(id){
@@ -330,9 +396,10 @@ function load(id){
   renderQuestions(c.questions);
   document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
   noteBox.required = false;
-  noteHint.textContent = 'Optional — required only on overrides.';
+  noteHint.textContent = 'Optional — required with override.';
   noteBox.value = '';
 }
+
 document.getElementById('btn-advance').onclick = ()=>onDecision('Advance');
 document.getElementById('btn-hm').onclick      = ()=>onDecision('HM-Review');
 document.getElementById('btn-hold').onclick    = ()=>onDecision('Hold');
@@ -346,6 +413,7 @@ document.querySelectorAll('#seg button').forEach(b=>{
   });
 });
 
+/* Initial load */
 load('jordan');
 </script>
 </body>
