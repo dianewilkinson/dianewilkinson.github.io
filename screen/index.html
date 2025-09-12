@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Screen Assist (HITL) — Demo</title>
+<style>
+  :root{
+    --bg:#f7f7fb;
+    --card:#ffffff;
+    --ink:#111827;
+    --muted:#6b7280;
+    --line:#ececf2;
+    --pill-strong:#16a34a;
+    --pill-avg:#f59e0b;
+    --pill-flag:#ef4444;
+    --accent-start:#8b5cf6; /* gradient headers */
+    --accent-end:#ec4899;
+    --shadow: 0 8px 24px rgba(17,24,39,.06);
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font:16px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  .wrap{max-width:1200px;margin:28px auto;padding:0 20px}
+  h1{font-size:28px;margin:0 0 16px 0}
+  .subtle{color:var(--muted)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media (max-width: 980px){.grid{grid-template-columns:1fr}}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line)}
+  .card .body{padding:18px}
+  .header{
+    display:inline-block;padding:8px 14px;margin:18px 18px 0;border-radius:999px;
+    color:#fff;font-weight:700;letter-spacing:.2px;
+    background:linear-gradient(135deg,var(--accent-start),var(--accent-end));
+  }
+
+  .row{display:grid;grid-template-columns:160px 1fr;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .row:last-child{border-bottom:none}
+  .label{font-weight:700}
+  .kvs{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .pill{font-size:12px;padding:6px 10px;border-radius:999px;color:#fff;font-weight:700;letter-spacing:.2px}
+  .pill.strong{background:var(--pill-strong)}
+  .pill.avg{background:var(--pill-avg)}
+  .pill.flag{background:var(--pill-flag)}
+
+  .nested{margin-top:8px;border-left:3px solid #d6d6e7;padding:10px 12px;border-radius:10px;background:#fafafe}
+  .chev{display:inline-block;transform:rotate(-90deg);transition:transform .2s ease}
+  .open .chev{transform:rotate(0)}
+  .toggle{display:flex;align-items:center;gap:8px;color:var(--muted);font-weight:600;cursor:pointer;margin:6px 0 2px 0}
+  .emp{margin:10px 0 6px;font-weight:800}
+  .meta{color:var(--muted);font-size:14px;margin:0}
+
+  .r-stack{display:flex;flex-direction:column;gap:20px}
+  .ai-pill{display:inline-block;border-radius:999px;padding:8px 12px;font-weight:800}
+  .rec-Advance{background:#e9f9ee;color:#0f5132;border:1px solid #a7e3bf}
+  .rec-HM-Review{background:#fff7e6;color:#7a4d00;border:1px solid #ffd48a}
+  .rec-Hold{background:#f5f6f8;color:#334155;border:1px solid #d1d5db}
+  .rec-Decline{background:#fde8e8;color:#7f1d1d;border:1px solid #fecaca}
+
+  .btns{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{
+    padding:10px 14px;border:1px solid #d1d5db;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;
+    transition:all .15s ease
+  }
+  .btn:hover{box-shadow:var(--shadow)}
+  .btn.active{background:#111827;color:#fff;border-color:#111827}
+
+  textarea{
+    width:100%;min-height:110px;border:1px solid #d1d5db;border-radius:12px;padding:10px 12px;font:inherit;resize:vertical;background:#fff
+  }
+  .hint{color:var(--muted);font-size:13px;margin-left:6px}
+  .hstack{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .seg{display:inline-flex;gap:8px;background:#f1f5f9;border:1px solid #e5e7eb;padding:6px;border-radius:999px}
+  .seg button{padding:6px 10px;border:0;background:transparent;border-radius:999px;font-weight:700;color:#334155;cursor:pointer}
+  .seg button.active{background:#fff;border:1px solid #d1d5db;color:#111827}
+  .muted{color:var(--muted)}
+  ul.clean{margin:12px 0 0 22px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hstack" style="justify-content:space-between;margin-bottom:6px;">
+      <h1>Screen Assist (HITL) — Demo</h1>
+      <div class="hstack">
+        <span class="muted">Sample candidates:</span>
+        <div class="seg" id="seg">
+          <button data-id="jordan" class="active">Jordan</button>
+          <button data-id="taylor">Taylor</button>
+          <button data-id="sam">Sam</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <section class="card" id="left">
+        <div class="header">Application Review</div>
+        <div class="body" id="review"></div>
+      </section>
+
+      <div class="r-stack">
+        <section class="card">
+          <div class="header">Decision Recommendation</div>
+          <div class="body">
+            <div class="hstack" style="justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <div id="aiRecPill" class="ai-pill rec-Advance">AI Recommendation: Advance</div>
+            </div>
+
+            <div style="margin:10px 0 14px;">
+              <strong class="muted">AI Decision Rationale:</strong>
+              <div id="rationale" style="margin-top:6px"></div>
+            </div>
+
+            <div>
+              <div class="hstack" style="margin:6px 0 10px"><strong>Your decision:</strong></div>
+              <div class="btns">
+                <button class="btn" id="btn-advance">Advance</button>
+                <button class="btn" id="btn-hm">HM-Review</button>
+                <button class="btn" id="btn-hold">Hold</button>
+                <button class="btn" id="btn-decline">Decline</button>
+              </div>
+            </div>
+
+            <div style="margin-top:12px">
+              <label for="notes"><strong>Notes (saved to ATS)</strong>
+                <span id="note-hint" class="hint">Optional — required only on overrides.</span>
+              </label>
+              <textarea id="notes" placeholder="Add context, risks, or follow-ups…"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="header">Recommended Recruiter Interview Questions</div>
+          <div class="body">
+            <ul id="rq" class="clean"></ul>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+<script>
+const DATA = {
+  jordan: {
+    name: "Jordan",
+    aiRec: "Advance",
+    rationale: [
+      "Tenure PASS",
+      "Near-competitor (+)",
+      "Resume coverage avg 0.98",
+      "SQS 0.78",
+      "Company data freshness: 12d"
+    ],
+    review: [
+      {label:"Source", value:"Referral – Gold (SQS 0.78)", strength:"strong"},
+      {label:"Location", value:"SF Bay Area", strength:"strong"},
+      {label:"Total Work Experience", value:"7.5 years", strength:"strong"},
+      {label:"Role Experience", value:"5.0 years (Enterprise AE)", strength:"strong"},
+      {label:"Education", value:"Undergraduate Degree (BA, Economics)", strength:"avg"},
+      {label:"Seniority", value:"High end of band", strength:"flag"},
+      {label:"Tenure", value:"1 employer in last 5 yrs", strength:"strong", nested: {
+        caption:"Employer history (promotion-safe)",
+        history:[
+          {employer:"Acme Inc.", confidence:"high", lines:[
+            "2021-04: Associate AE → AE (promotion)",
+            "2022-06: AE → Senior AE (promotion)"
+          ], range:"2020-01 → present"},
+          {employer:"BetaSoft", confidence:"high", lines:["Single role"], range:"2018-01 → 2019-12"}
+        ]
+      }}
+    ],
+    questions:[
+      "Review salary bands & expectations",
+      "Percent of pipeline self-sourced in FY24",
+      "Confirm length of sales cycle and ACV"
+    ]
+  },
+
+  taylor: {
+    name: "Taylor",
+    aiRec: "HM-Review",
+    rationale: [
+      "Tenure PASS",
+      "Direct competitor",
+      "Resume coverage avg 0.72 (low bar on ACV)",
+      "SQS 0.62",
+      "Company data freshness: 34d"
+    ],
+    review: [
+      {label:"Source", value:"Inbound – Career site (SQS 0.62)", strength:"avg"},
+      {label:"Location", value:"Remote – PST", strength:"strong"},
+      {label:"Total Work Experience", value:"6.0 years", strength:"strong"},
+      {label:"Role Experience", value:"3.0 years (Mid-market AE)", strength:"avg"},
+      {label:"Education", value:"Undergraduate Degree (BS)", strength:"strong"},
+      {label:"Seniority", value:"Middle of band", strength:"strong"},
+      {label:"Tenure", value:"2 employers in last 5 yrs", strength:"avg", nested:{
+        caption:"Employer history (promotion-safe)",
+        history:[
+          {employer:"Nimbus", confidence:"high", lines:["AE → Sr AE (promotion)"], range:"2021-02 → present"},
+          {employer:"QuickApps", confidence:"high", lines:["Single role"], range:"2019-05 → 2021-01"},
+        ]
+      }}
+    ],
+    questions:[
+      "Walk through top 2 wins; confirm ACV & cycle",
+      "Percent sourced vs. partner leads",
+      "Any public-sector exposure?"
+    ]
+  },
+
+  sam: {
+    name: "Sam",
+    aiRec: "Hold",
+    rationale: [
+      "Tenure FLAG (4 employers in 5 yrs)",
+      "No competitor proximity",
+      "Resume coverage avg 0.41",
+      "SQS 0.55",
+      "Data freshness: 98d"
+    ],
+    review: [
+      {label:"Source", value:"Sourced – Recruiter outreach (SQS 0.55)", strength:"avg"},
+      {label:"Location", value:"Austin, TX", strength:"strong"},
+      {label:"Total Work Experience", value:"9.0 years", strength:"strong"},
+      {label:"Role Experience", value:"2.0 years (AE)", strength:"flag"},
+      {label:"Education", value:"Undergraduate Degree", strength:"strong"},
+      {label:"Seniority", value:"Low end of band", strength:"avg"},
+      {label:"Tenure", value:"4 employers in last 5 yrs", strength:"flag", nested:{
+        caption:"Employer history (promotion-safe)",
+        history:[
+          {employer:"Startly", confidence:"med", lines:["Single role"], range:"2024-01 → present"},
+          {employer:"Pulse", confidence:"high", lines:["Single role"], range:"2023-02 → 2023-12"},
+          {employer:"BlueBox", confidence:"high", lines:["Single role"], range:"2021-08 → 2023-01"},
+          {employer:"CoreApps", confidence:"high", lines:["Single role"], range:"2019-03 → 2021-06"}
+        ]
+      }}
+    ],
+    questions:[
+      "Explore reasons for recent moves; manager references?",
+      "Coachability & self-sourcing examples",
+      "Territory/account coverage experience"
+    ]
+  }
+};
+
+const $ = sel => document.querySelector(sel);
+function pill(str){return `<span class="pill ${str}">${str==='strong'?'Strong':str==='avg'?'Average':'Flag'}</span>`}
+
+function renderReview(list){
+  const rows = list.map((item,i)=>{
+    const nested = item.nested ? `
+      <div class="nested" id="nest-${i}" hidden>
+        <div class="emp">Employer history</div>
+        ${item.nested.history.map(h => `
+          <div style="margin:10px 0 6px;">
+            <div><strong>${h.employer}</strong> <span class="muted">Confidence: ${h.confidence}${h.range?` • ${h.range}`:''}</span></div>
+            <ul class="clean">
+              ${h.lines.map(l=>`<li>${l}</li>`).join('')}
+            </ul>
+          </div>
+        `).join('')}
+      </div>` : '';
+
+    const toggle = item.nested ? `
+      <div class="toggle" data-target="nest-${i}">
+        <span class="chev">▸</span>
+        <span>${item.nested.caption}</span>
+      </div>` : '';
+
+    return `
+      <div class="row">
+        <div class="label">${item.label}:</div>
+        <div class="kvs">
+          ${pill(item.strength)} <div>${item.value}</div>
+          ${toggle}
+          ${nested}
+        </div>
+      </div>`;
+  }).join('');
+  $("#review").innerHTML = rows;
+
+  $("#review").querySelectorAll(".toggle").forEach(t=>{
+    t.addEventListener('click', ()=>{
+      const id = t.getAttribute('data-target');
+      const block = document.getElementById(id);
+      const open = block.hasAttribute('hidden') ? false : true;
+      block.toggleAttribute('hidden');
+      t.classList.toggle('open');
+    });
+  });
+}
+
+function renderRationale(list){
+  $("#rationale").innerHTML = list.map(x=>`• ${x}`).join(' • ');
+}
+
+function setRecPill(rec){
+  const pill = $("#aiRecPill");
+  pill.className = `ai-pill rec-${rec.replace(' ','-')}`;
+  pill.textContent = `AI Recommendation: ${rec}`;
+}
+
+function renderQuestions(list){
+  $("#rq").innerHTML = list.map(q=>`<li>${q}</li>`).join('');
+}
+
+const noteBox = $("#notes");
+const noteHint = $("#note-hint");
+let aiRec = "Advance";
+
+function onDecision(decision){
+  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+  const map = {Advance:'#btn-advance','HM-Review':'#btn-hm',Hold:'#btn-hold',Decline:'#btn-decline'};
+  document.querySelector(map[decision]).classList.add('active');
+
+  const override = decision !== aiRec;
+  noteBox.required = override;
+  noteHint.textContent = override ? 'Required — explain the override (saved to ATS).'
+                                  : 'Optional — add context, risks, or follow-ups.';
+}
+
+function load(id){
+  const c = DATA[id];
+  aiRec = c.aiRec;
+  setRecPill(c.aiRec);
+  renderReview(c.review);
+  renderRationale(c.rationale);
+  renderQuestions(c.questions);
+  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+  noteBox.required = false;
+  noteHint.textContent = 'Optional — required only on overrides.';
+  noteBox.value = '';
+}
+document.getElementById('btn-advance').onclick = ()=>onDecision('Advance');
+document.getElementById('btn-hm').onclick      = ()=>onDecision('HM-Review');
+document.getElementById('btn-hold').onclick    = ()=>onDecision('Hold');
+document.getElementById('btn-decline').onclick = ()=>onDecision('Decline');
+
+document.querySelectorAll('#seg button').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('#seg button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    load(b.dataset.id);
+  });
+});
+
+load('jordan');
+</script>
+</body>
+</html>
