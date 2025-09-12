@@ -1,385 +1,283 @@
+
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Screen Assist (HITL) — Demo</title>
+<meta charset="utf-8">
+<title>Screen Assist (HITL) - Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  :root{
-    --bg:#f6f8fc;
-    --ink:#111827;
-    --muted:#6b7280;
-    --line:#e7e9f0;
-    --card:#fff;
-    --shadow:0 8px 22px rgba(17,24,39,.06);
-    --r:14px;
-
-    /* chips */
-    --grad-a:#8b5cf6;
-    --grad-b:#ec4899;
-
-    /* strength pills */
-    --g:#22c55e; /* strong */
-    --y:#fbbf24; /* average */
-    --r2:#ef4444;/* flag */
-  }
-
+  /* ASCII-safe CSS */
   *{box-sizing:border-box}
-  html,body{height:100%;margin:0}
-  body{
-    font:14px/1.45 ui-sans-serif,system-ui,-apple-system,Segoe UI,Inter,Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink);
-    background:var(--bg);
-  }
-
-  .wrap{max-width:1120px;margin:16px auto 28px;padding:0 18px}
-
-  /* top accent bar (thin, rounded, within content width) */
-  .accent{
-    height:5px;border-radius:9999px;margin:6px 0 16px;
-    background:linear-gradient(90deg,var(--grad-a),var(--grad-b));
-  }
-
-  /* title row */
-  .titlebar{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-  h1{margin:0;font-size:22px;font-weight:800}
-
-  .seg-wrap{display:flex;align-items:center;gap:8px;color:var(--muted)}
-  .seg{
-    display:inline-flex;gap:6px;padding:4px;border-radius:999px;
-    background:#f1f5f9;border:1px solid #e5e7eb;
-  }
-  .seg button{
-    padding:4px 10px;border:0;background:transparent;border-radius:999px;
-    font-weight:700;font-size:13px;color:#334155;cursor:pointer
-  }
-  .seg button.active{background:#fff;border:1px solid #d1d5db;color:#111827}
-
-  /* layout */
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#0f172a;background:#ffffff}
+  .wrap{max-width:1200px;margin:24px auto;padding:0 20px}
+  .topbar{height:8px;background:linear-gradient(90deg,#ec4899,#7c3aed);border-radius:999px}
+  header{display:flex;align-items:center;justify-content:space-between;margin:12px 0 16px;gap:12px;flex-wrap:wrap}
+  h1{margin:0;font-size:26px}
+  .toggle{display:flex;gap:8px;align-items:center}
+  .chip{border:1px solid #e2e8f0;border-radius:999px;padding:8px 12px;background:#f8fafc;font-weight:700;cursor:pointer;font-size:13px}
+  .chip.active{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
+  .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
   @media (max-width:980px){.grid{grid-template-columns:1fr}}
-
-  .card{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-    box-shadow:var(--shadow)
-  }
-  .card .body{padding:12px 14px}
-
-  /* section chip headers */
-  .chip{
-    display:inline-block;margin:12px 12px 0;padding:6px 12px;border-radius:12px;color:#fff;
-    background:linear-gradient(135deg,var(--grad-a),var(--grad-b));font-weight:800;font-size:13px
-  }
-
-  /* application rows */
-  .row{
-    display:grid;grid-template-columns:260px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)
-  }
-  .row:last-child{border-bottom:none}
-
-  .label{display:flex;align-items:center;gap:10px;font-weight:800}
-  .label .lbl{white-space:nowrap}
-
-  .pill{
-    display:inline-block;font-weight:800;letter-spacing:.2px;color:#fff;
-    border-radius:999px;padding:3px 9px;font-size:12px;line-height:1
-  }
-  .pill.strong{background:var(--g)}
-  .pill.avg{background:var(--y)}
-  .pill.flag{background:var(--r2)}
-
-  .kvs{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-
-  /* subtoggle (under a row) */
-  .subtoggle{
-    display:flex;align-items:center;gap:8px;color:var(--muted);
-    font-weight:700;cursor:pointer;margin:4px 0 2px 0;font-size:13px
-  }
-  .chev{display:inline-block;transform:rotate(-90deg);transition:transform .18s}
-  .open .chev{transform:rotate(0)}
-
-  /* nested history card */
-  .history{
-    background:#fafbff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:6px
-  }
-  .emp-row{margin:8px 0 6px}
-  .emp-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .emp-name{font-weight:800}
-  .emp-meta{color:var(--muted)}
-  ul.clean{margin:6px 0 0 18px}
-
-  /* rec area */
-  .ai-pill{display:inline-block;border-radius:999px;padding:6px 10px;font-weight:800;font-size:13px}
-  .rec-Advance{background:#e9f9ee;color:#0f5132;border:1px solid #a7e3bf}
-  .rec-HM-Review{background:#fff7e6;color:#7a4d00;border:1px solid #ffd48a}
-  .rec-Hold{background:#f5f6f8;color:#334155;border:1px solid #d1d5db}
-  .rec-Decline{background:#fde8e8;color:#7f1d1d;border:1px solid #fecaca}
-
-  .btns{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
-  .btn{padding:8px 12px;border:1px solid #d1d5db;border-radius:10px;background:#fff;font-weight:800;cursor:pointer}
-  .btn:hover{box-shadow:var(--shadow)}
-  .btn.active{background:#111827;color:#fff;border-color:#111827}
-
-  textarea{
-    width:100%;min-height:90px;padding:10px 12px;border:1px solid #d1d5db;border-radius:12px;
-    background:#fff;font:inherit;resize:vertical
-  }
-  .hint{color:var(--muted);font-size:12px;margin-left:6px}
+  .card{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:16px 18px;box-shadow:0 4px 20px rgba(15,23,42,.06)}
+  .tab{display:inline-block;padding:8px 14px;border-radius:999px;color:#fff;font-weight:700;background:linear-gradient(90deg,#ec4899,#7c3aed);margin:-6px 0 12px}
+  .row{display:grid;grid-template-columns:100px 220px 1fr;align-items:center;gap:10px;padding:8px 0}
+  .row + .row{border-top:1px dashed #e2e8f0}
+  .status{display:inline-flex;align-items:center;justify-content:center;min-width:90px;height:26px;padding:4px 10px;font-size:12px;font-weight:700;border-radius:999px;border:1px solid transparent}
+  .s-strong{color:#065f46;background:#ecfdf5;border-color:#a7f3d0}
+  .s-average{color:#92400e;background:#fef3c7;border-color:#fde68a}
+  .s-flag{color:#7f1d1d;background:#fee2e2;border-color:#fecaca}
+  .label{min-width:220px;font-weight:700}
+  .tiny{font-size:12px;color:#64748b}
+  .pill{display:inline-block;padding:6px 10px;border:1px solid #e2e8f0;border-radius:999px;background:#f8fafc;font-size:12px;margin-right:6px}
+  .ai{display:inline-block;padding:8px 12px;border-radius:12px;font-weight:800;border:1px solid #e2e8f0}
+  .ai.ok{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
+  .ai.warn{background:#fef3c7;border-color:#fde68a;color:#92400e}
+  .ai.no{background:#fee2e2;border-color:#fecaca;color:#7f1d1d}
+  .btn{border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;background:#f8fafc;font-weight:600;margin:6px 6px 0 0;display:inline-block}
+  textarea{width:100%;min-height:80px;border:1px solid #e2e8f0;border-radius:12px;padding:10px;resize:vertical}
+  ul{margin:0;padding-left:22px}
+  /* Tenure dropdown */
+  details.tenure{grid-column:2 / span 2;margin:0 0 6px 30px;position:relative;padding-left:12px}
+  details.tenure::before{content:"";position:absolute;left:-18px;top:-14px;width:18px;height:14px;border-left:2px solid #e2e8f0;border-bottom:2px solid #e2e8f0;border-radius:0 0 0 8px}
+  details.tenure summary{list-style:none;cursor:pointer;font-size:12px;color:#475569}
+  details.tenure summary::-webkit-details-marker{display:none}
+  .kv{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="accent"></div>
+<div class="wrap">
+  <div class="topbar"></div>
+  <header>
+    <h1>Screen Assist (HITL) - Demo</h1>
+    <div class="toggle" id="candidateToggle">
+      <span class="tiny">Sample candidates:</span>
+      <span class="chip active" data-id="jordan">Jordan</span>
+      <span class="chip" data-id="taylor">Taylor</span>
+      <span class="chip" data-id="sam">Sam</span>
+    </div>
+  </header>
 
-    <div class="titlebar">
-      <h1>Screen Assist (HITL) — Demo</h1>
-      <div class="seg-wrap">
-        <span>Sample candidates:</span>
-        <div class="seg" id="seg">
-          <button class="active" data-id="jordan">Jordan</button>
-          <button data-id="taylor">Taylor</button>
-          <button data-id="sam">Sam</button>
-        </div>
+  <div class="grid">
+    <!-- Left: Application Review -->
+    <div class="card">
+      <div class="tab">Application Review</div>
+
+      <div class="row">
+        <span class="status" id="s_source">Strong</span>
+        <div class="label">Source:</div>
+        <div id="v_source">Referral - Gold (SQS 0.78)</div>
       </div>
+
+      <div class="row">
+        <span class="status" id="s_location">Strong</span>
+        <div class="label">Location:</div>
+        <div id="v_location">SF Bay Area</div>
+      </div>
+
+      <div class="row">
+        <span class="status" id="s_total_exp">Strong</span>
+        <div class="label">Total Work Experience:</div>
+        <div id="v_total_exp">7.5 years</div>
+      </div>
+
+      <div class="row">
+        <span class="status" id="s_role_exp">Strong</span>
+        <div class="label">Role Experience:</div>
+        <div id="v_role_exp">5.0 years (Enterprise AE)</div>
+      </div>
+
+      <div class="row">
+        <span class="status" id="s_edu">Average</span>
+        <div class="label">Education:</div>
+        <div id="v_edu">Undergraduate Degree (BA, Economics)</div>
+      </div>
+
+      <div class="row">
+        <span class="status" id="s_seniority">Flag</span>
+        <div class="label">Seniority:</div>
+        <div id="v_seniority">High end of band</div>
+      </div>
+
+      <div class="row" id="tenure-row">
+        <span class="status" id="s_tenure">Strong</span>
+        <div class="label">Tenure:</div>
+        <div id="v_tenure">1 employer in last 5 yrs</div>
+      </div>
+
+      <!-- Nested dropdown directly under Tenure -->
+      <details class="tenure" open>
+        <summary>Employer history (promotion-safe)</summary>
+        <div class="card" style="margin-top:8px;padding:10px 12px">
+          <div id="employers"></div>
+        </div>
+      </details>
     </div>
 
-    <div class="grid">
-      <!-- LEFT -->
-      <section class="card">
-        <div class="chip">Application Review</div>
-        <div class="body" id="review"></div>
-      </section>
+    <!-- Right: Decision -->
+    <div class="card">
+      <div class="tab">Decision Recommendation</div>
+      <div class="ai" id="ai_rec">AI Recommendation: Advance</div>
+      <div class="tiny" style="margin-top:8px" id="why_rec">Why: ...</div>
 
-      <!-- RIGHT stack -->
-      <div style="display:flex;flex-direction:column;gap:18px">
-        <section class="card">
-          <div class="chip">Decision Recommendation</div>
-          <div class="body">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-              <div id="aiRecPill" class="ai-pill rec-Advance">AI Recommendation: Advance</div>
-            </div>
+      <!-- Competitor signal line -->
+      <div class="tiny" style="margin-top:6px" id="comp_sig">Competitor: Unknown (0.00) - Freshness: N/A</div>
 
-            <div style="margin:8px 0 10px;font-size:13px">
-              <strong>AI Decision Rationale:</strong>
-              <span id="rationale" class="muted" style="margin-left:6px"></span>
-            </div>
+      <div style="margin-top:12px">
+        <span class="btn">Advance</span>
+        <span class="btn">HM-Review</span>
+        <span class="btn">Hold</span>
+        <span class="btn">Decline</span>
+      </div>
 
-            <div class="btns">
-              <button class="btn" id="btn-advance">Advance</button>
-              <button class="btn" id="btn-hm">HM-Review</button>
-              <button class="btn" id="btn-hold">Hold</button>
-              <button class="btn" id="btn-decline">Decline</button>
-            </div>
+      <div class="tiny" style="margin-top:12px">Reason / note (required for overrides):</div>
+      <textarea placeholder="Type notes here..."></textarea>
 
-            <div style="margin-top:6px">
-              <label for="notes" style="font-weight:800">Notes (saved to ATS)</label>
-              <span id="note-hint" class="hint">Optional — required with override.</span>
-              <textarea id="notes" placeholder="Add context, risks, or follow-ups…"></textarea>
-            </div>
-          </div>
-        </section>
-
-        <section class="card">
-          <div class="chip">Recommended Recruiter Interview Questions</div>
-          <div class="body">
-            <ul id="rq" class="clean"></ul>
-          </div>
-        </section>
+      <div class="card" style="margin-top:16px">
+        <div class="tab">Recommended Recruiter Interview Questions</div>
+        <ul id="rq_list">
+          <li>Review salary bands and expectations</li>
+          <li>What percent of pipeline was self-sourced in FY24?</li>
+          <li>Confirm length of sales cycle and ACV</li>
+        </ul>
       </div>
     </div>
   </div>
+</div>
 
 <script>
-/* ---------- Data ---------- */
-const DATA = {
-  jordan:{
-    aiRec:"Advance",
-    rationale:[
-      "Tenure PASS","Near-competitor (+)","Resume coverage avg 0.98","SQS 0.78","Company data freshness: 12d"
-    ],
-    review:[
-      {label:"Source",value:"Referral - Gold (SQS 0.78)",strength:"strong"},
-      {label:"Location",value:"SF Bay Area",strength:"strong"},
-      {label:"Total Work Experience",value:"7.5 years",strength:"strong"},
-      {label:"Role Experience",value:"5.0 years (Enterprise AE)",strength:"strong"},
-      {label:"Education",value:"Undergraduate Degree (BA, Economics)",strength:"avg"},
-      {label:"Seniority",value:"High end of band",strength:"flag"},
-      {label:"Tenure",value:"1 employer in last 5 yrs",strength:"strong",history:{
-        caption:"Employer history (promotion-safe)",
-        items:[
-          {employer:"Acme Inc.",meta:"Confidence: high • 2020-01 → present",bullets:[
-            "2021-04: Associate AE → AE (promotion)",
-            "2022-06: AE → Senior AE (promotion)"
-          ]},
-          {employer:"BetaSoft",meta:"Confidence: high • 2018-01 → 2019-12",bullets:[
-            "Single role"
-          ]}
-        ]
-      }}
-    ],
-    q:[
-      "Review salary bands & expectations",
-      "Percent of pipeline self-sourced in FY24",
-      "Confirm length of sales cycle and ACV"
-    ]
-  },
-  taylor:{
-    aiRec:"HM-Review",
-    rationale:[
-      "Tenure PASS","Direct competitor","Resume coverage avg 0.72 (ACV low bar)","SQS 0.62","Data freshness: 34d"
-    ],
-    review:[
-      {label:"Source",value:"Inbound – Career site (SQS 0.62)",strength:"avg"},
-      {label:"Location",value:"Remote — PST",strength:"strong"},
-      {label:"Total Work Experience",value:"6.0 years",strength:"strong"},
-      {label:"Role Experience",value:"3.0 years (Mid-market AE)",strength:"avg"},
-      {label:"Education",value:"Undergraduate Degree (BS)",strength:"strong"},
-      {label:"Seniority",value:"Middle of band",strength:"strong"},
-      {label:"Tenure",value:"2 employers in last 5 yrs",strength:"avg",history:{
-        caption:"Employer history (promotion-safe)",
-        items:[
-          {employer:"Nimbus",meta:"Confidence: high • 2021-02 → present",bullets:[
-            "AE → Sr AE (promotion)"
-          ]},
-          {employer:"QuickApps",meta:"Confidence: high • 2019-05 → 2021-01",bullets:["Single role"]}
-        ]
-      }}
-    ],
-    q:[
-      "Walk through top 2 wins; confirm ACV & cycle",
-      "Percent sourced vs. partner leads",
-      "Any public-sector exposure?"
-    ]
-  },
-  sam:{
-    aiRec:"Hold",
-    rationale:[
-      "Tenure FLAG (4 employers in 5 yrs)","No competitor proximity","Resume coverage avg 0.41","SQS 0.55","Data freshness: 98d"
-    ],
-    review:[
-      {label:"Source",value:"Sourced — Recruiter outreach (SQS 0.55)",strength:"avg"},
-      {label:"Location",value:"Austin, TX",strength:"strong"},
-      {label:"Total Work Experience",value:"9.0 years",strength:"strong"},
-      {label:"Role Experience",value:"2.0 years (AE)",strength:"flag"},
-      {label:"Education",value:"Undergraduate Degree",strength:"strong"},
-      {label:"Seniority",value:"Low end of band",strength:"avg"},
-      {label:"Tenure",value:"4 employers in last 5 yrs",strength:"flag",history:{
-        caption:"Employer history (promotion-safe)",
-        items:[
-          {employer:"Startly",meta:"Confidence: medium • 2024-01 → present",bullets:["Single role"]},
-          {employer:"Pulse",meta:"Confidence: high • 2023-02 → 2023-12",bullets:["Single role"]},
-          {employer:"BlueBox",meta:"Confidence: high • 2021-08 → 2023-01",bullets:["Single role"]},
-          {employer:"CoreApps",meta:"Confidence: high • 2019-03 → 2021-06",bullets:["Single role"]}
-        ]
-      }}
-    ],
-    q:[
-      "Explore reasons for recent moves; manager references?",
-      "Coachability & self-sourcing examples",
-      "Territory/account coverage experience"
-    ]
+  // Three sample candidates
+  const CANDIDATES = {
+    jordan: {
+      status: {source:"s-strong", location:"s-strong", total:"s-strong", role:"s-strong", edu:"s-average", seniority:"s-flag", tenure:"s-strong"},
+      source: "Referral - Gold (SQS 0.78)",
+      location: "SF Bay Area",
+      totalExp: "7.5 years",
+      roleExp: "5.0 years (Enterprise AE)",
+      edu: "Undergraduate Degree (BA, Economics)",
+      seniority: "High end of band",
+      tenure: "1 employer in last 5 yrs",
+      employers: [
+        {company:"Acme Inc.", span:"2020-01 -> present", notes:["2021-04: Associate AE -> AE (promotion)", "2022-06: AE -> Senior AE (promotion)"], conf:"high"},
+        {company:"BetaSoft", span:"2018-01 -> 2019-12", notes:["Single role"], conf:"high"}
+      ],
+      rec: {label:"Advance", cls:"ok"},
+      why: "Tenure PASS; Near-competitor (+); Resume coverage avg 0.98; SQS 0.78; Company data fresh 12d",
+      comp: {label:"Near", score:"0.58", freshness:"12d"},
+      rq: [
+        "Review salary bands and expectations",
+        "Percent of pipeline self-sourced in FY24",
+        "Confirm length of sales cycle and ACV"
+      ]
+    },
+    taylor: {
+      status: {source:"s-average", location:"s-strong", total:"s-average", role:"s-average", edu:"s-strong", seniority:"s-average", tenure:"s-flag"},
+      source: "Inbound - Job Posting (SQS 0.31)",
+      location: "Remote - PST overlap 4h",
+      totalExp: "4.2 years",
+      roleExp: "1.8 years (BDR)",
+      edu: "BS, Business Admin",
+      seniority: "Within band",
+      tenure: "4 employers in last 5 yrs",
+      employers: [
+        {company:"StartCo", span:"2024-01 -> present", notes:["BDR"], conf:"med"},
+        {company:"Grow.io", span:"2023-03 -> 2023-12", notes:["SDR"], conf:"med"},
+        {company:"Taskly", span:"2021-05 -> 2023-02", notes:["SDR"], conf:"low"},
+        {company:"Retail PT", span:"2020-01 -> 2021-04", notes:["Associate"], conf:"high"}
+      ],
+      rec: {label:"HM-Review", cls:"warn"},
+      why: "Tenure FLAG; Competitor: None; Resume coverage avg 0.62; Low SQS 0.31; Consider for SDR pool",
+      comp: {label:"None", score:"0.22", freshness:"8d"},
+      rq: [
+        "Discuss role seniority fit and ramp expectations",
+        "Explore stability context for job changes",
+        "Assess outbound motion depth and conversion rates"
+      ]
+    },
+    sam: {
+      status: {source:"s-strong", location:"s-strong", total:"s-strong", role:"s-strong", edu:"s-average", seniority:"s-strong", tenure:"s-strong"},
+      source: "Sourced - Talent map (SQS 0.65)",
+      location: "Austin, TX (open to hybrid)",
+      totalExp: "9.1 years",
+      roleExp: "6.2 years (Enterprise AE)",
+      edu: "BA, Communications",
+      seniority: "Mid-band",
+      tenure: "2 employers in last 5 yrs",
+      employers: [
+        {company:"Contenda", span:"2022-02 -> present", notes:["Enterprise AE", "2023-08: Club Winner"], conf:"high"},
+        {company:"Helios Data", span:"2019-01 -> 2022-01", notes:["AE -> Sr AE"], conf:"high"}
+      ],
+      rec: {label:"Advance", cls:"ok"},
+      why: "Tenure PASS; Competitor: Direct; Resume coverage avg 0.91; SQS 0.65; Deal sizes match 150k ACV",
+      comp: {label:"Direct", score:"0.74", freshness:"15d"},
+      rq: [
+        "Validate ACV and cycle for top 3 wins",
+        "IC vs team-sourced pipeline split",
+        "Territory and named accounts expectations"
+      ]
+    }
+  };
+
+  function setStatus(elId, cls){
+    var el = document.getElementById(elId);
+    el.className = "status " + cls;
+    el.textContent = (cls==="s-strong"?"Strong":cls==="s-average"?"Average":"Flag");
   }
-};
 
-/* ---------- DOM helpers ---------- */
-const $ = s => document.querySelector(s);
+  function renderEmployers(list){
+    return list.map(function(e){
+      var notes = e.notes.map(function(n){ return '<div class="tiny">• ' + n + '</div>'; }).join("");
+      return '<div style="border-left:2px solid #e2e8f0;padding-left:12px;margin-top:8px">'
+           +   '<div><b>' + e.company + '</b> <span class="pill">Confidence: ' + e.conf + '</span> <span class="tiny">' + e.span + '</span></div>'
+           +   notes
+           + '</div>';
+    }).join("");
+  }
 
-function pill(str){
-  const map={strong:"Strong",avg:"Average",flag:"Flag"};
-  return `<span class="pill ${str}">${map[str]}</span>`;
-}
+  function renderCandidate(id){
+    var c = CANDIDATES[id];
+    // Statuses
+    setStatus("s_source", c.status.source);
+    setStatus("s_location", c.status.location);
+    setStatus("s_total_exp", c.status.total);
+    setStatus("s_role_exp", c.status.role);
+    setStatus("s_edu", c.status.edu);
+    setStatus("s_seniority", c.status.seniority);
+    setStatus("s_tenure", c.status.tenure);
+    // Values
+    document.getElementById("v_source").textContent = c.source;
+    document.getElementById("v_location").textContent = c.location;
+    document.getElementById("v_total_exp").textContent = c.totalExp;
+    document.getElementById("v_role_exp").textContent = c.roleExp;
+    document.getElementById("v_edu").textContent = c.edu;
+    document.getElementById("v_seniority").textContent = c.seniority;
+    document.getElementById("v_tenure").textContent = c.tenure;
+    // Employers
+    document.getElementById("employers").innerHTML = renderEmployers(c.employers);
+    // Recommendation
+    var ai = document.getElementById("ai_rec");
+    ai.textContent = "AI Recommendation: " + c.rec.label;
+    ai.className = "ai " + (c.rec.cls || "");
+    // Why
+    document.getElementById("why_rec").textContent = "Why: " + c.why;
+    // Competitor signal
+    document.getElementById("comp_sig").textContent = "Competitor: " + c.comp.label + " (" + c.comp.score + ") - Freshness: " + c.comp.freshness;
+    // Questions
+    var rq = document.getElementById("rq_list");
+    rq.innerHTML = c.rq.map(function(x){ return "<li>"+x+"</li>"; }).join("");
+    // Toggle pills
+    Array.prototype.forEach.call(document.querySelectorAll(".chip"), function(ch){ ch.classList.remove("active"); });
+    var active = document.querySelector('.chip[data-id="'+id+'"]'); if(active) active.classList.add("active");
+  }
 
-function renderReview(rows){
-  const out = rows.map((r,idx)=>{
-    const left = `
-      <div class="label">
-        ${pill(r.strength)}
-        <span class="lbl">${r.label}:</span>
-      </div>`;
-    const right = `<div class="kvs">${r.value}</div>`;
-    const base = `<div class="row">${left}${right}</div>`;
-    const sub = r.history ? `
-      <div class="subtoggle" data-t="${idx}">
-        <span class="chev">▸</span>
-        <span>${r.history.caption}</span>
-      </div>
-      <div class="history" id="h-${idx}" hidden>
-        ${r.history.items.map(it=>`
-          <div class="emp-row">
-            <div class="emp-head">
-              <span class="emp-name">${it.employer}</span>
-              <span class="emp-meta">${it.meta}</span>
-            </div>
-            <ul class="clean">
-              ${it.bullets.map(b=>`<li>${b}</li>`).join("")}
-            </ul>
-          </div>
-        `).join("")}
-      </div>
-    ` : "";
-
-    return base + sub;
-  }).join("");
-  $("#review").innerHTML = out;
-
-  // toggle
-  $("#review").querySelectorAll(".subtoggle").forEach(t=>{
-    t.addEventListener("click",()=>{
-      const id=t.getAttribute("data-t");
-      const pane=$("#h-"+id);
-      const open=!pane.hasAttribute("hidden");
-      pane.toggleAttribute("hidden");
-      t.classList.toggle("open",!open);
-    });
+  // Wire up toggle
+  document.getElementById("candidateToggle").addEventListener("click", function(e){
+    var t = e.target.closest(".chip");
+    if(!t) return;
+    renderCandidate(t.getAttribute("data-id"));
   });
-}
 
-function setRec(rec){
-  const pill=$("#aiRecPill");
-  pill.className="ai-pill rec-"+rec.replace(" ","-");
-  pill.textContent="AI Recommendation: "+rec;
-}
-
-function renderRationale(list){ $("#rationale").textContent = list.join(" • "); }
-function renderQs(list){ $("#rq").innerHTML=list.map(x=>`<li>${x}</li>`).join(""); }
-
-/* ---------- Decisions ---------- */
-let aiRec="Advance";
-const noteBox=$("#notes"), hint=$("#note-hint");
-function onDecision(dec){
-  document.querySelectorAll(".btn").forEach(b=>b.classList.remove("active"));
-  ({Advance:"#btn-advance","HM-Review":"#btn-hm",Hold:"#btn-hold",Decline:"#btn-decline"});
-  const map={Advance:"#btn-advance","HM-Review":"#btn-hm",Hold:"#btn-hold",Decline:"#btn-decline"};
-  document.querySelector(map[dec]).classList.add("active");
-  const override=(dec!==aiRec);
-  noteBox.required=override;
-  hint.textContent="Optional — required with override."; // text fixed per your instruction
-}
-document.getElementById("btn-advance").onclick=()=>onDecision("Advance");
-document.getElementById("btn-hm").onclick=()=>onDecision("HM-Review");
-document.getElementById("btn-hold").onclick=()=>onDecision("Hold");
-document.getElementById("btn-decline").onclick=()=>onDecision("Decline");
-
-/* ---------- Candidate switching ---------- */
-function load(id){
-  const c=DATA[id];
-  aiRec=c.aiRec;
-  setRec(c.aiRec);
-  renderReview(c.review);
-  renderRationale(c.rationale);
-  renderQs(c.q);
-  document.querySelectorAll(".btn").forEach(b=>b.classList.remove("active"));
-  noteBox.required=false; noteBox.value=""; hint.textContent="Optional — required with override.";
-}
-document.querySelectorAll("#seg button").forEach(b=>{
-  b.addEventListener("click",()=>{
-    document.querySelectorAll("#seg button").forEach(x=>x.classList.remove("active"));
-    b.classList.add("active"); load(b.dataset.id);
-  });
-});
-
-/* init */
-load("jordan");
+  // Initial render
+  renderCandidate("jordan");
 </script>
 </body>
 </html>
