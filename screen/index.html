@@ -1,154 +1,142 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Screen Assist (HITL) — Demo</title>
 <style>
   :root{
-    --bg:#f5f7fb;
-    --card:#ffffff;
+    --bg:#f6f8fc;
     --ink:#111827;
     --muted:#6b7280;
-    --line:#ececf2;
-    --shadow: 0 8px 24px rgba(17,24,39,.06);
-    --radius:14px;
+    --line:#e7e9f0;
+    --card:#fff;
+    --shadow:0 8px 22px rgba(17,24,39,.06);
+    --r:14px;
 
-    --pill-strong:#16a34a;
-    --pill-avg:#f59e0b;
-    --pill-flag:#ef4444;
+    /* chips */
+    --grad-a:#8b5cf6;
+    --grad-b:#ec4899;
 
-    --accent-start:#8b5cf6; /* gradient chips */
-    --accent-end:#ec4899;
-
-    --chip-bg:#f1f5f9;
-    --chip-border:#e5e7eb;
+    /* strength pills */
+    --g:#22c55e; /* strong */
+    --y:#fbbf24; /* average */
+    --r2:#ef4444;/* flag */
   }
 
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%}
+  html,body{height:100%;margin:0}
   body{
-    font:14px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;
+    font:14px/1.45 ui-sans-serif,system-ui,-apple-system,Segoe UI,Inter,Roboto,Helvetica,Arial,sans-serif;
     color:var(--ink);
     background:var(--bg);
   }
 
-  /* Top gradient bar (classic) */
-  .topbar{
-    height:6px;
-    background:linear-gradient(90deg,var(--accent-start),var(--accent-end));
-    border-radius:0 0 8px 8px;
+  .wrap{max-width:1120px;margin:16px auto 28px;padding:0 18px}
+
+  /* top accent bar (thin, rounded, within content width) */
+  .accent{
+    height:5px;border-radius:9999px;margin:6px 0 16px;
+    background:linear-gradient(90deg,var(--grad-a),var(--grad-b));
   }
 
-  .wrap{max-width:1120px;margin:14px auto 28px;padding:0 18px}
+  /* title row */
+  .titlebar{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  h1{margin:0;font-size:22px;font-weight:800}
 
-  /* Page title row + candidates group */
-  .titlebar{
-    display:flex;align-items:center;justify-content:space-between;margin:10px 0 10px;
-  }
-  h1{font-size:22px;margin:0;font-weight:800}
-
-  .seg-wrap{
-    display:flex;align-items:center;gap:8px;color:var(--muted);
-    font-size:13px;
-  }
+  .seg-wrap{display:flex;align-items:center;gap:8px;color:var(--muted)}
   .seg{
-    display:inline-flex;gap:6px;background:var(--chip-bg);border:1px solid var(--chip-border);
-    padding:5px;border-radius:999px;
+    display:inline-flex;gap:6px;padding:4px;border-radius:999px;
+    background:#f1f5f9;border:1px solid #e5e7eb;
   }
   .seg button{
-    padding:4px 10px;border:0;background:transparent;border-radius:999px;font-weight:700;
-    color:#334155;cursor:pointer;font-size:13px;
+    padding:4px 10px;border:0;background:transparent;border-radius:999px;
+    font-weight:700;font-size:13px;color:#334155;cursor:pointer
   }
   .seg button.active{background:#fff;border:1px solid #d1d5db;color:#111827}
 
-  /* Layout */
+  /* layout */
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  @media (max-width: 980px){.grid{grid-template-columns:1fr}}
+  @media (max-width:980px){.grid{grid-template-columns:1fr}}
 
   .card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
+    background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:var(--shadow)
   }
-  .card .body{padding:14px 16px}
+  .card .body{padding:12px 14px}
 
-  /* Gradient chip headers */
-  .header{
-    display:inline-block;
-    padding:6px 12px;margin:14px 14px 0;border-radius:12px;
-    color:#fff;font-weight:800;letter-spacing:.2px;font-size:13px;
-    background:linear-gradient(135deg,var(--accent-start),var(--accent-end));
+  /* section chip headers */
+  .chip{
+    display:inline-block;margin:12px 12px 0;padding:6px 12px;border-radius:12px;color:#fff;
+    background:linear-gradient(135deg,var(--grad-a),var(--grad-b));font-weight:800;font-size:13px
   }
 
-  /* Rows in Application Review */
+  /* application rows */
   .row{
-    display:grid;grid-template-columns:180px 1fr;
-    align-items:center;gap:10px;
-    padding:10px 0;border-bottom:1px solid var(--line)
+    display:grid;grid-template-columns:260px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)
   }
   .row:last-child{border-bottom:none}
-  .label{font-weight:800}
 
-  .kvs{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .label{display:flex;align-items:center;gap:10px;font-weight:800}
+  .label .lbl{white-space:nowrap}
+
   .pill{
-    font-size:11px;padding:4px 8px;border-radius:999px;color:#fff;font-weight:800;letter-spacing:.2px
+    display:inline-block;font-weight:800;letter-spacing:.2px;color:#fff;
+    border-radius:999px;padding:3px 9px;font-size:12px;line-height:1
   }
-  .pill.strong{background:var(--pill-strong)}
-  .pill.avg{background:var(--pill-avg)}
-  .pill.flag{background:var(--pill-flag)}
+  .pill.strong{background:var(--g)}
+  .pill.avg{background:var(--y)}
+  .pill.flag{background:var(--r2)}
 
-  /* Employer history nested */
-  .toggle{
-    display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-weight:700;
-    cursor:pointer;margin-top:2px
+  .kvs{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+  /* subtoggle (under a row) */
+  .subtoggle{
+    display:flex;align-items:center;gap:8px;color:var(--muted);
+    font-weight:700;cursor:pointer;margin:4px 0 2px 0;font-size:13px
   }
-  .chev{display:inline-block;transform:rotate(-90deg);transition:transform .2s ease}
+  .chev{display:inline-block;transform:rotate(-90deg);transition:transform .18s}
   .open .chev{transform:rotate(0)}
 
-  .nested{
-    margin-top:8px;border-left:3px solid #d6d6e7;padding:10px 12px;border-radius:10px;background:#fafafe;
-    border:1px solid var(--line);
+  /* nested history card */
+  .history{
+    background:#fafbff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:6px
   }
-  .emp{margin:6px 0;font-weight:800}
-  .muted{color:var(--muted)}
+  .emp-row{margin:8px 0 6px}
+  .emp-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .emp-name{font-weight:800}
+  .emp-meta{color:var(--muted)}
   ul.clean{margin:6px 0 0 18px}
 
-  /* Decision panel */
-  .ai-pill{
-    display:inline-block;border-radius:999px;padding:6px 10px;font-weight:800;font-size:13px
-  }
+  /* rec area */
+  .ai-pill{display:inline-block;border-radius:999px;padding:6px 10px;font-weight:800;font-size:13px}
   .rec-Advance{background:#e9f9ee;color:#0f5132;border:1px solid #a7e3bf}
   .rec-HM-Review{background:#fff7e6;color:#7a4d00;border:1px solid #ffd48a}
   .rec-Hold{background:#f5f6f8;color:#334155;border:1px solid #d1d5db}
   .rec-Decline{background:#fde8e8;color:#7f1d1d;border:1px solid #fecaca}
 
   .btns{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
-  .btn{
-    padding:8px 12px;border:1px solid #d1d5db;border-radius:10px;background:#fff;font-weight:800;cursor:pointer;
-    transition:all .15s ease;font-size:14px
-  }
+  .btn{padding:8px 12px;border:1px solid #d1d5db;border-radius:10px;background:#fff;font-weight:800;cursor:pointer}
   .btn:hover{box-shadow:var(--shadow)}
   .btn.active{background:#111827;color:#fff;border-color:#111827}
 
   textarea{
-    width:100%;min-height:90px;border:1px solid #d1d5db;border-radius:12px;padding:10px 12px;font:inherit;resize:vertical;background:#fff
+    width:100%;min-height:90px;padding:10px 12px;border:1px solid #d1d5db;border-radius:12px;
+    background:#fff;font:inherit;resize:vertical
   }
   .hint{color:var(--muted);font-size:12px;margin-left:6px}
-
 </style>
 </head>
 <body>
-  <div class="topbar"></div>
-
   <div class="wrap">
+    <div class="accent"></div>
+
     <div class="titlebar">
       <h1>Screen Assist (HITL) — Demo</h1>
       <div class="seg-wrap">
         <span>Sample candidates:</span>
         <div class="seg" id="seg">
-          <button data-id="jordan" class="active">Jordan</button>
+          <button class="active" data-id="jordan">Jordan</button>
           <button data-id="taylor">Taylor</button>
           <button data-id="sam">Sam</button>
         </div>
@@ -156,16 +144,16 @@
     </div>
 
     <div class="grid">
-      <!-- Left: Application Review -->
+      <!-- LEFT -->
       <section class="card">
-        <div class="header">Application Review</div>
+        <div class="chip">Application Review</div>
         <div class="body" id="review"></div>
       </section>
 
-      <!-- Right stack -->
+      <!-- RIGHT stack -->
       <div style="display:flex;flex-direction:column;gap:18px">
         <section class="card">
-          <div class="header">Decision Recommendation</div>
+          <div class="chip">Decision Recommendation</div>
           <div class="body">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
               <div id="aiRecPill" class="ai-pill rec-Advance">AI Recommendation: Advance</div>
@@ -176,14 +164,11 @@
               <span id="rationale" class="muted" style="margin-left:6px"></span>
             </div>
 
-            <div>
-              <div style="font-weight:800;margin:6px 0 6px">Your decision:</div>
-              <div class="btns">
-                <button class="btn" id="btn-advance">Advance</button>
-                <button class="btn" id="btn-hm">HM-Review</button>
-                <button class="btn" id="btn-hold">Hold</button>
-                <button class="btn" id="btn-decline">Decline</button>
-              </div>
+            <div class="btns">
+              <button class="btn" id="btn-advance">Advance</button>
+              <button class="btn" id="btn-hm">HM-Review</button>
+              <button class="btn" id="btn-hold">Hold</button>
+              <button class="btn" id="btn-decline">Decline</button>
             </div>
 
             <div style="margin-top:6px">
@@ -195,7 +180,7 @@
         </section>
 
         <section class="card">
-          <div class="header">Recommended Recruiter Interview Questions</div>
+          <div class="chip">Recommended Recruiter Interview Questions</div>
           <div class="body">
             <ul id="rq" class="clean"></ul>
           </div>
@@ -205,103 +190,90 @@
   </div>
 
 <script>
-/* ---------- Sample Data ---------- */
+/* ---------- Data ---------- */
 const DATA = {
-  jordan: {
-    name: "Jordan",
-    aiRec: "Advance",
-    rationale: [
-      "Tenure PASS",
-      "Near-competitor (+)",
-      "Resume coverage avg 0.98",
-      "SQS 0.78",
-      "Company data freshness: 12d"
+  jordan:{
+    aiRec:"Advance",
+    rationale:[
+      "Tenure PASS","Near-competitor (+)","Resume coverage avg 0.98","SQS 0.78","Company data freshness: 12d"
     ],
-    review: [
-      {label:"Source", value:"Referral – Gold (SQS 0.78)", strength:"strong"},
-      {label:"Location", value:"SF Bay Area", strength:"strong"},
-      {label:"Total Work Experience", value:"7.5 years", strength:"strong"},
-      {label:"Role Experience", value:"5.0 years (Enterprise AE)", strength:"strong"},
-      {label:"Education", value:"Undergraduate Degree (BA, Economics)", strength:"avg"},
-      {label:"Seniority", value:"High end of band", strength:"flag"},
-      {label:"Tenure", value:"1 employer in last 5 yrs", strength:"strong", nested: {
+    review:[
+      {label:"Source",value:"Referral - Gold (SQS 0.78)",strength:"strong"},
+      {label:"Location",value:"SF Bay Area",strength:"strong"},
+      {label:"Total Work Experience",value:"7.5 years",strength:"strong"},
+      {label:"Role Experience",value:"5.0 years (Enterprise AE)",strength:"strong"},
+      {label:"Education",value:"Undergraduate Degree (BA, Economics)",strength:"avg"},
+      {label:"Seniority",value:"High end of band",strength:"flag"},
+      {label:"Tenure",value:"1 employer in last 5 yrs",strength:"strong",history:{
         caption:"Employer history (promotion-safe)",
-        history:[
-          {employer:"Acme Inc.", confidence:"high", lines:[
+        items:[
+          {employer:"Acme Inc.",meta:"Confidence: high • 2020-01 → present",bullets:[
             "2021-04: Associate AE → AE (promotion)",
             "2022-06: AE → Senior AE (promotion)"
-          ], range:"2020-01 → present"},
-          {employer:"BetaSoft", confidence:"high", lines:["Single role"], range:"2018-01 → 2019-12"}
+          ]},
+          {employer:"BetaSoft",meta:"Confidence: high • 2018-01 → 2019-12",bullets:[
+            "Single role"
+          ]}
         ]
       }}
     ],
-    questions:[
+    q:[
       "Review salary bands & expectations",
       "Percent of pipeline self-sourced in FY24",
       "Confirm length of sales cycle and ACV"
     ]
   },
-
-  taylor: {
-    name: "Taylor",
-    aiRec: "HM-Review",
-    rationale: [
-      "Tenure PASS",
-      "Direct competitor",
-      "Resume coverage avg 0.72 (low bar on ACV)",
-      "SQS 0.62",
-      "Company data freshness: 34d"
+  taylor:{
+    aiRec:"HM-Review",
+    rationale:[
+      "Tenure PASS","Direct competitor","Resume coverage avg 0.72 (ACV low bar)","SQS 0.62","Data freshness: 34d"
     ],
-    review: [
-      {label:"Source", value:"Inbound – Career site (SQS 0.62)", strength:"avg"},
-      {label:"Location", value:"Remote – PST", strength:"strong"},
-      {label:"Total Work Experience", value:"6.0 years", strength:"strong"},
-      {label:"Role Experience", value:"3.0 years (Mid-market AE)", strength:"avg"},
-      {label:"Education", value:"Undergraduate Degree (BS)", strength:"strong"},
-      {label:"Seniority", value:"Middle of band", strength:"strong"},
-      {label:"Tenure", value:"2 employers in last 5 yrs", strength:"avg", nested:{
+    review:[
+      {label:"Source",value:"Inbound – Career site (SQS 0.62)",strength:"avg"},
+      {label:"Location",value:"Remote — PST",strength:"strong"},
+      {label:"Total Work Experience",value:"6.0 years",strength:"strong"},
+      {label:"Role Experience",value:"3.0 years (Mid-market AE)",strength:"avg"},
+      {label:"Education",value:"Undergraduate Degree (BS)",strength:"strong"},
+      {label:"Seniority",value:"Middle of band",strength:"strong"},
+      {label:"Tenure",value:"2 employers in last 5 yrs",strength:"avg",history:{
         caption:"Employer history (promotion-safe)",
-        history:[
-          {employer:"Nimbus", confidence:"high", lines:["AE → Sr AE (promotion)"], range:"2021-02 → present"},
-          {employer:"QuickApps", confidence:"high", lines:["Single role"], range:"2019-05 → 2021-01"},
+        items:[
+          {employer:"Nimbus",meta:"Confidence: high • 2021-02 → present",bullets:[
+            "AE → Sr AE (promotion)"
+          ]},
+          {employer:"QuickApps",meta:"Confidence: high • 2019-05 → 2021-01",bullets:["Single role"]}
         ]
       }}
     ],
-    questions:[
+    q:[
       "Walk through top 2 wins; confirm ACV & cycle",
       "Percent sourced vs. partner leads",
       "Any public-sector exposure?"
     ]
   },
-
-  sam: {
-    name: "Sam",
-    aiRec: "Hold",
-    rationale: [
-      "Tenure FLAG (4 employers in 5 yrs)",
-      "No competitor proximity",
-      "Resume coverage avg 0.41",
-      "SQS 0.55",
-      "Data freshness: 98d"
+  sam:{
+    aiRec:"Hold",
+    rationale:[
+      "Tenure FLAG (4 employers in 5 yrs)","No competitor proximity","Resume coverage avg 0.41","SQS 0.55","Data freshness: 98d"
     ],
-    review: [
-      {label:"Source", value:"Sourced – Recruiter outreach (SQS 0.55)", strength:"avg"},
-      {label:"Location", value:"Austin, TX", strength:"strong"},
-      {label:"Total Work Experience", value:"9.0 years", strength:"strong"},
-      {label:"Role Experience", value:"2.0 years (AE)", strength:"flag"},
-      {label:"Education", value:"Undergraduate Degree", strength:"strong"},
-      {label:"Seniority", value:"Low end of band", strength:"avg"},
-      {label:"Tenure", value:"4 employers in last 5 yrs", strength:"flag", nested:{
+    review:[
+      {label:"Source",value:"Sourced — Recruiter outreach (SQS 0.55)",strength:"avg"},
+      {label:"Location",value:"Austin, TX",strength:"strong"},
+      {label:"Total Work Experience",value:"9.0 years",strength:"strong"},
+      {label:"Role Experience",value:"2.0 years (AE)",strength:"flag"},
+      {label:"Education",value:"Undergraduate Degree",strength:"strong"},
+      {label:"Seniority",value:"Low end of band",strength:"avg"},
+      {label:"Tenure",value:"4 employers in last 5 yrs",strength:"flag",history:{
         caption:"Employer history (promotion-safe)",
-        history:[
-          {employer:"Startly", confidence:"med", lines:["Single role"], range:"2024-01 → present"},
-          {employer:"Pulse", confidence:"high", lines:["Single role"], range:"2023-02 → 2023-12"},
-          {employer:"BlueBox", confidence:"high", lines:["Single role"], range:"2021-08 → 2023-01"},
-          {employer:"CoreApps", confidence:"high", lines:["Single role"], range:"2019-03 → 2021-06"}
+        items:[
+          {employer:"Startly",meta:"Confidence: medium • 2024-01 → present",bullets:["Single role"]},
+          {employer:"Pulse",meta:"Confidence: high • 2023-02 → 2023-12",bullets:["Single role"]},
+          {employer:"BlueBox",meta:"Confidence: high • 2021-08 → 2023-01",bullets:["Single role"]},
+          {employer:"CoreApps",meta:"Confidence: high • 2019-03 → 2021-06",bullets:["Single role"]}
         ]
       }}
     ],
-    questions:[
+    q:[
       "Explore reasons for recent moves; manager references?",
       "Coachability & self-sourcing examples",
       "Territory/account coverage experience"
@@ -309,112 +281,105 @@ const DATA = {
   }
 };
 
-/* ---------- Helpers & Rendering ---------- */
-const $ = sel => document.querySelector(sel);
-function pill(str){return `<span class="pill ${str}">${str==='strong'?'Strong':str==='avg'?'Average':'Flag'}</span>`}
+/* ---------- DOM helpers ---------- */
+const $ = s => document.querySelector(s);
 
-function renderReview(list){
-  const rows = list.map((item,i)=>{
-    const nested = item.nested ? `
-      <div class="nested" id="nest-${i}" hidden>
-        ${item.nested.history.map(h => `
-          <div style="margin:6px 0 8px">
-            <div><strong>${h.employer}</strong> <span class="muted">Confidence: ${h.confidence}${h.range?` • ${h.range}`:''}</span></div>
+function pill(str){
+  const map={strong:"Strong",avg:"Average",flag:"Flag"};
+  return `<span class="pill ${str}">${map[str]}</span>`;
+}
+
+function renderReview(rows){
+  const out = rows.map((r,idx)=>{
+    const left = `
+      <div class="label">
+        ${pill(r.strength)}
+        <span class="lbl">${r.label}:</span>
+      </div>`;
+    const right = `<div class="kvs">${r.value}</div>`;
+    const base = `<div class="row">${left}${right}</div>`;
+    const sub = r.history ? `
+      <div class="subtoggle" data-t="${idx}">
+        <span class="chev">▸</span>
+        <span>${r.history.caption}</span>
+      </div>
+      <div class="history" id="h-${idx}" hidden>
+        ${r.history.items.map(it=>`
+          <div class="emp-row">
+            <div class="emp-head">
+              <span class="emp-name">${it.employer}</span>
+              <span class="emp-meta">${it.meta}</span>
+            </div>
             <ul class="clean">
-              ${h.lines.map(l=>`<li>${l}</li>`).join('')}
+              ${it.bullets.map(b=>`<li>${b}</li>`).join("")}
             </ul>
           </div>
-        `).join('')}
-      </div>` : '';
+        `).join("")}
+      </div>
+    ` : "";
 
-    const toggle = item.nested ? `
-      <div class="toggle" data-target="nest-${i}">
-        <span class="chev">▸</span>
-        <span>${item.nested.caption}</span>
-      </div>` : '';
+    return base + sub;
+  }).join("");
+  $("#review").innerHTML = out;
 
-    return `
-      <div class="row">
-        <div class="label">${item.label}:</div>
-        <div class="kvs">
-          ${pill(item.strength)} <div>${item.value}</div>
-          ${toggle}
-          ${nested}
-        </div>
-      </div>`;
-  }).join('');
-  $("#review").innerHTML = rows;
-
-  $("#review").querySelectorAll(".toggle").forEach(t=>{
-    t.addEventListener('click', ()=>{
-      const id = t.getAttribute('data-target');
-      const block = document.getElementById(id);
-      const open = !block.hasAttribute('hidden');
-      block.toggleAttribute('hidden');
-      t.classList.toggle('open', !open);
+  // toggle
+  $("#review").querySelectorAll(".subtoggle").forEach(t=>{
+    t.addEventListener("click",()=>{
+      const id=t.getAttribute("data-t");
+      const pane=$("#h-"+id);
+      const open=!pane.hasAttribute("hidden");
+      pane.toggleAttribute("hidden");
+      t.classList.toggle("open",!open);
     });
   });
 }
 
-function renderRationale(list){
-  $("#rationale").innerHTML = list.join(" • ");
+function setRec(rec){
+  const pill=$("#aiRecPill");
+  pill.className="ai-pill rec-"+rec.replace(" ","-");
+  pill.textContent="AI Recommendation: "+rec;
 }
 
-function setRecPill(rec){
-  const pill = $("#aiRecPill");
-  pill.className = `ai-pill rec-${rec.replace(' ','-')}`;
-  pill.textContent = `AI Recommendation: ${rec}`;
+function renderRationale(list){ $("#rationale").textContent = list.join(" • "); }
+function renderQs(list){ $("#rq").innerHTML=list.map(x=>`<li>${x}</li>`).join(""); }
+
+/* ---------- Decisions ---------- */
+let aiRec="Advance";
+const noteBox=$("#notes"), hint=$("#note-hint");
+function onDecision(dec){
+  document.querySelectorAll(".btn").forEach(b=>b.classList.remove("active"));
+  ({Advance:"#btn-advance","HM-Review":"#btn-hm",Hold:"#btn-hold",Decline:"#btn-decline"});
+  const map={Advance:"#btn-advance","HM-Review":"#btn-hm",Hold:"#btn-hold",Decline:"#btn-decline"};
+  document.querySelector(map[dec]).classList.add("active");
+  const override=(dec!==aiRec);
+  noteBox.required=override;
+  hint.textContent="Optional — required with override."; // text fixed per your instruction
 }
+document.getElementById("btn-advance").onclick=()=>onDecision("Advance");
+document.getElementById("btn-hm").onclick=()=>onDecision("HM-Review");
+document.getElementById("btn-hold").onclick=()=>onDecision("Hold");
+document.getElementById("btn-decline").onclick=()=>onDecision("Decline");
 
-function renderQuestions(list){
-  $("#rq").innerHTML = list.map(q=>`<li>${q}</li>`).join('');
-}
-
-/* ---------- Decision logic & state ---------- */
-const noteBox = $("#notes");
-const noteHint = $("#note-hint");
-let aiRec = "Advance";
-
-function onDecision(decision){
-  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
-  const map = {Advance:'#btn-advance','HM-Review':'#btn-hm',Hold:'#btn-hold',Decline:'#btn-decline'};
-  document.querySelector(map[decision]).classList.add('active');
-
-  /* Require a note if recruiter overrides the AI rec */
-  const override = decision !== aiRec;
-  noteBox.required = override;
-  noteHint.textContent = 'Optional — ' + (override ? 'required with override.' : 'required with override.');
-  // We keep the text constant per your instruction. The logic still toggles the "required" attribute.
-}
-
+/* ---------- Candidate switching ---------- */
 function load(id){
-  const c = DATA[id];
-  aiRec = c.aiRec;
-  setRecPill(c.aiRec);
+  const c=DATA[id];
+  aiRec=c.aiRec;
+  setRec(c.aiRec);
   renderReview(c.review);
   renderRationale(c.rationale);
-  renderQuestions(c.questions);
-  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
-  noteBox.required = false;
-  noteHint.textContent = 'Optional — required with override.';
-  noteBox.value = '';
+  renderQs(c.q);
+  document.querySelectorAll(".btn").forEach(b=>b.classList.remove("active"));
+  noteBox.required=false; noteBox.value=""; hint.textContent="Optional — required with override.";
 }
-
-document.getElementById('btn-advance').onclick = ()=>onDecision('Advance');
-document.getElementById('btn-hm').onclick      = ()=>onDecision('HM-Review');
-document.getElementById('btn-hold').onclick    = ()=>onDecision('Hold');
-document.getElementById('btn-decline').onclick = ()=>onDecision('Decline');
-
-document.querySelectorAll('#seg button').forEach(b=>{
-  b.addEventListener('click', ()=>{
-    document.querySelectorAll('#seg button').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    load(b.dataset.id);
+document.querySelectorAll("#seg button").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll("#seg button").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active"); load(b.dataset.id);
   });
 });
 
-/* Initial load */
-load('jordan');
+/* init */
+load("jordan");
 </script>
 </body>
 </html>
