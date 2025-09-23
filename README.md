@@ -1,33 +1,46 @@
-# Diane Wilkinson — Recruiting Portfolio
+# Diane Wilkinson — Recruiting Strategy & Ops
 
-[![Website](https://img.shields.io/badge/Website-dianewilkinson.github.io-2563eb?logo=google-chrome&logoColor=white)](https://dianewilkinson.github.io/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dianewilkinson/)
-[![Email](https://img.shields.io/badge/Email-dianewilkinson510%40gmail.com-4b5563?logo=gmail&logoColor=white)](mailto:dianewilkinson510@gmail.com)
-![Focus](https://img.shields.io/badge/Focus-Recruiting%20Ops%20%E2%80%A2%20CX%20%E2%80%A2%20Process%20%26%20Analytics-10B981)
-![Location](https://img.shields.io/badge/Based%20in-SF%20Bay%20Area-6B7280)
+**Recruiting Operations | Talent Acquisition Strategy | People Analytics | AI in Hiring**
 
-Lightweight showcase of recruiting demos, experiments, and proof points. Built to stay role-flexible (IC, Ops, Lead).
+I build hiring machines—then run them. With 10+ years in recruiting and an MBA in Data Analytics, I focus on reducing friction in the funnel, standardizing processes, and implementing AI responsibly.
 
 ---
 
-## Highlights
+## 📂 Featured Work
 
-- **Screen Assist (legacy) — Demo**  
-  JD→Resume evidence, explainable AI rationale, recruiter-in-the-loop.  
-  🔗 https://dianewilkinson.github.io/screen/
+- **[Screen Assist (Demo)](./screen/)**  
+  JD + resume triage with evidence receipts.  
 
-- **Screening A[i]gent — Demo (new)**  
-  Updated version of Screen Assist with promotion-safe tenure and clearer decision rationale.  
-  🔗 https://dianewilkinson.github.io/screening/
+- **[Screening A[i]gent (Demo)](./screening/)**  
+  Next-gen demo: candidate toggles, AI rationale, override logging.
 
-- **Case Studies & Playbooks**  
-  Experiments (LinkedIn posting lift, surge hiring math), **Automated Interview Workflows — SOP**, **Metrics Dictionary**, source quality snapshot, Candidate Journey swimlanes.  
-  🔗 https://dianewilkinson.github.io/case-studies/
+- **Playbooks & SOPs**  
+  - Automated Interview Workflows SOPs  
+  - Candidate Journey Swimlanes  
+  - Metrics Dictionary  
 
-- **Credentials & Recommendations**  
-  Certifications, full recommendations, and academic honors. (No resume posted publicly.)  
-  🔗 https://dianewilkinson.github.io/credentials/
+- **Case Studies & Recruiting Analytics**  
+  - LinkedIn Posting Optimization  
+  - Recruiting Funnel under Attrition  
+  - Candidate Quality by Source  
 
 ---
 
-> All examples are illustrative/redacted; no proprietary data.
+## 🏆 Recommendations
+
+> “Rare talent. Listens before talking, connects ideas… the best recruiter in our sector.”  
+> “Fastest turnaround of highly qualified talent I’ve seen.”  
+> “One of the most effective recruiters in the Bay Area.”
+
+*(Full, dated recommendations on [LinkedIn](https://www.linkedin.com/in/dianewilkinson))*
+
+---
+
+## 🎓 Certifications & Credentials
+- MBA — Data Analytics (4.0 GPA, Beta Gamma Sigma, Phi Kappa Phi)  
+- Wharton People Analytics  
+- SHRM: Employing Abilities  
+- AIRS: CTR, CSMR, CDR  
+- AI in Recruiting (CASR)  
+
+---
