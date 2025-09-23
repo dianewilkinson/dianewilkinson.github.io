@@ -5,18 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Diane Wilkinson — Recruiting Ops & AI Portfolio</title>
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; background:#0b0d12; color:#e8eaf0; }
+    body { 
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
+      margin: 0; 
+      background: #f9fafb;   /* light background */
+      color: #1f2937;        /* dark text */
+    }
     header { padding: 48px 20px; text-align: center; }
-    h1 { margin: 0 0 10px; font-size: 28px; }
-    p.sub { margin: 0; opacity: .8; }
-    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); padding: 24px; max-width: 1100px; margin: 0 auto 60px; }
-    .card { background: linear-gradient(180deg, #161a22, #11151b); border: 1px solid #1e2530; border-radius: 14px; padding: 18px; text-decoration: none; color: inherit; transition: transform .12s ease, border-color .12s ease; }
-    .card:hover { transform: translateY(-2px); border-color:#2b8cff; }
-    .card h3 { margin: 0 0 6px; font-size: 18px; }
-    .card p { margin: 0; opacity: .85; font-size: 14px; line-height: 1.35; }
-    footer { text-align:center; padding: 24px; opacity:.7; font-size: 14px; }
-    .tag { display:inline-block; font-size:12px; padding:2px 8px; border:1px solid #2b8cff; border-radius:999px; color:#bcd9ff; margin-left:8px; }
-    a.inline { color:#7fb3ff; }
+    h1 { margin: 0 0 10px; font-size: 28px; color:#111827; }
+    p.sub { margin: 0; color:#4b5563; }
+    
+    .grid { 
+      display: grid; 
+      gap: 16px; 
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+      padding: 24px; 
+      max-width: 1100px; 
+      margin: 0 auto 60px; 
+    }
+    .card { 
+      background: #fff; 
+      border: 1px solid #e5e7eb; 
+      border-radius: 14px; 
+      padding: 18px; 
+      text-decoration: none; 
+      color: inherit; 
+      transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease; 
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08); 
+    }
+    .card:hover { 
+      transform: translateY(-2px); 
+      border-color:#2563eb; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12); 
+    }
+    .card h3 { margin: 0 0 6px; font-size: 18px; color:#111827; }
+    .card p { margin: 0; color:#374151; font-size: 14px; line-height: 1.45; }
+    
+    footer { text-align:center; padding: 24px; color:#6b7280; font-size: 14px; }
+    
+    .tag { 
+      display:inline-block; 
+      font-size:12px; 
+      padding:2px 8px; 
+      border:1px solid #2563eb; 
+      border-radius:999px; 
+      color:#2563eb; 
+      margin-left:8px; 
+    }
+    a.inline { color:#2563eb; }
   </style>
 </head>
 <body>
@@ -27,28 +63,29 @@
 
   <main class="grid">
     <a class="card" href="/screen/">
-      <h3>Screen Assist (HITL) <span class="tag">Demo</span></h3>
-      <p>JD→Resume evidence with audit-ready rationale; promotion-safe tenure; HM-Review/Advance/Hold—no auto-rejects.</p>
+      <h3>Screen Assist <span class="tag">Demo</span></h3>
+      <p>Original human-in-the-loop screening demo. Shows JD→Resume evidence, AI rationale, and recruiter decision options.</p>
     </a>
 
     <a class="card" href="/screening/">
-      <h3>Screening A[i]gent <span class="tag">Explainer</span></h3>
-      <p>What it is, why it matters, pilot plan, success metrics, and guardrails. Built to standardize quality while saving hours.</p>
+      <h3>Screening A[i]gent <span class="tag">Demo</span></h3>
+      <p>Newer version of Screen Assist — resume triage with receipts, AI decision rationale, promotion-safe tenure, and recruiter-in-the-loop controls.</p>
     </a>
 
     <a class="card" href="/case-studies/">
       <h3>Case Studies</h3>
-      <p>LinkedIn posting optimization (20× apps), recruiting funnel surge plan (20 AE hires in 30 days), source quality.</p>
+      <p>LinkedIn posting optimization (20× apps), recruiting funnel surge plan (20 hires in 30 days), and candidate source quality analysis.</p>
     </a>
 
     <a class="card" href="/resume/">
       <h3>Resume & Credentials</h3>
-      <p>MBA (Data Analytics, 4.0), Beta Gamma Sigma, TA Strategy & Ops leadership, selected work samples.</p>
+      <p>MBA (Data Analytics, 4.0), Beta Gamma Sigma, TA Strategy & Ops leadership, and selected work samples.</p>
     </a>
   </main>
 
   <footer>
-    San Francisco Bay Area · <a class="inline" href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
+    San Francisco Bay Area · 
+    <a class="inline" href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
     <a class="inline" href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
   </footer>
 </body>
