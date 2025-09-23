@@ -1,8 +1,13 @@
 # Diane Wilkinson — Recruiting Strategy & Ops
 
-**Recruiting Operations | Talent Acquisition Strategy | People Analytics | AI in Hiring**
+[![Website](https://img.shields.io/badge/Website-dianewilkinson.github.io-2563eb?logo=google-chrome&logoColor=white)](https://dianewilkinson.github.io/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-20%2B%20Recommendations-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dianewilkinson/)
+[![Email](https://img.shields.io/badge/Email-dianewilkinson510%40gmail.com-4b5563?logo=gmail&logoColor=white)](mailto:dianewilkinson510@gmail.com)
+![Focus](https://img.shields.io/badge/Focus-Recruiting%20Ops%20%E2%80%A2%20CX%20%E2%80%A2%20Process%20%26%20Analytics-10B981)
+![Location](https://img.shields.io/badge/Based%20in-SF%20Bay%20Area-6B7280)
 
-I build hiring machines—then run them. With 10+ years in recruiting and an MBA in Data Analytics, I focus on reducing friction in the funnel, standardizing processes, and implementing AI responsibly.
+Recruiting Strategy & Operations • Candidate Experience • Process Design & Analytics  
+MBA in Data Analytics (4.0 GPA) • Beta Gamma Sigma • Phi Kappa Phi
 
 ---
 
@@ -32,7 +37,7 @@ I build hiring machines—then run them. With 10+ years in recruiting and an MBA
 > “Fastest turnaround of highly qualified talent I’ve seen.”  
 > “One of the most effective recruiters in the Bay Area.”
 
-*(Full, dated recommendations on [LinkedIn](https://www.linkedin.com/in/dianewilkinson))*
+*20+ dated recommendations on [LinkedIn](https://www.linkedin.com/in/dianewilkinson). Extended version coming soon.*
 
 ---
 
