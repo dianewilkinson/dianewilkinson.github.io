@@ -5,7 +5,7 @@ MBA in Data Analytics (4.0 GPA) • Beta Gamma Sigma • Phi Kappa Phi
 
 ---
 
-## Featured Work
+## 🧩 Featured Work
 
 - **Screen Assist — Demo**  
   JD→Resume evidence with explainable AI rationale and recruiter-in-the-loop.  
@@ -26,7 +26,15 @@ MBA in Data Analytics (4.0 GPA) • Beta Gamma Sigma • Phi Kappa Phi
 
 ---
 
-## Recommendations (samples)
+## 📊 What I Focus On
+- Cleaner, faster loops (time-to-screen/interview SLAs, nudges, scorecard hygiene)
+- Higher-signal pipelines (referrals + outbound; time-box inbound)
+- Structured decisions (intake → rubric → evidence-linked scorecards)
+- Transparent AI (human-in-the-loop; rationale + override notes)
+
+---
+
+## 🏆 Recommendations (samples)
 
 > “Rare talent. Listens before talking, connects ideas… the best recruiter in our sector.”  
 > “Fast turnaround of highly qualified talent.”  
@@ -36,7 +44,14 @@ MBA in Data Analytics (4.0 GPA) • Beta Gamma Sigma • Phi Kappa Phi
 
 ---
 
-**Contact**  
+## 📚 Certifications & Credentials
+- MBA — Data Analytics (4.0 GPA, Beta Gamma Sigma, Phi Kappa Phi)  
+- Wharton People Analytics • SHRM: Employing Abilities  
+- AIRS: CTR, CSMR, CDR • AI in Recruiting (CASR)
+
+---
+
+## ✉️ Contact
 San Francisco Bay Area  
 dianewilkinson510@gmail.com • https://www.linkedin.com/in/dianewilkinson
 
