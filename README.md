@@ -1,10 +1,23 @@
-# Diane Wilkinson — Recruiting Operations & AI Portfolio
+# Diane Wilkinson — Recruiting Portfolio
 
-This is my public portfolio site (GitHub Pages). Highlights:
+Lightweight showcase of recruiting demos, experiments, and proof points. Built to stay role-flexible (IC, Ops, Lead).
 
-- **Screen Assist (HITL):** Evidence-linked JD→Resume screening with audit-ready rationale  
-- **Screening A[i]gent:** Explainer, pilot plan, success metrics, guardrails  
-- **Case Studies:** LinkedIn posting optimization (20× apps), recruiting funnel surge plan  
-- **Resume & Credentials:** MBA (Data Analytics, 4.0), Beta Gamma Sigma, Greenhouse SME
+- **Screen Assist (legacy) — Demo:** JD→Resume evidence, explainable AI rationale, recruiter-in-the-loop.  
+  Site: https://dianewilkinson.github.io/screen/
 
-> Site: https://dianewilkinson.github.io/
+- **Screening A[i]gent — Demo (new):** Updated version of Screen Assist with promotion-safe tenure and clearer decision rationale.  
+  Site: https://dianewilkinson.github.io/screening/
+
+- **Case Studies & Playbooks:** Experiments (LinkedIn posting lift, surge hiring math), **Automated Interview Workflows — SOP**, **Metrics Dictionary**, source quality snapshot, Candidate Journey swimlanes.  
+  Index: https://dianewilkinson.github.io/case-studies/
+
+- **Credentials & Recommendations:** Certifications, full recommendations, academic honors. (No resume posted publicly.)  
+  Index: https://dianewilkinson.github.io/credentials/
+
+---
+
+**About**  
+Recruiting Strategy & Operations • Candidate Experience • Process Design & Analytics  
+San Francisco Bay Area • dianewilkinson510@gmail.com • https://www.linkedin.com/in/dianewilkinson
+
+> All examples are illustrative/redacted; no proprietary data.
