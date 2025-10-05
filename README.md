@@ -1,17 +1,13 @@
-# Diane Wilkinson — Recruiting Strategy & Ops
+# Diane Wilkinson — All Things Talent Acquisition
 
-Recruiting Strategy & Operations • Candidate Experience • Process Design & Analytics  
+Senior Recruiter • GTM Hiring • AI & Automation • Recruiting Operations & Strategy • Candidate Experience • Process Design & Analytics • Greenhouse SME
 MBA in Data Analytics (4.0 GPA) • Beta Gamma Sigma • Phi Kappa Phi
 
 ---
 
 ## 🧩 Featured Work
 
-- **Screen Assist — Demo**  
-  JD→Resume evidence with explainable AI rationale and recruiter-in-the-loop.  
-  https://dianewilkinson.github.io/screen/
-
-- **Screening A[i]gent — Demo (new)**  
+- **Screening A[i]gent — Demo **  
   Updated version with promotion-safe tenure, clearer rationale, and override logging.  
   https://dianewilkinson.github.io/screening/
 
