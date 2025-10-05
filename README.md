@@ -1,6 +1,6 @@
 # Diane Wilkinson — All Things Talent Acquisition
 
-Senior Recruiter • GTM Hiring • AI & Automation • Recruiting Operations & Strategy • Candidate Experience • Process Design & Analytics • Greenhouse SME
+Senior Recruiter • GTM Hiring • AI & Automation • Recruiting Operations & Strategy • Candidate Experience • Process Design & Analytics • Greenhouse SME •
 MBA in Data Analytics (4.0 GPA) • Beta Gamma Sigma • Phi Kappa Phi
 
 ---
