@@ -27,6 +27,11 @@
     a{color:var(--link);text-decoration:none}
     a:hover{text-decoration:underline}
     footer{text-align:center;margin:40px 0 20px;font-size:14px;color:var(--muted)}
+
+    /* Force 4-up layout for Recruiting Operations section */
+    .grid.four { grid-template-columns: repeat(4, minmax(220px, 1fr)); }
+    @media (max-width: 1200px) { .grid.four { grid-template-columns: repeat(2, minmax(260px, 1fr)); } }
+    @media (max-width: 640px)  { .grid.four { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -38,7 +43,7 @@
 
   <div class="wrap">
 
-    <!-- A[i]gent Systems -->
+    <!-- 🦾 A[i]gent Systems -->
     <section>
       <h2>🦾 A[i]gent Systems</h2>
       <div class="grid">
@@ -60,10 +65,27 @@
       </div>
     </section>
 
-    <!-- Recruiting Ops & Playbooks -->
+    <!-- 📊 Tools & References (moved up) -->
     <section>
-      <h2>🧩 Recruiting Ops & Playbooks</h2>
+      <h2>📊 Tools & References</h2>
       <div class="grid">
+        <div class="card">
+          <h3>Recruiting Funnel Calculator</h3>
+          <p>Interactive Google Sheet to forecast hiring capacity and time-to-fill.</p>
+          <p class="meta"><a href="https://docs.google.com/spreadsheets/d/1zenqUasirR68Y_yqrgBpQU_it4fobqz9/edit?usp=sharing" target="_blank">Open Sheet</a></p>
+        </div>
+        <div class="card">
+          <h3>Metrics Dictionary</h3>
+          <p>Standard definitions for recruiting KPIs to keep dashboards consistent.</p>
+          <p class="meta"><a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=sharing" target="_blank">Open Sheet</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🧩 Recruiting Operations -->
+    <section>
+      <h2>🧩 Recruiting Operations</h2>
+      <div class="grid four">
         <div class="card">
           <h3>Automated Interview Workflows — SOPs</h3>
           <p>Scorecard compliance and scheduling automations for faster cycles and lower no-shows.</p>
@@ -87,24 +109,7 @@
       </div>
     </section>
 
-    <!-- Tools & References -->
-    <section>
-      <h2>📊 Tools & References</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Recruiting Funnel Calculator</h3>
-          <p>Interactive Google Sheet to forecast hiring capacity and time-to-fill.</p>
-          <p class="meta"><a href="https://docs.google.com/spreadsheets/d/1zenqUasirR68Y_yqrgBpQU_it4fobqz9/edit?usp=sharing" target="_blank">Open Sheet</a></p>
-        </div>
-        <div class="card">
-          <h3>Metrics Dictionary</h3>
-          <p>Standard definitions for recruiting KPIs to keep dashboards consistent.</p>
-          <p class="meta"><a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=sharing" target="_blank">Open Sheet</a></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Credentials -->
+    <!-- 🪪 Credentials & Recommendations -->
     <section>
       <h2>🪪 Credentials & Recommendations</h2>
       <div class="grid">
