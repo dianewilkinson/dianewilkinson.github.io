@@ -36,6 +36,30 @@
     .grid.four { grid-template-columns: repeat(4, minmax(220px, 1fr)); }
     @media (max-width: 1200px) { .grid.four { grid-template-columns: repeat(2, minmax(260px, 1fr)); } }
     @media (max-width: 640px)  { .grid.four { grid-template-columns: 1fr; } }
+
+    /* Footer logo bar styling */
+    .logo-bar{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      gap:20px;
+      margin-top:18px;
+    }
+    .logo-bar img{
+      height:42px;
+      filter:grayscale(100%);
+      opacity:.9;
+      transition:opacity .2s ease, filter .2s ease;
+    }
+    .logo-bar img:hover{
+      filter:none;
+      opacity:1;
+    }
+    @media (max-width:640px){
+      .logo-bar{gap:14px}
+      .logo-bar img{height:32px}
+    }
   </style>
 </head>
 <body>
@@ -118,9 +142,13 @@
       <h2>🪪 Credentials & Recommendations</h2>
       <div class="grid">
         <div class="card">
-          <h3>Resume / CV</h3>
-          <p>Full career summary and impact metrics from agency and in-house recruiting.</p>
-          <p class="meta"><a href="./assets/Diane_Wilkinson_CV_Anthropic.pdf" target="_blank">Open PDF</a></p>
+          <h3>Credentials</h3>
+          <p>
+            <strong>MBA, Data Analytics (4.0 GPA)</strong> — Louisiana State University Shreveport<br>
+            Honors: <em>Beta Gamma Sigma</em>, <em>Phi Kappa Phi</em><br><br>
+            <strong>Certifications:</strong> Wharton People Analytics · SHRM Employing Abilities ·
+            AIRS (CTR, CSMR, CDR, CASR — AI in Recruiting)
+          </p>
         </div>
         <div class="card">
           <h3>Recommendations</h3>
@@ -129,12 +157,26 @@
         </div>
       </div>
     </section>
-
   </div>
 
+  <!-- 🌟 Footer with logo bar -->
   <footer>
-    San Francisco Bay Area · <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> · 
-    <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank">LinkedIn</a>
+    <p>
+      San Francisco Bay Area · 
+      <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> · 
+      <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank">LinkedIn</a>
+    </p>
+
+    <div class="logo-bar" aria-label="Certifications and Honors">
+      <img src="./assets/logos/SHRM.png" alt="SHRM Employing Abilities" loading="lazy">
+      <img src="./assets/logos/BGS.png" alt="Beta Gamma Sigma" loading="lazy">
+      <img src="./assets/logos/PKP.png" alt="Phi Kappa Phi" loading="lazy">
+      <img src="./assets/logos/MBA4.0.png" alt="LSUS MBA Data Analytics 4.0" loading="lazy">
+      <img src="./assets/logos/CDR.png" alt="AIRS Certified Diversity Recruiter" loading="lazy">
+      <img src="./assets/logos/CTR.png" alt="AIRS Certified Technical Recruiter" loading="lazy">
+      <img src="./assets/logos/CASR.png" alt="AIRS Certificate in AI Sourcing & Recruiting" loading="lazy">
+      <img src="./assets/logos/CSMR.png" alt="AIRS Certified Social & New Media Recruiter" loading="lazy">
+    </div>
   </footer>
 </body>
 </html>
