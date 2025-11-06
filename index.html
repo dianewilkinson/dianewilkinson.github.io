@@ -34,6 +34,34 @@
     .meta{margin-top:auto;font-size:12px;color:#6b7280;line-height:1.6}
     .meta a{display:block;margin-top:3px}
 
+    .card.cta {
+      background: linear-gradient(135deg, #2563eb 0%, #8b5cf6 100%);
+      color: #fff;
+      text-align: center;
+      border: none;
+      box-shadow: 0 2px 6px var(--shadow);
+    }
+    .card.cta h3 {
+      color: #fff;
+    }
+    .card.cta p {
+      color: #f3f4f6;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: #fff;
+      color: #2563eb;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .cta-btn:hover {
+      background: #f9fafb;
+      color: #1d4ed8;
+    }
+
     footer{text-align:center;margin:36px 0 22px;color:var(--muted);font-size:14px}
     /* Two-row credentials badge block */
     .cred-wrap{max-width:940px;margin:0 auto 12px}
@@ -110,9 +138,9 @@
         </div>
 
         <div class="card">
-          <h3>Case Study: Pipeline Optimization</h3>
-          <p>Case study in recruitment strategy & planning for 20 sales hires.</p>
-          <p class="meta"><a href="../assets/Case_Study_Recruiting_Funnel.pdf" target="_blank" rel="noopener">Open PDF</a></p>
+          <h3>Funnel Optimization</h3>
+          <p>Case Study: recruitment strategy & planning.</p>
+          <p class="meta"><a href="../assets/Case_Study_Recruiting_Funnel.pptx.pdf" target="_blank" rel="noopener">Open PDF</a></p>
         </div>
 
         <div class="card">
@@ -139,24 +167,30 @@
           <p class="meta"><a href="../assets/Candidate_Quality_by_Source.pdf" target="_blank" rel="noopener">Open PDF</a></p>
         </div>
 
+        <div class="card cta">
+          <h3>Book a 15-Minute Intro</h3>
+          <p>Let’s connect to discuss Recruiting Operations, AI adoption, or your next hiring challenge.</p>
+          <p class="meta"><a class="cta-btn" href="https://calendar.app.google/4HZymoB5k3Ly5MNm6" target="_blank" rel="noopener">📅 Book Appointment</a></p>
+        </div>
+        
       </div>
     </section>
 
   </div>
 
-  <footer>
+   <footer>
   <div class="cred-wrap" aria-label="Honors and Certifications">
     <div class="logo-bar large-row">
-      <img src="./assets/logos/SHRM_pill.png" alt="SHRM Foundation — Employing Abilities at Work, Certified" loading="lazy">
-      <img src="./assets/logos/BGS_pill.png"  alt="Beta Gamma Sigma — International Business Honor Society" loading="lazy">
-      <img src="./assets/logos/PKP_pill.png"  alt="Phi Kappa Phi — National Honor Society" loading="lazy">
-      <img src="./assets/logos/MBA_pill.png"  alt="MBA Data Analytics — Louisiana State University Shreveport, 4.0 GPA" loading="lazy">
+      <img src="../assets/logos/SHRM_pill.png" alt="SHRM Foundation — Employing Abilities at Work, Certified" loading="lazy">
+      <img src="../assets/logos/BGS_pill.png"  alt="Beta Gamma Sigma — International Business Honor Society" loading="lazy">
+      <img src="../assets/logos/PKP_pill.png"  alt="Phi Kappa Phi — National Honor Society" loading="lazy">
+      <img src="../assets/logos/MBA_pill.png"  alt="MBA Data Analytics — Louisiana State University Shreveport, 4.0 GPA" loading="lazy">
     </div>
     <div class="logo-bar large-row">
-      <img src="./assets/logos/AIRS_CSMR_pill.png" alt="AIRS Certified Social & New Media Recruiter" loading="lazy">
-      <img src="./assets/logos/AIRS_CDR_pill.png"  alt="AIRS Certified Diversity Recruiter" loading="lazy">
-      <img src="./assets/logos/AIRS_CTR_pill.png"  alt="AIRS Certified Technical Recruiter" loading="lazy">
-      <img src="./assets/logos/AIRS_CASR_pill.png" alt="AIRS Certified AI & Sourcing Recruiter" loading="lazy">
+      <img src="../assets/logos/AIRS_CSMR_pill.png" alt="AIRS Certified Social & New Media Recruiter" loading="lazy">
+      <img src="../assets/logos/AIRS_CDR_pill.png"  alt="AIRS Certified Diversity Recruiter" loading="lazy">
+      <img src="../assets/logos/AIRS_CTR_pill.png"  alt="AIRS Certified Technical Recruiter" loading="lazy">
+      <img src="../assets/logos/AIRS_CASR_pill.png" alt="AIRS Certified AI & Sourcing Recruiter" loading="lazy">
     </div>
   </div>
 
@@ -190,7 +224,7 @@
     margin-bottom: 10px;
   }
   .logo-bar.large-row img {
-    height: 120px; /* Larger and balanced with cards */
+    height: 120px; /* BIGGER badges */
     width: auto;
     object-fit: contain;
     filter: grayscale(100%) brightness(.96);
