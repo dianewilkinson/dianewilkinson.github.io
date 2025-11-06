@@ -7,18 +7,18 @@ MBA in Data Analytics (4.0 GPA) • Beta Gamma Sigma • Phi Kappa Phi
 
 ## 🧩 Featured Work
 
-- **Screening A[i]gent — Demo **  
-  Updated version with promotion-safe tenure, clearer rationale, and override logging.  
-  https://dianewilkinson.github.io/screening/
+- **Screening A[i]gent — Demo**  
+  Promotion-safe tenure logic, receipts, and recruiter-in-the-loop controls.
+  🔗 https://dianewilkinson.github.io/screening/
 
-- **Case Studies & Playbooks**  
-  Experiments (LinkedIn posting lift, surge-hiring math), Automated Interview Workflows SOPs, Metrics Dictionary, Source Quality, Candidate Journey.  
-  https://dianewilkinson.github.io/case-studies/
+- **Recruiting Operations Portfolio**  
+  Automated Workflows, Metrics Dictionary, Recruiting Pipeline Calculator, Candidate Journey.  
+  🔗 https://dianewilkinson.github.io/
 
 - **Credentials & Recommendations**  
   Certifications, academic honors, and reputation proof.  
   20+ dated recommendations on LinkedIn.  
-  https://dianewilkinson.github.io/credentials/
+  🔗 https://dianewilkinson.github.io/credentials/
 
 ---
 
@@ -47,8 +47,14 @@ MBA in Data Analytics (4.0 GPA) • Beta Gamma Sigma • Phi Kappa Phi
 
 ---
 
-## ✉️ Contact
+## ✉️ Contact 💬 Let’s Connect
+
+- **Book a 15-Minute Intro:** [📅 Schedule Here](https://calendar.app.google/4HZymoB5k3Ly5MNm6)  
+- **Email:** [dianewilkinson510@gmail.com](mailto:dianewilkinson510@gmail.com)  
+- **LinkedIn:** [linkedin.com/in/dianewilkinson](https://www.linkedin.com/in/dianewilkinson)
+
 San Francisco Bay Area  
-dianewilkinson510@gmail.com • https://www.linkedin.com/in/dianewilkinson
+
+---
 
 > All examples are illustrative/redacted; no proprietary data.
