@@ -5,10 +5,17 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Diane Wilkinson — Recruiting Operations Portfolio</title>
   <style>
-    :root{--bg:#f9fafb;--card:#fff;--text:#1f2937;--muted:#4b5563;--border:#e5e7eb;--link:#2563eb;--shadow:rgba(0,0,0,.08)}
+    :root{
+      --bg:#f9fafb;--card:#fff;--text:#1f2937;--muted:#4b5563;
+      --border:#e5e7eb;--link:#2563eb;--shadow:rgba(0,0,0,.08)
+    }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+    body{
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
+    }
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
     .bar{height:4px;background:linear-gradient(90deg,#f43f5e,#8b5cf6,#3b82f6)}
     header{text-align:center;padding:44px 16px 20px}
     header h1{font-size:28px;margin:0}
@@ -18,15 +25,26 @@
     section{margin:34px 0}
     h2{font-size:22px;margin:0 0 14px}
 
-    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-    /* Equal-height 4-col layout on desktop */
-    .grid.four{display:grid;gap:16px;grid-template-columns:repeat(4,minmax(220px,1fr));align-items:stretch}
-    @media (max-width:1200px){.grid.four{grid-template-columns:repeat(2,minmax(260px,1fr))}}
-    @media (max-width:640px){.grid.four{grid-template-columns:1fr}}
+    .grid{
+      display:grid;gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr))
+    }
+    .grid.four{
+      display:grid;gap:16px;
+      grid-template-columns:repeat(4,minmax(220px,1fr));
+      align-items:stretch
+    }
+    @media (max-width:1200px){
+      .grid.four{grid-template-columns:repeat(2,minmax(260px,1fr))}
+    }
+    @media (max-width:640px){
+      .grid.four{grid-template-columns:1fr}
+    }
 
     .card{
-      background:var(--card);border:1px solid var(--border);border-radius:16px;
-      padding:16px;box-shadow:0 1px 3px var(--shadow);
+      background:var(--card);border:1px solid var(--border);
+      border-radius:16px;padding:16px;
+      box-shadow:0 1px 3px var(--shadow);
       display:flex;flex-direction:column;min-height:180px
     }
     .card h3{margin:2px 0 8px;font-size:18px}
@@ -34,45 +52,34 @@
     .meta{margin-top:auto;font-size:12px;color:#6b7280;line-height:1.6}
     .meta a{display:block;margin-top:3px}
 
-    .card.cta {
-      background: linear-gradient(135deg, #2563eb 0%, #8b5cf6 100%);
-      color: #fff;
-      text-align: center;
-      border: none;
-      box-shadow: 0 2px 6px var(--shadow);
+    .card.cta{
+      background:linear-gradient(135deg,#2563eb 0%,#8b5cf6 100%);
+      color:#fff;text-align:center;border:none;
+      box-shadow:0 2px 6px var(--shadow)
     }
-    .card.cta h3 {
-      color: #fff;
+    .card.cta h3{color:#fff}
+    .card.cta p{color:#f3f4f6}
+    .cta-btn{
+      display:inline-block;background:#fff;color:#2563eb;
+      font-weight:600;padding:8px 14px;border-radius:8px;
+      text-decoration:none;transition:all .25s ease
     }
-    .card.cta p {
-      color: #f3f4f6;
-    }
-    .cta-btn {
-      display: inline-block;
-      background: #fff;
-      color: #2563eb;
-      font-weight: 600;
-      padding: 8px 14px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: all 0.25s ease;
-    }
-    .cta-btn:hover {
-      background: #f9fafb;
-      color: #1d4ed8;
-    }
+    .cta-btn:hover{background:#f9fafb;color:#1d4ed8}
 
     footer{text-align:center;margin:36px 0 22px;color:var(--muted);font-size:14px}
-    /* Two-row credentials badge block */
     .cred-wrap{max-width:940px;margin:0 auto 12px}
-    .logo-bar{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:nowrap;margin:0 0 8px}
+    .logo-bar{
+      display:flex;justify-content:center;align-items:center;
+      gap:18px;flex-wrap:nowrap;margin:0 0 8px
+    }
     .logo-bar img{
-      height:68px; /* larger badges */
-      width:auto;object-fit:contain;
+      height:68px;width:auto;object-fit:contain;
       filter:grayscale(100%) brightness(.96);
       opacity:.95;transition:filter .25s ease,opacity .25s ease
     }
-    .logo-bar img:hover{filter:grayscale(0%) brightness(1.05);opacity:1}
+    .logo-bar img:hover{
+      filter:grayscale(0%) brightness(1.05);opacity:1
+    }
     @media (max-width:980px){
       .cred-wrap{max-width:720px}
       .logo-bar img{height:56px}
@@ -84,6 +91,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="bar"></div>
 
@@ -92,165 +100,136 @@
     <p>
       Senior Recruiter • Recruiting Operations & Strategy • AI & Automation • Candidate Experience • Greenhouse SME • Process Design & Analytics<br>
       MBA, Data Analytics (4.0 GPA) • Honors: Beta Gamma Sigma, Phi Kappa Phi •
-      <a href="../assets/Recommendations_Excerpts.pdf" target="_blank" rel="noopener">Recommendations</a>
+      <a href="../assets/credentials-recommendations-excerpts.pdf" target="_blank" rel="noopener">Recommendations</a>
     </p>
   </header>
 
   <div class="wrap">
+    <section aria-labelledby="work">
+      <h2 id="work">🧩 Selected Work</h2>
 
-    <!-- A[i]gent Systems -->
-    <section aria-labelledby="agents">
-      <h2 id="agents">🦾 A[i]gent Systems</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>A[i]gents Roster</h3>
-          <p>Ten specialized AI agents supporting every recruiting stage.</p>
-          <p class="meta"><a href="../assets/A[i]gents_Roster.pdf" target="_blank" rel="noopener">Open PDF</a></p>
-        </div>
-        <div class="card">
-          <h3>Screening A[i]gent — Demo</h3>
-          <p>AI A[i]gent operative to battle screening top funnel chaos & recover hidden talent.</p>
-          <p class="meta"><a href="https://dianewilkinson.github.io/screening/" target="_blank" rel="noopener">Open Demo</a></p>
-        </div>
-        <div class="card">
-          <h3>Screening A[i]gent Explainer</h3>
-          <p>Why a Screening A[i]gent? Problems it solves, controls, and design choices.</p>
-          <p class="meta"><a href="../assets/why-screening-agent.pdf" target="_blank" rel="noopener">Open PDF</a></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Recruiting Operations (merged tools + ops) -->
-    <section aria-labelledby="ops">
-      <h2 id="ops">🧩 Recruiting Operations</h2>
       <div class="grid four">
 
+        <!-- AI -->
         <div class="card">
-          <h3>Playbook: Automated Workflows</h3>
-          <p>Scorecard compliance and scheduling automations for faster cycles and lower no-shows.</p>
-          <p class="meta"><a href="../assets/Automated_Interview_Workflows_SOPs.pdf" target="_blank" rel="noopener">Open PDF</a></p>
+          <h3>AI Tool: A[i]gents Roster</h3>
+          <p>Ten specialized AI agents augmenting each stage of the recruiting lifecycle.</p>
+          <p class="meta">
+            <a href="../assets/ai-tool-agents-roster.pdf" target="_blank" rel="noopener">Open PDF</a>
+          </p>
         </div>
 
+        <div class="card">
+          <h3>AI Tool: Screening A[i]gent</h3>
+          <p>Promotion-safe tenure logic, receipts, and recruiter-in-the-loop controls to cut noise and recover hidden talent.</p>
+          <p class="meta">
+            <a href="https://dianewilkinson.github.io/screening/" target="_blank" rel="noopener">Open Demo</a>
+            <a href="../assets/ai-tool-screening-agent.pdf" target="_blank" rel="noopener">Open Explainer (PDF)</a>
+          </p>
+        </div>
+
+        <!-- Tools -->
         <div class="card">
           <h3>Tool: Recruiting Pipeline Calculator</h3>
-          <p>Interactive tool to plan hires by stakeholder capacity or date.</p>
-          <p class="meta"><a href="https://docs.google.com/spreadsheets/d/1zenqUasirR68Y_yqrgBpQU_it4fobqz9/edit?usp=drive_link&ouid=112848020919676015255&rtpof=true&sd=true" target="_blank" rel="noopener">Open Google Sheet</a></p>
-        </div>
-
-        <div class="card">
-          <h3>Analysis: Recruiting Strategies Case Study</h3>
-          <p>Case study in attrition planning & recruitment strategy for 20 sales hires.</p>
-          <p class="meta"><a href="../assets/Case_Study_Recruiting_Funnel.pdf" target="_blank" rel="noopener">Open PDF</a></p>
-        </div>
-
-        <div class="card">
-          <h3>Playbook: AI-First Ops Model</h3>
-          <p>Defines where AI assists vs. human decisions—guardrails for evidence and transparency.</p>
-          <p class="meta"><a href="../assets/AI_1st_Operating_Model.pdf" target="_blank" rel="noopener">Open PDF</a></p>
-        </div>
-
-        <div class="card">
-          <h3>Playbook: Candidate Journey</h3>
-          <p>Recruiter/HM/Candidate touchpoints with automation triggers and message templates.</p>
-          <p class="meta"><a href="../assets/Candidate_Journey.pdf" target="_blank" rel="noopener">Open PDF</a></p>
+          <p>Interactive planner to forecast hires by stakeholder capacity or target date using funnel math.</p>
+          <p class="meta">
+            <a href="https://docs.google.com/spreadsheets/d/1zenqUasirR68Y_yqrgBpQU_it4fobqz9/edit?usp=drive_link" target="_blank" rel="noopener">Open Google Sheet</a>
+          </p>
         </div>
 
         <div class="card">
           <h3>Tool: Metrics Dictionary</h3>
-          <p>Definitions for KPIs to keep dashboards consistent and debates short.</p>
-          <p class="meta"><a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link&ouid=112848020919676015255&rtpof=true&sd=true" target="_blank" rel="noopener">Open Google Sheet</a></p>
+          <p>Standardized KPI definitions to align dashboards and shorten performance debates.</p>
+          <p class="meta">
+            <a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link" target="_blank" rel="noopener">Open Google Sheet</a>
+          </p>
+        </div>
+
+        <!-- Playbooks -->
+        <div class="card">
+          <h3>Playbook: Automated Interview Workflows</h3>
+          <p>Scorecard compliance, scheduling automations, and no-show prevention flows for faster interview cycles.</p>
+          <p class="meta">
+            <a href="../assets/playbook-automated-interview-workflows.pdf" target="_blank" rel="noopener">Open PDF</a>
+          </p>
         </div>
 
         <div class="card">
-          <h3>Analysis: Candidate Source Quality</h3>
-          <p>Applications-to-Hire by channel (inbound, outbound, referrals) to focus on highest-signal pipelines.</p>
-          <p class="meta"><a href="../assets/Candidate_Quality_by_Source.pdf" target="_blank" rel="noopener">Open PDF</a></p>
+          <h3>Playbook: Candidate Journey</h3>
+          <p>Recruiter/HM/Candidate touchpoints with automation triggers, message templates, and timing guidelines.</p>
+          <p class="meta">
+            <a href="../assets/playbook-candidate-journey.pdf" target="_blank" rel="noopener">Open PDF</a>
+          </p>
         </div>
 
+        <div class="card">
+          <h3>Playbook: AI-First Ops Model</h3>
+          <p>Defines where AI assists vs. where humans decide—guardrails for evidence, control, and transparency.</p>
+          <p class="meta">
+            <a href="../assets/playbook-ai-first-ops-model.pdf" target="_blank" rel="noopener">Open PDF</a>
+          </p>
+        </div>
+
+        <!-- Analyses -->
+        <div class="card">
+          <h3>Analysis: Candidate Source Quality</h3>
+          <p>Applications-to-hire by channel (inbound, outbound, referrals) to identify highest-signal pipelines.</p>
+          <p class="meta">
+            <a href="../assets/analysis-candidate-source-quality.pdf" target="_blank" rel="noopener">Open PDF</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Analysis: Recruiting Strategies Case Study</h3>
+          <p>Attrition planning and funnel optimization for 20 sales hires with improved pass-through rates.</p>
+          <p class="meta">
+            <a href="../assets/analysis-recruiting-funnel.pdf" target="_blank" rel="noopener">Open PDF</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Analysis: Sourcing Optimization</h3>
+          <p>LinkedIn posting optimization case study showing how headline, timing, and audience refinements
+             produced a <strong>20× increase</strong> in qualified applications.</p>
+          <p class="meta">
+            <a href="../assets/analysis-linkedin-posting-optimization.pdf" target="_blank" rel="noopener">Open PDF</a>
+          </p>
+        </div>
+
+        <!-- CTA -->
         <div class="card cta">
           <h3>Book a 15-Minute Intro</h3>
-          <p>Let’s connect to discuss Recruiting Operations, AI adoption, or your next hiring challenge.</p>
-          <p class="meta"><a class="cta-btn" href="https://calendar.app.google/4HZymoB5k3Ly5MNm6" target="_blank" rel="noopener">📅 Book Appointment</a></p>
+          <p>Let’s connect to discuss Recruiting Ops, AI adoption, or your next hiring challenge.</p>
+          <p class="meta">
+            <a class="cta-btn" href="https://calendar.app.google/4HZymoB5k3Ly5MNm6" target="_blank" rel="noopener">📅 Book Appointment</a>
+          </p>
         </div>
-        
+
       </div>
     </section>
-
   </div>
 
-   <footer>
-  <div class="cred-wrap" aria-label="Honors and Certifications">
-    <div class="logo-bar large-row">
-      <img src="../assets/logos/SHRM_pill.png" alt="SHRM Foundation — Employing Abilities at Work, Certified" loading="lazy">
-      <img src="../assets/logos/BGS_pill.png"  alt="Beta Gamma Sigma — International Business Honor Society" loading="lazy">
-      <img src="../assets/logos/PKP_pill.png"  alt="Phi Kappa Phi — National Honor Society" loading="lazy">
-      <img src="../assets/logos/MBA_pill.png"  alt="MBA Data Analytics — Louisiana State University Shreveport, 4.0 GPA" loading="lazy">
+  <footer>
+    <div class="cred-wrap" aria-label="Honors and Certifications">
+      <div class="logo-bar large-row">
+        <img src="../assets/logos/SHRM_pill.png" alt="SHRM Foundation — Employing Abilities at Work, Certified" loading="lazy">
+        <img src="../assets/logos/BGS_pill.png" alt="Beta Gamma Sigma — International Business Honor Society" loading="lazy">
+        <img src="../assets/logos/PKP_pill.png" alt="Phi Kappa Phi — National Honor Society" loading="lazy">
+        <img src="../assets/logos/MBA_pill.png" alt="MBA Data Analytics — Louisiana State University Shreveport, 4.0 GPA" loading="lazy">
+      </div>
+      <div class="logo-bar large-row">
+        <img src="../assets/logos/AIRS_CSMR_pill.png" alt="AIRS Certified Social & New Media Recruiter" loading="lazy">
+        <img src="../assets/logos/AIRS_CDR_pill.png" alt="AIRS Certified Diversity Recruiter" loading="lazy">
+        <img src="../assets/logos/AIRS_CTR_pill.png" alt="AIRS Certified Technical Recruiter" loading="lazy">
+        <img src="../assets/logos/AIRS_CASR_pill.png" alt="AIRS Certified AI & Sourcing Recruiter" loading="lazy">
+      </div>
     </div>
-    <div class="logo-bar large-row">
-      <img src="../assets/logos/AIRS_CSMR_pill.png" alt="AIRS Certified Social & New Media Recruiter" loading="lazy">
-      <img src="../assets/logos/AIRS_CDR_pill.png"  alt="AIRS Certified Diversity Recruiter" loading="lazy">
-      <img src="../assets/logos/AIRS_CTR_pill.png"  alt="AIRS Certified Technical Recruiter" loading="lazy">
-      <img src="../assets/logos/AIRS_CASR_pill.png" alt="AIRS Certified AI & Sourcing Recruiter" loading="lazy">
-    </div>
-  </div>
 
-  <p>
-    San Francisco Bay Area ·
-    <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
-    <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
-  </p>
-</footer>
-
-<style>
-  footer {
-    text-align: center;
-    margin: 48px 0 30px;
-    color: var(--muted);
-    font-size: 14px;
-  }
-  .cred-wrap {
-    max-width: 1100px;
-    margin: 0 auto 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .logo-bar.large-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: nowrap;
-    margin-bottom: 10px;
-  }
-  .logo-bar.large-row img {
-    height: 120px; /* BIGGER badges */
-    width: auto;
-    object-fit: contain;
-    filter: grayscale(100%) brightness(.96);
-    opacity: .95;
-    transition: filter .25s ease, opacity .25s ease;
-  }
-  .logo-bar.large-row img:hover {
-    filter: grayscale(0%) brightness(1.05);
-    opacity: 1;
-  }
-  @media (max-width: 980px) {
-    .logo-bar.large-row {
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .logo-bar.large-row img {
-      height: 100px;
-    }
-  }
-  @media (max-width: 640px) {
-    .logo-bar.large-row {
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .logo-bar.large-row img {
-      height: 80px;
-    }
-  }
-</style>
+    <p>
+      San Francisco Bay Area ·
+      <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
+      <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </footer>
+</body>
+</html>
