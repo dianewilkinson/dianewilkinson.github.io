@@ -210,19 +210,84 @@
   </div>
 
   <footer>
-    <div class="cred-wrap" aria-label="Honors and Certifications">
-      <div class="logo-bar large-row">
-        <img src="../assets/logos/SHRM_pill.png" alt="SHRM Foundation — Employing Abilities at Work, Certified" loading="lazy">
-        <img src="../assets/logos/BGS_pill.png" alt="Beta Gamma Sigma — International Business Honor Society" loading="lazy">
-        <img src="../assets/logos/PKP_pill.png" alt="Phi Kappa Phi — National Honor Society" loading="lazy">
-        <img src="../assets/logos/MBA_pill.png" alt="MBA Data Analytics — Louisiana State University Shreveport, 4.0 GPA" loading="lazy">
+    <div class="badges-wrap" aria-label="Honors and Certifications">
+      <div class="badges badges--two-rows">
+        <div class="badge">
+          <img src="../assets/logos/SHRM_pill.png" alt="SHRM Foundation — Employing Abilities at Work, Certified" loading="lazy">
+        </div>
+        <div class="badge">
+          <img src="../assets/logos/BGS_pill.png" alt="Beta Gamma Sigma — International Business Honor Society" loading="lazy">
+        </div>
+        <div class="badge">
+          <img src="../assets/logos/PKP_pill.png" alt="Phi Kappa Phi — National Honor Society" loading="lazy">
+        </div>
+        <div class="badge">
+          <img src="../assets/logos/MBA_pill.png" alt="MBA Data Analytics — Louisiana State University Shreveport, 4.0 GPA" loading="lazy">
+        </div>
+        <div class="badge">
+          <img src="../assets/logos/AIRS_CSMR_pill.png" alt="AIRS Certified Social & New Media Recruiter" loading="lazy">
+        </div>
+        <div class="badge">
+          <img src="../assets/logos/AIRS_CDR_pill.png" alt="AIRS Certified Diversity Recruiter" loading="lazy">
+        </div>
+        <div class="badge">
+          <img src="../assets/logos/AIRS_CTR_pill.png" alt="AIRS Certified Technical Recruiter" loading="lazy">
+        </div>
+        <div class="badge">
+          <img src="../assets/logos/AIRS_CASR_pill.png" alt="AIRS Certified AI & Sourcing Recruiter" loading="lazy">
+        </div>
       </div>
-      <div class="logo-bar large-row">
-        <img src="../assets/logos/AIRS_CSMR_pill.png" alt="AIRS Certified Social & New Media Recruiter" loading="lazy">
-        <img src="../assets/logos/AIRS_CDR_pill.png" alt="AIRS Certified Diversity Recruiter" loading="lazy">
-        <img src="../assets/logos/AIRS_CTR_pill.png" alt="AIRS Certified Technical Recruiter" loading="lazy">
-        <img src="../assets/logos/AIRS_CASR_pill.png" alt="AIRS Certified AI & Sourcing Recruiter" loading="lazy">
-      </div>
+    </div>
+
+    <style>
+    /* --- Rounded badge grid: 2 rows of 4 --- */
+    .badges-wrap {
+      max-width: 1100px;
+      margin: 0 auto 20px;
+      padding: 0 20px;
+    }
+
+    .badges {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: stretch;
+      justify-items: center;
+    }
+
+    @media (max-width: 980px) {
+      .badges { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .badges { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .badge {
+      width: 100%;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px; /* matches main page cards */
+      padding: 8px 12px;
+      box-shadow: 0 1px 3px var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .badge img {
+      height: 72px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(100%) brightness(.96);
+      opacity: .95;
+      transition: filter .25s ease, opacity .25s ease;
+    }
+
+    .badge img:hover {
+      filter: grayscale(0%) brightness(1.05);
+      opacity: 1;
+    }
+    </style>
     </div>
 
     <p>
