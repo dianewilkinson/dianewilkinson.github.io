@@ -24,35 +24,27 @@
     a{color:var(--link);text-decoration:none}
     a:hover{text-decoration:underline}
 
+    /* Header */
     .bar{height:4px;background:linear-gradient(90deg,#f43f5e,#8b5cf6,#3b82f6)}
-    header{text-align:center;padding:44px 16px 20px}
+    header{text-align:center;padding:44px 16px 16px}
     header h1{font-size:28px;margin:0}
     header p{margin:8px 0 0;color:var(--muted);font-size:15px;line-height:1.6}
 
+    /* Layout */
     .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 8px}
-    section{margin:34px 0}
+    section{margin:28px 0}
     h2{font-size:22px;margin:0 0 14px}
 
-    .grid{
-      display:grid;gap:16px;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr))
-    }
-    .grid.four{
-      display:grid;gap:16px;
-      grid-template-columns:repeat(4,minmax(220px,1fr));
-      align-items:stretch
-    }
-    @media (max-width:1200px){
-      .grid.four{grid-template-columns:repeat(2,minmax(260px,1fr))}
-    }
-    @media (max-width:640px){
-      .grid.four{grid-template-columns:1fr}
-    }
+    /* Grid */
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    .grid.four{display:grid;gap:16px;grid-template-columns:repeat(4,minmax(220px,1fr));align-items:stretch}
+    @media (max-width:1200px){.grid.four{grid-template-columns:repeat(2,minmax(260px,1fr))}}
+    @media (max-width:640px){.grid.four{grid-template-columns:1fr}}
 
+    /* Cards */
     .card{
-      background:var(--card);border:1px solid var(--border);
-      border-radius:16px;padding:16px;
-      box-shadow:0 1px 3px var(--shadow);
+      background:var(--card);border:1px solid var(--border);border-radius:16px;
+      padding:16px;box-shadow:0 1px 3px var(--shadow);
       display:flex;flex-direction:column;min-height:180px
     }
     .card h3{margin:2px 0 8px;font-size:18px}
@@ -60,36 +52,30 @@
     .meta{margin-top:auto;font-size:12px;color:#6b7280;line-height:1.6}
     .meta a{display:block;margin-top:3px}
 
+    /* CTA card */
     .card.cta{
       background:linear-gradient(135deg,#2563eb 0%,#8b5cf6 100%);
-      color:#fff;text-align:center;border:none;
-      box-shadow:0 2px 6px var(--shadow)
+      color:#fff;text-align:center;border:none;box-shadow:0 2px 6px var(--shadow)
     }
     .card.cta h3{color:#fff}
     .card.cta p{color:#f3f4f6}
     .cta-btn{
-      display:inline-block;background:#fff;color:#2563eb;
-      font-weight:600;padding:8px 14px;border-radius:8px;
-      text-decoration:none;transition:all .25s ease
+      display:inline-block;background:#fff;color:#2563eb;font-weight:600;
+      padding:8px 14px;border-radius:8px;text-decoration:none;transition:all .25s ease
     }
     .cta-btn:hover{background:#f9fafb;color:#1d4ed8}
 
-    /* HERO — full wrap width */
-    .hero-statement{width:100%;max-width:100%;margin:24px 0 12px;padding:0}
-    .hero-statement p{
-      font-size:20px;line-height:1.5;font-weight:600;color:#1f2937;margin:0
+    /* HERO (full wrap width, tighter to tagline) */
+    .hero{width:100%;max-width:100%;margin:12px 0 18px}
+    .hero-panel{
+      background:linear-gradient(90deg,rgba(244,63,94,.09),rgba(139,92,246,.09),rgba(59,130,246,.09));
+      border-radius:16px;padding:22px 26px;box-shadow:0 1px 4px rgba(0,0,0,.05)
     }
-    .hero-statement strong{font-size:22px;color:#111827}
+    .hero p{margin:0;font-size:20px;line-height:1.5;font-weight:600;color:#1f2937}
+    .hero strong{font-size:22px;color:#111827}
 
-    /* HERO style: soft gradient panel */
-    .soft-bg{
-      background:linear-gradient(90deg,rgba(244,63,94,.08),rgba(139,92,246,.08),rgba(59,130,246,.08));
-      border-radius:16px;padding:24px 28px;margin:0 0 26px;
-      box-shadow:0 1px 4px rgba(0,0,0,.05);
-    }
-
-    /* Badges grid in footer */
-    .badges-wrap{max-width:1100px;margin:0 auto 20px;padding:0 20px}
+    /* Footer badges */
+    .badges-wrap{max-width:1100px;margin:0 auto 18px;padding:0 20px}
     .badges{
       display:grid;gap:16px;grid-template-columns:repeat(4,1fr);
       align-items:stretch;justify-items:center
@@ -108,9 +94,9 @@
     }
     .badge img:hover{filter:grayscale(0%) brightness(1.05);opacity:1}
 
-    /* Footer text — lock centered */
+    /* Footer text (center + same width as grid) */
     footer{text-align:center;margin:48px 0 30px;color:var(--muted);font-size:14px}
-    footer p{max-width:1100px;margin:16px auto 0;text-align:center}
+    footer .footline{max-width:1100px;margin:18px auto 0;padding:0 20px}
   </style>
 </head>
 
@@ -127,21 +113,18 @@
   </header>
 
   <div class="wrap">
-    <!-- HERO inside .wrap so widths match the grid -->
-    <div class="hero-statement">
-      <div class="soft-bg">
-        <p>
-          <strong>MIT says 95% of AI pilots are failing — Let’s get ahead.</strong><br>
-          The future of hiring is here. Are your recruiters ready?
-        </p>
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-panel">
+        <p><strong>MIT says 95% of AI pilots are failing — Let’s get ahead.</strong><br>The future of hiring is here. Are your recruiters ready?</p>
       </div>
     </div>
 
+    <!-- WORK GRID -->
     <section aria-labelledby="work">
       <h2 id="work">🧩 Selected Work</h2>
 
       <div class="grid four">
-
         <!-- AI -->
         <div class="card">
           <h3>🤖 AI Tool: A[i]gents Roster</h3>
@@ -151,7 +134,7 @@
 
         <div class="card">
           <h3>🤖 AI Tool: Screening A[i]gent</h3>
-          <p>AI Agent operative to battle screening top funnel recruiting chaos and <strong>recover hidden talent – Save hours each week!</strong>.</p>
+          <p>AI Agent operative to battle screening top-funnel chaos and <strong>recover hidden talent — save hours each week!</strong></p>
           <p class="meta">
             <a href="https://dianewilkinson.github.io/screening/" target="_blank" rel="noopener">Open Demo</a>
             <a href="../assets/ai-tool-screening-agent.pdf" target="_blank" rel="noopener">Open Explainer (PDF)</a>
@@ -193,7 +176,7 @@
         <!-- Analyses -->
         <div class="card">
           <h3>📊 Analysis: Candidate Source Quality</h3>
-          <p>Focus on the highest quality application sources (inbound, outbound, referrals) for maximum <strong>efficiency & ROI.</strong></p>
+          <p>Focus on the highest-quality application sources (inbound, outbound, referrals) for maximum <strong>efficiency & ROI.</strong></p>
           <p class="meta"><a href="../assets/analysis-candidate-source-quality.pdf" target="_blank" rel="noopener">Open PDF</a></p>
         </div>
 
@@ -205,8 +188,7 @@
 
         <div class="card">
           <h3>📊 Analysis: Sourcing Optimization</h3>
-          <p>LinkedIn posting optimization case study showing how headline, timing, and audience refinements
-             produced a <strong>20× increase</strong> in qualified applications.</p>
+          <p>LinkedIn posting optimization case study showing how headline, timing, and audience refinements produced a <strong>20× increase</strong> in qualified applications.</p>
           <p class="meta"><a href="../assets/analysis-linkedin-posting-optimization.pdf" target="_blank" rel="noopener">Open PDF</a></p>
         </div>
 
@@ -216,11 +198,11 @@
           <p>Let’s connect to discuss Recruiting Ops, AI adoption, or your next hiring challenge.</p>
           <p class="meta"><a class="cta-btn" href="https://calendar.app.google/4HZymoB5k3Ly5MNm6" target="_blank" rel="noopener">📅 Book Appointment</a></p>
         </div>
-
       </div>
     </section>
   </div>
 
+  <!-- Footer -->
   <footer>
     <div class="badges-wrap" aria-label="Honors and Certifications">
       <div class="badges badges--two-rows">
@@ -235,11 +217,13 @@
       </div>
     </div>
 
-    <p>
-      Based in the San Francisco Bay Area · Always open to connect about Recruiting Ops, AI adoption, sourcing elite talent, and hiring systems.
-      <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
-      <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
-    </p>
+    <div class="wrap">
+      <p class="footline">
+        Based in the San Francisco Bay Area · Always open to connect about Recruiting Ops, AI adoption, sourcing elite talent, and hiring systems.
+        <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
+        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </div>
   </footer>
 </body>
 </html>
