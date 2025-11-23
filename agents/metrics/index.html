@@ -63,8 +63,9 @@
       letter-spacing: -0.03em;
     }
 
+    /* Bigger subtitle */
     .subtitle-inline {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       font-weight: 500;
       color: #4b5563;
       opacity: 0.98;
@@ -126,15 +127,28 @@
     }
 
     .tab.active::after {
-      background: linear-gradient(90deg, #22c55e, #6366f1);
+      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
     }
 
     .section-title {
       font-size: 0.9rem;
       font-weight: 600;
       color: #374151;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
       text-align: left;
+      position: relative;
+    }
+
+    /* Thin “eyeliner” gradient under funnel title */
+    .section-title::after {
+      content: "";
+      display: block;
+      margin-top: 6px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
+      opacity: 0.4;
+      max-width: 260px;
     }
 
     table {
@@ -188,12 +202,13 @@
       text-align: center;
     }
 
+    /* Smaller number boxes */
     input[type="number"] {
-      width: 4.5rem;
-      padding: 0.2rem 0.3rem;
-      border-radius: 0.5rem;
+      width: 3.5rem;
+      padding: 0.15rem 0.25rem;
+      border-radius: 0.45rem;
       border: 1px solid #d1d5db;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       text-align: center;
     }
 
@@ -541,11 +556,11 @@
       se: {
         name: "Software Engineer",
         data: [
-          { entered: 600, moved: 48 },
-          { entered: 48,  moved: 18 },
-          { entered: 18,  moved: 13 },
-          { entered: 13,  moved: 5  },
-          { entered: 5,   moved: 4  }
+          { entered: 200, moved: 30 },
+          { entered: 30,  moved: 12 },
+          { entered: 12,  moved: 3  },
+          { entered: 3,   moved: 2  },
+          { entered: 2,   moved: 2  }
         ]
       },
       sda: {
@@ -597,6 +612,7 @@
       const name = stageName.toLowerCase();
       const b = benchmark;
 
+      // Large upside anomaly
       if (b && conv > b * 2) {
         return "alert";
       }
@@ -653,6 +669,7 @@
       if (!stages.length) return;
 
       const maxEntered = Math.max(...stages.map((s) => s.entered || 0));
+      const bullets = [];
 
       const classified = stages.map((s) => {
         const conv = s.conv;
@@ -672,6 +689,7 @@
           dot.className = "diag-dot";
           const label = document.createElement("span");
           label.className = "diag-label";
+          // pill shows "Watch", but summary uses phrase "slightly off benchmark"
           label.textContent = status === "warn" ? "Watch" : statusLabel(status);
 
           pill.appendChild(dot);
@@ -684,24 +702,22 @@
         return { ...s, status };
       });
 
-      const bullets = [];
-
       classified.forEach((s) => {
         const name = s.name.toLowerCase();
-        const label = s.name.split("|")[0].trim(); // "Hiring Manager Interview" etc.
+        const label = s.name.split("|")[0].trim();
 
         if (s.status === "bottleneck" || s.status === "alert") {
           if (name.includes("application")) {
             bullets.push(
               `<strong>${label} – ${statusLabel(s.status)}:</strong> Is the drop driven by low-quality applicants, poor targeting, or a technical issue with routing/duplicates?`
             );
-          } else if (name.includes("recruiter"))) {
+          } else if (name.includes("recruiter")) {
             bullets.push(
               `<strong>${label} – ${statusLabel(s.status)}:</strong> Are recruiters consistently applying the same bar, or is pass-through varying widely by recruiter?`
             );
           } else if (name.includes("hiring manager")) {
             bullets.push(
-              `<strong>${label} – ${statusLabel(s.status)}:</strong> Are candidates dropping out before HM interviews, or is the HM declining most candidates at this stage?`
+              `<strong>${label} – ${statusLabel(s.status)}:</strong> Are candidates dropping out before HM, or is the HM declining most candidates at this stage?`
             );
           } else if (name.includes("final")) {
             bullets.push(
@@ -715,7 +731,7 @@
         } else if (s.status === "warn") {
           if (name.includes("recruiter")) {
             bullets.push(
-              `<strong>${label} – slightly off benchmark:</strong> Is the pass-through trend stable, or has it shifted in the last 2–4 weeks?`
+              `<strong>${label} – slightly off benchmark:</strong> Has pass-through shifted in the last 2–4 weeks, or is it stable by recruiter?`
             );
           } else if (name.includes("hiring manager")) {
             bullets.push(
@@ -781,6 +797,7 @@
       });
     });
 
+    // initial load
     applyReq(currentReqKey);
   </script>
 </body>
