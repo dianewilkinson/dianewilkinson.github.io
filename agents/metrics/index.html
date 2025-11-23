@@ -240,38 +240,14 @@
       color: #9ca3af;
     }
 
-    .bench-note {
-      margin-top: 0.45rem;
-      font-size: 0.74rem;
-      color: #6b7280;
-    }
-
-    .bench-note strong {
-      color: #374151;
-    }
-
-    .results-summary {
-      margin-top: 1.4rem;
-      font-size: 0.8rem;
-      color: #4b5563;
-      border-radius: 0.75rem;
-      border: 1px solid #e5e7eb;
-      padding: 0.8rem 0.9rem;
-      background: #f9fafb;
-    }
-
-    .results-summary strong {
-      color: #111827;
-    }
-
     .callouts {
-      margin-top: 1rem;
+      margin-top: 1.4rem;
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1rem;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .callouts {
         grid-template-columns: minmax(0, 1fr);
       }
@@ -294,6 +270,12 @@
       color: #6b7280;
     }
 
+    .callout p {
+      margin: 0 0 0.4rem;
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
     .callout ul {
       margin: 0.2rem 0 0;
       padding-left: 1rem;
@@ -306,6 +288,7 @@
     .diag-pill {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       padding: 0.18rem 0.55rem;
       border-radius: 999px;
       font-size: 0.73rem;
@@ -313,6 +296,7 @@
       gap: 0.25rem;
       background: #ecfdf3; /* healthy tint by default */
       color: #166534;
+      min-width: 115px; /* make them consistent */
     }
 
     .diag-dot {
@@ -389,9 +373,9 @@
         <thead>
           <tr>
             <th>Candidates in</th>
-            <th>Stage</th>
+            <th>Stage | Benchmark CVR</th>
             <th>Advanced</th>
-            <th>Conversion</th>
+            <th>CVR</th>
             <th>Diagnosis</th>
           </tr>
         </thead>
@@ -400,7 +384,7 @@
             <td>
               <input type="number" min="0" value="200" class="in-input" />
             </td>
-            <td class="stage-cell">Applied / Sourced</td>
+            <td class="stage-cell">Applied / Sourced · 10–15% CVR</td>
             <td>
               <input type="number" min="0" value="30" class="out-input" />
             </td>
@@ -411,7 +395,7 @@
             <td>
               <input type="number" min="0" value="30" class="in-input" />
             </td>
-            <td class="stage-cell">Recruiter Screen</td>
+            <td class="stage-cell">Recruiter Screen · ≥50% CVR</td>
             <td>
               <input type="number" min="0" value="12" class="out-input" />
             </td>
@@ -422,7 +406,7 @@
             <td>
               <input type="number" min="0" value="12" class="in-input" />
             </td>
-            <td class="stage-cell">Hiring Manager</td>
+            <td class="stage-cell">Hiring Manager · ≥70% CVR</td>
             <td>
               <input type="number" min="0" value="3" class="out-input" />
             </td>
@@ -433,7 +417,7 @@
             <td>
               <input type="number" min="0" value="3" class="in-input" />
             </td>
-            <td class="stage-cell">Final / Panel</td>
+            <td class="stage-cell">Final / Panel · ≥30% CVR</td>
             <td>
               <input type="number" min="0" value="2" class="out-input" />
             </td>
@@ -444,7 +428,7 @@
             <td>
               <input type="number" min="0" value="2" class="in-input" />
             </td>
-            <td class="stage-cell">Offer</td>
+            <td class="stage-cell">Offer · ≥85% CVR</td>
             <td>
               <input type="number" min="0" value="2" class="out-input" />
             </td>
@@ -457,7 +441,7 @@
       <div class="btn-row">
         <button class="btn-primary" id="analyze-btn">
           <span class="icon">🧮</span>
-          <span>Run diagnostics</span>
+          <span>Re-run diagnostics</span>
         </button>
         <button class="btn-secondary" id="reset-btn" type="button">
           <span class="icon">↺</span>
@@ -468,29 +452,28 @@
       <div class="ats-note">
         In production, these counts are pulled automatically from your ATS/HRIS.
       </div>
-      <div class="bench-note">
-        <strong>Benchmarks (stage → next):</strong>
-        App→Screen 10–15% · Screen→HM ≥50% · HM→Final ≥70% ·
-        Final→Offer ≥30% · Offer→Accept ≥85%.
-      </div>
 
-      <!-- Summary + callouts BELOW funnel -->
-      <div id="summary" class="results-summary">
-        Choose an active search, then click <strong>Run diagnostics</strong>
-        to see conversion and health by stage.
-      </div>
-
+      <!-- Callouts: Bottlenecks, Watch, Actions -->
       <div class="callouts">
         <div class="callout">
-          <h3>Action items</h3>
-          <ul id="actions">
-            <li>Primary actions will appear here after diagnostics run.</li>
+          <h3>Bottlenecks (hypotheses)</h3>
+          <p>Potential causes — to validate with data, not assumptions.</p>
+          <ul id="bottlenecks">
+            <li>Potential bottlenecks will appear here after diagnostics run.</li>
           </ul>
         </div>
         <div class="callout">
-          <h3>Troubleshooting</h3>
-          <ul id="troubleshooting">
-            <li>Likely root causes will appear here after diagnostics run.</li>
+          <h3>Watch</h3>
+          <p>Stages slightly off benchmark or trending oddly.</p>
+          <ul id="watch">
+            <li>Watchlist stages will appear here after diagnostics run.</li>
+          </ul>
+        </div>
+        <div class="callout">
+          <h3>Action items</h3>
+          <p>Next steps for your TA Ops / recruiter sync.</p>
+          <ul id="actions">
+            <li>Primary actions will appear here after diagnostics run.</li>
           </ul>
         </div>
       </div>
@@ -622,9 +605,9 @@
 
     function runDiagnostics() {
       const stages = getFunnelData();
-      const summaryEl = document.getElementById("summary");
+      const bottlenecksEl = document.getElementById("bottlenecks");
+      const watchEl = document.getElementById("watch");
       const actionsEl = document.getElementById("actions");
-      const troubleEl = document.getElementById("troubleshooting");
 
       if (!stages.length) return;
 
@@ -663,73 +646,78 @@
         return { ...s, status };
       });
 
-      // find worst stage
+      const bottlenecks = [];
+      const watch = [];
+      const actions = [];
+
+      // stage-level bullets
+      classified.forEach((s) => {
+        if (s.status === "bottleneck" || s.status === "bottleneck-high") {
+          let msg = `${s.name}: ${isNaN(s.conv) ? "–" : s.conv.toFixed(1) + "%"} CVR – materially off benchmark.`;
+          if (s.status === "bottleneck-high") {
+            msg += " Potential technical error with job posting or ATS routing inflating counts.";
+          }
+          bottlenecks.push(msg);
+        } else if (s.status === "warn") {
+          watch.push(
+            `${s.name}: ${isNaN(s.conv) ? "–" : s.conv.toFixed(1) + "%"} CVR – slightly off benchmark; watch trend over the next 2–4 weeks.`
+          );
+        }
+      });
+
+      // worst stage drives deeper hypotheses & actions
       const worst =
         classified.find((s) => s.status === "bottleneck") ||
         classified.find((s) => s.status === "bottleneck-high") ||
         classified.find((s) => s.status === "warn");
 
-      if (!worst) {
-        summaryEl.innerHTML =
-          "No obvious problem stages. Protect what’s working and watch trends over time for this requisition.";
-      } else {
-        summaryEl.innerHTML =
-          `<strong>${worst.name}</strong> is the highest-risk stage: ` +
-          `<strong>${worst.conv.toFixed(1)}%</strong> advance, flagged as ` +
-          `<strong>${statusLabel(worst.status)}</strong>. Start your discussion here.`;
-      }
-
-      // actions + troubleshooting based on worst stage
-      const actions = [];
-      const troubles = [];
-
       if (worst) {
         const name = worst.name.toLowerCase();
 
         if (name.includes("applied") || name.includes("sourced")) {
-          if (worst.status === "bottleneck" || worst.status === "warn") {
-            actions.push("Review job title, targeting, and comp to ensure inbound volume and quality are on target.");
-            actions.push("Align on minimum qualified profile so strong candidates aren’t screened out too early.");
-            troubles.push("Underpowered job posting or misaligned requirements.");
-            troubles.push("Overly strict initial screen or miscalibrated must-have criteria.");
-          } else if (worst.status === "bottleneck-high") {
-            actions.push("Validate ATS routing to confirm inbound applications are attached to this requisition.");
-            actions.push("Check the mix of sourced vs inbound candidates and avoid double-counting.");
-            troubles.push("Broken routing or job posting glitch causing abnormal funnel shape.");
-            troubles.push("Inflated counts from manual sourcing imports.");
+          bottlenecks.push("Possible misalignment between job posting (title, level, comp, location) and target profile.");
+          bottlenecks.push("Risk that early screen criteria are too strict or unclear, filtering out viable candidates.");
+          if (worst.status === "bottleneck-high") {
+            bottlenecks.push("Potential technical error with job posting or ATS routing (e.g., duplicate postings, mis-routed applications).");
           }
+          actions.push("Review title, target markets, and comp band with the hiring manager; confirm who you actually want to interview.");
+          actions.push("Re-align on minimum qualified profile and tighten early-screen questions so decisions feel binary.");
         } else if (name.includes("recruiter")) {
-          actions.push("Run a calibration session with the hiring manager on what a strong profile looks like.");
-          actions.push("Tighten and structure rejection reasons to see patterns by skill or experience.");
-          troubles.push("Misalignment between recruiter and HM on bar or role definition.");
-          troubles.push("Scorecard fields not capturing why candidates are dropped.");
+          bottlenecks.push("Recruiter and hiring manager may not share the same mental model of a ‘yes’ candidate.");
+          bottlenecks.push("Rejection reasons may be too generic to see patterns (e.g., ‘not a fit’).");
+          actions.push("Run a quick calibration with the hiring manager using 5–10 recent candidates at the screen stage.");
+          actions.push("Standardize rejection reasons at Recruiter Screen so you can see themes by skill, level, or territory.");
         } else if (name.includes("hiring manager")) {
-          actions.push("Standardize HM interview questions and decision criteria for this role.");
-          actions.push("Ensure candidates are prepped on scope, expectations, and comp before HM interviews.");
-          troubles.push("HM expectations drifting above market reality.");
-          troubles.push("Late-stage surprises around scope, comp, or location.");
+          bottlenecks.push("HM bar drifting above market reality or beyond what is documented in the role profile.");
+          bottlenecks.push("Candidates may be surprised by scope, comp, or expectations at HM stage instead of earlier.");
+          actions.push("Standardize HM interview questions and decision criteria for this role; document what ‘strong yes’ looks like.");
+          actions.push("Ensure candidates are prepped on scope, expectations, and comp guardrails before HM interviews.");
         } else if (name.includes("final") || name.includes("panel")) {
-          actions.push("Tighten panel structure and decision rubric so signals are comparable.");
-          actions.push("Debrief panels quickly to spot inconsistent signals or bias.");
-          troubles.push("Too many interviewers with unstructured feedback.");
-          troubles.push("Inconsistent evaluation criteria across panel members.");
+          bottlenecks.push("Panel design may be noisy — too many interviewers or unstructured feedback.");
+          bottlenecks.push("Evaluation criteria might differ by interviewer, creating inconsistent decisions.");
+          actions.push("Limit panel size and give each interviewer a clear focus area and scoring rubric.");
+          actions.push("Add a structured debrief within 24 hours to resolve conflicting feedback quickly.");
         } else if (name.includes("offer")) {
-          actions.push("Review offer positioning vs market and recent declines.");
-          actions.push("Capture and address candidate concerns before extending the offer.");
-          troubles.push("Comp, equity, or remote expectations out of sync with candidates.");
-          troubles.push("Slow or opaque process causing candidates to choose competitors.");
+          bottlenecks.push("Offer positioning (comp, equity, remote policy) may be out of sync with candidate expectations.");
+          bottlenecks.push("Decision time may be too slow or communication too sparse, giving competitors an edge.");
+          actions.push("Review last 3–5 declines for themes in comp, level, or remote expectations.");
+          actions.push("Introduce a ‘pre-close’ step before drafting the offer to surface any blockers early.");
         }
       }
 
-      if (!actions.length) {
-        actions.push("Use this view to pick one stage to improve and one to protect for this requisition.");
+      if (!bottlenecks.length) {
+        bottlenecks.push("No red bottlenecks detected. Use this view to spot issues as volumes change.");
       }
-      if (!troubles.length) {
-        troubles.push("Monitor this funnel over time; trends matter more than any single snapshot.");
+      if (!watch.length) {
+        watch.push("No stages slightly off benchmark. Re-run after major changes to sourcing or bar.");
+      }
+      if (!actions.length) {
+        actions.push("Choose one stage to improve and one to protect for this requisition this quarter.");
       }
 
+      bottlenecksEl.innerHTML = bottlenecks.map((b) => `<li>${b}</li>`).join("");
+      watchEl.innerHTML = watch.map((w) => `<li>${w}</li>`).join("");
       actionsEl.innerHTML = actions.map((a) => `<li>${a}</li>`).join("");
-      troubleEl.innerHTML = troubles.map((t) => `<li>${t}</li>`).join("");
     }
 
     function applyReq(key) {
@@ -753,14 +741,8 @@
       const activeBtn = document.querySelector(`.tab[data-req="${key}"]`);
       if (activeBtn) activeBtn.classList.add("active");
 
-      const summaryEl = document.getElementById("summary");
-      summaryEl.innerHTML =
-        `Loaded <strong>${req.name}</strong>. Click <strong>Run diagnostics</strong> to see stage health.`;
-
-      document.getElementById("actions").innerHTML =
-        "<li>Primary actions will appear here after diagnostics run.</li>";
-      document.getElementById("troubleshooting").innerHTML =
-        "<li>Likely root causes will appear here after diagnostics run.</li>";
+      // auto-run diagnostics on load / tab switch
+      runDiagnostics();
     }
 
     document
