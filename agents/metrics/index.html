@@ -64,10 +64,10 @@
     }
 
     .subtitle-inline {
-      font-size: 0.98rem;
+      font-size: 1.05rem;
       font-weight: 400;
       color: #4b5563;
-      opacity: 0.9;
+      opacity: 0.95;
       white-space: nowrap;
     }
 
@@ -150,24 +150,6 @@
       position: relative;
     }
 
-    /* funnel bar behind stage cell with subtle color gradient */
-    #funnel-body tr .stage-cell::before {
-      content: "";
-      position: absolute;
-      left: 8%;
-      top: 50%;
-      transform: translateY(-50%);
-      height: 60%;
-      border-radius: 999px;
-      background: linear-gradient(
-        90deg,
-        rgba(244, 63, 94, 0.06),
-        rgba(59, 130, 246, 0.06)
-      );
-      width: var(--bar-pct);
-      z-index: -1;
-    }
-
     th,
     td {
       padding: 0.45rem 0.4rem;
@@ -186,12 +168,12 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: #6b7280;
-      background: #f3f4ff; /* subtle indigo tint */
+      background: #f9fafb; /* gray strip */
     }
 
     th:nth-child(2),
     td:nth-child(2) {
-      text-align: center; /* center stage names */
+      text-align: center;
     }
 
     th:nth-child(1),
@@ -220,6 +202,44 @@
       outline: none;
       border-color: #6366f1;
       box-shadow: 0 0 0 1px #6366f1;
+    }
+
+    /* Stage pills that visually form a funnel */
+    .stage-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0.22rem 0.8rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #111827;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+    }
+
+    .stage-pill--1 {
+      width: 85%;
+      background: linear-gradient(90deg, #fee2e2, #fee2ff);
+    }
+
+    .stage-pill--2 {
+      width: 75%;
+      background: linear-gradient(90deg, #ffedd5, #e0f2fe);
+    }
+
+    .stage-pill--3 {
+      width: 65%;
+      background: linear-gradient(90deg, #fef9c3, #e0f2fe);
+    }
+
+    .stage-pill--4 {
+      width: 55%;
+      background: linear-gradient(90deg, #e0f2fe, #f5f3ff);
+    }
+
+    .stage-pill--5 {
+      width: 45%;
+      background: linear-gradient(90deg, #dcfce7, #f5f3ff);
     }
 
     .btn-row {
@@ -284,21 +304,22 @@
 
     .callout {
       border-radius: 0.9rem;
-      border: 1px dashed #e5e7eb;
+      background: #f9fafb;         /* gray boxes again */
       padding: 0.9rem;
       font-size: 0.8rem;
       color: #4b5563;
+      border: 1px solid #e5e7eb;
     }
 
     .callout h3 {
-      margin: 0 0 0.4rem;
+      margin: 0 0 0.2rem;
       font-size: 0.82rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
 
     .callout p {
-      margin: 0 0 0.4rem;
+      margin: 0 0 0.5rem;
       font-size: 0.75rem;
       color: #6b7280;
     }
@@ -312,16 +333,22 @@
       margin-bottom: 0.25rem;
     }
 
+    /* Differentiate the 3 boxes with top-border accents */
     .callout--bottlenecks {
-      background: #fef2f2; /* light red tint */
+      border-top: 3px solid #ef4444;
     }
 
     .callout--watch {
-      background: #fff7ed; /* light amber tint */
+      border-top: 3px solid #f97316;
     }
 
     .callout--actions {
-      background: #ecfdf3; /* light green tint */
+      border-top: 3px solid #22c55e;
+    }
+
+    .callout--actions ol {
+      padding-left: 1.1rem;
+      margin: 0.2rem 0 0;
     }
 
     .diag-pill {
@@ -426,7 +453,9 @@
             <td>
               <input type="number" min="0" value="200" class="in-input" />
             </td>
-            <td class="stage-cell">Application Stage | 12%</td>
+            <td class="stage-cell">
+              <span class="stage-pill stage-pill--1">Application Stage | 12%</span>
+            </td>
             <td>
               <input type="number" min="0" value="30" class="out-input" />
             </td>
@@ -437,7 +466,9 @@
             <td>
               <input type="number" min="0" value="30" class="in-input" />
             </td>
-            <td class="stage-cell">Recruiter Interview | 50%</td>
+            <td class="stage-cell">
+              <span class="stage-pill stage-pill--2">Recruiter Interview | 50%</span>
+            </td>
             <td>
               <input type="number" min="0" value="12" class="out-input" />
             </td>
@@ -448,7 +479,9 @@
             <td>
               <input type="number" min="0" value="12" class="in-input" />
             </td>
-            <td class="stage-cell">Hiring Manager Interview | 70%</td>
+            <td class="stage-cell">
+              <span class="stage-pill stage-pill--3">Hiring Manager Interview | 70%</span>
+            </td>
             <td>
               <input type="number" min="0" value="3" class="out-input" />
             </td>
@@ -459,7 +492,9 @@
             <td>
               <input type="number" min="0" value="3" class="in-input" />
             </td>
-            <td class="stage-cell">Final Interview | 30%</td>
+            <td class="stage-cell">
+              <span class="stage-pill stage-pill--4">Final Interview | 30%</span>
+            </td>
             <td>
               <input type="number" min="0" value="2" class="out-input" />
             </td>
@@ -470,7 +505,9 @@
             <td>
               <input type="number" min="0" value="2" class="in-input" />
             </td>
-            <td class="stage-cell">Offer | 85%</td>
+            <td class="stage-cell">
+              <span class="stage-pill stage-pill--5">Offer | 85%</span>
+            </td>
             <td>
               <input type="number" min="0" value="2" class="out-input" />
             </td>
@@ -499,24 +536,24 @@
       <div class="callouts">
         <div class="callout callout--bottlenecks">
           <h3>Bottlenecks (hypotheses)</h3>
-          <p>Potential causes — validate with data, not assumptions.</p>
+          <p>Where to investigate first. Use these as prompts for deeper analysis.</p>
           <ul id="bottlenecks">
             <li>Potential bottlenecks will appear here after diagnostics run.</li>
           </ul>
         </div>
         <div class="callout callout--watch">
           <h3>Watch</h3>
-          <p>Stages slightly off benchmark or behaving oddly over time.</p>
+          <p>Signals to monitor over the next few weeks.</p>
           <ul id="watch">
             <li>Watchlist stages will appear here after diagnostics run.</li>
           </ul>
         </div>
         <div class="callout callout--actions">
           <h3>Action items</h3>
-          <p>Next steps for your TA Ops / recruiter sync.</p>
-          <ul id="actions">
+          <p>Next 1–2 moves for your TA Ops / recruiter sync.</p>
+          <ol id="actions">
             <li>Primary actions will appear here after diagnostics run.</li>
-          </ul>
+          </ol>
         </div>
       </div>
 
@@ -533,7 +570,7 @@
       esd: {
         name: "Enterprise Sales Director",
         data: [
-          { entered: 320, moved: 40 }, // 12.5% Application -> Recruiter
+          { entered: 320, moved: 40 },
           { entered: 40,  moved: 16 },
           { entered: 16,  moved: 4  },
           { entered: 4,   moved: 3  },
@@ -593,45 +630,35 @@
       return stages;
     }
 
-    // Stage-aware benchmarks, anomaly at Application Stage
     function classifyStage(stageName, conv) {
       if (isNaN(conv)) return "unknown";
       const name = stageName.toLowerCase();
 
-      // Application -> Recruiter Interview
-      if (
-        name.includes("application") ||
-        name.includes("applied") ||
-        name.includes("sourced")
-      ) {
-        if (conv < 5) return "bottleneck";      // too low
-        if (conv < 10) return "warn";           // slightly low
-        if (conv <= 20) return "healthy";       // realistic band
-        return "bottleneck-high";               // too high = anomaly
+      if (name.includes("application")) {
+        if (conv < 5) return "bottleneck";
+        if (conv < 10) return "warn";
+        if (conv <= 20) return "healthy";
+        return "bottleneck-high";
       }
 
-      // Recruiter Interview -> HM
       if (name.includes("recruiter")) {
         if (conv < 30) return "bottleneck";
         if (conv < 50) return "warn";
         return "healthy";
       }
 
-      // HM Interview -> Final
       if (name.includes("hiring manager")) {
         if (conv < 50) return "bottleneck";
         if (conv < 70) return "warn";
         return "healthy";
       }
 
-      // Final Interview -> Offer
       if (name.includes("final")) {
         if (conv < 20) return "bottleneck";
         if (conv < 30) return "warn";
         return "healthy";
       }
 
-      // Offer -> Acceptance
       if (name.includes("offer")) {
         if (conv < 70) return "bottleneck";
         if (conv < 85) return "warn";
@@ -663,14 +690,11 @@
         const conv = s.conv;
         const status = classifyStage(s.name, conv);
 
-        // funnel bar width by entered count
         const pct = maxEntered > 0 ? (s.entered / maxEntered) * 90 : 0;
         s.rowEl.style.setProperty("--bar-pct", pct.toFixed(0) + "%");
 
-        // conversion cell
         s.convCell.textContent = isNaN(conv) ? "–" : conv.toFixed(1) + "%";
 
-        // diagnosis pill
         if (status === "unknown") {
           s.diagCell.textContent = "—";
         } else {
@@ -696,7 +720,6 @@
       const watch = [];
       const actions = [];
 
-      // General bullets per stage based on status (no CVR math)
       classified.forEach((s) => {
         const name = s.name.toLowerCase();
 
@@ -762,7 +785,6 @@
         }
       });
 
-      // Worst stage drives focused actions
       const worst =
         classified.find((s) => s.status === "bottleneck") ||
         classified.find((s) => s.status === "bottleneck-high") ||
@@ -811,7 +833,7 @@
 
       if (!bottlenecks.length) {
         bottlenecks.push(
-          "No red bottlenecks detected in this snapshot. Use this view as volumes change or when performance drifts."
+          "No clear bottlenecks in this snapshot. Use this view again when volumes or performance change."
         );
       }
       if (!watch.length) {
@@ -842,7 +864,6 @@
         rows[idx].querySelector(".out-input").value = pair.moved;
         rows[idx].querySelector(".conv-cell").textContent = "–";
         rows[idx].querySelector(".diag-cell").textContent = "";
-        rows[idx].style.setProperty("--bar-pct", "0%");
       });
 
       document
@@ -851,7 +872,6 @@
       const activeBtn = document.querySelector(`.tab[data-req="${key}"]`);
       if (activeBtn) activeBtn.classList.add("active");
 
-      // auto-run diagnostics on load / tab switch
       runDiagnostics();
     }
 
