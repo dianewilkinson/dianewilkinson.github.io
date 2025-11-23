@@ -63,7 +63,6 @@
       letter-spacing: -0.03em;
     }
 
-    /* Bigger subtitle */
     .subtitle-inline {
       font-size: 1.4rem;
       font-weight: 500;
@@ -178,7 +177,7 @@
       text-align: center;
     }
 
-    /* Gradient eyeliner under header row */
+    /* Gradient eyeliner under header row: same as active tab */
     thead {
       position: relative;
     }
@@ -188,11 +187,10 @@
       position: absolute;
       left: 0;
       right: 0;
-      bottom: -1px;
-      height: 3px;
+      bottom: -2px;
+      height: 2px;
       border-radius: 999px;
       background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
-      opacity: 0.5;
     }
 
     td:nth-child(1),
@@ -316,13 +314,49 @@
       text-align: center;
     }
 
-    .callout-summary ul {
-      margin: 0.2rem 0 0;
-      padding-left: 1rem;
+    .summary-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.4rem;
     }
 
-    .callout-summary li {
-      margin-bottom: 0.25rem;
+    .diag-block {
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      padding: 0.55rem 0.75rem;
+      background: #ffffff;
+    }
+
+    .diag-block-header {
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .diag-block-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 2.3fr);
+      column-gap: 1rem;
+      row-gap: 0.2rem;
+      font-size: 0.78rem;
+    }
+
+    .diag-label {
+      font-weight: 500;
+      color: #4b5563;
+      white-space: nowrap;
+    }
+
+    .diag-qs div {
+      line-height: 1.4;
+    }
+
+    .diag-empty {
+      font-size: 0.78rem;
+      color: #6b7280;
+      text-align: center;
+      padding: 0.3rem 0;
     }
 
     /* Diagnosis pills: gray chip, colored text/dot */
@@ -375,11 +409,11 @@
       background: #7e22ce;
     }
 
-    .diag-label {
+    .diag-label-pill {
       font-weight: 500;
     }
 
-    /* CVR + trend */
+    /* CVR + neutral trend */
     .conv-wrapper {
       display: inline-flex;
       align-items: center;
@@ -387,19 +421,9 @@
       gap: 0.25rem;
     }
 
-    .trend-up {
+    .trend {
       font-size: 0.8rem;
-      color: #16a34a;
-    }
-
-    .trend-down {
-      font-size: 0.8rem;
-      color: #dc2626;
-    }
-
-    .trend-flat {
-      font-size: 0.8rem;
-      color: #9ca3af;
+      color: #6b7280; /* neutral grey */
     }
 
     .footer-note {
@@ -544,9 +568,9 @@
         <div class="callout-summary">
           <h3>Diagnostic Summary | Recommendations for Investigation &amp; Next Steps</h3>
           <p>Start with these prompts based on the current funnel snapshot.</p>
-          <ul id="summary">
-            <li>Questions and next steps will appear here after diagnostics run.</li>
-          </ul>
+          <div id="summary" class="summary-body">
+            <div class="diag-empty">Questions and next steps will appear here after diagnostics run.</div>
+          </div>
         </div>
       </div>
 
@@ -601,7 +625,7 @@
       }
     };
 
-    /* Demo “last quarter” CVRs for trend arrows */
+    /* Demo previous-quarter CVRs for neutral trend arrows */
     const PREV_CVR = {
       esd: [10, 45, 40, 25, 80],
       se:  [15, 48, 35, 28, 78],
@@ -693,27 +717,25 @@
       const summaryEl = document.getElementById("summary");
       if (!stages.length) return;
 
-      const bullets = [];
+      let hmBottleneck = false;
+      let finalAlert = false;
+      let offerBottleneck = false;
 
       const classified = stages.map((s) => {
         const conv = s.conv;
         const status = classifyStage(s.name, conv, s.benchmark);
 
-        /* CVR + trend arrow */
+        /* CVR + neutral trend arrow based on previous quarter */
         const prevArr = PREV_CVR[currentReqKey] || [];
         const prev = prevArr[s.index];
-        let trendClass = "";
         let trendSymbol = "";
 
         if (!isNaN(conv) && !isNaN(prev) && prev > 0) {
           if (conv > prev + 1) {
-            trendClass = "trend-up";
             trendSymbol = "↗";
           } else if (conv < prev - 1) {
-            trendClass = "trend-down";
             trendSymbol = "↘";
           } else {
-            trendClass = "trend-flat";
             trendSymbol = "•";
           }
         }
@@ -725,7 +747,7 @@
             `<span class="conv-wrapper">` +
             `<span class="conv-value">${conv.toFixed(1)}%</span>` +
             (trendSymbol
-              ? `<span class="${trendClass}">${trendSymbol}</span>`
+              ? `<span class="trend">${trendSymbol}</span>`
               : "") +
             `</span>`;
           s.convCell.innerHTML = convHTML;
@@ -740,7 +762,7 @@
           const dot = document.createElement("span");
           dot.className = "diag-dot";
           const label = document.createElement("span");
-          label.className = "diag-label";
+          label.className = "diag-label-pill";
 
           if (status === "warn") {
             label.textContent = "Watch";
@@ -759,70 +781,94 @@
           s.diagCell.appendChild(pill);
         }
 
+        const name = s.name.toLowerCase();
+        if (status === "bottleneck" && name.includes("hiring manager")) {
+          hmBottleneck = true;
+        }
+        if (status === "alert" && name.includes("final")) {
+          finalAlert = true;
+        }
+        if (status === "bottleneck" && name.includes("offer")) {
+          offerBottleneck = true;
+        }
+
         return { ...s, status };
       });
 
-      classified.forEach((s) => {
-        const name = s.name.toLowerCase();
-        const stageLabel = s.name.split("|")[0].trim();
+      /* Build compact diagnostic blocks – no Watch/Task language here */
+      const blocks = [];
 
-        let prefix = "";
-        if (s.status === "bottleneck") prefix = "Bottleneck";
-        else if (s.status === "alert") prefix = "Alert";
-        else if (s.status === "warn") prefix = "Task";
-        else return; // healthy or unknown: no bullet
+      if (hmBottleneck) {
+        blocks.push(`
+          <div class="diag-block">
+            <div class="diag-block-header"><strong>Bottleneck | HM Interview:</strong></div>
+            <div class="diag-block-grid">
+              <div class="diag-label">If Candidate Withdrawal:</div>
+              <div class="diag-qs">
+                <div>What themes appear in candidate feedback?</div>
+                <div>Is the process too labor intensive or delayed?</div>
+                <div>Is compensation competitive?</div>
+                <div>Is workplace policy unattractive?</div>
+              </div>
+              <div class="diag-label">If HM Decline:</div>
+              <div class="diag-qs">
+                <div>What is decline rationale?</div>
+                <div>Are expectations calibrated with role level, scope, etc.?</div>
+                <div>Have needs changed?</div>
+              </div>
+            </div>
+          </div>
+        `);
+      }
 
-        if (s.status === "bottleneck" || s.status === "alert") {
-          if (name.includes("application")) {
-            bullets.push(
-              `<strong>${prefix} | ${stageLabel}:</strong> Is the drop driven by low-quality applicants, poor targeting, or a technical routing/posting issue?`
-            );
-          } else if (name.includes("recruiter")) {
-            bullets.push(
-              `<strong>${prefix} | ${stageLabel}:</strong> Are recruiters applying the same bar, or is pass-through varying widely by recruiter or shift?`
-            );
-          } else if (name.includes("hiring manager")) {
-            bullets.push(
-              `<strong>${prefix} | ${stageLabel}:</strong> Are candidates dropping out before HM, or is the HM declining most candidates at this stage?`
-            );
-          } else if (name.includes("final")) {
-            bullets.push(
-              `<strong>${prefix} | ${stageLabel}:</strong> Are final decisions driven by one panelist or inconsistent rubrics across interviewers?`
-            );
-          } else if (name.includes("offer")) {
-            bullets.push(
-              `<strong>${prefix} | ${stageLabel}:</strong> When candidates decline, what do they cite most often—comp, level, remote/hybrid expectations, or timing?`
-            );
-          }
-        } else if (s.status === "warn") {
-          if (name.includes("recruiter")) {
-            bullets.push(
-              `<strong>${prefix} | ${stageLabel}:</strong> Has pass-through shifted in the last 2–4 weeks, or is it stable by recruiter?`
-            );
-          } else if (name.includes("hiring manager")) {
-            bullets.push(
-              `<strong>${prefix} | ${stageLabel}:</strong> Is HM availability or rescheduling causing candidates to cool off before the conversation?`
-            );
-          } else if (name.includes("final")) {
-            bullets.push(
-              `<strong>${prefix} | ${stageLabel}:</strong> Are panel scores tightly clustered, or is there high variance between interviewers?`
-            );
-          } else if (name.includes("offer")) {
-            bullets.push(
-              `<strong>${prefix} | ${stageLabel}:</strong> Is time-to-offer or approvals creating delays that give competitors room to move first?`
-            );
-          }
-        }
-      });
+      if (finalAlert) {
+        blocks.push(`
+          <div class="diag-block">
+            <div class="diag-block-header"><strong>Alert | Final Interview:</strong></div>
+            <div class="diag-block-grid">
+              <div class="diag-label">If due to error:</div>
+              <div class="diag-qs">
+                <div>Is the data reported incorrectly?</div>
+                <div>Is there a technical issue?</div>
+              </div>
+              <div class="diag-label">If due to change:</div>
+              <div class="diag-qs">
+                <div>Has the market changed?</div>
+                <div>Has candidate quality changed?</div>
+                <div>Does the benchmark need recalibration?</div>
+              </div>
+            </div>
+          </div>
+        `);
+      }
 
-      const uniqueBullets = [...new Set(bullets)];
-      const limited = uniqueBullets.length
-        ? uniqueBullets.slice(0, 7)
-        : [
-            "No major issues detected in this snapshot. Re-run diagnostics after you change sourcing strategy, interview bar, or offer positioning."
-          ];
+      if (offerBottleneck) {
+        blocks.push(`
+          <div class="diag-block">
+            <div class="diag-block-header"><strong>Bottleneck | Offer:</strong></div>
+            <div class="diag-block-grid">
+              <div class="diag-label">If due to error:</div>
+              <div class="diag-qs">
+                <div>Is the data reported incorrectly?</div>
+                <div>Is there a technical issue?</div>
+              </div>
+              <div class="diag-label">If due to change:</div>
+              <div class="diag-qs">
+                <div>Has the market changed?</div>
+                <div>Is compensation competitive?</div>
+                <div>Is workplace policy unattractive?</div>
+              </div>
+            </div>
+          </div>
+        `);
+      }
 
-      summaryEl.innerHTML = limited.map((b) => `<li>${b}</li>`).join("");
+      if (!blocks.length) {
+        summaryEl.innerHTML =
+          `<div class="diag-empty">No major issues detected in this snapshot. Re-run diagnostics after you change sourcing strategy, interview bar, or offer positioning.</div>`;
+      } else {
+        summaryEl.innerHTML = blocks.join("");
+      }
     }
 
     function applyReq(key) {
