@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Metrics A[i]gent – Funnel Diagnostics Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Metrics A[i]gent – a demo that turns recruiting funnel data into diagnostics, bottleneck detection, and ops insights."
+  />
+
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      line-height: 1.5;
+      color: #111827;
+      background-color: #f3f4f6;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top left, #e5e7eb, #f9fafb);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 2.5rem auto;
+      padding: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.25rem;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+      padding: 2rem;
+      border: 1px solid #e5e7eb;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      margin: 0 0 0.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6b7280;
+      margin-bottom: 0.25rem;
+    }
+
+    .subhead {
+      font-size: 0.98rem;
+      color: #4b5563;
+      margin-bottom: 1.5rem;
+      max-width: 34rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      color: #374151;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 800px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-hint {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 0.9rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    th,
+    td {
+      padding: 0.4rem 0.35rem;
+      text-align: right;
+      border-bottom: 1px solid #e5e7eb;
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    th {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #6b7280;
+    }
+
+    input[type="number"] {
+      width: 5.5rem;
+      padding: 0.25rem 0.35rem;
+      border-radius: 0.5rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.8rem;
+      text-align: right;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 1px #6366f1;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    button {
+      border-radius: 999px;
+      border: none;
+      font-size: 0.85rem;
+      cursor: pointer;
+      padding: 0.45rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-primary {
+      background: #111827;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    button span.icon {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .results-card {
+      background: #f9fafb;
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      padding: 1rem;
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-height: 460px;
+      overflow: auto;
+    }
+
+    .metric-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: white;
+      border: 1px solid #e5e7eb;
+      color: #111827;
+    }
+
+    .metric-chip span.dot {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .metric-chip.bottleneck span.dot {
+      background: #ef4444;
+    }
+
+    .metric-chip.warn span.dot {
+      background: #f97316;
+    }
+
+    .results-header {
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .results-sub {
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    .results-list {
+      padding-left: 1rem;
+      margin: 0.2rem 0 0.4rem;
+    }
+
+    .results-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .tiny-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+    }
+
+    .footer-note {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      text-align: right;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #3730a3;
+      margin-left: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <div class="eyebrow">A[i]gents Portfolio · Demo</div>
+      <h1>Metrics A[i]gent</h1>
+      <p class="subhead">
+        A tiny agent that turns your recruiting funnel into diagnostics:
+        conversion by stage, bottleneck detection, and ops-ready talking points
+        for your next sync with a hiring leader.
+      </p>
+
+      <div class="pill-row">
+        <div class="pill">Funnel diagnostics</div>
+        <div class="pill">Pass-through analysis</div>
+        <div class="pill">Bottleneck detection</div>
+        <div class="pill">TA Ops workflow support</div>
+      </div>
+
+      <div class="layout">
+        <!-- LEFT: INPUT TABLE -->
+        <div>
+          <div class="section-title">Enter your funnel by stage</div>
+          <div class="section-hint">
+            For each stage, add the number of candidates who
+            <strong>entered</strong> the stage and how many
+            <strong>moved to the next stage</strong>. Or load a pre-filled
+            example.
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Stage</th>
+                <th>Candidates in</th>
+                <th>Moved on</th>
+              </tr>
+            </thead>
+            <tbody id="funnel-body">
+              <tr data-index="0">
+                <td>Applied / Sourced</td>
+                <td>
+                  <input type="number" min="0" value="120" class="in-input" />
+                </td>
+                <td>
+                  <input type="number" min="0" value="60" class="out-input" />
+                </td>
+              </tr>
+              <tr data-index="1">
+                <td>Recruiter Screen</td>
+                <td>
+                  <input type="number" min="0" value="60" class="in-input" />
+                </td>
+                <td>
+                  <input type="number" min="0" value="30" class="out-input" />
+                </td>
+              </tr>
+              <tr data-index="2">
+                <td>Hiring Manager</td>
+                <td>
+                  <input type="number" min="0" value="30" class="in-input" />
+                </td>
+                <td>
+                  <input type="number" min="0" value="10" class="out-input" />
+                </td>
+              </tr>
+              <tr data-index="3">
+                <td>Final / Panel</td>
+                <td>
+                  <input type="number" min="0" value="10" class="in-input" />
+                </td>
+                <td>
+                  <input type="number" min="0" value="4" class="out-input" />
+                </td>
+              </tr>
+              <tr data-index="4">
+                <td>Offer</td>
+                <td>
+                  <input type="number" min="0" value="4" class="in-input" />
+                </td>
+                <td>
+                  <input type="number" min="0" value="2" class="out-input" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="btn-row">
+            <button class="btn-primary" id="analyze-btn">
+              <span class="icon">🧮</span>
+              <span>Run diagnostics</span>
+            </button>
+            <button class="btn-secondary" id="example-btn" type="button">
+              <span class="icon">✨</span>
+              <span>Load example funnel</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- RIGHT: RESULTS -->
+        <div>
+          <div class="section-title">Diagnostics & insights</div>
+          <div class="section-hint">
+            The agent summarizes where the funnel is healthy, where it's
+            leaking, and how you might respond as TA Ops.
+          </div>
+
+          <div class="results-card" id="results">
+            <div>
+              <div class="results-header">
+                No diagnostics yet.
+              </div>
+              <div class="results-sub">
+                Enter your funnel and click
+                <strong>Run diagnostics</strong> to see pass-through rates,
+                bottlenecks, and ops suggestions.
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-note">
+            <span class="tiny-label">Agent type</span>
+            <span class="badge">Metrics A[i]gent · TA Ops</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function getFunnelData() {
+      const rows = Array.from(
+        document.querySelectorAll("#funnel-body tr")
+      );
+      const stages = [];
+
+      rows.forEach((row) => {
+        const name = row.cells[0].textContent.trim();
+        const enteredInput = row.querySelector(".in-input");
+        const movedInput = row.querySelector(".out-input");
+
+        const entered = Number(enteredInput.value || 0);
+        const moved = Number(movedInput.value || 0);
+
+        if (entered <= 0) return;
+
+        const convStage = entered ? (moved / entered) * 100 : 0;
+        stages.push({
+          name,
+          entered,
+          moved,
+          convStage, // stage-to-stage
+        });
+      });
+
+      return stages;
+    }
+
+    function classifyStage(conv) {
+      if (conv < 20) return "bottleneck";
+      if (conv < 40) return "warn";
+      return "healthy";
+    }
+
+    function formatPct(x) {
+      if (isNaN(x)) return "–";
+      return x.toFixed(1) + "%";
+    }
+
+    function analyzeFunnel() {
+      const stages = getFunnelData();
+      const resultsEl = document.getElementById("results");
+
+      if (!stages.length) {
+        resultsEl.innerHTML =
+          "<div class='results-header'>Not enough data.</div><div class='results-sub'>Add at least one stage with candidates to run diagnostics.</div>";
+        return;
+      }
+
+      // Overall conversion
+      const first = stages[0];
+      const last = stages[stages.length - 1];
+      const overallConv =
+        first.entered > 0 ? (last.moved / first.entered) * 100 : 0;
+
+      // Find bottlenecks by stage conversion
+      const withClassification = stages.map((s, idx) => {
+        const status = classifyStage(s.convStage);
+        return { ...s, status, index: idx };
+      });
+
+      const bottlenecks = withClassification
+        .filter((s) => s.status === "bottleneck")
+        .sort((a, b) => a.convStage - b.convStage);
+
+      const warnings = withClassification
+        .filter((s) => s.status === "warn")
+        .sort((a, b) => a.convStage - b.convStage);
+
+      const healthiest = [...withClassification]
+        .sort((a, b) => b.convStage - a.convStage)
+        .slice(0, 1);
+
+      // Build HTML
+      let html = "";
+
+      html += `
+        <div>
+          <div class="results-header">
+            Funnel snapshot
+          </div>
+          <div class="results-sub">
+            Overall conversion from <strong>${first.name}</strong> to
+            <strong>${last.name}</strong> is <strong>${formatPct(
+              overallConv
+            )}</strong> (${last.moved} hires from ${first.entered} candidates).
+          </div>
+        </div>
+      `;
+
+      // Stage summary chips
+      html += `<div><div class="tiny-label">Stage pass-through</div>`;
+      withClassification.forEach((s) => {
+        const cls =
+          s.status === "bottleneck"
+            ? "metric-chip bottleneck"
+            : s.status === "warn"
+            ? "metric-chip warn"
+            : "metric-chip";
+        const label =
+          s.status === "bottleneck"
+            ? "Bottleneck"
+            : s.status === "warn"
+            ? "Watch"
+            : "Healthy";
+
+        html += `
+          <span class="${cls}">
+            <span class="dot"></span>
+            <span>${s.name}</span>
+            <span>· ${formatPct(s.convStage)}</span>
+            <span>· ${label}</span>
+          </span>
+        `;
+      });
+      html += `</div>`;
+
+      // Bottleneck narrative
+      html += `<div>`;
+      html += `<div class="results-header">Where the funnel is leaking</div>`;
+
+      if (!bottlenecks.length && !warnings.length) {
+        html += `<div class="results-sub">
+          No obvious red-flag stages. You could still tighten screens or sharpen calibration with hiring managers,
+          but pass-through rates look broadly healthy.
+        </div>`;
+      } else {
+        html += `<ul class="results-list">`;
+        if (bottlenecks.length) {
+          const primary = bottlenecks[0];
+          html += `
+            <li>
+              <strong>${primary.name}</strong> is your sharpest drop:
+              only ${formatPct(primary.convStage)} of candidates move forward
+              (${primary.moved} of ${primary.entered}). This is the best place to
+              focus first.
+            </li>
+          `;
+        }
+        if (warnings.length) {
+          const names = warnings.map((w) => w.name).join(", ");
+          html += `
+            <li>
+              <strong>Emerging friction at:</strong> ${names}. These stages are not yet critical bottlenecks, but trending low enough
+              that they could become problems as volume scales.
+            </li>
+          `;
+        }
+        html += `</ul>`;
+      }
+      html += `</div>`;
+
+      // Suggestions section
+      const suggestions = [];
+
+      if (bottlenecks.length) {
+        const b = bottlenecks[0];
+        suggestions.push(
+          `Run a quick calibration with hiring managers on <strong>${b.name}</strong>. Align on what “good” looks like, tighten scorecards, and ensure rejection reasons are structured so you can see patterns.`
+        );
+      }
+
+      if (overallConv < 5) {
+        suggestions.push(
+          `Overall conversion (${formatPct(
+            overallConv
+          )}) is very low. Check if you’re over-screening early on, or attracting the wrong profile at the top of the funnel.`
+        );
+      } else if (overallConv > 20) {
+        suggestions.push(
+          `Overall conversion (${formatPct(
+            overallConv
+          )}) is high. This might be a sign your top-of-funnel isn’t wide enough, or that expectations are too loose for long-term quality.`
+        );
+      }
+
+      if (healthiest.length) {
+        const h = healthiest[0];
+        suggestions.push(
+          `Protect what’s working: <strong>${h.name}</strong> has the strongest pass-through (${formatPct(
+            h.convStage
+          )}). Capture what this team is doing well and use it as a template for other roles.`
+        );
+      }
+
+      html += `<div>`;
+      html += `<div class="results-header">Ops talking points</div>`;
+
+      if (!suggestions.length) {
+        html += `<div class="results-sub">
+          Use this view to anchor your next sync: pick one stage to improve, one to protect, and one experiment
+          to run in the next 2 weeks.
+        </div>`;
+      } else {
+        html += `<ul class="results-list">`;
+        suggestions.forEach((s) => {
+          html += `<li>${s}</li>`;
+        });
+        html += `</ul>`;
+      }
+
+      html += `<div class="results-sub">
+        This is a simplified demo. In a full implementation, the Metrics A[i]gent would plug directly into your ATS,
+        watch trends over time, and ping you when a stage goes out of bounds.
+      </div>`;
+
+      html += `</div>`;
+
+      resultsEl.innerHTML = html;
+    }
+
+    function loadExample() {
+      const examples = [
+        { entered: 150, moved: 70 },
+        { entered: 70, moved: 28 },
+        { entered: 28, moved: 9 },
+        { entered: 9, moved: 3 },
+        { entered: 3, moved: 2 },
+      ];
+
+      const rows = Array.from(
+        document.querySelectorAll("#funnel-body tr")
+      );
+
+      rows.forEach((row, idx) => {
+        const enteredInput = row.querySelector(".in-input");
+        const movedInput = row.querySelector(".out-input");
+        if (examples[idx]) {
+          enteredInput.value = examples[idx].entered;
+          movedInput.value = examples[idx].moved;
+        } else {
+          enteredInput.value = "";
+          movedInput.value = "";
+        }
+      });
+
+      analyzeFunnel();
+    }
+
+    document
+      .getElementById("analyze-btn")
+      .addEventListener("click", analyzeFunnel);
+
+    document
+      .getElementById("example-btn")
+      .addEventListener("click", loadExample);
+  </script>
+</body>
+</html>
