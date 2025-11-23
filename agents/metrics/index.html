@@ -174,18 +174,18 @@
       letter-spacing: 0.06em;
       color: #6b7280;
       background: #f9fafb;
-      text-align: center;  /* center ALL column titles */
+      text-align: center;
     }
 
     td:nth-child(1),
     td:nth-child(3),
     td:nth-child(4),
     td:nth-child(5) {
-      text-align: center;  /* center numeric columns & diagnosis */
+      text-align: center;
     }
 
     td:nth-child(2) {
-      text-align: center; /* stage column */
+      text-align: center;
     }
 
     input[type="number"] {
@@ -194,7 +194,7 @@
       border-radius: 0.5rem;
       border: 1px solid #d1d5db;
       font-size: 0.8rem;
-      text-align: right;
+      text-align: center; /* center text inside the inputs */
     }
 
     input[type="number"]:focus {
@@ -203,7 +203,7 @@
       box-shadow: 0 0 0 1px #6366f1;
     }
 
-    /* Stage pills that visually form a solid-color funnel */
+    /* Stage pills: solid, neutral funnel */
     .stage-pill {
       display: inline-flex;
       align-items: center;
@@ -218,27 +218,27 @@
 
     .stage-pill--1 {
       width: 90%;
-      background: #dbeafe; /* blue */
+      background: #e5e7eb;
     }
 
     .stage-pill--2 {
       width: 75%;
-      background: #ccfbf1; /* teal */
+      background: #d4d7dd;
     }
 
     .stage-pill--3 {
       width: 60%;
-      background: #e0e7ff; /* indigo */
+      background: #c4c7cf;
     }
 
     .stage-pill--4 {
       width: 45%;
-      background: #fef3c7; /* amber */
+      background: #b4bac4;
     }
 
     .stage-pill--5 {
       width: 30%;
-      background: #e5e7eb; /* gray */
+      background: #a5acb8;
     }
 
     .btn-row {
@@ -288,15 +288,12 @@
       color: #9ca3af;
     }
 
-    /* Bottom boxes: stacked, gray, two cards */
+    /* Single summary box */
     .callouts {
       margin-top: 1.4rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
     }
 
-    .callout {
+    .callout-summary {
       border-radius: 0.9rem;
       background: #f9fafb;
       padding: 0.9rem;
@@ -305,7 +302,7 @@
       border: 1px solid #e5e7eb;
     }
 
-    .callout h3 {
+    .callout-summary h3 {
       margin: 0 0 0.3rem;
       font-size: 0.82rem;
       text-transform: uppercase;
@@ -313,25 +310,20 @@
       text-align: center;
     }
 
-    .callout p {
+    .callout-summary p {
       margin: 0 0 0.5rem;
       font-size: 0.75rem;
       color: #6b7280;
       text-align: center;
     }
 
-    .callout ul {
+    .callout-summary ul {
       margin: 0.2rem 0 0;
       padding-left: 1rem;
     }
 
-    .callout li {
+    .callout-summary li {
       margin-bottom: 0.25rem;
-    }
-
-    .callout--actions ol {
-      padding-left: 1.1rem;
-      margin: 0.2rem 0 0;
     }
 
     /* Diagnosis pills */
@@ -374,7 +366,6 @@
       background: #ef4444;
     }
 
-    /* NEW Alert pill: same background as bottleneck, purple text */
     .diag-pill.alert {
       background: #fef2f2;
       color: #7e22ce;
@@ -527,19 +518,12 @@
       </div>
 
       <div class="callouts">
-        <div class="callout callout--signals">
-          <h3>Funnel signals &amp; hypotheses</h3>
-          <p>Where to investigate first. Use these as prompts for deeper analysis.</p>
-          <ul id="bottlenecks">
-            <li>Signals and hypotheses will appear here after diagnostics run.</li>
+        <div class="callout-summary">
+          <h3>Diagnostic Summary | Recommendations for Investigation &amp; Next Steps</h3>
+          <p>Where to look first based on the current funnel snapshot.</p>
+          <ul id="summary">
+            <li>Insights and next steps will appear here after diagnostics run.</li>
           </ul>
-        </div>
-        <div class="callout callout--actions">
-          <h3>Recommended next steps</h3>
-          <p>Next 1–2 moves for your TA Ops / recruiter sync.</p>
-          <ol id="actions">
-            <li>Primary actions will appear here after diagnostics run.</li>
-          </ol>
         </div>
       </div>
 
@@ -551,7 +535,6 @@
   </main>
 
   <script>
-    // Benchmarks by stage (for Alert logic)
     function getBenchmark(stageName) {
       const name = stageName.toLowerCase();
       if (name.includes("application")) return 12;
@@ -562,7 +545,6 @@
       return null;
     }
 
-    // Realistic funnels for each requisition
     const REQS = {
       esd: {
         name: "Enterprise Sales Director",
@@ -633,12 +615,10 @@
       const name = stageName.toLowerCase();
       const b = benchmark;
 
-      // If we have a benchmark, check for "Alert" first (well above expected)
       if (b && conv > b * 2) {
         return "alert";
       }
 
-      // Application Stage
       if (name.includes("application")) {
         if (conv < 5) return "bottleneck";
         if (conv < 10) return "warn";
@@ -646,7 +626,6 @@
         return "alert";
       }
 
-      // Recruiter Interview
       if (name.includes("recruiter")) {
         if (conv < 30) return "bottleneck";
         if (conv < 45) return "warn";
@@ -654,7 +633,6 @@
         return "alert";
       }
 
-      // Hiring Manager Interview
       if (name.includes("hiring manager")) {
         if (conv < 50) return "bottleneck";
         if (conv < 70) return "warn";
@@ -662,7 +640,6 @@
         return "alert";
       }
 
-      // Final Interview
       if (name.includes("final")) {
         if (conv < 20) return "bottleneck";
         if (conv < 30) return "warn";
@@ -670,7 +647,6 @@
         return "alert";
       }
 
-      // Offer
       if (name.includes("offer")) {
         if (conv < 70) return "bottleneck";
         if (conv < 85) return "warn";
@@ -691,9 +667,7 @@
 
     function runDiagnostics() {
       const stages = getFunnelData();
-      const signalsEl = document.getElementById("bottlenecks");
-      const actionsEl = document.getElementById("actions");
-
+      const summaryEl = document.getElementById("summary");
       if (!stages.length) return;
 
       const maxEntered = Math.max(...stages.map((s) => s.entered || 0));
@@ -728,69 +702,49 @@
         return { ...s, status };
       });
 
-      const signals = [];
-      const actions = [];
+      const bullets = [];
 
       classified.forEach((s) => {
         const name = s.name.toLowerCase();
 
         if (s.status === "bottleneck" || s.status === "alert") {
           if (name.includes("application")) {
-            signals.push(
-              "Application Stage: review job posting copy, targeting, and source mix; compare candidate feedback on clarity of the role."
-            );
-            signals.push(
-              "Validate ATS routing and deduplication for applications; look for a potential technical error with the job posting or routing rules."
+            bullets.push(
+              "Application Stage: review job posting copy, targeting, and source mix; confirm ATS routing rules are working as expected."
             );
           } else if (name.includes("recruiter")) {
-            signals.push(
-              "Recruiter Interview: check notes quality and rejection reasons; confirm recruiters are capturing specific skills and signal, not just 'not a fit'."
-            );
-            signals.push(
-              "Compare recruiter feedback with hiring manager expectations to see where the bar may be misaligned."
+            bullets.push(
+              "Recruiter Interview: audit notes and rejection reasons; compare recruiter feedback against the hiring manager's written profile."
             );
           } else if (name.includes("hiring manager")) {
-            signals.push(
-              "Hiring Manager Interview: review HM feedback themes and look for patterns (e.g., level, industry, territory)."
-            );
-            signals.push(
-              "Check whether candidates report surprises at HM stage in CSAT surveys (scope, comp, location)."
+            bullets.push(
+              "Hiring Manager Interview: review HM feedback themes and candidate CSAT comments for surprises around scope, comp, or location."
             );
           } else if (name.includes("final")) {
-            signals.push(
-              "Final Interview: audit panel composition and interview rubrics; ensure each interviewer has a clear focus area."
-            );
-            signals.push(
-              "Review panel debrief notes for conflicts in scoring that indicate inconsistent expectations."
+            bullets.push(
+              "Final Interview: check panel composition and rubrics; ensure each interviewer owns a specific competency with a clear scoring guide."
             );
           } else if (name.includes("offer")) {
-            signals.push(
-              "Offer: analyze recent declines and candidate feedback for themes in comp, level, or remote expectations."
-            );
-            signals.push(
-              "Check offer turnaround time and approval steps for delays that may be pushing candidates to competitors."
+            bullets.push(
+              "Offer: run a quick win–loss analysis on recent offers and collect candidate feedback on comp, level, remote/hybrid expectations, and timing."
             );
           }
         } else if (s.status === "warn") {
-          if (name.includes("application")) {
-            signals.push(
-              "Application Stage: track changes in inbound volume and quality by source over the next few weeks."
-            );
-          } else if (name.includes("recruiter")) {
-            signals.push(
-              "Recruiter Interview: monitor consistency of pass-through across recruiters; review a sample of notes monthly."
+          if (name.includes("recruiter")) {
+            bullets.push(
+              "Recruiter Interview: monitor pass-through by recruiter monthly and spot-check interview notes for consistency."
             );
           } else if (name.includes("hiring manager")) {
-            signals.push(
-              "Hiring Manager Interview: monitor HM availability and rescheduling; check for interview fatigue or time pressure."
+            bullets.push(
+              "Hiring Manager Interview: watch reschedule rates and time between stages; heavy delays can suppress pass-through."
             );
           } else if (name.includes("final")) {
-            signals.push(
-              "Final Interview: track panel score variance and follow-up questions; flag if decisions feel subjective or noisy."
+            bullets.push(
+              "Final Interview: watch panel score variance; large disagreements can signal unclear expectations."
             );
           } else if (name.includes("offer")) {
-            signals.push(
-              "Offer: keep an eye on candidate negotiation patterns and time-to-accept; small shifts can signal market changes."
+            bullets.push(
+              "Offer: track time-to-accept and negotiation patterns; small changes can indicate shifting market or internal positioning."
             );
           }
         }
@@ -805,56 +759,34 @@
         const name = worst.name.toLowerCase();
 
         if (name.includes("application")) {
-          actions.push(
-            "Pull a quick report on applications by source for this req and compare quality vs volume."
-          );
-          actions.push(
-            "Run a short candidate survey on how clearly the job posting describes responsibilities and requirements."
+          bullets.push(
+            "Next: pull a simple source-of-hire report for this req (by job board, referral, outbound) and compare quality vs. volume."
           );
         } else if (name.includes("recruiter")) {
-          actions.push(
-            "Schedule a 30-minute calibration between recruiter(s) and hiring manager to review 5–10 recent profiles."
-          );
-          actions.push(
-            "Standardize recruiter interview questions and rejection codes for this role to improve signal quality."
+          bullets.push(
+            "Next: schedule a 30-minute calibration between recruiter(s) and HM to review 5–10 recent profiles and tighten the 'strong yes' bar."
           );
         } else if (name.includes("hiring manager")) {
-          actions.push(
-            "Review HM interview scorecards and comments for the last 10–15 candidates; identify recurring reasons for 'no'."
-          );
-          actions.push(
-            "Align on a written 'strong yes' profile and share it with recruiting to ensure pre-HM screening is tighter."
+          bullets.push(
+            "Next: review the last 10–15 HM scorecards to identify the top 2–3 recurring 'no' reasons and translate them into clearer screen-in criteria."
           );
         } else if (name.includes("final")) {
-          actions.push(
-            "Tighten panel design so each interviewer covers a distinct competency with a clear rubric."
-          );
-          actions.push(
-            "Host a structured debrief within 24 hours after each panel to resolve conflicting feedback quickly."
+          bullets.push(
+            "Next: run a short retro with the panel on one or two recent hires/declines and capture lessons you can reuse across reqs."
           );
         } else if (name.includes("offer")) {
-          actions.push(
-            "Review recent offer outcomes (accepts/declines) and candidate feedback with People Ops / Comp."
-          );
-          actions.push(
-            "Introduce a 'pre-close' conversation before drafting offers to surface blockers early."
+          bullets.push(
+            "Next: partner with People Ops/Comp to tighten an offer template for this role and pre-close candidates on comp and level earlier in the process."
           );
         }
       }
 
-      if (!signals.length) {
-        signals.push(
-          "No clear funnel issues in this snapshot. Use this view again when volumes or performance change."
-        );
-      }
-      if (!actions.length) {
-        actions.push(
-          "Choose one stage to protect (working well) and one stage to experiment on for this requisition."
-        );
-      }
+      const uniqueBullets = [...new Set(bullets)]; // de-dup
+      const limited = uniqueBullets.length ? uniqueBullets.slice(0, 7) : [
+        "No major funnel issues detected in this snapshot. Re-run diagnostics after you change sourcing strategy or the role profile."
+      ];
 
-      signalsEl.innerHTML = signals.map((b) => `<li>${b}</li>`).join("");
-      actionsEl.innerHTML = actions.map((a) => `<li>${a}</li>`).join("");
+      summaryEl.innerHTML = limited.map((b) => `<li>${b}</li>`).join("");
     }
 
     function applyReq(key) {
@@ -895,7 +827,6 @@
       });
     });
 
-    // init on first load
     applyReq(currentReqKey);
   </script>
 </body>
