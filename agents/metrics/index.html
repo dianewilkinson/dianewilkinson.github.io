@@ -58,7 +58,7 @@
       font-size: 0.98rem;
       color: #4b5563;
       margin-bottom: 1.5rem;
-      max-width: 34rem;
+      max-width: 46rem; /* wider so it doesn’t wrap so early */
     }
 
     .pill-row {
@@ -81,6 +81,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
       gap: 1.5rem;
+      align-items: flex-start;
     }
 
     @media (max-width: 800px) {
@@ -186,8 +187,9 @@
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-      max-height: 460px;
-      overflow: auto;
+      /* removed max-height so it doesn’t create an awkward scroll */
+      /* max-height: 460px;
+         overflow: auto; */
     }
 
     .metric-chip {
@@ -200,6 +202,7 @@
       background: white;
       border: 1px solid #e5e7eb;
       color: #111827;
+      margin: 0.15rem 0.15rem 0 0;
     }
 
     .metric-chip span.dot {
@@ -261,6 +264,22 @@
       color: #3730a3;
       margin-left: 0.25rem;
     }
+
+    .related {
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    .related a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .related a:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 <body>
@@ -271,7 +290,8 @@
       <p class="subhead">
         A tiny agent that turns your recruiting funnel into diagnostics:
         conversion by stage, bottleneck detection, and ops-ready talking points
-        for your next sync with a hiring leader.
+        for your next sync with a hiring leader. In production, it reads these
+        numbers directly from your ATS — this demo lets you tweak them.
       </p>
 
       <div class="pill-row">
@@ -284,12 +304,12 @@
       <div class="layout">
         <!-- LEFT: INPUT TABLE -->
         <div>
-          <div class="section-title">Enter your funnel by stage</div>
+          <div class="section-title">Funnel by stage (ATS snapshot – demo)</div>
           <div class="section-hint">
-            For each stage, add the number of candidates who
-            <strong>entered</strong> the stage and how many
-            <strong>moved to the next stage</strong>. Or load a pre-filled
-            example.
+            Metrics A[i]gent reads how many candidates <strong>enter</strong>
+            each stage and how many <strong>move to the next stage</strong>.
+            Here you can adjust the sample data to mirror a real requisition
+            before running diagnostics.
           </div>
 
           <table>
@@ -304,43 +324,43 @@
               <tr data-index="0">
                 <td>Applied / Sourced</td>
                 <td>
-                  <input type="number" min="0" value="120" class="in-input" />
+                  <input type="number" min="0" value="150" class="in-input" />
                 </td>
                 <td>
-                  <input type="number" min="0" value="60" class="out-input" />
+                  <input type="number" min="0" value="70" class="out-input" />
                 </td>
               </tr>
               <tr data-index="1">
                 <td>Recruiter Screen</td>
                 <td>
-                  <input type="number" min="0" value="60" class="in-input" />
+                  <input type="number" min="0" value="70" class="in-input" />
                 </td>
                 <td>
-                  <input type="number" min="0" value="30" class="out-input" />
+                  <input type="number" min="0" value="28" class="out-input" />
                 </td>
               </tr>
               <tr data-index="2">
                 <td>Hiring Manager</td>
                 <td>
-                  <input type="number" min="0" value="30" class="in-input" />
+                  <input type="number" min="0" value="28" class="in-input" />
                 </td>
                 <td>
-                  <input type="number" min="0" value="10" class="out-input" />
+                  <input type="number" min="0" value="9" class="out-input" />
                 </td>
               </tr>
               <tr data-index="3">
                 <td>Final / Panel</td>
                 <td>
-                  <input type="number" min="0" value="10" class="in-input" />
+                  <input type="number" min="0" value="9" class="in-input" />
                 </td>
                 <td>
-                  <input type="number" min="0" value="4" class="out-input" />
+                  <input type="number" min="0" value="3" class="out-input" />
                 </td>
               </tr>
               <tr data-index="4">
                 <td>Offer</td>
                 <td>
-                  <input type="number" min="0" value="4" class="in-input" />
+                  <input type="number" min="0" value="3" class="in-input" />
                 </td>
                 <td>
                   <input type="number" min="0" value="2" class="out-input" />
@@ -356,8 +376,13 @@
             </button>
             <button class="btn-secondary" id="example-btn" type="button">
               <span class="icon">✨</span>
-              <span>Load example funnel</span>
+              <span>Reset to sample funnel</span>
             </button>
+          </div>
+
+          <div class="results-sub">
+            In a full implementation, recruiters never touch these counts —
+            they’re pulled on a schedule from ATS/HRIS and watched over time.
           </div>
         </div>
 
@@ -372,12 +397,12 @@
           <div class="results-card" id="results">
             <div>
               <div class="results-header">
-                No diagnostics yet.
+                Ready when you are.
               </div>
               <div class="results-sub">
-                Enter your funnel and click
-                <strong>Run diagnostics</strong> to see pass-through rates,
-                bottlenecks, and ops suggestions.
+                Use the sample funnel on the left (or tweak the counts to match
+                a real role), then click <strong>Run diagnostics</strong> to see
+                pass-through rates, bottlenecks, and ops suggestions.
               </div>
             </div>
           </div>
@@ -387,6 +412,16 @@
             <span class="badge">Metrics A[i]gent · TA Ops</span>
           </div>
         </div>
+      </div>
+
+      <div class="related">
+        <span class="tiny-label">Related tools</span>
+        ·
+        <a href="/assets/tool-metrics-dictionary.xlsx" target="_blank" rel="noopener">Metrics Dictionary</a>
+        ·
+        <a href="/assets/tool-recruiting-funnel-calculators.xlsx" target="_blank" rel="noopener">Recruiting Funnel Calculator</a>
+        ·
+        <a href="/assets/analysis-recruiting-funnel-case-study.pdf" target="_blank" rel="noopener">Recruiting Funnel Case Study</a>
       </div>
     </section>
   </main>
@@ -420,9 +455,39 @@
       return stages;
     }
 
-    function classifyStage(conv) {
-      if (conv < 20) return "bottleneck";
-      if (conv < 40) return "warn";
+    // Stage-aware benchmarks based on your TA experience
+    function classifyStage(stageName, conv) {
+      let thresholds;
+
+      const name = stageName.toLowerCase();
+
+      // Applied → Recruiter Screen
+      if (name.includes("applied") || name.includes("sourced")) {
+        thresholds = { bottleneck: 10, warn: 15 };
+
+      // Recruiter Screen → HM Interview
+      } else if (name.includes("recruiter")) {
+        thresholds = { bottleneck: 30, warn: 50 };
+
+      // HM Interview → Final / Panel
+      } else if (name.includes("hiring manager")) {
+        thresholds = { bottleneck: 50, warn: 70 };
+
+      // Final / Panel → Offer
+      } else if (name.includes("final") || name.includes("panel")) {
+        thresholds = { bottleneck: 20, warn: 30 };
+
+      // Offer → Acceptance
+      } else if (name.includes("offer")) {
+        thresholds = { bottleneck: 70, warn: 85 };
+
+      // Fallback
+      } else {
+        thresholds = { bottleneck: 20, warn: 40 };
+      }
+
+      if (conv < thresholds.bottleneck) return "bottleneck";
+      if (conv < thresholds.warn) return "warn";
       return "healthy";
     }
 
@@ -437,7 +502,7 @@
 
       if (!stages.length) {
         resultsEl.innerHTML =
-          "<div class='results-header'>Not enough data.</div><div class='results-sub'>Add at least one stage with candidates to run diagnostics.</div>";
+          "<div class='results-header'>Not enough data.</div><div class='results-sub'>Use the sample funnel or add at least one stage with candidates to run diagnostics.</div>";
         return;
       }
 
@@ -449,7 +514,7 @@
 
       // Find bottlenecks by stage conversion
       const withClassification = stages.map((s, idx) => {
-        const status = classifyStage(s.convStage);
+        const status = classifyStage(s.name, s.convStage);
         return { ...s, status, index: idx };
       });
 
@@ -516,7 +581,7 @@
       if (!bottlenecks.length && !warnings.length) {
         html += `<div class="results-sub">
           No obvious red-flag stages. You could still tighten screens or sharpen calibration with hiring managers,
-          but pass-through rates look broadly healthy.
+          but pass-through rates look broadly healthy against typical benchmarks.
         </div>`;
       } else {
         html += `<ul class="results-list">`;
@@ -594,8 +659,8 @@
       }
 
       html += `<div class="results-sub">
-        This is a simplified demo. In a full implementation, the Metrics A[i]gent would plug directly into your ATS,
-        watch trends over time, and ping you when a stage goes out of bounds.
+        In a full deployment, Metrics A[i]gent plugs into your ATS, watches this funnel over time,
+        and pings you when a stage drops below benchmark.
       </div>`;
 
       html += `</div>`;
