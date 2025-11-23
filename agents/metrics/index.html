@@ -146,6 +146,12 @@
       border: 1px solid #e5e7eb;
     }
 
+    colgroup col:nth-child(1) { width: 18%; }
+    colgroup col:nth-child(2) { width: 34%; }
+    colgroup col:nth-child(3) { width: 18%; }
+    colgroup col:nth-child(4) { width: 15%; }
+    colgroup col:nth-child(5) { width: 15%; }
+
     #funnel-body tr {
       position: relative;
     }
@@ -167,22 +173,19 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: #6b7280;
-      background: #f9fafb; /* gray strip */
+      background: #f9fafb;
       text-align: center;  /* center ALL column titles */
     }
 
     td:nth-child(1),
     td:nth-child(3),
-    td:nth-child(4) {
-      text-align: right;
+    td:nth-child(4),
+    td:nth-child(5) {
+      text-align: center;  /* center numeric columns & diagnosis */
     }
 
     td:nth-child(2) {
-      text-align: center;
-    }
-
-    td:nth-child(5) {
-      text-align: center;
+      text-align: center; /* stage column */
     }
 
     input[type="number"] {
@@ -200,7 +203,7 @@
       box-shadow: 0 0 0 1px #6366f1;
     }
 
-    /* Stage pills that visually form a funnel */
+    /* Stage pills that visually form a solid-color funnel */
     .stage-pill {
       display: inline-flex;
       align-items: center;
@@ -214,28 +217,28 @@
     }
 
     .stage-pill--1 {
-      width: 85%;
-      background: linear-gradient(90deg, #fee2e2, #fee2ff);
+      width: 90%;
+      background: #dbeafe; /* blue */
     }
 
     .stage-pill--2 {
       width: 75%;
-      background: linear-gradient(90deg, #ffedd5, #e0f2fe);
+      background: #ccfbf1; /* teal */
     }
 
     .stage-pill--3 {
-      width: 65%;
-      background: linear-gradient(90deg, #fef9c3, #e0f2fe);
+      width: 60%;
+      background: #e0e7ff; /* indigo */
     }
 
     .stage-pill--4 {
-      width: 55%;
-      background: linear-gradient(90deg, #e0f2fe, #f5f3ff);
+      width: 45%;
+      background: #fef3c7; /* amber */
     }
 
     .stage-pill--5 {
-      width: 45%;
-      background: linear-gradient(90deg, #dcfce7, #f5f3ff);
+      width: 30%;
+      background: #e5e7eb; /* gray */
     }
 
     .btn-row {
@@ -307,7 +310,7 @@
       font-size: 0.82rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      text-align: center;   /* center box titles */
+      text-align: center;
     }
 
     .callout p {
@@ -331,6 +334,7 @@
       margin: 0.2rem 0 0;
     }
 
+    /* Diagnosis pills */
     .diag-pill {
       display: inline-flex;
       align-items: center;
@@ -361,15 +365,23 @@
       background: #f97316;
     }
 
-    .diag-pill.bottleneck,
-    .diag-pill.bottleneck-high {
+    .diag-pill.bottleneck {
       background: #fef2f2;
       color: #b91c1c;
     }
 
-    .diag-pill.bottleneck .diag-dot,
-    .diag-pill.bottleneck-high .diag-dot {
+    .diag-pill.bottleneck .diag-dot {
       background: #ef4444;
+    }
+
+    /* NEW Alert pill: same background as bottleneck, purple text */
+    .diag-pill.alert {
+      background: #fef2f2;
+      color: #7e22ce;
+    }
+
+    .diag-pill.alert .diag-dot {
+      background: #7e22ce;
     }
 
     .diag-label {
@@ -415,10 +427,12 @@
         </div>
       </div>
 
-      <!-- Funnel table -->
       <div class="section-title">Funnel by stage (ATS snapshot – demo)</div>
 
       <table>
+        <colgroup>
+          <col /><col /><col /><col /><col />
+        </colgroup>
         <thead>
           <tr>
             <th>Candidates in</th>
@@ -512,7 +526,6 @@
         In production, these counts are pulled automatically from your ATS/HRIS.
       </div>
 
-      <!-- Callouts: two stacked boxes -->
       <div class="callouts">
         <div class="callout callout--signals">
           <h3>Funnel signals &amp; hypotheses</h3>
@@ -538,6 +551,17 @@
   </main>
 
   <script>
+    // Benchmarks by stage (for Alert logic)
+    function getBenchmark(stageName) {
+      const name = stageName.toLowerCase();
+      if (name.includes("application")) return 12;
+      if (name.includes("recruiter")) return 50;
+      if (name.includes("hiring manager")) return 70;
+      if (name.includes("final")) return 30;
+      if (name.includes("offer")) return 85;
+      return null;
+    }
+
     // Realistic funnels for each requisition
     const REQS = {
       esd: {
@@ -594,6 +618,7 @@
           entered,
           moved,
           conv,
+          benchmark: getBenchmark(stageName),
           rowEl: row,
           convCell,
           diagCell
@@ -603,46 +628,61 @@
       return stages;
     }
 
-    function classifyStage(stageName, conv) {
+    function classifyStage(stageName, conv, benchmark) {
       if (isNaN(conv)) return "unknown";
       const name = stageName.toLowerCase();
+      const b = benchmark;
 
+      // If we have a benchmark, check for "Alert" first (well above expected)
+      if (b && conv > b * 2) {
+        return "alert";
+      }
+
+      // Application Stage
       if (name.includes("application")) {
         if (conv < 5) return "bottleneck";
         if (conv < 10) return "warn";
         if (conv <= 20) return "healthy";
-        return "bottleneck-high";
+        return "alert";
       }
 
+      // Recruiter Interview
       if (name.includes("recruiter")) {
         if (conv < 30) return "bottleneck";
-        if (conv < 50) return "warn";
-        return "healthy";
+        if (conv < 45) return "warn";
+        if (conv <= 70) return "healthy";
+        return "alert";
       }
 
+      // Hiring Manager Interview
       if (name.includes("hiring manager")) {
         if (conv < 50) return "bottleneck";
         if (conv < 70) return "warn";
-        return "healthy";
+        if (conv <= 85) return "healthy";
+        return "alert";
       }
 
+      // Final Interview
       if (name.includes("final")) {
         if (conv < 20) return "bottleneck";
         if (conv < 30) return "warn";
-        return "healthy";
+        if (conv <= 50) return "healthy";
+        return "alert";
       }
 
+      // Offer
       if (name.includes("offer")) {
         if (conv < 70) return "bottleneck";
         if (conv < 85) return "warn";
-        return "healthy";
+        if (conv <= 95) return "healthy";
+        return "alert";
       }
 
       return "healthy";
     }
 
     function statusLabel(status) {
-      if (status === "bottleneck-high") return "Bottleneck (anomaly)";
+      if (status === "alert") return "Alert";
       if (status === "bottleneck") return "Bottleneck";
       if (status === "warn") return "Watch";
       if (status === "healthy") return "Healthy";
@@ -660,7 +700,7 @@
 
       const classified = stages.map((s) => {
         const conv = s.conv;
-        const status = classifyStage(s.name, conv);
+        const status = classifyStage(s.name, conv, s.benchmark);
 
         const pct = maxEntered > 0 ? (s.entered / maxEntered) * 90 : 0;
         s.rowEl.style.setProperty("--bar-pct", pct.toFixed(0) + "%");
@@ -694,7 +734,7 @@
       classified.forEach((s) => {
         const name = s.name.toLowerCase();
 
-        if (s.status === "bottleneck" || s.status === "bottleneck-high") {
+        if (s.status === "bottleneck" || s.status === "alert") {
           if (name.includes("application")) {
             signals.push(
               "Application Stage: review job posting copy, targeting, and source mix; compare candidate feedback on clarity of the role."
@@ -758,7 +798,7 @@
 
       const worst =
         classified.find((s) => s.status === "bottleneck") ||
-        classified.find((s) => s.status === "bottleneck-high") ||
+        classified.find((s) => s.status === "alert") ||
         classified.find((s) => s.status === "warn");
 
       if (worst) {
