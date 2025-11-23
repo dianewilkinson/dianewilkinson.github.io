@@ -345,7 +345,6 @@
 
     .root-header {
       text-align: center;
-      margin-bottom: 0.4rem;
     }
 
     .root-header h3 {
@@ -356,11 +355,28 @@
       color: #374151;
     }
 
+    /* Column header row inside root card */
+    .root-columns-header {
+      margin: 0.55rem 1.2rem 0.25rem;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr 1.1fr;
+      column-gap: 0.75rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #6b7280;
+      text-align: left;
+    }
+
+    .root-columns-header div:first-child {
+      padding-left: 0.1rem;
+    }
+
     .root-gradient {
       height: 2px;
       border-radius: 999px;
       background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
-      margin: 0.4rem 1.2rem 0.7rem;
+      margin: 0.35rem 1.2rem 0.7rem;
     }
 
     .root-empty {
@@ -383,14 +399,17 @@
       border: 1px solid #e5e7eb;
       padding: 0.7rem 0.9rem 0.85rem;
       box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr 1.1fr;
+      column-gap: 0.75rem;
+      align-items: flex-start;
     }
 
-    .root-issue-header {
+    .root-issue-main {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.4rem;
-      margin-bottom: 0.5rem;
+      flex-direction: column;
+      gap: 0.25rem;
+      align-items: flex-start;
     }
 
     .root-stage-name {
@@ -399,16 +418,9 @@
       color: #111827;
     }
 
-    .root-issue-body {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-    }
-
-    @media (max-width: 640px) {
-      .root-issue-body {
-        grid-template-columns: 1fr;
-      }
+    .root-issue-col {
+      font-size: 0.78rem;
+      color: #4b5563;
     }
 
     .root-col-title {
@@ -419,13 +431,19 @@
       margin-bottom: 0.25rem;
     }
 
-    .root-list {
-      font-size: 0.78rem;
-      color: #4b5563;
-    }
-
     .root-list div {
       line-height: 1.4;
+    }
+
+    @media (max-width: 640px) {
+      .root-columns-header {
+        grid-template-columns: 1fr;
+        row-gap: 0.15rem;
+      }
+      .root-issue-card {
+        grid-template-columns: 1fr;
+        row-gap: 0.5rem;
+      }
     }
 
     .footer-note {
@@ -574,6 +592,11 @@
       <div class="root-card">
         <div class="root-header">
           <h3>Diagnostic Summary | Root Cause Table</h3>
+          <div class="root-columns-header">
+            <div>Issue | Stage</div>
+            <div>Source: Internal | Org</div>
+            <div>Source: External | Candidate</div>
+          </div>
         </div>
         <div class="root-gradient"></div>
 
@@ -821,25 +844,21 @@
 
         html += `
           <div class="root-issue-card">
-            <div class="root-issue-header">
+            <div class="root-issue-main">
               <span class="diag-pill ${pillClass}">
                 <span class="diag-dot"></span>
                 <span class="diag-label-pill">${labelText}</span>
               </span>
               <span class="root-stage-name">${row.stageLabel}</span>
             </div>
-            <div class="root-issue-body">
-              <div>
-                <div class="root-col-title">Source: Internal | Org</div>
-                <div class="root-list">
-                  ${row.internal.map((q) => `<div>${q}</div>`).join("")}
-                </div>
+            <div class="root-issue-col root-issue-col--internal">
+              <div class="root-list">
+                ${row.internal.map((q) => `<div>${q}</div>`).join("")}
               </div>
-              <div>
-                <div class="root-col-title">Source: External | Candidate</div>
-                <div class="root-list">
-                  ${row.external.map((q) => `<div>${q}</div>`).join("")}
-                </div>
+            </div>
+            <div class="root-issue-col root-issue-col--external">
+              <div class="root-list">
+                ${row.external.map((q) => `<div>${q}</div>`).join("")}
               </div>
             </div>
           </div>
