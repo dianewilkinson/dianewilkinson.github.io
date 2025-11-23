@@ -64,10 +64,10 @@
     }
 
     .subtitle-inline {
-      font-size: 1.05rem;
-      font-weight: 400;
+      font-size: 1.15rem;
+      font-weight: 500;
       color: #4b5563;
-      opacity: 0.95;
+      opacity: 0.98;
       white-space: nowrap;
     }
 
@@ -194,7 +194,7 @@
       border-radius: 0.5rem;
       border: 1px solid #d1d5db;
       font-size: 0.8rem;
-      text-align: center; /* center text inside the inputs */
+      text-align: center;
     }
 
     input[type="number"]:focus {
@@ -216,30 +216,11 @@
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
     }
 
-    .stage-pill--1 {
-      width: 90%;
-      background: #e5e7eb;
-    }
-
-    .stage-pill--2 {
-      width: 75%;
-      background: #d4d7dd;
-    }
-
-    .stage-pill--3 {
-      width: 60%;
-      background: #c4c7cf;
-    }
-
-    .stage-pill--4 {
-      width: 45%;
-      background: #b4bac4;
-    }
-
-    .stage-pill--5 {
-      width: 30%;
-      background: #a5acb8;
-    }
+    .stage-pill--1 { width: 90%; background: #e5e7eb; }
+    .stage-pill--2 { width: 75%; background: #d4d7dd; }
+    .stage-pill--3 { width: 60%; background: #c4c7cf; }
+    .stage-pill--4 { width: 45%; background: #b4bac4; }
+    .stage-pill--5 { width: 30%; background: #a5acb8; }
 
     .btn-row {
       display: flex;
@@ -326,7 +307,7 @@
       margin-bottom: 0.25rem;
     }
 
-    /* Diagnosis pills */
+    /* Diagnosis pills: gray chip, colored text/dot */
     .diag-pill {
       display: inline-flex;
       align-items: center;
@@ -337,40 +318,41 @@
       border: 1px solid #e5e7eb;
       gap: 0.25rem;
       min-width: 115px;
-      background: #ecfdf3;
-      color: #166534;
+      background: #f3f4f6;
+      color: #111827;
     }
 
     .diag-dot {
       width: 0.45rem;
       height: 0.45rem;
       border-radius: 999px;
+      background: #9ca3af;
+    }
+
+    .diag-pill.healthy {
+      color: #15803d;
+    }
+    .diag-pill.healthy .diag-dot {
       background: #22c55e;
     }
 
     .diag-pill.warn {
-      background: #fff7ed;
       color: #9a3412;
     }
-
     .diag-pill.warn .diag-dot {
       background: #f97316;
     }
 
     .diag-pill.bottleneck {
-      background: #fef2f2;
       color: #b91c1c;
     }
-
     .diag-pill.bottleneck .diag-dot {
       background: #ef4444;
     }
 
     .diag-pill.alert {
-      background: #fef2f2;
       color: #7e22ce;
     }
-
     .diag-pill.alert .diag-dot {
       background: #7e22ce;
     }
@@ -520,9 +502,9 @@
       <div class="callouts">
         <div class="callout-summary">
           <h3>Diagnostic Summary | Recommendations for Investigation &amp; Next Steps</h3>
-          <p>Where to look first based on the current funnel snapshot.</p>
+          <p>Start with these questions based on the current funnel snapshot.</p>
           <ul id="summary">
-            <li>Insights and next steps will appear here after diagnostics run.</li>
+            <li>Questions and next steps will appear here after diagnostics run.</li>
           </ul>
         </div>
       </div>
@@ -660,7 +642,7 @@
     function statusLabel(status) {
       if (status === "alert") return "Alert";
       if (status === "bottleneck") return "Bottleneck";
-      if (status === "warn") return "Watch";
+      if (status === "warn") return "Slightly off benchmark";
       if (status === "healthy") return "Healthy";
       return "—";
     }
@@ -690,7 +672,7 @@
           dot.className = "diag-dot";
           const label = document.createElement("span");
           label.className = "diag-label";
-          label.textContent = statusLabel(status);
+          label.textContent = status === "warn" ? "Watch" : statusLabel(status);
 
           pill.appendChild(dot);
           pill.appendChild(label);
@@ -706,85 +688,57 @@
 
       classified.forEach((s) => {
         const name = s.name.toLowerCase();
+        const label = s.name.split("|")[0].trim(); // "Hiring Manager Interview" etc.
 
         if (s.status === "bottleneck" || s.status === "alert") {
           if (name.includes("application")) {
             bullets.push(
-              "Application Stage: review job posting copy, targeting, and source mix; confirm ATS routing rules are working as expected."
+              `<strong>${label} – ${statusLabel(s.status)}:</strong> Is the drop driven by low-quality applicants, poor targeting, or a technical issue with routing/duplicates?`
             );
-          } else if (name.includes("recruiter")) {
+          } else if (name.includes("recruiter"))) {
             bullets.push(
-              "Recruiter Interview: audit notes and rejection reasons; compare recruiter feedback against the hiring manager's written profile."
+              `<strong>${label} – ${statusLabel(s.status)}:</strong> Are recruiters consistently applying the same bar, or is pass-through varying widely by recruiter?`
             );
           } else if (name.includes("hiring manager")) {
             bullets.push(
-              "Hiring Manager Interview: review HM feedback themes and candidate CSAT comments for surprises around scope, comp, or location."
+              `<strong>${label} – ${statusLabel(s.status)}:</strong> Are candidates dropping out before HM interviews, or is the HM declining most candidates at this stage?`
             );
           } else if (name.includes("final")) {
             bullets.push(
-              "Final Interview: check panel composition and rubrics; ensure each interviewer owns a specific competency with a clear scoring guide."
+              `<strong>${label} – ${statusLabel(s.status)}:</strong> Are final decisions driven by one panelist or inconsistent rubrics across interviewers?`
             );
           } else if (name.includes("offer")) {
             bullets.push(
-              "Offer: run a quick win–loss analysis on recent offers and collect candidate feedback on comp, level, remote/hybrid expectations, and timing."
+              `<strong>${label} – ${statusLabel(s.status)}:</strong> When candidates decline, what do they cite most often—comp, level, remote/hybrid expectations, or timing?`
             );
           }
         } else if (s.status === "warn") {
           if (name.includes("recruiter")) {
             bullets.push(
-              "Recruiter Interview: monitor pass-through by recruiter monthly and spot-check interview notes for consistency."
+              `<strong>${label} – slightly off benchmark:</strong> Is the pass-through trend stable, or has it shifted in the last 2–4 weeks?`
             );
           } else if (name.includes("hiring manager")) {
             bullets.push(
-              "Hiring Manager Interview: watch reschedule rates and time between stages; heavy delays can suppress pass-through."
+              `<strong>${label} – slightly off benchmark:</strong> Is HM availability or rescheduling causing candidates to cool off before the conversation?`
             );
           } else if (name.includes("final")) {
             bullets.push(
-              "Final Interview: watch panel score variance; large disagreements can signal unclear expectations."
+              `<strong>${label} – slightly off benchmark:</strong> Are panel scores tightly clustered, or is there high variance between interviewers?`
             );
           } else if (name.includes("offer")) {
             bullets.push(
-              "Offer: track time-to-accept and negotiation patterns; small changes can indicate shifting market or internal positioning."
+              `<strong>${label} – slightly off benchmark:</strong> Is time-to-offer or approvals creating delays that give competitors room to move first?`
             );
           }
         }
       });
 
-      const worst =
-        classified.find((s) => s.status === "bottleneck") ||
-        classified.find((s) => s.status === "alert") ||
-        classified.find((s) => s.status === "warn");
-
-      if (worst) {
-        const name = worst.name.toLowerCase();
-
-        if (name.includes("application")) {
-          bullets.push(
-            "Next: pull a simple source-of-hire report for this req (by job board, referral, outbound) and compare quality vs. volume."
-          );
-        } else if (name.includes("recruiter")) {
-          bullets.push(
-            "Next: schedule a 30-minute calibration between recruiter(s) and HM to review 5–10 recent profiles and tighten the 'strong yes' bar."
-          );
-        } else if (name.includes("hiring manager")) {
-          bullets.push(
-            "Next: review the last 10–15 HM scorecards to identify the top 2–3 recurring 'no' reasons and translate them into clearer screen-in criteria."
-          );
-        } else if (name.includes("final")) {
-          bullets.push(
-            "Next: run a short retro with the panel on one or two recent hires/declines and capture lessons you can reuse across reqs."
-          );
-        } else if (name.includes("offer")) {
-          bullets.push(
-            "Next: partner with People Ops/Comp to tighten an offer template for this role and pre-close candidates on comp and level earlier in the process."
-          );
-        }
-      }
-
-      const uniqueBullets = [...new Set(bullets)]; // de-dup
-      const limited = uniqueBullets.length ? uniqueBullets.slice(0, 7) : [
-        "No major funnel issues detected in this snapshot. Re-run diagnostics after you change sourcing strategy or the role profile."
-      ];
+      const uniqueBullets = [...new Set(bullets)];
+      const limited = uniqueBullets.length
+        ? uniqueBullets.slice(0, 7)
+        : [
+            "No major issues detected in this snapshot. Re-run diagnostics after you change sourcing strategy, bar, or offer positioning."
+          ];
 
       summaryEl.innerHTML = limited.map((b) => `<li>${b}</li>`).join("");
     }
