@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Metrics A[i]gent – Funnel Diagnostics Demo</title>
+  <title>Metrics A[i]gent – Recruiting Pipeline Funnel Diagnostics</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Metrics A[i]gent – a demo that turns recruiting funnel data into diagnostics, bottleneck detection, and ops insights."
+    content="Quick recruiting funnel diagnostics: pass-through by stage and health flags for TA Ops."
   />
 
   <style>
@@ -39,12 +39,6 @@
       border: 1px solid #e5e7eb;
     }
 
-    h1 {
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      margin: 0 0 0.25rem;
-      letter-spacing: -0.03em;
-    }
-
     .eyebrow {
       font-size: 0.8rem;
       font-weight: 600;
@@ -54,33 +48,74 @@
       margin-bottom: 0.25rem;
     }
 
-    .subhead {
-      font-size: 0.98rem;
-      color: #4b5563;
-      margin-bottom: 1.5rem;
-      max-width: 46rem;
+    h1 {
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+      margin: 0 0 0.25rem;
+      letter-spacing: -0.03em;
     }
 
-    .pill-row {
+    .subtitle {
+      font-size: 0.95rem;
+      color: #4b5563;
+      margin: 0 0 1.5rem;
+    }
+
+    .tabs-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tabs-label {
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    .tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      gap: 0.4rem;
     }
 
-    .pill {
-      font-size: 0.75rem;
-      padding: 0.35rem 0.7rem;
+    .tab {
+      border: none;
+      background: transparent;
+      font-size: 0.82rem;
+      padding: 0.35rem 0.8rem;
       border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      background: #f9fafb;
-      color: #374151;
+      cursor: pointer;
+      color: #4b5563;
+      position: relative;
+    }
+
+    .tab::after {
+      content: "";
+      position: absolute;
+      left: 16%;
+      right: 16%;
+      bottom: -3px;
+      height: 2px;
+      border-radius: 999px;
+      background: transparent;
+    }
+
+    .tab.active {
+      color: #111827;
+      font-weight: 600;
+      background: #e5e7eb;
+    }
+
+    .tab.active::after {
+      background: linear-gradient(90deg, #22c55e, #ef4444);
     }
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: 1.75rem;
       align-items: flex-start;
     }
 
@@ -97,29 +132,45 @@
       margin-bottom: 0.5rem;
     }
 
-    .section-hint {
-      font-size: 0.8rem;
-      color: #6b7280;
-      margin-bottom: 0.9rem;
-    }
-
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.85rem;
+      border-radius: 0.9rem;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    }
+
+    #funnel-body tr {
+      --bar-pct: 0%;
+      position: relative;
+    }
+
+    /* funnel bar behind stage cell */
+    #funnel-body tr .stage-cell::before {
+      content: "";
+      position: absolute;
+      left: 8%;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 60%;
+      border-radius: 999px;
+      background: #e5e7eb;
+      width: var(--bar-pct);
+      z-index: -1;
     }
 
     th,
     td {
-      padding: 0.4rem 0.35rem;
+      padding: 0.45rem 0.4rem;
       text-align: right;
       border-bottom: 1px solid #e5e7eb;
       white-space: nowrap;
+      background: #fff;
     }
 
-    th:first-child,
-    td:first-child {
-      text-align: left;
+    tr:last-child td {
+      border-bottom: none;
     }
 
     th {
@@ -127,11 +178,22 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: #6b7280;
+      background: #f9fafb;
+    }
+
+    th:nth-child(2),
+    td:nth-child(2) {
+      text-align: center; /* center stage names */
+    }
+
+    th:nth-child(1),
+    td:nth-child(1) {
+      text-align: right;
     }
 
     input[type="number"] {
-      width: 5.5rem;
-      padding: 0.25rem 0.35rem;
+      width: 4.5rem;
+      padding: 0.2rem 0.3rem;
       border-radius: 0.5rem;
       border: 1px solid #d1d5db;
       font-size: 0.8rem;
@@ -147,18 +209,17 @@
     .btn-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 0.9rem;
-      margin-bottom: 0.5rem;
+      gap: 0.6rem;
+      margin-top: 0.8rem;
       align-items: center;
     }
 
     button {
       border-radius: 999px;
       border: none;
-      font-size: 0.85rem;
+      font-size: 0.83rem;
       cursor: pointer;
-      padding: 0.45rem 0.9rem;
+      padding: 0.4rem 0.9rem;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
@@ -179,77 +240,126 @@
       line-height: 1;
     }
 
-    .results-card {
-      background: #f9fafb;
-      border-radius: 1rem;
-      border: 1px solid #e5e7eb;
-      padding: 1rem;
-      font-size: 0.85rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .metric-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      padding: 0.2rem 0.55rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      background: white;
-      border: 1px solid #e5e7eb;
-      color: #111827;
-      margin: 0.15rem 0.15rem 0 0;
-    }
-
-    .metric-chip span.dot {
-      width: 0.45rem;
-      height: 0.45rem;
-      border-radius: 999px;
-      background: #22c55e; /* healthy */
-    }
-
-    .metric-chip.bottleneck span.dot {
-      background: #ef4444; /* red */
-    }
-
-    .metric-chip.warn span.dot {
-      background: #f97316; /* orange */
-    }
-
-    .metric-chip.bottleneck-high span.dot {
-      background: #eab308; /* yellow anomaly */
-    }
-
-    .results-header {
-      font-weight: 600;
-      color: #111827;
-    }
-
-    .results-sub {
-      font-size: 0.78rem;
-      color: #6b7280;
-    }
-
-    .results-list {
-      padding-left: 1rem;
-      margin: 0.2rem 0 0.4rem;
-    }
-
-    .results-list li {
-      margin-bottom: 0.25rem;
-    }
-
     .tiny-label {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #9ca3af;
     }
 
+    .ats-note {
+      margin-top: 0.45rem;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .bench-note {
+      margin-top: 0.45rem;
+      font-size: 0.74rem;
+      color: #6b7280;
+    }
+
+    .bench-note strong {
+      color: #374151;
+    }
+
+    .results-summary {
+      font-size: 0.8rem;
+      color: #4b5563;
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      padding: 0.8rem 0.9rem;
+      background: #f9fafb;
+      margin-bottom: 0.9rem;
+    }
+
+    .results-summary strong {
+      color: #111827;
+    }
+
+    .callouts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    @media (max-width: 800px) {
+      .callouts {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .callout {
+      border-radius: 0.9rem;
+      border: 1px dashed #e5e7eb;
+      background: #f9fafb;
+      padding: 0.9rem;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .callout h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b7280;
+    }
+
+    .callout ul {
+      margin: 0.2rem 0 0;
+      padding-left: 1rem;
+    }
+
+    .callout li {
+      margin-bottom: 0.25rem;
+    }
+
+    .diag-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      border: 1px solid #e5e7eb;
+      gap: 0.25rem;
+      background: #ecfdf3; /* healthy tint by default */
+      color: #166534;
+    }
+
+    .diag-dot {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .diag-pill.warn {
+      background: #fff7ed;
+      color: #9a3412;
+    }
+
+    .diag-pill.warn .diag-dot {
+      background: #f97316;
+    }
+
+    .diag-pill.bottleneck,
+    .diag-pill.bottleneck-high {
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+
+    .diag-pill.bottleneck .diag-dot,
+    .diag-pill.bottleneck-high .diag-dot {
+      background: #ef4444; /* red for both bottleneck + anomaly */
+    }
+
+    .diag-label {
+      font-weight: 500;
+    }
+
     .footer-note {
-      margin-top: 1.5rem;
+      margin-top: 1.2rem;
       font-size: 0.75rem;
       color: #9ca3af;
       text-align: right;
@@ -268,7 +378,7 @@
     }
 
     .related {
-      margin-top: 0.75rem;
+      margin-top: 0.9rem;
       font-size: 0.78rem;
       color: #6b7280;
     }
@@ -281,43 +391,6 @@
     .related a:hover {
       text-decoration: underline;
     }
-
-    /* Scenario pills */
-    .scenario-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-      margin-top: 0.25rem;
-      flex-wrap: wrap;
-    }
-
-    .scenario-label {
-      font-size: 0.78rem;
-      color: #6b7280;
-    }
-
-    .scenario-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .scenario-pill {
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      background: #f9fafb;
-      font-size: 0.78rem;
-      padding: 0.25rem 0.7rem;
-      cursor: pointer;
-    }
-
-    .scenario-pill.active {
-      background: #111827;
-      color: #f9fafb;
-      border-color: #111827;
-    }
   </style>
 </head>
 <body>
@@ -325,102 +398,87 @@
     <section class="card">
       <div class="eyebrow">A[i]gents Portfolio · Demo</div>
       <h1>Metrics A[i]gent</h1>
-      <p class="subhead">
-        A tiny agent that turns your recruiting funnel into diagnostics:
-        conversion by stage, bottleneck detection, and ops-ready talking points
-        for your next sync with a hiring leader. In production, it reads these
-        numbers directly from your ATS — this demo lets you explore a few
-        scenarios.
-      </p>
+      <p class="subtitle">Recruiting Pipeline Funnel Diagnostics</p>
 
-      <div class="pill-row">
-        <div class="pill">Funnel diagnostics</div>
-        <div class="pill">Pass-through analysis</div>
-        <div class="pill">Bottleneck detection</div>
-        <div class="pill">TA Ops workflow support</div>
+      <div class="tabs-row">
+        <span class="tabs-label tiny-label">Active searches</span>
+        <div class="tabs">
+          <button class="tab" data-req="esd">Enterprise Sales Director</button>
+          <button class="tab" data-req="se">Software Engineer</button>
+          <button class="tab" data-req="sda">Senior Data Analyst</button>
+        </div>
       </div>
 
       <div class="layout">
-        <!-- LEFT: INPUT TABLE -->
+        <!-- LEFT: FUNNEL TABLE -->
         <div>
           <div class="section-title">Funnel by stage (ATS snapshot – demo)</div>
-          <div class="section-hint">
-            Metrics A[i]gent reads how many candidates <strong>enter</strong>
-            each stage and how many <strong>move to the next stage</strong>.
-            Pick a sample scenario, or adjust the counts to match a real
-            requisition before running diagnostics.
-          </div>
-
-          <div class="scenario-row">
-            <div class="scenario-label">
-              <span class="tiny-label">Sample scenarios</span>
-            </div>
-            <div class="scenario-pills">
-              <button class="scenario-pill" data-scenario="screen">
-                Screen bottleneck
-              </button>
-              <button class="scenario-pill" data-scenario="hm">
-                HM calibration issue
-              </button>
-              <button class="scenario-pill" data-scenario="offer">
-                Offer acceptance drop
-              </button>
-            </div>
-          </div>
 
           <table>
             <thead>
               <tr>
-                <th>Stage</th>
                 <th>Candidates in</th>
-                <th>Moved on</th>
+                <th>Stage</th>
+                <th>Advanced to next stage</th>
+                <th>Conversion</th>
+                <th>Diagnosis</th>
               </tr>
             </thead>
             <tbody id="funnel-body">
               <tr data-index="0">
-                <td>Applied / Sourced</td>
                 <td>
-                  <input type="number" min="0" value="150" class="in-input" />
+                  <input type="number" min="0" value="200" class="in-input" />
                 </td>
+                <td class="stage-cell">Applied / Sourced</td>
                 <td>
-                  <input type="number" min="0" value="70" class="out-input" />
+                  <input type="number" min="0" value="30" class="out-input" />
                 </td>
+                <td><span class="conv-cell">–</span></td>
+                <td><span class="diag-cell"></span></td>
               </tr>
               <tr data-index="1">
-                <td>Recruiter Screen</td>
                 <td>
-                  <input type="number" min="0" value="70" class="in-input" />
+                  <input type="number" min="0" value="30" class="in-input" />
                 </td>
+                <td class="stage-cell">Recruiter Screen</td>
                 <td>
-                  <input type="number" min="0" value="28" class="out-input" />
+                  <input type="number" min="0" value="12" class="out-input" />
                 </td>
+                <td><span class="conv-cell">–</span></td>
+                <td><span class="diag-cell"></span></td>
               </tr>
               <tr data-index="2">
-                <td>Hiring Manager</td>
                 <td>
-                  <input type="number" min="0" value="28" class="in-input" />
+                  <input type="number" min="0" value="12" class="in-input" />
                 </td>
-                <td>
-                  <input type="number" min="0" value="9" class="out-input" />
-                </td>
-              </tr>
-              <tr data-index="3">
-                <td>Final / Panel</td>
-                <td>
-                  <input type="number" min="0" value="9" class="in-input" />
-                </td>
+                <td class="stage-cell">Hiring Manager</td>
                 <td>
                   <input type="number" min="0" value="3" class="out-input" />
                 </td>
+                <td><span class="conv-cell">–</span></td>
+                <td><span class="diag-cell"></span></td>
               </tr>
-              <tr data-index="4">
-                <td>Offer</td>
+              <tr data-index="3">
                 <td>
                   <input type="number" min="0" value="3" class="in-input" />
                 </td>
+                <td class="stage-cell">Final / Panel</td>
                 <td>
                   <input type="number" min="0" value="2" class="out-input" />
                 </td>
+                <td><span class="conv-cell">–</span></td>
+                <td><span class="diag-cell"></span></td>
+              </tr>
+              <tr data-index="4">
+                <td>
+                  <input type="number" min="0" value="2" class="in-input" />
+                </td>
+                <td class="stage-cell">Offer</td>
+                <td>
+                  <input type="number" min="0" value="2" class="out-input" />
+                </td>
+                <td><span class="conv-cell">–</span></td>
+                <td><span class="diag-cell"></span></td>
               </tr>
             </tbody>
           </table>
@@ -431,35 +489,41 @@
               <span>Run diagnostics</span>
             </button>
             <button class="btn-secondary" id="reset-btn" type="button">
-              <span class="icon">✨</span>
-              <span>Reset to current scenario</span>
+              <span class="icon">↺</span>
+              <span>Reset requisition</span>
             </button>
           </div>
 
-          <div class="results-sub">
-            In a full implementation, recruiters never touch these counts —
-            they're pulled on a schedule from ATS/HRIS and watched over time.
+          <div class="ats-note">
+            In production, these counts are pulled automatically from your ATS/HRIS.
+          </div>
+          <div class="bench-note">
+            <strong>Benchmarks (stage → next):</strong>
+            App→Screen 10–15% · Screen→HM ≥50% · HM→Final ≥70% ·
+            Final→Offer ≥30% · Offer→Accept ≥85%.
           </div>
         </div>
 
-        <!-- RIGHT: RESULTS -->
+        <!-- RIGHT: SUMMARY + CALLOUTS -->
         <div>
-          <div class="section-title">Diagnostics & insights</div>
-          <div class="section-hint">
-            The agent summarizes where the funnel is healthy, where it's
-            leaking, and how you might respond as TA Ops.
+          <div class="section-title">Stage health summary</div>
+          <div id="summary" class="results-summary">
+            Choose an active search, then click <strong>Run diagnostics</strong>
+            to see conversion and health by stage.
           </div>
 
-          <div class="results-card" id="results">
-            <div>
-              <div class="results-header">
-                Ready when you are.
-              </div>
-              <div class="results-sub">
-                Pick a scenario on the left (or tweak the counts to match a real
-                role), then click <strong>Run diagnostics</strong> to see
-                pass-through rates, bottlenecks, and ops suggestions.
-              </div>
+          <div class="callouts">
+            <div class="callout">
+              <h3>Action items</h3>
+              <ul id="actions">
+                <li>Primary actions will appear here after diagnostics run.</li>
+              </ul>
+            </div>
+            <div class="callout">
+              <h3>Troubleshooting</h3>
+              <ul id="troubleshooting">
+                <li>Likely root causes will appear here after diagnostics run.</li>
+              </ul>
             </div>
           </div>
 
@@ -483,94 +547,74 @@
   </main>
 
   <script>
-    const SCENARIOS = {
-      // Screen is too tight – low pass-through from Applied → Screen
-      screen: {
-        label: "Screen bottleneck",
+    // Realistic funnels for each requisition
+    const REQS = {
+      esd: {
+        name: "Enterprise Sales Director",
         data: [
-          { entered: 300, moved: 18 }, // 6%
-          { entered: 18, moved: 10 },  // 55.6%
-          { entered: 10, moved: 7 },   // 70%
-          { entered: 7, moved: 5 },    // 71.4%
-          { entered: 5, moved: 4 }     // 80%
-        ],
-        investigate: [
-          "Inspect inbound channels for volume/quality mismatch (job title, location, comp range, posting text).",
-          "Review recruiter screen criteria – are you over-filtering on nice-to-haves instead of must-haves?",
-          "Check whether job requirements are unrealistically narrow or out of market.",
-          "Validate that application routing is correct and that inbound resumes are reaching this requisition."
+          { entered: 320, moved: 40 }, // 12.5% App→Screen (healthy)
+          { entered: 40, moved: 16 },  // 40% Screen→HM (watch)
+          { entered: 16, moved: 4 },   // 25% HM→Final (bottleneck)
+          { entered: 4, moved: 3 },    // 75% Final→Offer (healthy)
+          { entered: 3, moved: 2 }     // 66.7% Offer→Accept (watch)
         ]
       },
-
-      // HM is too strict – big drop at HM stage
-      hm: {
-        label: "HM calibration issue",
+      se: {
+        name: "Software Engineer",
         data: [
-          { entered: 200, moved: 30 }, // 15%
-          { entered: 30, moved: 12 },  // 40%
-          { entered: 12, moved: 3 },   // 25%
-          { entered: 3, moved: 2 },    // 66.7%
-          { entered: 2, moved: 2 }     // 100%
-        ],
-        investigate: [
-          "Run calibration with the hiring manager: align on what 'good' looks like and review calibration profiles.",
-          "Audit HM rejection reasons – are they consistent and structured enough to see patterns?",
-          "Check whether recruiters are pre-briefing candidates well on scope, expectations, and comp.",
-          "Review scorecard design – is it capturing true must-haves vs personal preferences?"
+          { entered: 600, moved: 48 }, // 8% App→Screen (watch)
+          { entered: 48, moved: 18 },  // 37.5% Screen→HM (watch)
+          { entered: 18, moved: 13 },  // 72.2% HM→Final (healthy)
+          { entered: 13, moved: 5 },   // 38.5% Final→Offer (healthy)
+          { entered: 5, moved: 4 }     // 80% Offer→Accept (watch)
         ]
       },
-
-      // Inbound is fine, but offers are not converting
-      offer: {
-        label: "Offer acceptance drop",
+      sda: {
+        name: "Senior Data Analyst",
         data: [
-          { entered: 220, moved: 32 }, // 14.5%
-          { entered: 32, moved: 18 },  // 56.3%
-          { entered: 18, moved: 14 },  // 77.8%
-          { entered: 14, moved: 10 },  // 71.4%
-          { entered: 10, moved: 3 }    // 30% acceptance
-        ],
-        investigate: [
-          "Review comp positioning against market and recent declines (TC, equity, variable).",
-          "Check timing: are offers landing too slowly compared to competitor processes?",
-          "Audit candidate experience in final rounds – are there mixed messages or misaligned expectations?",
-          "Review how risks and concerns from earlier conversations are captured and addressed pre-offer."
+          { entered: 220, moved: 28 }, // 12.7% App→Screen (healthy)
+          { entered: 28, moved: 15 },  // 53.6% Screen→HM (healthy)
+          { entered: 15, moved: 11 },  // 73.3% HM→Final (healthy)
+          { entered: 11, moved: 7 },   // 63.6% Final→Offer (healthy)
+          { entered: 7, moved: 3 }     // 42.9% Offer→Accept (bottleneck)
         ]
       }
     };
 
-    let currentScenarioKey = "hm"; // default
+    let currentReqKey = "esd";
 
     function getFunnelData() {
-      const rows = Array.from(
-        document.querySelectorAll("#funnel-body tr")
-      );
+      const rows = Array.from(document.querySelectorAll("#funnel-body tr"));
       const stages = [];
 
       rows.forEach((row) => {
-        const name = row.cells[0].textContent.trim();
-        const enteredInput = row.querySelector(".in-input");
-        const movedInput = row.querySelector(".out-input");
+        const stageName = row.querySelector(".stage-cell").textContent.trim();
+        const inInput = row.querySelector(".in-input");
+        const outInput = row.querySelector(".out-input");
+        const convCell = row.querySelector(".conv-cell");
+        const diagCell = row.querySelector(".diag-cell");
 
-        const entered = Number(enteredInput.value || 0);
-        const moved = Number(movedInput.value || 0);
+        const entered = Number(inInput.value || 0);
+        const moved = Number(outInput.value || 0);
+        const conv = entered > 0 ? (moved / entered) * 100 : NaN;
 
-        if (entered <= 0) return;
-
-        const convStage = entered ? (moved / entered) * 100 : 0;
         stages.push({
-          name,
+          name: stageName,
           entered,
           moved,
-          convStage,
+          conv,
+          rowEl: row,
+          convCell,
+          diagCell
         });
       });
 
       return stages;
     }
 
-    // Stage-aware benchmarks, including "too high" anomaly at Applied → Screen
+    // Stage-aware benchmarks, anomaly at App→Screen
     function classifyStage(stageName, conv) {
+      if (isNaN(conv)) return "unknown";
       const name = stageName.toLowerCase();
 
       // Applied → Recruiter Screen
@@ -612,267 +656,174 @@
       return "healthy";
     }
 
-    function formatPct(x) {
-      if (isNaN(x)) return "–";
-      return x.toFixed(1) + "%";
+    function statusLabel(status) {
+      if (status === "bottleneck-high") return "Bottleneck (anomaly)";
+      if (status === "bottleneck") return "Bottleneck";
+      if (status === "warn") return "Watch";
+      if (status === "healthy") return "Healthy";
+      return "—";
     }
 
-    function analyzeFunnel() {
+    function runDiagnostics() {
       const stages = getFunnelData();
-      const resultsEl = document.getElementById("results");
+      const summaryEl = document.getElementById("summary");
+      const actionsEl = document.getElementById("actions");
+      const troubleEl = document.getElementById("troubleshooting");
 
-      if (!stages.length) {
-        resultsEl.innerHTML =
-          "<div class='results-header'>Not enough data.</div><div class='results-sub'>Use a sample scenario or add at least one stage with candidates to run diagnostics.</div>";
-        return;
-      }
+      if (!stages.length) return;
 
-      const first = stages[0];
-      const last = stages[stages.length - 1];
-      const overallConv =
-        first.entered > 0 ? (last.moved / first.entered) * 100 : 0;
+      const maxEntered = Math.max(...stages.map((s) => s.entered || 0));
 
-      const withClassification = stages.map((s, idx) => {
-        const status = classifyStage(s.name, s.convStage);
-        return { ...s, status, index: idx };
+      const classified = stages.map((s) => {
+        const conv = s.conv;
+        const status = classifyStage(s.name, conv);
+
+        // funnel bar width by entered count
+        const pct = maxEntered > 0 ? (s.entered / maxEntered) * 90 : 0; // max 90% width
+        s.rowEl.style.setProperty("--bar-pct", pct.toFixed(0) + "%");
+
+        // conversion cell
+        s.convCell.textContent = isNaN(conv) ? "–" : conv.toFixed(1) + "%";
+
+        // diagnosis pill
+        if (status === "unknown") {
+          s.diagCell.textContent = "—";
+        } else {
+          const pill = document.createElement("span");
+          pill.className = "diag-pill " + status;
+          const dot = document.createElement("span");
+          dot.className = "diag-dot";
+          const label = document.createElement("span");
+          label.className = "diag-label";
+          label.textContent = statusLabel(status);
+
+          pill.appendChild(dot);
+          pill.appendChild(label);
+
+          s.diagCell.innerHTML = "";
+          s.diagCell.appendChild(pill);
+        }
+
+        return { ...s, status };
       });
 
-      const bottlenecks = withClassification
-        .filter((s) => s.status === "bottleneck")
-        .sort((a, b) => a.convStage - b.convStage);
+      // find worst stage
+      const worst =
+        classified.find((s) => s.status === "bottleneck") ||
+        classified.find((s) => s.status === "bottleneck-high") ||
+        classified.find((s) => s.status === "warn");
 
-      const warnings = withClassification
-        .filter((s) => s.status === "warn")
-        .sort((a, b) => a.convStage - b.convStage);
-
-      const anomalies = withClassification
-        .filter((s) => s.status === "bottleneck-high")
-        .sort((a, b) => b.convStage - a.convStage);
-
-      const healthiest = [...withClassification]
-        .sort((a, b) => b.convStage - a.convStage)
-        .slice(0, 1);
-
-      let html = "";
-
-      html += `
-        <div>
-          <div class="results-header">
-            Funnel snapshot
-          </div>
-          <div class="results-sub">
-            Overall conversion from <strong>${first.name}</strong> to
-            <strong>${last.name}</strong> is <strong>${formatPct(
-              overallConv
-            )}</strong> (${last.moved} hires from ${first.entered} candidates).
-          </div>
-        </div>
-      `;
-
-      // Stage chips
-      html += `<div><div class="tiny-label">Stage pass-through</div>`;
-      withClassification.forEach((s) => {
-        const cls =
-          s.status === "bottleneck-high"
-            ? "metric-chip bottleneck-high"
-            : s.status === "bottleneck"
-            ? "metric-chip bottleneck"
-            : s.status === "warn"
-            ? "metric-chip warn"
-            : "metric-chip";
-
-        const label =
-          s.status === "bottleneck-high"
-            ? "High (Anomaly)"
-            : s.status === "bottleneck"
-            ? "Bottleneck"
-            : s.status === "warn"
-            ? "Watch"
-            : "Healthy";
-
-        html += `
-          <span class="${cls}">
-            <span class="dot"></span>
-            <span>${s.name}</span>
-            <span>· ${formatPct(s.convStage)}</span>
-            <span>· ${label}</span>
-          </span>
-        `;
-      });
-      html += `</div>`;
-
-      // Bottlenecks & anomalies narrative
-      html += `<div>`;
-      html += `<div class="results-header">Where the funnel is leaking</div>`;
-
-      if (!bottlenecks.length && !warnings.length && !anomalies.length) {
-        html += `<div class="results-sub">
-          No obvious red-flag stages. You could still tighten screens or sharpen calibration with hiring managers,
-          but pass-through rates look broadly healthy against typical benchmarks.
-        </div>`;
+      if (!worst) {
+        summaryEl.innerHTML =
+          "No obvious problem stages. Protect what’s working and watch trends over time for this requisition.";
       } else {
-        html += `<ul class="results-list">`;
-        if (bottlenecks.length) {
-          const primary = bottlenecks[0];
-          html += `
-            <li>
-              <strong>${primary.name}</strong> is your sharpest drop:
-              only ${formatPct(primary.convStage)} of candidates move forward
-              (${primary.moved} of ${primary.entered}). This is the best place to
-              focus first.
-            </li>
-          `;
-        }
-        if (warnings.length) {
-          const names = warnings.map((w) => w.name).join(", ");
-          html += `
-            <li>
-              <strong>Emerging friction at:</strong> ${names}. These stages are not yet critical bottlenecks, but trending low enough
-              that they could become problems as volume scales.
-            </li>
-          `;
-        }
-        if (anomalies.length) {
-          const a = anomalies[0];
-          html += `
-            <li>
-              <strong>Unusually high pass-through at ${a.name} (${formatPct(
-                a.convStage
-              )}).</strong> This can indicate low inbound volume, broken application routing,
-              or over-advancing underqualified candidates. Worth investigating immediately.
-            </li>
-          `;
-        }
-        html += `</ul>`;
-      }
-      html += `</div>`;
-
-      // Generic ops talking points
-      const suggestions = [];
-
-      if (bottlenecks.length) {
-        const b = bottlenecks[0];
-        suggestions.push(
-          `Run a quick calibration with hiring managers on <strong>${b.name}</strong>. Align on what “good” looks like, tighten scorecards, and ensure rejection reasons are structured so you can see patterns.`
-        );
+        summaryEl.innerHTML =
+          `<strong>${worst.name}</strong> is the highest-risk stage: ` +
+          `<strong>${worst.conv.toFixed(1)}%</strong> advance, flagged as ` +
+          `<strong>${statusLabel(worst.status)}</strong>. Start your discussion here.`;
       }
 
-      if (overallConv < 5) {
-        suggestions.push(
-          `Overall conversion (${formatPct(
-            overallConv
-          )}) is very low. Check if you’re over-screening early on, or attracting the wrong profile at the top of the funnel.`
-        );
-      } else if (overallConv > 20) {
-        suggestions.push(
-          `Overall conversion (${formatPct(
-            overallConv
-          )}) is high. This might be a sign your top-of-funnel isn’t wide enough, or that expectations are too loose for long-term quality.`
-        );
-      }
+      // actions + troubleshooting based on worst stage
+      const actions = [];
+      const troubles = [];
 
-      if (healthiest.length) {
-        const h = healthiest[0];
-        suggestions.push(
-          `Protect what’s working: <strong>${h.name}</strong> has the strongest pass-through (${formatPct(
-            h.convStage
-          )}). Capture what this team is doing well and use it as a template for other roles.`
-        );
-      }
+      if (worst) {
+        const name = worst.name.toLowerCase();
 
-      html += `<div>`;
-      html += `<div class="results-header">Ops talking points</div>`;
-
-      if (!suggestions.length) {
-        html += `<div class="results-sub">
-          Use this view to anchor your next sync: pick one stage to improve, one to protect, and one experiment
-          to run in the next 2 weeks.
-        </div>`;
-      } else {
-        html += `<ul class="results-list">`;
-        suggestions.forEach((s) => {
-          html += `<li>${s}</li>`;
-        });
-        html += `</ul>`;
-      }
-
-      html += `<div class="results-sub">
-        In a full deployment, Metrics A[i]gent plugs into your ATS, watches this funnel over time,
-        and pings you when a stage drops below benchmark.
-      </div>`;
-
-      // Scenario-specific "Areas to investigate"
-      if (currentScenarioKey && SCENARIOS[currentScenarioKey]) {
-        const inv = SCENARIOS[currentScenarioKey].investigate || [];
-        if (inv.length) {
-          html += `<div class="results-header" style="margin-top:0.6rem;">Areas to investigate for this scenario</div>`;
-          html += `<ul class="results-list">`;
-          inv.forEach((item) => {
-            html += `<li>${item}</li>`;
-          });
-          html += `</ul>`;
+        if (name.includes("applied") || name.includes("sourced")) {
+          if (worst.status === "bottleneck" || worst.status === "warn") {
+            actions.push("Review job title, targeting, and comp to ensure inbound volume and quality are on target.");
+            actions.push("Align on minimum qualified profile so strong candidates aren’t screened out too early.");
+            troubles.push("Underpowered job posting or misaligned requirements.");
+            troubles.push("Overly strict initial screen or miscalibrated must-have criteria.");
+          } else if (worst.status === "bottleneck-high") {
+            actions.push("Validate ATS routing to confirm inbound applications are attached to this requisition.");
+            actions.push("Check the mix of sourced vs inbound candidates and avoid double-counting.");
+            troubles.push("Broken routing or job posting glitch causing abnormal funnel shape.");
+            troubles.push("Inflated counts from manual sourcing imports.");
+          }
+        } else if (name.includes("recruiter")) {
+          actions.push("Run a calibration session with the hiring manager on what a strong profile looks like.");
+          actions.push("Tighten and structure rejection reasons to see patterns by skill or experience.");
+          troubles.push("Misalignment between recruiter and HM on bar or role definition.");
+          troubles.push("Scorecard fields not capturing why candidates are dropped.");
+        } else if (name.includes("hiring manager")) {
+          actions.push("Standardize HM interview questions and decision criteria for this role.");
+          actions.push("Ensure candidates are prepped on scope, expectations, and comp before HM interviews.");
+          troubles.push("HM expectations drifting above market reality.");
+          troubles.push("Late-stage surprises around scope, comp, or location.");
+        } else if (name.includes("final") || name.includes("panel")) {
+          actions.push("Tighten panel structure and decision rubric so signals are comparable.");
+          actions.push("Debrief panels quickly to spot inconsistent signals or bias.");
+          troubles.push("Too many interviewers with unstructured feedback.");
+          troubles.push("Inconsistent evaluation criteria across panel members.");
+        } else if (name.includes("offer")) {
+          actions.push("Review offer positioning vs market and recent declines.");
+          actions.push("Capture and address candidate concerns before extending the offer.");
+          troubles.push("Comp, equity, or remote expectations out of sync with candidates.");
+          troubles.push("Slow or opaque process causing candidates to choose competitors.");
         }
       }
 
-      html += `</div>`;
+      if (!actions.length) {
+        actions.push("Use this view to pick one stage to improve and one to protect for this requisition.");
+      }
+      if (!troubles.length) {
+        troubles.push("Monitor this funnel over time; trends matter more than any single snapshot.");
+      }
 
-      resultsEl.innerHTML = html;
+      actionsEl.innerHTML = actions.map((a) => `<li>${a}</li>`).join("");
+      troubleEl.innerHTML = troubles.map((t) => `<li>${t}</li>`).join("");
     }
 
-    function applyScenario(key) {
-      const scenario = SCENARIOS[key];
-      if (!scenario) return;
+    function applyReq(key) {
+      const req = REQS[key];
+      if (!req) return;
+      currentReqKey = key;
 
-      currentScenarioKey = key;
-
-      const rows = Array.from(
-        document.querySelectorAll("#funnel-body tr")
-      );
-
-      scenario.data.forEach((pair, idx) => {
+      const rows = Array.from(document.querySelectorAll("#funnel-body tr"));
+      req.data.forEach((pair, idx) => {
         if (!rows[idx]) return;
-        const enteredInput = rows[idx].querySelector(".in-input");
-        const movedInput = rows[idx].querySelector(".out-input");
-        enteredInput.value = pair.entered;
-        movedInput.value = pair.moved;
+        rows[idx].querySelector(".in-input").value = pair.entered;
+        rows[idx].querySelector(".out-input").value = pair.moved;
+        rows[idx].querySelector(".conv-cell").textContent = "–";
+        rows[idx].querySelector(".diag-cell").textContent = "";
+        rows[idx].style.setProperty("--bar-pct", "0%");
       });
 
-      // Clear any extra rows if scenario has fewer stages (not the case now but future-proofing)
-      for (let i = scenario.data.length; i < rows.length; i++) {
-        const enteredInput = rows[i].querySelector(".in-input");
-        const movedInput = rows[i].querySelector(".out-input");
-        enteredInput.value = "";
-        movedInput.value = "";
-      }
-
-      // Update active pill
       document
-        .querySelectorAll(".scenario-pill")
+        .querySelectorAll(".tab")
         .forEach((btn) => btn.classList.remove("active"));
-      const activeBtn = document.querySelector(
-        `.scenario-pill[data-scenario="${key}"]`
-      );
+      const activeBtn = document.querySelector(`.tab[data-req="${key}"]`);
       if (activeBtn) activeBtn.classList.add("active");
+
+      const summaryEl = document.getElementById("summary");
+      summaryEl.innerHTML =
+        `Loaded <strong>${req.name}</strong>. Click <strong>Run diagnostics</strong> to see stage health.`;
+
+      document.getElementById("actions").innerHTML =
+        "<li>Primary actions will appear here after diagnostics run.</li>";
+      document.getElementById("troubleshooting").innerHTML =
+        "<li>Likely root causes will appear here after diagnostics run.</li>";
     }
 
     document
       .getElementById("analyze-btn")
-      .addEventListener("click", analyzeFunnel);
+      .addEventListener("click", runDiagnostics);
 
     document
       .getElementById("reset-btn")
-      .addEventListener("click", () => applyScenario(currentScenarioKey));
+      .addEventListener("click", () => applyReq(currentReqKey));
 
-    document.querySelectorAll(".scenario-pill").forEach((btn) => {
+    document.querySelectorAll(".tab").forEach((btn) => {
       btn.addEventListener("click", () => {
-        const key = btn.getAttribute("data-scenario");
-        applyScenario(key);
-        analyzeFunnel();
+        const key = btn.getAttribute("data-req");
+        applyReq(key);
       });
     });
 
-    // Initialize with default scenario
-    applyScenario(currentScenarioKey);
+    // init on first load
+    applyReq(currentReqKey);
   </script>
 </body>
 </html>
