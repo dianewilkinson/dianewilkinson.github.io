@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Quick recruiting funnel diagnostics: pass-through by stage and health flags for TA Ops."
+    content="Quick recruiting funnel diagnostics: pass-through by stage, bottlenecks, and root-cause prompts for TA Ops."
   />
 
   <style>
@@ -77,56 +77,72 @@
       }
     }
 
+    /* Tabs row with folder rail */
     .tabs-row {
+      position: relative;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 0.75rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
       flex-wrap: wrap;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 0;
+    }
+
+    .tabs-row::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
     }
 
     .tabs-label {
       font-size: 0.78rem;
       color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.2rem;
     }
 
     .tab {
-      border: none;
+      border: 1px solid transparent;
+      border-bottom: none;
+      border-radius: 10px 10px 0 0;
       background: transparent;
       font-size: 0.82rem;
-      padding: 0.35rem 0.8rem;
-      border-radius: 999px;
+      padding: 0.45rem 1.1rem;
       cursor: pointer;
-      color: #4b5563;
+      color: #6b7280;
       position: relative;
+      margin-bottom: -1px;
+      transition: background 0.15s ease, color 0.15s ease,
+        border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .tab::after {
-      content: "";
-      position: absolute;
-      left: 16%;
-      right: 16%;
-      bottom: -3px;
-      height: 2px;
-      border-radius: 999px;
-      background: transparent;
+    .tab:hover {
+      background: #f3f4f6;
+      border-color: #e5e7eb;
+      border-bottom-color: transparent;
+      color: #374151;
     }
 
     .tab.active {
+      background: #ffffff;
       color: #111827;
       font-weight: 600;
-      background: #e5e7eb;
-    }
-
-    .tab.active::after {
-      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
+      border-color: #d1d5db;
+      border-bottom-color: #ffffff;
+      box-shadow: 0 -1px 4px rgba(15, 23, 42, 0.06);
     }
 
     .section-title {
@@ -141,9 +157,6 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 0.85rem;
-      border-radius: 0.9rem;
-      overflow: hidden;
-      border: 1px solid #e5e7eb;
     }
 
     colgroup col:nth-child(1) { width: 18%; }
@@ -151,10 +164,6 @@
     colgroup col:nth-child(3) { width: 18%; }
     colgroup col:nth-child(4) { width: 15%; }
     colgroup col:nth-child(5) { width: 15%; }
-
-    #funnel-body tr {
-      position: relative;
-    }
 
     th,
     td {
@@ -177,11 +186,11 @@
       text-align: center;
     }
 
-    /* Gradient eyeliner under header row: same as active tab */
     thead {
       position: relative;
     }
 
+    /* Gradient eyeliner under funnel header */
     thead::after {
       content: "";
       position: absolute;
@@ -220,7 +229,7 @@
       box-shadow: 0 0 0 1px #6366f1;
     }
 
-    /* Stage pills: solid, neutral funnel */
+    /* Stage pills: neutral funnel shape */
     .stage-pill {
       display: inline-flex;
       align-items: center;
@@ -273,90 +282,10 @@
       line-height: 1;
     }
 
-    .tiny-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #9ca3af;
-    }
-
     .ats-note {
       margin-top: 0.45rem;
       font-size: 0.75rem;
       color: #9ca3af;
-    }
-
-    .callouts {
-      margin-top: 1.4rem;
-    }
-
-    .callout-summary {
-      border-radius: 0.9rem;
-      background: #f9fafb;
-      padding: 0.9rem;
-      font-size: 0.8rem;
-      color: #4b5563;
-      border: 1px solid #e5e7eb;
-    }
-
-    .callout-summary h3 {
-      margin: 0 0 0.3rem;
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      text-align: center;
-    }
-
-    .callout-summary p {
-      margin: 0 0 0.5rem;
-      font-size: 0.75rem;
-      color: #6b7280;
-      text-align: center;
-    }
-
-    .summary-body {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-top: 0.4rem;
-    }
-
-    .diag-block {
-      border-radius: 0.75rem;
-      border: 1px solid #e5e7eb;
-      padding: 0.55rem 0.75rem;
-      background: #ffffff;
-    }
-
-    .diag-block-header {
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 0.2rem;
-    }
-
-    .diag-block-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 2.3fr);
-      column-gap: 1rem;
-      row-gap: 0.2rem;
-      font-size: 0.78rem;
-    }
-
-    .diag-label {
-      font-weight: 500;
-      color: #4b5563;
-      white-space: nowrap;
-    }
-
-    .diag-qs div {
-      line-height: 1.4;
-    }
-
-    .diag-empty {
-      font-size: 0.78rem;
-      color: #6b7280;
-      text-align: center;
-      padding: 0.3rem 0;
     }
 
     /* Diagnosis pills: gray chip, colored text/dot */
@@ -384,30 +313,22 @@
     .diag-pill.healthy {
       color: #15803d;
     }
-    .diag-pill.healthy .diag-dot {
-      background: #22c55e;
-    }
+    .diag-pill.healthy .diag-dot { background: #22c55e; }
 
     .diag-pill.warn {
       color: #9a3412;
     }
-    .diag-pill.warn .diag-dot {
-      background: #f97316;
-    }
+    .diag-pill.warn .diag-dot { background: #f97316; }
 
     .diag-pill.bottleneck {
       color: #b91c1c;
     }
-    .diag-pill.bottleneck .diag-dot {
-      background: #ef4444;
-    }
+    .diag-pill.bottleneck .diag-dot { background: #ef4444; }
 
     .diag-pill.alert {
       color: #7e22ce;
     }
-    .diag-pill.alert .diag-dot {
-      background: #7e22ce;
-    }
+    .diag-pill.alert .diag-dot { background: #7e22ce; }
 
     .diag-label-pill {
       font-weight: 500;
@@ -423,7 +344,105 @@
 
     .trend {
       font-size: 0.8rem;
-      color: #6b7280; /* neutral grey */
+      color: #6b7280;
+    }
+
+    /* Bottom root-cause card */
+    .root-card {
+      margin-top: 1.4rem;
+      background: #f9fafb;
+      border-radius: 0.9rem;
+      border: 1px solid #e5e7eb;
+      padding: 0.9rem 0.9rem 1rem;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .root-header {
+      text-align: center;
+      margin-bottom: 0.6rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .root-header h3 {
+      margin: 0;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #374151;
+    }
+
+    .root-strip {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
+    }
+
+    .root-header p {
+      margin: 0.45rem 0 0;
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .root-empty {
+      font-size: 0.78rem;
+      color: #6b7280;
+      text-align: center;
+      padding: 0.7rem 0.3rem;
+    }
+
+    .root-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      margin-top: 0.2rem;
+    }
+
+    .root-table th,
+    .root-table td {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0.45rem 0.5rem;
+      vertical-align: top;
+    }
+
+    .root-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .root-table th {
+      background: #f3f4f6;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #6b7280;
+      text-align: left;
+    }
+
+    .root-issue-cell {
+      white-space: nowrap;
+    }
+
+    .root-stage-label {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.78rem;
+      color: #4b5563;
+    }
+
+    .root-col-label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.15rem;
+      color: #4b5563;
+    }
+
+    .root-list div {
+      line-height: 1.4;
     }
 
     .footer-note {
@@ -457,7 +476,7 @@
       </div>
 
       <div class="tabs-row">
-        <span class="tabs-label tiny-label">Active searches</span>
+        <span class="tabs-label">Active searches</span>
         <div class="tabs">
           <button class="tab" data-req="esd">Enterprise Sales Director</button>
           <button class="tab" data-req="se">Software Engineer</button>
@@ -550,7 +569,7 @@
       </table>
 
       <div class="btn-row">
-        <button class="btn-primary" id="analyze-btn">
+        <button class="btn-primary" id="analyze-btn" type="button">
           <span class="icon">🧮</span>
           <span>Re-run diagnostics</span>
         </button>
@@ -564,24 +583,29 @@
         In production, these counts are pulled automatically from your ATS/HRIS.
       </div>
 
-      <div class="callouts">
-        <div class="callout-summary">
-          <h3>Diagnostic Summary | Recommendations for Investigation &amp; Next Steps</h3>
+      <!-- Root-cause bottom card -->
+      <div class="root-card">
+        <div class="root-header">
+          <h3>Diagnostic Summary | Root Cause Table</h3>
+          <div class="root-strip"></div>
           <p>Start with these prompts based on the current funnel snapshot.</p>
-          <div id="summary" class="summary-body">
-            <div class="diag-empty">Questions and next steps will appear here after diagnostics run.</div>
+        </div>
+        <div id="root-table-container">
+          <div class="root-empty">
+            No alerts or bottlenecks in this snapshot. Re-run diagnostics after changes to sourcing, interview bar, or offer positioning.
           </div>
         </div>
       </div>
 
       <div class="footer-note">
-        <span class="tiny-label">Agent type</span>
+        <span>Agent type</span>
         <span class="badge">Metrics A[i]gent · TA Ops</span>
       </div>
     </section>
   </main>
 
   <script>
+    /* Benchmark helper */
     function getBenchmark(stageName) {
       const name = stageName.toLowerCase();
       if (name.includes("application")) return 12;
@@ -592,43 +616,44 @@
       return null;
     }
 
+    /* Demo data per requisition */
     const REQS = {
       esd: {
         name: "Enterprise Sales Director",
         data: [
           { entered: 320, moved: 40 },
-          { entered: 40,  moved: 16 },
-          { entered: 16,  moved: 4  },
-          { entered: 4,   moved: 3  },
-          { entered: 3,   moved: 2  }
+          { entered: 40, moved: 16 },
+          { entered: 16, moved: 4 },
+          { entered: 4, moved: 3 },
+          { entered: 3, moved: 2 }
         ]
       },
       se: {
         name: "Software Engineer",
         data: [
           { entered: 200, moved: 30 },
-          { entered: 30,  moved: 12 },
-          { entered: 12,  moved: 3  },
-          { entered: 3,   moved: 2  },
-          { entered: 2,   moved: 2  }
+          { entered: 30, moved: 12 },
+          { entered: 12, moved: 3 },
+          { entered: 3, moved: 2 },
+          { entered: 2, moved: 2 }
         ]
       },
       sda: {
         name: "Senior Data Analyst",
         data: [
           { entered: 220, moved: 28 },
-          { entered: 28,  moved: 15 },
-          { entered: 15,  moved: 11 },
-          { entered: 11,  moved: 7  },
-          { entered: 7,   moved: 3  }
+          { entered: 28, moved: 15 },
+          { entered: 15, moved: 11 },
+          { entered: 11, moved: 7 },
+          { entered: 7, moved: 3 }
         ]
       }
     };
 
-    /* Demo previous-quarter CVRs for neutral trend arrows */
+    /* Previous-quarter CVRs for neutral trend arrows (demo) */
     const PREV_CVR = {
       esd: [10, 45, 40, 25, 80],
-      se:  [15, 48, 35, 28, 78],
+      se: [15, 48, 35, 28, 78],
       sda: [12, 52, 60, 32, 82]
     };
 
@@ -656,7 +681,6 @@
           moved,
           conv,
           benchmark: getBenchmark(stageName),
-          rowEl: row,
           convCell,
           diagCell
         });
@@ -670,6 +694,7 @@
       const name = stageName.toLowerCase();
       const b = benchmark;
 
+      /* Huge over-performance vs benchmark => Alert */
       if (b && conv > b * 2) {
         return "alert";
       }
@@ -712,16 +737,157 @@
       return "healthy";
     }
 
+    function buildRootCauseRows(classified) {
+      const rows = [];
+
+      classified.forEach((s) => {
+        const status = s.status;
+        if (status !== "bottleneck" && status !== "alert") return;
+
+        const nameLower = s.name.toLowerCase();
+        const isHM = nameLower.includes("hiring manager");
+        const isFinal = nameLower.includes("final");
+        const isOffer = nameLower.includes("offer");
+        const isRecruiter = nameLower.includes("recruiter");
+        const isApplication = nameLower.includes("application");
+
+        let issueLabel = status === "bottleneck" ? "Bottleneck" : "Alert";
+
+        const stageLabel = s.name.split("|")[0].trim(); // "HM Interview", etc.
+
+        let internal = [];
+        let external = [];
+
+        /* Stage-specific content – matching your sheet */
+        if (isHM && status === "bottleneck") {
+          internal = [
+            "What is HM decline rationale?",
+            "Are expectations calibrated with role level, scope, etc.?",
+            "Have needs changed?"
+          ];
+          external = [
+            "What themes appear in candidate feedback?",
+            "Is the process too labor intensive or delayed?",
+            "Is compensation, workplace policy, benefits, etc. competitive?"
+          ];
+        } else if (isFinal && status === "alert") {
+          internal = [
+            "Is the data reported incorrectly?",
+            "Is there a technical issue?"
+          ];
+          external = [
+            "Has the market changed?",
+            "Has candidate quality changed?",
+            "Does the benchmark need recalibration?"
+          ];
+        } else if (isOffer && status === "bottleneck") {
+          internal = [
+            "Is the data reported incorrectly?",
+            "Is there a technical issue?"
+          ];
+          external = [
+            "Has the market changed?",
+            "Is compensation, workplace policy, benefits, etc. competitive?"
+          ];
+        } else {
+          /* Generic fallbacks so other stages can still show something */
+          internal = [
+            "Is stage coding and data capture accurate?",
+            "Are decision criteria and expectations clearly documented?"
+          ];
+          external = [
+            "Has candidate volume or quality changed recently?",
+            "Has the market or role attractiveness shifted?"
+          ];
+        }
+
+        rows.push({
+          issueLabel,
+          status,
+          stageLabel,
+          internal,
+          external
+        });
+      });
+
+      return rows;
+    }
+
+    function renderRootCauseTable(classified) {
+      const container = document.getElementById("root-table-container");
+      const rows = buildRootCauseRows(classified);
+
+      if (!rows.length) {
+        container.innerHTML =
+          '<div class="root-empty">No alerts or bottlenecks in this snapshot. Re-run diagnostics after changes to sourcing, interview bar, or offer positioning.</div>';
+        return;
+      }
+
+      let html = `
+        <table class="root-table">
+          <thead>
+            <tr>
+              <th>Issue | Stage</th>
+              <th>Internal Error | Org Decline</th>
+              <th>External Changes | Candidate Withdrawal</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      rows.forEach((row) => {
+        const pillClass =
+          row.status === "bottleneck"
+            ? "bottleneck"
+            : row.status === "alert"
+            ? "alert"
+            : row.status === "warn"
+            ? "warn"
+            : "healthy";
+
+        const labelText =
+          row.status === "bottleneck"
+            ? "Bottleneck"
+            : row.status === "alert"
+            ? "Alert"
+            : row.status === "warn"
+            ? "Watch"
+            : "Healthy";
+
+        html += `
+          <tr>
+            <td class="root-issue-cell">
+              <span class="diag-pill ${pillClass}">
+                <span class="diag-dot"></span>
+                <span class="diag-label-pill">${labelText}</span>
+              </span>
+              <span class="root-stage-label">${row.stageLabel}</span>
+            </td>
+            <td>
+              <span class="root-col-label">Internal Error | Org Decline</span>
+              <div class="root-list">
+                ${row.internal.map((q) => `<div>${q}</div>`).join("")}
+              </div>
+            </td>
+            <td>
+              <span class="root-col-label">External Changes | Candidate Withdrawal</span>
+              <div class="root-list">
+                ${row.external.map((q) => `<div>${q}</div>`).join("")}
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `</tbody></table>`;
+      container.innerHTML = html;
+    }
+
     function runDiagnostics() {
       const stages = getFunnelData();
-      const summaryEl = document.getElementById("summary");
-      if (!stages.length) return;
+      const classified = [];
 
-      let hmBottleneck = false;
-      let finalAlert = false;
-      let offerBottleneck = false;
-
-      const classified = stages.map((s) => {
+      stages.forEach((s) => {
         const conv = s.conv;
         const status = classifyStage(s.name, conv, s.benchmark);
 
@@ -764,12 +930,12 @@
           const label = document.createElement("span");
           label.className = "diag-label-pill";
 
-          if (status === "warn") {
-            label.textContent = "Watch";
-          } else if (status === "bottleneck") {
+          if (status === "bottleneck") {
             label.textContent = "Bottleneck";
           } else if (status === "alert") {
             label.textContent = "Alert";
+          } else if (status === "warn") {
+            label.textContent = "Watch";
           } else {
             label.textContent = "Healthy";
           }
@@ -781,94 +947,10 @@
           s.diagCell.appendChild(pill);
         }
 
-        const name = s.name.toLowerCase();
-        if (status === "bottleneck" && name.includes("hiring manager")) {
-          hmBottleneck = true;
-        }
-        if (status === "alert" && name.includes("final")) {
-          finalAlert = true;
-        }
-        if (status === "bottleneck" && name.includes("offer")) {
-          offerBottleneck = true;
-        }
-
-        return { ...s, status };
+        classified.push({ ...s, status });
       });
 
-      /* Build compact diagnostic blocks – no Watch/Task language here */
-      const blocks = [];
-
-      if (hmBottleneck) {
-        blocks.push(`
-          <div class="diag-block">
-            <div class="diag-block-header"><strong>Bottleneck | HM Interview:</strong></div>
-            <div class="diag-block-grid">
-              <div class="diag-label">If Candidate Withdrawal:</div>
-              <div class="diag-qs">
-                <div>What themes appear in candidate feedback?</div>
-                <div>Is the process too labor intensive or delayed?</div>
-                <div>Is compensation competitive?</div>
-                <div>Is workplace policy unattractive?</div>
-              </div>
-              <div class="diag-label">If HM Decline:</div>
-              <div class="diag-qs">
-                <div>What is decline rationale?</div>
-                <div>Are expectations calibrated with role level, scope, etc.?</div>
-                <div>Have needs changed?</div>
-              </div>
-            </div>
-          </div>
-        `);
-      }
-
-      if (finalAlert) {
-        blocks.push(`
-          <div class="diag-block">
-            <div class="diag-block-header"><strong>Alert | Final Interview:</strong></div>
-            <div class="diag-block-grid">
-              <div class="diag-label">If due to error:</div>
-              <div class="diag-qs">
-                <div>Is the data reported incorrectly?</div>
-                <div>Is there a technical issue?</div>
-              </div>
-              <div class="diag-label">If due to change:</div>
-              <div class="diag-qs">
-                <div>Has the market changed?</div>
-                <div>Has candidate quality changed?</div>
-                <div>Does the benchmark need recalibration?</div>
-              </div>
-            </div>
-          </div>
-        `);
-      }
-
-      if (offerBottleneck) {
-        blocks.push(`
-          <div class="diag-block">
-            <div class="diag-block-header"><strong>Bottleneck | Offer:</strong></div>
-            <div class="diag-block-grid">
-              <div class="diag-label">If due to error:</div>
-              <div class="diag-qs">
-                <div>Is the data reported incorrectly?</div>
-                <div>Is there a technical issue?</div>
-              </div>
-              <div class="diag-label">If due to change:</div>
-              <div class="diag-qs">
-                <div>Has the market changed?</div>
-                <div>Is compensation competitive?</div>
-                <div>Is workplace policy unattractive?</div>
-              </div>
-            </div>
-          </div>
-        `);
-      }
-
-      if (!blocks.length) {
-        summaryEl.innerHTML =
-          `<div class="diag-empty">No major issues detected in this snapshot. Re-run diagnostics after you change sourcing strategy, interview bar, or offer positioning.</div>`;
-      } else {
-        summaryEl.innerHTML = blocks.join("");
-      }
+      renderRootCauseTable(classified);
     }
 
     function applyReq(key) {
@@ -909,7 +991,7 @@
       });
     });
 
-    // initial load
+    /* Initial load */
     applyReq(currentReqKey);
   </script>
 </body>
