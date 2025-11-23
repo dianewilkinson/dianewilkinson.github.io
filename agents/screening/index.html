@@ -5,161 +5,326 @@
 <title>Screening A[i]gent - Demo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  /* Base */
+  /* ===== Base / Page shell (match Metrics A[i]gent) ===== */
   *{box-sizing:border-box}
-  body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#0f172a;background:#fff}
-  .wrap{max-width:1200px;margin:24px auto;padding:0 20px}
-  .topbar{height:8px;background:linear-gradient(90deg,#ec4899,#7c3aed);border-radius:999px}
-  header{display:flex;align-items:center;justify-content:space-between;margin:12px 0 16px;gap:12px;flex-wrap:wrap}
-  h1{margin:0;font-size:26px}
+  :root{
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+    color:#0f172a;
+    background:#f3f4f6;
+  }
+  body{
+    margin:0;
+    background:radial-gradient(circle at top left,#e5e7eb,#f9fafb);
+    min-height:100vh;
+  }
+
+  .wrap{
+    max-width:960px;
+    margin:2.5rem auto;
+    padding:0 1.5rem;
+  }
+
+  .shell{
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 18px 45px rgba(15,23,42,.12);
+    border:1px solid #e5e7eb;
+    padding:20px 22px 24px;
+  }
+
+  .topbar{
+    height:4px;
+    border-radius:999px;
+    background:linear-gradient(90deg,#f97316,#ec4899,#6366f1);
+    margin-bottom:16px;
+  }
+
+  header{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    margin:4px 0 14px;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  h1{
+    margin:0;
+    font-size:clamp(1.9rem,3vw,2.3rem);
+    letter-spacing:-0.03em;
+  }
   .tiny{font-size:12px;color:#64748b}
 
-  /* Candidate toggle */
-  .toggle{display:flex;gap:8px;align-items:center}
-  .chip{border:1px solid #e2e8f0;border-radius:999px;padding:8px 12px;background:#f8fafc;font-weight:700;cursor:pointer;font-size:13px}
-  .chip.active{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
+  /* Candidate toggle (keep, but neutralize colors a bit) */
+  .toggle{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .chip{
+    border:1px solid #e2e8f0;
+    border-radius:999px;
+    padding:6px 12px;
+    background:#f9fafb;
+    font-weight:600;
+    cursor:pointer;
+    font-size:13px;
+    color:#475569;
+    transition:background .15s ease,border-color .15s ease,color .15s ease;
+  }
+  .chip:hover{
+    background:#eef2ff;
+    border-color:#c7d2fe;
+  }
+  .chip.active{
+    background:#ffffff;
+    border-color:#6366f1;
+    color:#111827;
+    box-shadow:0 0 0 1px rgba(99,102,241,.35);
+  }
 
   /* Layout */
-  .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
-  @media (max-width:980px){.grid{grid-template-columns:1fr}}
+  .grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:20px;
+  }
+  @media (max-width:980px){
+    .grid{grid-template-columns:1fr}
+  }
 
-  /* Cards */
-  .card{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:16px 18px;box-shadow:0 4px 20px rgba(15,23,42,.06)}
-  .tab{display:inline-block;padding:8px 14px;border-radius:999px;color:#fff;font-weight:700;background:linear-gradient(90deg,#ec4899,#7c3aed);margin:-6px 0 12px}
+  /* Cards (inner panels) */
+  .card{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:18px;
+    padding:16px 18px;
+    box-shadow:0 4px 18px rgba(15,23,42,.06);
+  }
+
+  /* Section “tabs” – reuse gradient accent */
+  .tab{
+    display:inline-block;
+    padding:7px 14px;
+    border-radius:999px;
+    color:#fff;
+    font-weight:700;
+    background:linear-gradient(90deg,#f97316,#ec4899,#6366f1);
+    margin:-6px 0 12px;
+    font-size:13px;
+  }
 
   /* Rows */
-  .row{display:grid;grid-template-columns:140px 220px 1fr;align-items:center;gap:10px;padding:8px 0}
+  .row{
+    display:grid;
+    grid-template-columns:130px 210px 1fr;
+    align-items:center;
+    gap:10px;
+    padding:8px 0;
+  }
   .row + .row{border-top:1px dashed #e2e8f0}
-  .label{min-width:220px;font-weight:700}
+  .label{min-width:210px;font-weight:600;color:#111827}
 
-  /* Status chips (left column) */
-  .status{display:inline-flex;align-items:center;justify-content:center;min-width:90px;height:26px;padding:4px 10px;font-size:12px;font-weight:700;border-radius:999px;border:1px solid transparent}
-  .s-strong{color:#065f46;background:#ecfdf5;border-color:#a7f3d0}
-  .s-average{color:#92400e;background:#fef3c7;border-color:#fde68a}
-  .s-flag{color:#7f1d1d;background:#fee2e2;border-color:#fecaca}
+  /* Status chips (left column) – softer, neutral shells */
+  .status{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:86px;
+    height:26px;
+    padding:3px 10px;
+    font-size:12px;
+    font-weight:600;
+    border-radius:999px;
+    border:1px solid #e5e7eb;
+    background:#f3f4f6;
+    color:#111827;
+  }
+  .s-strong{color:#14532d}
+  .s-average{color:#92400e}
+  .s-flag{color:#7f1d1d}
 
   /* Inline pills */
-  .pill{display:inline-block;padding:6px 10px;border:1px solid #e2e8f0;border-radius:999px;background:#f8fafc;font-size:12px;margin-left:6px;white-space:nowrap}
-  /* Tenure (neutral gray) */
+  .pill{
+    display:inline-block;
+    padding:5px 9px;
+    border:1px solid #e2e8f0;
+    border-radius:999px;
+    background:#f8fafc;
+    font-size:12px;
+    margin-left:6px;
+    white-space:nowrap;
+  }
   .pill-tenure{background:#f1f5f9;border-color:#e2e8f0;color:#334155}
-  /* Competitor (green/amber/pink) */
-  .pill-match{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}   /* Match = green */
-  .pill-related{background:#fff7ed;border-color:#fed7aa;color:#92400e} /* Related = amber */
-  .pill-mismatch{background:#fee2e2;border-color:#fecaca;color:#7f1d1d}/* Mismatch = pink */
+  .pill-match{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
+  .pill-related{background:#fff7ed;border-color:#fed7aa;color:#92400e}
+  .pill-mismatch{background:#fee2e2;border-color:#fecaca;color:#7f1d1d}
 
   /* Tenure dropdown elbow */
-  details.tenure{grid-column:2 / span 2;margin:0 0 6px 30px;position:relative;padding-left:12px}
-  details.tenure::before{content:"";position:absolute;left:-18px;top:-14px;width:18px;height:14px;border-left:2px solid #e2e8f0;border-bottom:2px solid #e2e8f0;border-radius:0 0 0 8px}
-  details.tenure summary{list-style:none;cursor:pointer;font-size:12px;color:#475569}
+  details.tenure{
+    grid-column:1 / span 3;
+    margin:0 0 6px 0;
+    position:relative;
+    padding-left:30px;
+  }
+  details.tenure::before{
+    content:"";
+    position:absolute;
+    left:14px;
+    top:-10px;
+    width:16px;
+    height:14px;
+    border-left:2px solid #e2e8f0;
+    border-bottom:2px solid #e2e8f0;
+    border-radius:0 0 0 8px;
+  }
+  details.tenure summary{
+    list-style:none;
+    cursor:pointer;
+    font-size:12px;
+    color:#475569;
+  }
   details.tenure summary::-webkit-details-marker{display:none}
 
   /* Buttons & AI tags */
-  .btn{border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;background:#f8fafc;font-weight:600;margin:6px 6px 0 0;display:inline-block}
-  .ai{display:inline-block;padding:8px 12px;border-radius:12px;font-weight:800;border:1px solid #e2e8f0}
-  .ai.ok{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
-  .ai.warn{background:#fef3c7;border-color:#fde68a;color:#92400e}
-  .ai.no{background:#fee2e2;border-color:#fecaca;color:#7f1d1d}
+  .btn{
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    padding:9px 11px;
+    background:#f9fafb;
+    font-weight:600;
+    margin:6px 6px 0 0;
+    display:inline-block;
+    font-size:13px;
+    color:#111827;
+  }
 
-  textarea{width:100%;min-height:80px;border:1px solid #e2e8f0;border-radius:12px;padding:10px;resize:vertical}
+  .ai{
+    display:inline-block;
+    padding:7px 11px;
+    border-radius:12px;
+    font-weight:700;
+    border:1px solid #e5e7eb;
+    font-size:13px;
+  }
+  .ai.ok{background:#f0fdf4;border-color:#bbf7d0;color:#166534}
+  .ai.warn{background:#fffbeb;border-color:#fed7aa;color:#92400e}
+  .ai.no{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
+
+  textarea{
+    width:100%;
+    min-height:80px;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:10px;
+    resize:vertical;
+    font-family:inherit;
+    font-size:13px;
+  }
+
   ul{margin:0;padding-left:22px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="topbar"></div>
-  <header>
-    <h1>Screening A[i]gent - Demo</h1>
-    <div class="toggle" id="candidateToggle">
-      <span class="tiny">Sample candidates:</span>
-      <span class="chip active" data-id="jordan">Jordan</span>
-      <span class="chip" data-id="taylor">Taylor</span>
-      <span class="chip" data-id="sam">Sam</span>
-    </div>
-  </header>
+  <div class="shell">
+    <div class="topbar"></div>
 
-  <div class="grid">
-    <!-- Left: Application Review -->
-    <div class="card">
-      <div class="tab">Application Review</div>
-
-      <div class="row">
-        <span class="status" id="s_source">Strong</span>
-        <div class="label">Source:</div>
-        <div id="v_source">Referral - Gold (SQS 0.78)</div>
+    <header>
+      <h1>Screening A[i]gent - Demo</h1>
+      <div class="toggle" id="candidateToggle">
+        <span class="tiny">Sample candidates:</span>
+        <span class="chip active" data-id="jordan">Jordan</span>
+        <span class="chip" data-id="taylor">Taylor</span>
+        <span class="chip" data-id="sam">Sam</span>
       </div>
+    </header>
 
-      <div class="row">
-        <span class="status" id="s_location">Strong</span>
-        <div class="label">Location:</div>
-        <div id="v_location">SF Bay Area</div>
-      </div>
+    <div class="grid">
+      <!-- Left: Application Review -->
+      <div class="card">
+        <div class="tab">Application Review</div>
 
-      <div class="row">
-        <span class="status" id="s_total_exp">Strong</span>
-        <div class="label">Total Work Experience:</div>
-        <div id="v_total_exp">7.5 years</div>
-      </div>
-
-      <div class="row">
-        <span class="status" id="s_role_exp">Strong</span>
-        <div class="label">Role Experience:</div>
-        <div id="v_role_exp">5.0 years (Enterprise AE)</div>
-      </div>
-
-      <div class="row">
-        <span class="status" id="s_edu">Average</span>
-        <div class="label">Education:</div>
-        <div id="v_edu">Undergraduate Degree (BA, Economics)</div>
-      </div>
-
-      <div class="row">
-        <span class="status" id="s_seniority">Flag</span>
-        <div class="label">Seniority:</div>
-        <div id="v_seniority">High end of band</div>
-      </div>
-
-      <div class="row" id="tenure-row">
-        <span class="status" id="s_tenure">Strong</span>
-        <div class="label">Employer &amp; Tenure:</div>
-        <div>
-          <div id="v_tenure">1 employer in last 5 yrs</div>
-          <div class="tiny" id="comp_score_summary" style="margin-top:4px">Competitor Score: —</div>
+        <div class="row">
+          <span class="status" id="s_source">Strong</span>
+          <div class="label">Source:</div>
+          <div id="v_source">Referral - Gold (SQS 0.78)</div>
         </div>
-      </div>
 
-      <!-- Nested dropdown directly under Employer & Tenure -->
-      <details class="tenure" open>
-        <summary>Employer history (promotion-safe)</summary>
-        <div class="card" style="margin-top:8px;padding:10px 12px">
-          <div id="employers"></div>
+        <div class="row">
+          <span class="status" id="s_location">Strong</span>
+          <div class="label">Location:</div>
+          <div id="v_location">SF Bay Area</div>
         </div>
-      </details>
-    </div>
 
-    <!-- Right: Decision -->
-    <div class="card">
-      <div class="tab">Decision Recommendation</div>
-      <div class="ai" id="ai_rec">AI Recommendation: Advance</div>
-      <div class="tiny" style="margin-top:8px" id="why_rec">AI Decision Rationale: Resume coverage 0.98 • SQS 0.78 • Data freshness 12d • Tenure Pass</div>
+        <div class="row">
+          <span class="status" id="s_total_exp">Strong</span>
+          <div class="label">Total Work Experience:</div>
+          <div id="v_total_exp">7.5 years</div>
+        </div>
 
-      <!-- Decision buttons -->
-      <div style="margin-top:12px">
-        <span class="btn">Advance</span>
-        <span class="btn">HM-Review</span>
-        <span class="btn">Hold</span>
-        <span class="btn">Decline</span>
+        <div class="row">
+          <span class="status" id="s_role_exp">Strong</span>
+          <div class="label">Role Experience:</div>
+          <div id="v_role_exp">5.0 years (Enterprise AE)</div>
+        </div>
+
+        <div class="row">
+          <span class="status" id="s_edu">Average</span>
+          <div class="label">Education:</div>
+          <div id="v_edu">Undergraduate Degree (BA, Economics)</div>
+        </div>
+
+        <div class="row">
+          <span class="status" id="s_seniority">Flag</span>
+          <div class="label">Seniority:</div>
+          <div id="v_seniority">High end of band</div>
+        </div>
+
+        <div class="row" id="tenure-row">
+          <span class="status" id="s_tenure">Strong</span>
+          <div class="label">Employer &amp; Tenure:</div>
+          <div>
+            <div id="v_tenure">1 employer in last 5 yrs</div>
+            <div class="tiny" id="comp_score_summary" style="margin-top:4px">
+              Competitor Score: —
+            </div>
+          </div>
+        </div>
+
+        <!-- Nested dropdown directly under Employer & Tenure -->
+        <details class="tenure" open>
+          <summary>Employer history (promotion-safe)</summary>
+          <div class="card" style="margin-top:8px;padding:10px 12px">
+            <div id="employers"></div>
+          </div>
+        </details>
       </div>
 
-      <div class="tiny" style="margin-top:12px">Notes (saved to ATS): Optional — required with override</div>
-      <textarea placeholder="Type notes here..."></textarea>
+      <!-- Right: Decision -->
+      <div class="card">
+        <div class="tab">Decision Recommendation</div>
+        <div class="ai" id="ai_rec">AI Recommendation: Advance</div>
+        <div class="tiny" style="margin-top:8px" id="why_rec">
+          AI Decision Rationale: Resume coverage 0.98 • SQS 0.78 • Data freshness 12d • Tenure Pass
+        </div>
 
-      <div class="card" style="margin-top:16px">
-        <div class="tab">Recommended Recruiter Interview Questions</div>
-        <ul id="rq_list">
-          <li>Review salary bands and expectations</li>
-          <li>What percent of pipeline was self-sourced in FY24?</li>
-          <li>Confirm length of sales cycle and ACV</li>
-        </ul>
+        <!-- Decision buttons -->
+        <div style="margin-top:12px">
+          <span class="btn">Advance</span>
+          <span class="btn">HM-Review</span>
+          <span class="btn">Hold</span>
+          <span class="btn">Decline</span>
+        </div>
+
+        <div class="tiny" style="margin-top:12px">
+          Notes (saved to ATS): Optional — required with override
+        </div>
+        <textarea placeholder="Type notes here..."></textarea>
+
+        <div class="card" style="margin-top:16px">
+          <div class="tab">Recommended Recruiter Interview Questions</div>
+          <ul id="rq_list">
+            <li>Review salary bands and expectations</li>
+            <li>What percent of pipeline was self-sourced in FY24?</li>
+            <li>Confirm length of sales cycle and ACV</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -177,7 +342,7 @@
       edu: "Undergraduate Degree (BA, Economics)",
       seniority: "High end of band",
       tenure: "1 employer in last 5 yrs",
-      compGlobal: {score:"0.58", label:"Related"},   // aggregated label aligned with chips
+      compGlobal: {score:"0.58", label:"Related"},
       employers: [
         {company:"Acme Inc.", span:"2020-01 -> present", notes:["2021-04: Associate AE -> AE (promotion)", "2022-06: AE -> Senior AE (promotion)"], tenureConf:"High", compClass:"related", compLabel:"Related", score:"0.58"},
         {company:"BetaSoft", span:"2018-01 -> 2019-12", notes:["Single role"], tenureConf:"High", compClass:"mismatch", compLabel:"Mismatch", score:"0.22"}
@@ -253,24 +418,25 @@
 
   function renderEmployers(list){
     return list.map(function(e){
-      var notes = e.notes.map(function(n){ return '<div class="tiny">• ' + n + '</div>'; }).join("");
-      // Inline: company → dates → pills
-      var line = '<div><b>' + e.company + '</b> '
-               + '<span class="tiny">' + e.span + '</span>'
-               + '<span class="pill pill-tenure" title="Model confidence in promotion-safe tenure at this employer">Tenure Confidence: ' + e.tenureConf + '</span>'
-               + '<span class="pill ' + compPillClass(e.compClass) + '" title="Similarity signal ' + (e.score || "") + '">Competitor: ' + e.compLabel + '</span>'
-               + '</div>';
-      return '<div style="border-left:2px solid #e2e8f0;padding-left:12px;margin-top:8px">'
-           +   line
-           +   notes
-           + '</div>';
+      var notes = e.notes.map(function(n){
+        return '<div class="tiny">• ' + n + '</div>';
+      }).join("");
+      var line =
+        '<div><b>' + e.company + '</b> ' +
+        '<span class="tiny">' + e.span + '</span>' +
+        '<span class="pill pill-tenure" title="Model confidence in promotion-safe tenure at this employer">Tenure Confidence: ' + e.tenureConf + '</span>' +
+        '<span class="pill ' + compPillClass(e.compClass) + '" title="Similarity signal ' + (e.score || "") + '">Competitor: ' + e.compLabel + '</span>' +
+        '</div>';
+      return '<div style="border-left:2px solid #e2e8f0;padding-left:12px;margin-top:8px">' +
+               line +
+               notes +
+             '</div>';
     }).join("");
   }
 
   function renderCandidate(id){
     var c = CANDIDATES[id];
 
-    // Statuses
     setStatus("s_source", c.status.source);
     setStatus("s_location", c.status.location);
     setStatus("s_total_exp", c.status.total);
@@ -279,7 +445,6 @@
     setStatus("s_seniority", c.status.seniority);
     setStatus("s_tenure", c.status.tenure);
 
-    // Values
     document.getElementById("v_source").textContent = c.source;
     document.getElementById("v_location").textContent = c.location;
     document.getElementById("v_total_exp").textContent = c.totalExp;
@@ -288,36 +453,36 @@
     document.getElementById("v_seniority").textContent = c.seniority;
     document.getElementById("v_tenure").textContent = c.tenure;
 
-    // Aggregated Competitor Score line
-    var compLine = "Competitor Score: " + (c.compGlobal?.score || "—") + (c.compGlobal?.label ? " (" + c.compGlobal.label + ")" : "");
+    var compLine = "Competitor Score: " +
+      (c.compGlobal?.score || "—") +
+      (c.compGlobal?.label ? " (" + c.compGlobal.label + ")" : "");
     document.getElementById("comp_score_summary").textContent = compLine;
 
-    // Employer list with inline pills
     document.getElementById("employers").innerHTML = renderEmployers(c.employers);
 
-    // Recommendation + rationale (no competitor mentioned; “Pass” capitalization)
     var ai = document.getElementById("ai_rec");
     ai.textContent = "AI Recommendation: " + c.rec.label;
     ai.className = "ai " + (c.rec.cls || "");
     document.getElementById("why_rec").textContent = c.why;
 
-    // Questions
-    document.getElementById("rq_list").innerHTML = c.rq.map(function(x){ return "<li>"+x+"</li>"; }).join("");
+    document.getElementById("rq_list").innerHTML = c.rq
+      .map(function(x){ return "<li>"+x+"</li>"; })
+      .join("");
 
-    // Toggle state
-    Array.prototype.forEach.call(document.querySelectorAll(".chip"), function(ch){ ch.classList.remove("active"); });
+    Array.prototype.forEach.call(
+      document.querySelectorAll(".chip"),
+      function(ch){ ch.classList.remove("active"); }
+    );
     var active = document.querySelector('.chip[data-id="'+id+'"]');
     if(active) active.classList.add("active");
   }
 
-  // Toggle handler
   document.getElementById("candidateToggle").addEventListener("click", function(e){
     var t = e.target.closest(".chip");
     if(!t) return;
     renderCandidate(t.getAttribute("data-id"));
   });
 
-  // Initial render
   renderCandidate("jordan");
 </script>
 </body>
