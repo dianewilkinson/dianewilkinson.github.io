@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Metrics A[i]gent – Recruiting Pipeline Funnel Diagnostics</title>
+  <title>Metrics A[i]gent – Recruiting Funnel Pipeline Health Diagnostics</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
@@ -64,7 +64,7 @@
     }
 
     .subtitle-inline {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 500;
       color: #4b5563;
       opacity: 0.98;
@@ -186,22 +186,6 @@
       text-align: center;
     }
 
-    thead {
-      position: relative;
-    }
-
-    /* Gradient eyeliner under funnel header */
-    thead::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -2px;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
-    }
-
     td:nth-child(1),
     td:nth-child(3),
     td:nth-child(4),
@@ -215,7 +199,7 @@
 
     /* Smaller number boxes */
     input[type="number"] {
-      width: 3rem;
+      width: 2.6rem;
       padding: 0.12rem 0.2rem;
       border-radius: 0.45rem;
       border: 1px solid #d1d5db;
@@ -362,7 +346,17 @@
       text-align: center;
       margin-bottom: 0.6rem;
       position: relative;
-      padding-bottom: 0.5rem;
+      padding-top: 0.65rem;
+    }
+
+    .root-gradient {
+      position: absolute;
+      left: 1.2rem;
+      right: 1.2rem;
+      top: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
     }
 
     .root-header h3 {
@@ -371,22 +365,6 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #374151;
-    }
-
-    .root-strip {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
-    }
-
-    .root-header p {
-      margin: 0.45rem 0 0;
-      font-size: 0.75rem;
-      color: #6b7280;
     }
 
     .root-empty {
@@ -398,16 +376,22 @@
 
     .root-table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       font-size: 0.8rem;
-      margin-top: 0.2rem;
+      margin-top: 0.5rem;
+      table-layout: fixed;
+      border-radius: 0.75rem;
+      overflow: hidden;
     }
 
     .root-table th,
     .root-table td {
       border-bottom: 1px solid #e5e7eb;
-      padding: 0.45rem 0.5rem;
+      padding: 0.45rem 0.6rem;
       vertical-align: top;
+      white-space: normal;
+      word-break: break-word;
     }
 
     .root-table tr:last-child td {
@@ -431,13 +415,6 @@
       display: block;
       margin-top: 0.25rem;
       font-size: 0.78rem;
-      color: #4b5563;
-    }
-
-    .root-col-label {
-      font-weight: 500;
-      display: block;
-      margin-bottom: 0.15rem;
       color: #4b5563;
     }
 
@@ -472,7 +449,7 @@
 
       <div class="title-row">
         <h1>Metrics A[i]gent</h1>
-        <span class="subtitle-inline">Recruiting Pipeline Funnel Diagnostics</span>
+        <span class="subtitle-inline">Recruiting Funnel Pipeline Health Diagnostics</span>
       </div>
 
       <div class="tabs-row">
@@ -586,9 +563,8 @@
       <!-- Root-cause bottom card -->
       <div class="root-card">
         <div class="root-header">
+          <div class="root-gradient"></div>
           <h3>Diagnostic Summary | Root Cause Table</h3>
-          <div class="root-strip"></div>
-          <p>Start with these prompts based on the current funnel snapshot.</p>
         </div>
         <div id="root-table-container">
           <div class="root-empty">
@@ -748,17 +724,10 @@
         const isHM = nameLower.includes("hiring manager");
         const isFinal = nameLower.includes("final");
         const isOffer = nameLower.includes("offer");
-        const isRecruiter = nameLower.includes("recruiter");
-        const isApplication = nameLower.includes("application");
-
-        let issueLabel = status === "bottleneck" ? "Bottleneck" : "Alert";
-
-        const stageLabel = s.name.split("|")[0].trim(); // "HM Interview", etc.
 
         let internal = [];
         let external = [];
 
-        /* Stage-specific content – matching your sheet */
         if (isHM && status === "bottleneck") {
           internal = [
             "What is HM decline rationale?",
@@ -802,9 +771,8 @@
         }
 
         rows.push({
-          issueLabel,
           status,
-          stageLabel,
+          stageLabel: s.name.split("|")[0].trim(),
           internal,
           external
         });
@@ -841,8 +809,6 @@
             ? "bottleneck"
             : row.status === "alert"
             ? "alert"
-            : row.status === "warn"
-            ? "warn"
             : "healthy";
 
         const labelText =
@@ -850,8 +816,6 @@
             ? "Bottleneck"
             : row.status === "alert"
             ? "Alert"
-            : row.status === "warn"
-            ? "Watch"
             : "Healthy";
 
         html += `
@@ -864,13 +828,11 @@
               <span class="root-stage-label">${row.stageLabel}</span>
             </td>
             <td>
-              <span class="root-col-label">Internal Error | Org Decline</span>
               <div class="root-list">
                 ${row.internal.map((q) => `<div>${q}</div>`).join("")}
               </div>
             </td>
             <td>
-              <span class="root-col-label">External Changes | Candidate Withdrawal</span>
               <div class="root-list">
                 ${row.external.map((q) => `<div>${q}</div>`).join("")}
               </div>
