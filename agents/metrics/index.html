@@ -404,11 +404,18 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: #6b7280;
-      text-align: left;
+      text-align: center; /* center header titles */
     }
 
     .root-issue-cell {
       white-space: nowrap;
+      text-align: left;  /* left-align issue column content */
+    }
+
+    /* Left align question columns */
+    .root-table td:nth-child(2),
+    .root-table td:nth-child(3) {
+      text-align: left;
     }
 
     .root-stage-label {
@@ -416,6 +423,7 @@
       margin-top: 0.25rem;
       font-size: 0.78rem;
       color: #4b5563;
+      font-weight: 600;   /* bold stage names */
     }
 
     .root-list div {
@@ -731,41 +739,41 @@
         if (isHM && status === "bottleneck") {
           internal = [
             "What is HM decline rationale?",
-            "Are expectations calibrated with role level, scope, etc.?",
-            "Have needs changed?"
+            "Are expectations aligned with level & scope?",
+            "Have hiring needs changed?"
           ];
           external = [
-            "What themes appear in candidate feedback?",
-            "Is the process too labor intensive or delayed?",
-            "Is compensation, workplace policy, benefits, etc. competitive?"
+            "What themes show up in candidate feedback?",
+            "Is the process slow or heavy?",
+            "Are comp, policy, and benefits competitive?"
           ];
         } else if (isFinal && status === "alert") {
           internal = [
-            "Is the data reported incorrectly?",
+            "Is the data reported correctly?",
             "Is there a technical issue?"
           ];
           external = [
             "Has the market changed?",
             "Has candidate quality changed?",
-            "Does the benchmark need recalibration?"
+            "Does the benchmark need updating?"
           ];
         } else if (isOffer && status === "bottleneck") {
           internal = [
-            "Is the data reported incorrectly?",
+            "Is the data reported correctly?",
             "Is there a technical issue?"
           ];
           external = [
             "Has the market changed?",
-            "Is compensation, workplace policy, benefits, etc. competitive?"
+            "Are offer, policy, and benefits competitive?"
           ];
         } else {
           /* Generic fallbacks so other stages can still show something */
           internal = [
             "Is stage coding and data capture accurate?",
-            "Are decision criteria and expectations clearly documented?"
+            "Are decision criteria and expectations documented?"
           ];
           external = [
-            "Has candidate volume or quality changed recently?",
+            "Has candidate volume or quality changed?",
             "Has the market or role attractiveness shifted?"
           ];
         }
@@ -796,8 +804,8 @@
           <thead>
             <tr>
               <th>Issue | Stage</th>
-              <th>Internal Error | Org Decline</th>
-              <th>External Changes | Candidate Withdrawal</th>
+              <th>Source: Internal | Org</th>
+              <th>Source: External | Candidate</th>
             </tr>
           </thead>
           <tbody>
