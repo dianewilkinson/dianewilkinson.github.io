@@ -159,6 +159,7 @@
       font-size: 0.85rem;
     }
 
+    /* Funnel table column widths */
     colgroup col:nth-child(1) { width: 18%; }
     colgroup col:nth-child(2) { width: 34%; }
     colgroup col:nth-child(3) { width: 18%; }
@@ -186,14 +187,15 @@
       text-align: center;
     }
 
-    td:nth-child(1),
-    td:nth-child(3),
-    td:nth-child(4),
-    td:nth-child(5) {
+    /* Center numbers in top funnel table */
+    tbody tr td:nth-child(1),
+    tbody tr td:nth-child(3),
+    tbody tr td:nth-child(4),
+    tbody tr td:nth-child(5) {
       text-align: center;
     }
 
-    td:nth-child(2) {
+    tbody tr td:nth-child(2) {
       text-align: center;
     }
 
@@ -344,19 +346,7 @@
 
     .root-header {
       text-align: center;
-      margin-bottom: 0.6rem;
-      position: relative;
-      padding-top: 0.65rem;
-    }
-
-    .root-gradient {
-      position: absolute;
-      left: 1.2rem;
-      right: 1.2rem;
-      top: 0;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
+      margin-bottom: 0.4rem;
     }
 
     .root-header h3 {
@@ -365,6 +355,14 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #374151;
+    }
+
+    /* Gradient now sits BETWEEN title and table */
+    .root-gradient {
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
+      margin: 0.4rem 1.2rem 0.45rem;
     }
 
     .root-empty {
@@ -379,10 +377,15 @@
       border-collapse: separate;
       border-spacing: 0;
       font-size: 0.8rem;
-      margin-top: 0.5rem;
+      margin-top: 0.1rem;
       table-layout: fixed;
       border-radius: 0.75rem;
       overflow: hidden;
+    }
+
+    /* Root table: all cell content left-aligned */
+    .root-table td {
+      text-align: left;
     }
 
     .root-table th,
@@ -392,6 +395,11 @@
       vertical-align: top;
       white-space: normal;
       word-break: break-word;
+      background: #f9fafb;
+    }
+
+    .root-table tr:nth-child(even) td {
+      background: #f3f4f6;
     }
 
     .root-table tr:last-child td {
@@ -404,17 +412,11 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: #6b7280;
-      text-align: center; /* center header titles */
+      text-align: center; /* keep headers centered */
     }
 
     .root-issue-cell {
       white-space: nowrap;
-      text-align: left;  /* left-align issue column content */
-    }
-
-    /* Left align question columns */
-    .root-table td:nth-child(2),
-    .root-table td:nth-child(3) {
       text-align: left;
     }
 
@@ -473,7 +475,11 @@
 
       <table>
         <colgroup>
-          <col /><col /><col /><col /><col />
+          <col />
+          <col />
+          <col />
+          <col />
+          <col />
         </colgroup>
         <thead>
           <tr>
@@ -571,9 +577,12 @@
       <!-- Root-cause bottom card -->
       <div class="root-card">
         <div class="root-header">
-          <div class="root-gradient"></div>
           <h3>Diagnostic Summary | Root Cause Table</h3>
         </div>
+
+        <!-- Gradient under title -->
+        <div class="root-gradient"></div>
+
         <div id="root-table-container">
           <div class="root-empty">
             No alerts or bottlenecks in this snapshot. Re-run diagnostics after changes to sourcing, interview bar, or offer positioning.
@@ -801,6 +810,11 @@
 
       let html = `
         <table class="root-table">
+          <colgroup>
+            <col style="width:18%">
+            <col style="width:41%">
+            <col style="width:41%">
+          </colgroup>
           <thead>
             <tr>
               <th>Issue | Stage</th>
