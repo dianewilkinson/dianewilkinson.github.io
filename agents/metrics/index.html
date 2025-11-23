@@ -112,19 +112,6 @@
       background: linear-gradient(90deg, #22c55e, #ef4444);
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-      gap: 1.75rem;
-      align-items: flex-start;
-    }
-
-    @media (max-width: 800px) {
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
     .section-title {
       font-size: 0.9rem;
       font-weight: 600;
@@ -264,13 +251,13 @@
     }
 
     .results-summary {
+      margin-top: 1.4rem;
       font-size: 0.8rem;
       color: #4b5563;
       border-radius: 0.75rem;
       border: 1px solid #e5e7eb;
       padding: 0.8rem 0.9rem;
       background: #f9fafb;
-      margin-bottom: 0.9rem;
     }
 
     .results-summary strong {
@@ -278,6 +265,7 @@
     }
 
     .callouts {
+      margin-top: 1rem;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1rem;
@@ -359,7 +347,7 @@
     }
 
     .footer-note {
-      margin-top: 1.2rem;
+      margin-top: 1.5rem;
       font-size: 0.75rem;
       color: #9ca3af;
       text-align: right;
@@ -375,21 +363,6 @@
       background: #eef2ff;
       color: #3730a3;
       margin-left: 0.25rem;
-    }
-
-    .related {
-      margin-top: 0.9rem;
-      font-size: 0.78rem;
-      color: #6b7280;
-    }
-
-    .related a {
-      color: #2563eb;
-      text-decoration: none;
-    }
-
-    .related a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
@@ -409,139 +382,122 @@
         </div>
       </div>
 
-      <div class="layout">
-        <!-- LEFT: FUNNEL TABLE -->
-        <div>
-          <div class="section-title">Funnel by stage (ATS snapshot – demo)</div>
+      <!-- Funnel table -->
+      <div class="section-title">Funnel by stage (ATS snapshot – demo)</div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Candidates in</th>
-                <th>Stage</th>
-                <th>Advanced to next stage</th>
-                <th>Conversion</th>
-                <th>Diagnosis</th>
-              </tr>
-            </thead>
-            <tbody id="funnel-body">
-              <tr data-index="0">
-                <td>
-                  <input type="number" min="0" value="200" class="in-input" />
-                </td>
-                <td class="stage-cell">Applied / Sourced</td>
-                <td>
-                  <input type="number" min="0" value="30" class="out-input" />
-                </td>
-                <td><span class="conv-cell">–</span></td>
-                <td><span class="diag-cell"></span></td>
-              </tr>
-              <tr data-index="1">
-                <td>
-                  <input type="number" min="0" value="30" class="in-input" />
-                </td>
-                <td class="stage-cell">Recruiter Screen</td>
-                <td>
-                  <input type="number" min="0" value="12" class="out-input" />
-                </td>
-                <td><span class="conv-cell">–</span></td>
-                <td><span class="diag-cell"></span></td>
-              </tr>
-              <tr data-index="2">
-                <td>
-                  <input type="number" min="0" value="12" class="in-input" />
-                </td>
-                <td class="stage-cell">Hiring Manager</td>
-                <td>
-                  <input type="number" min="0" value="3" class="out-input" />
-                </td>
-                <td><span class="conv-cell">–</span></td>
-                <td><span class="diag-cell"></span></td>
-              </tr>
-              <tr data-index="3">
-                <td>
-                  <input type="number" min="0" value="3" class="in-input" />
-                </td>
-                <td class="stage-cell">Final / Panel</td>
-                <td>
-                  <input type="number" min="0" value="2" class="out-input" />
-                </td>
-                <td><span class="conv-cell">–</span></td>
-                <td><span class="diag-cell"></span></td>
-              </tr>
-              <tr data-index="4">
-                <td>
-                  <input type="number" min="0" value="2" class="in-input" />
-                </td>
-                <td class="stage-cell">Offer</td>
-                <td>
-                  <input type="number" min="0" value="2" class="out-input" />
-                </td>
-                <td><span class="conv-cell">–</span></td>
-                <td><span class="diag-cell"></span></td>
-              </tr>
-            </tbody>
-          </table>
+      <table>
+        <thead>
+          <tr>
+            <th>Candidates in</th>
+            <th>Stage</th>
+            <th>Advanced to next stage</th>
+            <th>Conversion</th>
+            <th>Diagnosis</th>
+          </tr>
+        </thead>
+        <tbody id="funnel-body">
+          <tr data-index="0">
+            <td>
+              <input type="number" min="0" value="200" class="in-input" />
+            </td>
+            <td class="stage-cell">Applied / Sourced</td>
+            <td>
+              <input type="number" min="0" value="30" class="out-input" />
+            </td>
+            <td><span class="conv-cell">–</span></td>
+            <td><span class="diag-cell"></span></td>
+          </tr>
+          <tr data-index="1">
+            <td>
+              <input type="number" min="0" value="30" class="in-input" />
+            </td>
+            <td class="stage-cell">Recruiter Screen</td>
+            <td>
+              <input type="number" min="0" value="12" class="out-input" />
+            </td>
+            <td><span class="conv-cell">–</span></td>
+            <td><span class="diag-cell"></span></td>
+          </tr>
+          <tr data-index="2">
+            <td>
+              <input type="number" min="0" value="12" class="in-input" />
+            </td>
+            <td class="stage-cell">Hiring Manager</td>
+            <td>
+              <input type="number" min="0" value="3" class="out-input" />
+            </td>
+            <td><span class="conv-cell">–</span></td>
+            <td><span class="diag-cell"></span></td>
+          </tr>
+          <tr data-index="3">
+            <td>
+              <input type="number" min="0" value="3" class="in-input" />
+            </td>
+            <td class="stage-cell">Final / Panel</td>
+            <td>
+              <input type="number" min="0" value="2" class="out-input" />
+            </td>
+            <td><span class="conv-cell">–</span></td>
+            <td><span class="diag-cell"></span></td>
+          </tr>
+          <tr data-index="4">
+            <td>
+              <input type="number" min="0" value="2" class="in-input" />
+            </td>
+            <td class="stage-cell">Offer</td>
+            <td>
+              <input type="number" min="0" value="2" class="out-input" />
+            </td>
+            <td><span class="conv-cell">–</span></td>
+            <td><span class="diag-cell"></span></td>
+          </tr>
+        </tbody>
+      </table>
 
-          <div class="btn-row">
-            <button class="btn-primary" id="analyze-btn">
-              <span class="icon">🧮</span>
-              <span>Run diagnostics</span>
-            </button>
-            <button class="btn-secondary" id="reset-btn" type="button">
-              <span class="icon">↺</span>
-              <span>Reset requisition</span>
-            </button>
-          </div>
+      <div class="btn-row">
+        <button class="btn-primary" id="analyze-btn">
+          <span class="icon">🧮</span>
+          <span>Run diagnostics</span>
+        </button>
+        <button class="btn-secondary" id="reset-btn" type="button">
+          <span class="icon">↺</span>
+          <span>Reset requisition</span>
+        </button>
+      </div>
 
-          <div class="ats-note">
-            In production, these counts are pulled automatically from your ATS/HRIS.
-          </div>
-          <div class="bench-note">
-            <strong>Benchmarks (stage → next):</strong>
-            App→Screen 10–15% · Screen→HM ≥50% · HM→Final ≥70% ·
-            Final→Offer ≥30% · Offer→Accept ≥85%.
-          </div>
+      <div class="ats-note">
+        In production, these counts are pulled automatically from your ATS/HRIS.
+      </div>
+      <div class="bench-note">
+        <strong>Benchmarks (stage → next):</strong>
+        App→Screen 10–15% · Screen→HM ≥50% · HM→Final ≥70% ·
+        Final→Offer ≥30% · Offer→Accept ≥85%.
+      </div>
+
+      <!-- Summary + callouts BELOW funnel -->
+      <div id="summary" class="results-summary">
+        Choose an active search, then click <strong>Run diagnostics</strong>
+        to see conversion and health by stage.
+      </div>
+
+      <div class="callouts">
+        <div class="callout">
+          <h3>Action items</h3>
+          <ul id="actions">
+            <li>Primary actions will appear here after diagnostics run.</li>
+          </ul>
         </div>
-
-        <!-- RIGHT: SUMMARY + CALLOUTS -->
-        <div>
-          <div class="section-title">Stage health summary</div>
-          <div id="summary" class="results-summary">
-            Choose an active search, then click <strong>Run diagnostics</strong>
-            to see conversion and health by stage.
-          </div>
-
-          <div class="callouts">
-            <div class="callout">
-              <h3>Action items</h3>
-              <ul id="actions">
-                <li>Primary actions will appear here after diagnostics run.</li>
-              </ul>
-            </div>
-            <div class="callout">
-              <h3>Troubleshooting</h3>
-              <ul id="troubleshooting">
-                <li>Likely root causes will appear here after diagnostics run.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="footer-note">
-            <span class="tiny-label">Agent type</span>
-            <span class="badge">Metrics A[i]gent · TA Ops</span>
-          </div>
+        <div class="callout">
+          <h3>Troubleshooting</h3>
+          <ul id="troubleshooting">
+            <li>Likely root causes will appear here after diagnostics run.</li>
+          </ul>
         </div>
       </div>
 
-      <div class="related">
-        <span class="tiny-label">Related tools</span>
-        ·
-        <a href="/assets/tool-metrics-dictionary.xlsx" target="_blank" rel="noopener">Metrics Dictionary</a>
-        ·
-        <a href="/assets/tool-recruiting-funnel-calculators.xlsx" target="_blank" rel="noopener">Recruiting Funnel Calculator</a>
-        ·
-        <a href="/assets/analysis-recruiting-funnel-case-study.pdf" target="_blank" rel="noopener">Recruiting Funnel Case Study</a>
+      <div class="footer-note">
+        <span class="tiny-label">Agent type</span>
+        <span class="badge">Metrics A[i]gent · TA Ops</span>
       </div>
     </section>
   </main>
@@ -679,7 +635,7 @@
         const status = classifyStage(s.name, conv);
 
         // funnel bar width by entered count
-        const pct = maxEntered > 0 ? (s.entered / maxEntered) * 90 : 0; // max 90% width
+        const pct = maxEntered > 0 ? (s.entered / maxEntered) * 90 : 0; // max 90%
         s.rowEl.style.setProperty("--bar-pct", pct.toFixed(0) + "%");
 
         // conversion cell
