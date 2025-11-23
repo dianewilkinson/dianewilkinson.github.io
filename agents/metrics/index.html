@@ -45,19 +45,36 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: #6b7280;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
     }
 
     h1 {
       font-size: clamp(1.9rem, 3vw, 2.4rem);
-      margin: 0 0 0.25rem;
+      margin: 0;
       letter-spacing: -0.03em;
     }
 
-    .subtitle {
-      font-size: 0.95rem;
+    .subtitle-inline {
+      font-size: 0.98rem;
+      font-weight: 400;
       color: #4b5563;
-      margin: 0 0 1.5rem;
+      opacity: 0.9;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      .subtitle-inline {
+        white-space: normal;
+      }
     }
 
     .tabs-row {
@@ -109,7 +126,7 @@
     }
 
     .tab.active::after {
-      background: linear-gradient(90deg, #22c55e, #ef4444);
+      background: linear-gradient(90deg, #22c55e, #6366f1);
     }
 
     .section-title {
@@ -133,7 +150,7 @@
       position: relative;
     }
 
-    /* funnel bar behind stage cell */
+    /* funnel bar behind stage cell with subtle color gradient */
     #funnel-body tr .stage-cell::before {
       content: "";
       position: absolute;
@@ -142,7 +159,11 @@
       transform: translateY(-50%);
       height: 60%;
       border-radius: 999px;
-      background: #e5e7eb;
+      background: linear-gradient(
+        90deg,
+        rgba(244, 63, 94, 0.06),
+        rgba(59, 130, 246, 0.06)
+      );
       width: var(--bar-pct);
       z-index: -1;
     }
@@ -165,7 +186,7 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: #6b7280;
-      background: #f9fafb;
+      background: #f3f4ff; /* subtle indigo tint */
     }
 
     th:nth-child(2),
@@ -176,6 +197,14 @@
     th:nth-child(1),
     td:nth-child(1) {
       text-align: right;
+    }
+
+    th:nth-child(5) {
+      text-align: center; /* align with pills */
+    }
+
+    td:nth-child(5) {
+      text-align: center;
     }
 
     input[type="number"] {
@@ -256,7 +285,6 @@
     .callout {
       border-radius: 0.9rem;
       border: 1px dashed #e5e7eb;
-      background: #f9fafb;
       padding: 0.9rem;
       font-size: 0.8rem;
       color: #4b5563;
@@ -267,7 +295,6 @@
       font-size: 0.82rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #6b7280;
     }
 
     .callout p {
@@ -285,6 +312,18 @@
       margin-bottom: 0.25rem;
     }
 
+    .callout--bottlenecks {
+      background: #fef2f2; /* light red tint */
+    }
+
+    .callout--watch {
+      background: #fff7ed; /* light amber tint */
+    }
+
+    .callout--actions {
+      background: #ecfdf3; /* light green tint */
+    }
+
     .diag-pill {
       display: inline-flex;
       align-items: center;
@@ -294,9 +333,9 @@
       font-size: 0.73rem;
       border: 1px solid #e5e7eb;
       gap: 0.25rem;
-      background: #ecfdf3; /* healthy tint by default */
+      min-width: 115px;
+      background: #ecfdf3;
       color: #166534;
-      min-width: 115px; /* make them consistent */
     }
 
     .diag-dot {
@@ -323,7 +362,7 @@
 
     .diag-pill.bottleneck .diag-dot,
     .diag-pill.bottleneck-high .diag-dot {
-      background: #ef4444; /* red for both bottleneck + anomaly */
+      background: #ef4444;
     }
 
     .diag-label {
@@ -354,8 +393,11 @@
   <main class="page">
     <section class="card">
       <div class="eyebrow">A[i]gents Portfolio · Demo</div>
-      <h1>Metrics A[i]gent</h1>
-      <p class="subtitle">Recruiting Pipeline Funnel Diagnostics</p>
+
+      <div class="title-row">
+        <h1>Metrics A[i]gent</h1>
+        <span class="subtitle-inline">Recruiting Pipeline Funnel Diagnostics</span>
+      </div>
 
       <div class="tabs-row">
         <span class="tabs-label tiny-label">Active searches</span>
@@ -384,7 +426,7 @@
             <td>
               <input type="number" min="0" value="200" class="in-input" />
             </td>
-            <td class="stage-cell">Applied / Sourced · 10–15% CVR</td>
+            <td class="stage-cell">Application Stage | 12%</td>
             <td>
               <input type="number" min="0" value="30" class="out-input" />
             </td>
@@ -395,7 +437,7 @@
             <td>
               <input type="number" min="0" value="30" class="in-input" />
             </td>
-            <td class="stage-cell">Recruiter Screen · ≥50% CVR</td>
+            <td class="stage-cell">Recruiter Interview | 50%</td>
             <td>
               <input type="number" min="0" value="12" class="out-input" />
             </td>
@@ -406,7 +448,7 @@
             <td>
               <input type="number" min="0" value="12" class="in-input" />
             </td>
-            <td class="stage-cell">Hiring Manager · ≥70% CVR</td>
+            <td class="stage-cell">Hiring Manager Interview | 70%</td>
             <td>
               <input type="number" min="0" value="3" class="out-input" />
             </td>
@@ -417,7 +459,7 @@
             <td>
               <input type="number" min="0" value="3" class="in-input" />
             </td>
-            <td class="stage-cell">Final / Panel · ≥30% CVR</td>
+            <td class="stage-cell">Final Interview | 30%</td>
             <td>
               <input type="number" min="0" value="2" class="out-input" />
             </td>
@@ -428,7 +470,7 @@
             <td>
               <input type="number" min="0" value="2" class="in-input" />
             </td>
-            <td class="stage-cell">Offer · ≥85% CVR</td>
+            <td class="stage-cell">Offer | 85%</td>
             <td>
               <input type="number" min="0" value="2" class="out-input" />
             </td>
@@ -455,21 +497,21 @@
 
       <!-- Callouts: Bottlenecks, Watch, Actions -->
       <div class="callouts">
-        <div class="callout">
+        <div class="callout callout--bottlenecks">
           <h3>Bottlenecks (hypotheses)</h3>
-          <p>Potential causes — to validate with data, not assumptions.</p>
+          <p>Potential causes — validate with data, not assumptions.</p>
           <ul id="bottlenecks">
             <li>Potential bottlenecks will appear here after diagnostics run.</li>
           </ul>
         </div>
-        <div class="callout">
+        <div class="callout callout--watch">
           <h3>Watch</h3>
-          <p>Stages slightly off benchmark or trending oddly.</p>
+          <p>Stages slightly off benchmark or behaving oddly over time.</p>
           <ul id="watch">
             <li>Watchlist stages will appear here after diagnostics run.</li>
           </ul>
         </div>
-        <div class="callout">
+        <div class="callout callout--actions">
           <h3>Action items</h3>
           <p>Next steps for your TA Ops / recruiter sync.</p>
           <ul id="actions">
@@ -491,31 +533,31 @@
       esd: {
         name: "Enterprise Sales Director",
         data: [
-          { entered: 320, moved: 40 }, // 12.5% App→Screen (healthy)
-          { entered: 40, moved: 16 },  // 40% Screen→HM (watch)
-          { entered: 16, moved: 4 },   // 25% HM→Final (bottleneck)
-          { entered: 4, moved: 3 },    // 75% Final→Offer (healthy)
-          { entered: 3, moved: 2 }     // 66.7% Offer→Accept (watch)
+          { entered: 320, moved: 40 }, // 12.5% Application -> Recruiter
+          { entered: 40,  moved: 16 },
+          { entered: 16,  moved: 4  },
+          { entered: 4,   moved: 3  },
+          { entered: 3,   moved: 2  }
         ]
       },
       se: {
         name: "Software Engineer",
         data: [
-          { entered: 600, moved: 48 }, // 8% App→Screen (watch)
-          { entered: 48, moved: 18 },  // 37.5% Screen→HM (watch)
-          { entered: 18, moved: 13 },  // 72.2% HM→Final (healthy)
-          { entered: 13, moved: 5 },   // 38.5% Final→Offer (healthy)
-          { entered: 5, moved: 4 }     // 80% Offer→Accept (watch)
+          { entered: 600, moved: 48 },
+          { entered: 48,  moved: 18 },
+          { entered: 18,  moved: 13 },
+          { entered: 13,  moved: 5  },
+          { entered: 5,   moved: 4  }
         ]
       },
       sda: {
         name: "Senior Data Analyst",
         data: [
-          { entered: 220, moved: 28 }, // 12.7% App→Screen (healthy)
-          { entered: 28, moved: 15 },  // 53.6% Screen→HM (healthy)
-          { entered: 15, moved: 11 },  // 73.3% HM→Final (healthy)
-          { entered: 11, moved: 7 },   // 63.6% Final→Offer (healthy)
-          { entered: 7, moved: 3 }     // 42.9% Offer→Accept (bottleneck)
+          { entered: 220, moved: 28 },
+          { entered: 28,  moved: 15 },
+          { entered: 15,  moved: 11 },
+          { entered: 11,  moved: 7  },
+          { entered: 7,   moved: 3  }
         ]
       }
     };
@@ -551,41 +593,45 @@
       return stages;
     }
 
-    // Stage-aware benchmarks, anomaly at App→Screen
+    // Stage-aware benchmarks, anomaly at Application Stage
     function classifyStage(stageName, conv) {
       if (isNaN(conv)) return "unknown";
       const name = stageName.toLowerCase();
 
-      // Applied → Recruiter Screen
-      if (name.includes("applied") || name.includes("sourced")) {
+      // Application -> Recruiter Interview
+      if (
+        name.includes("application") ||
+        name.includes("applied") ||
+        name.includes("sourced")
+      ) {
         if (conv < 5) return "bottleneck";      // too low
         if (conv < 10) return "warn";           // slightly low
         if (conv <= 20) return "healthy";       // realistic band
         return "bottleneck-high";               // too high = anomaly
       }
 
-      // Recruiter Screen → HM Interview
+      // Recruiter Interview -> HM
       if (name.includes("recruiter")) {
         if (conv < 30) return "bottleneck";
         if (conv < 50) return "warn";
         return "healthy";
       }
 
-      // HM Interview → Final / Panel
+      // HM Interview -> Final
       if (name.includes("hiring manager")) {
         if (conv < 50) return "bottleneck";
         if (conv < 70) return "warn";
         return "healthy";
       }
 
-      // Final / Panel → Offer
-      if (name.includes("final") || name.includes("panel")) {
+      // Final Interview -> Offer
+      if (name.includes("final")) {
         if (conv < 20) return "bottleneck";
         if (conv < 30) return "warn";
         return "healthy";
       }
 
-      // Offer → Acceptance
+      // Offer -> Acceptance
       if (name.includes("offer")) {
         if (conv < 70) return "bottleneck";
         if (conv < 85) return "warn";
@@ -618,7 +664,7 @@
         const status = classifyStage(s.name, conv);
 
         // funnel bar width by entered count
-        const pct = maxEntered > 0 ? (s.entered / maxEntered) * 90 : 0; // max 90%
+        const pct = maxEntered > 0 ? (s.entered / maxEntered) * 90 : 0;
         s.rowEl.style.setProperty("--bar-pct", pct.toFixed(0) + "%");
 
         // conversion cell
@@ -650,22 +696,73 @@
       const watch = [];
       const actions = [];
 
-      // stage-level bullets
+      // General bullets per stage based on status (no CVR math)
       classified.forEach((s) => {
+        const name = s.name.toLowerCase();
+
         if (s.status === "bottleneck" || s.status === "bottleneck-high") {
-          let msg = `${s.name}: ${isNaN(s.conv) ? "–" : s.conv.toFixed(1) + "%"} CVR – materially off benchmark.`;
-          if (s.status === "bottleneck-high") {
-            msg += " Potential technical error with job posting or ATS routing inflating counts.";
+          if (name.includes("application")) {
+            bottlenecks.push(
+              "Application Stage: review job posting copy, targeting, and source mix; compare candidate feedback on clarity of the role."
+            );
+            bottlenecks.push(
+              "Validate ATS routing and deduplication for applications; look for a potential technical error with the job posting or routing rules."
+            );
+          } else if (name.includes("recruiter")) {
+            bottlenecks.push(
+              "Recruiter Interview: check notes quality and rejection reasons; confirm recruiters are capturing specific skills and signal, not just 'not a fit'."
+            );
+            bottlenecks.push(
+              "Compare recruiter feedback with hiring manager expectations to see where the bar may be misaligned."
+            );
+          } else if (name.includes("hiring manager")) {
+            bottlenecks.push(
+              "Hiring Manager Interview: review HM feedback themes and look for patterns (e.g., level, industry, territory)."
+            );
+            bottlenecks.push(
+              "Check whether candidates report surprises at HM stage in CSAT surveys (scope, comp, location)."
+            );
+          } else if (name.includes("final")) {
+            bottlenecks.push(
+              "Final Interview: audit panel composition and interview rubrics; ensure each interviewer has a clear focus area."
+            );
+            bottlenecks.push(
+              "Review panel debrief notes for conflicts in scoring that indicate inconsistent expectations."
+            );
+          } else if (name.includes("offer")) {
+            bottlenecks.push(
+              "Offer: analyze recent declines and candidate feedback for themes in comp, level, or remote expectations."
+            );
+            bottlenecks.push(
+              "Check offer turnaround time and approval steps for delays that may be pushing candidates to competitors."
+            );
           }
-          bottlenecks.push(msg);
         } else if (s.status === "warn") {
-          watch.push(
-            `${s.name}: ${isNaN(s.conv) ? "–" : s.conv.toFixed(1) + "%"} CVR – slightly off benchmark; watch trend over the next 2–4 weeks.`
-          );
+          if (name.includes("application")) {
+            watch.push(
+              "Application Stage: track changes in inbound volume and quality by source over the next few weeks."
+            );
+          } else if (name.includes("recruiter")) {
+            watch.push(
+              "Recruiter Interview: monitor consistency of pass-through across recruiters; review a sample of notes monthly."
+            );
+          } else if (name.includes("hiring manager")) {
+            watch.push(
+              "Hiring Manager Interview: monitor HM availability and rescheduling; check for interview fatigue or time pressure."
+            );
+          } else if (name.includes("final")) {
+            watch.push(
+              "Final Interview: track panel score variance and follow-up questions; flag if decisions feel subjective or noisy."
+            );
+          } else if (name.includes("offer")) {
+            watch.push(
+              "Offer: keep an eye on candidate negotiation patterns and time-to-accept; small shifts can signal market changes."
+            );
+          }
         }
       });
 
-      // worst stage drives deeper hypotheses & actions
+      // Worst stage drives focused actions
       const worst =
         classified.find((s) => s.status === "bottleneck") ||
         classified.find((s) => s.status === "bottleneck-high") ||
@@ -674,45 +771,58 @@
       if (worst) {
         const name = worst.name.toLowerCase();
 
-        if (name.includes("applied") || name.includes("sourced")) {
-          bottlenecks.push("Possible misalignment between job posting (title, level, comp, location) and target profile.");
-          bottlenecks.push("Risk that early screen criteria are too strict or unclear, filtering out viable candidates.");
-          if (worst.status === "bottleneck-high") {
-            bottlenecks.push("Potential technical error with job posting or ATS routing (e.g., duplicate postings, mis-routed applications).");
-          }
-          actions.push("Review title, target markets, and comp band with the hiring manager; confirm who you actually want to interview.");
-          actions.push("Re-align on minimum qualified profile and tighten early-screen questions so decisions feel binary.");
+        if (name.includes("application")) {
+          actions.push(
+            "Pull a quick report on applications by source for this req and compare quality vs volume."
+          );
+          actions.push(
+            "Run a short candidate survey on how clearly the job posting describes responsibilities and requirements."
+          );
         } else if (name.includes("recruiter")) {
-          bottlenecks.push("Recruiter and hiring manager may not share the same mental model of a ‘yes’ candidate.");
-          bottlenecks.push("Rejection reasons may be too generic to see patterns (e.g., ‘not a fit’).");
-          actions.push("Run a quick calibration with the hiring manager using 5–10 recent candidates at the screen stage.");
-          actions.push("Standardize rejection reasons at Recruiter Screen so you can see themes by skill, level, or territory.");
+          actions.push(
+            "Schedule a 30-minute calibration between recruiter(s) and hiring manager to review 5–10 recent profiles."
+          );
+          actions.push(
+            "Standardize recruiter interview questions and rejection codes for this role to improve signal quality."
+          );
         } else if (name.includes("hiring manager")) {
-          bottlenecks.push("HM bar drifting above market reality or beyond what is documented in the role profile.");
-          bottlenecks.push("Candidates may be surprised by scope, comp, or expectations at HM stage instead of earlier.");
-          actions.push("Standardize HM interview questions and decision criteria for this role; document what ‘strong yes’ looks like.");
-          actions.push("Ensure candidates are prepped on scope, expectations, and comp guardrails before HM interviews.");
-        } else if (name.includes("final") || name.includes("panel")) {
-          bottlenecks.push("Panel design may be noisy — too many interviewers or unstructured feedback.");
-          bottlenecks.push("Evaluation criteria might differ by interviewer, creating inconsistent decisions.");
-          actions.push("Limit panel size and give each interviewer a clear focus area and scoring rubric.");
-          actions.push("Add a structured debrief within 24 hours to resolve conflicting feedback quickly.");
+          actions.push(
+            "Review HM interview scorecards and comments for the last 10–15 candidates; identify recurring reasons for 'no'."
+          );
+          actions.push(
+            "Align on a written 'strong yes' profile and share it with recruiting to ensure pre-HM screening is tighter."
+          );
+        } else if (name.includes("final")) {
+          actions.push(
+            "Tighten panel design so each interviewer covers a distinct competency with a clear rubric."
+          );
+          actions.push(
+            "Host a structured debrief within 24 hours after each panel to resolve conflicting feedback quickly."
+          );
         } else if (name.includes("offer")) {
-          bottlenecks.push("Offer positioning (comp, equity, remote policy) may be out of sync with candidate expectations.");
-          bottlenecks.push("Decision time may be too slow or communication too sparse, giving competitors an edge.");
-          actions.push("Review last 3–5 declines for themes in comp, level, or remote expectations.");
-          actions.push("Introduce a ‘pre-close’ step before drafting the offer to surface any blockers early.");
+          actions.push(
+            "Review recent offer outcomes (accepts/declines) and candidate feedback with People Ops / Comp."
+          );
+          actions.push(
+            "Introduce a 'pre-close' conversation before drafting offers to surface blockers early."
+          );
         }
       }
 
       if (!bottlenecks.length) {
-        bottlenecks.push("No red bottlenecks detected. Use this view to spot issues as volumes change.");
+        bottlenecks.push(
+          "No red bottlenecks detected in this snapshot. Use this view as volumes change or when performance drifts."
+        );
       }
       if (!watch.length) {
-        watch.push("No stages slightly off benchmark. Re-run after major changes to sourcing or bar.");
+        watch.push(
+          "No stages currently on watch. Re-check after major changes in sourcing strategy or role profile."
+        );
       }
       if (!actions.length) {
-        actions.push("Choose one stage to improve and one to protect for this requisition this quarter.");
+        actions.push(
+          "Choose one stage to protect (working well) and one stage to experiment on for this requisition."
+        );
       }
 
       bottlenecksEl.innerHTML = bottlenecks.map((b) => `<li>${b}</li>`).join("");
