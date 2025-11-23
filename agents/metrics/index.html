@@ -123,7 +123,6 @@
       padding: 0.45rem 1.1rem;
       cursor: pointer;
       color: #6b7280;
-      position: relative;
       margin-bottom: -1px;
       transition: background 0.15s ease, color 0.15s ease,
         border-color 0.15s ease, box-shadow 0.15s ease;
@@ -333,7 +332,7 @@
       color: #6b7280;
     }
 
-    /* Bottom root-cause card */
+    /* Bottom root-cause wrapper */
     .root-card {
       margin-top: 1.4rem;
       background: #f9fafb;
@@ -357,12 +356,11 @@
       color: #374151;
     }
 
-    /* Gradient now sits BETWEEN title and table */
     .root-gradient {
       height: 2px;
       border-radius: 999px;
       background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
-      margin: 0.4rem 1.2rem 0.45rem;
+      margin: 0.4rem 1.2rem 0.7rem;
     }
 
     .root-empty {
@@ -372,60 +370,58 @@
       padding: 0.7rem 0.3rem;
     }
 
-    .root-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      font-size: 0.8rem;
-      margin-top: 0.1rem;
-      table-layout: fixed;
+    /* Issue cards inside root-card */
+    .root-issues {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .root-issue-card {
+      background: #ffffff;
       border-radius: 0.75rem;
-      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      padding: 0.7rem 0.9rem 0.85rem;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     }
 
-    /* Root table: all cell content left-aligned */
-    .root-table td {
-      text-align: left;
+    .root-issue-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.5rem;
     }
 
-    .root-table th,
-    .root-table td {
-      border-bottom: 1px solid #e5e7eb;
-      padding: 0.45rem 0.6rem;
-      vertical-align: top;
-      white-space: normal;
-      word-break: break-word;
-      background: #f9fafb;
+    .root-stage-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #111827;
     }
 
-    .root-table tr:nth-child(even) td {
-      background: #f3f4f6;
+    .root-issue-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
     }
 
-    .root-table tr:last-child td {
-      border-bottom: none;
+    @media (max-width: 640px) {
+      .root-issue-body {
+        grid-template-columns: 1fr;
+      }
     }
 
-    .root-table th {
-      background: #f3f4f6;
-      font-size: 0.78rem;
+    .root-col-title {
+      font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: #6b7280;
-      text-align: center; /* keep headers centered */
+      margin-bottom: 0.25rem;
     }
 
-    .root-issue-cell {
-      white-space: nowrap;
-      text-align: left;
-    }
-
-    .root-stage-label {
-      display: block;
-      margin-top: 0.25rem;
+    .root-list {
       font-size: 0.78rem;
       color: #4b5563;
-      font-weight: 600;   /* bold stage names */
     }
 
     .root-list div {
@@ -579,8 +575,6 @@
         <div class="root-header">
           <h3>Diagnostic Summary | Root Cause Table</h3>
         </div>
-
-        <!-- Gradient under title -->
         <div class="root-gradient"></div>
 
         <div id="root-table-container">
@@ -776,7 +770,7 @@
             "Are offer, policy, and benefits competitive?"
           ];
         } else {
-          /* Generic fallbacks so other stages can still show something */
+          /* Generic fallbacks */
           internal = [
             "Is stage coding and data capture accurate?",
             "Are decision criteria and expectations documented?"
@@ -798,7 +792,7 @@
       return rows;
     }
 
-    function renderRootCauseTable(classified) {
+    function renderRootCauseCards(classified) {
       const container = document.getElementById("root-table-container");
       const rows = buildRootCauseRows(classified);
 
@@ -808,22 +802,7 @@
         return;
       }
 
-      let html = `
-        <table class="root-table">
-          <colgroup>
-            <col style="width:18%">
-            <col style="width:41%">
-            <col style="width:41%">
-          </colgroup>
-          <thead>
-            <tr>
-              <th>Issue | Stage</th>
-              <th>Source: Internal | Org</th>
-              <th>Source: External | Candidate</th>
-            </tr>
-          </thead>
-          <tbody>
-      `;
+      let html = `<div class="root-issues">`;
 
       rows.forEach((row) => {
         const pillClass =
@@ -841,29 +820,33 @@
             : "Healthy";
 
         html += `
-          <tr>
-            <td class="root-issue-cell">
+          <div class="root-issue-card">
+            <div class="root-issue-header">
               <span class="diag-pill ${pillClass}">
                 <span class="diag-dot"></span>
                 <span class="diag-label-pill">${labelText}</span>
               </span>
-              <span class="root-stage-label">${row.stageLabel}</span>
-            </td>
-            <td>
-              <div class="root-list">
-                ${row.internal.map((q) => `<div>${q}</div>`).join("")}
+              <span class="root-stage-name">${row.stageLabel}</span>
+            </div>
+            <div class="root-issue-body">
+              <div>
+                <div class="root-col-title">Source: Internal | Org</div>
+                <div class="root-list">
+                  ${row.internal.map((q) => `<div>${q}</div>`).join("")}
+                </div>
               </div>
-            </td>
-            <td>
-              <div class="root-list">
-                ${row.external.map((q) => `<div>${q}</div>`).join("")}
+              <div>
+                <div class="root-col-title">Source: External | Candidate</div>
+                <div class="root-list">
+                  ${row.external.map((q) => `<div>${q}</div>`).join("")}
+                </div>
               </div>
-            </td>
-          </tr>
+            </div>
+          </div>
         `;
       });
 
-      html += `</tbody></table>`;
+      html += `</div>`;
       container.innerHTML = html;
     }
 
@@ -875,7 +858,6 @@
         const conv = s.conv;
         const status = classifyStage(s.name, conv, s.benchmark);
 
-        /* CVR + neutral trend arrow based on previous quarter */
         const prevArr = PREV_CVR[currentReqKey] || [];
         const prev = prevArr[s.index];
         let trendSymbol = "";
@@ -903,7 +885,7 @@
           s.convCell.innerHTML = convHTML;
         }
 
-        /* Diagnosis pills */
+        /* Diagnosis pills in main table */
         if (status === "unknown") {
           s.diagCell.textContent = "—";
         } else {
@@ -934,7 +916,7 @@
         classified.push({ ...s, status });
       });
 
-      renderRootCauseTable(classified);
+      renderRootCauseCards(classified);
     }
 
     function applyReq(key) {
