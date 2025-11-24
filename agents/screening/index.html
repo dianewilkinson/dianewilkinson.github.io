@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Screening A[i]gent – Application Review</title>
+  <title>Screening A[i]gent – Application Screen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
@@ -28,7 +28,7 @@
     }
 
     .card {
-      background: white;
+      background: #ffffff;
       border-radius: 1.25rem;
       box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
       padding: 2rem;
@@ -73,7 +73,7 @@
       }
     }
 
-    /* Tabs row (mirrors Metrics) */
+    /* Tabs row (mirrors Metrics A[i]gent) */
     .tabs-row {
       position: relative;
       display: flex;
@@ -140,12 +140,12 @@
       box-shadow: 0 -1px 4px rgba(15, 23, 42, 0.06);
     }
 
-    /* Top layout: application review + employer history */
+    /* Top 2-column layout */
     .top-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 1.5rem;
-      margin-bottom: 1.6rem;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.25rem;
+      margin-bottom: 1.4rem;
     }
 
     @media (max-width: 768px) {
@@ -156,208 +156,207 @@
 
     .subcard {
       background: #ffffff;
-      border-radius: 1rem;
+      border-radius: 1.1rem;
       border: 1px solid #e5e7eb;
-      padding: 1rem 1.25rem;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      padding: 1.1rem 1.2rem 1.2rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+    }
+
+    .subcard-header {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.6rem;
     }
 
     .subcard-header-pill {
       display: inline-flex;
       align-items: center;
-      padding: 0.35rem 0.9rem;
+      justify-content: center;
+      padding: 0.3rem 0.9rem;
       border-radius: 999px;
       background: #111827;
       color: #f9fafb;
       font-size: 0.8rem;
       font-weight: 600;
-      margin-bottom: 0.6rem;
     }
 
-    .subcard-title {
+    /* Application review table */
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
       font-size: 0.85rem;
-      font-weight: 600;
-      color: #374151;
-      margin-bottom: 0.3rem;
     }
 
-    .subcard-subtitle {
-      font-size: 0.78rem;
-      color: #6b7280;
-      margin-bottom: 0.6rem;
-    }
-
-    /* Application review rows */
-    .app-rows {
-      border-top: 1px solid #f3f4f6;
-      margin-top: 0.2rem;
-    }
-
-    .app-row {
-      display: grid;
-      grid-template-columns: 150px minmax(0, 1fr);
-      column-gap: 0.75rem;
-      padding: 0.5rem 0;
+    .review-table th,
+    .review-table td {
+      padding: 0.42rem 0.25rem;
       border-bottom: 1px dashed #e5e7eb;
-      align-items: center;
-      font-size: 0.84rem;
     }
 
-    .app-row:last-child {
+    .review-table tr:last-child th,
+    .review-table tr:last-child td {
       border-bottom: none;
     }
 
-    .app-label {
+    .review-table th {
+      width: 32%;
       font-weight: 600;
-      color: #374151;
+      color: #4b5563;
+      text-align: left;
+      font-size: 0.82rem;
     }
 
-    .app-main {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-    }
-
-    .app-value {
+    .review-table td.value-cell {
+      width: 38%;
       color: #111827;
-      font-size: 0.85rem;
     }
 
-    /* Status pills (mirror Metrics diag pills, gray background + colored text) */
-    .status-pill {
+    .review-table td.tier-cell {
+      width: 30%;
+      text-align: right;
+    }
+
+    /* Tier pills – gray background, colored dot/text */
+    .tier-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.3rem;
-      padding: 0.18rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.73rem;
-      border: 1px solid #e5e7eb;
-      background: #f3f4f6;
-      white-space: nowrap;
-    }
-
-    .status-dot {
-      width: 0.43rem;
-      height: 0.43rem;
-      border-radius: 999px;
-      background: #9ca3af;
-    }
-
-    .status-pill.strong {
-      color: #15803d;
-    }
-    .status-pill.strong .status-dot {
-      background: #22c55e;
-    }
-
-    .status-pill.average {
-      color: #9a3412;
-    }
-    .status-pill.average .status-dot {
-      background: #f97316;
-    }
-
-    .status-pill.flag {
-      color: #b91c1c;
-    }
-    .status-pill.flag .status-dot {
-      background: #ef4444;
-    }
-
-    .status-label {
-      font-weight: 500;
-    }
-
-    /* Meta pills (tenure / competitor) – neutral gray bg, colored text only */
-    .meta-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
       padding: 0.18rem 0.55rem;
       border-radius: 999px;
       font-size: 0.73rem;
       border: 1px solid #e5e7eb;
+      gap: 0.25rem;
+      min-width: 90px;
       background: #f3f4f6;
-      white-space: nowrap;
+      color: #111827;
     }
 
-    .meta-label {
+    .tier-dot {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 999px;
+      background: #9ca3af;
+    }
+
+    .tier-pill.t1 {
+      color: #15803d;
+    }
+    .tier-pill.t1 .tier-dot { background: #22c55e; }
+
+    .tier-pill.t2 {
+      color: #1d4ed8;
+    }
+    .tier-pill.t2 .tier-dot { background: #3b82f6; }
+
+    .tier-pill.t3 {
+      color: #4b5563;
+    }
+    .tier-pill.t3 .tier-dot { background: #9ca3af; }
+
+    .tier-label {
       font-weight: 500;
     }
 
-    .meta-tenure {
-      color: #334155;
-    }
-
-    .meta-comp-match {
-      color: #15803d;
-    }
-
-    .meta-comp-related {
-      color: #9a3412;
-    }
-
-    .meta-comp-mismatch {
-      color: #b91c1c;
-    }
-
-    .tiny {
-      font-size: 0.75rem;
+    .subcopy {
+      font-size: 0.76rem;
       color: #6b7280;
+      margin-bottom: 0.4rem;
     }
 
-    .employer-block {
-      border-left: 2px solid #e5e7eb;
-      padding-left: 0.75rem;
-      margin-top: 0.7rem;
+    /* Employer history list */
+    .employer-list {
+      margin-top: 0.4rem;
+      font-size: 0.82rem;
+      color: #111827;
     }
 
-    .employer-header {
+    .employer-block + .employer-block {
+      margin-top: 0.55rem;
+      padding-top: 0.55rem;
+      border-top: 1px dashed #e5e7eb;
+    }
+
+    .employer-line {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 0.4rem;
-      margin-bottom: 0.15rem;
+      gap: 0.35rem;
     }
 
     .employer-name {
       font-weight: 600;
-      font-size: 0.85rem;
     }
 
     .employer-dates {
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       color: #6b7280;
     }
 
+    .pill-small {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      gap: 0.25rem;
+      white-space: nowrap;
+    }
+
+    .pill-small.tenure-conf {
+      background: #eef2ff;
+      border-color: #c7d2fe;
+      color: #3730a3;
+    }
+
+    /* Competitor pills: Match/Related/Mismatch */
+    .pill-small.comp-match {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #065f46;
+    }
+
+    .pill-small.comp-related {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      color: #1d4ed8; /* blue, per your request */
+    }
+
+    .pill-small.comp-mismatch {
+      background: #fef2f2;
+      border-color: #fecaca;
+      color: #b91c1c;
+    }
+
     .employer-notes {
-      margin-top: 0.2rem;
+      font-size: 0.76rem;
+      color: #6b7280;
+      margin-left: 0.1rem;
+      margin-top: 0.15rem;
     }
 
-    .employer-notes .tiny {
-      display: block;
+    .overall-comp {
+      font-size: 0.76rem;
+      color: #6b7280;
+      margin-top: 0.8rem;
     }
 
-    .comp-summary {
-      margin-top: 0.6rem;
-    }
-
-    /* Screening summary bottom card */
+    /* Screening summary block (bottom) */
     .summary-card {
-      margin-top: 1.6rem;
+      margin-top: 1.5rem;
       background: #f9fafb;
       border-radius: 0.9rem;
       border: 1px solid #e5e7eb;
-      padding: 0.9rem 0.9rem 1rem;
+      padding: 0.95rem 0.95rem 1.1rem;
       font-size: 0.8rem;
       color: #4b5563;
     }
 
     .summary-header {
       text-align: center;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.25rem;
     }
 
     .summary-header h3 {
@@ -368,8 +367,8 @@
       color: #374151;
     }
 
-    .summary-subtitle {
-      font-size: 0.78rem;
+    .summary-sub {
+      font-size: 0.76rem;
       color: #6b7280;
       margin-top: 0.15rem;
     }
@@ -378,122 +377,140 @@
       height: 2px;
       border-radius: 999px;
       background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
-      margin: 0.5rem 1.2rem 0.7rem;
+      margin: 0.6rem 1.1rem 0.7rem;
     }
 
-    .summary-sections {
+    .decision-row {
       display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-      padding: 0 0.5rem 0.2rem;
-    }
-
-    .summary-section {
-      background: #ffffff;
-      border-radius: 0.75rem;
-      border: 1px solid #e5e7eb;
-      padding: 0.7rem 0.9rem 0.85rem;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-    }
-
-    /* Decision section */
-    .decision-top {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
       flex-wrap: wrap;
-      margin-bottom: 0.5rem;
+      gap: 0.6rem;
+      align-items: center;
+      margin: 0 0.2rem 0.7rem;
     }
 
     .ai-pill {
       display: inline-flex;
       align-items: center;
-      padding: 0.3rem 0.9rem;
+      padding: 0.28rem 0.75rem;
       border-radius: 999px;
       font-size: 0.78rem;
-      font-weight: 700;
-      border: none;
-      background: linear-gradient(90deg, #22c55e, #16a34a);
-      color: #f9fafb;
+      font-weight: 600;
+      gap: 0.35rem;
+      border: 1px solid #16a34a;
+      background: #ecfdf5;
+      color: #166534;
       white-space: nowrap;
     }
 
-    .decision-why {
+    .ai-pill .dot {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .ai-rationale {
       font-size: 0.78rem;
-      color: #4b5563;
+      color: #6b7280;
+      flex: 1;
+      min-width: 190px;
     }
 
     .decision-actions {
       display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
       align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 0.4rem;
-      flex-wrap: wrap;
+      margin: 0 0.2rem 0.6rem;
     }
 
-    .choice-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .choice-btn {
+    .btn-option {
       border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      color: #111827;
       font-size: 0.8rem;
-      padding: 0.32rem 0.9rem;
+      padding: 0.35rem 0.9rem;
       cursor: pointer;
-      color: #374151;
     }
 
-    .choice-btn:hover {
-      background: #e5e7eb;
+    .btn-option:hover {
+      background: #f3f4f6;
     }
 
-    .notes-toggle {
-      border-radius: 999px;
-      border: 1px solid #d1d5db;
-      background: #ffffff;
-      font-size: 0.78rem;
-      padding: 0.28rem 0.8rem;
-      cursor: pointer;
-      color: #374151;
+    /* HM-Review as softer “pause” color */
+    .btn-option.hm-review {
+      border-color: #facc15;
+      background: #fefce8;
+      color: #854d0e;
     }
 
-    .notes-area {
-      margin-top: 0.5rem;
+    .btn-option.primary {
+      border-color: #111827;
+      background: #111827;
+      color: #f9fafb;
     }
 
-    .notes-area textarea {
+    .btn-option.request-info {
+      border-color: #6366f1;
+      color: #3730a3;
+      background: #eef2ff;
+    }
+
+    .btn-option.notes {
+      border-style: dashed;
+      font-style: italic;
+      color: #6b7280;
+      background: #f9fafb;
+    }
+
+    .notes-container {
+      margin: 0 0.2rem 0.8rem;
+      display: none;
+    }
+
+    .notes-container.visible {
+      display: block;
+    }
+
+    textarea.notes-input {
       width: 100%;
-      min-height: 70px;
-      border-radius: 0.6rem;
+      min-height: 72px;
+      border-radius: 0.7rem;
       border: 1px solid #d1d5db;
-      padding: 0.5rem 0.6rem;
-      font-family: inherit;
+      padding: 0.5rem 0.7rem;
       font-size: 0.8rem;
       resize: vertical;
+      font-family: inherit;
     }
 
-    .summary-section-title {
+    .questions-card {
+      background: #ffffff;
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      padding: 0.7rem 0.85rem 0.85rem;
+      margin: 0 0.2rem;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+
+    .questions-title {
       font-size: 0.8rem;
       font-weight: 600;
-      color: #111827;
-      margin-bottom: 0.4rem;
-    }
-
-    .questions-list {
-      margin: 0;
-      padding-left: 1.1rem;
-    }
-
-    .questions-list li {
+      color: #374151;
       margin-bottom: 0.25rem;
     }
 
-    /* Footer badge */
+    .questions-list {
+      margin: 0.2rem 0 0;
+      padding-left: 1.1rem;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .questions-list li + li {
+      margin-top: 0.2rem;
+    }
+
     .footer-note {
       margin-top: 1.5rem;
       font-size: 0.75rem;
@@ -512,6 +529,102 @@
       color: #3730a3;
       margin-left: 0.25rem;
     }
+
+    /* Simple modal for Request More Info (demo only) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.35);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 40;
+    }
+
+    .modal-backdrop.visible {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 0.9rem;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+      padding: 1rem 1.2rem 1.1rem;
+      max-width: 420px;
+      width: 90%;
+      border: 1px solid #e5e7eb;
+      font-size: 0.85rem;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-header h4 {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      border: none;
+      background: transparent;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: #6b7280;
+    }
+
+    .modal-field {
+      margin-top: 0.4rem;
+    }
+
+    .modal-field label {
+      display: block;
+      font-size: 0.76rem;
+      color: #6b7280;
+      margin-bottom: 0.1rem;
+    }
+
+    .modal-input,
+    .modal-textarea {
+      width: 100%;
+      border-radius: 0.6rem;
+      border: 1px solid #d1d5db;
+      padding: 0.35rem 0.5rem;
+      font-size: 0.8rem;
+      font-family: inherit;
+    }
+
+    .modal-textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: 0.7rem;
+    }
+
+    .modal-btn {
+      border-radius: 999px;
+      border: 1px solid #111827;
+      background: #111827;
+      color: #f9fafb;
+      font-size: 0.8rem;
+      padding: 0.32rem 0.9rem;
+      cursor: pointer;
+    }
+
+    .modal-btn.secondary {
+      background: #f9fafb;
+      color: #111827;
+      border-color: #d1d5db;
+    }
   </style>
 </head>
 <body>
@@ -521,12 +634,12 @@
 
       <div class="title-row">
         <h1>Screening A[i]gent</h1>
-        <span class="subtitle-inline" id="jobSubtitle">Application Screen: Enterprise AE</span>
+        <span class="subtitle-inline" id="job-subtitle">Application Screen: Enterprise AE</span>
       </div>
 
       <div class="tabs-row">
         <span class="tabs-label">Active candidates</span>
-        <div class="tabs" id="candidateTabs">
+        <div class="tabs">
           <button class="tab active" data-id="jordan">Jordan</button>
           <button class="tab" data-id="taylor">Taylor</button>
           <button class="tab" data-id="sam">Sam</button>
@@ -534,134 +647,105 @@
       </div>
 
       <div class="top-grid">
-        <!-- Application Review -->
+        <!-- Left: Application review -->
         <div class="subcard">
-          <div class="subcard-header-pill">Application Review</div>
-          <div class="app-rows">
-            <div class="app-row">
-              <div class="app-label">Source</div>
-              <div class="app-main">
-                <div class="app-value" id="v_source"></div>
-                <span class="status-pill strong" id="s_source">
-                  <span class="status-dot"></span>
-                  <span class="status-label">Strong</span>
-                </span>
-              </div>
-            </div>
-
-            <div class="app-row">
-              <div class="app-label">Location</div>
-              <div class="app-main">
-                <div class="app-value" id="v_location"></div>
-                <span class="status-pill strong" id="s_location">
-                  <span class="status-dot"></span>
-                  <span class="status-label">Strong</span>
-                </span>
-              </div>
-            </div>
-
-            <div class="app-row">
-              <div class="app-label">Total Work Experience</div>
-              <div class="app-main">
-                <div class="app-value" id="v_total_exp"></div>
-                <span class="status-pill strong" id="s_total_exp">
-                  <span class="status-dot"></span>
-                  <span class="status-label">Strong</span>
-                </span>
-              </div>
-            </div>
-
-            <div class="app-row">
-              <div class="app-label">Role Experience</div>
-              <div class="app-main">
-                <div class="app-value" id="v_role_exp"></div>
-                <span class="status-pill strong" id="s_role_exp">
-                  <span class="status-dot"></span>
-                  <span class="status-label">Strong</span>
-                </span>
-              </div>
-            </div>
-
-            <div class="app-row">
-              <div class="app-label">Education</div>
-              <div class="app-main">
-                <div class="app-value" id="v_edu"></div>
-                <span class="status-pill average" id="s_edu">
-                  <span class="status-dot"></span>
-                  <span class="status-label">Average</span>
-                </span>
-              </div>
-            </div>
-
-            <div class="app-row">
-              <div class="app-label">Seniority</div>
-              <div class="app-main">
-                <div class="app-value" id="v_seniority"></div>
-                <span class="status-pill flag" id="s_seniority">
-                  <span class="status-dot"></span>
-                  <span class="status-label">Flag</span>
-                </span>
-              </div>
-            </div>
+          <div class="subcard-header">
+            <span class="subcard-header-pill">Application Review</span>
           </div>
+          <div class="subcopy">
+            Structured snapshot used to drive the first recruiter screen.
+          </div>
+
+          <table class="review-table">
+            <tbody>
+              <tr>
+                <th>Location</th>
+                <td class="value-cell" id="val-location"></td>
+                <td class="tier-cell"><span id="tier-location" class="tier-pill"><span class="tier-dot"></span><span class="tier-label"></span></span></td>
+              </tr>
+              <tr>
+                <th>Education</th>
+                <td class="value-cell" id="val-education"></td>
+                <td class="tier-cell"><span id="tier-education" class="tier-pill"><span class="tier-dot"></span><span class="tier-label"></span></span></td>
+              </tr>
+              <tr>
+                <th>Total Work Experience</th>
+                <td class="value-cell" id="val-total-exp"></td>
+                <td class="tier-cell"><span id="tier-total-exp" class="tier-pill"><span class="tier-dot"></span><span class="tier-label"></span></span></td>
+              </tr>
+              <tr>
+                <th>Role Experience</th>
+                <td class="value-cell" id="val-role-exp"></td>
+                <td class="tier-cell"><span id="tier-role-exp" class="tier-pill"><span class="tier-dot"></span><span class="tier-label"></span></span></td>
+              </tr>
+              <tr>
+                <th>Seniority</th>
+                <td class="value-cell" id="val-seniority"></td>
+                <td class="tier-cell"><span id="tier-seniority" class="tier-pill"><span class="tier-dot"></span><span class="tier-label"></span></span></td>
+              </tr>
+              <tr>
+                <th>Competitor Profile</th>
+                <td class="value-cell" id="val-competitor"></td>
+                <td class="tier-cell"><span id="tier-competitor" class="tier-pill"><span class="tier-dot"></span><span class="tier-label"></span></span></td>
+              </tr>
+              <tr>
+                <th>Tenure</th>
+                <td class="value-cell" id="val-tenure"></td>
+                <td class="tier-cell"><span id="tier-tenure" class="tier-pill"><span class="tier-dot"></span><span class="tier-label"></span></span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-        <!-- Employer history & tenure -->
+        <!-- Right: Employer history & tenure detail -->
         <div class="subcard">
-          <div class="subcard-title">Employer History &amp; Tenure</div>
-          <div class="subcard-subtitle">
+          <div class="subcard-header">Employer History &amp; Tenure Detail</div>
+          <div class="subcopy">
             Promotion-safe history with competitor mapping per employer.
           </div>
-          <div id="employers"></div>
-          <div class="tiny comp-summary" id="comp_score_summary"></div>
+
+          <div class="employer-list" id="employer-list"></div>
+
+          <div class="overall-comp" id="overall-competitor"></div>
         </div>
       </div>
 
-      <!-- Screening summary / recommendations -->
+      <!-- Screening summary & recommendations -->
       <div class="summary-card">
         <div class="summary-header">
           <h3>Screening Summary | Recommendations</h3>
-          <div class="summary-subtitle">
+          <div class="summary-sub">
             Start with the AI recommendation, then use these prompts as follow-ups in your recruiter screen.
           </div>
         </div>
         <div class="summary-gradient"></div>
 
-        <div class="summary-sections">
-          <!-- Decision block -->
-          <div class="summary-section">
-            <div class="decision-top">
-              <span class="ai-pill" id="ai_rec">AI Recommendation: Advance</span>
-              <div class="decision-why" id="why_rec"></div>
-            </div>
+        <div class="decision-row">
+          <span class="ai-pill" id="ai-pill">
+            <span class="dot"></span>
+            <span id="ai-pill-label">AI Recommendation: Advance</span>
+          </span>
+          <span class="ai-rationale" id="ai-rationale">
+            AI Decision Rationale: …
+          </span>
+        </div>
 
-            <div class="decision-actions">
-              <div class="choice-buttons">
-                <button type="button" class="choice-btn">Advance</button>
-                <button type="button" class="choice-btn">HM-Review</button>
-                <button type="button" class="choice-btn">Hold</button>
-                <button type="button" class="choice-btn">Decline</button>
-              </div>
-              <button type="button" class="notes-toggle" id="notesToggle">
-                Add notes
-              </button>
-            </div>
+        <div class="decision-actions">
+          <button class="btn-option primary" data-choice="advance">Advance</button>
+          <button class="btn-option hm-review" data-choice="hm-review">HM-Review</button>
+          <button class="btn-option" data-choice="hold">Hold</button>
+          <button class="btn-option" data-choice="decline">Decline</button>
+          <button class="btn-option request-info" id="btn-request-info">Request more info</button>
+          <button class="btn-option notes" id="btn-notes">Add notes…</button>
+        </div>
 
-            <div class="notes-area" id="notesArea" hidden>
-              <textarea
-                id="notesField"
-                placeholder="Notes (saved to ATS): Optional — required with override"
-              ></textarea>
-            </div>
-          </div>
+        <div class="notes-container" id="notes-container">
+          <textarea class="notes-input" id="notes-input" placeholder="Internal notes to save to ATS (override rationale, risks, or next steps)…"></textarea>
+        </div>
 
-          <!-- Interview prompts block -->
-          <div class="summary-section">
-            <div class="summary-section-title">
-              Recommended Recruiter Interview Questions
-            </div>
-            <ul class="questions-list" id="rq_list"></ul>
-          </div>
+        <div class="questions-card">
+          <div class="questions-title">Recommended Recruiter Interview Questions</div>
+          <ul class="questions-list" id="questions-list"></ul>
         </div>
       </div>
 
@@ -672,215 +756,229 @@
     </section>
   </main>
 
+  <!-- Modal for "Request more info" (demo only) -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h4>Request Additional Information</h4>
+        <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-field">
+        <label for="modal-to">To</label>
+        <input id="modal-to" class="modal-input" type="email" placeholder="candidate@example.com" />
+      </div>
+      <div class="modal-field">
+        <label for="modal-subject">Subject</label>
+        <input id="modal-subject" class="modal-input" type="text" value="Quick follow-up on your application" />
+      </div>
+      <div class="modal-field">
+        <label for="modal-body">Message</label>
+        <textarea id="modal-body" class="modal-textarea">Hi there,
+
+Thanks again for your interest in this role. I’d love to clarify a few details so we can properly evaluate your application.
+
+[Add your specific questions here.]
+
+Best,
+[Your name]</textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn secondary" id="modal-cancel">Cancel</button>
+        <button class="modal-btn" id="modal-send">Send (demo)</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Candidate data
     const CANDIDATES = {
       jordan: {
         jobTitle: "Enterprise AE",
-        status: {
-          source: "strong",
-          location: "strong",
-          total: "strong",
-          role: "strong",
-          edu: "average",
-          seniority: "flag"
-        },
-        source: "Referral – Gold (SQS 0.78)",
-        location: "SF Bay Area",
-        totalExp: "7.5 years",
-        roleExp: "5.0 years",
-        edu: "BA",
-        seniority: "High End",
-        employersInLast5: "1 in last 5 yrs",
-        compGlobal: { score: "0.58", label: "Related" },
+        location: { text: "SF Bay Area, CA", tier: 1 },
+        education: { text: "BA", tier: 1 },
+        totalExp: { text: "7.5 years", tier: 1 },
+        roleExp: { text: "5.0 years", tier: 1 },
+        seniority: { text: "High End", tier: 2 },
+        competitorOverall: { label: "Related", detail: "0.58 (Related)", tier: 2 },
+        tenure: { text: "1 in last 5 years", tier: 1 },
         employers: [
           {
             company: "Acme Inc.",
-            span: "2020-01 → present",
+            dates: "2020-01 → present",
+            tenureConf: "High",
+            comp: "related",
+            role: "Enterprise AE",
             notes: [
               "2021-04: Associate AE → AE (promotion)",
               "2022-06: AE → Senior AE (promotion)"
-            ],
-            tenureConf: "High",
-            compClass: "related",
-            compLabel: "Related",
-            score: "0.58"
+            ]
           },
           {
             company: "BetaSoft",
-            span: "2018-01 → 2019-12",
-            notes: ["Single role"],
+            dates: "2018-01 → 2019-12",
             tenureConf: "High",
-            compClass: "mismatch",
-            compLabel: "Mismatch",
-            score: "0.22"
+            comp: "mismatch",
+            role: "AE",
+            notes: ["Single role"]
           }
         ],
-        rec: { label: "Advance" },
-        why:
-          "Resume coverage 0.98 · SQS 0.78 · Data freshness 12d · Tenure Pass",
-        rq: [
-          "What are the current salary bands and expectations for this role?",
-          "What percent of this candidate's pipeline was self-sourced in FY24?",
-          "How long is the typical sales cycle and what is the target ACV for this territory?"
-        ]
-      },
-      taylor: {
-        jobTitle: "Enterprise AE",
-        status: {
-          source: "average",
-          location: "strong",
-          total: "average",
-          role: "average",
-          edu: "strong",
-          seniority: "average"
+        ai: {
+          label: "AI Recommendation: Advance",
+          rationale:
+            "AI Decision Rationale: Resume coverage 0.98 · SQS 0.78 · Data freshness 12d · Tenure Pass"
         },
-        source: "Inbound – Job posting (SQS 0.31)",
-        location: "Remote – PST overlap 4 hours",
-        totalExp: "4.2 years",
-        roleExp: "1.8 years",
-        edu: "BS",
-        seniority: "Mid Band",
-        employersInLast5: "4 in last 5 yrs",
-        compGlobal: { score: "0.22", label: "Mismatch" },
-        employers: [
-          {
-            company: "StartCo",
-            span: "2024-01 → present",
-            notes: ["BDR"],
-            tenureConf: "Medium",
-            compClass: "mismatch",
-            compLabel: "Mismatch",
-            score: "0.20"
-          },
-          {
-            company: "Grow.io",
-            span: "2023-03 → 2023-12",
-            notes: ["SDR"],
-            tenureConf: "Medium",
-            compClass: "related",
-            compLabel: "Related",
-            score: "0.42"
-          },
-          {
-            company: "Taskly",
-            span: "2021-05 → 2023-02",
-            notes: ["SDR"],
-            tenureConf: "Low",
-            compClass: "mismatch",
-            compLabel: "Mismatch",
-            score: "0.18"
-          },
-          {
-            company: "Retail PT",
-            span: "2020-01 → 2021-04",
-            notes: ["Associate"],
-            tenureConf: "High",
-            compClass: "mismatch",
-            compLabel: "Mismatch",
-            score: "0.10"
-          }
-        ],
-        rec: { label: "HM-Review" },
-        why:
-          "Resume coverage 0.62 · SQS 0.31 · Data freshness 8d · Tenure Flag",
-        rq: [
-          "How does this candidate's experience align with the required seniority and ramp expectations?",
+        questions: [
+          "How does this candidate’s experience align with the required seniority and ramp expectations?",
           "What context can they provide for each job change in the last five years?",
           "What outbound motion have they owned end-to-end, and what conversion rates did they achieve?"
         ]
       },
+      taylor: {
+        jobTitle: "Enterprise AE",
+        location: { text: "Remote — PST overlap 4 hours", tier: 2 },
+        education: { text: "BS", tier: 1 },
+        totalExp: { text: "4.2 years", tier: 2 },
+        roleExp: { text: "1.8 years", tier: 2 },
+        seniority: { text: "Mid Band", tier: 2 },
+        competitorOverall: { label: "Mismatch", detail: "0.22 (Mismatch)", tier: 3 },
+        tenure: { text: "4 in last 5 years", tier: 3 },
+        employers: [
+          {
+            company: "StartCo",
+            dates: "2024-01 → present",
+            tenureConf: "Medium",
+            comp: "mismatch",
+            role: "BDR",
+            notes: []
+          },
+          {
+            company: "Grow.io",
+            dates: "2023-03 → 2023-12",
+            tenureConf: "Medium",
+            comp: "related",
+            role: "SDR",
+            notes: []
+          },
+          {
+            company: "Taskly",
+            dates: "2021-05 → 2023-02",
+            tenureConf: "Low",
+            comp: "mismatch",
+            role: "SDR",
+            notes: []
+          },
+          {
+            company: "Retail PT",
+            dates: "2020-01 → 2021-04",
+            tenureConf: "High",
+            comp: "mismatch",
+            role: "Associate",
+            notes: []
+          }
+        ],
+        ai: {
+          label: "AI Recommendation: HM-Review",
+          rationale:
+            "AI Decision Rationale: Resume coverage 0.62 · SQS 0.31 · Data freshness 8d · Tenure Flag"
+        },
+        questions: [
+          "How does this candidate’s experience align with the required seniority and ramp expectations?",
+          "What context can they share to explain each job change in the past five years?",
+          "What outbound motion have they personally driven, and what conversion rates did they achieve?"
+        ]
+      },
       sam: {
         jobTitle: "Enterprise AE",
-        status: {
-          source: "strong",
-          location: "strong",
-          total: "strong",
-          role: "strong",
-          edu: "average",
-          seniority: "strong"
-        },
-        source: "Sourced – Talent map (SQS 0.65)",
-        location: "Austin, TX (open to hybrid)",
-        totalExp: "9.1 years",
-        roleExp: "6.2 years",
-        edu: "BA",
-        seniority: "Mid Band",
-        employersInLast5: "2 in last 5 yrs",
-        compGlobal: { score: "0.74", label: "Match" },
+        location: { text: "Austin, TX (open to hybrid)", tier: 1 },
+        education: { text: "BA", tier: 1 },
+        totalExp: { text: "9.1 years", tier: 1 },
+        roleExp: { text: "6.2 years", tier: 1 },
+        seniority: { text: "Mid Band", tier: 1 },
+        competitorOverall: { label: "Match", detail: "0.74 (Match)", tier: 1 },
+        tenure: { text: "2 in last 5 years", tier: 1 },
         employers: [
           {
             company: "Contenda",
-            span: "2022-02 → present",
-            notes: ["Enterprise AE", "2023-08: Club Winner"],
+            dates: "2022-02 → present",
             tenureConf: "High",
-            compClass: "match",
-            compLabel: "Match",
-            score: "0.74"
+            comp: "match",
+            role: "Enterprise AE",
+            notes: ["2023-08: Club Winner"]
           },
           {
             company: "Helios Data",
-            span: "2019-01 → 2022-01",
-            notes: ["AE → Sr AE"],
+            dates: "2019-01 → 2022-01",
             tenureConf: "High",
-            compClass: "related",
-            compLabel: "Related",
-            score: "0.55"
+            comp: "related",
+            role: "AE → Sr AE",
+            notes: []
           }
         ],
-        rec: { label: "Advance" },
-        why:
-          "Resume coverage 0.91 · SQS 0.65 · Data freshness 15d · Tenure Pass",
-        rq: [
-          "What were the ACV and sales cycle for the candidate's top three wins?",
-          "What is their individual versus team-sourced pipeline split over the last year?",
-          "How do they feel about the territory design and named accounts for this role?"
+        ai: {
+          label: "AI Recommendation: Advance",
+          rationale:
+            "AI Decision Rationale: Resume coverage 0.91 · SQS 0.65 · Data freshness 15d · Tenure Pass"
+        },
+        questions: [
+          "How do their top three wins map to the ACV and cycle for this role?",
+          "What mix of IC-generated versus team-sourced pipeline do they typically own?",
+          "What territory and named-account expectations set them up for success?"
         ]
       }
     };
 
-    function setStatusPill(id, level) {
-      const pill = document.getElementById(id);
-      if (!pill) return;
-      const labelSpan = pill.querySelector(".status-label");
-      pill.className = "status-pill " + level;
-      if (labelSpan) {
-        if (level === "strong") labelSpan.textContent = "Strong";
-        else if (level === "average") labelSpan.textContent = "Average";
-        else labelSpan.textContent = "Flag";
-      }
+    function setTierPill(elId, tier) {
+      const el = document.getElementById(elId);
+      if (!el) return;
+      el.className = "tier-pill t" + (tier || 3);
+      el.innerHTML =
+        '<span class="tier-dot"></span><span class="tier-label">Tier ' +
+        (tier || 3) +
+        "</span>";
     }
 
-    function compMetaClasses(compClass) {
-      if (compClass === "match") return "meta-pill meta-comp-match";
-      if (compClass === "related") return "meta-pill meta-comp-related";
-      return "meta-pill meta-comp-mismatch";
-    }
+    function renderEmployers(list, overall) {
+      const container = document.getElementById("employer-list");
+      const overallEl = document.getElementById("overall-competitor");
+      if (!container || !overallEl) return;
 
-    function renderEmployers(list) {
-      return list
+      container.innerHTML = list
         .map((e) => {
+          const compClass =
+            e.comp === "match"
+              ? "comp-match"
+              : e.comp === "related"
+              ? "comp-related"
+              : "comp-mismatch";
+
           const notesHtml = e.notes
-            .map((n) => `<div class="tiny">• ${n}</div>`)
+            .map((n) => `<div class="employer-notes">• ${n}</div>`)
             .join("");
+
           return `
           <div class="employer-block">
-            <div class="employer-header">
+            <div class="employer-line">
               <span class="employer-name">${e.company}</span>
-              <span class="employer-dates tiny">${e.span}</span>
-              <span class="meta-pill meta-tenure">
-                <span class="meta-label">Tenure: ${e.tenureConf}</span>
-              </span>
-              <span class="${compMetaClasses(e.compClass)}">
-                <span class="meta-label">Competitor: ${e.compLabel}</span>
-              </span>
+              <span class="employer-dates">${e.dates}</span>
+              <span class="pill-small tenure-conf">Tenure: ${e.tenureConf}</span>
+              <span class="pill-small ${compClass}">Competitor: ${
+            e.comp.charAt(0).toUpperCase() + e.comp.slice(1)
+          }</span>
             </div>
-            <div class="employer-notes">
-              ${notesHtml}
-            </div>
+            ${
+              e.role
+                ? `<div class="employer-notes">${e.role}</div>`
+                : ""
+            }
+            ${notesHtml}
           </div>`;
         })
         .join("");
+
+      if (overall?.detail && overall?.label) {
+        overallEl.textContent = `Overall competitor score: ${overall.detail}`;
+      } else {
+        overallEl.textContent = "";
+      }
     }
 
     function renderCandidate(id) {
@@ -888,84 +986,88 @@
       if (!c) return;
 
       // Subtitle
-      const subtitle = document.getElementById("jobSubtitle");
+      const subtitle = document.getElementById("job-subtitle");
       if (subtitle) {
         subtitle.textContent = "Application Screen: " + (c.jobTitle || "");
       }
 
-      // Main values
-      document.getElementById("v_source").textContent = c.source;
-      document.getElementById("v_location").textContent = c.location;
-      document.getElementById("v_total_exp").textContent = c.totalExp;
-      document.getElementById("v_role_exp").textContent = c.roleExp;
-      document.getElementById("v_edu").textContent = c.edu;
-      document.getElementById("v_seniority").textContent = c.seniority;
+      // Application review values
+      document.getElementById("val-location").textContent = c.location.text;
+      document.getElementById("val-education").textContent = c.education.text;
+      document.getElementById("val-total-exp").textContent = c.totalExp.text;
+      document.getElementById("val-role-exp").textContent = c.roleExp.text;
+      document.getElementById("val-seniority").textContent = c.seniority.text;
+      document.getElementById("val-competitor").textContent =
+        c.competitorOverall.label;
+      document.getElementById("val-tenure").textContent = c.tenure.text;
 
-      // Status pills
-      setStatusPill("s_source", c.status.source);
-      setStatusPill("s_location", c.status.location);
-      setStatusPill("s_total_exp", c.status.total);
-      setStatusPill("s_role_exp", c.status.role);
-      setStatusPill("s_edu", c.status.edu);
-      setStatusPill("s_seniority", c.status.seniority);
+      setTierPill("tier-location", c.location.tier);
+      setTierPill("tier-education", c.education.tier);
+      setTierPill("tier-total-exp", c.totalExp.tier);
+      setTierPill("tier-role-exp", c.roleExp.tier);
+      setTierPill("tier-seniority", c.seniority.tier);
+      setTierPill("tier-competitor", c.competitorOverall.tier);
+      setTierPill("tier-tenure", c.tenure.tier);
 
-      // Employers card
-      document.getElementById("employers").innerHTML = renderEmployers(
-        c.employers
-      );
-      const compSummary = document.getElementById("comp_score_summary");
-      if (compSummary) {
-        compSummary.textContent =
-          "Overall competitor score: " +
-          (c.compGlobal?.score || "—") +
-          (c.compGlobal?.label ? " (" + c.compGlobal.label + ")" : "");
-      }
+      // Employer history
+      renderEmployers(c.employers, c.competitorOverall);
 
-      // AI recommendation
-      const aiRec = document.getElementById("ai_rec");
-      if (aiRec) {
-        aiRec.textContent = "AI Recommendation: " + c.rec.label;
-      }
-      const why = document.getElementById("why_rec");
-      if (why) {
-        why.textContent = "AI Decision Rationale: " + c.why;
-      }
+      // AI rec
+      document.getElementById("ai-pill-label").textContent = c.ai.label;
+      document.getElementById("ai-rationale").textContent = c.ai.rationale;
 
-      // Questions – sentence format
-      const rqList = document.getElementById("rq_list");
-      if (rqList) {
-        rqList.innerHTML = c.rq.map((q) => `<li>${q}</li>`).join("");
-      }
+      // Questions
+      const qList = document.getElementById("questions-list");
+      qList.innerHTML = c.questions
+        .map((q) => `<li>${q}</li>`)
+        .join("");
 
       // Tabs active state
-      document
-        .querySelectorAll(".tab")
-        .forEach((btn) => btn.classList.remove("active"));
-      const activeBtn = document.querySelector(`.tab[data-id="${id}"]`);
-      if (activeBtn) activeBtn.classList.add("active");
+      document.querySelectorAll(".tab").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.id === id);
+      });
     }
 
-    // Candidate tab handler
-    document.getElementById("candidateTabs").addEventListener("click", (e) => {
-      const btn = e.target.closest(".tab");
-      if (!btn) return;
-      const id = btn.getAttribute("data-id");
-      renderCandidate(id);
+    // Tab click
+    document.querySelectorAll(".tab").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        renderCandidate(btn.dataset.id);
+      });
     });
 
     // Notes toggle
-    const notesToggle = document.getElementById("notesToggle");
-    const notesArea = document.getElementById("notesArea");
-    if (notesToggle && notesArea) {
-      notesToggle.addEventListener("click", () => {
-        const isHidden = notesArea.hasAttribute("hidden");
-        if (isHidden) {
-          notesArea.removeAttribute("hidden");
-          notesToggle.textContent = "Hide notes";
-        } else {
-          notesArea.setAttribute("hidden", "");
-          notesToggle.textContent = "Add notes";
-        }
+    const notesBtn = document.getElementById("btn-notes");
+    const notesContainer = document.getElementById("notes-container");
+    if (notesBtn && notesContainer) {
+      notesBtn.addEventListener("click", () => {
+        notesContainer.classList.toggle("visible");
+      });
+    }
+
+    // Request more info modal
+    const modalBackdrop = document.getElementById("modal-backdrop");
+    const openRequestBtn = document.getElementById("btn-request-info");
+    const modalClose = document.getElementById("modal-close");
+    const modalCancel = document.getElementById("modal-cancel");
+    const modalSend = document.getElementById("modal-send");
+
+    function closeModal() {
+      modalBackdrop.classList.remove("visible");
+    }
+
+    if (openRequestBtn && modalBackdrop) {
+      openRequestBtn.addEventListener("click", () => {
+        modalBackdrop.classList.add("visible");
+      });
+    }
+    if (modalClose) modalClose.addEventListener("click", closeModal);
+    if (modalCancel) modalCancel.addEventListener("click", closeModal);
+
+    if (modalSend) {
+      modalSend.addEventListener("click", () => {
+        // Demo only – no real email
+        alert("Request sent (demo only).");
+        closeModal();
       });
     }
 
