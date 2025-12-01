@@ -24,6 +24,8 @@ This creates:
 - Longer time-to-fill  
 - Lower close rates  
 - Higher operational drag on the recruiting team
+- Low Candidate Satisfaction
+- Poor Employer Branding
 
 ### 1.2 What Workflow A[i]gent Does
 
