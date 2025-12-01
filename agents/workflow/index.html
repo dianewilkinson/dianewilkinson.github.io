@@ -44,8 +44,8 @@
     .suite-header {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
+      gap: 0.5rem;
+      margin-bottom: 1.4rem;
     }
 
     .suite-top-row {
@@ -65,12 +65,12 @@
       width: 24px;
       height: 24px;
       border-radius: 999px;
-      /* more pink / purple, less orange */
+      /* more purple / pink, less orange */
       background:
-        radial-gradient(circle at 28% 22%, #ffffff 0, #f9a8d4 18%, #ec4899 46%, #8b5cf6 78%, #6366f1 100%);
+        radial-gradient(circle at 28% 22%, #ffffff 0, #f9a8ff 18%, #e879f9 40%, #a855f7 70%, #6366f1 100%);
       box-shadow:
         0 0 0 2px rgba(255, 255, 255, 0.9),
-        0 8px 16px rgba(15, 23, 42, 0.28);
+        0 8px 18px rgba(76, 29, 149, 0.45);
     }
 
     .suite-label {
@@ -91,6 +91,8 @@
       border-radius: 999px;
       border: 1px solid transparent;
       background: #f9fafb;
+      align-self: flex-start;
+      margin-top: 0.2rem;
     }
 
     .back-link:hover {
@@ -108,6 +110,8 @@
       display: inline-flex;
       flex-wrap: wrap;
       gap: 0.3rem;
+      align-items: center;
+      justify-content: flex-end;
     }
 
     .agent-nav-label {
@@ -141,8 +145,11 @@
 
     @media (max-width: 640px) {
       .suite-top-row {
-        flex-direction: column-reverse;
+        flex-direction: column;
         align-items: flex-start;
+      }
+      .agent-nav {
+        justify-content: flex-start;
       }
     }
 
@@ -151,7 +158,7 @@
     .title-row {
       display: flex;
       flex-wrap: wrap;
-      align-items: baseline;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 0.75rem;
       margin-bottom: 0.4rem;
@@ -164,16 +171,17 @@
     }
 
     .subtitle-inline {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 500;
       color: #4b5563;
       opacity: 0.98;
-      white-space: nowrap;
+      flex: 1 1 auto;
+      text-align: right;
     }
 
     @media (max-width: 640px) {
       .subtitle-inline {
-        white-space: normal;
+        text-align: left;
       }
     }
 
@@ -270,7 +278,6 @@
       top: 50%;
       height: 2px;
       border-radius: 999px;
-      /* gradient line to match suite */
       background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
       z-index: 0;
       opacity: 0.65;
@@ -337,7 +344,7 @@
       }
     }
 
-    /* Two-column layout for details + sample email */
+    /* Two-column layout for details + comms */
 
     .timeline-layout {
       margin-top: 0.6rem;
@@ -421,6 +428,8 @@
       font-size: 0.9rem;
     }
 
+    /* Stage communications */
+
     .sample-email-card {
       border-radius: 0.9rem;
       border: 1px solid #e5e7eb;
@@ -430,32 +439,66 @@
       color: #4b5563;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
-      max-height: 320px;
-      overflow: auto;
+      gap: 0.4rem;
+      max-height: 340px;
+      overflow: hidden;
     }
 
-    .sample-label-row {
+    .sample-header {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.75rem;
-      color: #6b7280;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 0.25rem;
     }
 
-    .sample-label-pill {
+    .sample-title {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .sample-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .sample-tab {
       border-radius: 999px;
-      padding: 0.1rem 0.55rem;
       border: 1px solid #e5e7eb;
-      background: #f3f4f6;
+      background: #f9fafb;
+      padding: 0.18rem 0.7rem;
       font-size: 0.74rem;
       color: #4b5563;
+      cursor: pointer;
+    }
+
+    .sample-tab:hover {
+      background: #f3f4f6;
+    }
+
+    .sample-tab.active {
+      border-color: #6366f1;
+      background: #eef2ff;
+      color: #3730a3;
+      font-weight: 500;
+    }
+
+    .sample-scroll {
+      overflow: auto;
+      padding-right: 0.2rem;
+    }
+
+    .sample-meta {
+      font-size: 0.76rem;
+      color: #6b7280;
+      margin-bottom: 0.25rem;
     }
 
     .sample-subject {
       font-weight: 600;
       color: #111827;
-      margin-top: 0.15rem;
+      margin-bottom: 0.35rem;
     }
 
     .sample-body {
@@ -539,20 +582,21 @@
             <span class="brand-orb" aria-hidden="true"></span>
             <span class="suite-label">A[i]gents Portfolio · Demo</span>
           </div>
-          <!-- Update this href to whatever your main portfolio/agents hub is -->
-          <a class="back-link" href="../../index.html">
-            <span class="arrow">←</span>
-            <span>Back to A[i]gents overview</span>
-          </a>
+          <!-- Mini suite nav -->
+          <nav class="agent-nav" aria-label="A[i]gents navigation">
+            <span class="agent-nav-label">Agents</span>
+            <a class="agent-nav-link" href="../screening/index.html">Screening A[i]gent</a>
+            <a class="agent-nav-link" href="../metrics/index.html">Metrics A[i]gent</a>
+            <a class="agent-nav-link active" href="./index.html">Workflow A[i]gent</a>
+          </nav>
         </div>
 
-        <!-- Mini suite nav -->
-        <nav class="agent-nav" aria-label="A[i]gents navigation">
-          <span class="agent-nav-label">Agents</span>
-          <a class="agent-nav-link" href="../screening/index.html">Screening A[i]gent</a>
-          <a class="agent-nav-link" href="../metrics/index.html">Metrics A[i]gent</a>
-          <a class="agent-nav-link active" href="./index.html">Workflow A[i]gent</a>
-        </nav>
+        <!-- Back to overview -->
+        <!-- Update href to your main portfolio / agents hub -->
+        <a class="back-link" href="../../index.html">
+          <span class="arrow">←</span>
+          <span>Back to A[i]gents overview</span>
+        </a>
       </header>
 
       <!-- Hero -->
@@ -580,7 +624,7 @@
           <div class="stat-label">Automated actions</div>
           <div class="stat-value">20+</div>
           <div class="stat-sub">
-            Confirmations, reminders, nudges, and delay updates per requisition.
+            Confirmations, reminders, nudges, time-based triggers, and delay updates.
           </div>
         </div>
         <div class="stat-card">
@@ -592,7 +636,7 @@
         </div>
       </div>
 
-      <!-- Timeline + sample workflow -->
+      <!-- Timeline + comms -->
       <div class="section-title">Interview workflow timeline</div>
       <div class="section-subtitle">Click a stage to see candidate comms & automations</div>
 
@@ -626,12 +670,14 @@
       </div>
 
       <div class="timeline-layout">
-        <div class="timeline-stage-card" id="stage-details">
-          <!-- Filled by JS -->
-        </div>
+        <div class="timeline-stage-card" id="stage-details"></div>
 
-        <div class="sample-email-card" id="sample-email">
-          <!-- Filled by JS -->
+        <div class="sample-email-card">
+          <div class="sample-header">
+            <div class="sample-title">Stage communications</div>
+            <div class="sample-tabs" id="comm-tabs"></div>
+          </div>
+          <div class="sample-scroll" id="sample-email-content"></div>
         </div>
       </div>
 
@@ -642,7 +688,7 @@
           <div class="solves-col">
             <div class="solves-col-title">Operational drag</div>
             <div>
-              Less chasing, more recruiting. Automates the repetitive communication so recruiters
+              Less chasing, more recruiting. Automates repetitive communication so recruiters
               spend time on calibration, decision support, and candidate coaching instead of
               reminders and manual updates.
             </div>
@@ -674,6 +720,8 @@
   </main>
 
   <script>
+    /* Stage definitions with workflow + multiple comms per stage */
+
     const STAGE_CONTENT = {
       screen: {
         title: "Initial Screen workflow",
@@ -685,21 +733,61 @@
           "If there’s still no reply at 96 hours, alert the recruiter to follow up or adjust priority.",
           "Once a time is booked, send a calendar invite and confirmation email with expectations for the call."
         ],
-        sample: {
-          type: "DW · Sample: Initial screen confirmation",
-          badge: "Candidate-facing",
-          subject: "[Company] – Initial Conversation for [Role] – [Date/Time]",
-          body: `Hi [First name],
+        comms: [
+          {
+            id: "screen-cand-invite",
+            label: "Candidate – invite to schedule",
+            audience: "Candidate-facing · Trigger: on stage entry",
+            subject: "Subject: [Company] – Initial Conversation for [Role]",
+            body: `Hi [First name],
 
-Thanks for taking the time to speak with us! This 30-minute call will focus on your experience, what you’re looking for next, and how this role fits.
+Thanks for your interest in [Company] and the [Role] position. We'd love to set up a short conversation to learn more about your background and share details about the role.
 
-If you need to reschedule or request accommodations, you can use the link below or reply directly to this email.
-
+You can pick a time that works best for you using the link below:
 [Calendar link]
+
+If you don't see a time that works, reply here and we’ll help coordinate something that does.
 
 Best,
 [Recruiter name]`
-        }
+          },
+          {
+            id: "screen-cand-followup",
+            label: "Candidate – post-screen follow-up (time-based)",
+            audience: "Candidate-facing · Trigger: 1 hour after interview start",
+            subject: "Subject: Thanks for speaking with us about [Role]",
+            body: `Hi [First name],
+
+Thank you for taking the time to speak with us today about [Role]. We enjoyed learning more about your experience and what you're looking for next.
+
+If you'd like to dig more into our culture and how we work, you can explore:
+• Careers page: [link]
+• Team blog: [link]
+• Employee stories: [link]
+
+We’re reviewing notes from today’s conversation and will follow up with next steps soon.
+
+Thanks again,
+[Recruiter name]`
+          },
+          {
+            id: "screen-rec-alert",
+            label: "Recruiter – follow-up alert",
+            audience: "Internal · Trigger: no candidate reply at 96 hours",
+            subject: "Subject: Screening invite pending for [Candidate] – [Role]",
+            body: `Hi [Recruiter name],
+
+[Candidate] has been in the Initial Screen stage for 96+ hours without scheduling time.
+
+Suggested next steps:
+• Send a quick 1–2 line check-in via email or LinkedIn.
+• Confirm the contact info in the ATS is accurate.
+• Decide whether to keep warm, fast-follow, or move out of process.
+
+You can jump directly to the candidate profile here:
+[ATS candidate link]`
+          }
+        ]
       },
       hm: {
         title: "HM / Tech interview workflow",
@@ -708,24 +796,93 @@ Best,
         items: [
           "Send candidate confirmation with agenda and interviewer names.",
           "24 hours before the interview, trigger a reminder with location/Zoom link.",
-          "After the interview end time, send hiring manager a scorecard nudge.",
-          "Escalate to TA lead if the scorecard is still missing after 48 hours."
+          "Before the interview, send hiring manager a prep packet with candidate context and focus areas.",
+          "After the interview end time, send hiring manager a scorecard nudge, followed by time-based reminders until submitted."
         ],
-        sample: {
-          type: "DW · Sample: HM scorecard reminder",
-          badge: "Internal | HM",
-          subject: "[Action needed] Scorecard for [Candidate] – [Role]",
-          body: `Hi [Manager name],
+        comms: [
+          {
+            id: "hm-cand-confirm",
+            label: "Candidate – confirmation & agenda",
+            audience: "Candidate-facing · Trigger: when HM/Tech interview booked",
+            subject: "Subject: Your upcoming interview for [Role] at [Company]",
+            body: `Hi [First name],
 
-Thanks for meeting with [Candidate] today. When you have a moment, please submit your scorecard in the ATS so we can keep the process moving.
+Your next conversation for [Role] is confirmed for [Date / Time].
 
-You can jump directly to the form here:
+You’ll be speaking with:
+• [HM/Interviewer name] – [Title]
+
+We’ll focus on your experience in [focus areas], how you approach [problem space], and what you’re looking for in your next role. The interview will be held via [Zoom/onsite details].
+
+If anything changes or you need to reschedule, you can reply directly to this email.
+
+Looking forward to it!`
+          },
+          {
+            id: "hm-cand-post",
+            label: "Candidate – post-interview reflection + resources",
+            audience: "Candidate-facing · Trigger: 1 hour after interview start",
+            subject: "Subject: Thanks again for meeting with [Interviewer] – [Role]",
+            body: `Hi [First name],
+
+Thanks again for taking the time to meet with [Interviewer] today.
+
+If you'd like to learn more while we review feedback, here are a few helpful links:
+• How our team works: [link]
+• Product & roadmap overview: [link]
+• Values and leadership principles: [link]
+
+We aim to share an update within [timeline]. If your timeline changes or you receive other offers, please reply here so we can plan accordingly.
+
+Best,
+[Recruiting team]`
+          },
+          {
+            id: "hm-prep",
+            label: "Hiring manager – prep packet",
+            audience: "Internal · Trigger: 24 hours before interview",
+            subject: "Subject: Prep for interview with [Candidate] – [Role]",
+            body: `Hi [Manager name],
+
+Here’s your prep packet for tomorrow’s interview with [Candidate] for [Role].
+
+Quick context:
+• Source: [referral / outbound / inbound]  
+• Key experience: [highlights]  
+• Risk / watchouts: [notes]
+
+Focus areas for you:
+• Evaluate: [skills / behaviors]  
+• Calibrate: level vs. expectations for this role  
+• Capture: concrete examples to support your recommendation
+
+You can open the scorecard directly here:
 [Scorecard link]
 
-If you’re on the fence or would like a quick debrief with Recruiting, reply here and we’ll set it up.
+The closer you submit feedback to interview time, the more accurate and actionable it will be. Thank you!`
+          },
+          {
+            id: "hm-scorecard",
+            label: "Hiring manager – scorecard reminders",
+            audience: "Internal · Trigger: end of interview + time-based nudges",
+            subject: "Subject: Action needed – scorecard for [Candidate] – [Role]",
+            body: `Hi [Manager name],
 
-Thank you!`
-        }
+Quick reminder to submit your scorecard for [Candidate] for [Role].
+
+Capturing detailed feedback while the conversation is fresh helps:
+• Avoid recency and halo bias  
+• Give other interviewers richer context  
+• Keep candidates from sitting in limbo
+
+You can submit feedback here:
+[Scorecard link]
+
+If you’d like a quick debrief before submitting, reply here and Recruiting will set it up.
+
+Thanks for helping us keep the process tight.`
+          }
+        ]
       },
       panel: {
         title: "Panel workflow",
@@ -737,22 +894,68 @@ Thank you!`
           "Distribute tailored scorecard prompts to each panelist based on evaluation focus.",
           "After all scorecards are submitted, send hiring manager a summary prompt to make a decision."
         ],
-        sample: {
-          type: "DW · Sample: Panel confirmation",
-          badge: "Candidate-facing",
-          subject: "[Company] – Panel interview details for [Role]",
-          body: `Hi [First name],
+        comms: [
+          {
+            id: "panel-cand-confirm",
+            label: "Candidate – consolidated panel confirmation",
+            audience: "Candidate-facing · Trigger: when panel is scheduled",
+            subject: "Subject: Panel interview details for [Role] at [Company]",
+            body: `Hi [First name],
 
-We’re excited to move you forward to our panel conversation for [Role]. This session will run for [duration] and you’ll meet with:
+We’re excited to move you forward to our panel conversation for [Role]. Your panel is scheduled for [date/time] and will run approximately [duration].
 
+You’ll meet with:
 • [Interviewer 1] – [Focus area]  
 • [Interviewer 2] – [Focus area]  
 • [Interviewer 3] – [Focus area]
 
-Your Zoom link and calendar invite are below. If anything comes up, feel free to reply to this email and we’ll help you reschedule.
+We’ll focus on how you approach [problem space], how you collaborate across teams, and how you make decisions with incomplete information.
 
-Looking forward to it!`
-        }
+Your calendar invite and [Zoom/onsite] details are included below. If anything comes up, reply here and we’ll help you reschedule.
+
+Looking forward to the conversation!`
+          },
+          {
+            id: "panel-panelist",
+            label: "Panelists – expectations & coverage",
+            audience: "Internal · Trigger: 24 hours before panel",
+            subject: "Subject: Panel coverage & scorecards for [Candidate] – [Role]",
+            body: `Hi team,
+
+Tomorrow you’ll be meeting with [Candidate] for [Role]. To keep the panel structured and avoid overlap, here’s the coverage plan:
+
+• [Interviewer 1] – depth in [area]; focus on [capabilities]  
+• [Interviewer 2] – collaboration / cross-functional work  
+• [Interviewer 3] – problem solving and decision making
+
+Please review the candidate profile and your scorecard prompts before the interview:
+[Scorecard link]
+
+Right after the panel, take 5–10 minutes to submit feedback independently. The sooner feedback is captured, the less bias creeps in.
+
+Thank you!`
+          },
+          {
+            id: "panel-cand-post",
+            label: "Candidate – post-panel expectations",
+            audience: "Candidate-facing · Trigger: 1–2 hours after panel start",
+            subject: "Subject: Thank you for joining the panel – next steps for [Role]",
+            body: `Hi [First name],
+
+Thank you again for spending so much time with the team today. We know a panel is a big time investment.
+
+We’ll debrief as a group over the next [timeline] and will share an update with you by [date]. In the meantime, here are a few resources you might find helpful:
+
+• How the team is structured today: [link]  
+• What we’re building next: [link]  
+• Culture and values in practice: [link]
+
+If your situation changes or you receive other offers, please let us know so we can respond thoughtfully.
+
+Best,
+[Recruiting team]`
+          }
+        ]
       },
       final: {
         title: "Final interview workflow",
@@ -764,18 +967,65 @@ Looking forward to it!`
           "Notify recruiter if signals indicate high risk of competing offers or timing collisions.",
           "After final, trigger a decision reminder to the hiring team tied to agreed SLA."
         ],
-        sample: {
-          type: "DW · Sample: Final round follow-up",
-          badge: "Candidate-facing",
-          subject: "Thanks for meeting with us – next steps for [Role]",
-          body: `Hi [First name],
+        comms: [
+          {
+            id: "final-cand-confirm",
+            label: "Candidate – final round confirmation",
+            audience: "Candidate-facing · Trigger: when final round booked",
+            subject: "Subject: Final interview details for [Role] at [Company]",
+            body: `Hi [First name],
 
-Thank you again for taking the time to meet with the team today. We’re wrapping up final conversations and expect to have an update for you by [date].
+You’re scheduled for a final conversation for [Role] on [date/time].
 
-If you receive other offers or your timeline changes, please reply here so we can plan thoughtfully on our side as well.
+In this conversation we’ll focus on:
+• Any remaining questions you have  
+• How this role fits into your longer-term goals  
+• How we’re thinking about the offer and timeline
 
-We appreciate your time and interest in [Company]!`
-        }
+We expect to share a decision within [timeline] after this conversation.
+
+If you have any competing offers or deadlines, please reply here so we can factor that into our planning.
+
+Best,
+[Recruiting team]`
+          },
+          {
+            id: "final-cand-checkin",
+            label: "Candidate – offer expectation check-in",
+            audience: "Candidate-facing · Trigger: 24 hours before final",
+            subject: "Subject: Quick check-in before your final interview for [Role]",
+            body: `Hi [First name],
+
+Ahead of your final conversation tomorrow, it would be helpful to understand where you are in your search.
+
+If you’re open to it, please reply with:
+• Any offer timelines you’re currently working with  
+• Your target compensation range  
+• Other roles or companies you’re most excited about
+
+This helps us avoid surprises on timing and tailor any potential offer to what matters most to you.
+
+Thank you!`
+          },
+          {
+            id: "final-hm-reminder",
+            label: "Hiring team – decision reminder",
+            audience: "Internal · Trigger: SLA window after final",
+            subject: "Subject: Decision needed – [Candidate] for [Role]",
+            body: `Hi team,
+
+[Candidate] completed their final conversation for [Role] on [date]. To keep the process tight and respectful of the candidate’s time, we’d like to confirm a decision by [SLA date].
+
+Please review scorecards and share your recommendation:
+• Strong hire / hire / leaning no / strong no  
+• Any key risks or questions we still need to resolve
+
+You can add your notes here:
+[ATS link]
+
+If you need more time or an additional conversation, reply to this email and we’ll coordinate.`
+          }
+        ]
       },
       offer: {
         title: "Offer workflow",
@@ -787,23 +1037,69 @@ We appreciate your time and interest in [Company]!`
           "Notify recruiter when approvals are complete so they can schedule the offer call.",
           "After the offer call, send a recap email with key terms and expiry date."
         ],
-        sample: {
-          type: "DW · Sample: Offer recap",
-          badge: "Candidate-facing",
-          subject: "Your offer for [Role] at [Company]",
-          body: `Hi [First name],
+        comms: [
+          {
+            id: "offer-internal-init",
+            label: "Recruiting / People – offer creation checklist",
+            audience: "Internal · Trigger: when status set to 'Ready to Offer'",
+            subject: "Subject: Offer checklist for [Candidate] – [Role]",
+            body: `Hi [Recruiter name],
+
+[Candidate] is marked as Ready to Offer for [Role]. Before we route approvals, please confirm:
+
+• Final band & level: [details]  
+• Location / work arrangement: [details]  
+• Target start date: [date]  
+• Any custom components: sign-on, draw, spiffs, etc.
+
+Submit details here:
+[Offer request form link]
+
+Once submitted, Workflow A[i]gent will route to the appropriate approvers automatically.`
+          },
+          {
+            id: "offer-approver",
+            label: "Approvers – offer package for review",
+            audience: "Internal · Trigger: on offer routing",
+            subject: "Subject: Offer approval requested – [Candidate] for [Role]",
+            body: `Hi [Approver name],
+
+An offer has been proposed for [Candidate] for [Role]. Summary:
+
+• Base: [amount]  
+• Variable / commission: [details]  
+• Equity: [details]  
+• Target start date: [date]  
+
+Please review and approve or comment here:
+[Offer approval link]
+
+If you need additional context (pipeline, market data, internal equity), reply here and Recruiting will provide it.
+
+Thank you!`
+          },
+          {
+            id: "offer-cand-recap",
+            label: "Candidate – offer recap",
+            audience: "Candidate-facing · Trigger: after live offer call",
+            subject: "Subject: Your offer for [Role] at [Company]",
+            body: `Hi [First name],
 
 It was great speaking with you about the offer for [Role]. As a recap, here are the high-level details we discussed:
 
 • Base salary: [amount]  
 • Bonus / commission: [details]  
 • Equity: [details]  
-• Start date: [date]
+• Start date: [date]  
+• Offer valid through: [date]
 
-The formal letter is attached and available in your portal. Please let us know if you have any questions or would like to talk through anything in more detail.
+Your full offer letter and benefits summary are attached and available in your candidate portal.
+
+If you’d like to walk through any part of the offer in more detail, reply here and we’ll gladly set up time.
 
 We’re excited about the possibility of working together.`
-        }
+          }
+        ]
       },
       prestart: {
         title: "Pre-start workflow",
@@ -815,29 +1111,74 @@ We’re excited about the possibility of working together.`
           "Remind manager and IT of equipment, access, and onboarding tasks one week before start.",
           "Confirm that the new hire appears in HRIS and ATS is updated before start date."
         ],
-        sample: {
-          type: "DW · Sample: Pre-start welcome",
-          badge: "New-hire-facing",
-          subject: "Welcome to [Company]! Here’s what to expect on your first day",
-          body: `Hi [First name],
+        comms: [
+          {
+            id: "prestart-hand-off",
+            label: "People / HR – new hire hand-off",
+            audience: "Internal · Trigger: on marked 'Offer accepted'",
+            subject: "Subject: New hire hand-off – [New hire] joining as [Role]",
+            body: `Hi People/HR team,
 
-We’re excited to welcome you to [Company] as our new [Role]. Your first day will be [date]. Here’s what to expect:
+[New hire] has accepted the offer for [Role] and is scheduled to start on [start date].
 
+Included in this hand-off:
+• Final comp details and band  
+• Work location / arrangement  
+• Manager and team  
+• Any special onboarding notes (equipment, accommodations, etc.)
+
+Full packet:
+[Hand-off doc / ATS link]
+
+Please confirm HRIS creation and onboarding steps are in motion.`
+          },
+          {
+            id: "prestart-newhire",
+            label: "New hire – first-day logistics",
+            audience: "New-hire-facing · Trigger: 1 week before start",
+            subject: "Subject: Welcome to [Company]! What to expect on your first day",
+            body: `Hi [First name],
+
+We’re excited to welcome you to [Company] as our new [Role]. Your first day will be [date].
+
+Here’s what to expect:
 • Start time: [time]  
 • Location / Zoom: [details]  
-• Who you’ll meet: [names / teams]
+• Who you’ll meet: [names / teams]  
+• What to bring / prepare: [details]
 
-If anything changes before then, or you have questions about benefits, payroll, or equipment, reply here and we’ll be happy to help.
+If you have questions about benefits, payroll, or equipment before then, reply here and our People team will help.
 
 Welcome aboard!`
-        }
+          },
+          {
+            id: "prestart-manager",
+            label: "Manager – onboarding reminders",
+            audience: "Internal · Trigger: 5–7 days before start",
+            subject: "Subject: Onboarding checklist – [New hire] starts [date]",
+            body: `Hi [Manager name],
+
+[New hire] starts on [date]. To make their first week smooth, please review:
+
+• Laptop / equipment requested and approved  
+• Access to systems and tools  
+• First-week schedule and introductions  
+• Clear 30/60/90 day expectations
+
+You can review and update the onboarding checklist here:
+[Onboarding checklist link]
+
+A great first week has outsized impact on long-term engagement — thank you for making it intentional.`
+          }
+        ]
       }
     };
+
+    /* Render functions */
 
     function renderStage(stageKey) {
       const data = STAGE_CONTENT[stageKey] || STAGE_CONTENT.screen;
       const details = document.getElementById("stage-details");
-      const email = document.getElementById("sample-email");
 
       details.innerHTML = `
         <div class="timeline-stage-title">${data.title}</div>
@@ -848,16 +1189,64 @@ Welcome aboard!`
         </ul>
       `;
 
-      email.innerHTML = `
-        <div class="sample-label-row">
-          <span>${data.sample.type}</span>
-          <span class="sample-label-pill">${data.sample.badge}</span>
-        </div>
-        <div class="sample-subject">${data.sample.subject}</div>
-        <div class="sample-body">${data.sample.body}</div>
-      `;
+      renderComms(stageKey, data.comms[0]?.id);
     }
 
+    function renderComms(stageKey, activeCommId) {
+      const data = STAGE_CONTENT[stageKey] || STAGE_CONTENT.screen;
+      const tabsContainer = document.getElementById("comm-tabs");
+      const contentContainer = document.getElementById("sample-email-content");
+
+      if (!data.comms || !data.comms.length) {
+        tabsContainer.innerHTML = "";
+        contentContainer.innerHTML =
+          "<div class='sample-meta'>No communications configured for this stage yet.</div>";
+        return;
+      }
+
+      const comms = data.comms;
+      const defaultId = activeCommId || comms[0].id;
+
+      // Tabs
+      tabsContainer.innerHTML = comms
+        .map(
+          (c) => `
+          <button
+            class="sample-tab ${c.id === defaultId ? "active" : ""}"
+            data-stage="${stageKey}"
+            data-comm="${c.id}"
+          >
+            ${c.label}
+          </button>`
+        )
+        .join("");
+
+      // Content
+      const comm = comms.find((c) => c.id === defaultId) || comms[0];
+
+      contentContainer.innerHTML = `
+        <div class="sample-meta">${comm.audience}</div>
+        <div class="sample-subject">${comm.subject}</div>
+        <div class="sample-body">${comm.body}</div>
+      `;
+
+      // Attach listeners to tabs
+      document.querySelectorAll(".sample-tab").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const stage = btn.getAttribute("data-stage");
+          const commId = btn.getAttribute("data-comm");
+
+          document
+            .querySelectorAll(".sample-tab")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          renderComms(stage, commId);
+        });
+      });
+    }
+
+    // Timeline interactions
     document.querySelectorAll(".timeline-node").forEach((btn) => {
       btn.addEventListener("click", () => {
         document
