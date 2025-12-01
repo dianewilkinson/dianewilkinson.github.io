@@ -43,10 +43,16 @@
 
     .suite-header {
       display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .suite-top-row {
+      display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 1.25rem;
     }
 
     .suite-brand {
@@ -59,11 +65,12 @@
       width: 24px;
       height: 24px;
       border-radius: 999px;
+      /* more pink / purple, less orange */
       background:
-        radial-gradient(circle at 25% 25%, #ffffff 0, #f97316 25%, #ec4899 55%, #6366f1 100%);
+        radial-gradient(circle at 28% 22%, #ffffff 0, #f9a8d4 18%, #ec4899 46%, #8b5cf6 78%, #6366f1 100%);
       box-shadow:
         0 0 0 2px rgba(255, 255, 255, 0.9),
-        0 8px 16px rgba(15, 23, 42, 0.25);
+        0 8px 16px rgba(15, 23, 42, 0.28);
     }
 
     .suite-label {
@@ -93,6 +100,50 @@
 
     .back-link span.arrow {
       font-size: 0.9rem;
+    }
+
+    /* Agent nav */
+
+    .agent-nav {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .agent-nav-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+      margin-right: 0.3rem;
+    }
+
+    .agent-nav-link {
+      font-size: 0.76rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      color: #4b5563;
+      text-decoration: none;
+    }
+
+    .agent-nav-link:hover {
+      background: #f3f4f6;
+    }
+
+    .agent-nav-link.active {
+      border-color: #6366f1;
+      background: #eef2ff;
+      color: #3730a3;
+      font-weight: 500;
+    }
+
+    @media (max-width: 640px) {
+      .suite-top-row {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+      }
     }
 
     /* Hero */
@@ -205,22 +256,24 @@
     .timeline-rail {
       position: relative;
       display: flex;
-      flex-wrap: wrap;
+      justify-content: space-between; /* equal spacing */
       align-items: center;
       gap: 0.5rem;
-      padding-bottom: 0.4rem;
+      padding: 0.6rem 0.4rem 0.4rem;
     }
 
     .timeline-rail::before {
       content: "";
       position: absolute;
-      left: 0.4rem;
-      right: 0.4rem;
+      left: 0.8rem;
+      right: 0.8rem;
       top: 50%;
       height: 2px;
       border-radius: 999px;
-      background: linear-gradient(90deg, #e5e7eb, #e5e7eb);
+      /* gradient line to match suite */
+      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
       z-index: 0;
+      opacity: 0.65;
     }
 
     .timeline-node {
@@ -239,6 +292,7 @@
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
       transition: background 0.15s ease, color 0.15s ease,
         border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+      white-space: nowrap;
     }
 
     .timeline-node:hover {
@@ -271,10 +325,12 @@
 
     @media (max-width: 720px) {
       .timeline-rail {
-        align-items: flex-start;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding-top: 0.3rem;
       }
       .timeline-rail::before {
-        display: none;
+        display: none; /* skip rail on stacked mobile layout */
       }
       .timeline-node-label {
         white-space: normal;
@@ -478,15 +534,25 @@
     <section class="card">
       <!-- Suite header -->
       <header class="suite-header">
-        <div class="suite-brand">
-          <span class="brand-orb" aria-hidden="true"></span>
-          <span class="suite-label">A[i]gents Portfolio · Demo</span>
+        <div class="suite-top-row">
+          <div class="suite-brand">
+            <span class="brand-orb" aria-hidden="true"></span>
+            <span class="suite-label">A[i]gents Portfolio · Demo</span>
+          </div>
+          <!-- Update this href to whatever your main portfolio/agents hub is -->
+          <a class="back-link" href="../../index.html">
+            <span class="arrow">←</span>
+            <span>Back to A[i]gents overview</span>
+          </a>
         </div>
-        <!-- Update this href to whatever your main portfolio/agents hub is -->
-        <a class="back-link" href="../../index.html">
-          <span class="arrow">←</span>
-          <span>Back to A[i]gents overview</span>
-        </a>
+
+        <!-- Mini suite nav -->
+        <nav class="agent-nav" aria-label="A[i]gents navigation">
+          <span class="agent-nav-label">Agents</span>
+          <a class="agent-nav-link" href="../screening/index.html">Screening A[i]gent</a>
+          <a class="agent-nav-link" href="../metrics/index.html">Metrics A[i]gent</a>
+          <a class="agent-nav-link active" href="./index.html">Workflow A[i]gent</a>
+        </nav>
       </header>
 
       <!-- Hero -->
@@ -608,8 +674,6 @@
   </main>
 
   <script>
-    // Stage copy is inspired by the Candidate Journey playbook templates.
-
     const STAGE_CONTENT = {
       screen: {
         title: "Initial Screen workflow",
