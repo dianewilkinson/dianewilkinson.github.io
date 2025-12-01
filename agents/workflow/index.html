@@ -55,6 +55,12 @@
       gap: 1rem;
     }
 
+    .suite-brand-row {
+      display: flex;
+      align-items: center;
+      margin-top: 0.35rem;
+    }
+
     .suite-brand {
       display: flex;
       align-items: center;
@@ -65,7 +71,7 @@
       width: 24px;
       height: 24px;
       border-radius: 999px;
-      /* more purple / pink, less orange */
+      /* more purple / pink gradient */
       background:
         radial-gradient(circle at 28% 22%, #ffffff 0, #f9a8ff 18%, #e879f9 40%, #a855f7 70%, #6366f1 100%);
       box-shadow:
@@ -91,8 +97,6 @@
       border-radius: 999px;
       border: 1px solid transparent;
       background: #f9fafb;
-      align-self: flex-start;
-      margin-top: 0.2rem;
     }
 
     .back-link:hover {
@@ -264,7 +268,7 @@
     .timeline-rail {
       position: relative;
       display: flex;
-      justify-content: space-between; /* equal spacing */
+      justify-content: space-between;
       align-items: center;
       gap: 0.5rem;
       padding: 0.6rem 0.4rem 0.4rem;
@@ -337,14 +341,14 @@
         padding-top: 0.3rem;
       }
       .timeline-rail::before {
-        display: none; /* skip rail on stacked mobile layout */
+        display: none;
       }
       .timeline-node-label {
         white-space: normal;
       }
     }
 
-    /* Two-column layout for details + comms */
+    /* Two-column layout */
 
     .timeline-layout {
       margin-top: 0.6rem;
@@ -428,13 +432,13 @@
       font-size: 0.9rem;
     }
 
-    /* Stage communications */
+    /* Stage communications card */
 
     .sample-email-card {
       border-radius: 0.9rem;
       border: 1px solid #e5e7eb;
       background: #ffffff;
-      padding: 0.9rem 1rem;
+      padding: 0.8rem 1rem 0.9rem;
       font-size: 0.8rem;
       color: #4b5563;
       display: flex;
@@ -444,10 +448,10 @@
       overflow: hidden;
     }
 
-    .sample-header {
+    .sample-title-row {
       display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
+      align-items: baseline;
+      justify-content: space-between;
       margin-bottom: 0.25rem;
     }
 
@@ -457,31 +461,56 @@
       color: #111827;
     }
 
-    .sample-tabs {
+    .sample-tabs-row {
+      position: relative;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.35rem;
+      gap: 0.2rem;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .sample-tabs-row::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
     }
 
     .sample-tab {
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      background: #f9fafb;
-      padding: 0.18rem 0.7rem;
-      font-size: 0.74rem;
-      color: #4b5563;
+      border: 1px solid transparent;
+      border-bottom: none;
+      border-radius: 10px 10px 0 0;
+      background: transparent;
+      font-size: 0.78rem;
+      padding: 0.35rem 0.9rem;
       cursor: pointer;
+      color: #6b7280;
+      margin-bottom: -1px;
+      transition: background 0.15s ease, color 0.15s ease,
+        border-color 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
     }
 
     .sample-tab:hover {
       background: #f3f4f6;
+      border-color: #e5e7eb;
+      border-bottom-color: transparent;
+      color: #374151;
     }
 
     .sample-tab.active {
-      border-color: #6366f1;
-      background: #eef2ff;
-      color: #3730a3;
+      background: #ffffff;
+      color: #111827;
       font-weight: 500;
+      border-color: #d1d5db;
+      border-bottom-color: #ffffff;
+      box-shadow: 0 -1px 4px rgba(15, 23, 42, 0.06);
     }
 
     .sample-scroll {
@@ -578,10 +607,13 @@
       <!-- Suite header -->
       <header class="suite-header">
         <div class="suite-top-row">
-          <div class="suite-brand">
-            <span class="brand-orb" aria-hidden="true"></span>
-            <span class="suite-label">A[i]gents Portfolio · Demo</span>
-          </div>
+          <!-- Back to overview -->
+          <!-- Update href to your main portfolio/agents hub if needed -->
+          <a class="back-link" href="../../index.html">
+            <span class="arrow">←</span>
+            <span>Back to A[i]gents overview</span>
+          </a>
+
           <!-- Mini suite nav -->
           <nav class="agent-nav" aria-label="A[i]gents navigation">
             <span class="agent-nav-label">Agents</span>
@@ -591,12 +623,12 @@
           </nav>
         </div>
 
-        <!-- Back to overview -->
-        <!-- Update href to your main portfolio / agents hub -->
-        <a class="back-link" href="../../index.html">
-          <span class="arrow">←</span>
-          <span>Back to A[i]gents overview</span>
-        </a>
+        <div class="suite-brand-row">
+          <div class="suite-brand">
+            <span class="brand-orb" aria-hidden="true"></span>
+            <span class="suite-label">A[i]gents Portfolio · Demo</span>
+          </div>
+        </div>
       </header>
 
       <!-- Hero -->
@@ -673,10 +705,10 @@
         <div class="timeline-stage-card" id="stage-details"></div>
 
         <div class="sample-email-card">
-          <div class="sample-header">
+          <div class="sample-title-row">
             <div class="sample-title">Stage communications</div>
-            <div class="sample-tabs" id="comm-tabs"></div>
           </div>
+          <div class="sample-tabs-row" id="comm-tabs"></div>
           <div class="sample-scroll" id="sample-email-content"></div>
         </div>
       </div>
@@ -1207,7 +1239,7 @@ A great first week has outsized impact on long-term engagement — thank you for
       const comms = data.comms;
       const defaultId = activeCommId || comms[0].id;
 
-      // Tabs
+      // Tabs (folder-style)
       tabsContainer.innerHTML = comms
         .map(
           (c) => `
@@ -1221,7 +1253,7 @@ A great first week has outsized impact on long-term engagement — thank you for
         )
         .join("");
 
-      // Content
+      // Active content
       const comm = comms.find((c) => c.id === defaultId) || comms[0];
 
       contentContainer.innerHTML = `
