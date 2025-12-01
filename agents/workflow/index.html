@@ -32,86 +32,70 @@
     }
 
     .card {
-      background: white;
+      background: #ffffff;
       border-radius: 1.25rem;
       box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
       padding: 2rem;
       border: 1px solid #e5e7eb;
     }
 
-    .eyebrow {
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #6b7280;
-      margin-bottom: 0.4rem;
-    }
+    /* Suite header / brand */
 
-    /* === New in-card suite nav strip === */
-
-    .agent-nav {
+    .suite-header {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.65rem;
-      border-bottom: 1px solid #e5e7eb;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
     }
 
-    .agent-nav-left {
+    .suite-brand {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.6rem;
+    }
+
+    .brand-orb {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 25% 25%, #ffffff 0, #f97316 25%, #ec4899 55%, #6366f1 100%);
+      box-shadow:
+        0 0 0 2px rgba(255, 255, 255, 0.9),
+        0 8px 16px rgba(15, 23, 42, 0.25);
+    }
+
+    .suite-label {
       font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
       color: #6b7280;
     }
 
-    .agent-nav-left a {
-      text-decoration: none;
-      color: #374151;
-      padding: 0.18rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      background: #f9fafb;
-    }
-
-    .agent-nav-left a:hover {
-      background: #eef2ff;
-    }
-
-    .agent-nav-right {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
+    .back-link {
       font-size: 0.78rem;
-    }
-
-    .agent-pill {
-      text-decoration: none;
-      padding: 0.22rem 0.75rem;
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
       color: #4b5563;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
       background: #f9fafb;
     }
 
-    .agent-pill:hover {
-      background: #eef2ff;
-      color: #111827;
+    .back-link:hover {
+      border-color: #e5e7eb;
+      background: #f3f4f6;
     }
 
-    .agent-pill.active {
-      background: #111827;
-      color: #f9fafb;
-      border-color: #111827;
+    .back-link span.arrow {
+      font-size: 0.9rem;
     }
 
-    .agent-pill span {
-      font-weight: 500;
-    }
+    /* Hero */
 
     .title-row {
       display: flex;
@@ -119,7 +103,7 @@
       align-items: baseline;
       justify-content: space-between;
       gap: 0.75rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.4rem;
     }
 
     h1 {
@@ -129,7 +113,7 @@
     }
 
     .subtitle-inline {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       font-weight: 500;
       color: #4b5563;
       opacity: 0.98;
@@ -149,14 +133,14 @@
       max-width: 40rem;
     }
 
-    /* Stats row */
+    /* Small stats row */
 
     .stats-row {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0.8rem;
       margin-top: 1.4rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.6rem;
     }
 
     .stat-card {
@@ -194,84 +178,113 @@
       }
     }
 
-    /* Timeline / tabs */
+    /* Timeline header */
 
     .section-title {
       font-size: 0.9rem;
       font-weight: 600;
       color: #374151;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.15rem;
       text-align: left;
     }
 
-    .tabs-row {
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
-      flex-wrap: wrap;
-      border-bottom: 1px solid #e5e7eb;
-      padding-bottom: 0;
-    }
-
-    .tabs-row::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -2px;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #f97316, #ec4899, #6366f1);
-    }
-
-    .tabs-label {
+    .section-subtitle {
       font-size: 0.78rem;
       color: #6b7280;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.09em;
     }
 
-    .tabs {
+    /* Timeline rail */
+
+    .timeline-wrapper {
+      margin-top: 0.9rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .timeline-rail {
+      position: relative;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.2rem;
+      align-items: center;
+      gap: 0.5rem;
+      padding-bottom: 0.4rem;
     }
 
-    .tab {
-      border: 1px solid transparent;
-      border-bottom: none;
-      border-radius: 10px 10px 0 0;
-      background: transparent;
-      font-size: 0.82rem;
-      padding: 0.45rem 1.1rem;
-      cursor: pointer;
-      color: #6b7280;
-      margin-bottom: -1px;
-      transition: background 0.15s ease, color 0.15s ease,
-        border-color 0.15s ease, box-shadow 0.15s ease;
+    .timeline-rail::before {
+      content: "";
+      position: absolute;
+      left: 0.4rem;
+      right: 0.4rem;
+      top: 50%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #e5e7eb, #e5e7eb);
+      z-index: 0;
     }
 
-    .tab:hover {
-      background: #f3f4f6;
-      border-color: #e5e7eb;
-      border-bottom-color: transparent;
-      color: #374151;
-    }
-
-    .tab.active {
+    .timeline-node {
+      position: relative;
+      z-index: 1;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
       background: #ffffff;
-      color: #111827;
-      font-weight: 600;
-      border-color: #d1d5db;
-      border-bottom-color: #ffffff;
-      box-shadow: 0 -1px 4px rgba(15, 23, 42, 0.06);
+      padding: 0.2rem 0.9rem 0.2rem 0.65rem;
+      font-size: 0.78rem;
+      color: #4b5563;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+      transition: background 0.15s ease, color 0.15s ease,
+        border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
     }
+
+    .timeline-node:hover {
+      background: #f9fafb;
+      transform: translateY(-1px);
+    }
+
+    .timeline-node.active {
+      background: #111827;
+      color: #f9fafb;
+      border-color: #111827;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.25);
+    }
+
+    .timeline-node-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #9ca3af;
+      flex-shrink: 0;
+    }
+
+    .timeline-node.active .timeline-node-dot {
+      background: linear-gradient(135deg, #f97316, #ec4899, #6366f1);
+    }
+
+    .timeline-node-label {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 720px) {
+      .timeline-rail {
+        align-items: flex-start;
+      }
+      .timeline-rail::before {
+        display: none;
+      }
+      .timeline-node-label {
+        white-space: normal;
+      }
+    }
+
+    /* Two-column layout for details + sample email */
 
     .timeline-layout {
-      margin-top: 1.4rem;
+      margin-top: 0.6rem;
       display: grid;
       grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.1fr);
       gap: 1rem;
@@ -310,6 +323,26 @@
       color: #111827;
     }
 
+    .timeline-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 0.1rem 0.6rem;
+      font-size: 0.72rem;
+      color: #4b5563;
+      margin-bottom: 0.55rem;
+    }
+
+    .timeline-tag span.dot {
+      width: 0.36rem;
+      height: 0.36rem;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
     .timeline-list {
       list-style: none;
       padding: 0;
@@ -332,30 +365,10 @@
       font-size: 0.9rem;
     }
 
-    .timeline-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      background: #fff;
-      padding: 0.1rem 0.55rem;
-      font-size: 0.72rem;
-      color: #4b5563;
-      margin-bottom: 0.45rem;
-    }
-
-    .timeline-tag span.dot {
-      width: 0.36rem;
-      height: 0.36rem;
-      border-radius: 999px;
-      background: #22c55e;
-    }
-
     .sample-email-card {
       border-radius: 0.9rem;
       border: 1px solid #e5e7eb;
-      background: #fff;
+      background: #ffffff;
       padding: 0.9rem 1rem;
       font-size: 0.8rem;
       color: #4b5563;
@@ -396,7 +409,7 @@
     /* What it solves */
 
     .solves-layout {
-      margin-top: 1.6rem;
+      margin-top: 1.8rem;
       background: #f9fafb;
       border-radius: 0.9rem;
       border: 1px solid #e5e7eb;
@@ -410,7 +423,7 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #374151;
-      margin: 0 0 0.5rem;
+      margin: 0 0 0.6rem;
       text-align: center;
     }
 
@@ -438,6 +451,8 @@
       color: #4b5563;
     }
 
+    /* Footer */
+
     .footer-note {
       margin-top: 1.5rem;
       font-size: 0.75rem;
@@ -461,30 +476,29 @@
 <body>
   <main class="page">
     <section class="card">
-      <div class="eyebrow">A[i]gents Portfolio · Demo</div>
-
-      <!-- NEW SUITE NAV STRIP -->
-      <div class="agent-nav">
-        <div class="agent-nav-left">
-          <span>Suite:</span>
-          <!-- update href to your actual portfolio root -->
-          <a href="../">← Back to portfolio</a>
+      <!-- Suite header -->
+      <header class="suite-header">
+        <div class="suite-brand">
+          <span class="brand-orb" aria-hidden="true"></span>
+          <span class="suite-label">A[i]gents Portfolio · Demo</span>
         </div>
-        <div class="agent-nav-right">
-          <!-- update hrefs to match your folder names -->
-          <a class="agent-pill" href="../screening/"><span>Screening</span> A[i]gent</a>
-          <a class="agent-pill active" href="../workflow/"><span>Workflow</span> A[i]gent</a>
-          <a class="agent-pill" href="../metrics/"><span>Metrics</span> A[i]gent</a>
-        </div>
-      </div>
+        <!-- Update this href to whatever your main portfolio/agents hub is -->
+        <a class="back-link" href="../../index.html">
+          <span class="arrow">←</span>
+          <span>Back to A[i]gents overview</span>
+        </a>
+      </header>
 
+      <!-- Hero -->
       <div class="title-row">
         <h1>Workflow A[i]gent</h1>
         <span class="subtitle-inline">Interview stage automation layer for your funnel.</span>
       </div>
 
       <p class="hero-copy">
-        Workflow A[i]gent orchestrates confirmations, reminders, scorecard nudges, and delay updates across every interview stage, so recruiters spend less time chasing calendars and more time making great hires.
+        Workflow A[i]gent orchestrates confirmations, reminders, scorecard nudges, and delay updates
+        across every interview stage, so recruiters spend less time chasing calendars and more time
+        making great hires.
       </p>
 
       <!-- Small stats row -->
@@ -492,37 +506,67 @@
         <div class="stat-card">
           <div class="stat-label">Interview pipeline</div>
           <div class="stat-value">6 stages</div>
-          <div class="stat-sub">Screen → HM/Tech → Panel → Final → Offer → Pre-start.</div>
+          <div class="stat-sub">
+            Screen → HM/Tech → Panel → Final → Offer → Pre-start.
+          </div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Automated actions</div>
           <div class="stat-value">20+</div>
-          <div class="stat-sub">Confirmations, reminders, nudges, and delay updates per requisition.</div>
+          <div class="stat-sub">
+            Confirmations, reminders, nudges, and delay updates per requisition.
+          </div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Designed for</div>
           <div class="stat-value">ATS-native</div>
-          <div class="stat-sub">Built to sit on top of Greenhouse, Lever, and similar platforms.</div>
+          <div class="stat-sub">
+            Built to sit on top of Greenhouse, Lever, and similar platforms.
+          </div>
         </div>
       </div>
 
       <!-- Timeline + sample workflow -->
       <div class="section-title">Interview workflow timeline</div>
-      <div class="tabs-row">
-        <span class="tabs-label">Click a stage to see what’s automated</span>
-        <div class="tabs">
-          <button class="tab stage-tab active" data-stage="screen">Initial Screen</button>
-          <button class="tab stage-tab" data-stage="hm">HM / Tech</button>
-          <button class="tab stage-tab" data-stage="panel">Panel</button>
-          <button class="tab stage-tab" data-stage="final">Final</button>
-          <button class="tab stage-tab" data-stage="offer">Offer</button>
-          <button class="tab stage-tab" data-stage="prestart">Pre-start</button>
+      <div class="section-subtitle">Click a stage to see candidate comms & automations</div>
+
+      <div class="timeline-wrapper">
+        <div class="timeline-rail" id="timeline-rail">
+          <button class="timeline-node active" data-stage="screen">
+            <span class="timeline-node-dot"></span>
+            <span class="timeline-node-label">Initial Screen</span>
+          </button>
+          <button class="timeline-node" data-stage="hm">
+            <span class="timeline-node-dot"></span>
+            <span class="timeline-node-label">HM / Tech</span>
+          </button>
+          <button class="timeline-node" data-stage="panel">
+            <span class="timeline-node-dot"></span>
+            <span class="timeline-node-label">Panel</span>
+          </button>
+          <button class="timeline-node" data-stage="final">
+            <span class="timeline-node-dot"></span>
+            <span class="timeline-node-label">Final</span>
+          </button>
+          <button class="timeline-node" data-stage="offer">
+            <span class="timeline-node-dot"></span>
+            <span class="timeline-node-label">Offer</span>
+          </button>
+          <button class="timeline-node" data-stage="prestart">
+            <span class="timeline-node-dot"></span>
+            <span class="timeline-node-label">Pre-start</span>
+          </button>
         </div>
       </div>
 
       <div class="timeline-layout">
-        <div class="timeline-stage-card" id="stage-details"></div>
-        <div class="sample-email-card" id="sample-email"></div>
+        <div class="timeline-stage-card" id="stage-details">
+          <!-- Filled by JS -->
+        </div>
+
+        <div class="sample-email-card" id="sample-email">
+          <!-- Filled by JS -->
+        </div>
       </div>
 
       <!-- What it solves -->
@@ -533,15 +577,16 @@
             <div class="solves-col-title">Operational drag</div>
             <div>
               Less chasing, more recruiting. Automates the repetitive communication so recruiters
-              spend time on calibration, decision support, and candidate coaching instead of reminders
-              and manual updates.
+              spend time on calibration, decision support, and candidate coaching instead of
+              reminders and manual updates.
             </div>
           </div>
           <div class="solves-col">
             <div class="solves-col-title">Candidate experience</div>
             <div>
-              No more “black box” stages. Every step has a clear expectation, confirmation, and follow-up,
-              with delay alerts routed to recruiters whenever signals indicate risk or confusion.
+              No more “black box” stages. Every step has a clear expectation, confirmation, and
+              follow-up, with delay alerts routed to recruiters whenever signals indicate risk or
+              confusion.
             </div>
           </div>
           <div class="solves-col">
@@ -563,7 +608,8 @@
   </main>
 
   <script>
-    // Simple stage content map – no external dependencies.
+    // Stage copy is inspired by the Candidate Journey playbook templates.
+
     const STAGE_CONTENT = {
       screen: {
         title: "Initial Screen workflow",
@@ -596,10 +642,10 @@ Best,
         goal: "Reduce no-shows and keep hiring managers on SLA for feedback.",
         label: "Confirmation + scorecard nudges",
         items: [
-          "Send candidate confirmation with agenda and names of interviewers.",
-          "24 hours before the interview, trigger a reminder with location/zoom link.",
+          "Send candidate confirmation with agenda and interviewer names.",
+          "24 hours before the interview, trigger a reminder with location/Zoom link.",
           "After the interview end time, send hiring manager a scorecard nudge.",
-          "Escalate to TA lead if scorecard is still missing after 48 hours."
+          "Escalate to TA lead if the scorecard is still missing after 48 hours."
         ],
         sample: {
           type: "DW · Sample: HM scorecard reminder",
@@ -623,9 +669,9 @@ Thank you!`
         label: "Calendar orchestration + recap",
         items: [
           "Once a candidate is marked ready for panel, Workflow A[i]gent proposes time slots based on interviewer availability.",
-          "Sends a single, consolidated confirmation email to the candidate with all panel details.",
-          "Distributes tailored scorecard prompts to each panelist based on dimension coverage.",
-          "After all scorecards are submitted, sends hiring manager a summary prompt to make a decision."
+          "Send a single consolidated confirmation email to the candidate with all panel details.",
+          "Distribute tailored scorecard prompts to each panelist based on evaluation focus.",
+          "After all scorecards are submitted, send hiring manager a summary prompt to make a decision."
         ],
         sample: {
           type: "DW · Sample: Panel confirmation",
@@ -647,10 +693,10 @@ Looking forward to it!`
       final: {
         title: "Final interview workflow",
         goal: "De-risk last-mile candidate experience and prep for offer.",
-        label: "Expectation setting + closing signals",
+        label: "Expectation-setting + closing signals",
         items: [
-          "Send final-round confirmation with clear next-steps and decision timeline.",
-          "Capture candidate’s compensation expectations and competing process timing via a structured pre-call check-in.",
+          "Send final-round confirmation with clear next steps and decision timeline.",
+          "Capture candidate’s compensation expectations and competing-process timing via a brief pre-call check-in.",
           "Notify recruiter if signals indicate high risk of competing offers or timing collisions.",
           "After final, trigger a decision reminder to the hiring team tied to agreed SLA."
         ],
@@ -707,7 +753,7 @@ We’re excited about the possibility of working together.`
         ],
         sample: {
           type: "DW · Sample: Pre-start welcome",
-          badge: "New hire-facing",
+          badge: "New-hire-facing",
           subject: "Welcome to [Company]! Here’s what to expect on your first day",
           body: `Hi [First name],
 
@@ -726,7 +772,6 @@ Welcome aboard!`
 
     function renderStage(stageKey) {
       const data = STAGE_CONTENT[stageKey] || STAGE_CONTENT.screen;
-
       const details = document.getElementById("stage-details");
       const email = document.getElementById("sample-email");
 
@@ -735,7 +780,7 @@ Welcome aboard!`
         <div class="timeline-goal"><span>Goal:</span> ${data.goal}</div>
         <div class="timeline-tag"><span class="dot"></span>${data.label}</div>
         <ul class="timeline-list">
-          ${data.items.map(item => `<li>${item}</li>`).join("")}
+          ${data.items.map((item) => `<li>${item}</li>`).join("")}
         </ul>
       `;
 
@@ -749,18 +794,18 @@ Welcome aboard!`
       `;
     }
 
-    document.querySelectorAll(".stage-tab").forEach(btn => {
+    document.querySelectorAll(".timeline-node").forEach((btn) => {
       btn.addEventListener("click", () => {
         document
-          .querySelectorAll(".stage-tab")
-          .forEach(b => b.classList.remove("active"));
+          .querySelectorAll(".timeline-node")
+          .forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         const key = btn.getAttribute("data-stage");
         renderStage(key);
       });
     });
 
-    // initial load
+    // Initial load
     renderStage("screen");
   </script>
 </body>
