@@ -1,0 +1,1166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Workflow A[i]gent – Interview Stage Automation & Orchestration Engine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --bg: #060712;
+      --bg-elevated: #0f1020;
+      --bg-soft: #141527;
+      --border-subtle: #262845;
+      --accent: #8b5cf6;
+      --accent-soft: rgba(139, 92, 246, 0.12);
+      --accent-strong: #a855f7;
+      --text-main: #f9fafb;
+      --text-soft: #a1a5d3;
+      --text-muted: #6b72a5;
+      --danger: #f97373;
+      --success: #4ade80;
+      --warning: #fbbf24;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #14162b 0, #050515 55%, #02010a 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 72px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 20% 15%, #e5e7ff 0, #a855f7 25%, #4c1d95 65%, #020617 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #f9fafb;
+      box-shadow: 0 0 18px rgba(167, 139, 250, 0.55);
+    }
+
+    .brand-text {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .pill {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 6px 12px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.35);
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3.5fr) minmax(0, 2.5fr);
+      gap: 28px;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-main {
+      background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(15,23,42,0.75));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(75, 85, 99, 0.6);
+      padding: 20px 22px 22px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      inset: -80px;
+      background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.2), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero-main-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-kicker {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      font-size: clamp(24px, 3vw, 30px);
+      line-height: 1.15;
+      margin: 0 0 10px;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(90deg, #e5e7ff, #a855f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 540px;
+      margin-bottom: 14px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(75, 85, 99, 0.8);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-main);
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top left, #a855f7, #4c1d95);
+      border-color: rgba(192, 132, 252, 0.5);
+      box-shadow: 0 10px 30px rgba(88, 28, 135, 0.6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 38px rgba(88, 28, 135, 0.75);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text-soft);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .btn-icon {
+      font-size: 14px;
+      margin-left: 4px;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 12px;
+    }
+
+    .metric-card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(55, 65, 81, 0.8);
+      padding: 14px 14px 12px;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .metric-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .metric-value {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .metric-pill {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(22, 163, 74, 0.1);
+      color: var(--success);
+      border: 1px solid rgba(22, 163, 74, 0.35);
+    }
+
+    .metric-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* Timeline */
+
+    .section {
+      background: rgba(10, 12, 32, 0.95);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 18px 18px 18px;
+      margin-bottom: 22px;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.55);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .section-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .timeline {
+      position: relative;
+      padding-top: 6px;
+      padding-bottom: 4px;
+    }
+
+    .timeline-track {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      top: 24px;
+      height: 2px;
+      background: radial-gradient(circle at left, rgba(148,163,184,0.9), rgba(51,65,85,0.3));
+      opacity: 0.9;
+    }
+
+    .timeline-steps {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+
+    .timeline-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      border: 2px solid rgba(148, 163, 184, 0.8);
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .timeline-dot-inner {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.6);
+      transition: background 0.15s ease;
+    }
+
+    .timeline-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 90px;
+    }
+
+    .timeline-step.active .timeline-dot {
+      border-color: var(--accent-strong);
+      background: radial-gradient(circle at top, #a855f7, #4c1d95);
+      transform: scale(1.05);
+      box-shadow: 0 0 22px rgba(168, 85, 247, 0.75);
+    }
+
+    .timeline-step.active .timeline-dot-inner {
+      background: #e5e7ff;
+    }
+
+    .timeline-step.active .timeline-label {
+      color: #e5e7ff;
+    }
+
+    /* Stage details */
+
+    .stage-wrapper {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 880px) {
+      .stage-wrapper {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .stage-panel {
+      background: var(--bg-soft);
+      border-radius: 14px;
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      padding: 12px 13px 12px;
+    }
+
+    .stage-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .stage-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .stage-badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.6);
+      color: var(--text-muted);
+    }
+
+    .stage-desc {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .stage-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .stage-list li {
+      padding: 6px 8px;
+      border-radius: 10px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .stage-chip {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .msg-panel {
+      background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.2), rgba(15, 23, 42, 0.96));
+      border-radius: 14px;
+      border: 1px solid rgba(79, 70, 229, 0.7);
+      padding: 10px 10px;
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.85);
+    }
+
+    .msg-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .msg-title {
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .msg-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #e5e7ff, #a855f7);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: #020617;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.6);
+    }
+
+    .msg-badge {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-muted);
+    }
+
+    .msg-body {
+      font-size: 11px;
+      color: #e5e7ff;
+      background: rgba(15,23,42,0.92);
+      border-radius: 10px;
+      padding: 9px 9px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      margin-bottom: 6px;
+    }
+
+    .msg-field-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .msg-field-value {
+      font-size: 11px;
+      color: #e5e7ff;
+    }
+
+    .msg-footer {
+      font-size: 10px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .msg-footer-pill {
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      font-size: 10px;
+    }
+
+    /* Features */
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 880px) {
+      .feature-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .feature-card {
+      background: var(--bg-soft);
+      border-radius: 14px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      padding: 10px 11px 10px;
+    }
+
+    .feature-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .feature-title {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .feature-body {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div>
+          <div class="brand-text">A[i]gents Suite</div>
+          <div style="font-size:12px; color:var(--text-soft);">
+            Workflow A[i]gent · Interview Stage Automation & Orchestration
+          </div>
+        </div>
+      </div>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        <span>Demo View · v1.0</span>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-main">
+        <div class="hero-main-inner">
+          <div class="hero-kicker">Workflow A[i]gent</div>
+          <h1 class="hero-title">
+            Interview <span class="hero-highlight">automation layer</span> for your funnel.
+          </h1>
+          <p class="hero-subtitle">
+            Workflow A[i]gent orchestrates confirmations, reminders, scorecard nudges, and delay updates
+            across every interview stage, so recruiters spend less time chasing calendars and more time
+            making great hires.
+          </p>
+          <div class="hero-tags">
+            <span class="tag"><span class="tag-dot"></span> No-show reduction</span>
+            <span class="tag">Scorecard SLAs</span>
+            <span class="tag">ATS-native automations</span>
+          </div>
+          <div class="hero-ctas">
+            <!-- TODO: Update these hrefs to your actual URLs -->
+            <a class="btn btn-primary" href="#" target="_blank">
+              View full system documentation
+              <span class="btn-icon">↗</span>
+            </a>
+            <a class="btn btn-ghost" href="#" target="_blank">
+              Download Workflow playbook (PDF)
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <div class="metric-card">
+          <div class="metric-label">Interview Pipeline</div>
+          <div class="metric-main">
+            <div>
+              <div class="metric-value">6 stages</div>
+              <div class="metric-sub">Screen → HM/Tech → Panel → Final → Offer → Pre-start</div>
+            </div>
+            <span class="metric-pill">End-to-end coverage</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Automated actions</div>
+          <div class="metric-main">
+            <div>
+              <div class="metric-value">20+</div>
+              <div class="metric-sub">Confirmations, reminders, nudges, updates</div>
+            </div>
+            <span class="metric-pill">Manual follow-up ↓</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Designed for</div>
+          <div class="metric-main">
+            <div>
+              <div class="metric-value">ATS-native</div>
+              <div class="metric-sub">Greenhouse, Lever, & similar platforms</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Timeline + stage details -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Interview workflow timeline</div>
+          <div class="section-sub">
+            Click a stage to see how Workflow A[i]gent automates communication, SLAs, and follow-ups.
+          </div>
+        </div>
+        <div class="section-sub">
+          Candidate-first · Automation-forward · ATS-native
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-track"></div>
+        <div class="timeline-steps" id="timelineSteps">
+          <div class="timeline-step active" data-stage="screen">
+            <div class="timeline-dot">
+              <div class="timeline-dot-inner"></div>
+            </div>
+            <div class="timeline-label">Initial Screen</div>
+          </div>
+          <div class="timeline-step" data-stage="hm">
+            <div class="timeline-dot">
+              <div class="timeline-dot-inner"></div>
+            </div>
+            <div class="timeline-label">HM / Tech</div>
+          </div>
+          <div class="timeline-step" data-stage="panel">
+            <div class="timeline-dot">
+              <div class="timeline-dot-inner"></div>
+            </div>
+            <div class="timeline-label">Panel</div>
+          </div>
+          <div class="timeline-step" data-stage="final">
+            <div class="timeline-dot">
+              <div class="timeline-dot-inner"></div>
+            </div>
+            <div class="timeline-label">Final</div>
+          </div>
+          <div class="timeline-step" data-stage="offer">
+            <div class="timeline-dot">
+              <div class="timeline-dot-inner"></div>
+            </div>
+            <div class="timeline-label">Offer</div>
+          </div>
+          <div class="timeline-step" data-stage="prestart">
+            <div class="timeline-dot">
+              <div class="timeline-dot-inner"></div>
+            </div>
+            <div class="timeline-label">Pre-start</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage detail wrappers -->
+
+      <!-- Screen -->
+      <div class="stage-wrapper stage-view" data-stage-view="screen">
+        <div class="stage-panel">
+          <div class="stage-title-row">
+            <div class="stage-title">Initial Screen workflow</div>
+            <span class="stage-badge">Goal: convert interest into booked time</span>
+          </div>
+          <p class="stage-desc">
+            When a candidate moves into the screening stage, Workflow A[i]gent sequences availability,
+            confirmation, and reminder flows to minimize drop-off before the first conversation.
+          </p>
+          <ul class="stage-list">
+            <li>
+              <span>Stage change → availability request</span>
+              <span class="stage-chip">Candidate email · Immediate</span>
+            </li>
+            <li>
+              <span>No reply in 48 hours → gentle nudge</span>
+              <span class="stage-chip">Candidate email · +48h</span>
+            </li>
+            <li>
+              <span>No reply in 96 hours → recruiter alert</span>
+              <span class="stage-chip">Recruiter alert · +96h</span>
+            </li>
+            <li>
+              <span>Event booked → calendar invite + confirmation</span>
+              <span class="stage-chip">Calendar + template</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="msg-panel">
+          <div class="msg-header">
+            <div class="msg-title">
+              <div class="msg-avatar">DW</div>
+              <div>Sample: Initial screen confirmation</div>
+            </div>
+            <span class="msg-badge">Candidate-facing</span>
+          </div>
+          <div class="msg-body">
+            <div class="msg-field-label">Subject</div>
+            <div class="msg-field-value">
+              [Company] – Initial Conversation for [Role] – [Date/Time]
+            </div>
+            <div style="height:6px;"></div>
+            <div class="msg-field-label">Preview</div>
+            <div class="msg-field-value">
+              Thanks for taking the time to speak with us! This 30-minute call will focus on your
+              experience, what you’re looking for next, and how this role fits. If you need to reschedule
+              or request accommodations, you can use the link below or reply directly to this email…
+            </div>
+          </div>
+          <div class="msg-footer">
+            <span class="msg-footer-pill">Automated on event booking</span>
+            <span>Backstopped by recruiter if anything changes.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HM / Tech -->
+      <div class="stage-wrapper stage-view" data-stage-view="hm" style="display:none;">
+        <div class="stage-panel">
+          <div class="stage-title-row">
+            <div class="stage-title">HM / Technical interview workflow</div>
+            <span class="stage-badge">Goal: keep candidates & interviewers aligned</span>
+          </div>
+          <p class="stage-desc">
+            Once a candidate is through initial fit, Workflow A[i]gent supports deeper interviews with
+            structured prep, interviewer reminders, and scorecard SLAs.
+          </p>
+          <ul class="stage-list">
+            <li>
+              <span>Event booked → confirmation + prep</span>
+              <span class="stage-chip">Candidate email · Immediate</span>
+            </li>
+            <li>
+              <span>Upcoming interview → candidate reminder</span>
+              <span class="stage-chip">Candidate email · -24h</span>
+            </li>
+            <li>
+              <span>Upcoming interview → interviewer reminder</span>
+              <span class="stage-chip">Interviewer email · -2h</span>
+            </li>
+            <li>
+              <span>Interview complete → scorecard nudge</span>
+              <span class="stage-chip">Interviewer email · +2h / +24h</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="msg-panel">
+          <div class="msg-header">
+            <div class="msg-title">
+              <div class="msg-avatar">DW</div>
+              <div>Sample: HM interview prep email</div>
+            </div>
+            <span class="msg-badge">Candidate-facing</span>
+          </div>
+          <div class="msg-body">
+            <div class="msg-field-label">Subject</div>
+            <div class="msg-field-value">
+              [Company] – HM/Technical Interview for [Role] – What to Expect
+            </div>
+            <div style="height:6px;"></div>
+            <div class="msg-field-label">Preview</div>
+            <div class="msg-field-value">
+              In this conversation we’ll go deeper into how you approach your work, walk through a few
+              recent projects, and leave time for your questions. You do not need to prepare a formal
+              presentation. If you prefer a different format or need accommodations, reply and we’ll
+              adjust…
+            </div>
+          </div>
+          <div class="msg-footer">
+            <span class="msg-footer-pill">Paired with interviewer scorecard nudges</span>
+            <span>Feedback stays fresh and decisions move quickly.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel -->
+      <div class="stage-wrapper stage-view" data-stage-view="panel" style="display:none;">
+        <div class="stage-panel">
+          <div class="stage-title-row">
+            <div class="stage-title">Panel interview workflow</div>
+            <span class="stage-badge">Goal: coordinate multiple stakeholders</span>
+          </div>
+          <p class="stage-desc">
+            For panel stages, Workflow A[i]gent ensures candidates know the structure and interviewers know
+            their focus area, while maintaining tight feedback loops.
+          </p>
+          <ul class="stage-list">
+            <li>
+              <span>Panel confirmed → consolidated agenda</span>
+              <span class="stage-chip">Candidate email · Immediate</span>
+            </li>
+            <li>
+              <span>Panel upcoming → group reminder</span>
+              <span class="stage-chip">Candidate & interviewers · -24h</span>
+            </li>
+            <li>
+              <span>Panel complete → scorecard nudges per interviewer</span>
+              <span class="stage-chip">Interviewer emails · +2h / +24h</span>
+            </li>
+            <li>
+              <span>Missing feedback → HM escalation</span>
+              <span class="stage-chip">HM / Lead · +48h</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="msg-panel">
+          <div class="msg-header">
+            <div class="msg-title">
+              <div class="msg-avatar">DW</div>
+              <div>Sample: Panel agenda overview</div>
+            </div>
+            <span class="msg-badge">Candidate-facing</span>
+          </div>
+          <div class="msg-body">
+            <div class="msg-field-label">Preview</div>
+            <div class="msg-field-value">
+              Your panel will be three 30-minute conversations focused on: (1) how you collaborate across
+              teams, (2) how you structure ambiguous projects, and (3) how you think about impact. Each
+              interviewer has a different lens, but you don’t need separate prep for each block…
+            </div>
+          </div>
+          <div class="msg-footer">
+            <span class="msg-footer-pill">Panel expectations are clear</span>
+            <span>Reduces candidate anxiety and improves signal quality.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Final -->
+      <div class="stage-wrapper stage-view" data-stage-view="final" style="display:none;">
+        <div class="stage-panel">
+          <div class="stage-title-row">
+            <div class="stage-title">Final interview workflow</div>
+            <span class="stage-badge">Goal: de-risk closing conversations</span>
+          </div>
+          <p class="stage-desc">
+            Final conversations are highly sensitive. Workflow A[i]gent focuses on clarity, expectations,
+            and timely follow-up so high-intent candidates don’t stall out.
+          </p>
+          <ul class="stage-list">
+            <li>
+              <span>Final booked → confirmation + expectations</span>
+              <span class="stage-chip">Candidate email · Immediate</span>
+            </li>
+            <li>
+              <span>Upcoming → reminder + interviewer brief</span>
+              <span class="stage-chip">Candidate & HM · -24h</span>
+            </li>
+            <li>
+              <span>Final complete → “what to expect next”</span>
+              <span class="stage-chip">Candidate email · +2h</span>
+            </li>
+            <li>
+              <span>Decision delayed → status update</span>
+              <span class="stage-chip">Candidate email · +3–7 days</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="msg-panel">
+          <div class="msg-header">
+            <div class="msg-title">
+              <div class="msg-avatar">DW</div>
+              <div>Sample: Final stage expectations</div>
+            </div>
+            <span class="msg-badge">Candidate-facing</span>
+          </div>
+          <div class="msg-body">
+            <div class="msg-field-label">Preview</div>
+            <div class="msg-field-value">
+              After this conversation, our team reviews feedback and aligns on next steps. In most cases
+              you’ll hear from us within 3–5 business days. If anything changes with that timing, we’ll
+              proactively reach out so you’re not left wondering.
+            </div>
+          </div>
+          <div class="msg-footer">
+            <span class="msg-footer-pill">Delay updates are built in</span>
+            <span>Protects candidate experience at the most critical point.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Offer -->
+      <div class="stage-wrapper stage-view" data-stage-view="offer" style="display:none;">
+        <div class="stage-panel">
+          <div class="stage-title-row">
+            <div class="stage-title">Offer workflow</div>
+            <span class="stage-badge">Goal: structured, human closing</span>
+          </div>
+          <p class="stage-desc">
+            Offers are still delivered by humans. Workflow A[i]gent supports them with structured timing,
+            expectations, and follow-through so candidates feel guided, not pressured.
+          </p>
+          <ul class="stage-list">
+            <li>
+              <span>Offer approved → schedule offer conversation</span>
+              <span class="stage-chip">Candidate email · Immediate</span>
+            </li>
+            <li>
+              <span>Offer call complete → written offer summary</span>
+              <span class="stage-chip">Candidate email · Same day</span>
+            </li>
+            <li>
+              <span>Decision window → check-in & Q&A</span>
+              <span class="stage-chip">Candidate email · +2–5 days</span>
+            </li>
+            <li>
+              <span>Offer accepted → “what happens next”</span>
+              <span class="stage-chip">New hire email · Immediate</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="msg-panel">
+          <div class="msg-header">
+            <div class="msg-title">
+              <div class="msg-avatar">DW</div>
+              <div>Sample: Offer follow-up</div>
+            </div>
+            <span class="msg-badge">Candidate-facing</span>
+          </div>
+          <div class="msg-body">
+            <div class="msg-field-label">Preview</div>
+            <div class="msg-field-value">
+              It was great speaking with you today. Attached is a written summary of your offer details,
+              including base, bonus, equity, and benefits. Take the time you need to review; if helpful
+              we’re happy to set up another call to walk through questions or talk about start dates.
+            </div>
+          </div>
+          <div class="msg-footer">
+            <span class="msg-footer-pill">Clear, calm closing motion</span>
+            <span>Structured without feeling transactional.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pre-start -->
+      <div class="stage-wrapper stage-view" data-stage-view="prestart" style="display:none;">
+        <div class="stage-panel">
+          <div class="stage-title-row">
+            <div class="stage-title">Pre-start workflow</div>
+            <span class="stage-badge">Goal: keep accepted offers warm</span>
+          </div>
+          <p class="stage-desc">
+            Post-accept, Workflow A[i]gent makes sure new hires know what to expect between now and day one,
+            reducing anxiety and minimizing risk of last-minute fall-off.
+          </p>
+          <ul class="stage-list">
+            <li>
+              <span>Offer accepted → welcome + next steps</span>
+              <span class="stage-chip">New hire email · Immediate</span>
+            </li>
+            <li>
+              <span>Paperwork window → reminders as needed</span>
+              <span class="stage-chip">New hire email · Configurable</span>
+            </li>
+            <li>
+              <span>1 week before start → first day logistics</span>
+              <span class="stage-chip">New hire email · -7 days</span>
+            </li>
+            <li>
+              <span>Day before start → brief welcome note</span>
+              <span class="stage-chip">New hire email · -1 day</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="msg-panel">
+          <div class="msg-header">
+            <div class="msg-title">
+              <div class="msg-avatar">DW</div>
+              <div>Sample: Pre-start welcome</div>
+            </div>
+            <span class="msg-badge">New hire-facing</span>
+          </div>
+          <div class="msg-body">
+            <div class="msg-field-label">Preview</div>
+            <div class="msg-field-value">
+              We’re excited to have you join! Between now and your first day you’ll receive a few brief
+              notes about benefits, equipment, and logistics. On day one, you’ll start with onboarding and
+              team introductions before diving into role-specific work.
+            </div>
+          </div>
+          <div class="msg-footer">
+            <span class="msg-footer-pill">Closes the loop after offer</span>
+            <span>New hires know what’s coming next.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature summary -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-title">What Workflow A[i]gent solves</div>
+          <div class="section-sub">
+            Built originally during an ATS migration, designed to be ATS-agnostic and reusable across teams.
+          </div>
+        </div>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-label">Operational drag</div>
+          <div class="feature-title">Less chasing, more recruiting</div>
+          <div class="feature-body">
+            Automates repetitive communication so recruiters spend time on calibration, decision support,
+            and candidate coaching instead of reminders and manual updates.
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-label">Candidate experience</div>
+          <div class="feature-title">No more “black box” stages</div>
+          <div class="feature-body">
+            Each stage has a clear expectation, follow-up, and delay plan so candidates know what’s
+            happening even when hiring teams are busy.
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-label">Funnel health</div>
+          <div class="feature-title">Tighter feedback loops</div>
+          <div class="feature-body">
+            Scorecard SLAs and interviewer nudges keep feedback flowing, enabling faster decisions and
+            better signal quality for downstream stages.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>Part of the A[i]gents portfolio · Designed & implemented by Diane Wilkinson.</span>
+      <span>Upstream: Screening A[i]gent · Downstream: Metrics A[i]gent.</span>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const steps = document.querySelectorAll(".timeline-step");
+      const views = document.querySelectorAll(".stage-view");
+
+      function setActive(stage) {
+        steps.forEach((step) => {
+          step.classList.toggle("active", step.dataset.stage === stage);
+        });
+        views.forEach((view) => {
+          view.style.display = view.dataset.stageView === stage ? "grid" : "none";
+        });
+      }
+
+      steps.forEach((step) => {
+        step.addEventListener("click", () => {
+          setActive(step.dataset.stage);
+        });
+      });
+
+      // ensure default
+      setActive("screen");
+    })();
+  </script>
+</body>
+</html>
