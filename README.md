@@ -9,7 +9,7 @@ MBA in Data Analytics (4.0 GPA) • Beta Gamma Sigma • Phi Kappa Phi
 
 - **Screening A[i]gent — Demo**  
   Promotion-safe tenure logic, receipts, and recruiter-in-the-loop controls.
-  🔗 https://dianewilkinson.github.io/screening/
+  🔗 https://dianewilkinson.github.io/agents/screening/
 
 - **Recruiting Operations Portfolio**  
   Automated Workflows, Metrics Dictionary, Recruiting Pipeline Calculator, Candidate Journey.  
