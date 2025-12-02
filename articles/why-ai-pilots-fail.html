@@ -1,0 +1,933 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Why 95% of AI Pilots Fail & What the Successful 5% Do Differently | Drive Human Capital</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Why 95% of AI pilots fail in recruiting and what the successful 5% do differently — workflow-first, data-ready, AI-native recruiting operations." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-elevated: #111827;
+      --card: #020617;
+      --accent: #8b5cf6;
+      --accent-soft: rgba(139, 92, 246, 0.15);
+      --accent-bright: #a855f7;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border-subtle: #1f2937;
+      --pill-bg: #111827;
+      --tag-bg: #111827;
+      --tag-border: #1f2937;
+      --tag-text: #e5e7eb;
+      --max-width: 760px;
+      --radius-xl: 1.5rem;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #111827, #020617 60%);
+      color: var(--text);
+    }
+
+    a {
+      color: var(--accent-bright);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+    }
+
+    /* Top nav-ish header (simplified Wix-style) */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 20% 20%, #f97316, #a855f7 40%, #2563eb);
+      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.25);
+    }
+
+    .logo-text-main {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      font-size: 0.96rem;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.88rem;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav a.active {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.84rem;
+      color: var(--text);
+      background: linear-gradient(
+        135deg,
+        rgba(139, 92, 246, 0.25),
+        rgba(56, 189, 248, 0.1)
+      );
+      box-shadow: 0 10px 40px rgba(15, 23, 42, 0.8);
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      text-decoration: none;
+      border-color: rgba(216, 180, 254, 0.8);
+    }
+
+    /* Article layout */
+    .article-shell {
+      max-width: var(--max-width);
+      margin: 12px auto 0;
+    }
+
+    .article-card {
+      background: linear-gradient(
+          135deg,
+          rgba(15, 23, 42, 0.9),
+          rgba(2, 6, 23, 0.98)
+        ),
+        radial-gradient(circle at top left, rgba(139, 92, 246, 0.2), transparent 55%);
+      border-radius: calc(var(--radius-xl) + 0.25rem);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow:
+        0 18px 60px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      padding: 28px 22px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .shell {
+        padding: 32px 32px 56px;
+      }
+      .article-card {
+        padding: 36px 42px 38px;
+      }
+    }
+
+    .article-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .article-chip {
+      padding: 4px 11px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .article-chip span.dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.7);
+    }
+
+    .article-title {
+      font-size: clamp(1.7rem, 2.2vw + 1rem, 2.3rem);
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      margin: 0 0 10px;
+    }
+
+    .article-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 30rem;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .meta-author {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--pill-bg);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .meta-avatar {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f97316, #a855f7);
+    }
+
+    .meta-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.7);
+    }
+
+    .meta-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .hero {
+      margin: 18px 0 24px;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      overflow: hidden;
+      background: radial-gradient(circle at top left, #111827, #020617);
+      position: relative;
+    }
+
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.1);
+    }
+
+    .hero-fallback {
+      padding: 26px 22px 26px;
+    }
+
+    .hero-kicker {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .hero-text {
+      font-size: 0.94rem;
+      color: #e5e7eb;
+      max-width: 32rem;
+    }
+
+    .article-body {
+      font-size: 0.97rem;
+      line-height: 1.7;
+      color: #e5e7eb;
+    }
+
+    .article-body p {
+      margin: 0 0 1.05em;
+    }
+
+    .article-body strong {
+      font-weight: 600;
+    }
+
+    .article-body h2,
+    .article-body h3 {
+      margin: 1.8em 0 0.6em;
+      line-height: 1.35;
+      letter-spacing: 0.01em;
+    }
+
+    .article-body h2 {
+      font-size: 1.25rem;
+    }
+
+    .article-body h3 {
+      font-size: 1.02rem;
+      color: #e5e7eb;
+    }
+
+    .article-body ul {
+      padding-left: 1.1rem;
+      margin: 0 0 1rem;
+    }
+
+    .article-body li {
+      margin-bottom: 0.4rem;
+    }
+
+    .article-body blockquote {
+      margin: 0 0 1.3em;
+      padding: 12px 16px;
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 0.95rem;
+      color: #e5e7eb;
+    }
+
+    .article-body blockquote p {
+      margin: 0;
+    }
+
+    .inline-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.73rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-left: 4px;
+    }
+
+    .inline-pill span {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.7);
+    }
+
+    .pdf-link {
+      margin: 18px 0 8px;
+      font-size: 0.86rem;
+    }
+
+    .pdf-link a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.95);
+      text-decoration: none;
+      font-size: 0.84rem;
+      color: var(--text);
+    }
+
+    .pdf-link a span.icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #22c55e, #a855f7);
+    }
+
+    /* Tags + footer */
+    .tags-section {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      row-gap: 12px;
+    }
+
+    .tag-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      padding: 5px 11px;
+      border: 1px solid var(--tag-border);
+      background: var(--tag-bg);
+      font-size: 0.8rem;
+      color: var(--tag-text);
+    }
+
+    .article-cta {
+      margin-top: 26px;
+      padding: 18px 16px;
+      border-radius: 1.1rem;
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.16), transparent 60%),
+                  rgba(15, 23, 42, 0.92);
+      font-size: 0.9rem;
+    }
+
+    .article-cta h3 {
+      margin: 0 0 0.4em;
+      font-size: 1.02rem;
+    }
+
+    .article-cta p {
+      margin: 0 0 0.6em;
+    }
+
+    .article-cta-links {
+      font-size: 0.86rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      align-items: center;
+    }
+
+    .article-cta-links a {
+      text-decoration: none;
+    }
+
+    .article-cta-links a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="shell">
+      <header class="site-header">
+        <div class="logo">
+          <div class="logo-mark" aria-hidden="true"></div>
+          <div>
+            <div class="logo-text-main">Drive Human Capital</div>
+            <div class="logo-text-sub">AI-Native Recruiting & Ops</div>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="https://dianewilkinson.github.io">Home</a>
+          <a href="https://www.drivehumancapital.com/services">Services</a>
+          <a href="https://www.drivehumancapital.com/about">About</a>
+          <a href="https://www.drivehumancapital.com/blog" class="active">Blog</a>
+          <a href="mailto:info@drivehumancapital.com" class="nav-cta">Get Started</a>
+        </nav>
+      </header>
+
+      <main class="article-shell">
+        <article class="article-card">
+          <div class="article-chip-row">
+            <div class="article-chip">
+              <span class="dot"></span>
+              AI in Recruiting • Thought Leadership
+            </div>
+            <div class="article-chip">
+              <span class="dot"></span>
+              Automation & Workflows
+            </div>
+          </div>
+
+          <h1 class="article-title">
+            Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently
+          </h1>
+
+          <p class="article-subtitle">
+            AI isn't failing because the technology is bad. It's failing because the workflow
+            around it is broken — especially in recruiting.
+          </p>
+
+          <div class="meta-row">
+            <div class="meta-author">
+              <div class="meta-avatar" aria-hidden="true"></div>
+              <span>Diane Wilkinson</span>
+            </div>
+            <span class="meta-dot"></span>
+            <span>Nov 22 • 4 min read</span>
+            <span class="meta-dot"></span>
+            <span class="meta-pill">AI-Native Recruiter &amp; Recruiting Ops Architect</span>
+          </div>
+
+          <div class="hero">
+            <!-- If you have a hero image in GitHub, replace the fallback with an <img> -->
+            <!-- Example: <img src="assets/ai-pilots-hero.jpg" alt="Abstract AI workflow network" class="hero-image" /> -->
+            <div class="hero-fallback">
+              <div class="hero-kicker">Article Overview</div>
+              <div class="hero-text">
+                Why AI pilots stall out at “cool demo” stage, why recruiters don’t trust the tools
+                they’re given, and how the successful 5% design workflow-first, AI-ready
+                recruiting systems.
+              </div>
+            </div>
+          </div>
+
+          <div class="pdf-link">
+            <!-- Update the href to the actual path of your PDF in GitHub -->
+            <a href="assets/ai-why-pilots-fail.pdf" target="_blank" rel="noopener">
+              <span class="icon" aria-hidden="true"></span>
+              <span>Download this article as a PDF</span>
+            </a>
+          </div>
+
+          <div class="article-body">
+            <p>
+              If you’ve been anywhere near an executive meeting this year, you’ve probably heard a
+              version of the same painful story:
+            </p>
+
+            <blockquote>
+              <p>“We launched an AI pilot… and it didn’t work.”</p>
+            </blockquote>
+
+            <p>
+              It’s not a coincidence and it’s not a lack of talent.
+              <a href="https://sloanreview.mit.edu" target="_blank" rel="noopener">
+                According to MIT, 95% of AI pilots fail
+              </a>
+              before they ever reach real adoption or scale.
+            </p>
+
+            <p>
+              Companies invest in AI tools, only to end up with abandoned dashboards, inconsistent
+              usage, frustrated recruiters, and workflows that are somehow
+              <em>slower</em> than before.
+            </p>
+
+            <p>
+              And MIT isn’t alone. Research from
+              <a href="https://www.mckinsey.com" target="_blank" rel="noopener">McKinsey</a>,
+              <a href="https://www.gartner.com" target="_blank" rel="noopener">Gartner</a> and
+              <a href="https://hbr.org" target="_blank" rel="noopener">HBR</a> all show the same
+              pattern:
+            </p>
+
+            <blockquote>
+              <p>
+                AI isn’t failing because the technology is bad. It’s failing because the
+                <strong>workflow around it</strong> is broken.
+              </p>
+            </blockquote>
+
+            <p>
+              Below are the seven universal reasons AI pilots fail in recruiting —
+              and what the successful 5% do differently.
+            </p>
+
+            <h2 id="1-ai-added-to-broken-workflow">#1 – AI Is Added to a Broken Workflow</h2>
+
+            <p>Most failed pilots follow the same pattern:</p>
+            <ul>
+              <li>Processes are inconsistent</li>
+              <li>Scorecards are unreliable</li>
+              <li>Data is missing or unstructured</li>
+              <li>Hiring managers operate differently</li>
+              <li>Recruiters tag things their own way</li>
+            </ul>
+
+            <p>Then someone says:</p>
+            <p>“Let’s buy an AI screening tool.”</p>
+
+            <blockquote>
+              <p>But AI doesn’t fix chaos — it magnifies it.</p>
+            </blockquote>
+
+            <h3>✅ The 5% Solution</h3>
+            <p>Successful teams standardize the workflow first:</p>
+
+            <ul>
+              <li>Intake</li>
+              <li>Job scorecards</li>
+              <li>Funnel stages</li>
+              <li>Pass-through rules</li>
+              <li>Outcome definitions</li>
+              <li>Naming conventions</li>
+              <li>KPI structure</li>
+            </ul>
+
+            <blockquote>
+              <p>Only after the workflow is clean do they add AI inside it.</p>
+            </blockquote>
+
+            <h2 id="2-poor-data-quality">#2 – Poor Data Quality Makes AI Useless</h2>
+
+            <p>AI can only act on the signals it’s given.</p>
+            <p>If your data is:</p>
+
+            <ul>
+              <li>inconsistent</li>
+              <li>incomplete</li>
+              <li>redundant</li>
+              <li>missing outcomes</li>
+              <li>not tied to decisions</li>
+              <li>scattered across tools</li>
+            </ul>
+
+            <p>…then AI has nothing reliable to predict, match, or classify.</p>
+
+            <h3>✅ The 5% Solution</h3>
+            <p>They clean and standardize:</p>
+            <ul>
+              <li>Scorecards</li>
+              <li>Funnel logic</li>
+              <li>Pass-through rates</li>
+              <li>Candidate outcomes</li>
+              <li>Role criteria</li>
+              <li>Decision points</li>
+            </ul>
+
+            <blockquote>
+              <p>Reliable data creates the foundation AI needs to actually work.</p>
+            </blockquote>
+
+            <h2 id="3-pilots-outside-funnel">
+              #3 – AI Pilots Run Outside the Recruiting Funnel
+            </h2>
+
+            <p>One of the most common failure modes is simple:</p>
+            <p><strong>AI is piloted as a standalone tool.</strong></p>
+
+            <p>Examples:</p>
+            <ul>
+              <li>A chatbot that doesn’t talk to the ATS</li>
+              <li>A screening tool recruiters don’t trust</li>
+              <li>An AI scheduler nobody activates</li>
+              <li>A sourcing tool that doesn’t pull performance data</li>
+            </ul>
+
+            <p>Disconnected AI → disconnected adoption → failed pilot.</p>
+
+            <h3>✅ The 5% Solution</h3>
+            <p>They place AI <strong>inside</strong> the funnel:</p>
+
+            <ul>
+              <li>intake</li>
+              <li>sourcing</li>
+              <li>screening</li>
+              <li>scheduling</li>
+              <li>scoring</li>
+              <li>calibration</li>
+            </ul>
+
+            <blockquote>
+              <p>AI becomes part of the workflow’s fabric, not an extra button.</p>
+            </blockquote>
+
+            <h2 id="4-no-domain-expert">
+              #4 – No Domain Expert Is Driving the AI Work
+            </h2>
+
+            <p>Failed AI pilots are typically owned by:</p>
+
+            <ul>
+              <li>procurement</li>
+              <li>a generalist PM</li>
+              <li>a vendor</li>
+              <li>a data scientist who’s never recruited</li>
+              <li>a People Ops generalist</li>
+            </ul>
+
+            <p>Nobody with real funnel knowledge is in the room.</p>
+
+            <h3>✅ The 5% Solution</h3>
+            <p>They put a domain expert in charge — someone who understands:</p>
+
+            <ul>
+              <li>recruiting</li>
+              <li>systems design</li>
+              <li>automation</li>
+              <li>AI workflows</li>
+              <li>hiring manager behavior</li>
+            </ul>
+
+            <blockquote>
+              <p>
+                This is why companies increasingly need
+                <strong>AI-Native Recruiters</strong> — hybrid operators who can build and
+                optimize internal tools.
+              </p>
+            </blockquote>
+
+            <h2 id="5-mistrust-change-fatigue">
+              #5 – Mistrust and Change Fatigue Kill AI Adoption
+            </h2>
+
+            <p>AI fails when people don’t use it — and people don’t use it when:</p>
+
+            <ul>
+              <li>It’s a black box</li>
+              <li>It contradicts their judgment</li>
+              <li>It duplicates work</li>
+              <li>It’s unclear how decisions are made</li>
+              <li>It feels like a threat instead of support</li>
+            </ul>
+
+            <blockquote>
+              <p>
+                This is <em>not</em> a technical problem. It’s a trust and workflow problem.
+              </p>
+            </blockquote>
+
+            <h3>✅ The 5% Solution</h3>
+            <p>They design AI workflows that:</p>
+
+            <ul>
+              <li>make decisions visible</li>
+              <li>give recruiters the final say</li>
+              <li>enhance human judgment</li>
+              <li>reduce busywork</li>
+              <li>show clear time saved</li>
+              <li>don’t threaten the role — they amplify it</li>
+            </ul>
+
+            <blockquote>
+              <p>Humans must remain in the loop — but with AI doing the grunt work.</p>
+            </blockquote>
+
+            <h2 id="6-layered-on-top">
+              #6 – AI Is Layered On Top of Work Instead of Replacing It
+            </h2>
+
+            <p>A massive hidden failure point: teams adopt AI that <strong>adds work</strong>.</p>
+
+            <ul>
+              <li>“Review these AI scores.”</li>
+              <li>“Review this auto-screen.”</li>
+              <li>“Review this shortlist.”</li>
+            </ul>
+
+            <p>AI that doubles work → gets abandoned → pilot fails.</p>
+
+            <h3>✅ The 5% Solution</h3>
+
+            <h3>❌ Not this:</h3>
+            <p>“AI suggests candidates to check.”</p>
+
+            <h3>✅ Instead:</h3>
+            <p>“AI screens inbound and delivers only qualified applicants.”</p>
+
+            <h3>❌ Not this:</h3>
+            <p>“AI flags scheduling conflicts.”</p>
+
+            <h3>✅ Instead:</h3>
+            <p>“AI books interviews with guardrails.”</p>
+
+            <p><strong>The difference is everything.</strong></p>
+
+            <h2 id="7-never-scales">
+              #7 – AI Pilot Never Scales Beyond the “Cool Demo” Phase
+            </h2>
+
+            <p>Even when the AI works, pilots die because:</p>
+
+            <ol>
+              <li>Someone bought a tool</li>
+              <li>Demo looked good</li>
+              <li>Team used it for 30 days</li>
+              <li>Nobody integrated it</li>
+              <li>Nobody owned it</li>
+              <li>Pilot ended</li>
+              <li>Vendor blamed the client; client blamed the vendor</li>
+            </ol>
+
+            <p>No workflow redesign → no scale → failure.</p>
+
+            <h3>✅ The 5% Solution</h3>
+            <p>They implement:</p>
+
+            <ul>
+              <li>workflow diagrams</li>
+              <li>KPI standards</li>
+              <li>transparency guardrails</li>
+              <li>multi-agent workflows</li>
+              <li>ownership roles</li>
+              <li>rollout plans</li>
+              <li>feedback loops</li>
+            </ul>
+
+            <blockquote>
+              <p>AI becomes part of the operating rhythm — not an experiment.</p>
+            </blockquote>
+
+            <h2 id="what-5-percent-know">
+              What the 5% Know That the 95% Don’t
+            </h2>
+
+            <p>
+              Recent research shows only a small fraction of companies see meaningful earnings uplift
+              from AI. High performers treat AI as an operating model, not a side project.
+            </p>
+
+            <h3>AI only works when you build workflows first — tools second.</h3>
+
+            <p>
+              When workflows are clean, data is reliable, and adoption is intentional,
+              <strong>AI becomes transformative.</strong>
+            </p>
+
+            <ul>
+              <li>You don’t need 15 tools — you need one integrated system.</li>
+              <li>You don’t need another “pilot” — you need an AI-ready recruiting ops architecture.</li>
+              <li>You don’t need vendor sprawl — you need internal AI teammates.</li>
+            </ul>
+
+            <h2 id="future-ai-native-recruiter">
+              The Future Belongs to the AI-Native Recruiter
+            </h2>
+
+            <p>Companies are waking up to a new reality:</p>
+
+            <ul>
+              <li>AI won’t replace recruiters.</li>
+              <li>But recruiters who can build AI will replace those who can’t.</li>
+            </ul>
+
+            <blockquote>
+              <p>
+                The next generation of recruiting teams won’t just use AI tools — they’ll build
+                internal AI workflows, tailored to their processes, guardrails, and culture.
+              </p>
+            </blockquote>
+
+            <p>The 5% are already doing it.</p>
+
+            <h2 id="join-five-percent">Want your team to join the 5%?</h2>
+
+            <p>I help companies:</p>
+
+            <ul>
+              <li>audit their recruiting workflows</li>
+              <li>eliminate vendor sprawl</li>
+              <li>design AI-ready funnel architecture</li>
+              <li>build internal AI agents</li>
+              <li>create automations that actually get adopted</li>
+            </ul>
+
+            <p>If you’re exploring AI adoption — or your pilot is stuck — I’d love to help.</p>
+          </div>
+
+          <div class="tags-section">
+            <div class="tag-label">Tags</div>
+            <div class="tags">
+              <span class="tag">AI</span>
+              <span class="tag">AI Adoption</span>
+              <span class="tag">Recruiting Ops</span>
+              <span class="tag">Recruiting Automation</span>
+              <span class="tag">AI Workflows</span>
+              <span class="tag">Talent Acquisition</span>
+              <span class="tag">ATS Optimization</span>
+              <span class="tag">Recruiting Strategy</span>
+              <span class="tag">AI Pilots</span>
+              <span class="tag">Workflow Design</span>
+            </div>
+          </div>
+
+          <section class="article-cta" aria-label="Work with Diane">
+            <h3>Let’s build AI workflows your team will actually adopt.</h3>
+            <p>
+              I design AI-native recruiting systems — from screening agents and metrics dictionaries
+              to interview workflows and ATS automation.
+            </p>
+            <div class="article-cta-links">
+              <span>👋 How can I help?</span>
+              <a href="mailto:dianewilkinson510@gmail.com">Email: dianewilkinson510@gmail.com</a>
+              <a href="https://dianewilkinson.github.io" target="_blank" rel="noopener">Portfolio</a>
+              <a href="https://linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </section>
+
+          <footer class="footer">
+            <div>© 2025 Diane Wilkinson, dba Drive Human Capital. All rights reserved.</div>
+            <div class="footer-links">
+              <a href="mailto:info@drivehumancapital.com">info@drivehumancapital.com</a>
+              <a href="https://www.drivehumancapital.com/terms-and-conditions" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+              <a href="https://www.drivehumancapital.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+              <a href="https://www.drivehumancapital.com/accessibility-statement" target="_blank" rel="noopener">Accessibility</a>
+            </div>
+          </footer>
+        </article>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
