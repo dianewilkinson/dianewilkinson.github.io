@@ -57,8 +57,11 @@
 
     .suite-brand-row {
       display: flex;
+      justify-content: space-between;
       align-items: center;
+      gap: 1rem;
       margin-top: 0.35rem;
+      flex-wrap: wrap;
     }
 
     .suite-brand {
@@ -71,7 +74,6 @@
       width: 24px;
       height: 24px;
       border-radius: 999px;
-      /* more purple / pink gradient */
       background:
         radial-gradient(circle at 28% 22%, #ffffff 0, #f9a8ff 18%, #e879f9 40%, #a855f7 70%, #6366f1 100%);
       box-shadow:
@@ -149,6 +151,10 @@
 
     @media (max-width: 640px) {
       .suite-top-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .suite-brand-row {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -439,7 +445,7 @@
       border: 1px solid #e5e7eb;
       background: #ffffff;
       padding: 0.8rem 1rem 0.9rem;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: #4b5563;
       display: flex;
       flex-direction: column;
@@ -468,7 +474,7 @@
       gap: 0.2rem;
       border-bottom: 1px solid #e5e7eb;
       padding-bottom: 0;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.35rem;
     }
 
     .sample-tabs-row::after {
@@ -513,13 +519,49 @@
       box-shadow: 0 -1px 4px rgba(15, 23, 42, 0.06);
     }
 
+    /* Audience pills within a channel */
+
+    .audience-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.3rem 0 0.35rem;
+    }
+
+    .audience-pill {
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      padding: 0.15rem 0.65rem;
+      font-size: 0.72rem;
+      color: #4b5563;
+      cursor: pointer;
+    }
+
+    .audience-pill:hover {
+      background: #f3f4f6;
+    }
+
+    .audience-pill.active {
+      background: #111827;
+      border-color: #111827;
+      color: #f9fafb;
+    }
+
     .sample-scroll {
       overflow: auto;
       padding-right: 0.2rem;
+      max-height: 230px;
     }
 
     .sample-meta {
-      font-size: 0.76rem;
+      font-size: 0.72rem;
+      color: #6b7280;
+      margin-bottom: 0.15rem;
+    }
+
+    .sample-meta-2 {
+      font-size: 0.72rem;
       color: #6b7280;
       margin-bottom: 0.25rem;
     }
@@ -527,11 +569,13 @@
     .sample-subject {
       font-weight: 600;
       color: #111827;
-      margin-bottom: 0.35rem;
+      font-size: 0.76rem;
+      margin-bottom: 0.25rem;
     }
 
     .sample-body {
       white-space: pre-wrap;
+      font-size: 0.74rem;
     }
 
     /* What it solves */
@@ -607,12 +651,18 @@
       <!-- Suite header -->
       <header class="suite-header">
         <div class="suite-top-row">
-          <!-- Back to overview -->
-          <!-- Update href to your main portfolio/agents hub if needed -->
+          <!-- Back to overview (update href for your hub) -->
           <a class="back-link" href="../../index.html">
             <span class="arrow">←</span>
             <span>Back to A[i]gents overview</span>
           </a>
+        </div>
+
+        <div class="suite-brand-row">
+          <div class="suite-brand">
+            <span class="brand-orb" aria-hidden="true"></span>
+            <span class="suite-label">A[i]gents Portfolio · Demo</span>
+          </div>
 
           <!-- Mini suite nav -->
           <nav class="agent-nav" aria-label="A[i]gents navigation">
@@ -621,13 +671,6 @@
             <a class="agent-nav-link" href="../metrics/index.html">Metrics A[i]gent</a>
             <a class="agent-nav-link active" href="./index.html">Workflow A[i]gent</a>
           </nav>
-        </div>
-
-        <div class="suite-brand-row">
-          <div class="suite-brand">
-            <span class="brand-orb" aria-hidden="true"></span>
-            <span class="suite-label">A[i]gents Portfolio · Demo</span>
-          </div>
         </div>
       </header>
 
@@ -646,21 +689,21 @@
       <!-- Small stats row -->
       <div class="stats-row">
         <div class="stat-card">
-          <div class="stat-label">Interview pipeline</div>
+          <div class="stat-label">Interview Pipeline</div>
           <div class="stat-value">6 stages</div>
           <div class="stat-sub">
             Screen → HM/Tech → Panel → Final → Offer → Pre-start.
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Automated actions</div>
+          <div class="stat-label">Automated Actions</div>
           <div class="stat-value">20+</div>
           <div class="stat-sub">
             Confirmations, reminders, nudges, time-based triggers, and delay updates.
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Designed for</div>
+          <div class="stat-label">Designed For</div>
           <div class="stat-value">ATS-native</div>
           <div class="stat-sub">
             Built to sit on top of Greenhouse, Lever, and similar platforms.
@@ -669,7 +712,7 @@
       </div>
 
       <!-- Timeline + comms -->
-      <div class="section-title">Interview workflow timeline</div>
+      <div class="section-title">Interview Workflow Timeline</div>
       <div class="section-subtitle">Click a stage to see candidate comms & automations</div>
 
       <div class="timeline-wrapper">
@@ -706,19 +749,26 @@
 
         <div class="sample-email-card">
           <div class="sample-title-row">
-            <div class="sample-title">Stage communications</div>
+            <div class="sample-title">Stage Communications</div>
           </div>
-          <div class="sample-tabs-row" id="comm-tabs"></div>
+
+          <!-- Channel tabs -->
+          <div class="sample-tabs-row" id="channel-tabs"></div>
+
+          <!-- Audience pills -->
+          <div class="audience-row" id="audience-row"></div>
+
+          <!-- Email content -->
           <div class="sample-scroll" id="sample-email-content"></div>
         </div>
       </div>
 
       <!-- What it solves -->
       <div class="solves-layout">
-        <h3 class="solves-title">What Workflow A[i]gent solves</h3>
+        <h3 class="solves-title">What Workflow A[i]gent Solves</h3>
         <div class="solves-columns">
           <div class="solves-col">
-            <div class="solves-col-title">Operational drag</div>
+            <div class="solves-col-title">Operational Drag</div>
             <div>
               Less chasing, more recruiting. Automates repetitive communication so recruiters
               spend time on calibration, decision support, and candidate coaching instead of
@@ -726,7 +776,7 @@
             </div>
           </div>
           <div class="solves-col">
-            <div class="solves-col-title">Candidate experience</div>
+            <div class="solves-col-title">Candidate Experience</div>
             <div>
               No more “black box” stages. Every step has a clear expectation, confirmation, and
               follow-up, with delay alerts routed to recruiters whenever signals indicate risk or
@@ -734,7 +784,7 @@
             </div>
           </div>
           <div class="solves-col">
-            <div class="solves-col-title">Funnel health</div>
+            <div class="solves-col-title">Funnel Health</div>
             <div>
               Tighter feedback loops. Scorecard nudges and interview SLAs keep decisions moving,
               reduce idle time in the pipeline, and give downstream agents (like Metrics A[i]gent)
@@ -752,11 +802,11 @@
   </main>
 
   <script>
-    /* Stage definitions with workflow + multiple comms per stage */
+    /* Stage data with channel + audience structure */
 
     const STAGE_CONTENT = {
       screen: {
-        title: "Initial Screen workflow",
+        title: "Initial Screen Workflow",
         goal: "Convert intent into a booked time without manual back-and-forth.",
         label: "Stage change + availability request",
         items: [
@@ -768,8 +818,11 @@
         comms: [
           {
             id: "screen-cand-invite",
+            channel: "external",
+            audienceGroup: "Candidate",
             label: "Candidate – invite to schedule",
-            audience: "Candidate-facing · Trigger: on stage entry",
+            commType: "Confirmation",
+            trigger: "On stage change to Initial Screen",
             subject: "Subject: [Company] – Initial Conversation for [Role]",
             body: `Hi [First name],
 
@@ -785,8 +838,11 @@ Best,
           },
           {
             id: "screen-cand-followup",
+            channel: "external",
+            audienceGroup: "Candidate",
             label: "Candidate – post-screen follow-up (time-based)",
-            audience: "Candidate-facing · Trigger: 1 hour after interview start",
+            commType: "Follow-up",
+            trigger: "Time-based: 1 hour after interview start",
             subject: "Subject: Thanks for speaking with us about [Role]",
             body: `Hi [First name],
 
@@ -803,9 +859,29 @@ Thanks again,
 [Recruiter name]`
           },
           {
+            id: "screen-referrer-update",
+            channel: "external",
+            audienceGroup: "Referrer",
+            label: "Referrer – candidate in process",
+            commType: "Status update",
+            trigger: "On candidate moving to Initial Screen",
+            subject: "Subject: Quick update on your referral [Candidate] – [Role]",
+            body: `Hi [Referrer name],
+
+Quick update on your referral [Candidate] for [Role]: we’ve moved them into the Initial Screen stage and are coordinating time for a conversation.
+
+We’ll keep you posted as they move through the process. Thanks again for the referral — we really appreciate it.
+
+Best,
+[Recruiting team]`
+          },
+          {
             id: "screen-rec-alert",
+            channel: "internal",
+            audienceGroup: "Recruiter",
             label: "Recruiter – follow-up alert",
-            audience: "Internal · Trigger: no candidate reply at 96 hours",
+            commType: "Reminder",
+            trigger: "Time-based: no candidate reply at 96 hours",
             subject: "Subject: Screening invite pending for [Candidate] – [Role]",
             body: `Hi [Recruiter name],
 
@@ -818,11 +894,28 @@ Suggested next steps:
 
 You can jump directly to the candidate profile here:
 [ATS candidate link]`
+          },
+          {
+            id: "screen-coord-calendar",
+            channel: "internal",
+            audienceGroup: "Coordinator",
+            label: "Coordinator – calendar assist",
+            commType: "Task notification",
+            trigger: "On candidate reply without using self-schedule link",
+            subject: "Subject: Calendar help needed – screen for [Candidate]",
+            body: `Hi [Coordinator name],
+
+[Candidate] has replied to schedule a screen for [Role] but did not use the self-scheduling link.
+
+Please coordinate a time with [Recruiter name] and the candidate, then update the ATS and calendar invite.
+
+Candidate thread:
+[Email / ATS link]`
           }
         ]
       },
       hm: {
-        title: "HM / Tech interview workflow",
+        title: "HM / Tech Interview Workflow",
         goal: "Reduce no-shows and keep hiring managers on SLA for feedback.",
         label: "Confirmation + scorecard nudges",
         items: [
@@ -834,8 +927,11 @@ You can jump directly to the candidate profile here:
         comms: [
           {
             id: "hm-cand-confirm",
+            channel: "external",
+            audienceGroup: "Candidate",
             label: "Candidate – confirmation & agenda",
-            audience: "Candidate-facing · Trigger: when HM/Tech interview booked",
+            commType: "Confirmation",
+            trigger: "On HM/Tech interview booking",
             subject: "Subject: Your upcoming interview for [Role] at [Company]",
             body: `Hi [First name],
 
@@ -852,8 +948,11 @@ Looking forward to it!`
           },
           {
             id: "hm-cand-post",
-            label: "Candidate – post-interview reflection + resources",
-            audience: "Candidate-facing · Trigger: 1 hour after interview start",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Candidate – post-interview reflection",
+            commType: "Follow-up",
+            trigger: "Time-based: 1 hour after interview start",
             subject: "Subject: Thanks again for meeting with [Interviewer] – [Role]",
             body: `Hi [First name],
 
@@ -871,8 +970,11 @@ Best,
           },
           {
             id: "hm-prep",
+            channel: "internal",
+            audienceGroup: "Interviewer",
             label: "Hiring manager – prep packet",
-            audience: "Internal · Trigger: 24 hours before interview",
+            commType: "Prep",
+            trigger: "Time-based: 24 hours before interview",
             subject: "Subject: Prep for interview with [Candidate] – [Role]",
             body: `Hi [Manager name],
 
@@ -895,8 +997,11 @@ The closer you submit feedback to interview time, the more accurate and actionab
           },
           {
             id: "hm-scorecard",
+            channel: "internal",
+            audienceGroup: "Interviewer",
             label: "Hiring manager – scorecard reminders",
-            audience: "Internal · Trigger: end of interview + time-based nudges",
+            commType: "Reminder",
+            trigger: "On interview end + escalation at 24/48 hours",
             subject: "Subject: Action needed – scorecard for [Candidate] – [Role]",
             body: `Hi [Manager name],
 
@@ -917,7 +1022,7 @@ Thanks for helping us keep the process tight.`
         ]
       },
       panel: {
-        title: "Panel workflow",
+        title: "Panel Workflow",
         goal: "Align multiple interviewers and tighten the decision loop.",
         label: "Calendar orchestration + recap",
         items: [
@@ -929,8 +1034,11 @@ Thanks for helping us keep the process tight.`
         comms: [
           {
             id: "panel-cand-confirm",
+            channel: "external",
+            audienceGroup: "Candidate",
             label: "Candidate – consolidated panel confirmation",
-            audience: "Candidate-facing · Trigger: when panel is scheduled",
+            commType: "Confirmation",
+            trigger: "On panel scheduling",
             subject: "Subject: Panel interview details for [Role] at [Company]",
             body: `Hi [First name],
 
@@ -949,8 +1057,11 @@ Looking forward to the conversation!`
           },
           {
             id: "panel-panelist",
+            channel: "internal",
+            audienceGroup: "Interviewer",
             label: "Panelists – expectations & coverage",
-            audience: "Internal · Trigger: 24 hours before panel",
+            commType: "Prep",
+            trigger: "Time-based: 24 hours before panel",
             subject: "Subject: Panel coverage & scorecards for [Candidate] – [Role]",
             body: `Hi team,
 
@@ -969,8 +1080,11 @@ Thank you!`
           },
           {
             id: "panel-cand-post",
+            channel: "external",
+            audienceGroup: "Candidate",
             label: "Candidate – post-panel expectations",
-            audience: "Candidate-facing · Trigger: 1–2 hours after panel start",
+            commType: "Follow-up",
+            trigger: "Time-based: 1–2 hours after panel start",
             subject: "Subject: Thank you for joining the panel – next steps for [Role]",
             body: `Hi [First name],
 
@@ -990,7 +1104,7 @@ Best,
         ]
       },
       final: {
-        title: "Final interview workflow",
+        title: "Final Interview Workflow",
         goal: "De-risk last-mile candidate experience and prep for offer.",
         label: "Expectation-setting + closing signals",
         items: [
@@ -1002,8 +1116,11 @@ Best,
         comms: [
           {
             id: "final-cand-confirm",
+            channel: "external",
+            audienceGroup: "Candidate",
             label: "Candidate – final round confirmation",
-            audience: "Candidate-facing · Trigger: when final round booked",
+            commType: "Confirmation",
+            trigger: "On final interview booking",
             subject: "Subject: Final interview details for [Role] at [Company]",
             body: `Hi [First name],
 
@@ -1023,8 +1140,11 @@ Best,
           },
           {
             id: "final-cand-checkin",
+            channel: "external",
+            audienceGroup: "Candidate",
             label: "Candidate – offer expectation check-in",
-            audience: "Candidate-facing · Trigger: 24 hours before final",
+            commType: "Survey / check-in",
+            trigger: "Time-based: 24 hours before final",
             subject: "Subject: Quick check-in before your final interview for [Role]",
             body: `Hi [First name],
 
@@ -1041,8 +1161,11 @@ Thank you!`
           },
           {
             id: "final-hm-reminder",
+            channel: "internal",
+            audienceGroup: "Interviewer",
             label: "Hiring team – decision reminder",
-            audience: "Internal · Trigger: SLA window after final",
+            commType: "Reminder",
+            trigger: "Time-based: SLA window after final",
             subject: "Subject: Decision needed – [Candidate] for [Role]",
             body: `Hi team,
 
@@ -1060,7 +1183,7 @@ If you need more time or an additional conversation, reply to this email and we�
         ]
       },
       offer: {
-        title: "Offer workflow",
+        title: "Offer Workflow",
         goal: "Tighten time-to-offer while keeping stakeholders informed.",
         label: "Offer routing + approvals",
         items: [
@@ -1072,8 +1195,11 @@ If you need more time or an additional conversation, reply to this email and we�
         comms: [
           {
             id: "offer-internal-init",
-            label: "Recruiting / People – offer creation checklist",
-            audience: "Internal · Trigger: when status set to 'Ready to Offer'",
+            channel: "internal",
+            audienceGroup: "Recruiter",
+            label: "Recruiting – offer creation checklist",
+            commType: "Task notification",
+            trigger: "On status set to Ready to Offer",
             subject: "Subject: Offer checklist for [Candidate] – [Role]",
             body: `Hi [Recruiter name],
 
@@ -1091,8 +1217,11 @@ Once submitted, Workflow A[i]gent will route to the appropriate approvers automa
           },
           {
             id: "offer-approver",
+            channel: "internal",
+            audienceGroup: "Legal / Approvers / HR",
             label: "Approvers – offer package for review",
-            audience: "Internal · Trigger: on offer routing",
+            commType: "Approval request",
+            trigger: "On offer routing",
             subject: "Subject: Offer approval requested – [Candidate] for [Role]",
             body: `Hi [Approver name],
 
@@ -1112,8 +1241,11 @@ Thank you!`
           },
           {
             id: "offer-cand-recap",
+            channel: "external",
+            audienceGroup: "Candidate",
             label: "Candidate – offer recap",
-            audience: "Candidate-facing · Trigger: after live offer call",
+            commType: "Follow-up / recap",
+            trigger: "After live offer call",
             subject: "Subject: Your offer for [Role] at [Company]",
             body: `Hi [First name],
 
@@ -1130,11 +1262,28 @@ Your full offer letter and benefits summary are attached and available in your c
 If you’d like to walk through any part of the offer in more detail, reply here and we’ll gladly set up time.
 
 We’re excited about the possibility of working together.`
+          },
+          {
+            id: "offer-agency-update",
+            channel: "external",
+            audienceGroup: "Agency",
+            label: "Agency – offer status",
+            commType: "Status update",
+            trigger: "On verbal offer acceptance",
+            subject: "Subject: Update on your candidate [Candidate] – offer accepted",
+            body: `Hi [Agency contact],
+
+Great news: [Candidate] has verbally accepted the offer for [Role] at [Company]. We’re now moving into background and pre-start steps.
+
+Thank you for the partnership on this search. We’ll confirm start date and invoice details once paperwork is complete.
+
+Best,
+[Recruiting team]`
           }
         ]
       },
       prestart: {
-        title: "Pre-start workflow",
+        title: "Pre-start Workflow",
         goal: "Smooth hand-off from recruiting to onboarding without dropped details.",
         label: "Pre-start checklist",
         items: [
@@ -1146,8 +1295,11 @@ We’re excited about the possibility of working together.`
         comms: [
           {
             id: "prestart-hand-off",
+            channel: "internal",
+            audienceGroup: "Legal / Approvers / HR",
             label: "People / HR – new hire hand-off",
-            audience: "Internal · Trigger: on marked 'Offer accepted'",
+            commType: "Hand-off",
+            trigger: "On status set to Offer Accepted",
             subject: "Subject: New hire hand-off – [New hire] joining as [Role]",
             body: `Hi People/HR team,
 
@@ -1166,8 +1318,11 @@ Please confirm HRIS creation and onboarding steps are in motion.`
           },
           {
             id: "prestart-newhire",
+            channel: "external",
+            audienceGroup: "Candidate",
             label: "New hire – first-day logistics",
-            audience: "New-hire-facing · Trigger: 1 week before start",
+            commType: "Welcome",
+            trigger: "Time-based: 1 week before start",
             subject: "Subject: Welcome to [Company]! What to expect on your first day",
             body: `Hi [First name],
 
@@ -1185,8 +1340,11 @@ Welcome aboard!`
           },
           {
             id: "prestart-manager",
+            channel: "internal",
+            audienceGroup: "Recruiter",
             label: "Manager – onboarding reminders",
-            audience: "Internal · Trigger: 5–7 days before start",
+            commType: "Reminder",
+            trigger: "Time-based: 5–7 days before start",
             subject: "Subject: Onboarding checklist – [New hire] starts [date]",
             body: `Hi [Manager name],
 
@@ -1206,7 +1364,23 @@ A great first week has outsized impact on long-term engagement — thank you for
       }
     };
 
-    /* Render functions */
+    /* Render helpers */
+
+    const CHANNEL_ORDER = ["external", "internal"];
+    const CHANNEL_LABEL = {
+      external: "External (candidate, referrer, agency)",
+      internal: "Internal (recruiter, interviewers, operations)"
+    };
+
+    const ALL_AUDIENCE_ORDER = [
+      "Candidate",
+      "Referrer",
+      "Agency",
+      "Recruiter",
+      "Interviewer",
+      "Coordinator",
+      "Legal / Approvers / HR"
+    ];
 
     function renderStage(stageKey) {
       const data = STAGE_CONTENT[stageKey] || STAGE_CONTENT.screen;
@@ -1221,59 +1395,116 @@ A great first week has outsized impact on long-term engagement — thank you for
         </ul>
       `;
 
-      renderComms(stageKey, data.comms[0]?.id);
+      renderComms(stageKey);
     }
 
-    function renderComms(stageKey, activeCommId) {
+    function renderComms(stageKey, forcedChannel, forcedAudience) {
       const data = STAGE_CONTENT[stageKey] || STAGE_CONTENT.screen;
-      const tabsContainer = document.getElementById("comm-tabs");
+      const channelTabs = document.getElementById("channel-tabs");
+      const audienceRow = document.getElementById("audience-row");
       const contentContainer = document.getElementById("sample-email-content");
 
-      if (!data.comms || !data.comms.length) {
-        tabsContainer.innerHTML = "";
+      const comms = data.comms || [];
+
+      if (!comms.length) {
+        channelTabs.innerHTML = "";
+        audienceRow.innerHTML = "";
         contentContainer.innerHTML =
           "<div class='sample-meta'>No communications configured for this stage yet.</div>";
         return;
       }
 
-      const comms = data.comms;
-      const defaultId = activeCommId || comms[0].id;
+      // Available channels for this stage
+      const channelsForStage = CHANNEL_ORDER.filter((ch) =>
+        comms.some((c) => c.channel === ch)
+      );
+      const activeChannel =
+        forcedChannel && channelsForStage.includes(forcedChannel)
+          ? forcedChannel
+          : channelsForStage[0];
 
-      // Tabs (folder-style)
-      tabsContainer.innerHTML = comms
+      // Channel tabs (Internal / External)
+      channelTabs.innerHTML = channelsForStage
         .map(
-          (c) => `
+          (ch) => `
           <button
-            class="sample-tab ${c.id === defaultId ? "active" : ""}"
-            data-stage="${stageKey}"
-            data-comm="${c.id}"
+            class="sample-tab ${ch === activeChannel ? "active" : ""}"
+            data-channel="${ch}"
           >
-            ${c.label}
+            ${ch === "external" ? "External" : "Internal"}
           </button>`
         )
         .join("");
 
-      // Active content
-      const comm = comms.find((c) => c.id === defaultId) || comms[0];
+      // Audience options within that channel
+      const audiencesForChannel = Array.from(
+        new Set(
+          comms
+            .filter((c) => c.channel === activeChannel)
+            .map((c) => c.audienceGroup)
+        )
+      ).sort(
+        (a, b) =>
+          ALL_AUDIENCE_ORDER.indexOf(a) - ALL_AUDIENCE_ORDER.indexOf(b)
+      );
+
+      const activeAudience =
+        forcedAudience && audiencesForChannel.includes(forcedAudience)
+          ? forcedAudience
+          : audiencesForChannel[0];
+
+      audienceRow.innerHTML = audiencesForChannel
+        .map(
+          (aud) => `
+          <button
+            class="audience-pill ${aud === activeAudience ? "active" : ""}"
+            data-audience="${aud}"
+          >
+            ${aud}
+          </button>`
+        )
+        .join("");
+
+      // Pick first comm that matches active channel + audience
+      const activeComm =
+        comms.find(
+          (c) =>
+            c.channel === activeChannel && c.audienceGroup === activeAudience
+        ) || comms[0];
 
       contentContainer.innerHTML = `
-        <div class="sample-meta">${comm.audience}</div>
-        <div class="sample-subject">${comm.subject}</div>
-        <div class="sample-body">${comm.body}</div>
+        <div class="sample-meta">${
+          activeChannel === "external" ? "External" : "Internal"
+        } · ${activeComm.audienceGroup}</div>
+        <div class="sample-meta-2">
+          Comms type: <strong>${activeComm.commType}</strong> ·
+          Trigger: <strong>${activeComm.trigger}</strong>
+        </div>
+        <div class="sample-subject">${activeComm.subject}</div>
+        <div class="sample-body">${activeComm.body}</div>
       `;
 
-      // Attach listeners to tabs
+      // Wire up tab clicks
       document.querySelectorAll(".sample-tab").forEach((btn) => {
         btn.addEventListener("click", () => {
-          const stage = btn.getAttribute("data-stage");
-          const commId = btn.getAttribute("data-comm");
-
           document
             .querySelectorAll(".sample-tab")
             .forEach((b) => b.classList.remove("active"));
           btn.classList.add("active");
+          const ch = btn.getAttribute("data-channel");
+          renderComms(stageKey, ch, null);
+        });
+      });
 
-          renderComms(stage, commId);
+      // Wire up audience pill clicks
+      document.querySelectorAll(".audience-pill").forEach((pill) => {
+        pill.addEventListener("click", () => {
+          document
+            .querySelectorAll(".audience-pill")
+            .forEach((p) => p.classList.remove("active"));
+          pill.classList.add("active");
+          const aud = pill.getAttribute("data-audience");
+          renderComms(stageKey, activeChannel, aud);
         });
       });
     }
