@@ -17,9 +17,7 @@
       --max-width: 900px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
       margin: 0;
@@ -35,18 +33,14 @@
       color: #2563eb;
       text-decoration: none;
     }
-    a:hover {
-      text-decoration: underline;
-    }
+    a:hover { text-decoration: underline; }
 
-    /* PAGE WRAPPER */
     .shell {
       max-width: var(--max-width);
       margin: 32px auto 60px;
       padding: 0 20px;
     }
 
-    /* HEADER TAGS */
     .article-kicker-row {
       display: flex;
       flex-wrap: wrap;
@@ -113,7 +107,7 @@
       height: 3px;
       width: 100%;
       border-radius: 999px;
-      margin: 10px 0 26px;
+      margin: 10px 0 22px;
       background: linear-gradient(
         90deg,
         var(--accent-pink),
@@ -123,24 +117,13 @@
       );
     }
 
-    /* OVERVIEW BOX */
-    .overview-card {
-      border-radius: 10px;
-      border: 1px solid var(--border-subtle);
-      background: #f9fafb;
-      padding: 14px 16px;
-      margin-bottom: 22px;
-      font-size: 0.95rem;
-    }
-    .overview-label {
-      font-size: 0.74rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 6px;
+    .hero-banner {
+      width: 100%;
+      border-radius: 16px;
+      margin: 12px 0 26px;
+      display: block;
     }
 
-    /* PDF LINK BUTTON */
     .pdf-link {
       display: inline-flex;
       align-items: center;
@@ -165,7 +148,6 @@
       text-decoration: none;
     }
 
-    /* BODY TEXT */
     .article-body {
       font-size: 1.08rem;
       line-height: 1.72;
@@ -188,7 +170,6 @@
       font-size: 1.06rem;
     }
 
-    /* SECTION HEADINGS */
     .section-heading {
       font-size: 1.65rem;
       font-weight: 700;
@@ -218,7 +199,6 @@
       margin-bottom: 0.5rem;
     }
 
-    /* BLOCKQUOTES (Medium-style) */
     blockquote {
       margin: 1.7rem 0;
       padding: 0.2rem 0 0.2rem 1.3rem;
@@ -233,7 +213,6 @@
       margin: 0;
     }
 
-    /* CALLOUT LABELS */
     .callout-label {
       font-size: 0.82rem;
       font-weight: 600;
@@ -243,7 +222,6 @@
       margin: 1.3rem 0 0.35rem;
     }
 
-    /* TAGS */
     .tags-section {
       margin-top: 32px;
       padding-top: 18px;
@@ -277,7 +255,6 @@
       color: #374151;
     }
 
-    /* CTA BOX */
     .article-cta {
       margin-top: 26px;
       padding: 18px 16px;
@@ -312,30 +289,71 @@
       justify-content: space-between;
       flex-wrap: wrap;
     }
+
+    /* Force overrides against GitHub defaults */
+    body, .article-body {
+      font-size: 1.1rem !important;
+      line-height: 1.72 !important;
+      font-weight: 400 !important;
+    }
+
+    .article-body p {
+      font-size: 1.1rem !important;
+      margin-bottom: 1.25em !important;
+    }
+
+    .section-heading,
+    .section-number {
+      font-size: 1.75rem !important;
+      line-height: 1.3 !important;
+      font-weight: 700 !important;
+    }
+
+    .article-body h2 {
+      font-size: 1.55rem !important;
+      font-weight: 700 !important;
+      margin-top: 2.5rem !important;
+      margin-bottom: 0.75rem !important;
+    }
+
+    .article-body h3 {
+      font-size: 1.25rem !important;
+      font-weight: 600 !important;
+      margin-top: 1.7rem !important;
+      margin-bottom: 0.55rem !important;
+    }
+
+    blockquote p {
+      font-size: 1.22rem !important;
+      font-weight: 600 !important;
+      line-height: 1.55 !important;
+    }
+
+    blockquote {
+      border-left: 3px solid var(--accent-purple) !important;
+      padding-left: 1.3rem !important;
+      margin: 1.7rem 0 !important;
+    }
   </style>
 </head>
 <body>
 
   <main class="shell">
 
-    <!-- TAGS ABOVE TITLE -->
     <div class="article-kicker-row">
       <span class="pill">AI in Recruiting · Thought Leadership</span>
       <span class="pill">Automation &amp; Workflows</span>
     </div>
 
-    <!-- TITLE -->
     <h1 class="article-title">
       Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently
     </h1>
 
-    <!-- SUBTITLE -->
     <p class="article-subtitle">
       AI isn’t failing because the technology is bad. It’s failing because the workflow
       around it is broken — especially in recruiting.
     </p>
 
-    <!-- META -->
     <div class="meta-row">
       <div class="meta-author">
         <div class="meta-avatar"></div>
@@ -349,15 +367,8 @@
 
     <div class="gradient-rule"></div>
 
-    <!-- OVERVIEW -->
-    <section class="overview-card">
-      <div class="overview-label">Article Overview</div>
-      <p>
-        Why AI pilots stall out at “cool demo” stage, why recruiters don’t trust the tools
-        they’re given, and how the successful 5% design workflow-first, AI-ready recruiting
-        systems.
-      </p>
-    </section>
+    <!-- HERO BANNER -->
+    <img src="../assets/ai-pilots-hero.png" alt="MIT says 95% of AI pilots are crashing" class="hero-banner">
 
     <!-- PDF BUTTON -->
     <a class="pdf-link" href="../assets/ai-why-pilots-fail.pdf" target="_blank">
@@ -366,7 +377,6 @@
     </a>
 
     <article class="article-body">
-
       <p>
         If you’ve been anywhere near an executive meeting this year, you’ve probably heard a
         version of the same painful story:
@@ -408,7 +418,6 @@
         successful 5% do differently.
       </p>
 
-      <!-- #1 -->
       <h2 class="section-heading"><span class="section-number">#1</span>AI Is Added to a Broken Workflow</h2>
 
       <p>Most failed pilots follow the same pattern:</p>
@@ -442,7 +451,6 @@
         <p>Only after the workflow is clean do they add AI inside it.</p>
       </blockquote>
 
-      <!-- #2 -->
       <h2 class="section-heading"><span class="section-number">#2</span>Poor Data Quality Makes AI Useless</h2>
 
       <p>AI can only act on the signals it’s given.</p>
@@ -473,10 +481,9 @@
         <p>Reliable data creates the foundation AI needs to actually work.</p>
       </blockquote>
 
-      <!-- #3 -->
       <h2 class="section-heading"><span class="section-number">#3</span>AI Pilots Run Outside the Recruiting Funnel</h2>
 
-      <p>One of the most common failure modes:</p>
+      <p>One of the most common failure modes is simple:</p>
       <p><strong>AI is piloted as a standalone tool.</strong></p>
 
       <p>Examples:</p>
@@ -501,7 +508,6 @@
         <p>AI becomes part of the workflow’s fabric, not an extra button.</p>
       </blockquote>
 
-      <!-- #4 -->
       <h2 class="section-heading"><span class="section-number">#4</span>No Domain Expert Is Driving the AI Work</h2>
 
       <p>Failed AI pilots are typically owned by:</p>
@@ -532,7 +538,6 @@
         </p>
       </blockquote>
 
-      <!-- #5 -->
       <h2 class="section-heading"><span class="section-number">#5</span>Mistrust and Change Fatigue Kill AI Adoption</h2>
 
       <p>AI fails when people don’t use it — and people don’t use it when:</p>
@@ -563,7 +568,6 @@
         <p>Humans remain in the loop — but AI removes the grunt work.</p>
       </blockquote>
 
-      <!-- #6 -->
       <h2 class="section-heading"><span class="section-number">#6</span>AI Is Layered On Top of Work Instead of Replacing It</h2>
 
       <p>A hidden failure pattern: AI introduces <strong>more</strong> work.</p>
@@ -590,7 +594,6 @@
         <p>The difference is everything.</p>
       </blockquote>
 
-      <!-- #7 -->
       <h2 class="section-heading"><span class="section-number">#7</span>AI Pilots Never Scale Beyond the “Cool Demo”</h2>
 
       <p>Pilots often die because:</p>
@@ -620,7 +623,6 @@
         <p>AI becomes part of the operating rhythm — not an experiment.</p>
       </blockquote>
 
-      <!-- WHAT THE 5% KNOW -->
       <h2>What the 5% Know That the 95% Don’t</h2>
       <p>
         Successful orgs treat AI as an operating model — not a project — and they see
@@ -635,7 +637,6 @@
         <li>You don’t need vendor sprawl — you need internal AI teammates.</li>
       </ul>
 
-      <!-- FUTURE -->
       <h2>The Future Belongs to the AI-Native Recruiter</h2>
 
       <p>Companies are waking up to a new reality:</p>
@@ -654,7 +655,6 @@
 
       <p>The 5% are already doing it.</p>
 
-      <!-- CTA -->
       <h2>Want your team to join the 5%?</h2>
       <p>I help companies:</p>
 
@@ -667,10 +667,8 @@
       </ul>
 
       <p>If you’re exploring AI adoption — or your pilot is stuck — I’d love to help.</p>
-
     </article>
 
-    <!-- TAGS -->
     <section class="tags-section">
       <div class="tag-label">Tags</div>
       <div class="tags">
@@ -684,14 +682,12 @@
       </div>
     </section>
 
-    <!-- CTA BOX -->
     <section class="article-cta">
       <h3>Let’s build AI workflows your team will actually adopt.</h3>
       <p>
         I design AI-native recruiting systems — from screening agents to
         interview workflows and ATS automation.
       </p>
-
       <div class="article-cta-links">
         <a href="mailto:dianewilkinson510@gmail.com">Email</a>
         <a href="https://dianewilkinson.github.io">Portfolio</a>
