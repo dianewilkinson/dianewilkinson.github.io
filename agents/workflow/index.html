@@ -199,7 +199,7 @@
       margin-top: 0.5rem;
       font-size: 0.9rem;
       color: #4b5563;
-      max-width: 52rem; /* wider so it doesn’t wrap too early */
+      max-width: 52rem;
     }
 
     /* Small stats row */
@@ -433,7 +433,7 @@
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.3rem;
     }
 
     .timeline-list li {
@@ -448,6 +448,26 @@
       left: 0;
       color: #9ca3af;
       font-size: 0.9rem;
+    }
+
+    /* highlightable overview items */
+
+    .timeline-list li.overview-comm {
+      border-radius: 0.4rem;
+      padding-top: 0.15rem;
+      padding-bottom: 0.15rem;
+      margin-left: -0.2rem;
+      padding-right: 0.4rem;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .timeline-list li.overview-comm.active {
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    .timeline-list li.overview-comm.active::before {
+      color: #f9fafb;
     }
 
     /* Stage communications card */
@@ -843,8 +863,8 @@
             audienceGroup: "Candidate",
             variant: "invite",
             variantLabel: "Invite to schedule",
-            commType: "Invitation",
-            trigger: "On stage change to Initial Screen",
+            commType: "Scheduling invitation",
+            trigger: "On stage change",
             subject: "Subject: [Company] – Initial Conversation for [Role]",
             body: `Hi [First name],
 
@@ -865,7 +885,7 @@ Best,
             variant: "confirm",
             variantLabel: "Confirmation",
             commType: "Confirmation",
-            trigger: "On candidate booking a time",
+            trigger: "On booking",
             subject: "Subject: Your conversation with [Recruiter] is confirmed – [Role]",
             body: `Hi [First name],
 
@@ -884,9 +904,9 @@ Looking forward to speaking with you,
             channel: "external",
             audienceGroup: "Candidate",
             variant: "followup",
-            variantLabel: "Post-screen",
+            variantLabel: "Post-screen follow-up",
             commType: "Follow-up",
-            trigger: "Time-based: 1 hour after interview start",
+            trigger: "1 hour after interview start",
             subject: "Subject: Thanks for speaking with us about [Role]",
             body: `Hi [First name],
 
@@ -911,7 +931,7 @@ Thanks again,
             variant: "status",
             variantLabel: "Referral status update",
             commType: "Status update",
-            trigger: "On candidate moving to Initial Screen",
+            trigger: "On stage change",
             subject: "Subject: Quick update on your referral [Candidate] – [Role]",
             body: `Hi [Referrer name],
 
@@ -931,7 +951,7 @@ Best,
             variant: "noresponse",
             variantLabel: "No-response alert",
             commType: "Reminder",
-            trigger: "Time-based: no candidate reply at 96 hours",
+            trigger: "At 96 hours with no response",
             subject: "Subject: Screening invite pending for [Candidate] – [Role]",
             body: `Hi [Recruiter name],
 
@@ -952,7 +972,7 @@ You can jump directly to the candidate profile here:
             variant: "calendar",
             variantLabel: "Calendar assist",
             commType: "Task notification",
-            trigger: "On candidate reply without using self-schedule link",
+            trigger: "On reply without using scheduling link",
             subject: "Subject: Calendar help needed – screen for [Candidate]",
             body: `Hi [Coordinator name],
 
@@ -990,8 +1010,8 @@ Candidate thread:
             audienceGroup: "Candidate",
             variant: "invite",
             variantLabel: "Availability request",
-            commType: "Invitation",
-            trigger: "On stage change from Screen → HM/Tech",
+            commType: "Scheduling invitation",
+            trigger: "On stage change from Screen",
             subject: "Subject: Next step for [Role] – HM/Tech interview availability",
             body: `Hi [First name],
 
@@ -1010,9 +1030,9 @@ Best,
             channel: "external",
             audienceGroup: "Candidate",
             variant: "confirm",
-            variantLabel: "Confirmation & agenda",
+            variantLabel: "Confirmation",
             commType: "Confirmation",
-            trigger: "On HM/Tech interview booking",
+            trigger: "On booking",
             subject: "Subject: Your upcoming interview for [Role] at [Company]",
             body: `Hi [First name],
 
@@ -1034,7 +1054,7 @@ Looking forward to it!`
             variant: "followup",
             variantLabel: "Post-interview follow-up",
             commType: "Follow-up",
-            trigger: "Time-based: 1 hour after interview start",
+            trigger: "1 hour after interview start",
             subject: "Subject: Thanks again for meeting with [Interviewer] – [Role]",
             body: `Hi [First name],
 
@@ -1059,7 +1079,7 @@ Best,
             variant: "status",
             variantLabel: "Referral status update",
             commType: "Status update",
-            trigger: "On candidate moving to HM/Tech",
+            trigger: "On stage change to HM/Tech",
             subject: "Subject: Your referral [Candidate] reached the HM/Tech stage",
             body: `Hi [Referrer name],
 
@@ -1077,9 +1097,9 @@ Thanks again for the referral,
             channel: "internal",
             audienceGroup: "Recruiter",
             variant: "booked",
-            variantLabel: "Event booked confirmation",
+            variantLabel: "Event booked",
             commType: "Notification",
-            trigger: "On HM/Tech interview booking",
+            trigger: "On booking",
             subject: "Subject: HM/Tech interview booked – [Candidate] for [Role]",
             body: `Hi [Recruiter name],
 
@@ -1095,7 +1115,7 @@ You can review details or make changes here:
             variant: "prep",
             variantLabel: "Candidate prep packet",
             commType: "Prep",
-            trigger: "Time-based: morning of interview",
+            trigger: "Morning of interview",
             subject: "Subject: Prep for interview with [Candidate] – [Role]",
             body: `Hi [Manager name],
 
@@ -1123,7 +1143,7 @@ The closer you submit feedback to interview time, the more accurate and actionab
             variant: "scorecard",
             variantLabel: "Scorecard reminder",
             commType: "Reminder",
-            trigger: "On interview end + escalation at 24/48 hours",
+            trigger: "After interview end, with escalation at 24/48 hours",
             subject: "Subject: Action needed – scorecard for [Candidate] – [Role]",
             body: `Hi [Manager name],
 
@@ -1148,7 +1168,7 @@ Thanks for helping us keep the process tight.`
             variant: "decision",
             variantLabel: "Decision reminder",
             commType: "Reminder",
-            trigger: "Time-based: 48 hours after interview if no move/reject",
+            trigger: "48 hours after interview with no decision",
             subject: "Subject: Decision needed – [Candidate] for [Role] (HM/Tech)",
             body: `Hi [Recruiter name],
 
@@ -1188,9 +1208,9 @@ You can review feedback and update status here:
             channel: "external",
             audienceGroup: "Candidate",
             variant: "advance",
-            variantLabel: "Next steps & availability",
-            commType: "Invitation",
-            trigger: "On candidate marked ready for panel",
+            variantLabel: "Next step & availability",
+            commType: "Scheduling invitation",
+            trigger: "On marked ready for panel",
             subject: "Subject: Next step for [Role] – panel availability",
             body: `Hi [First name],
 
@@ -1209,9 +1229,9 @@ Best,
             channel: "external",
             audienceGroup: "Candidate",
             variant: "confirm",
-            variantLabel: "Panel confirmation & homework",
+            variantLabel: "Panel confirmation",
             commType: "Confirmation",
-            trigger: "On panel scheduling",
+            trigger: "On panel booking",
             subject: "Subject: Panel interview details for [Role] at [Company]",
             body: `Hi [First name],
 
@@ -1238,7 +1258,7 @@ Looking forward to the conversation!`
             variant: "followup",
             variantLabel: "Post-panel follow-up",
             commType: "Follow-up",
-            trigger: "Time-based: 1–2 hours after panel start",
+            trigger: "1–2 hours after panel start",
             subject: "Subject: Thank you for joining the panel – next steps for [Role]",
             body: `Hi [First name],
 
@@ -1264,7 +1284,7 @@ Best,
             variant: "status",
             variantLabel: "Referral status update",
             commType: "Status update",
-            trigger: "On candidate scheduled for panel",
+            trigger: "On panel booking",
             subject: "Subject: Your referral [Candidate] reached the panel stage",
             body: `Hi [Referrer name],
 
@@ -1282,9 +1302,9 @@ Thank you again for the referral,
             channel: "internal",
             audienceGroup: "Interviewer",
             variant: "prep",
-            variantLabel: "Panel coverage & prompts",
+            variantLabel: "Panel coverage",
             commType: "Prep",
-            trigger: "Time-based: 24 hours before panel",
+            trigger: "24 hours before panel",
             subject: "Subject: Panel coverage & scorecards for [Candidate] – [Role]",
             body: `Hi team,
 
@@ -1308,7 +1328,7 @@ Thank you!`
             variant: "scorecards",
             variantLabel: "Scorecard reminders",
             commType: "Reminder",
-            trigger: "Time-based: 4/24 hours after panel if missing",
+            trigger: "4 and 24 hours after panel if missing",
             subject: "Subject: Action needed – panel scorecard for [Candidate]",
             body: `Hi [Interviewer name],
 
@@ -1331,7 +1351,7 @@ Thank you!`
             variant: "decision",
             variantLabel: "Decision prompt",
             commType: "Reminder",
-            trigger: "Time-based: SLA window after last scorecard",
+            trigger: "At SLA window after last scorecard",
             subject: "Subject: Decision needed after panel – [Candidate] for [Role]",
             body: `Hi [Recruiter name],
 
@@ -1373,7 +1393,7 @@ You can review scorecards and notes here:
             variant: "confirm",
             variantLabel: "Final confirmation",
             commType: "Confirmation",
-            trigger: "On final interview booking",
+            trigger: "On final booking",
             subject: "Subject: Final interview details for [Role] at [Company]",
             body: `Hi [First name],
 
@@ -1398,7 +1418,7 @@ Best,
             variant: "checkin",
             variantLabel: "Offer expectation check-in",
             commType: "Survey / check-in",
-            trigger: "Time-based: 24 hours before final",
+            trigger: "24 hours before final",
             subject: "Subject: Quick check-in before your final interview for [Role]",
             body: `Hi [First name],
 
@@ -1420,7 +1440,7 @@ Thank you!`
             variant: "followup",
             variantLabel: "Post-final follow-up",
             commType: "Follow-up",
-            trigger: "Time-based: 1 hour after final interview start",
+            trigger: "1 hour after final start",
             subject: "Subject: Thank you for your time – next steps for [Role]",
             body: `Hi [First name],
 
@@ -1442,7 +1462,7 @@ Best,
             variant: "status",
             variantLabel: "Final-stage referral update",
             commType: "Status update",
-            trigger: "On candidate scheduled for final",
+            trigger: "On final booking",
             subject: "Subject: Your referral [Candidate] is at the final stage",
             body: `Hi [Referrer name],
 
@@ -1462,7 +1482,7 @@ Best,
             variant: "prep",
             variantLabel: "Final conversation prep",
             commType: "Prep",
-            trigger: "Time-based: morning of final",
+            trigger: "Morning of final",
             subject: "Subject: Final conversation context – [Candidate] for [Role]",
             body: `Hi [Interviewer name],
 
@@ -1488,7 +1508,7 @@ You can review full history and scorecards here:
             variant: "decision",
             variantLabel: "Decision reminder",
             commType: "Reminder",
-            trigger: "Time-based: SLA window after final",
+            trigger: "At SLA window after final",
             subject: "Subject: Decision needed – [Candidate] for [Role] (final)",
             body: `Hi [Recruiter name],
 
@@ -1660,9 +1680,9 @@ Thank you!`
             channel: "external",
             audienceGroup: "Candidate",
             variant: "welcome",
-            variantLabel: "Welcome & first-day details",
+            variantLabel: "Welcome & first day",
             commType: "Welcome",
-            trigger: "Time-based: 1 week before start",
+            trigger: "1 week before start",
             subject: "Subject: Welcome to [Company]! What to expect on your first day",
             body: `Hi [First name],
 
@@ -1687,7 +1707,7 @@ Welcome aboard!`
             variant: "status",
             variantLabel: "Referral hire update",
             commType: "Status update",
-            trigger: "On candidate start date confirmed",
+            trigger: "On start date confirmed",
             subject: "Subject: Your referral [New hire] is joining [Company]!",
             body: `Hi [Referrer name],
 
@@ -1731,7 +1751,7 @@ Please confirm HRIS creation and onboarding steps are in motion.`
             variant: "manager-reminder",
             variantLabel: "Manager onboarding reminder",
             commType: "Reminder",
-            trigger: "Time-based: 5–7 days before start",
+            trigger: "5–7 days before start",
             subject: "Subject: Onboarding checklist – [New hire] starts [date]",
             body: `Hi [Manager name],
 
@@ -1763,9 +1783,9 @@ A great first week has outsized impact on long-term engagement — thank you for
       "Legal / Approvers / HR"
     ];
 
-    /* Render left overview card, optionally filtered by channel */
+    /* Overview rendering, optionally filtered by channel */
 
-    function renderOverview(stageKey, channel) {
+    function renderOverview(stageKey, channel, activeCommId) {
       const data = STAGE_CONTENT[stageKey] || STAGE_CONTENT.screen;
       const details = document.getElementById("stage-details");
       const comms = data.comms || [];
@@ -1784,11 +1804,12 @@ A great first week has outsized impact on long-term engagement — thank you for
           bulletsHtml = filtered
             .map(
               (c) => `
-              <li>
+              <li class="overview-comm ${c.id === activeCommId ? "active" : ""}"
+                  data-comm-id="${c.id}">
+                <strong>${c.variantLabel}</strong> – 
                 <strong>To:</strong> ${c.audienceGroup} ·
                 <strong>Type:</strong> ${c.commType} ·
-                <strong>Trigger:</strong> ${c.trigger}<br />
-                ${c.variantLabel}
+                <strong>Trigger:</strong> ${c.trigger}
               </li>`
             )
             .join("");
@@ -1819,7 +1840,7 @@ A great first week has outsized impact on long-term engagement — thank you for
     }
 
     function renderStage(stageKey) {
-      renderOverview(stageKey, null);
+      renderOverview(stageKey, null, null);
       renderComms(stageKey);
     }
 
@@ -1925,15 +1946,16 @@ A great first week has outsized impact on long-term engagement — thank you for
           activeChannel === "external" ? "External" : "Internal"
         } · ${activeComm.audienceGroup}</div>
         <div class="sample-meta-2">
-          Comms type: <strong>${activeComm.commType}</strong> ·
+          Email: <strong>${activeComm.variantLabel}</strong> ·
+          Type: <strong>${activeComm.commType}</strong> ·
           Trigger: <strong>${activeComm.trigger}</strong>
         </div>
         <div class="sample-subject">${activeComm.subject}</div>
         <div class="sample-body">${activeComm.body}</div>
       `;
 
-      // Sync left card with chosen channel
-      renderOverview(stageKey, activeChannel);
+      // Sync left card with chosen channel + active email
+      renderOverview(stageKey, activeChannel, activeComm.id);
 
       /* Wire up interactions */
 
