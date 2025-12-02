@@ -289,22 +289,31 @@ These metrics can feed into **Metrics A[i]gent** dashboards for holistic funnel 
 
 ### 7.2 Metrics Dictionary Integration
 
-Workflow A[i]gent emits standardized timestamps and events that align with the shared A[i]gents Metrics Dictionary:
-- Metric name
-- Definition & formula
-- Required fields / timestamps
-- Stage entry and exit rules
-- Normalization rules for ATS variations (Greenhouse vs. Lever vs. Workday)
+Workflow A[i]gent emits standardized timestamps and event objects that map 1:1 to the Metrics Dictionary fields:
 
-Key events emitted:
-- stage_entered_at – every time a candidate enters a stage
-- interview_scheduled_at – when the event record is created
-- interview_start_at / interview_end_at – from the calendar event
-- scorecard_submitted_at – for SLA and “feedback freshness” metrics
-- offer_extended_at – for offer-acceptance velocity
-- delay_update_sent_at – for candidate wait-time and delay-coverage metrics
+| Event emitted by Workflow A[i]gent | Metrics Dictionary Field   | Used For                          |
+|------------------------------------|----------------------------|-----------------------------------|
+| stage_entered_at                   | stage_start_time           | Time-in-stage calculations        |
+| interview_scheduled_at             | interview_scheduled_time   | SLA tracking, throughput          |
+| interview_start_at                 | interview_start_time       | Wait time, candidate friction     |
+| interview_end_at                   | interview_end_time         | Feedback freshness calculations   |
+| scorecard_submitted_at             | scorecard_submitted_time   | SLA compliance                    |
+| offer_extended_at                  | offer_extended_time        | Time-to-offer                     |
+| delay_update_sent_at               | delay_update_sent          | Delay coverage & CX metrics       |
 
-Metrics A[i]gent simply aggregates these events into funnel, SLA, delay-coverage, and throughput dashboards.
+These events allow Metrics A[i]gent to compute:
+
+- Stage duration (median & percentile)
+- SLA adherence (scorecards, scheduling, response times)
+- No-show rate by stage
+- Interview-to-decision velocity
+- Delay-coverage % (roles that received an update)
+- Candidate friction (days between interviews)
+- Pass-through rates across Screen → Panel → Offer
+
+Workflow A[i]gent = data generator
+Metrics A[i]gent = analytics engine
+Metrics Dictionary = the shared normalization layer
 
 ---
 
