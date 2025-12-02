@@ -69,6 +69,13 @@ Those are handled by other A[i]gents in the portfolio.
 - **Configurable**: stages and templates can be swapped per role / region  
 - **Fail-safe**: humans can override or pause any automation
 
+### 2.4 Gloabl Rules (applied to all automations)
+
+- **Time Zone**: send in candidate's local time; show both candidates + host times
+- **Reschedule / Cancel**: always include a self-service link and coordinator alias
+- **Accessibility**: ask about accommodations in every invite, include phone backup  
+- **Privacy**: no sensitve data in calendar bodies; link to secure docs instead  
+- **Branding**: consistent subject format - [Company] · [Role] · [Stage] 
 ---
 
 ## 3. Roles & Responsibilities
@@ -241,6 +248,16 @@ Workflow A[i]gent is designed to be measured. Suggested metrics:(See Metrics Dic
 
 These metrics can feed into **Metrics A[i]gent** dashboards for holistic funnel visibility.
 
+### 7.1 Assets in this folder
+
+- index.html - Workflow A[i]gent demo UI (timeline + comms viewer) 
+- README.md - this overview
+- /assets/playbook-automated-workflows.pdf - full SOP with trigger tables
+
+### 7.2 Template IDs
+
+Template IDs and exact copy are maintained in the SOP and email teamplate library (see §IV and §VII of the SOP).
+
 ---
 
 ## 8. Future Enhancements (AI-Forward Roadmap)
@@ -257,7 +274,7 @@ While this version is built using native ATS automation only, it is intentionall
 
 ## 9. How This Fits in the A[i]gents Suite
 
-Workflow A[i]gent sits in the **middle of the recruiting funnel**:
+Workflow A[i]gent Workflow A[i]gent emits clean events and timestamps (stage change, interview booked, scorecard submitted, delay update sent) that Metrics A[i]gent ingests to compute time-in-stage, SLA adherence, and no-show rate using the shared Metrics Dictionary.
 
 - **Upstream:**  
   - *Screening A[i]gent* – evaluates inbound applicants and routes to interviews  
