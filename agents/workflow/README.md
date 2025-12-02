@@ -230,7 +230,7 @@ Typical implementation steps:
 
 ## 7. Metrics & Reporting
 
-Workflow A[i]gent is designed to be measured. Suggested metrics:
+Workflow A[i]gent is designed to be measured. Suggested metrics:(See Metrics Dictionary for definitions & formulas)
 
 - No-show rate by stage  
 - Average days in each interview stage  
