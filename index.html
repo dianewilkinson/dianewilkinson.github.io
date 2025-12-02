@@ -24,14 +24,14 @@
     a{color:var(--link);text-decoration:none}
     a:hover{text-decoration:underline}
 
-    /* Header */
+    /* Header bar */
     .bar{height:4px;background:linear-gradient(90deg,#f43f5e,#8b5cf6,#3b82f6)}
-    header{text-align:center;padding:44px 16px 16px}
-    header h1{font-size:28px;margin:0}
-    header p{margin:8px 0 0;color:var(--muted);font-size:15px;line-height:1.6}
+    header{text-align:center;padding:32px 16px 18px}
+    header h1{font-size:26px;margin:0}
+    header p{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.6}
 
     /* Layout */
-    .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 8px}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 8px}
     section{margin:28px 0}
     h2{font-size:22px;margin:0 0 14px}
 
@@ -65,58 +65,160 @@
     }
     .cta-btn:hover{background:#f9fafb;color:#1d4ed8}
 
-    /* HERO (full wrap width, tighter to tagline) */
-    .hero{width:100%;max-width:100%;margin:12px 0 18px}
-    .hero-panel{
-      background:linear-gradient(90deg,rgba(244,63,94,.09),rgba(139,92,246,.09),rgba(59,130,246,.09));
-      border-radius:16px;padding:22px 26px;box-shadow:0 1px 4px rgba(0,0,0,.05)
-    }
-    .hero p{margin:0;font-size:20px;line-height:1.5;font-weight:600;color:#1f2937}
-    .hero strong{font-size:22px;color:#111827}
-
-    /* New centered hero section */
-    .hero-centered {
-      background: linear-gradient(90deg, rgba(244,63,94,.09), rgba(139,92,246,.09), rgba(59,130,246,.09));
-      border-radius: 18px;
-      padding: 32px 20px;
-      margin: 8px auto 24px;
-      max-width: 1000px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,.05);
+    /* SAGE HERO */
+    .sage-hero-wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px;
     }
 
-    .hero-inner {
-      max-width: 800px;
-      margin: 0 auto;
+    .sage-hero{
+      margin-top:12px;
+      padding:32px 28px 40px;
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 80% 40%, rgba(196,181,253,0.6), rgba(248,250,252,0.1) 60%),
+        linear-gradient(135deg,#fce7f3,#eef2ff);
+      box-shadow:0 18px 45px rgba(15,23,42,0.12);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:32px;
     }
 
-    .hero-sub {
-      font-size: 15px;
-      font-weight: 500;
-      color: #4b5563;
-      margin-top: 10px;
-      letter-spacing: 0.2px;
+    .sage-copy{
+      max-width:480px;
+    }
+
+    .sage-copy h2{
+      margin:0 0 10px;
+      font-size:38px;
+      line-height:1.15;
+    }
+    .sage-copy h2 span{
+      color:#8b5cf6;
       display:block;
     }
 
-    .hero-headline {
-      font-family: "Segoe UI", Roboto, system-ui, sans-serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: #111827;
-      line-height: 1.3;
-      margin: 0;
+    .sage-sub{
+      margin:0 0 22px;
+      font-size:15px;
+      color:#4b5563;
+      line-height:1.6;
     }
 
-    .hero-headline span {
-      color: #4f46e5; /* blue-violet accent */
+    .sage-cta{
+      display:flex;
+      gap:10px;
+      align-items:stretch;
+      max-width:420px;
     }
 
-    .hero-headline strong {
-      display: block;
-      font-size: 24px;
-      color: #111827;
-      margin-top: 8px;
+    .sage-cta input{
+      flex:1;
+      padding:11px 12px;
+      font-size:14px;
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+      outline:none;
+    }
+
+    .sage-cta button{
+      border:none;
+      cursor:pointer;
+      padding:11px 18px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:14px;
+      color:#fff;
+      background:linear-gradient(135deg,#ec4899,#8b5cf6);
+      box-shadow:0 8px 20px rgba(129,140,248,0.45);
+    }
+    .sage-cta button:hover{
+      filter:brightness(1.05);
+    }
+
+    .sage-art{
+      position:relative;
+      flex:0 0 360px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .sage-art img{
+      width:320px;
+      max-width:100%;
+      border-radius:50%;
+      filter:drop-shadow(0 18px 40px rgba(15,23,42,0.25));
+    }
+
+    /* Name tag */
+    .sage-name-tag{
+      position:absolute;
+      bottom:-10px;
+      left:50%;
+      transform:translateX(-50%);
+      background:#ffffff;
+      border-radius:999px;
+      padding:6px 14px;
+      font-size:13px;
+      font-weight:600;
+      color:#111827;
+      box-shadow:0 8px 20px rgba(15,23,42,0.15);
+    }
+
+    /* Benefit pills */
+    .sage-benefit{
+      position:absolute;
+      right:-6px;
+      background:rgba(255,255,255,0.95);
+      border-radius:999px;
+      padding:8px 14px;
+      font-size:12px;
+      color:#111827;
+      box-shadow:0 8px 22px rgba(15,23,42,0.18);
+      backdrop-filter:blur(10px);
+      white-space:nowrap;
+    }
+    .sage-benefit::before{
+      content:"";
+      position:absolute;
+      left:-40px;
+      top:50%;
+      width:36px;
+      height:1.5px;
+      background:linear-gradient(90deg,#8b5cf6,#ec4899);
+      transform:translateY(-50%);
+      opacity:0.8;
+    }
+
+    .sage-benefit.b1{top:10%;}
+    .sage-benefit.b2{top:32%;}
+    .sage-benefit.b3{top:54%;}
+    .sage-benefit.b4{top:76%;}
+
+    @media (max-width:900px){
+      .sage-hero{
+        flex-direction:column;
+        text-align:left;
+        padding:26px 20px 32px;
+      }
+      .sage-art{
+        order:-1;
+        flex:none;
+      }
+      .sage-benefit{
+        right:8px;
+      }
+    }
+
+    @media (max-width:640px){
+      header h1{font-size:22px}
+      .sage-copy h2{font-size:30px}
+      .sage-hero{padding:22px 18px 26px}
+      .sage-cta{flex-direction:column;align-items:stretch}
+      .sage-benefit{display:none;} /* hide pills on tiny screens if crowded */
     }
 
     /* Footer badges */
@@ -139,7 +241,7 @@
     }
     .badge img:hover{filter:grayscale(0%) brightness(1.05);opacity:1}
 
-    /* Footer text (center + same width as grid) */
+    /* Footer text */
     footer{text-align:center;margin:16px 0 20px;color:var(--muted);font-size:14px}
     footer .footline{max-width:1100px;margin:18px auto 0;padding:0 20px}
   </style>
@@ -158,21 +260,38 @@
     </p>
   </header>
 
-  <div class="wrap">
-    <!-- HERO -->
-    <div class="hero-centered">
-      <div class="hero-inner">
-        <h2 class="hero-headline">
-          You don’t need <span>12 AI recruiting vendors.</span><br>
-          <strong>You need one recruiter who can build internal agents.</strong>
-          <span class="hero-sub">
-            I design AI-native recruiting workflows, calculators, and agents that automate
-            everyday bottlenecks — without Frankensteining another set of point solutions.
-          </span>
+  <!-- SAGE HERO -->
+  <div class="sage-hero-wrap">
+    <section class="sage-hero" aria-labelledby="sage-hero-title">
+      <div class="sage-copy">
+        <h2 id="sage-hero-title">
+          Your AI-powered<br>
+          <span>HR super agent</span>
         </h2>
+        <p class="sage-sub">
+          Sage helps you transform recruiting and HR with intelligent agents that automate hiring, onboarding,
+          performance workflows, and reporting — privately, securely, and inside your existing stack.
+        </p>
+        <div class="sage-cta">
+          <input type="email" placeholder="Enter your work email">
+          <button type="button">Book a demo</button>
+        </div>
       </div>
-    </div> <!-- closes .hero-centered -->
 
+      <div class="sage-art">
+        <!-- Replace with your Sage avatar image -->
+        <img src="/assets/sage-agent.png" alt="Sage — your AI HR super agent">
+        <div class="sage-name-tag">Sage</div>
+
+        <div class="sage-benefit b1">Data-driven decisions</div>
+        <div class="sage-benefit b2">Time savings</div>
+        <div class="sage-benefit b3">24/7 accessibility</div>
+        <div class="sage-benefit b4">Scalable solution</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
     <div style="text-align:center; margin:10px 0 24px; font-size:15px;">
       <a href="/articles/why-ai-pilots-fail.html" target="_blank" rel="noopener">
         📄 Read my article: <em>Why 95% of AI Pilots Fail & What the Successful 5% Do Differently</em>
@@ -184,7 +303,6 @@
       <h2 id="work">🧩 Selected Work</h2>
 
       <div class="grid four">
-        <!-- AI -->
         <div class="card">
           <h3>🤖 AI Tool: Workflow A[i]gent</h3>
           <p>Automates across every interview stage, so recruiters spend less time on manual workflows and more time making great hires.</p>
