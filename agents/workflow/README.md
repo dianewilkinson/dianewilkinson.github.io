@@ -287,9 +287,24 @@ These metrics can feed into **Metrics A[i]gent** dashboards for holistic funnel 
 - README.md - this overview
 - /assets/playbook-automated-workflows.pdf - full SOP with trigger tables
 
-### 7.2 Template IDs
+### 7.2 Metrics Dictionary Integration
 
-Template IDs and exact copy are maintained in the SOP and email template library (see §IV and §VII of the SOP).
+Workflow A[i]gent emits standardized timestamps and events that align with the shared A[i]gents Metrics Dictionary:
+- Metric name
+- Definition & formula
+- Required fields / timestamps
+- Stage entry and exit rules
+- Normalization rules for ATS variations (Greenhouse vs. Lever vs. Workday)
+
+Key events emitted:
+- stage_entered_at – every time a candidate enters a stage
+- interview_scheduled_at – when the event record is created
+- interview_start_at / interview_end_at – from the calendar event
+- scorecard_submitted_at – for SLA and “feedback freshness” metrics
+- offer_extended_at – for offer-acceptance velocity
+- delay_update_sent_at – for candidate wait-time and delay-coverage metrics
+
+Metrics A[i]gent simply aggregates these events into funnel, SLA, delay-coverage, and throughput dashboards.
 
 ---
 
