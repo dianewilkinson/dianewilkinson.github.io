@@ -199,7 +199,7 @@
       margin-top: 0.5rem;
       font-size: 0.9rem;
       color: #4b5563;
-      max-width: 40rem;
+      max-width: 52rem; /* wider so it doesn’t wrap too early */
     }
 
     /* Small stats row */
@@ -382,16 +382,27 @@
       font-size: 0.86rem;
       font-weight: 600;
       color: #111827;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
     }
 
     .timeline-goal {
       font-size: 0.8rem;
       color: #6b7280;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.25rem;
     }
 
     .timeline-goal span {
+      font-weight: 500;
+      color: #111827;
+    }
+
+    .timeline-outcomes {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-bottom: 0.55rem;
+    }
+
+    .timeline-outcomes span.label {
       font-weight: 500;
       color: #111827;
     }
@@ -428,6 +439,7 @@
     .timeline-list li {
       padding-left: 0.85rem;
       position: relative;
+      font-size: 0.8rem;
     }
 
     .timeline-list li::before {
@@ -450,7 +462,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
-      max-height: 340px;
+      max-height: 360px;
       overflow: hidden;
     }
 
@@ -519,16 +531,18 @@
       box-shadow: 0 -1px 4px rgba(15, 23, 42, 0.06);
     }
 
-    /* Audience pills within a channel */
+    /* Audience + variant pills */
 
-    .audience-row {
+    .audience-row,
+    .variant-row {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
       margin: 0.3rem 0 0.35rem;
     }
 
-    .audience-pill {
+    .audience-pill,
+    .variant-pill {
       border-radius: 999px;
       border: 1px solid #e5e7eb;
       background: #f9fafb;
@@ -538,11 +552,13 @@
       cursor: pointer;
     }
 
-    .audience-pill:hover {
+    .audience-pill:hover,
+    .variant-pill:hover {
       background: #f3f4f6;
     }
 
-    .audience-pill.active {
+    .audience-pill.active,
+    .variant-pill.active {
       background: #111827;
       border-color: #111827;
       color: #f9fafb;
@@ -651,7 +667,6 @@
       <!-- Suite header -->
       <header class="suite-header">
         <div class="suite-top-row">
-          <!-- Back to overview (update href for your hub) -->
           <a class="back-link" href="../../index.html">
             <span class="arrow">←</span>
             <span>Back to A[i]gents overview</span>
@@ -664,7 +679,6 @@
             <span class="suite-label">A[i]gents Portfolio · Demo</span>
           </div>
 
-          <!-- Mini suite nav -->
           <nav class="agent-nav" aria-label="A[i]gents navigation">
             <span class="agent-nav-label">Agents</span>
             <a class="agent-nav-link" href="../screening/index.html">Screening A[i]gent</a>
@@ -686,7 +700,7 @@
         making great hires.
       </p>
 
-      <!-- Small stats row -->
+      <!-- Stats row -->
       <div class="stats-row">
         <div class="stat-card">
           <div class="stat-label">Interview Pipeline</div>
@@ -752,13 +766,12 @@
             <div class="sample-title">Stage Communications</div>
           </div>
 
-          <!-- Channel tabs -->
           <div class="sample-tabs-row" id="channel-tabs"></div>
 
-          <!-- Audience pills -->
           <div class="audience-row" id="audience-row"></div>
 
-          <!-- Email content -->
+          <div class="variant-row" id="variant-row"></div>
+
           <div class="sample-scroll" id="sample-email-content"></div>
         </div>
       </div>
@@ -802,26 +815,35 @@
   </main>
 
   <script>
-    /* Stage data with channel + audience structure */
+    /* Stage data with channel + audience + variant structure */
 
     const STAGE_CONTENT = {
       screen: {
         title: "Initial Screen Workflow",
         goal: "Convert intent into a booked time without manual back-and-forth.",
+        outcomes: [
+          "Convert intent into screen",
+          "Increase apps-to-screen ratio",
+          "Decrease candidate drop-offs",
+          "Save recruiter manual hours",
+          "Increase candidate satisfaction"
+        ],
         label: "Stage change + availability request",
         items: [
-          "When a candidate moves into the screening stage, send an immediate availability request with recruiter calendar link.",
-          "If there’s no reply in 48 hours, send a gentle reminder nudge to the candidate.",
-          "If there’s still no reply at 96 hours, alert the recruiter to follow up or adjust priority.",
-          "Once a time is booked, send a calendar invite and confirmation email with expectations for the call."
+          "Stage change into screen sends a self-serve scheduling invite.",
+          "If no response, time-based reminders keep the candidate warm.",
+          "Referrers stay updated when their candidate moves forward.",
+          "Internal alerts keep recruiter and coordinator aligned on next steps."
         ],
         comms: [
+          /* EXTERNAL – Candidate */
           {
             id: "screen-cand-invite",
             channel: "external",
             audienceGroup: "Candidate",
-            label: "Candidate – invite to schedule",
-            commType: "Confirmation",
+            variant: "invite",
+            variantLabel: "Invite to schedule",
+            commType: "Invitation",
             trigger: "On stage change to Initial Screen",
             subject: "Subject: [Company] – Initial Conversation for [Role]",
             body: `Hi [First name],
@@ -837,10 +859,32 @@ Best,
 [Recruiter name]`
           },
           {
-            id: "screen-cand-followup",
+            id: "screen-cand-confirm",
             channel: "external",
             audienceGroup: "Candidate",
-            label: "Candidate – post-screen follow-up (time-based)",
+            variant: "confirm",
+            variantLabel: "Confirmation on booking",
+            commType: "Confirmation",
+            trigger: "On candidate booking a time",
+            subject: "Subject: Your conversation with [Recruiter] is confirmed – [Role]",
+            body: `Hi [First name],
+
+Your initial conversation for [Role] is confirmed for [Date / Time].
+
+We’ll use this time to learn more about your experience, what you’re looking for next, and how this role might fit.
+
+If you need to reschedule, you can use the link below or reply directly to this email:
+[Reschedule link]
+
+Looking forward to speaking with you,
+[Recruiter name]`
+          },
+          {
+            id: "screen-cand-post",
+            channel: "external",
+            audienceGroup: "Candidate",
+            variant: "followup",
+            variantLabel: "Post-screen follow-up",
             commType: "Follow-up",
             trigger: "Time-based: 1 hour after interview start",
             subject: "Subject: Thanks for speaking with us about [Role]",
@@ -858,11 +902,14 @@ We’re reviewing notes from today’s conversation and will follow up with next
 Thanks again,
 [Recruiter name]`
           },
+
+          /* EXTERNAL – Referrer */
           {
             id: "screen-referrer-update",
             channel: "external",
             audienceGroup: "Referrer",
-            label: "Referrer – candidate in process",
+            variant: "status",
+            variantLabel: "Referral status update",
             commType: "Status update",
             trigger: "On candidate moving to Initial Screen",
             subject: "Subject: Quick update on your referral [Candidate] – [Role]",
@@ -875,11 +922,14 @@ We’ll keep you posted as they move through the process. Thanks again for the r
 Best,
 [Recruiting team]`
           },
+
+          /* INTERNAL – Recruiter / Coordinator */
           {
             id: "screen-rec-alert",
             channel: "internal",
             audienceGroup: "Recruiter",
-            label: "Recruiter – follow-up alert",
+            variant: "noresponse",
+            variantLabel: "No-response alert",
             commType: "Reminder",
             trigger: "Time-based: no candidate reply at 96 hours",
             subject: "Subject: Screening invite pending for [Candidate] – [Role]",
@@ -899,7 +949,8 @@ You can jump directly to the candidate profile here:
             id: "screen-coord-calendar",
             channel: "internal",
             audienceGroup: "Coordinator",
-            label: "Coordinator – calendar assist",
+            variant: "calendar",
+            variantLabel: "Calendar assist",
             commType: "Task notification",
             trigger: "On candidate reply without using self-schedule link",
             subject: "Subject: Calendar help needed – screen for [Candidate]",
@@ -914,22 +965,52 @@ Candidate thread:
           }
         ]
       },
+
       hm: {
         title: "HM / Tech Interview Workflow",
         goal: "Reduce no-shows and keep hiring managers on SLA for feedback.",
-        label: "Confirmation + scorecard nudges",
+        outcomes: [
+          "Increase screen-to-HM conversion",
+          "Reduce HM no-shows",
+          "Shrink time-to-feedback",
+          "Improve signal quality for later stages"
+        ],
+        label: "Confirmation, prep packets, scorecard nudges",
         items: [
-          "Send candidate confirmation with agenda and interviewer names.",
-          "24 hours before the interview, trigger a reminder with location/Zoom link.",
-          "Before the interview, send hiring manager a prep packet with candidate context and focus areas.",
-          "After the interview end time, send hiring manager a scorecard nudge, followed by time-based reminders until submitted."
+          "Stage advance requests availability and sets expectations for the HM/Tech round.",
+          "Booking sends a structured confirmation and agenda to the candidate.",
+          "Hiring managers receive prep packets before, and scorecard nudges after, each interview.",
+          "Decision reminders fire when feedback or move/reject actions stall."
         ],
         comms: [
+          /* EXTERNAL – Candidate */
+          {
+            id: "hm-cand-invite",
+            channel: "external",
+            audienceGroup: "Candidate",
+            variant: "invite",
+            variantLabel: "Availability request",
+            commType: "Invitation",
+            trigger: "On stage change from Screen → HM/Tech",
+            subject: "Subject: Next step for [Role] – HM/Tech interview availability",
+            body: `Hi [First name],
+
+We’d love to move you forward to the next step for [Role]: a HM/Tech conversation with [Interviewer name].
+
+Please share a few windows that work over the next week, or use the link below to grab time directly:
+[Calendar link]
+
+We’ll send a confirmation with details once the time is booked.
+
+Best,
+[Recruiting team]`
+          },
           {
             id: "hm-cand-confirm",
             channel: "external",
             audienceGroup: "Candidate",
-            label: "Candidate – confirmation & agenda",
+            variant: "confirm",
+            variantLabel: "Confirmation & agenda",
             commType: "Confirmation",
             trigger: "On HM/Tech interview booking",
             subject: "Subject: Your upcoming interview for [Role] at [Company]",
@@ -950,7 +1031,8 @@ Looking forward to it!`
             id: "hm-cand-post",
             channel: "external",
             audienceGroup: "Candidate",
-            label: "Candidate – post-interview reflection",
+            variant: "followup",
+            variantLabel: "Post-interview follow-up",
             commType: "Follow-up",
             trigger: "Time-based: 1 hour after interview start",
             subject: "Subject: Thanks again for meeting with [Interviewer] – [Role]",
@@ -968,17 +1050,56 @@ We aim to share an update within [timeline]. If your timeline changes or you rec
 Best,
 [Recruiting team]`
           },
+
+          /* EXTERNAL – Referrer */
+          {
+            id: "hm-referrer-update",
+            channel: "external",
+            audienceGroup: "Referrer",
+            variant: "status",
+            variantLabel: "Referral status update",
+            commType: "Status update",
+            trigger: "On candidate moving to HM/Tech",
+            subject: "Subject: Your referral [Candidate] reached the HM/Tech stage",
+            body: `Hi [Referrer name],
+
+Good news: [Candidate] has progressed to the HM/Tech interview stage for [Role].
+
+We’ll keep you posted once we’ve completed this round and have a decision on next steps.
+
+Thanks again for the referral,
+[Recruiting team]`
+          },
+
+          /* INTERNAL – Recruiter / Interviewer */
+          {
+            id: "hm-rec-booked",
+            channel: "internal",
+            audienceGroup: "Recruiter",
+            variant: "booked",
+            variantLabel: "Event booked confirmation",
+            commType: "Notification",
+            trigger: "On HM/Tech interview booking",
+            subject: "Subject: HM/Tech interview booked – [Candidate] for [Role]",
+            body: `Hi [Recruiter name],
+
+An HM/Tech interview has been scheduled for [Candidate] for [Role] on [date/time].
+
+You can review details or make changes here:
+[ATS / calendar link]`
+          },
           {
             id: "hm-prep",
             channel: "internal",
             audienceGroup: "Interviewer",
-            label: "Hiring manager – prep packet",
+            variant: "prep",
+            variantLabel: "Candidate prep packet",
             commType: "Prep",
-            trigger: "Time-based: 24 hours before interview",
+            trigger: "Time-based: morning of interview",
             subject: "Subject: Prep for interview with [Candidate] – [Role]",
             body: `Hi [Manager name],
 
-Here’s your prep packet for tomorrow’s interview with [Candidate] for [Role].
+Here’s your prep packet for today’s interview with [Candidate] for [Role].
 
 Quick context:
 • Source: [referral / outbound / inbound]  
@@ -999,7 +1120,8 @@ The closer you submit feedback to interview time, the more accurate and actionab
             id: "hm-scorecard",
             channel: "internal",
             audienceGroup: "Interviewer",
-            label: "Hiring manager – scorecard reminders",
+            variant: "scorecard",
+            variantLabel: "Scorecard reminder",
             commType: "Reminder",
             trigger: "On interview end + escalation at 24/48 hours",
             subject: "Subject: Action needed – scorecard for [Candidate] – [Role]",
@@ -1018,48 +1140,149 @@ You can submit feedback here:
 If you’d like a quick debrief before submitting, reply here and Recruiting will set it up.
 
 Thanks for helping us keep the process tight.`
+          },
+          {
+            id: "hm-rec-decision",
+            channel: "internal",
+            audienceGroup: "Recruiter",
+            variant: "decision",
+            variantLabel: "Decision reminder",
+            commType: "Reminder",
+            trigger: "Time-based: 48 hours after interview if no move/reject",
+            subject: "Subject: Decision needed – [Candidate] for [Role] (HM/Tech)",
+            body: `Hi [Recruiter name],
+
+[Candidate] completed their HM/Tech interview for [Role] more than 48 hours ago and no move/reject decision has been recorded.
+
+Next steps:
+• Nudge hiring manager for a clear recommendation  
+• Align on advance vs. reject vs. additional signal  
+• Update candidate with a meaningful status
+
+You can review feedback and update status here:
+[ATS link]`
           }
         ]
       },
+
       panel: {
         title: "Panel Workflow",
         goal: "Align multiple interviewers and tighten the decision loop.",
+        outcomes: [
+          "Reduce panel no-shows",
+          "Clarify focus areas for each panelist",
+          "Shorten time from panel to decision",
+          "Keep candidates informed during the longest stage"
+        ],
         label: "Calendar orchestration + recap",
         items: [
-          "Once a candidate is marked ready for panel, Workflow A[i]gent proposes time slots based on interviewer availability.",
-          "Send a single consolidated confirmation email to the candidate with all panel details.",
-          "Distribute tailored scorecard prompts to each panelist based on evaluation focus.",
-          "After all scorecards are submitted, send hiring manager a summary prompt to make a decision."
+          "Stage advance triggers a next-steps note and panel availability request.",
+          "Consolidated confirmation gives the candidate homework and prep resources.",
+          "Panelists receive tailored scorecard prompts and expectations.",
+          "Post-panel follow-ups and decision nudges keep the loop tight."
         ],
         comms: [
+          /* EXTERNAL – Candidate */
+          {
+            id: "panel-cand-advance",
+            channel: "external",
+            audienceGroup: "Candidate",
+            variant: "advance",
+            variantLabel: "Next steps & availability",
+            commType: "Invitation",
+            trigger: "On candidate marked ready for panel",
+            subject: "Subject: Next step for [Role] – panel availability",
+            body: `Hi [First name],
+
+We’re excited to move you forward to our panel stage for [Role].
+
+This step brings together a few people you’d work closely with. Please share a few windows that work over the next week, or use the scheduling link below:
+[Panel scheduling link]
+
+Once timing is locked, we’ll send a full agenda and homework so you know exactly what to expect.
+
+Best,
+[Recruiting team]`
+          },
           {
             id: "panel-cand-confirm",
             channel: "external",
             audienceGroup: "Candidate",
-            label: "Candidate – consolidated panel confirmation",
+            variant: "confirm",
+            variantLabel: "Panel confirmation & homework",
             commType: "Confirmation",
             trigger: "On panel scheduling",
             subject: "Subject: Panel interview details for [Role] at [Company]",
             body: `Hi [First name],
 
-We’re excited to move you forward to our panel conversation for [Role]. Your panel is scheduled for [date/time] and will run approximately [duration].
+Your panel for [Role] is scheduled for [date/time] and will run approximately [duration].
 
 You’ll meet with:
 • [Interviewer 1] – [Focus area]  
 • [Interviewer 2] – [Focus area]  
 • [Interviewer 3] – [Focus area]
 
-We’ll focus on how you approach [problem space], how you collaborate across teams, and how you make decisions with incomplete information.
+To make the conversation useful on both sides, we’d love for you to:
+• Review: [product / company overview links]  
+• Reflect on: 2–3 projects you’re proud of in [relevant area]  
+• Prepare questions about the role, team, and expectations
 
-Your calendar invite and [Zoom/onsite] details are included below. If anything comes up, reply here and we’ll help you reschedule.
+Your calendar invite and [Zoom/onsite] details are below. If anything comes up, reply here and we’ll help you reschedule.
 
 Looking forward to the conversation!`
           },
           {
+            id: "panel-cand-post",
+            channel: "external",
+            audienceGroup: "Candidate",
+            variant: "followup",
+            variantLabel: "Post-panel follow-up",
+            commType: "Follow-up",
+            trigger: "Time-based: 1–2 hours after panel start",
+            subject: "Subject: Thank you for joining the panel – next steps for [Role]",
+            body: `Hi [First name],
+
+Thank you again for spending so much time with the team today. We know a panel is a big time investment.
+
+We’ll debrief as a group over the next [timeline] and will share an update with you by [date]. In the meantime, here are a few resources you might find helpful:
+
+• How the team is structured today: [link]  
+• What we’re building next: [link]  
+• Culture and values in practice: [link]
+
+If your situation changes or you receive other offers, please let us know so we can respond thoughtfully.
+
+Best,
+[Recruiting team]`
+          },
+
+          /* EXTERNAL – Referrer */
+          {
+            id: "panel-referrer-update",
+            channel: "external",
+            audienceGroup: "Referrer",
+            variant: "status",
+            variantLabel: "Referral status update",
+            commType: "Status update",
+            trigger: "On candidate scheduled for panel",
+            subject: "Subject: Your referral [Candidate] reached the panel stage",
+            body: `Hi [Referrer name],
+
+Another update on [Candidate] for [Role]: they’re now scheduled for a full panel conversation with the team.
+
+We’ll follow up with you after the panel once we have alignment on next steps.
+
+Thank you again for the referral,
+[Recruiting team]`
+          },
+
+          /* INTERNAL – Interviewers / Recruiter */
+          {
             id: "panel-panelist",
             channel: "internal",
             audienceGroup: "Interviewer",
-            label: "Panelists – expectations & coverage",
+            variant: "prep",
+            variantLabel: "Panel coverage & prompts",
             commType: "Prep",
             trigger: "Time-based: 24 hours before panel",
             subject: "Subject: Panel coverage & scorecards for [Candidate] – [Role]",
@@ -1079,46 +1302,76 @@ Right after the panel, take 5–10 minutes to submit feedback independently. The
 Thank you!`
           },
           {
-            id: "panel-cand-post",
-            channel: "external",
-            audienceGroup: "Candidate",
-            label: "Candidate – post-panel expectations",
-            commType: "Follow-up",
-            trigger: "Time-based: 1–2 hours after panel start",
-            subject: "Subject: Thank you for joining the panel – next steps for [Role]",
-            body: `Hi [First name],
+            id: "panel-scorecards",
+            channel: "internal",
+            audienceGroup: "Interviewer",
+            variant: "scorecards",
+            variantLabel: "Scorecard reminders",
+            commType: "Reminder",
+            trigger: "Time-based: 4/24 hours after panel if missing",
+            subject: "Subject: Action needed – panel scorecard for [Candidate]",
+            body: `Hi [Interviewer name],
 
-Thank you again for spending so much time with the team today. We know a panel is a big time investment.
+This is a reminder to submit your panel feedback for [Candidate] for [Role].
 
-We’ll debrief as a group over the next [timeline] and will share an update with you by [date]. In the meantime, here are a few resources you might find helpful:
+Independent feedback, captured while the conversation is fresh, helps us:
+• Avoid groupthink  
+• See signal across different dimensions  
+• Move quickly and respectfully with candidates
 
-• How the team is structured today: [link]  
-• What we’re building next: [link]  
-• Culture and values in practice: [link]
+You can submit your scorecard here:
+[Scorecard link]
 
-If your situation changes or you receive other offers, please let us know so we can respond thoughtfully.
+Thank you!`
+          },
+          {
+            id: "panel-decision",
+            channel: "internal",
+            audienceGroup: "Recruiter",
+            variant: "decision",
+            variantLabel: "Decision prompt",
+            commType: "Reminder",
+            trigger: "Time-based: SLA window after last scorecard",
+            subject: "Subject: Decision needed after panel – [Candidate] for [Role]",
+            body: `Hi [Recruiter name],
 
-Best,
-[Recruiting team]`
+All panel interviews for [Candidate] for [Role] are complete. To keep momentum and candidate experience strong, we’d like to land on a decision by [date].
+
+Next steps:
+• Align with hiring manager on final recommendation  
+• Decide: advance to final / offer / no hire / hold  
+• Communicate a clear update to the candidate and referrer
+
+You can review scorecards and notes here:
+[ATS link]`
           }
         ]
       },
+
       final: {
         title: "Final Interview Workflow",
         goal: "De-risk last-mile candidate experience and prep for offer.",
+        outcomes: [
+          "Clarify expectations on both sides",
+          "Reduce offer-stage surprises",
+          "Align internal stakeholders on decision",
+          "Protect candidate experience at the most sensitive step"
+        ],
         label: "Expectation-setting + closing signals",
         items: [
-          "Send final-round confirmation with clear next steps and decision timeline.",
-          "Capture candidate’s compensation expectations and competing-process timing via a brief pre-call check-in.",
-          "Notify recruiter if signals indicate high risk of competing offers or timing collisions.",
-          "After final, trigger a decision reminder to the hiring team tied to agreed SLA."
+          "Final confirmation sets expectations and timelines.",
+          "Pre-final check-in surfaces competing offers and ranges.",
+          "Follow-ups and decision reminders prevent late-stage drift.",
+          "Referrers stay informed when their candidate reaches final."
         ],
         comms: [
+          /* EXTERNAL – Candidate */
           {
             id: "final-cand-confirm",
             channel: "external",
             audienceGroup: "Candidate",
-            label: "Candidate – final round confirmation",
+            variant: "confirm",
+            variantLabel: "Final confirmation",
             commType: "Confirmation",
             trigger: "On final interview booking",
             subject: "Subject: Final interview details for [Role] at [Company]",
@@ -1142,7 +1395,8 @@ Best,
             id: "final-cand-checkin",
             channel: "external",
             audienceGroup: "Candidate",
-            label: "Candidate – offer expectation check-in",
+            variant: "checkin",
+            variantLabel: "Offer expectation check-in",
             commType: "Survey / check-in",
             trigger: "Time-based: 24 hours before final",
             subject: "Subject: Quick check-in before your final interview for [Role]",
@@ -1160,44 +1414,184 @@ This helps us avoid surprises on timing and tailor any potential offer to what m
 Thank you!`
           },
           {
-            id: "final-hm-reminder",
+            id: "final-cand-post",
+            channel: "external",
+            audienceGroup: "Candidate",
+            variant: "followup",
+            variantLabel: "Post-final follow-up",
+            commType: "Follow-up",
+            trigger: "Time-based: 1 hour after final interview start",
+            subject: "Subject: Thank you for your time – next steps for [Role]",
+            body: `Hi [First name],
+
+Thank you again for taking the time to complete the final step for [Role].
+
+We’re now consolidating feedback and expect to have a decision by [date]. If your situation changes or you receive other offers, please let us know so we can respond thoughtfully.
+
+We appreciate the time and energy you’ve invested with us.
+
+Best,
+[Recruiting team]`
+          },
+
+          /* EXTERNAL – Referrer */
+          {
+            id: "final-referrer-update",
+            channel: "external",
+            audienceGroup: "Referrer",
+            variant: "status",
+            variantLabel: "Final-stage referral update",
+            commType: "Status update",
+            trigger: "On candidate scheduled for final",
+            subject: "Subject: Your referral [Candidate] is at the final stage",
+            body: `Hi [Referrer name],
+
+Quick update on [Candidate] for [Role]: they’re now at the final interview stage.
+
+We’ll let you know once we’ve reached a decision. Thank you again for the introduction — we appreciate your partnership.
+
+Best,
+[Recruiting team]`
+          },
+
+          /* INTERNAL – Interviewers / Recruiter */
+          {
+            id: "final-prep",
             channel: "internal",
             audienceGroup: "Interviewer",
-            label: "Hiring team – decision reminder",
+            variant: "prep",
+            variantLabel: "Final conversation prep",
+            commType: "Prep",
+            trigger: "Time-based: morning of final",
+            subject: "Subject: Final conversation context – [Candidate] for [Role]",
+            body: `Hi [Interviewer name],
+
+Here’s context for today’s final conversation with [Candidate] for [Role].
+
+Key signals so far:
+• Strengths: [highlights]  
+• Risks / questions: [notes]  
+• Competitive landscape: [offers / timelines if known]
+
+Focus areas for final:
+• Confirm motivation and mutual fit  
+• Clarify expectations on scope, level, and success measures  
+• Resolve open questions on both sides
+
+You can review full history and scorecards here:
+[ATS link]`
+          },
+          {
+            id: "final-decision",
+            channel: "internal",
+            audienceGroup: "Recruiter",
+            variant: "decision",
+            variantLabel: "Decision reminder",
             commType: "Reminder",
             trigger: "Time-based: SLA window after final",
-            subject: "Subject: Decision needed – [Candidate] for [Role]",
-            body: `Hi team,
+            subject: "Subject: Decision needed – [Candidate] for [Role] (final)",
+            body: `Hi [Recruiter name],
 
 [Candidate] completed their final conversation for [Role] on [date]. To keep the process tight and respectful of the candidate’s time, we’d like to confirm a decision by [SLA date].
 
-Please review scorecards and share your recommendation:
-• Strong hire / hire / leaning no / strong no  
-• Any key risks or questions we still need to resolve
+Next steps:
+• Align with hiring manager and leadership on final recommendation  
+• Decide: move to offer / no hire / hold  
+• Communicate outcome to candidate and referrer
 
-You can add your notes here:
-[ATS link]
-
-If you need more time or an additional conversation, reply to this email and we’ll coordinate.`
+You can review scorecards and notes here:
+[ATS link]`
           }
         ]
       },
+
       offer: {
         title: "Offer Workflow",
         goal: "Tighten time-to-offer while keeping stakeholders informed.",
+        outcomes: [
+          "Reduce time-to-offer",
+          "Protect internal equity and approvals",
+          "Create clear written documentation",
+          "Close more accepted offers"
+        ],
         label: "Offer routing + approvals",
         items: [
-          "Once the team is ready to move forward, prompt recruiter with an offer-creation checklist.",
-          "Route the proposed package to the right approval chain based on comp band and location.",
-          "Notify recruiter when approvals are complete so they can schedule the offer call.",
-          "After the offer call, send a recap email with key terms and expiry date."
+          "Offer creation checklist keeps details consistent.",
+          "Approvals are routed to the right stakeholders by band/location.",
+          "Offer recap emails reinforce key terms and timelines.",
+          "Referrers and agencies get a clean close-out signal."
         ],
         comms: [
+          /* EXTERNAL – Candidate */
+          {
+            id: "offer-cand-recap",
+            channel: "external",
+            audienceGroup: "Candidate",
+            variant: "recap",
+            variantLabel: "Offer recap",
+            commType: "Follow-up / recap",
+            trigger: "After live offer call",
+            subject: "Subject: Your offer for [Role] at [Company]",
+            body: `Hi [First name],
+
+It was great speaking with you about the offer for [Role]. As a recap, here are the high-level details we discussed:
+
+• Base salary: [amount]  
+• Bonus / commission: [details]  
+• Equity: [details]  
+• Start date: [date]  
+• Offer valid through: [date]
+
+Your full offer letter and benefits summary are attached and available in your candidate portal.
+
+If you’d like to walk through any part of the offer in more detail, reply here and we’ll gladly set up time.
+
+We’re excited about the possibility of working together.`
+          },
+
+          /* EXTERNAL – Referrer / Agency */
+          {
+            id: "offer-referrer-update",
+            channel: "external",
+            audienceGroup: "Referrer",
+            variant: "status",
+            variantLabel: "Referral offer update",
+            commType: "Status update",
+            trigger: "On verbal offer extension",
+            subject: "Subject: Update on your referral [Candidate] – offer extended",
+            body: `Hi [Referrer name],
+
+We’ve extended an offer to [Candidate] for [Role]. We’ll let you know once we have a final decision from their side.
+
+Thank you again for the introduction,
+[Recruiting team]`
+          },
+          {
+            id: "offer-agency-update",
+            channel: "external",
+            audienceGroup: "Agency",
+            variant: "status",
+            variantLabel: "Agency offer update",
+            commType: "Status update",
+            trigger: "On verbal offer acceptance",
+            subject: "Subject: Update on your candidate [Candidate] – offer accepted",
+            body: `Hi [Agency contact],
+
+Great news: [Candidate] has verbally accepted the offer for [Role] at [Company]. We’re now moving into background and pre-start steps.
+
+Thank you for the partnership on this search. We’ll confirm start date and invoice details once paperwork is complete.
+
+Best,
+[Recruiting team]`
+          },
+
+          /* INTERNAL – Recruiter / Approvers */
           {
             id: "offer-internal-init",
             channel: "internal",
             audienceGroup: "Recruiter",
-            label: "Recruiting – offer creation checklist",
+            variant: "checklist",
+            variantLabel: "Offer creation checklist",
             commType: "Task notification",
             trigger: "On status set to Ready to Offer",
             subject: "Subject: Offer checklist for [Candidate] – [Role]",
@@ -1219,7 +1613,8 @@ Once submitted, Workflow A[i]gent will route to the appropriate approvers automa
             id: "offer-approver",
             channel: "internal",
             audienceGroup: "Legal / Approvers / HR",
-            label: "Approvers – offer package for review",
+            variant: "approval",
+            variantLabel: "Approval request",
             commType: "Approval request",
             trigger: "On offer routing",
             subject: "Subject: Offer approval requested – [Candidate] for [Role]",
@@ -1238,66 +1633,79 @@ Please review and approve or comment here:
 If you need additional context (pipeline, market data, internal equity), reply here and Recruiting will provide it.
 
 Thank you!`
-          },
-          {
-            id: "offer-cand-recap",
-            channel: "external",
-            audienceGroup: "Candidate",
-            label: "Candidate – offer recap",
-            commType: "Follow-up / recap",
-            trigger: "After live offer call",
-            subject: "Subject: Your offer for [Role] at [Company]",
-            body: `Hi [First name],
-
-It was great speaking with you about the offer for [Role]. As a recap, here are the high-level details we discussed:
-
-• Base salary: [amount]  
-• Bonus / commission: [details]  
-• Equity: [details]  
-• Start date: [date]  
-• Offer valid through: [date]
-
-Your full offer letter and benefits summary are attached and available in your candidate portal.
-
-If you’d like to walk through any part of the offer in more detail, reply here and we’ll gladly set up time.
-
-We’re excited about the possibility of working together.`
-          },
-          {
-            id: "offer-agency-update",
-            channel: "external",
-            audienceGroup: "Agency",
-            label: "Agency – offer status",
-            commType: "Status update",
-            trigger: "On verbal offer acceptance",
-            subject: "Subject: Update on your candidate [Candidate] – offer accepted",
-            body: `Hi [Agency contact],
-
-Great news: [Candidate] has verbally accepted the offer for [Role] at [Company]. We’re now moving into background and pre-start steps.
-
-Thank you for the partnership on this search. We’ll confirm start date and invoice details once paperwork is complete.
-
-Best,
-[Recruiting team]`
           }
         ]
       },
+
       prestart: {
         title: "Pre-start Workflow",
         goal: "Smooth hand-off from recruiting to onboarding without dropped details.",
+        outcomes: [
+          "Reduce first-day friction",
+          "Tighten ATS → HRIS hand-off",
+          "Ensure equipment and access are ready",
+          "Create a welcoming new-hire experience"
+        ],
         label: "Pre-start checklist",
         items: [
-          "Once an offer is accepted, trigger a hand-off summary to the People / HR team.",
-          "Send a welcome note and first-day logistics to the new hire.",
-          "Remind manager and IT of equipment, access, and onboarding tasks one week before start.",
-          "Confirm that the new hire appears in HRIS and ATS is updated before start date."
+          "People/HR receives a structured new-hire hand-off.",
+          "New hires get a warm welcome and first-day logistics.",
+          "Managers and IT are reminded about equipment and access.",
+          "Referrers get a close-the-loop update once start is confirmed."
         ],
         comms: [
+          /* EXTERNAL – Candidate */
+          {
+            id: "prestart-newhire",
+            channel: "external",
+            audienceGroup: "Candidate",
+            variant: "welcome",
+            variantLabel: "Welcome & first-day details",
+            commType: "Welcome",
+            trigger: "Time-based: 1 week before start",
+            subject: "Subject: Welcome to [Company]! What to expect on your first day",
+            body: `Hi [First name],
+
+We’re excited to welcome you to [Company] as our new [Role]. Your first day will be [date].
+
+Here’s what to expect:
+• Start time: [time]  
+• Location / Zoom: [details]  
+• Who you’ll meet: [names / teams]  
+• What to bring / prepare: [details]
+
+If you have questions about benefits, payroll, or equipment before then, reply here and our People team will help.
+
+Welcome aboard!`
+          },
+
+          /* EXTERNAL – Referrer */
+          {
+            id: "prestart-referrer-update",
+            channel: "external",
+            audienceGroup: "Referrer",
+            variant: "status",
+            variantLabel: "Referral hire update",
+            commType: "Status update",
+            trigger: "On candidate start date confirmed",
+            subject: "Subject: Your referral [New hire] is joining [Company]!",
+            body: `Hi [Referrer name],
+
+Great news: [New hire] has signed and is scheduled to start as [Role] on [start date].
+
+Thank you again for sending this person our way — referrals like yours make a huge difference.
+
+Best,
+[Recruiting team]`
+          },
+
+          /* INTERNAL – People/HR / Manager */
           {
             id: "prestart-hand-off",
             channel: "internal",
             audienceGroup: "Legal / Approvers / HR",
-            label: "People / HR – new hire hand-off",
+            variant: "handoff",
+            variantLabel: "New hire hand-off",
             commType: "Hand-off",
             trigger: "On status set to Offer Accepted",
             subject: "Subject: New hire hand-off – [New hire] joining as [Role]",
@@ -1317,32 +1725,11 @@ Full packet:
 Please confirm HRIS creation and onboarding steps are in motion.`
           },
           {
-            id: "prestart-newhire",
-            channel: "external",
-            audienceGroup: "Candidate",
-            label: "New hire – first-day logistics",
-            commType: "Welcome",
-            trigger: "Time-based: 1 week before start",
-            subject: "Subject: Welcome to [Company]! What to expect on your first day",
-            body: `Hi [First name],
-
-We’re excited to welcome you to [Company] as our new [Role]. Your first day will be [date].
-
-Here’s what to expect:
-• Start time: [time]  
-• Location / Zoom: [details]  
-• Who you’ll meet: [names / teams]  
-• What to bring / prepare: [details]
-
-If you have questions about benefits, payroll, or equipment before then, reply here and our People team will help.
-
-Welcome aboard!`
-          },
-          {
             id: "prestart-manager",
             channel: "internal",
             audienceGroup: "Recruiter",
-            label: "Manager – onboarding reminders",
+            variant: "manager-reminder",
+            variantLabel: "Manager onboarding reminder",
             commType: "Reminder",
             trigger: "Time-based: 5–7 days before start",
             subject: "Subject: Onboarding checklist – [New hire] starts [date]",
@@ -1376,7 +1763,8 @@ A great first week has outsized impact on long-term engagement — thank you for
       "Legal / Approvers / HR"
     ];
 
-    /* Helper to render the left-side overview, filtered by channel when provided */
+    /* Render left overview card, optionally filtered by channel */
+
     function renderOverview(stageKey, channel) {
       const data = STAGE_CONTENT[stageKey] || STAGE_CONTENT.screen;
       const details = document.getElementById("stage-details");
@@ -1397,22 +1785,32 @@ A great first week has outsized impact on long-term engagement — thank you for
             .map(
               (c) => `
               <li>
-                <strong>${c.commType}</strong> – ${c.trigger}<br />
-                ${c.label}
+                <strong>To:</strong> ${c.audienceGroup} ·
+                <strong>Type:</strong> ${c.commType} ·
+                <strong>Trigger:</strong> ${c.trigger}<br />
+                ${c.variantLabel}
               </li>`
             )
             .join("");
         }
       }
 
-      // Fallback to original generic bullets if no channel-specific ones found
       if (!bulletsHtml) {
-        bulletsHtml = data.items.map((item) => `<li>${item}</li>`).join("");
+        bulletsHtml = (data.items || [])
+          .map((item) => `<li>${item}</li>`)
+          .join("");
       }
+
+      const outcomesText = (data.outcomes || []).join(" · ");
 
       details.innerHTML = `
         <div class="timeline-stage-title">${data.title}</div>
         <div class="timeline-goal"><span>Goal:</span> ${data.goal}</div>
+        ${
+          outcomesText
+            ? `<div class="timeline-outcomes"><span class="label">Outcomes:</span> ${outcomesText}</div>`
+            : ""
+        }
         <div class="timeline-tag"><span class="dot"></span>${tagLabel}</div>
         <ul class="timeline-list">
           ${bulletsHtml}
@@ -1420,17 +1818,16 @@ A great first week has outsized impact on long-term engagement — thank you for
       `;
     }
 
-    /* Wrap previous behavior: stage + comms */
     function renderStage(stageKey) {
-      // Start with generic view; renderComms will call renderOverview again with the live channel
       renderOverview(stageKey, null);
       renderComms(stageKey);
     }
 
-    function renderComms(stageKey, forcedChannel, forcedAudience) {
+    function renderComms(stageKey, forcedChannel, forcedAudience, forcedVariantId) {
       const data = STAGE_CONTENT[stageKey] || STAGE_CONTENT.screen;
       const channelTabs = document.getElementById("channel-tabs");
       const audienceRow = document.getElementById("audience-row");
+      const variantRow = document.getElementById("variant-row");
       const contentContainer = document.getElementById("sample-email-content");
 
       const comms = data.comms || [];
@@ -1438,21 +1835,21 @@ A great first week has outsized impact on long-term engagement — thank you for
       if (!comms.length) {
         channelTabs.innerHTML = "";
         audienceRow.innerHTML = "";
+        variantRow.innerHTML = "";
         contentContainer.innerHTML =
           "<div class='sample-meta'>No communications configured for this stage yet.</div>";
         return;
       }
 
-      // Available channels for this stage
       const channelsForStage = CHANNEL_ORDER.filter((ch) =>
         comms.some((c) => c.channel === ch)
       );
+
       const activeChannel =
         forcedChannel && channelsForStage.includes(forcedChannel)
           ? forcedChannel
           : channelsForStage[0];
 
-      // Channel tabs (External / Internal)
       channelTabs.innerHTML = channelsForStage
         .map(
           (ch) => `
@@ -1465,7 +1862,6 @@ A great first week has outsized impact on long-term engagement — thank you for
         )
         .join("");
 
-      // Audience options within that channel
       const audiencesForChannel = Array.from(
         new Set(
           comms
@@ -1494,12 +1890,35 @@ A great first week has outsized impact on long-term engagement — thank you for
         )
         .join("");
 
-      // Pick first comm that matches active channel + audience
+      const commsForAudience = comms.filter(
+        (c) => c.channel === activeChannel && c.audienceGroup === activeAudience
+      );
+
+      const activeVariant =
+        forcedVariantId &&
+        commsForAudience.some((c) => c.id === forcedVariantId)
+          ? forcedVariantId
+          : commsForAudience[0].id;
+
+      if (commsForAudience.length > 1) {
+        variantRow.innerHTML = commsForAudience
+          .map(
+            (c) => `
+            <button
+              class="variant-pill ${c.id === activeVariant ? "active" : ""}"
+              data-variant="${c.id}"
+            >
+              ${c.variantLabel}
+            </button>`
+          )
+          .join("");
+      } else {
+        variantRow.innerHTML = "";
+      }
+
       const activeComm =
-        comms.find(
-          (c) =>
-            c.channel === activeChannel && c.audienceGroup === activeAudience
-        ) || comms[0];
+        commsForAudience.find((c) => c.id === activeVariant) ||
+        commsForAudience[0];
 
       contentContainer.innerHTML = `
         <div class="sample-meta">${
@@ -1513,10 +1932,11 @@ A great first week has outsized impact on long-term engagement — thank you for
         <div class="sample-body">${activeComm.body}</div>
       `;
 
-      // Make sure the left-hand workflow card matches this channel
+      // Sync left card with chosen channel
       renderOverview(stageKey, activeChannel);
 
-      // Wire up tab clicks
+      /* Wire up interactions */
+
       document.querySelectorAll(".sample-tab").forEach((btn) => {
         btn.addEventListener("click", () => {
           document
@@ -1524,11 +1944,10 @@ A great first week has outsized impact on long-term engagement — thank you for
             .forEach((b) => b.classList.remove("active"));
           btn.classList.add("active");
           const ch = btn.getAttribute("data-channel");
-          renderComms(stageKey, ch, null);
+          renderComms(stageKey, ch, null, null);
         });
       });
 
-      // Wire up audience pill clicks
       document.querySelectorAll(".audience-pill").forEach((pill) => {
         pill.addEventListener("click", () => {
           document
@@ -1536,7 +1955,18 @@ A great first week has outsized impact on long-term engagement — thank you for
             .forEach((p) => p.classList.remove("active"));
           pill.classList.add("active");
           const aud = pill.getAttribute("data-audience");
-          renderComms(stageKey, activeChannel, aud);
+          renderComms(stageKey, activeChannel, aud, null);
+        });
+      });
+
+      document.querySelectorAll(".variant-pill").forEach((pill) => {
+        pill.addEventListener("click", () => {
+          document
+            .querySelectorAll(".variant-pill")
+            .forEach((p) => p.classList.remove("active"));
+          pill.classList.add("active");
+          const variantId = pill.getAttribute("data-variant");
+          renderComms(stageKey, activeChannel, activeAudience, variantId);
         });
       });
     }
