@@ -1364,13 +1364,7 @@ A great first week has outsized impact on long-term engagement — thank you for
       }
     };
 
-    /* Render helpers */
-
     const CHANNEL_ORDER = ["external", "internal"];
-    const CHANNEL_LABEL = {
-      external: "External (candidate, referrer, agency)",
-      internal: "Internal (recruiter, interviewers, operations)"
-    };
 
     const ALL_AUDIENCE_ORDER = [
       "Candidate",
@@ -1382,19 +1376,54 @@ A great first week has outsized impact on long-term engagement — thank you for
       "Legal / Approvers / HR"
     ];
 
-    function renderStage(stageKey) {
+    /* Helper to render the left-side overview, filtered by channel when provided */
+    function renderOverview(stageKey, channel) {
       const data = STAGE_CONTENT[stageKey] || STAGE_CONTENT.screen;
       const details = document.getElementById("stage-details");
+      const comms = data.comms || [];
+
+      let tagLabel = data.label;
+      let bulletsHtml = "";
+
+      if (channel) {
+        const filtered = comms.filter((c) => c.channel === channel);
+        if (filtered.length) {
+          tagLabel =
+            channel === "external"
+              ? "External communications"
+              : "Internal communications";
+
+          bulletsHtml = filtered
+            .map(
+              (c) => `
+              <li>
+                <strong>${c.commType}</strong> – ${c.trigger}<br />
+                ${c.label}
+              </li>`
+            )
+            .join("");
+        }
+      }
+
+      // Fallback to original generic bullets if no channel-specific ones found
+      if (!bulletsHtml) {
+        bulletsHtml = data.items.map((item) => `<li>${item}</li>`).join("");
+      }
 
       details.innerHTML = `
         <div class="timeline-stage-title">${data.title}</div>
         <div class="timeline-goal"><span>Goal:</span> ${data.goal}</div>
-        <div class="timeline-tag"><span class="dot"></span>${data.label}</div>
+        <div class="timeline-tag"><span class="dot"></span>${tagLabel}</div>
         <ul class="timeline-list">
-          ${data.items.map((item) => `<li>${item}</li>`).join("")}
+          ${bulletsHtml}
         </ul>
       `;
+    }
 
+    /* Wrap previous behavior: stage + comms */
+    function renderStage(stageKey) {
+      // Start with generic view; renderComms will call renderOverview again with the live channel
+      renderOverview(stageKey, null);
       renderComms(stageKey);
     }
 
@@ -1423,7 +1452,7 @@ A great first week has outsized impact on long-term engagement — thank you for
           ? forcedChannel
           : channelsForStage[0];
 
-      // Channel tabs (Internal / External)
+      // Channel tabs (External / Internal)
       channelTabs.innerHTML = channelsForStage
         .map(
           (ch) => `
@@ -1483,6 +1512,9 @@ A great first week has outsized impact on long-term engagement — thank you for
         <div class="sample-subject">${activeComm.subject}</div>
         <div class="sample-body">${activeComm.body}</div>
       `;
+
+      // Make sure the left-hand workflow card matches this channel
+      renderOverview(stageKey, activeChannel);
 
       // Wire up tab clicks
       document.querySelectorAll(".sample-tab").forEach((btn) => {
