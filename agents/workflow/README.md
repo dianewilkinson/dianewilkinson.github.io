@@ -75,19 +75,20 @@ Those are handled by other A[i]gents in the portfolio.
 - **Reschedule / Cancel**: always include a self-service link and coordinator alias
 - **Accessibility**: ask about accommodations in every invite, include phone backup  
 - **Privacy**: no sensitve data in calendar bodies; link to secure docs instead  
-- **Branding**: consistent subject format - [Company] · [Role] · [Stage] 
+- **Branding**: consistent subject format - [Company] · [Role] · [Stage]
+- **Localization**: templates must support region-specific phrasing and legal notes
 ---
 
 ## 3. Roles & Responsibilities
 
-| Role           | Responsibilities                                                                 |
-|----------------|----------------------------------------------------------------------------------|
-| Recruiter (R)  | Own candidate relationship, monitor automations, escalate issues                 |
-| Coordinator (C)| Manage calendar, reschedules, and exceptions                                    |
-| Hiring Manager | Interview, make decisions, complete scorecards within SLA                       |
-| Interviewers   | Conduct interviews, submit scorecards on time                                   |
-| ATS Admin      | Maintain automation rules, templates, routing                                   |
-| Owner          | Diane Wilkinson – design, implementation, ongoing optimization                  |
+| Role           | Responsibilities                                                                                         |
+|----------------|----------------------------------------------------------------------------------------------------------|
+| Recruiter (R)  | Own candidate relationship & communoications, monitor automation los, manually intervenes for exceptions |
+| Coordinator (C)| Manage calendar logistics, reschedules, and scheduling exceptions                                        |
+| Hiring Manager | Interviews, submits decisions & scorecards within SLA, participates in escalations                       |
+| Interviewers   | Conduct interviews, submit structured feedback promptly                                                  |
+| ATS Admin      | Maintains templates, manages automation rules, owns SLA dashboards                                       |
+| Owner          | Diane Wilkinson – design, implementation, continuous improvement                                         |
 
 ---
 
@@ -126,7 +127,14 @@ Below is the *conceptual* library of workflows that live inside Workflow A[i]gen
 
 Implementation details (trigger wiring, exact templates) are documented in sub-files and can be adapted to any ATS.
 
-### 5.1 Scheduling & Availability
+### 5.1 Trigger Glossary
+
+   - **Stage Change:**: Triggered when ATS stage is updated
+   - **Event Booked:**: Triggered when a calendar event is created
+   - **Time-Based:**: Triggered relative to interview / event start, stage change timestamp, or set time in stage has elapsed
+   - **Manual Override:**: Recruiter-triggered email templates
+
+### 5.2 Scheduling & Availability
 
 **Goals:**  
 Reduce drop-off between “stage change” and “time booked.”
@@ -143,7 +151,7 @@ Reduce drop-off between “stage change” and “time booked.”
 
 ---
 
-### 5.2 Interview Stage Workflows
+### 5.3 Interview Stage Workflows
 
 For each stage (Screen, HM/Tech, Panel, Final), the pattern is:
 
@@ -155,8 +163,8 @@ For each stage (Screen, HM/Tech, Panel, Final), the pattern is:
 
 Example: **HM / Technical Interview**
 
-| ID   | Trigger                       | Recipient    | Action / Template                                       |
-|------|------------------------------|-------------|---------------------------------------------------------|
+| ID   | Trigger                      | Recipient   | Action / Template                                      |
+|------|------------------------------|-------------|--------------------------------------------------------|
 | T1   | Event booked                 | Candidate   | `[CONF_HM_Tech]` – confirmation + how to prepare       |
 | T2   | -24h before                  | Candidate   | `[REM_HM_Tech]` – reminder + tech/logistics            |
 | T3   | +2h after                    | Candidate   | `[FU_HM_Tech]` – thank-you + next-steps expectation    |
@@ -168,7 +176,7 @@ The same pattern is reused for Panel and Final interviews with stage-specific co
 
 ---
 
-### 5.3 Scorecard & SLA Automation
+### 5.4 Scorecard & SLA Automation
 
 **Objective:** Ensure interview feedback is submitted while the conversation is fresh.
 
@@ -186,7 +194,7 @@ These SLAs are wired via:
 
 ---
 
-### 5.4 Status & Delay Updates
+### 5.5 Status & Delay Updates
 
 **Objective:** Protect candidate experience when internal timelines slip.
 
@@ -203,7 +211,7 @@ Delay updates can be triggered:
 
 ---
 
-### 5.5 Offer & Pre-Start Workflows
+### 5.6 Offer & Pre-Start Workflows
 
 **Objective:** Close offers thoughtfully and avoid “silence” between accept and start.
 
@@ -233,6 +241,26 @@ Typical implementation steps:
 6. **Train recruiters, coordinators, and HMs** on what’s automated vs. manual.  
 7. **Monitor metrics & tune**: no-show rate, SLA adherence, average days per stage.
 
+### 6.1 Role-Based Customization
+
+Workflow A[i]gent supports variations by role family:
+- Sales (multi-round panel, heavy prep)
+- Engineering (technical assessment linkage)
+- G&A (faster stage progression)
+- Leadership roles (multi-panel + executive approvals)
+
+Each role config supports:
+- Custom templates
+- Custom SLAs
+- Conditional prep packets
+- Variable panel sizes
+
+### 6.2 ATS Configuration Example (Simplified)
+- Automation: When Candidate enters “Recruiter Screen” → Send Email Template
+- Automation: When No Response 48h → Send Reminder
+- Automation: When Interview Ends → Send Scorecard Reminder
+- Task: If scorecard overdue 24h → Assign HM Task 
+
 ---
 
 ## 7. Metrics & Reporting
@@ -244,7 +272,12 @@ Workflow A[i]gent is designed to be measured. Suggested metrics:(See Metrics Dic
 - % scorecards submitted within SLA  
 - Candidate satisfaction (CSAT / NPS, where available)  
 - Template usage rate (how often standard comms are used)  
-- Volume of “delay update” communications sent  
+- Volume of “delay update” communications sent
+- Time Initial Screen → Manager Interview median
+- Scorecards on‑time (% within 24h)
+- Pass‑through Screen → Panel; Panel → Offer
+- Template adoption (% automated vs. ad‑hoc emails)
+- Recruitment Update usage (delays covered)
 
 These metrics can feed into **Metrics A[i]gent** dashboards for holistic funnel visibility.
 
@@ -256,7 +289,7 @@ These metrics can feed into **Metrics A[i]gent** dashboards for holistic funnel 
 
 ### 7.2 Template IDs
 
-Template IDs and exact copy are maintained in the SOP and email teamplate library (see §IV and §VII of the SOP).
+Template IDs and exact copy are maintained in the SOP and email template library (see §IV and §VII of the SOP).
 
 ---
 
@@ -285,3 +318,14 @@ Workflow A[i]gent Workflow A[i]gent emits clean events and timestamps (stage cha
   - *Interview A[i]gent* (future) – note-taking and structured feedback
 
 Together, they form an **AI-ready, automation-first recruiting operating system.**
+
+---
+
+## 10. Risks & Mitigations
+
+- **Risk:**  Over-automation → Candidates feel robotic
+- **Mitigation:** Mix in human touchpoints; configure warm tone templates
+- **Risk:** Incorrect triggers → Wrong emails sent
+- **Mitigation:** Use sandbox testing on dummy candidate
+- **Risk:** Hiring managers ignore SLAs
+- **Mitigation:** Escalation routing, Slack reminders, scorecard gating
