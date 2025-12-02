@@ -388,21 +388,10 @@
     .timeline-goal {
       font-size: 0.8rem;
       color: #6b7280;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.35rem;
     }
 
     .timeline-goal span {
-      font-weight: 500;
-      color: #111827;
-    }
-
-    .timeline-outcomes {
-      font-size: 0.75rem;
-      color: #6b7280;
-      margin-bottom: 0.55rem;
-    }
-
-    .timeline-outcomes span.label {
       font-weight: 500;
       color: #111827;
     }
@@ -417,7 +406,7 @@
       padding: 0.1rem 0.6rem;
       font-size: 0.72rem;
       color: #4b5563;
-      margin-bottom: 0.55rem;
+      margin: 0.4rem 0 0.5rem;
     }
 
     .timeline-tag span.dot {
@@ -427,54 +416,52 @@
       background: #22c55e;
     }
 
-    .timeline-list {
+    /* Overview list inside stage card */
+
+    .overview-list {
       list-style: none;
-      padding: 0;
       margin: 0;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 0.3rem;
+      gap: 0.35rem;
     }
 
-    .timeline-list li {
-      padding-left: 0.85rem;
-      position: relative;
-      font-size: 0.8rem;
-    }
-
-    .timeline-list li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #9ca3af;
-      font-size: 0.9rem;
-    }
-
-    /* overview bullets that map to specific comms */
-
-    .timeline-list li.overview-comm {
-      border-radius: 0.4rem;
-      padding-top: 0.15rem;
-      padding-bottom: 0.15rem;
-      margin-left: -0.2rem;
-      padding-right: 0.4rem;
-      cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    .overview-item {
+      padding: 0.4rem 0.55rem;
+      border-radius: 0.75rem;
       border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease,
+        box-shadow 0.15s ease;
     }
 
-    .timeline-list li.overview-comm:hover {
+    .overview-item:hover {
       background: #f3f4f6;
     }
 
-    .timeline-list li.overview-comm.active {
-      background: #eef2ff;           /* light purple like the pill */
-      color: #3730a3;                /* deep purple text */
-      border-color: #6366f1;         /* purple border */
+    .overview-item.active {
+      background: #eef2ff;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.25);
     }
 
-    .timeline-list li.overview-comm.active::before {
-      color: #6366f1;
+    .overview-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #111827;
+      margin-bottom: 0.05rem;
+    }
+
+    .overview-meta {
+      font-size: 0.76rem;
+      color: #6b7280;
+    }
+
+    .overview-empty {
+      font-size: 0.78rem;
+      color: #6b7280;
+      padding: 0.3rem 0.1rem;
     }
 
     /* Stage communications card */
@@ -489,7 +476,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
-      max-height: 360px;
+      max-height: 340px;
       overflow: hidden;
     }
 
@@ -558,18 +545,16 @@
       box-shadow: 0 -1px 4px rgba(15, 23, 42, 0.06);
     }
 
-    /* Audience + variant pills */
+    /* Email pills within a channel */
 
-    .audience-row,
-    .variant-row {
+    .email-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.35rem;
       margin: 0.3rem 0 0.35rem;
     }
 
-    .audience-pill,
-    .variant-pill {
+    .email-pill {
       border-radius: 999px;
       border: 1px solid #e5e7eb;
       background: #f9fafb;
@@ -577,15 +562,15 @@
       font-size: 0.72rem;
       color: #4b5563;
       cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease,
+        color 0.15s ease;
     }
 
-    .audience-pill:hover,
-    .variant-pill:hover {
+    .email-pill:hover {
       background: #f3f4f6;
     }
 
-    .audience-pill.active,
-    .variant-pill.active {
+    .email-pill.active {
       background: #111827;
       border-color: #111827;
       color: #f9fafb;
@@ -694,6 +679,7 @@
       <!-- Suite header -->
       <header class="suite-header">
         <div class="suite-top-row">
+          <!-- Back to overview (update href for your hub) -->
           <a class="back-link" href="../../index.html">
             <span class="arrow">←</span>
             <span>Back to A[i]gents overview</span>
@@ -706,6 +692,7 @@
             <span class="suite-label">A[i]gents Portfolio · Demo</span>
           </div>
 
+          <!-- Mini suite nav -->
           <nav class="agent-nav" aria-label="A[i]gents navigation">
             <span class="agent-nav-label">Agents</span>
             <a class="agent-nav-link" href="../screening/index.html">Screening A[i]gent</a>
@@ -727,7 +714,7 @@
         making great hires.
       </p>
 
-      <!-- Stats row -->
+      <!-- Small stats row -->
       <div class="stats-row">
         <div class="stat-card">
           <div class="stat-label">Interview Pipeline</div>
@@ -793,12 +780,13 @@
             <div class="sample-title">Stage Communications</div>
           </div>
 
+          <!-- Channel tabs -->
           <div class="sample-tabs-row" id="channel-tabs"></div>
 
-          <div class="audience-row" id="audience-row"></div>
+          <!-- Email pills -->
+          <div class="email-row" id="email-row"></div>
 
-          <div class="variant-row" id="variant-row"></div>
-
+          <!-- Email content -->
           <div class="sample-scroll" id="sample-email-content"></div>
         </div>
       </div>
@@ -842,266 +830,857 @@
   </main>
 
   <script>
-    /* (Same STAGE_CONTENT object as in the previous version — omitted here for brevity)
-       Make sure you keep all the stage + comm definitions exactly as you have them now.
-       The only changes below are to renderOverview and the click wiring. */
+    /* =============================
+       DATA MODEL
+    ============================== */
 
-    // ---- BEGIN STAGE_CONTENT (keep your full object here) ----
-    const STAGE_CONTENT = {/* ... use the full object from your current file ... */};
-    // ---- END STAGE_CONTENT ----
+    const STAGE_CONTENT = {
+      screen: {
+        title: "Initial Screen Workflow",
+        goal: "Convert intent into a booked time without manual back-and-forth.",
+        outcomes: [
+          "Increase apps-to-screen ratio",
+          "Decrease candidate drop-offs",
+          "Save recruiter manual hours",
+          "Increase candidate satisfaction"
+        ],
 
-    const CHANNEL_ORDER = ["external", "internal"];
+        overview: [
+          {
+            id: "invite",
+            name: "Scheduling invitation",
+            to: "Candidate",
+            type: "Invitation",
+            trigger: "On stage change"
+          },
+          {
+            id: "confirm",
+            name: "Confirmation",
+            to: "Candidate",
+            type: "Confirmation",
+            trigger: "On booking"
+          },
+          {
+            id: "followup",
+            name: "Post-screen follow-up",
+            to: "Candidate",
+            type: "Follow-up",
+            trigger: "1 hour after interview start"
+          },
+          {
+            id: "ref-update",
+            name: "Referral status update",
+            to: "Referrer",
+            type: "Status update",
+            trigger: "On stage change"
+          },
+          {
+            id: "rec-alert",
+            name: "Recruiter alert",
+            to: "Recruiter",
+            type: "Reminder",
+            trigger: "No reply for 96 hours"
+          },
+          {
+            id: "coord-assist",
+            name: "Coordinator: calendar assist",
+            to: "Coordinator",
+            type: "Task notification",
+            trigger: "Candidate replies without using link"
+          }
+        ],
 
-    const ALL_AUDIENCE_ORDER = [
-      "Candidate",
-      "Referrer",
-      "Agency",
-      "Recruiter",
-      "Interviewer",
-      "Coordinator",
-      "Legal / Approvers / HR"
-    ];
+        comms: [
+          {
+            id: "invite",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Scheduling invitation",
+            commType: "Invitation",
+            trigger: "On stage change",
+            subject: "Subject: Invitation to Interview – [Role] at [Company]",
+            body: `Hi [First name],
 
-    /* Overview rendering, optionally filtered by channel */
+Thanks for your interest in [Company] and the [Role] position. You can pick a time that works best using the link below:
 
-    function renderOverview(stageKey, channel, activeCommId) {
-      const data = STAGE_CONTENT[stageKey] || STAGE_CONTENT.screen;
-      const details = document.getElementById("stage-details");
-      const comms = data.comms || [];
+[Calendar link]
 
-      let tagLabel = data.label;
-      let bulletsHtml = "";
+If none of the available times work, reply here and we’ll help coordinate something that does.
 
-      if (channel) {
-        const filtered = comms.filter((c) => c.channel === channel);
-        if (filtered.length) {
-          tagLabel =
-            channel === "external"
-              ? "External communications"
-              : "Internal communications";
+Best,
+[Recruiter name]`
+          },
+          {
+            id: "confirm",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Confirmation",
+            commType: "Confirmation",
+            trigger: "On booking",
+            subject: "Subject: Your conversation with [Recruiter] is confirmed – [Role]",
+            body: `Hi [First name],
 
-          bulletsHtml = filtered
-            .map(
-              (c) => `
-              <li class="overview-comm ${c.id === activeCommId ? "active" : ""}"
-                  data-comm-id="${c.id}">
-                <strong>${c.variantLabel}</strong> – 
-                <strong>To:</strong> ${c.audienceGroup} ·
-                <strong>Type:</strong> ${c.commType} ·
-                <strong>Trigger:</strong> ${c.trigger}
-              </li>`
-            )
-            .join("");
-        }
+Your initial conversation for [Role] is confirmed for [Date / Time].
+
+We’ll use this time to learn more about your experience, what you’re looking for next, and how this role might fit.`
+          },
+          {
+            id: "followup",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Post-screen follow-up",
+            commType: "Follow-up",
+            trigger: "1 hour after interview start",
+            subject: "Subject: Thanks for speaking with us – [Role]",
+            body: `Hi [First name],
+
+Thank you for taking the time to speak with us today. We’re reviewing notes from the conversation and will let you know about next steps.
+
+In the meantime, here are a few resources you may find helpful:
+• Careers page: [link]
+• Team blog: [link]
+• Employee stories: [link]`
+          },
+          {
+            id: "ref-update",
+            channel: "external",
+            audienceGroup: "Referrer",
+            label: "Referral status update",
+            commType: "Status update",
+            trigger: "On stage change",
+            subject: "Subject: Update on your referral [Candidate] – [Role]",
+            body: `Hi [Referrer name],
+
+Quick update: [Candidate] has moved into the screening stage for [Role]. We’ll keep you posted as they progress.
+
+Thank you again for the referral!`
+          },
+          {
+            id: "rec-alert",
+            channel: "internal",
+            audienceGroup: "Recruiter",
+            label: "Recruiter alert",
+            commType: "Reminder",
+            trigger: "No reply for 96 hours",
+            subject: "Subject: Screening invite pending – [Candidate]",
+            body: `Hi [Recruiter name],
+
+[Candidate] has been in Initial Screen for 96+ hours without scheduling time.
+
+Suggested next steps:
+• Send a quick check-in
+• Confirm contact information in the ATS
+• Decide whether to keep warm, fast-follow, or move out of process`
+          },
+          {
+            id: "coord-assist",
+            channel: "internal",
+            audienceGroup: "Coordinator",
+            label: "Coordinator: calendar assist",
+            commType: "Task notification",
+            trigger: "Candidate replies without using link",
+            subject: "Subject: Calendar scheduling needed – [Candidate]",
+            body: `Hi [Coordinator name],
+
+[Candidate] replied to schedule a screen but did not use the calendar link.
+
+Please coordinate a time with [Recruiter name] and the candidate, then update the ATS and calendar invite.`
+          }
+        ]
+      },
+
+      /* HM / TECH INTERVIEW */
+      hm: {
+        title: "HM / Tech Interview Workflow",
+        goal: "Reduce no-shows and keep hiring managers on SLA for feedback.",
+        outcomes: [
+          "Reduce no-shows",
+          "Increase hiring manager preparedness",
+          "Improve response SLAs",
+          "Shorten decision cycles"
+        ],
+
+        overview: [
+          { id: "hm-invite", name: "Scheduling invitation", to: "Candidate", type: "Invitation", trigger: "On stage change" },
+          { id: "hm-confirm", name: "Confirmation", to: "Candidate", type: "Confirmation", trigger: "On booking" },
+          { id: "hm-post", name: "Post-interview follow-up", to: "Candidate", type: "Follow-up", trigger: "1 hour after interview" },
+          { id: "hm-prep", name: "Interviewer prep packet", to: "Interviewer", type: "Prep", trigger: "24 hours before interview" },
+          { id: "hm-score", name: "Scorecard reminders", to: "Interviewer", type: "Reminder", trigger: "After interview + 24/48 hours" },
+          { id: "ref-update", name: "Referral update", to: "Referrer", type: "Status update", trigger: "On stage change" }
+        ],
+
+        comms: [
+          {
+            id: "hm-invite",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Scheduling invitation",
+            commType: "Invitation",
+            trigger: "On stage change",
+            subject: "Subject: Next interview – [Role] at [Company]",
+            body: `Hi [First name],
+
+We’d like to move you forward to speak with the hiring manager for [Role].  
+You can choose a time that works best here:
+
+[Calendar link]`
+          },
+          {
+            id: "hm-confirm",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Confirmation",
+            commType: "Confirmation",
+            trigger: "On booking",
+            subject: "Subject: HM/Tech interview confirmed – [Role]",
+            body: `Hi [First name],
+
+Your next interview for [Role] is confirmed for [Date / Time].`
+          },
+          {
+            id: "hm-post",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Post-interview follow-up",
+            commType: "Follow-up",
+            trigger: "1 hour after interview",
+            subject: "Subject: Thanks again for meeting with us",
+            body: `Hi [First name],
+
+Thanks again for taking the time to speak with [Interviewer] today.  
+We’re reviewing feedback and will follow up with next steps.`
+          },
+          {
+            id: "hm-prep",
+            channel: "internal",
+            audienceGroup: "Interviewer",
+            label: "Interviewer prep packet",
+            commType: "Prep",
+            trigger: "24 hours before interview",
+            subject: "Subject: Prep for interview with [Candidate] – [Role]",
+            body: `Hi [Manager name],
+
+Here’s your prep packet for tomorrow’s interview with [Candidate] for [Role].
+
+Focus areas:
+• Key experience to validate
+• Risks / open questions
+• Signals that would make this an easy “yes”`
+          },
+          {
+            id: "hm-score",
+            channel: "internal",
+            audienceGroup: "Interviewer",
+            label: "Scorecard reminders",
+            commType: "Reminder",
+            trigger: "After interview + 24/48 hours",
+            subject: "Subject: Action needed – scorecard for [Candidate]",
+            body: `Hi [Manager name],
+
+Quick reminder to submit your scorecard for [Candidate] for [Role].  
+Capturing feedback while the conversation is fresh helps reduce bias and keeps candidates out of limbo.`
+          },
+          {
+            id: "ref-update",
+            channel: "external",
+            audienceGroup: "Referrer",
+            label: "Referral update",
+            commType: "Status update",
+            trigger: "On stage change",
+            subject: "Subject: Update on your referral – [Candidate]",
+            body: `Hi [Referrer name],
+
+[Candidate] has advanced to the HM/Tech interview stage for [Role].  
+We’ll keep you posted after this round.`
+          }
+        ]
+      },
+
+      /* PANEL */
+      panel: {
+        title: "Panel Workflow",
+        goal: "Align multiple interviewers and tighten the decision loop.",
+        outcomes: [
+          "Coordinate multi-step interviews smoothly",
+          "Improve interviewer alignment",
+          "Accelerate post-panel decisions"
+        ],
+
+        overview: [
+          { id: "panel-invite", name: "Scheduling invitation", to: "Candidate", type: "Invitation", trigger: "On stage change" },
+          { id: "panel-confirm", name: "Panel confirmation", to: "Candidate", type: "Confirmation", trigger: "On booking" },
+          { id: "panel-post", name: "Post-panel follow-up", to: "Candidate", type: "Follow-up", trigger: "1–2 hours after panel" },
+          { id: "panel-prep", name: "Panel prep packet", to: "Interviewer", type: "Prep", trigger: "24 hours before panel" },
+          { id: "panel-score", name: "Scorecard reminders", to: "Interviewer", type: "Reminder", trigger: "After panel" },
+          { id: "ref-update", name: "Referral update", to: "Referrer", type: "Status update", trigger: "On stage change" }
+        ],
+
+        comms: [
+          {
+            id: "panel-invite",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Scheduling invitation",
+            commType: "Invitation",
+            trigger: "On stage change",
+            subject: "Subject: Panel interview availability – [Role]",
+            body: `Hi [First name],
+
+We’d like to move you forward to a panel conversation for [Role].  
+Please share your availability for the next week and we’ll coordinate a time.`
+          },
+          {
+            id: "panel-confirm",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Panel confirmation",
+            commType: "Confirmation",
+            trigger: "On booking",
+            subject: "Subject: Panel interview confirmed – [Role]",
+            body: `Hi [First name],
+
+Your panel interview for [Role] is confirmed for [Date / Time].  
+You’ll meet with several members of the team across [duration].`
+          },
+          {
+            id: "panel-post",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Post-panel follow-up",
+            commType: "Follow-up",
+            trigger: "1–2 hours after panel",
+            subject: "Subject: Thank you for joining the panel",
+            body: `Hi [First name],
+
+Thank you again for spending time with the team today.  
+We’ll debrief as a group and share an update by [date].`
+          },
+          {
+            id: "panel-prep",
+            channel: "internal",
+            audienceGroup: "Interviewer",
+            label: "Panel prep packet",
+            commType: "Prep",
+            trigger: "24 hours before panel",
+            subject: "Subject: Panel coverage & scorecards – [Candidate]",
+            body: `Hi team,
+
+Here’s the coverage plan and scorecard links for tomorrow’s panel with [Candidate] for [Role].`
+          },
+          {
+            id: "panel-score",
+            channel: "internal",
+            audienceGroup: "Interviewer",
+            label: "Scorecard reminders",
+            commType: "Reminder",
+            trigger: "After panel",
+            subject: "Subject: Scorecard reminder – panel for [Candidate]",
+            body: `Hi team,
+
+Quick reminder to submit panel scorecards so we can make a timely decision.`
+          },
+          {
+            id: "ref-update",
+            channel: "external",
+            audienceGroup: "Referrer",
+            label: "Referral update",
+            commType: "Status update",
+            trigger: "On stage change",
+            subject: "Subject: Referral progress – [Candidate]",
+            body: `Hi [Referrer name],
+
+[Candidate] has moved to the panel stage for [Role].  
+We’ll follow up again once a decision is made.`
+          }
+        ]
+      },
+
+      /* FINAL */
+      final: {
+        title: "Final Interview Workflow",
+        goal: "De-risk last-mile candidate experience and prep for offer.",
+        outcomes: [
+          "Set clear expectations",
+          "Capture offer-prep signals early",
+          "Prevent late-stage drop-offs"
+        ],
+
+        overview: [
+          { id: "final-invite", name: "Scheduling invitation", to: "Candidate", type: "Invitation", trigger: "On stage change" },
+          { id: "final-confirm", name: "Confirmation", to: "Candidate", type: "Confirmation", trigger: "On booking" },
+          { id: "final-precheck", name: "Offer expectation check-in", to: "Candidate", type: "Survey / check-in", trigger: "24 hours before interview" },
+          { id: "final-post", name: "Post-interview follow-up", to: "Candidate", type: "Follow-up", trigger: "1 hour after interview" },
+          { id: "final-score", name: "Decision reminder", to: "Interviewer", type: "Reminder", trigger: "After final interview + SLA" },
+          { id: "ref-update", name: "Referral update", to: "Referrer", type: "Status update", trigger: "On stage change" }
+        ],
+
+        comms: [
+          {
+            id: "final-invite",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Scheduling invitation",
+            commType: "Invitation",
+            trigger: "On stage change",
+            subject: "Subject: Final interview – availability",
+            body: `Hi [First name],
+
+We’d like to schedule your final conversation for [Role].  
+Please share your availability over the next few days.`
+          },
+          {
+            id: "final-confirm",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Confirmation",
+            commType: "Confirmation",
+            trigger: "On booking",
+            subject: "Subject: Final interview confirmed – [Role]",
+            body: `Hi [First name],
+
+Your final interview is confirmed for [Date / Time].`
+          },
+          {
+            id: "final-precheck",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Offer expectation check-in",
+            commType: "Survey / check-in",
+            trigger: "24 hours before interview",
+            subject: "Subject: Quick check-in before your final",
+            body: `Hi [First name],
+
+Ahead of your final interview, it would be helpful to understand any offer timelines or expectations you’re working with.`
+          },
+          {
+            id: "final-post",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Post-interview follow-up",
+            commType: "Follow-up",
+            trigger: "1 hour after interview",
+            subject: "Subject: Thank you for your time today",
+            body: `Hi [First name],
+
+Thank you again for speaking with the team today.  
+We expect to share a decision by [date].`
+          },
+          {
+            id: "final-score",
+            channel: "internal",
+            audienceGroup: "Interviewer",
+            label: "Decision reminder",
+            commType: "Reminder",
+            trigger: "After final interview + SLA",
+            subject: "Subject: Decision needed – [Candidate]",
+            body: `Hi team,
+
+[Candidate] has completed final interviews. Please review scorecards and confirm your decision by [SLA date].`
+          },
+          {
+            id: "ref-update",
+            channel: "external",
+            audienceGroup: "Referrer",
+            label: "Referral update",
+            commType: "Status update",
+            trigger: "On stage change",
+            subject: "Subject: Referral update – final stage",
+            body: `Hi [Referrer name],
+
+[Candidate] has moved into final interviews for [Role].  
+We’ll follow up once we’ve reached a decision.`
+          }
+        ]
+      },
+
+      /* OFFER */
+      offer: {
+        title: "Offer Workflow",
+        goal: "Tighten time-to-offer while keeping stakeholders informed.",
+        outcomes: [
+          "Faster time-to-offer",
+          "Less manual routing",
+          "Fewer approval bottlenecks"
+        ],
+
+        overview: [
+          { id: "offer-checklist", name: "Offer creation checklist", to: "Recruiter", type: "Task notification", trigger: "On Ready to Offer" },
+          { id: "offer-approval", name: "Approval request", to: "Approvers", type: "Approval", trigger: "On routing" },
+          { id: "offer-recap", name: "Offer recap", to: "Candidate", type: "Follow-up", trigger: "After offer call" },
+          { id: "agency-update", name: "Agency update", to: "Agency", type: "Status update", trigger: "On verbal acceptance" }
+        ],
+
+        comms: [
+          {
+            id: "offer-checklist",
+            channel: "internal",
+            audienceGroup: "Recruiter",
+            label: "Offer checklist",
+            commType: "Task notification",
+            trigger: "On Ready to Offer",
+            subject: "Subject: Offer checklist – [Candidate]",
+            body: `Hi [Recruiter name],
+
+[Candidate] is marked Ready to Offer.  
+Please confirm level, band, start date, and any custom components before routing approvals.`
+          },
+          {
+            id: "offer-approval",
+            channel: "internal",
+            audienceGroup: "Legal / Approvers / HR",
+            label: "Approval request",
+            commType: "Approval",
+            trigger: "On routing",
+            subject: "Subject: Offer approval requested – [Candidate]",
+            body: `Hi [Approver name],
+
+An offer has been proposed for [Candidate] for [Role].  
+Please review the package and approve or comment here: [link].`
+          },
+          {
+            id: "offer-recap",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "Offer recap",
+            commType: "Follow-up",
+            trigger: "After offer call",
+            subject: "Subject: Your offer for [Role] at [Company]",
+            body: `Hi [First name],
+
+It was great speaking with you about the offer for [Role].  
+Here’s a high-level recap of what we discussed.`
+          },
+          {
+            id: "agency-update",
+            channel: "external",
+            audienceGroup: "Agency",
+            label: "Agency update",
+            commType: "Status update",
+            trigger: "On verbal acceptance",
+            subject: "Subject: Your candidate [Candidate] – offer accepted",
+            body: `Hi [Agency contact],
+
+Good news: [Candidate] has verbally accepted the offer for [Role].  
+We’ll confirm start date and invoice details once paperwork is complete.`
+          }
+        ]
+      },
+
+      /* PRE-START */
+      prestart: {
+        title: "Pre-start Workflow",
+        goal: "Smooth hand-off from recruiting to onboarding without dropped details.",
+        outcomes: [
+          "Reduce onboarding errors",
+          "Increase new hire readiness",
+          "Tighten HR & manager coordination"
+        ],
+
+        overview: [
+          { id: "handoff", name: "HR hand-off", to: "HR / People", type: "Hand-off", trigger: "On offer accepted" },
+          { id: "newhire-logistics", name: "First-day logistics", to: "New hire", type: "Welcome", trigger: "1 week before start" },
+          { id: "manager-reminder", name: "Manager onboarding reminder", to: "Manager", type: "Reminder", trigger: "5–7 days before start" }
+        ],
+
+        comms: [
+          {
+            id: "handoff",
+            channel: "internal",
+            audienceGroup: "Legal / Approvers / HR",
+            label: "HR hand-off",
+            commType: "Hand-off",
+            trigger: "On offer accepted",
+            subject: "Subject: New hire hand-off – [New hire] joining as [Role]",
+            body: `Hi People/HR team,
+
+[New hire] has accepted the offer for [Role] and is scheduled to start on [start date].  
+Attached is the hand-off packet with comp, location, manager, and any special notes.`
+          },
+          {
+            id: "newhire-logistics",
+            channel: "external",
+            audienceGroup: "Candidate",
+            label: "First-day logistics",
+            commType: "Welcome",
+            trigger: "1 week before start",
+            subject: "Subject: Welcome to [Company]! First-day details",
+            body: `Hi [First name],
+
+We’re excited to welcome you to [Company] as our new [Role].  
+Here’s what to expect on your first day: [details].`
+          },
+          {
+            id: "manager-reminder",
+            channel: "internal",
+            audienceGroup: "Recruiter",
+            label: "Manager onboarding reminder",
+            commType: "Reminder",
+            trigger: "5–7 days before start",
+            subject: "Subject: Onboarding checklist – [New hire] starts [date]",
+            body: `Hi [Manager name],
+
+[New hire] starts on [date]. Please review the onboarding checklist for equipment, access, and first-week plan.`
+          }
+        ]
       }
+    };
 
-      if (!bulletsHtml) {
-        bulletsHtml = (data.items || [])
-          .map((item) => `<li>${item}</li>`)
-          .join("");
-      }
+    /* =============================
+       STATE & HELPERS
+    ============================== */
 
-      const outcomesText = (data.outcomes || []).join(" · ");
+    const state = {
+      stageKey: "screen",
+      channel: "external",
+      commId: null
+    };
 
-      details.innerHTML = `
-        <div class="timeline-stage-title">${data.title}</div>
-        <div class="timeline-goal"><span>Goal:</span> ${data.goal}</div>
-        ${
-          outcomesText
-            ? `<div class="timeline-outcomes"><span class="label">Outcomes:</span> ${outcomesText}</div>`
-            : ""
-        }
-        <div class="timeline-tag"><span class="dot"></span>${tagLabel}</div>
-        <ul class="timeline-list">
-          ${bulletsHtml}
-        </ul>
-      `;
-
-      /* NEW: make overview bullets clickable when they map to comms */
-      if (channel) {
-        const bulletEls = details.querySelectorAll(".overview-comm");
-        bulletEls.forEach((li) => {
-          li.addEventListener("click", () => {
-            const commId = li.getAttribute("data-comm-id");
-            const allComms = STAGE_CONTENT[stageKey].comms || [];
-            const comm = allComms.find((c) => c.id === commId);
-            if (!comm) return;
-
-            // Clicking a bullet drives the right-hand card
-            renderComms(stageKey, comm.channel, comm.audienceGroup, comm.id);
-          });
-        });
-      }
+    function getStage() {
+      return STAGE_CONTENT[state.stageKey] || STAGE_CONTENT.screen;
     }
 
-    function renderStage(stageKey) {
-      renderOverview(stageKey, null, null);
-      renderComms(stageKey);
-    }
+    function normalizeState() {
+      const stage = getStage();
+      const comms = stage.comms || [];
 
-    function renderComms(stageKey, forcedChannel, forcedAudience, forcedVariantId) {
-      const data = STAGE_CONTENT[stageKey] || STAGE_CONTENT.screen;
-      const channelTabs = document.getElementById("channel-tabs");
-      const audienceRow = document.getElementById("audience-row");
-      const variantRow = document.getElementById("variant-row");
-      const contentContainer = document.getElementById("sample-email-content");
+      const channels = Array.from(new Set(comms.map((c) => c.channel)));
+      if (!channels.length) {
+        state.channel = "external";
+        state.commId = null;
+        return;
+      }
+      if (!channels.includes(state.channel)) {
+        state.channel = channels[0];
+      }
 
-      const comms = data.comms || [];
-
-      if (!comms.length) {
-        channelTabs.innerHTML = "";
-        audienceRow.innerHTML = "";
-        variantRow.innerHTML = "";
-        contentContainer.innerHTML =
-          "<div class='sample-meta'>No communications configured for this stage yet.</div>";
+      const commsForChannel = comms.filter((c) => c.channel === state.channel);
+      if (!commsForChannel.length) {
+        state.commId = null;
         return;
       }
 
-      const channelsForStage = CHANNEL_ORDER.filter((ch) =>
-        comms.some((c) => c.channel === ch)
+      const overviewOrder = (stage.overview || []).map((o) => o.id);
+      const ordered = commsForChannel.slice().sort((a, b) => {
+        return overviewOrder.indexOf(a.id) - overviewOrder.indexOf(b.id);
+      });
+
+      if (!state.commId || !ordered.some((c) => c.id === state.commId)) {
+        state.commId = ordered[0].id;
+      }
+    }
+
+    /* =============================
+       RENDER FUNCTIONS
+    ============================== */
+
+    function renderStageCard() {
+      const stage = getStage();
+      const details = document.getElementById("stage-details");
+
+      const channelLabel =
+        state.channel === "external"
+          ? "External communications"
+          : "Internal communications";
+
+      const comms = stage.comms || [];
+      const overview = stage.overview || [];
+
+      const overviewForChannel = overview.filter((ov) =>
+        comms.some((c) => c.id === ov.id && c.channel === state.channel)
       );
 
-      const activeChannel =
-        forcedChannel && channelsForStage.includes(forcedChannel)
-          ? forcedChannel
-          : channelsForStage[0];
+      let listHtml = "";
 
-      channelTabs.innerHTML = channelsForStage
-        .map(
-          (ch) => `
-          <button
-            class="sample-tab ${ch === activeChannel ? "active" : ""}"
-            data-channel="${ch}"
-          >
-            ${ch === "external" ? "External" : "Internal"}
-          </button>`
-        )
-        .join("");
-
-      const audiencesForChannel = Array.from(
-        new Set(
-          comms
-            .filter((c) => c.channel === activeChannel)
-            .map((c) => c.audienceGroup)
-        )
-      ).sort(
-        (a, b) =>
-          ALL_AUDIENCE_ORDER.indexOf(a) - ALL_AUDIENCE_ORDER.indexOf(b)
-      );
-
-      const activeAudience =
-        forcedAudience && audiencesForChannel.includes(forcedAudience)
-          ? forcedAudience
-          : audiencesForChannel[0];
-
-      audienceRow.innerHTML = audiencesForChannel
-        .map(
-          (aud) => `
-          <button
-            class="audience-pill ${aud === activeAudience ? "active" : ""}"
-            data-audience="${aud}"
-          >
-            ${aud}
-          </button>`
-        )
-        .join("");
-
-      const commsForAudience = comms.filter(
-        (c) => c.channel === activeChannel && c.audienceGroup === activeAudience
-      );
-
-      const activeVariant =
-        forcedVariantId &&
-        commsForAudience.some((c) => c.id === forcedVariantId)
-          ? forcedVariantId
-          : commsForAudience[0].id;
-
-      if (commsForAudience.length > 1) {
-        variantRow.innerHTML = commsForAudience
-          .map(
-            (c) => `
-            <button
-              class="variant-pill ${c.id === activeVariant ? "active" : ""}"
-              data-variant="${c.id}"
-            >
-              ${c.variantLabel}
-            </button>`
-          )
-          .join("");
+      if (!overviewForChannel.length) {
+        listHtml =
+          "<li class='overview-empty'>No communications configured for this channel at this stage yet.</li>";
       } else {
-        variantRow.innerHTML = "";
+        listHtml = overviewForChannel
+          .map((ov) => {
+            const isActive = ov.id === state.commId;
+            return `
+              <li class="overview-item ${
+                isActive ? "active" : ""
+              }" data-comm-id="${ov.id}">
+                <div class="overview-name">${ov.name}</div>
+                <div class="overview-meta">
+                  To: ${ov.to} · Type: ${ov.type}${
+              ov.trigger ? " · Trigger: " + ov.trigger : ""
+            }
+                </div>
+              </li>
+            `;
+          })
+          .join("");
       }
 
-      const activeComm =
-        commsForAudience.find((c) => c.id === activeVariant) ||
-        commsForAudience[0];
-
-      contentContainer.innerHTML = `
-        <div class="sample-meta">${
-          activeChannel === "external" ? "External" : "Internal"
-        } · ${activeComm.audienceGroup}</div>
-        <div class="sample-meta-2">
-          Email: <strong>${activeComm.variantLabel}</strong> ·
-          Type: <strong>${activeComm.commType}</strong> ·
-          Trigger: <strong>${activeComm.trigger}</strong>
+      details.innerHTML = `
+        <div class="timeline-stage-title">${stage.title}</div>
+        <div class="timeline-goal"><span>Goal:</span> ${stage.goal}</div>
+        ${
+          stage.outcomes && stage.outcomes.length
+            ? `<div class="timeline-goal"><span>Outcomes:</span> ${stage.outcomes.join(
+                " · "
+              )}</div>`
+            : ""
+        }
+        <div class="timeline-tag">
+          <span class="dot"></span>${channelLabel}
         </div>
-        <div class="sample-subject">${activeComm.subject}</div>
-        <div class="sample-body">${activeComm.body}</div>
+        <ul class="overview-list">
+          ${listHtml}
+        </ul>
       `;
 
-      // Keep left card in sync with active selection
-      renderOverview(stageKey, activeChannel, activeComm.id);
-
-      /* Re-wire interactions each time */
-
-      document.querySelectorAll(".sample-tab").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          document
-            .querySelectorAll(".sample-tab")
-            .forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          const ch = btn.getAttribute("data-channel");
-          renderComms(stageKey, ch, null, null);
-        });
-      });
-
-      document.querySelectorAll(".audience-pill").forEach((pill) => {
-        pill.addEventListener("click", () => {
-          document
-            .querySelectorAll(".audience-pill")
-            .forEach((p) => p.classList.remove("active"));
-          pill.classList.add("active");
-          const aud = pill.getAttribute("data-audience");
-          renderComms(stageKey, activeChannel, aud, null);
-        });
-      });
-
-      document.querySelectorAll(".variant-pill").forEach((pill) => {
-        pill.addEventListener("click", () => {
-          document
-            .querySelectorAll(".variant-pill")
-            .forEach((p) => p.classList.remove("active"));
-          pill.classList.add("active");
-          const variantId = pill.getAttribute("data-variant");
-          renderComms(stageKey, activeChannel, activeAudience, variantId);
+      details.querySelectorAll(".overview-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          const commId = item.getAttribute("data-comm-id");
+          const stage = getStage();
+          const comm = (stage.comms || []).find((c) => c.id === commId);
+          if (comm) {
+            state.stageKey = state.stageKey; // unchanged
+            state.channel = comm.channel;
+            state.commId = commId;
+            renderAll();
+          }
         });
       });
     }
 
-    // Timeline interactions
+    function renderCommsCard() {
+      const stage = getStage();
+      const comms = stage.comms || [];
+
+      const channelTabs = document.getElementById("channel-tabs");
+      const emailRow = document.getElementById("email-row");
+      const contentContainer = document.getElementById("sample-email-content");
+
+      const channels = Array.from(new Set(comms.map((c) => c.channel)));
+      if (!channels.length) {
+        channelTabs.innerHTML = "";
+        emailRow.innerHTML = "";
+        contentContainer.innerHTML =
+          "<div class='sample-meta'>No communications configured yet.</div>";
+        return;
+      }
+
+      const tabsHtml = channels
+        .map(
+          (ch) => `
+          <button
+            class="sample-tab ${ch === state.channel ? "active" : ""}"
+            data-channel="${ch}"
+          >
+            ${ch === "external" ? "External" : "Internal"}
+          </button>
+        `
+        )
+        .join("");
+
+      channelTabs.innerHTML = tabsHtml;
+
+      const commsForChannel = comms.filter(
+        (c) => c.channel === state.channel
+      );
+
+      const overviewOrder = (stage.overview || []).map((o) => o.id);
+      const orderedComms = commsForChannel.slice().sort((a, b) => {
+        return overviewOrder.indexOf(a.id) - overviewOrder.indexOf(b.id);
+      });
+
+      const pillsHtml = orderedComms
+        .map((c) => {
+          const ov = (stage.overview || []).find((o) => o.id === c.id);
+          const label = ov?.name || c.label || c.id;
+          const isActive = c.id === state.commId;
+          return `
+            <button
+              class="email-pill ${isActive ? "active" : ""}"
+              data-comm-id="${c.id}"
+            >
+              ${label}
+            </button>
+          `;
+        })
+        .join("");
+
+      emailRow.innerHTML = pillsHtml;
+
+      const activeComm = orderedComms.find((c) => c.id === state.commId);
+      if (!activeComm) {
+        contentContainer.innerHTML =
+          "<div class='sample-meta'>Select a communication to view the template.</div>";
+      } else {
+        const ov = (stage.overview || []).find((o) => o.id === activeComm.id);
+        const to = ov?.to || activeComm.audienceGroup || "—";
+        const type = ov?.type || activeComm.commType || "—";
+        const trig = ov?.trigger || activeComm.trigger || "—";
+
+        contentContainer.innerHTML = `
+          <div class="sample-meta">
+            ${state.channel === "external" ? "External" : "Internal"} · ${to}
+          </div>
+          <div class="sample-meta-2">
+            Type: <strong>${type}</strong> ·
+            Trigger: <strong>${trig}</strong>
+          </div>
+          <div class="sample-subject">${activeComm.subject}</div>
+          <div class="sample-body">${activeComm.body}</div>
+        `;
+      }
+
+      // Wire up tab + pill interactions
+      channelTabs.querySelectorAll(".sample-tab").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const ch = btn.getAttribute("data-channel");
+          state.channel = ch;
+          state.commId = null;
+          renderAll();
+        });
+      });
+
+      emailRow.querySelectorAll(".email-pill").forEach((pill) => {
+        pill.addEventListener("click", () => {
+          const commId = pill.getAttribute("data-comm-id");
+          state.commId = commId;
+          renderAll();
+        });
+      });
+    }
+
+    function renderTimelineActive() {
+      document.querySelectorAll(".timeline-node").forEach((node) => {
+        const key = node.getAttribute("data-stage");
+        if (key === state.stageKey) {
+          node.classList.add("active");
+        } else {
+          node.classList.remove("active");
+        }
+      });
+    }
+
+    function renderAll() {
+      normalizeState();
+      renderTimelineActive();
+      renderStageCard();
+      renderCommsCard();
+    }
+
+    /* =============================
+       EVENT BINDINGS
+    ============================== */
+
     document.querySelectorAll(".timeline-node").forEach((btn) => {
       btn.addEventListener("click", () => {
-        document
-          .querySelectorAll(".timeline-node")
-          .forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
         const key = btn.getAttribute("data-stage");
-        renderStage(key);
+        state.stageKey = key;
+        state.commId = null;
+        renderAll();
       });
     });
 
     // Initial load
-    renderStage("screen");
+    renderAll();
   </script>
 </body>
 </html>
