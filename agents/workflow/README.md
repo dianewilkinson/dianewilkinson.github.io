@@ -69,7 +69,7 @@ Those are handled by other A[i]gents in the portfolio.
 - **Configurable**: stages and templates can be swapped per role / region  
 - **Fail-safe**: humans can override or pause any automation
 
-### 2.4 Gloabl Rules (applied to all automations)
+### 2.4 Global Rules (applied to all automations)
 
 - **Time Zone**: send in candidate's local time; show both candidates + host times
 - **Reschedule / Cancel**: always include a self-service link and coordinator alias
