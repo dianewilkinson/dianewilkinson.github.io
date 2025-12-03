@@ -3,247 +3,279 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Diane Wilkinson — AI-Native Recruiting Ops & Internal Agents</title>
+  <title>DW — AI-Native Recruiting Ops & Internal Agents</title>
 
-  <!-- Open Graph preview for social sharing -->
+  <!-- Open Graph preview -->
   <meta property="og:title" content="Diane Wilkinson — AI-Native Recruiting Ops & Internal Agents">
-  <meta property="og:description" content="You don’t need 12 AI recruiting vendors. You need one recruiter who can build internal agents and workflow-first automations inside your existing stack.">
+  <meta property="og:description" content="We don't need more AI vendors. The future belongs to those building AI internally in the weeds of everyday workflows.">
   <meta property="og:image" content="https://dianewilkinson.github.io/assets/og-image.png">
   <meta property="og:type" content="website">
 
   <style>
     :root{
-      --bg:#f9fafb;--card:#fff;--text:#1f2937;--muted:#4b5563;
-      --border:#e5e7eb;--link:#2563eb;--shadow:rgba(0,0,0,.08)
+      --bg:#f9fafb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#4b5563;
+      --border:#e5e7eb;
+      --link:#2563eb;
+      --link-soft:#4f46e5;
+      --shadow:rgba(15,23,42,0.08);
+      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
+      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.12),rgba(168,85,247,.12),rgba(99,102,241,.12));
     }
-    *{box-sizing:border-box}
+    *{box-sizing:border-box;}
     body{
-      margin:0;background:var(--bg);color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
-    a{color:var(--link);text-decoration:none}
-    a:hover{text-decoration:underline}
+    a{color:var(--link);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    .bar{height:4px;background:var(--accent-grad);}
 
-    /* Header bar */
-    .bar{height:4px;background:linear-gradient(90deg,#f43f5e,#8b5cf6,#3b82f6)}
-    header{text-align:center;padding:32px 16px 18px}
-    header h1{font-size:26px;margin:0}
-    header p{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.6}
-
-    /* Layout */
-    .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 8px}
-    section{margin:28px 0}
-    h2{font-size:22px;margin:0 0 14px}
-
-    /* Grid */
-    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-    .grid.four{display:grid;gap:16px;grid-template-columns:repeat(4,minmax(220px,1fr));align-items:stretch}
-    @media (max-width:1200px){.grid.four{grid-template-columns:repeat(2,minmax(260px,1fr))}}
-    @media (max-width:640px){.grid.four{grid-template-columns:1fr}}
-
-    /* Cards */
-    .card{
-      background:var(--card);border:1px solid var(--border);border-radius:16px;
-      padding:16px;box-shadow:0 1px 3px var(--shadow);
-      display:flex;flex-direction:column;min-height:180px
+    header{
+      text-align:center;
+      padding:32px 16px 16px;
     }
-    .card h3{margin:2px 0 8px;font-size:18px}
-    .card p{margin:0 0 10px;color:#374151;font-size:14px;line-height:1.5}
-    .meta{margin-top:auto;font-size:12px;color:#6b7280;line-height:1.6}
-    .meta a{display:block;margin-top:3px}
-
-    /* CTA card */
-    .card.cta{
-      background:linear-gradient(135deg,#2563eb 0%,#8b5cf6 100%);
-      color:#fff;text-align:center;border:none;box-shadow:0 2px 6px var(--shadow)
+    header h1{
+      margin:0;
+      font-size:24px;
+      font-weight:700;
     }
-    .card.cta h3{color:#fff}
-    .card.cta p{color:#f3f4f6}
-    .cta-btn{
-      display:inline-block;background:#fff;color:#2563eb;font-weight:600;
-      padding:8px 14px;border-radius:8px;text-decoration:none;transition:all .25s ease
+    header p{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
     }
-    .cta-btn:hover{background:#f9fafb;color:#1d4ed8}
+    header p span.dot{
+      margin:0 4px;
+    }
 
-    /* SAGE HERO */
-    .sage-hero-wrap{
-      max-width:1100px;
+    .wrap{
+      max-width:1120px;
       margin:0 auto;
-      padding:0 20px;
+      padding:20px 20px 32px;
     }
 
-    .sage-hero{
-      margin-top:12px;
-      padding:32px 28px 40px;
-      border-radius:24px;
-      background:
-        radial-gradient(circle at 80% 40%, rgba(196,181,253,0.6), rgba(248,250,252,0.1) 60%),
-        linear-gradient(135deg,#fce7f3,#eef2ff);
-      box-shadow:0 18px 45px rgba(15,23,42,0.12);
+    /* HERO */
+    .hero{
+      margin:6px 0 24px;
+      border-radius:20px;
+      background:linear-gradient(120deg,#fde7ef,#f3e8ff,#e0ecff);
+      box-shadow:0 8px 24px var(--shadow);
+      padding:26px 26px 24px;
+      display:flex;
+      gap:24px;
+      align-items:stretch;
+      flex-wrap:wrap;
+    }
+    .hero-left{
+      flex:1 1 260px;
+      min-width:0;
+    }
+    .hero-eyebrow{
+      display:inline-flex;
+      padding:4px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.85);
+      border:1px solid rgba(148,163,184,.5);
+      font-size:11px;
+      font-weight:500;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:#4b5563;
+      margin-bottom:10px;
+    }
+    .hero-left h2{
+      margin:0 0 6px;
+      font-size:26px;
+      line-height:1.3;
+    }
+    .hero-left h2 span{
+      color:var(--link-soft);
+    }
+    .hero-sub{
+      margin:0;
+      font-size:15px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .hero-sub-small{
+      margin:10px 0 0;
+      font-size:13px;
+      font-style:italic;
+      color:#6b7280;
+    }
+
+    .hero-right{
+      flex:1 1 260px;
+      min-width:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .hero-panel{
+      width:100%;
+      max-width:360px;
+      background:rgba(255,255,255,.9);
+      border-radius:18px;
+      padding:16px 18px 14px;
+      border:1px solid rgba(229,231,235,.9);
+      box-shadow:0 10px 26px rgba(15,23,42,0.10);
+    }
+    .hero-panel-title{
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#6b7280;
+      margin-bottom:10px;
+      font-weight:600;
+    }
+    .hero-pill{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:32px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(209,213,219,.9);
+      background:#f9fafb;
+      font-size:13px;
+      margin-bottom:8px;
     }
-
-    .sage-copy{
-      max-width:480px;
+    .hero-pill span.label{
+      color:#111827;
+      font-weight:500;
     }
-
-    .sage-copy h2{
-      margin:0 0 10px;
-      font-size:38px;
-      line-height:1.15;
+    .hero-pill span.tag{
+      font-size:11px;
+      padding:3px 8px;
+      border-radius:999px;
+      background:rgba(129,140,248,.1);
+      color:#4f46e5;
+      font-weight:500;
     }
-    .sage-copy h2 span{
-      color:#8b5cf6;
-      display:block;
-    }
-
-    .sage-sub{
-      margin:0 0 22px;
-      font-size:15px;
-      color:#4b5563;
+    .hero-note{
+      margin-top:10px;
+      font-size:12px;
+      color:#6b7280;
       line-height:1.6;
     }
 
-    .sage-cta{
+    @media (max-width:720px){
+      .hero{
+        padding:20px 18px 18px;
+      }
+      .hero-left h2{font-size:22px;}
+    }
+
+    /* Section headings */
+    h2.section-title{
+      font-size:20px;
+      margin:4px 0 14px;
       display:flex;
-      gap:10px;
-      align-items:stretch;
-      max-width:420px;
-    }
-
-    .sage-cta input{
-      flex:1;
-      padding:11px 12px;
-      font-size:14px;
-      border-radius:999px;
-      border:1px solid #e5e7eb;
-      outline:none;
-    }
-
-    .sage-cta button{
-      border:none;
-      cursor:pointer;
-      padding:11px 18px;
-      border-radius:999px;
-      font-weight:600;
-      font-size:14px;
-      color:#fff;
-      background:linear-gradient(135deg,#ec4899,#8b5cf6);
-      box-shadow:0 8px 20px rgba(129,140,248,0.45);
-    }
-    .sage-cta button:hover{
-      filter:brightness(1.05);
-    }
-
-    .sage-art{
-      position:relative;
-      flex:0 0 360px;
-      display:flex;
-      justify-content:center;
       align-items:center;
+      gap:8px;
+    }
+    h2.section-title span.emoji{
+      font-size:20px;
     }
 
-    .sage-art img{
-      width:320px;
-      max-width:100%;
-      border-radius:50%;
-      filter:drop-shadow(0 18px 40px rgba(15,23,42,0.25));
+    /* Cards grid */
+    .grid{
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px 14px 12px;
+      box-shadow:0 1px 3px var(--shadow);
+      display:flex;
+      flex-direction:column;
+      min-height:170px;
+    }
+    .card h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .card p{
+      margin:0 0 10px;
+      color:#374151;
+      font-size:14px;
+      line-height:1.5;
+    }
+    .meta{
+      margin-top:auto;
+      font-size:12px;
+      color:#6b7280;
+      line-height:1.6;
+    }
+    .meta a{
+      display:inline-block;
+      margin-right:10px;
+      margin-top:2px;
     }
 
-    /* Name tag */
-    .sage-name-tag{
-      position:absolute;
-      bottom:-10px;
-      left:50%;
-      transform:translateX(-50%);
-      background:#ffffff;
+    .card.cta{
+      background:var(--accent-soft);
+      border:none;
+      box-shadow:0 2px 7px var(--shadow);
+      text-align:center;
+    }
+    .card.cta h3{margin-bottom:8px;}
+    .cta-btn{
+      display:inline-block;
+      margin-top:8px;
+      padding:8px 14px;
       border-radius:999px;
-      padding:6px 14px;
+      background:#4f46e5;
+      color:#fff;
       font-size:13px;
       font-weight:600;
-      color:#111827;
-      box-shadow:0 8px 20px rgba(15,23,42,0.15);
+      text-decoration:none;
+    }
+    .cta-btn:hover{
+      background:#4338ca;
+      text-decoration:none;
     }
 
-    /* Benefit pills */
-    .sage-benefit{
-      position:absolute;
-      right:-6px;
-      background:rgba(255,255,255,0.95);
-      border-radius:999px;
-      padding:8px 14px;
-      font-size:12px;
-      color:#111827;
-      box-shadow:0 8px 22px rgba(15,23,42,0.18);
-      backdrop-filter:blur(10px);
-      white-space:nowrap;
-    }
-    .sage-benefit::before{
-      content:"";
-      position:absolute;
-      left:-40px;
-      top:50%;
-      width:36px;
-      height:1.5px;
-      background:linear-gradient(90deg,#8b5cf6,#ec4899);
-      transform:translateY(-50%);
-      opacity:0.8;
+    .section-note{
+      font-size:13px;
+      color:#6b7280;
+      margin:4px 0 14px;
     }
 
-    .sage-benefit.b1{top:10%;}
-    .sage-benefit.b2{top:32%;}
-    .sage-benefit.b3{top:54%;}
-    .sage-benefit.b4{top:76%;}
-
-    @media (max-width:900px){
-      .sage-hero{
-        flex-direction:column;
-        text-align:left;
-        padding:26px 20px 32px;
-      }
-      .sage-art{
-        order:-1;
-        flex:none;
-      }
-      .sage-benefit{
-        right:8px;
-      }
+    /* Archive */
+    .archive{
+      margin-top:30px;
+      padding-top:14px;
+      border-top:1px solid #e5e7eb;
+    }
+    .archive h3{
+      font-size:15px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#6b7280;
+      margin:0 0 10px;
     }
 
-    @media (max-width:640px){
-      header h1{font-size:22px}
-      .sage-copy h2{font-size:30px}
-      .sage-hero{padding:22px 18px 26px}
-      .sage-cta{flex-direction:column;align-items:stretch}
-      .sage-benefit{display:none;} /* hide pills on tiny screens if crowded */
+    /* Footer */
+    footer{
+      text-align:center;
+      margin:16px 0 20px;
+      color:var(--muted);
+      font-size:13px;
     }
-
-    /* Footer badges */
-    .badges-wrap{max-width:1100px;margin:0 auto 18px;padding:0 20px}
-    .badges{
-      display:grid;gap:16px;grid-template-columns:repeat(4,1fr);
-      align-items:stretch;justify-items:center
+    footer .footline{
+      max-width:1120px;
+      margin:10px auto 0;
+      padding:0 20px;
     }
-    @media (max-width:980px){.badges{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:640px){.badges{grid-template-columns:repeat(2,1fr)}}
-    .badge{
-      width:100%;background:#fff;border:1px solid var(--border);
-      border-radius:16px;padding:10px 14px;box-shadow:0 1px 3px var(--shadow);
-      display:flex;align-items:center;justify-content:center
-    }
-    .badge img{
-      height:72px;width:auto;object-fit:contain;
-      filter:grayscale(100%) brightness(.96);opacity:.95;
-      transition:filter .25s ease,opacity .25s ease
-    }
-    .badge img:hover{filter:grayscale(0%) brightness(1.05);opacity:1}
-
-    /* Footer text */
-    footer{text-align:center;margin:16px 0 20px;color:var(--muted);font-size:14px}
-    footer .footline{max-width:1100px;margin:18px auto 0;padding:0 20px}
   </style>
 </head>
 
@@ -251,144 +283,223 @@
   <div class="bar"></div>
 
   <header>
-    <h1>👋 Diane Wilkinson – AI-Native Recruiting Ops & Internal Agents</h1>
+    <h1>👋 Diane Wilkinson — AI-Native Recruiting Ops & Internal Agents</h1>
     <p>
-      I help Talent Acquisition teams replace AI vendor sprawl with workflow-first automations and
-      lightweight internal agents — built inside the tools you already use.<br>
-      Recruiting Operations Specialist • AI & Automation • Greenhouse SME • MBA, Data Analytics (4.0 GPA) •
-      <a href="../assets/credentials-recommendations-excerpts.pdf" target="_blank" rel="noopener">Recommendations</a>
+      I help Talent Acquisition teams replace vendor sprawl with workflow-first automations and internal AI agents —
+      built directly inside the recruiting systems they already use.
+      <br>
+      Recruiting Operations Specialist · AI & Automation · Greenhouse SME · MBA, Data Analytics (4.0 GPA) ·
+      <a href="assets/credentials-recommendations-excerpts.pdf" target="_blank" rel="noopener">Recommendations</a>
     </p>
   </header>
 
-  <!-- SAGE HERO -->
-  <div class="sage-hero-wrap">
-    <section class="sage-hero" aria-labelledby="sage-hero-title">
-      <div class="sage-copy">
-        <h2 id="sage-hero-title">
-          Your AI-powered<br>
-          <span>HR super agent</span>
-        </h2>
-        <p class="sage-sub">
-          Sage helps you transform recruiting and HR with intelligent agents that automate hiring, onboarding,
-          performance workflows, and reporting — privately, securely, and inside your existing stack.
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-eyebrow">AI-Native Recruiting Ops · Internal Agents</div>
+        <h2>We don't need more <span>AI vendors.</span></h2>
+        <p class="hero-sub">
+          The future belongs to those building AI internally in the weeds of everyday workflows —
+          especially in recruiting.
         </p>
-        <div class="sage-cta">
-          <input type="email" placeholder="Enter your work email">
-          <button type="button">Book a demo</button>
+        <p class="hero-sub-small">
+          …& eliminating a dozen external tools while we're at it.
+        </p>
+      </div>
+      <div class="hero-right">
+        <div class="hero-panel">
+          <div class="hero-panel-title">What I build for Talent Acquisition</div>
+
+          <div class="hero-pill">
+            <span class="label">Screening A[i]gents</span>
+            <span class="tag">Recover hidden talent</span>
+          </div>
+          <div class="hero-pill">
+            <span class="label">Workflow & SLA A[i]gents</span>
+            <span class="tag">Keep interviews moving</span>
+          </div>
+          <div class="hero-pill">
+            <span class="label">Metrics A[i]gents</span>
+            <span class="tag">Funnel diagnostics</span>
+          </div>
+          <div class="hero-pill">
+            <span class="label">Capacity & Planner Tools</span>
+            <span class="tag">Plan realistic hiring</span>
+          </div>
+
+          <p class="hero-note">
+            My work focuses on <strong>internal, workflow-first automation</strong> — not another point solution.
+            Everything here is designed to plug into Greenhouse/ATS, Sheets, and existing TA workflows.
+          </p>
         </div>
       </div>
-
-      <div class="sage-art">
-        <!-- Replace with your Sage avatar image -->
-        <img src="/assets/sage-agent.png" alt="Sage — your AI HR super agent">
-        <div class="sage-name-tag">Sage</div>
-
-        <div class="sage-benefit b1">Data-driven decisions</div>
-        <div class="sage-benefit b2">Time savings</div>
-        <div class="sage-benefit b3">24/7 accessibility</div>
-        <div class="sage-benefit b4">Scalable solution</div>
-      </div>
     </section>
-  </div>
 
-  <div class="wrap">
-    <div style="text-align:center; margin:10px 0 24px; font-size:15px;">
-      <a href="/articles/why-ai-pilots-fail.html" target="_blank" rel="noopener">
-        📄 Read my article: <em>Why 95% of AI Pilots Fail & What the Successful 5% Do Differently</em>
+    <!-- Article link -->
+    <p class="section-note">
+      📄 Read my article:
+      <a href="assets/ai-why-pilots-fail.pdf" target="_blank" rel="noopener">
+        Why 95% of AI Pilots Fail & What the Successful 5% Do Differently
       </a>
-    </div>
+    </p>
 
-    <!-- WORK GRID -->
-    <section aria-labelledby="work">
-      <h2 id="work">🧩 Selected Work</h2>
+    <!-- Selected Work -->
+    <section aria-labelledby="selected-work">
+      <h2 class="section-title" id="selected-work">
+        <span class="emoji">🧩</span> Selected Work
+      </h2>
 
-      <div class="grid four">
+      <div class="grid">
+        <!-- Agents -->
         <div class="card">
           <h3>🤖 AI Tool: Workflow A[i]gent</h3>
-          <p>Automates across every interview stage, so recruiters spend less time on manual workflows and more time making great hires.</p>
+          <p>
+            Automates across every interview stage so recruiters spend less time on manual follow-ups
+            and more time making great hires.
+          </p>
           <p class="meta">
-            <a href="https://dianewilkinson.github.io/agents/workflow/" target="_blank" rel="noopener">Open Demo</a></p>
+            <a href="agents/workflow/" target="_blank" rel="noopener">Open Demo</a>
+            <a href="assets/playbook-automated-interview-workflows.pdf" target="_blank" rel="noopener">Open Playbook (PDF)</a>
+          </p>
         </div>
 
         <div class="card">
           <h3>🤖 AI Tool: Screening A[i]gent</h3>
-          <p>AI Agent operative to battle screening top-funnel chaos and <strong>recover hidden talent — save hours each week!</strong></p>
+          <p>
+            AI operative to battle top-funnel chaos and recover hidden talent — while keeping recruiters
+            firmly in the loop as decision makers.
+          </p>
           <p class="meta">
-            <a href="https://dianewilkinson.github.io/agents/screening/" target="_blank" rel="noopener">Open Demo</a>
-            <a href="../assets/screening-agent-explainer.pdf" target="_blank" rel="noopener">Open Explainer (PDF)</a>
+            <a href="agents/screening/" target="_blank" rel="noopener">Open Demo</a>
+            <a href="assets/screening-agent-explainer.pdf" target="_blank" rel="noopener">Open Explainer (PDF)</a>
           </p>
         </div>
 
         <div class="card">
           <h3>🤖 AI Tool: Metrics A[i]gent</h3>
-          <p>Funnel diagnostics, pass-through analysis, and <strong>bottleneck detection</strong> for TA Ops & People Analytics.</p>
+          <p>
+            Funnel diagnostics, pass-through analysis, and bottleneck detection
+            to help TA Ops & People Analytics teams see where hiring is really stuck.
+          </p>
           <p class="meta">
-            <a href="/agents/metrics/" target="_blank" rel="noopener">Open Demo</a>
-            <a href="/assets/analysis-recruiting-funnel-case-study.pdf" target="_blank" rel="noopener">Related Case Study</a>
+            <a href="agents/metrics/" target="_blank" rel="noopener">Open Demo</a>
+            <a href="assets/analysis-recruiting-funnel-case-study.pdf" target="_blank" rel="noopener">Related Case Study (PDF)</a>
+          </p>
+        </div>
+
+        <!-- Tools -->
+        <div class="card">
+          <h3>⚙️ Tool: Recruiting Pipeline Calculator</h3>
+          <p>
+            Interactive funnel calculator to eliminate bottlenecks and plan realistic hiring targets by stage.
+            Designed for TA leaders and Recruiting Ops.
+          </p>
+          <p class="meta">
+            <a href="https://docs.google.com/spreadsheets/d/1EYf9S4L6QljiCZ0-mUVpmb7DIvw74j1XUJOt8p42qsw/edit?usp=sharing"
+               target="_blank" rel="noopener">Open Google Sheet</a>
           </p>
         </div>
 
         <div class="card">
-          <h3>⚙️ Tool: Recruiting Pipeline Calculator</h3>
-          <p><strong>Eliminate bottlenecks</strong> and plan capacity with this interactive funnel calculator.</p>
-          <p class="meta"><a href="https://docs.google.com/spreadsheets/d/1EYf9S4L6QljiCZ0-mUVpmb7DIvw74j1XUJOt8p42qsw/edit?usp=sharing" target="_blank" rel="noopener">Open Google Sheet</a></p>
+          <h3>⚙️ Tool: Recruiting Planner (Apps Script)</h3>
+          <p>
+            A Google Sheets + Apps Script planner that turns headcount goals and pass-through assumptions
+            into a week-by-week plan for recruiters.
+          </p>
+          <p class="meta">
+            <a href="tools/planner/" target="_blank" rel="noopener">View Project</a>
+          </p>
         </div>
 
         <div class="card">
-          <h3>⚙️ Tool: Metrics Dictionary</h3>
-          <p>Standardized KPI definitions to align dashboards and shorten performance debates.</p>
-          <p class="meta"><a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link" target="_blank" rel="noopener">Open Google Sheet</a></p>
+          <h3>📊 Tool: Metrics Dictionary</h3>
+          <p>
+            Standardized KPI definitions for Recruiting Ops — aligns dashboards and reduces time spent
+            debating which numbers are “correct.”
+          </p>
+          <p class="meta">
+            <a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link"
+               target="_blank" rel="noopener">Open Google Sheet</a>
+          </p>
         </div>
 
+        <!-- Playbooks -->
         <div class="card">
           <h3>📕 Playbook: Automated Interview Workflows</h3>
-          <p>Scorecard compliance, scheduling automations, and no-show prevention flows for <strong>faster interview cycles.</strong></p>
-          <p class="meta"><a href="../assets/playbook-automated-interview-workflows.pdf" target="_blank" rel="noopener">Open PDF</a></p>
+          <p>
+            Scorecard compliance, scheduling automations, and no-show prevention flows for faster,
+            more reliable interview cycles.
+          </p>
+          <p class="meta">
+            <a href="assets/playbook-automated-interview-workflows.pdf" target="_blank" rel="noopener">Open PDF</a>
+          </p>
         </div>
 
         <div class="card">
           <h3>📙 Playbook: AI-First Ops Model</h3>
-          <p>Defines where AI assists vs. where humans decide—guardrails for evidence, control, and transparency.</p>
-          <p class="meta"><a href="../assets/playbook-ai-first-ops-model.pdf" target="_blank" rel="noopener">Open PDF</a></p>
+          <p>
+            Defines where AI assists versus where humans decide — guardrails for evidence, control,
+            and transparency in AI-assisted recruiting.
+          </p>
+          <p class="meta">
+            <a href="assets/playbook-ai-first-ops-model.pdf" target="_blank" rel="noopener">Open PDF</a>
+          </p>
         </div>
 
-        <div class="card">
-          <h3>📊 Analysis: Candidate Source Quality</h3>
-          <p>Focus on the highest-quality application sources (inbound, outbound, referrals) for maximum <strong>efficiency & ROI.</strong></p>
-          <p class="meta"><a href="../assets/analysis-candidate-source-quality.pdf" target="_blank" rel="noopener">Open PDF</a></p>
-        </div>
-
+        <!-- CTA -->
         <div class="card cta">
           <h3>Book a 15-Minute Intro</h3>
-          <p>Let’s connect to discuss Recruiting Ops, AI adoption, or your next hiring challenge.</p>
-          <p class="meta"><a class="cta-btn" href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">📅 Book Appointment</a></p>
+          <p>
+            Let’s connect to discuss Recruiting Ops, AI adoption, or your next hiring challenge.
+            I’m especially interested in AI-forward teams building internal capabilities.
+          </p>
+          <p class="meta">
+            <a class="cta-btn" href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">
+              📅 Book Appointment
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Archive -->
+      <div class="archive">
+        <h3>Archive · Earlier Case Studies (2020–2022)</h3>
+        <div class="grid">
+          <div class="card">
+            <h3>📊 Analysis: Sourcing Optimization (2022)</h3>
+            <p>
+              LinkedIn posting optimization case study showing how headline, timing, and audience refinements
+              produced a 20× increase in qualified applications for a remote role.
+            </p>
+            <p class="meta">
+              <a href="assets/analysis-linkedin-posting-optimization.pdf" target="_blank" rel="noopener">Open PDF</a>
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>📊 Analysis: Candidate Source Quality</h3>
+            <p>
+              Focus on the highest-quality application sources (inbound, outbound, referrals) for maximum
+              efficiency and ROI — early work that informed later funnel tools.
+            </p>
+            <p class="meta">
+              <a href="assets/analysis-candidate-source-quality.pdf" target="_blank" rel="noopener">Open PDF</a>
+            </p>
+          </div>
         </div>
       </div>
     </section>
   </div>
 
-  <!-- Footer -->
   <footer>
-    <div class="badges-wrap" aria-label="Honors and Certifications">
-      <div class="badges badges--two-rows">
-        <div class="badge"><img src="../assets/logos/SHRM_pill.png" alt="SHRM Foundation — Employing Abilities at Work, Certified" loading="lazy"></div>
-        <div class="badge"><img src="../assets/logos/BGS_pill.png" alt="Beta Gamma Sigma — International Business Honor Society" loading="lazy"></div>
-        <div class="badge"><img src="../assets/logos/PKP_pill.png" alt="Phi Kappa Phi — National Honor Society" loading="lazy"></div>
-        <div class="badge"><img src="../assets/logos/MBA_pill.png" alt="MBA Data Analytics — LSU Shreveport, 4.0 GPA" loading="lazy"></div>
-        <div class="badge"><img src="../assets/logos/AIRS_CSMR_pill.png" alt="AIRS Certified Social & New Media Recruiter" loading="lazy"></div>
-        <div class="badge"><img src="../assets/logos/AIRS_CDR_pill.png" alt="AIRS Certified Diversity Recruiter" loading="lazy"></div>
-        <div class="badge"><img src="../assets/logos/AIRS_CTR_pill.png" alt="AIRS Certified Technical Recruiter" loading="lazy"></div>
-        <div class="badge"><img src="../assets/logos/AIRS_CASR_pill.png" alt="AIRS Certified AI & Sourcing Recruiter" loading="lazy"></div>
-      </div>
-    </div>
-
-    <div class="wrap">
-      <p class="footline">
-        Based in the San Francisco Bay Area · Always open to connect about Recruiting Ops, AI adoption, sourcing elite talent, and hiring systems.
-        <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
-        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
-      </p>
-    </div>
+    <p class="footline">
+      Based in the San Francisco Bay Area · Always open to connect about Recruiting Ops, AI adoption,
+      sourcing elite talent, and hiring systems.
+      <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
+      <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
   </footer>
 </body>
 </html>
