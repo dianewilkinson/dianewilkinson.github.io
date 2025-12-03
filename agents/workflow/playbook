@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Workflow A[i]gent – Automated Interview Workflows Playbook</title>
+
+  <meta property="og:title" content="Workflow A[i]gent – Automated Interview Workflows Playbook">
+  <meta property="og:description" content="Interview stage automation & orchestration engine for scorecards, SLAs, and candidate experience.">
+  <meta property="og:type" content="article">
+
+  <style>
+    :root{
+      --bg:#f9fafb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#4b5563;
+      --border:#e5e7eb;
+      --link:#2563eb;
+      --link-soft:#4f46e5;
+      --shadow:rgba(15,23,42,0.08);
+      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
+      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.09),rgba(168,85,247,.09),rgba(99,102,241,.09));
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    a{color:var(--link);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    .bar{height:4px;background:var(--accent-grad);}
+
+    header{
+      padding:24px 16px 10px;
+      text-align:center;
+    }
+    header h1{
+      margin:0;
+      font-size:24px;
+      font-weight:700;
+    }
+    header p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .wrap{
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 20px 32px;
+    }
+
+    /* Hero card */
+    .hero{
+      margin:16px 0 24px;
+      border-radius:20px;
+      background:linear-gradient(120deg,#fde7ef,#f3e8ff,#e0ecff);
+      box-shadow:0 8px 24px var(--shadow);
+      padding:22px 22px 18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+    }
+    .hero-main{
+      flex:1 1 260px;
+      min-width:0;
+    }
+    .hero-eyebrow{
+      display:inline-flex;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.6);
+      background:rgba(255,255,255,.9);
+      font-size:11px;
+      font-weight:500;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#4b5563;
+      margin-bottom:8px;
+    }
+    .hero-title{
+      margin:0 0 8px;
+      font-size:22px;
+      line-height:1.35;
+    }
+    .hero-title span{
+      color:var(--link-soft);
+    }
+    .hero-main p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .hero-actions{
+      margin-top:10px;
+      font-size:13px;
+    }
+    .hero-actions a{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 12px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.8);
+      background:rgba(255,255,255,.9);
+      font-weight:500;
+    }
+
+    .hero-meta{
+      flex:0 0 260px;
+      max-width:280px;
+      min-width:0;
+      background:rgba(255,255,255,.9);
+      border-radius:16px;
+      border:1px solid rgba(229,231,235,.9);
+      padding:12px 14px 10px;
+      font-size:12px;
+      color:#4b5563;
+      box-shadow:0 6px 18px rgba(15,23,42,.07);
+    }
+    .hero-meta h3{
+      font-size:13px;
+      margin:0 0 6px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#6b7280;
+    }
+    .hero-meta ul{
+      margin:0 0 4px 16px;
+      padding:0;
+    }
+    .hero-meta li{margin-bottom:4px;}
+
+    @media (max-width:800px){
+      .hero{padding:18px 16px 14px;}
+      .hero-title{font-size:20px;}
+      .hero-meta{max-width:none;}
+    }
+
+    /* Layout with TOC */
+    .content-layout{
+      display:grid;
+      grid-template-columns:220px minmax(0,1fr);
+      gap:24px;
+      align-items:flex-start;
+    }
+    @media (max-width:900px){
+      .content-layout{
+        grid-template-columns:1fr;
+      }
+    }
+
+    .toc{
+      position:sticky;
+      top:20px;
+      align-self:flex-start;
+      background:var(--card);
+      border-radius:14px;
+      border:1px solid var(--border);
+      padding:12px 12px 10px;
+      box-shadow:0 1px 3px var(--shadow);
+      font-size:13px;
+    }
+    .toc h3{
+      margin:0 0 6px;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#6b7280;
+    }
+    .toc ul{
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    .toc li{
+      margin:3px 0;
+    }
+    .toc a{
+      color:#374151;
+      text-decoration:none;
+    }
+    .toc a:hover{
+      text-decoration:underline;
+      color:var(--link-soft);
+    }
+
+    article{
+      background:var(--card);
+      border-radius:16px;
+      border:1px solid var(--border);
+      box-shadow:0 1px 3px var(--shadow);
+      padding:18px 20px 18px;
+      font-size:14px;
+      line-height:1.7;
+      color:#111827;
+    }
+    article h2{
+      font-size:18px;
+      margin:18px 0 6px;
+    }
+    article h3{
+      font-size:15px;
+      margin:14px 0 4px;
+    }
+    article h2:first-of-type{
+      margin-top:0;
+    }
+    article p{
+      margin:2px 0 8px;
+    }
+    article ul{
+      margin:4px 0 10px 18px;
+      padding:0;
+    }
+    article li{
+      margin-bottom:3px;
+    }
+    .pill-note{
+      display:inline-block;
+      padding:3px 8px;
+      border-radius:999px;
+      background:rgba(219,234,254,.7);
+      color:#1d4ed8;
+      font-size:11px;
+      font-weight:500;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+    .callout{
+      margin:10px 0 12px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(239,246,255,.8);
+      border:1px solid #bfdbfe;
+      font-size:13px;
+    }
+
+    footer{
+      text-align:center;
+      margin:18px 0 20px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bar"></div>
+
+  <header>
+    <h1>Workflow A[i]gent – Automated Interview Workflows</h1>
+    <p>
+      Interview Stage Automation &amp; Orchestration Engine · by Diane Wilkinson  
+    </p>
+  </header>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-main">
+        <div class="hero-eyebrow">Playbook · Internal Interview Automation</div>
+        <h2 class="hero-title">
+          Making interviews <span>flow on their own</span> — without losing the human touch.
+        </h2>
+        <p>
+          Workflow A[i]gent is a modular system of interview workflows, automations, and communication templates
+          designed to reduce no-shows, enforce SLAs, and standardize candidate &amp; interviewer experience across
+          every stage of the funnel.
+        </p>
+        <p>
+          The patterns here were originally implemented during a Greenhouse migration, but they are intentionally
+          ATS-agnostic — any modern stack with basic automation rules can support them.
+        </p>
+        <div class="hero-actions">
+          <a href="../../assets/playbook-automated-interview-workflows.pdf" target="_blank" rel="noopener">
+            📄 Download this playbook as a PDF
+          </a>
+        </div>
+      </div>
+
+      <aside class="hero-meta">
+        <h3>What this playbook covers</h3>
+        <ul>
+          <li>Where interview workflows leak (and how to stop it)</li>
+          <li>Scope, design principles, and guardrails</li>
+          <li>Role &amp; ownership model across TA and HMs</li>
+          <li>System overview and ATS configuration notes</li>
+          <li>Stage-by-stage workflow library (Screen → Offer)</li>
+          <li>SLAs, escalations, and measurement</li>
+        </ul>
+        <div class="callout">
+          <span class="pill-note">Who this is for</span><br>
+          Recruiting Ops, TA leaders, and coordinators who want reliable, low-drama interviews — and who are tired of
+          manually chasing people for feedback.
+        </div>
+      </aside>
+    </section>
+
+    <!-- CONTENT + TOC -->
+    <div class="content-layout">
+      <nav class="toc">
+        <h3>Sections</h3>
+        <ul>
+          <li><a href="#problem">1. Problem &amp; Outcomes</a></li>
+          <li><a href="#scope">2. Scope &amp; Design Principles</a></li>
+          <li><a href="#roles">3. Roles &amp; Responsibilities</a></li>
+          <li><a href="#overview">4. System Overview</a></li>
+          <li><a href="#library">5. Workflow Library</a></li>
+          <li><a href="#implementation">6. Implementation &amp; Configuration</a></li>
+          <li><a href="#metrics">7. Metrics &amp; Continuous Improvement</a></li>
+        </ul>
+      </nav>
+
+      <article>
+
+        <!-- 1. Problem & Outcomes -->
+        <section id="problem">
+          <h2>1. Problem &amp; Outcomes</h2>
+
+          <h3>1.1 The Problem</h3>
+          <p>Most interview processes silently leak:</p>
+          <ul>
+            <li>Candidates no-show or drop after scheduling.</li>
+            <li>Interviewers don’t submit scorecards on time.</li>
+            <li>Hiring managers forget to deliver feedback.</li>
+            <li>Candidates get inconsistent instructions across stages.</li>
+            <li>Recruiters manually chase everyone, all the time.</li>
+          </ul>
+          <p>This creates longer time-to-fill, slower decisions, inconsistent experience, and constant operational drag.</p>
+
+          <h3>1.2 The Outcomes We’re Aiming For</h3>
+          <ul>
+            <li>Clean, predictable interview flows from screen → offer.</li>
+            <li>Scorecards submitted within agreed-upon SLAs.</li>
+            <li>Fewer no-shows and fewer “I never heard back” complaints.</li>
+            <li>Standard, role-appropriate candidate communications.</li>
+            <li>Recruiters focusing on real conversations, not inbox herding.</li>
+          </ul>
+        </section>
+
+        <!-- 2. Scope & Design Principles -->
+        <section id="scope">
+          <h2>2. Scope &amp; Design Principles</h2>
+
+          <h3>2.1 In-Scope</h3>
+          <ul>
+            <li>Automation &amp; templates from recruiter screen through offer/pre-start.</li>
+            <li>Scheduling workflows and reminders for candidates &amp; interviewers.</li>
+            <li>Scorecard nudges, SLAs, and escalation rules.</li>
+            <li>Status and delay communications (“we’re still here” messages).</li>
+          </ul>
+
+          <h3>2.2 Out-of-Scope (v1)</h3>
+          <ul>
+            <li>Top-funnel application review / screening logic (owned by Screening A[i]gent).</li>
+            <li>Comp approvals, offer generation, and HRIS provisioning.</li>
+            <li>Performance management or onboarding workflows.</li>
+          </ul>
+
+          <h3>2.3 Design Principles</h3>
+          <ul>
+            <li><strong>Workflow-first, tool-second.</strong> Everything is designed around how recruiting really works, not just features available in the ATS.</li>
+            <li><strong>Human-in-the-loop.</strong> Automation nudges and confirms; humans still make hiring decisions.</li>
+            <li><strong>Configurable &amp; role-aware.</strong> Messaging and timing flex by role family and seniority.</li>
+            <li><strong>Candidates never feel ghosted.</strong> Silence is considered a defect to design around.</li>
+          </ul>
+
+          <h3>2.4 Global Rules</h3>
+          <ul>
+            <li>No automation that sends conflicting messages (e.g., double confirmations).</li>
+            <li>Every automated message has a clear owner and a place to edit content.</li>
+            <li>Templates support regional/legal nuance where required.</li>
+            <li>All flows are logged somewhere visible to Recruiting Ops.</li>
+          </ul>
+        </section>
+
+        <!-- 3. Roles & Responsibilities -->
+        <section id="roles">
+          <h2>3. Roles &amp; Responsibilities</h2>
+
+          <h3>3.1 Recruiting Operations / TA Lead</h3>
+          <ul>
+            <li>Owns the overall workflow design and SLAs.</li>
+            <li>Configures automations inside the ATS and related tools.</li>
+            <li>Monitors metrics and tunes workflows over time.</li>
+          </ul>
+
+          <h3>3.2 Recruiters &amp; Coordinators</h3>
+          <ul>
+            <li>Trigger the right workflows by moving candidates to the correct stages.</li>
+            <li>Monitor exceptions (edge cases, reschedules, or escalations).</li>
+            <li>Own candidate experience in 1:1 communication.</li>
+          </ul>
+
+          <h3>3.3 Hiring Managers &amp; Interviewers</h3>
+          <ul>
+            <li>Provide availability and commit to SLAs for scorecards.</li>
+            <li>Respond to escalations when they’re overdue.</li>
+            <li>Participate in continuous improvement conversations.</li>
+          </ul>
+
+          <div class="callout">
+            <strong>Key idea:</strong> Workflow A[i]gent doesn’t replace humans; it makes it structurally easier
+            for them to do the right thing on time.
+          </div>
+        </section>
+
+        <!-- 4. System Overview -->
+        <section id="overview">
+          <h2>4. System Overview</h2>
+
+          <p>At a high level, Workflow A[i]gent delivers four major capability areas:</p>
+
+          <ul>
+            <li><strong>Scheduling workflows</strong> – availability capture, reminders if candidates don’t respond, and alerts when threads stall.</li>
+            <li><strong>Stage-based interview workflows</strong> – confirmations, reminders, and follow-ups for each interview stage.</li>
+            <li><strong>SLAs &amp; escalations</strong> – scorecard due dates, automatic nudges, and escalation paths when people are late.</li>
+            <li><strong>Status &amp; delay updates</strong> – structured check-ins when things are taking longer than usual.</li>
+          </ul>
+
+          <h3>4.1 ATS Implementation (Conceptual)</h3>
+          <p>
+            The playbook assumes a modern ATS (e.g., Greenhouse) with the ability to:
+          </p>
+          <ul>
+            <li>Trigger emails or tasks based on stage change and event dates.</li>
+            <li>Reference templates that can be configured per office / department.</li>
+            <li>Run rules based on “time since last event” (e.g., 48 hours after interview).</li>
+          </ul>
+          <p>
+            Where the ATS can’t do something directly (e.g., complex routing or cross-role logic), a lightweight
+            automation layer (Zapier, Make, or internal tooling) can sit on top.
+          </p>
+        </section>
+
+        <!-- 5. Workflow Library -->
+        <section id="library">
+          <h2>5. Workflow Library</h2>
+
+          <p>This library captures the core flows most teams need. Each can be adapted to your stages and naming.</p>
+
+          <h3>5.1 Trigger Glossary</h3>
+          <ul>
+            <li><strong>On stage change</strong> – Candidate moves into Screen / HM / Panel / Final / Offer.</li>
+            <li><strong>On event booked</strong> – Interview scheduled on calendar.</li>
+            <li><strong>On time since interview</strong> – X hours after scheduled interview end.</li>
+            <li><strong>On inactivity</strong> – No update after Y days in stage.</li>
+          </ul>
+
+          <h3>5.2 Scheduling &amp; Availability</h3>
+          <ul>
+            <li>Availability capture email when candidate first reaches “Interview” stages.</li>
+            <li>Reminder nudge if no response after 24–48 hours.</li>
+            <li>Alert to recruiter when candidate has not booked after threshold time.</li>
+          </ul>
+
+          <h3>5.3 Interview Stage Workflows</h3>
+          <ul>
+            <li><strong>For each stage</strong> (Screen, HM, Panel, Final):</li>
+            <li>Confirmation email with logistics + expectations.</li>
+            <li>Reminder 24 hours before interview.</li>
+            <li>Optional same-day reminder for virtual panels.</li>
+            <li>Follow-up “thank you” with next-steps expectations.</li>
+          </ul>
+
+          <h3>5.4 Scorecard &amp; SLA Automation</h3>
+          <ul>
+            <li>Scorecard due within X hours after interview end.</li>
+            <li>First nudge at X+24h if still incomplete.</li>
+            <li>Escalation to hiring manager or recruiting lead at X+48h.</li>
+            <li>Weekly digest of overdue scorecards for TA leadership.</li>
+          </ul>
+
+          <h3>5.5 Status &amp; Delay Updates</h3>
+          <ul>
+            <li>“We’re still here” messages when assessments or panels take longer than usual.</li>
+            <li>Templates for roles on hold, HM travel, or internal reprioritization.</li>
+            <li>Optional branded “what’s happening behind the scenes” notes for senior candidates.</li>
+          </ul>
+
+          <h3>5.6 Offer &amp; Pre-Start Workflows</h3>
+          <ul>
+            <li>Offer scheduling &amp; confirmation email.</li>
+            <li>“What to expect” between accept and start (IT, onboarding, paperwork).</li>
+            <li>Check-ins at 1–2 touchpoints before day one.</li>
+          </ul>
+        </section>
+
+        <!-- 6. Implementation -->
+        <section id="implementation">
+          <h2>6. Configuration &amp; Implementation Notes</h2>
+
+          <p>Typical implementation steps:</p>
+          <ul>
+            <li>Map current stages → Screen, HM/Tech, Panel, Final, Offer.</li>
+            <li>Define SLAs for each stage (scorecards, response times, etc.).</li>
+            <li>Create a template library (confirmation, reminder, follow-up, delay, regret).</li>
+            <li>Wire triggers using ATS automation features:
+              <ul>
+                <li>On stage change</li>
+                <li>On event booked</li>
+                <li>On time since interview</li>
+              </ul>
+            </li>
+            <li>Pilot on 1–2 roles (e.g., Sales + Eng) before expanding.</li>
+            <li>Train recruiters, coordinators, and HMs on what’s automated vs. manual.</li>
+            <li>Monitor metrics and tune: no-show rate, SLA adherence, average days per stage.</li>
+          </ul>
+
+          <h3>6.1 Role-Based Customization</h3>
+          <p>Most teams need at least light customization by role family:</p>
+          <ul>
+            <li><strong>Sales</strong> – heavier pre-interview prep, panel logistics, and expectation setting.</li>
+            <li><strong>Engineering</strong> – linkage to technical assessments, repos, or coding exercises.</li>
+            <li><strong>Exec / Leadership</strong> – tailored messages about stakeholders and decision timelines.</li>
+          </ul>
+
+          <h3>6.2 ATS Configuration Example (Simplified)</h3>
+          <p>
+            In Greenhouse, for example, most of this playbook can be implemented with
+            stage-change automations, email templates, and reminder rules layered on top of the existing pipeline.
+          </p>
+        </section>
+
+        <!-- 7. Metrics -->
+        <section id="metrics">
+          <h2>7. Metrics &amp; Continuous Improvement</h2>
+
+          <p>Workflow A[i]gent isn’t “set and forget.” It’s a living system that improves as you learn.</p>
+          <ul>
+            <li>No-show rate by stage.</li>
+            <li>Scorecard SLA adherence (% on time, by role / interviewer).</li>
+            <li>Average days per stage (before and after automation).</li>
+            <li>Candidate satisfaction / NPS, where measured.</li>
+          </ul>
+          <p>
+            These metrics can be monitored by the Metrics A[i]gent and surfaced to TA leadership in regular reviews,
+            closing the loop between design, automation, and outcomes.
+          </p>
+        </section>
+
+      </article>
+    </div>
+  </div>
+
+  <footer>
+    Part of the A[i]gents suite – internal, workflow-first AI and automation for recruiting.
+  </footer>
+</body>
+</html>
