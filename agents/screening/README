@@ -1,0 +1,141 @@
+# Screening A[i]gent
+AI-powered application review and candidate evaluation engine.
+
+Screening A[i]gent gives every resume a structured, objective, and consistent deep-dive in seconds. It replaces 6-second scans and inconsistent manual screening with a rubric-driven, auditable evaluation layer that surfaces hidden talent and improves downstream funnel quality.
+
+---
+
+## 1. Overview
+Inbound applications are noisy. Recruiters spend significant time manually verifying experience, tenure, education, and required skills. Strong candidates often get overlooked due to volume and inconsistency.
+
+Screening A[i]gent transforms early-stage evaluation by converting resumes and job descriptions into structured intelligence.
+
+**Key benefits:**
+- Faster, more consistent screening
+- High-potential candidates surfaced early
+- Cleaner ATS data for analytics
+- Reduced screening bias
+- Improved recruiter focus and speed
+
+---
+
+## 2. What Screening A[i]gent Does
+
+### Core Capabilities
+- AI-powered resume analysis and experience verification
+- Competitor and employer lookup with industry adjacency scoring
+- Rubric scoring based on job description and must-have criteria
+- Fit evaluation (Match / Partial / Mismatch) with justification
+- Tenure stability and risk detection
+- Structured “Ask Next” prompts for recruiter phone screens
+- Advance recommendation with required human review
+- ATS-ready structured output for reporting and downstream agents
+
+Screening A[i]gent performs the heavy lifting so recruiters can focus on judgment, not data gathering.
+
+---
+
+## 3. How It Works
+
+### 3.1 Inputs
+- Job description
+- Hiring manager requirements
+- Resume or structured application data
+- Competitor index
+- Rubric templates
+
+### 3.2 Processing Pipeline
+1. Convert job description into a rubric
+2. Parse and normalize resume data
+3. Identify and classify employers and competitor adjacency
+4. Score experience, tenure, education, and must-haves
+5. Evaluate fit and detect risk indicators
+6. Generate structured summary and recommendation
+7. Require human approval or override with notes
+8. Push structured output to ATS fields
+
+---
+
+## 4. Rubric Framework
+
+### Scoring Categories
+| Category | Description |
+|---------|-------------|
+| Experience | Relevancy, depth, seniority alignment, years of experience |
+| Tenure | Stability indicators, average tenure, patterns and gaps |
+| Education | Required vs preferred credentials |
+| Competitor Fit | Employer pedigree and industry adjacency |
+| Skills Match | Must-have tools and domain expertise |
+| Soft Signals | Writing clarity, detail, and follow-through |
+
+Rubrics convert subjective signals into objective and explainable evaluation criteria.
+
+---
+
+## 5. Output
+
+### Candidate Summary Card Includes:
+- Fit score and rubric category scores
+- Competitor match classification
+- Tenure and stability indicators
+- Matches vs mismatches
+- Flags and risks
+- Recommendation for next steps
+
+### Recommendation Types
+- Advance
+- Recommend HM Review
+- Do Not Advance (with reasons)
+
+### Human Review Layer
+All recommendations require recruiter approval or override, ensuring:
+- Auditability
+- Fairness governance
+- Consistent decision rationale
+
+---
+
+## 6. Why It Matters
+- Reduces screening time from 15 minutes to 60–90 seconds
+- Saves 50–75 recruiter hours per 300 applications
+- Improves pipeline quality and reduces bias
+- Produces clean, structured data for reporting
+- Provides consistent hiring manager alignment
+- Reduces operational drag while increasing throughput
+
+---
+
+## 7. Integration
+
+### Upstream Inputs
+- Job description
+- Hiring manager rubric
+- Competitor index
+- Resume parsing system
+
+### Downstream Outputs
+- ATS structured fields
+- Workflow A[i]gent (scheduling automation triggers)
+- Metrics A[i]gent (stage conversions, quality metrics)
+
+### Shared Layer
+- Metrics Dictionary for unified analytics and definitions
+
+---
+
+## 8. Example Use Cases
+- High-potential, nontraditional candidates are surfaced
+- Recruiters eliminate repetitive manual verification
+- Hiring managers receive structured, consistent signals
+- Funnel reporting becomes reliable and comparable
+- Overrides provide transparency and bias governance
+
+---
+
+## 9. Future Enhancements
+- Growth trajectory scoring
+- Automated HM review summaries
+- Integrated LinkedIn/GitHub enrichment
+- Multi-candidate ranking for high-volume roles
+- DEI fairness dashboards
+- Candidate Q&A summarization
