@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A[i]gent Suite – Overview of Internal Recruiting Agents</title>
+
+  <meta property="og:title" content="A[i]gent Suite – Overview of Internal Recruiting Agents">
+  <meta property="og:description" content="ATS-native, evidence-first AI agents that work together to keep recruiting loops moving and time-to-hire dropping at lightning speed.">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root{
+      --bg:#f9fafb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#4b5563;
+      --border:#e5e7eb;
+      --link:#2563eb;
+      --link-soft:#4f46e5;
+      --shadow:rgba(15,23,42,0.08);
+      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
+      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.09),rgba(168,85,247,.09),rgba(99,102,241,.09));
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    a{color:var(--link);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    .bar{height:4px;background:var(--accent-grad);}
+
+    header{
+      padding:24px 16px 10px;
+      text-align:center;
+    }
+    header h1{
+      margin:0;
+      font-size:24px;
+      font-weight:700;
+    }
+    header p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .wrap{
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 20px 32px;
+    }
+
+    /* Hero */
+    .hero{
+      margin:16px 0 24px;
+      border-radius:20px;
+      background:linear-gradient(120deg,#fde7ef,#f3e8ff,#e0ecff);
+      box-shadow:0 8px 24px var(--shadow);
+      padding:22px 22px 18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+      align-items:flex-start;
+    }
+    .hero-main{
+      flex:1 1 260px;
+      min-width:0;
+    }
+    .hero-eyebrow{
+      display:inline-flex;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.6);
+      background:rgba(255,255,255,.9);
+      font-size:11px;
+      font-weight:500;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#4b5563;
+      margin-bottom:8px;
+    }
+    .hero-title{
+      margin:0 0 8px;
+      font-size:22px;
+      line-height:1.35;
+    }
+    .hero-title span{
+      color:var(--link-soft);
+    }
+    .hero-main p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .hero-tagline{
+      margin-top:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.95);
+      border:1px solid rgba(209,213,219,.9);
+      font-size:12px;
+      color:#4b5563;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .hero-tagline span.emoji{
+      font-size:14px;
+    }
+
+    .hero-meta{
+      flex:0 0 260px;
+      max-width:280px;
+      min-width:0;
+      background:rgba(255,255,255,.9);
+      border-radius:16px;
+      border:1px solid rgba(229,231,235,.9);
+      padding:12px 14px 10px;
+      font-size:12px;
+      color:#4b5563;
+      box-shadow:0 6px 18px rgba(15,23,42,.07);
+    }
+    .hero-meta h3{
+      font-size:13px;
+      margin:0 0 6px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#6b7280;
+    }
+    .hero-meta ul{
+      margin:0 0 4px 16px;
+      padding:0;
+    }
+    .hero-meta li{margin-bottom:4px;}
+
+    @media (max-width:800px){
+      .hero{padding:18px 16px 14px;}
+      .hero-title{font-size:20px;}
+      .hero-meta{max-width:none;}
+    }
+
+    /* Section headings */
+    h2.section-title{
+      font-size:20px;
+      margin:4px 0 10px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    h2.section-title span.emoji{
+      font-size:20px;
+    }
+    .section-note{
+      font-size:13px;
+      color:#6b7280;
+      margin:4px 0 14px;
+    }
+
+    /* Agent list */
+    .agents-list{
+      margin-top:10px;
+    }
+    .agent-row{
+      display:flex;
+      gap:12px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:var(--card);
+      border:1px solid var(--border);
+      box-shadow:0 1px 2px var(--shadow);
+      margin-bottom:8px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .agent-id{
+      font-family:Menlo,Consolas,monospace;
+      font-size:12px;
+      color:#6b7280;
+      min-width:42px;
+    }
+    .agent-main{
+      flex:1 1 220px;
+      min-width:0;
+    }
+    .agent-main h3{
+      margin:0 0 4px;
+      font-size:15px;
+    }
+    .agent-main h3 span.name{
+      color:#1f2937;
+    }
+    .agent-main h3 span.role{
+      color:#111827;
+      font-weight:600;
+    }
+    .agent-main p{
+      margin:0;
+      font-size:13px;
+      color:#4b5563;
+    }
+    .agent-meta{
+      flex:0 0 auto;
+      font-size:12px;
+      color:#6b7280;
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      min-width:160px;
+    }
+    .pill{
+      display:inline-flex;
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+      font-size:11px;
+      color:#4b5563;
+      margin-right:4px;
+      margin-bottom:3px;
+    }
+    .link-row a{
+      display:inline-block;
+      margin-right:10px;
+      margin-top:2px;
+    }
+
+    @media (max-width:720px){
+      .agent-row{
+        align-items:flex-start;
+      }
+      .agent-meta{
+        flex-basis:100%;
+      }
+    }
+
+    .callout{
+      margin:14px 0 0;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(239,246,255,.8);
+      border:1px solid #bfdbfe;
+      font-size:13px;
+      color:#1f2937;
+    }
+
+    footer{
+      text-align:center;
+      margin:18px 0 20px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bar"></div>
+
+  <header>
+    <h1>A[i]gent Suite – Internal Recruiting Agents Overview</h1>
+    <p>
+      ATS-Native · Evidence-First · Human-in-the-Loop · AI Recruiting Operatives
+    </p>
+  </header>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-main">
+        <div class="hero-eyebrow">A[i]gent Suite</div>
+        <h2 class="hero-title">
+          A modular suite of <span>internal recruiting agents</span> that work together in the background.
+        </h2>
+        <p>
+          Each A[i]gent is a focused, explainable component of an AI-native recruiting operating system —
+          from intake and screening to interview orchestration, offers, and onboarding.
+        </p>
+        <div class="hero-tagline">
+          <span class="emoji">⚙️</span>
+          <span>Working in the background to keep loops moving &amp; time-to-hire trending down at lightning speed.</span>
+        </div>
+      </div>
+
+      <aside class="hero-meta">
+        <h3>Suite at a glance</h3>
+        <ul>
+          <li>10+ agents covering the full recruiting lifecycle.</li>
+          <li>Designed to live inside ATS + internal tools, not as another vendor.</li>
+          <li>Backed by a shared Metrics Dictionary and funnel model.</li>
+          <li>Built with human-in-the-loop control and evidence-first outputs.</li>
+        </ul>
+        <div class="callout">
+          This page is the high-level overview. Deep dives live in each agent’s demo &amp; playbook.
+        </div>
+      </aside>
+    </section>
+
+    <!-- Agents -->
+    <section aria-labelledby="suite">
+      <h2 class="section-title" id="suite">
+        <span class="emoji">🧩</span> A[i]gent Suite
+      </h2>
+      <p class="section-note">
+        001–010 form an end-to-end chain: Metrics ↔ Intake ↔ Sourcing ↔ Screening ↔ Interviews ↔ Offers ↔ Onboarding.
+        The ones with links below have full demos and playbooks implemented.
+      </p>
+
+      <div class="agents-list">
+
+        <!-- 001 Metrics -->
+        <div class="agent-row">
+          <div class="agent-id">001</div>
+          <div class="agent-main">
+            <h3><span class="name">Metrics</span> A[i]gent <span class="role">is your funnel diagnostician</span></h3>
+            <p>
+              Centralizes time-to-fill, pass-through, SLA, and capacity metrics using a shared Metrics Dictionary.
+              Surfaces bottlenecks and plan-vs-actual gaps across roles, teams, and sources.
+            </p>
+          </div>
+          <div class="agent-meta">
+            <div>
+              <span class="pill">Funnel analytics</span>
+              <span class="pill">SLAs</span>
+              <span class="pill">Capacity</span>
+            </div>
+            <div class="link-row">
+              <a href="../metrics/" target="_blank" rel="noopener">Open Demo</a>
+              <a href="../metrics/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
+              <a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link"
+                 target="_blank" rel="noopener">Metrics Dictionary</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 002 Kickoff -->
+        <div class="agent-row">
+          <div class="agent-id">002</div>
+          <div class="agent-main">
+            <h3><span class="name">Kickoff</span> A[i]gent <span class="role">turns intake into measured rubrics</span></h3>
+            <p>
+              Transforms hiring manager intake notes, JDs, and historical data into structured scorecards and
+              screening rubrics that other agents can consume.
+            </p>
+          </div>
+          <div class="agent-meta">
+            <div>
+              <span class="pill">Role design</span>
+              <span class="pill">Scorecards</span>
+              <span class="pill">Rubrics</span>
+            </div>
+            <div class="link-row">
+              <!-- reserved for future demo / playbook links -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 003 Outreach -->
+        <div class="agent-row">
+          <div class="agent-id">003</div>
+          <div class="agent-main">
+            <h3><span class="name">Outreach</span> A[i]gent, <span class="role">the sourcer with more responses</span></h3>
+            <p>
+              Drafts calibrated outreach based on ideal candidate profiles, company narratives, and past message
+              performance — while logging activity cleanly back to the ATS and CRM.
+            </p>
+          </div>
+          <div class="agent-meta">
+            <div>
+              <span class="pill">Sourcing</span>
+              <span class="pill">Outbound</span>
+              <span class="pill">Personalization</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 004 Match -->
+        <div class="agent-row">
+          <div class="agent-id">004</div>
+          <div class="agent-main">
+            <h3><span class="name">Match</span> A[i]gent <span class="role">finds talent across roles</span></h3>
+            <p>
+              Identifies cross-fit candidates within your existing database, proposing alternative roles and talent
+              pools when a search is blocked or reprioritized.
+            </p>
+          </div>
+          <div class="agent-meta">
+            <div>
+              <span class="pill">Internal mobility</span>
+              <span class="pill">Rediscovery</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 005 Nurture -->
+        <div class="agent-row">
+          <div class="agent-id">005</div>
+          <div class="agent-main">
+            <h3><span class="name">Nurture</span> A[i]gent <span class="role">delivers happy candidates</span></h3>
+            <p>
+              Keeps silver-medalist and future-fit candidates warm with curated updates, event invites, and check-ins
+              that align with employer brand and hiring plans.
+            </p>
+          </div>
+          <div class="agent-meta">
+            <div>
+              <span class="pill">Talent community</span>
+              <span class="pill">Campaigns</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 006 Screening -->
+        <div class="agent-row">
+          <div class="agent-id">006</div>
+          <div class="agent-main">
+            <h3><span class="name">Screening</span> A[i]gent <span class="role">returns a deep dive in seconds</span></h3>
+            <p>
+              Applies a hybrid rubric to every application, scoring experience, tenure, skills, and risk flags.
+              Surfaces hidden talent and produces structured recommendations for recruiters and hiring managers.
+            </p>
+          </div>
+          <div class="agent-meta">
+            <div>
+              <span class="pill">Application review</span>
+              <span class="pill">Hybrid scoring</span>
+              <span class="pill">Risk flags</span>
+            </div>
+            <div class="link-row">
+              <a href="../screening/" target="_blank" rel="noopener">Open Demo</a>
+              <a href="../screening/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
+              <a href="../../assets/screening-agent-explainer.pdf" target="_blank" rel="noopener">Explainer (PDF)</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 007 Interview -->
+        <div class="agent-row">
+          <div class="agent-id">007</div>
+          <div class="agent-main">
+            <h3><span class="name">Interview</span> A[i]gent <span class="role">never misses a prompt</span></h3>
+            <p>
+              Assists interviewers with structured prompts, note-taking scaffolds, and follow-up questions aligned to
+              the scorecard — while keeping feedback grounded and bias-aware.
+            </p>
+          </div>
+          <div class="agent-meta">
+            <div>
+              <span class="pill">Interview support</span>
+              <span class="pill">Guided prompts</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 008 Scorecard -->
+        <div class="agent-row">
+          <div class="agent-id">008</div>
+          <div class="agent-main">
+            <h3><span class="name">Scorecard</span> A[i]gent <span class="role">turns chats into receipts</span></h3>
+            <p>
+              Converts raw interview notes and signals into structured scorecards and decision summaries that are easy
+              to compare, audit, and feed into offer decisions.
+            </p>
+          </div>
+          <div class="agent-meta">
+            <div>
+              <span class="pill">Structured feedback</span>
+              <span class="pill">Decision support</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 009 Offer -->
+        <div class="agent-row">
+          <div class="agent-id">009</div>
+          <div class="agent-main">
+            <h3><span class="name">Offer</span> A[i]gent <span class="role">closes the deal</span></h3>
+            <p>
+              Tracks readiness signals, proposal details, and approval paths so offers move quickly, consistently,
+              and within guardrails — with clear narratives for candidates.
+            </p>
+          </div>
+          <div class="agent-meta">
+            <div>
+              <span class="pill">Approvals</span>
+              <span class="pill">Comp guardrails</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 010 Onboarding -->
+        <div class="agent-row">
+          <div class="agent-id">010</div>
+          <div class="agent-main">
+            <h3><span class="name">Onboarding</span> A[i]gent <span class="role">puts your best fit forward</span></h3>
+            <p>
+              Bridges the handoff between Talent Acquisition and People Ops — ensuring every new hire arrives with
+              clear expectations, the right equipment, and a strong first-week experience.
+            </p>
+          </div>
+          <div class="agent-meta">
+            <div>
+              <span class="pill">Pre-start</span>
+              <span class="pill">Day-1 readiness</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="callout">
+        As the suite matures, each A[i]gent can gain its own demo and playbook. Today, Metrics, Screening, and Workflow
+        A[i]gents are fully documented and wired into the shared Metrics Dictionary.
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    Let’s talk A[i]gents &amp; AI-native Recruiting Ops –
+    <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
+    <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+  </footer>
+</body>
+</html>
