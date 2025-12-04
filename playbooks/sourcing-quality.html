@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Candidate Source Quality Playbook – Inbound vs Sourced vs Referrals</title>
+  <title>Sourcing Quality Playbook – Inbound vs Outbound vs Referrals</title>
 
-  <meta property="og:title" content="Candidate Source Quality Playbook – Inbound vs Sourced vs Referrals">
-  <meta property="og:description" content="Mini playbook on what your pipeline data is really saying about inbound, sourced, and referral quality — and how to rebalance effort for better hiring outcomes.">
+  <meta property="og:title" content="Sourcing Quality Playbook – Inbound vs Outbound vs Referrals">
+  <meta property="og:description" content="Mini playbook on what your funnel data is really saying about inbound, sourced, and referral quality — and how to rebalance effort for better hiring outcomes.">
   <meta property="og:type" content="article">
 
   <style>
@@ -18,7 +18,7 @@
       --border:#e5e7eb;
       --link:#2563eb;
       --link-soft:#4f46e5;
-      --shadow:rgba(15,23,42,0.08);
+      --shadow:rgba(0,0,0,.08);
       --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
       --accent-soft:linear-gradient(135deg,rgba(249,115,129,.09),rgba(168,85,247,.09),rgba(99,102,241,.09));
     }
@@ -55,7 +55,6 @@
       padding:0 20px 32px;
     }
 
-    /* Hero card */
     .hero{
       margin:16px 0 24px;
       border-radius:20px;
@@ -66,41 +65,23 @@
       flex-wrap:wrap;
       gap:18px;
     }
-    .hero-main{
-      flex:1 1 260px;
-      min-width:0;
-    }
+    .hero-main{flex:1 1 260px;min-width:0;}
     .hero-eyebrow{
       display:inline-flex;
       padding:4px 10px;
       border-radius:999px;
       border:1px solid rgba(148,163,184,.6);
       background:rgba(255,255,255,.9);
-      font-size:11px;
-      font-weight:500;
-      letter-spacing:.08em;
+      font-size:11px;font-weight:500;
       text-transform:uppercase;
+      letter-spacing:.08em;
       color:#4b5563;
       margin-bottom:8px;
     }
-    .hero-title{
-      margin:0 0 8px;
-      font-size:22px;
-      line-height:1.35;
-    }
-    .hero-title span{
-      color:var(--link-soft);
-    }
-    .hero-main p{
-      margin:0;
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.7;
-    }
-    .hero-actions{
-      margin-top:10px;
-      font-size:13px;
-    }
+    .hero-title{margin:0 0 8px;font-size:22px;line-height:1.35;}
+    .hero-title span{color:var(--link-soft);}
+    .hero-main p{margin:0;font-size:14px;color:var(--muted);line-height:1.7;}
+    .hero-actions{margin-top:10px;font-size:13px;}
     .hero-actions a{
       display:inline-flex;
       align-items:center;
@@ -116,7 +97,6 @@
     .hero-meta{
       flex:0 0 260px;
       max-width:280px;
-      min-width:0;
       background:rgba(255,255,255,.9);
       border-radius:16px;
       border:1px solid rgba(229,231,235,.9);
@@ -126,16 +106,13 @@
       box-shadow:0 6px 18px rgba(15,23,42,.07);
     }
     .hero-meta h3{
-      font-size:13px;
       margin:0 0 6px;
+      font-size:13px;
       text-transform:uppercase;
       letter-spacing:.08em;
       color:#6b7280;
     }
-    .hero-meta ul{
-      margin:0 0 4px 16px;
-      padding:0;
-    }
+    .hero-meta ul{margin:0 0 4px 16px;padding:0;}
     .hero-meta li{margin-bottom:4px;}
 
     @media (max-width:800px){
@@ -144,7 +121,6 @@
       .hero-meta{max-width:none;}
     }
 
-    /* Layout with TOC */
     .content-layout{
       display:grid;
       grid-template-columns:220px minmax(0,1fr);
@@ -152,15 +128,12 @@
       align-items:flex-start;
     }
     @media (max-width:900px){
-      .content-layout{
-        grid-template-columns:1fr;
-      }
+      .content-layout{grid-template-columns:1fr;}
     }
 
     .toc{
       position:sticky;
       top:20px;
-      align-self:flex-start;
       background:var(--card);
       border-radius:14px;
       border:1px solid var(--border);
@@ -175,22 +148,10 @@
       letter-spacing:.08em;
       color:#6b7280;
     }
-    .toc ul{
-      list-style:none;
-      margin:0;
-      padding:0;
-    }
-    .toc li{
-      margin:3px 0;
-    }
-    .toc a{
-      color:#374151;
-      text-decoration:none;
-    }
-    .toc a:hover{
-      text-decoration:underline;
-      color:var(--link-soft);
-    }
+    .toc ul{list-style:none;margin:0;padding:0;}
+    .toc li{margin:3px 0;}
+    .toc a{color:#374151;text-decoration:none;}
+    .toc a:hover{text-decoration:underline;color:var(--link-soft);}
 
     article{
       background:var(--card);
@@ -200,29 +161,32 @@
       padding:18px 20px 18px;
       font-size:14px;
       line-height:1.7;
-      color:#111827;
     }
-    article h2{
-      font-size:18px;
-      margin:18px 0 6px;
+    article h2{font-size:18px;margin:18px 0 6px;}
+    article h3{font-size:15px;margin:14px 0 4px;}
+    article p{margin:2px 0 8px;}
+    article ul{margin:4px 0 10px 18px;padding:0;}
+    article li{margin-bottom:3px;}
+
+    .figure{text-align:center;margin:12px 0 18px;}
+    .figure img{
+      max-width:100%;
+      height:auto;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      box-shadow:0 4px 16px rgba(15,23,42,.12);
+      background:#fff;
     }
-    article h3{
-      font-size:15px;
-      margin:14px 0 4px;
+    .figure-caption{
+      margin-top:6px;
+      font-size:12px;
+      color:#6b7280;
     }
-    article h2:first-of-type{
-      margin-top:0;
-    }
-    article p{
-      margin:2px 0 8px;
-    }
-    article ul{
-      margin:4px 0 10px 18px;
-      padding:0;
-    }
-    article li{
-      margin-bottom:3px;
-    }
+
+    .table-wrap{margin:6px 0 10px;overflow-x:auto;}
+    table{width:100%;border-collapse:collapse;font-size:13px;}
+    th, td{border:1px solid #e5e7eb;padding:4px 6px;text-align:left;}
+    th{background:#f3f4f6;font-weight:600;}
 
     .callout{
       margin:10px 0 12px;
@@ -241,44 +205,6 @@
       font-size:11px;
       font-weight:500;
       text-transform:uppercase;
-      letter-spacing:.06em;
-    }
-
-    .figure{
-      margin:10px 0 16px;
-      text-align:center;
-    }
-    .figure img{
-      max-width:100%;
-      height:auto;
-      border-radius:12px;
-      border:1px solid #e5e7eb;
-      box-shadow:0 4px 16px rgba(15,23,42,.12);
-      background:#fff;
-    }
-    .figure-caption{
-      margin-top:6px;
-      font-size:12px;
-      color:#6b7280;
-    }
-
-    .table-wrap{
-      margin:6px 0 10px;
-      overflow-x:auto;
-    }
-    table{
-      width:100%;
-      border-collapse:collapse;
-      font-size:13px;
-    }
-    th, td{
-      border:1px solid #e5e7eb;
-      padding:4px 6px;
-      text-align:left;
-    }
-    th{
-      background:#f3f4f6;
-      font-weight:600;
     }
 
     footer{
@@ -294,37 +220,33 @@
   <div class="bar"></div>
 
   <header>
-    <h1>Candidate Source Quality Playbook</h1>
+    <h1>Sourcing Quality Playbook</h1>
     <p>
-      What your pipeline data is really saying about inbound, sourced, and referrals · by Diane Wilkinson
+      Understanding how inbound, outbound, and referrals truly convert · by Diane Wilkinson
     </p>
   </header>
 
   <div class="wrap">
 
-    <!-- HERO -->
     <section class="hero">
       <div class="hero-main">
-        <div class="hero-eyebrow">Mini Playbook · Funnel Quality & Source Mix</div>
+        <div class="hero-eyebrow">Mini Playbook · Funnel Quality</div>
         <h2 class="hero-title">
-          Stop treating all candidates as equal — <span>your sources aren’t.</span>
+          Not all pipelines are created equal — <span>but most teams treat them as if they are.</span>
         </h2>
         <p>
-          This mini playbook walks through a simple, real-world snapshot of candidate source quality:
-          inbound vs. sourced vs. referrals. The goal isn’t just to show ratios — it’s to show how a
-          Recruiting Ops leader would interpret them and rebalance effort.
+          This mini playbook explains a foundational recruiting truth: inbound, sourced, and referral
+          candidates do not behave the same — and your strategy, time allocation, and automations
+          should reflect that.
         </p>
         <p>
-          The same thinking underpins Metrics A[i]gent and the Recruiting Pipeline Calculator: less noise
-          from high-volume low-signal sources, more attention on channels that reliably convert to hires.
+          The graphic below is a simple snapshot demonstrating how many candidates each channel
+          typically requires to produce one hire.
         </p>
+
         <div class="hero-actions">
-          <a href="../index.html">
-            ← Back to portfolio
-          </a>
-          <a href="../assets/analysis-candidate-source-quality.pdf" target="_blank" rel="noopener">
-            📄 Download 1-page PDF
-          </a>
+          <a href="../index.html">← Back to portfolio</a>
+          <a href="../assets/analysis-candidate-source-quality.pdf" target="_blank">📄 Download PDF</a>
         </div>
       </div>
 
@@ -332,48 +254,46 @@
         <h3>What this covers</h3>
         <ul>
           <li>Simple source → hire ratios</li>
-          <li>How to interpret them as TA Ops</li>
-          <li>Implications for time & budget</li>
-          <li>How to rebalance towards quality</li>
-          <li>How Metrics A[i]gent would track it</li>
+          <li>How to interpret funnel efficiency</li>
+          <li>Where to rebalance sourcing time</li>
+          <li>How Metrics A[i]gent tracks this</li>
+          <li>High-impact next steps</li>
         </ul>
         <div class="callout">
-          <span class="pill-note">Use case</span><br>
-          Great for walking a hiring leader through why “more inbound” is not always the answer — and
-          why sourced and referral programs deserve real investment.
+          <span class="pill-note">Use Case</span><br>
+          Perfect for explaining to leadership why “just post the job everywhere” is not a hiring strategy.
         </div>
       </aside>
     </section>
 
-    <!-- CONTENT + TOC -->
+    <!-- Layout -->
     <div class="content-layout">
       <nav class="toc">
         <h3>Sections</h3>
         <ul>
           <li><a href="#snapshot">1. Snapshot</a></li>
-          <li><a href="#interpretation">2. How to Read This as TA Ops</a></li>
-          <li><a href="#implications">3. Strategy & Budget Implications</a></li>
-          <li><a href="#metrics">4. Metrics A[i]gent & Ongoing Monitoring</a></li>
+          <li><a href="#interpretation">2. Interpretation</a></li>
+          <li><a href="#implications">3. Strategic Implications</a></li>
+          <li><a href="#metrics">4. Metrics A[i]gent Integration</a></li>
           <li><a href="#actions">5. Recommended Actions</a></li>
         </ul>
       </nav>
 
       <article>
 
-        <!-- 1. Snapshot -->
+        <!-- Snapshot -->
         <section id="snapshot">
           <h2>1. Source Quality Snapshot</h2>
           <p>
-            Below is a simplified view of how many candidates you need from each source to make one hire
-            for a particular role family (numbers illustrative but realistic for tech / GTM).
+            A simplified view of how many candidates each channel needs to produce a hire
+            (numbers illustrative but directionally accurate for tech & GTM roles).
           </p>
 
           <div class="figure">
-            <img src="../assets/logos/analysis-candidate-source-quality.png"
-                 alt="Comparison of inbound, sourced, and referral candidate volumes required per hire">
+            <img src="../assets/logos/analysis-candidate-source-quality.png" alt="Source quality comparison">
             <div class="figure-caption">
-              Example: for this role, it takes roughly 250 inbound applications, 40 sourced candidates,
-              or 20 referrals to make one hire.
+              Example: For this role family, approx. 250 inbound applicants, 40 sourced candidates,
+              or 20 referrals are needed to produce one hire.
             </div>
           </div>
 
@@ -382,155 +302,126 @@
               <thead>
                 <tr>
                   <th>Source</th>
-                  <th>Approx. Candidates per Hire</th>
+                  <th>Candidates per Hire</th>
                   <th>Signal</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Inbound (job boards / careers site)</td>
+                  <td>Inbound</td>
                   <td>≈ 250</td>
-                  <td>Very high volume, low average signal.</td>
+                  <td>Very high volume; low average signal.</td>
                 </tr>
                 <tr>
-                  <td>Sourced (outbound)</td>
+                  <td>Outbound / Sourced</td>
                   <td>≈ 40</td>
-                  <td>Curated, higher intent after contact.</td>
+                  <td>Curated profiles, stronger alignment.</td>
                 </tr>
                 <tr>
                   <td>Referrals</td>
                   <td>≈ 20</td>
-                  <td>Highest quality and fastest path to hire.</td>
+                  <td>Highest intent and cultural fit.</td>
                 </tr>
               </tbody>
             </table>
           </div>
-
-          <p>
-            The exact numbers will vary by company and role, but the pattern is common: inbound dominates volume,
-            while referrals and outbound dominate quality and conversion.
-          </p>
         </section>
 
-        <!-- 2. Interpretation -->
+        <!-- Interpretation -->
         <section id="interpretation">
-          <h2>2. How to Read This as a TA Ops Leader</h2>
+          <h2>2. How a TA Ops Leader Reads This</h2>
 
-          <h3>2.1 Inbound is noisy by default</h3>
+          <h3>2.1 Inbound is noisy</h3>
           <p>
-            Inbound tends to be the easiest source to “grow” (post more jobs, open more apply links,
-            add more boards), but the marginal value of each extra inbound applicant is small.
+            Inbound can be tempting because it’s “free volume,” but each additional applicant tends
+            to add almost no incremental signal.
           </p>
+
           <ul>
-            <li>Reviewing 250+ resumes per hire is expensive in recruiter time.</li>
-            <li>Without structure, it also increases inconsistency and bias.</li>
-            <li>It can hide the fact that better sources are quietly doing most of the work.</li>
+            <li>250 resumes per hire is expensive in recruiter hours.</li>
+            <li>Most inbound funnels hide extreme variance in quality.</li>
+            <li>Low-signal noise = inconsistent decisions + fatigue.</li>
           </ul>
 
-          <h3>2.2 Sourced and referrals are high-leverage</h3>
+          <h3>2.2 Outbound has stronger alignment</h3>
           <p>
-            Even if sourced and referrals are “harder” to generate, the conversion math is different:
+            Even though outbound takes more effort, you control who enters the pipeline.
           </p>
           <ul>
-            <li>40 sourced candidates → 1 hire often means deeper research but far better alignment.</li>
-            <li>20 referrals → 1 hire shows that engaged employees are pre-filtering for fit.</li>
-            <li>Every incremental sourced / referral candidate is worth more than another random inbound apply.</li>
+            <li>Higher ICP match.</li>
+            <li>Higher likelihood of reaching final stages.</li>
+            <li>Far less variability than inbound noise.</li>
           </ul>
 
-          <h3>2.3 The mix tells you how to reallocate time</h3>
+          <h3>2.3 Referrals are the efficiency engine</h3>
           <p>
-            If your data looks like this and your team is still spending most of its week
-            triaging inbound, there is an obvious optimization opportunity:
+            Referrals usually convert fastest and take the least recruiter effort.
           </p>
           <ul>
-            <li>Automate more of the inbound review (Screening A[i]gent).</li>
-            <li>Move recruiter time toward outbound, referral programs, and high-touch work.</li>
-            <li>Use Workflow A[i]gent to keep high-quality candidates moving quickly.</li>
+            <li>Employees pre-filter for fit.</li>
+            <li>HMs trust referrals more.</li>
+            <li>Shorter time-to-hire due to built-in credibility.</li>
           </ul>
         </section>
 
-        <!-- 3. Implications -->
+        <!-- Implications -->
         <section id="implications">
-          <h2>3. Strategy & Budget Implications</h2>
+          <h2>3. Strategic Implications</h2>
 
-          <h3>3.1 Where to spend recruiter time</h3>
+          <h3>3.1 Rebalance recruiter time</h3>
           <ul>
-            <li>Dial back manual resume review for low-signal inbound channels.</li>
-            <li>Set minimum outbound activity targets where sourced hires outperform inbound.</li>
-            <li>Give recruiters capacity for deeper intake, calibration, and close work.</li>
+            <li>Reduce time spent manually triaging inbound.</li>
+            <li>Automate inbound with Screening A[i]gent.</li>
+            <li>Shift recruiter hours toward targeted outbound.</li>
           </ul>
 
-          <h3>3.2 Where to spend money</h3>
+          <h3>3.2 Spend where it matters</h3>
           <ul>
-            <li>Job board spend should be justified against actual hires, not just clicks or applies.</li>
-            <li>Referral bonuses and referral enablement tools often pay for themselves quickly.</li>
-            <li>Specialist tools (e.g., for targeted sourcing) can be worth more than another general job board.</li>
+            <li>Cut low-performing job boards.</li>
+            <li>Invest in referral programs; they convert.</li>
+            <li>Upgrade sourcing tools for targeted outreach.</li>
           </ul>
 
-          <h3>3.3 How to talk about this with leadership</h3>
+          <h3>3.3 Leadership messaging</h3>
           <div class="callout">
-            “For this role, one hire takes ~250 inbound applicants, ~40 sourced candidates, or ~20 referrals.
-            If we want to hire faster with better signal, we should invest in the channels that convert —
-            and automate more of the inbound noise.”
+            “If we want to increase hiring velocity and quality, we must invest in the sources
+            that convert — not the sources that simply generate the most résumés.”
           </div>
         </section>
 
-        <!-- 4. Metrics -->
+        <!-- Metrics -->
         <section id="metrics">
-          <h2>4. Metrics A[i]gent & Ongoing Monitoring</h2>
-
+          <h2>4. Metrics A[i]gent Integration</h2>
           <p>
-            In a full implementation, these insights become part of standard reporting rather than a one-off analysis.
-            Metrics A[i]gent would track, by role and time period:
-          </p>
-
-          <ul>
-            <li>Candidates per hire by source (inbound / outbound / referrals / internal).</li>
-            <li>Stage-by-stage conversion by source (screen pass, interview pass, offer rate).</li>
-            <li>Time-to-fill differences by source mix.</li>
-            <li>Cost-per-hire and recruiter time-per-hire by source.</li>
-          </ul>
-
-          <p>
-            Those metrics feed directly into decisions about:
+            Metrics A[i]gent provides ongoing monitoring of source efficiency, including:
           </p>
           <ul>
-            <li>Which channels to scale up or down.</li>
-            <li>Which recruiters are particularly strong in outbound vs. inbound-heavy roles.</li>
-            <li>Where candidate experience investments will have the biggest payoff.</li>
+            <li>Candidates per hire by source.</li>
+            <li>Pass-through by stage (screen, interview, offer).</li>
+            <li>Time-to-hire by source type.</li>
+            <li>Cost-per-hire vs recruiter time-per-hire.</li>
           </ul>
+          <p>
+            These insights power quarterly decisions on budget allocation, recruiter specialization,
+            and whether to scale or retire sources.
+          </p>
         </section>
 
-        <!-- 5. Actions -->
+        <!-- Recommended Actions -->
         <section id="actions">
           <h2>5. Recommended Actions</h2>
 
-          <p>For a TA leader looking at a chart like this, a simple action plan might be:</p>
-
           <ol>
-            <li>
-              <strong>Baseline the data.</strong> Run a 6–12 month lookback by role family to confirm your own
-              candidates-per-hire by source.
-            </li>
-            <li>
-              <strong>Set a target mix.</strong> For example: “At least 40% of hires from referrals + outbound
-              for AE roles next quarter.”
-            </li>
-            <li>
-              <strong>Free up time.</strong> Use Screening A[i]gent and basic automations to reduce manual inbound review.
-            </li>
-            <li>
-              <strong>Invest in high-quality channels.</strong> Referral programs, targeted sourcing, and better intake.
-            </li>
-            <li>
-              <strong>Review quarterly.</strong> Use Metrics A[i]gent dashboards to see if the mix and conversion
-              are improving — and iterate.
-            </li>
+            <li><strong>Establish baselines.</strong> Run a 6–12 month lookback by role family.</li>
+            <li><strong>Set quarterly targets.</strong> e.g., “40% of hires from referrals + outbound.”</li>
+            <li><strong>Automate inbound.</strong> Use Screening A[i]gent to remove triage overhead.</li>
+            <li><strong>Invest in high-signal channels.</strong> Referral enablement, sourcing tools.</li>
+            <li><strong>Review quarterly.</strong> Watch source mix and conversion improve.</li>
           </ol>
 
           <p>
-            This is a small example, but it shows the kind of story you can tell when recruiting data is clean,
-            structured, and connected to decision-making — exactly the kind of work this portfolio is designed to highlight.
+            This small snapshot is a powerful example of your larger philosophy:
+            <strong>measure what matters, optimize what converts, automate what doesn’t add value.</strong>
           </p>
         </section>
 
@@ -539,7 +430,7 @@
   </div>
 
   <footer>
-    Part of the playbooks & analysis library – designed to plug into Metrics A[i]gent and the Recruiting Pipeline Calculator.
+    Part of the playbooks & analysis library – designed to support Metrics A[i]gent and the Recruiting Pipeline Calculator.
   </footer>
 </body>
 </html>
