@@ -1,104 +1,106 @@
-# A[i]gent Suite — Internal Recruiting Agents  
-_Modular · ATS-Native · Evidence-First · Human-in-the-Loop_
+A[i]gent Suite — Internal Recruiting Agents
 
-The **A[i]gent Suite** is a collection of modular, interoperable AI agents designed to
-augment internal recruiting operations directly within the systems Talent Acquisition teams
-already use — Greenhouse, Sheets, Slack, email, and lightweight internal automation layers.
+Modular · ATS-Native · Evidence-First · Human-in-the-Loop
 
-Each A[i]gent is responsible for one part of the recruiting lifecycle, and all agents share:
+The A[i]gent Suite is a set of modular, interoperable AI agents that augment internal recruiting operations directly inside tools Talent Acquisition teams already use — Greenhouse, Slack, Sheets, and lightweight in-house automation layers.
 
-- A workflow-first operating model  
-- A common Metrics Dictionary  
-- Explainable, structured outputs  
-- Human-in-the-loop control  
+Each agent handles a specific part of the recruiting lifecycle, but all follow the same operating philosophy:
 
-The suite supports everything from intake → screening → interviews → offer → onboarding.
+Workflow-first — anchored in real recruiting processes
 
----
+Evidence-first — structured, explainable outputs
 
-## 📦 Directory Overview
+Human-in-the-loop — recruiters and HMs remain the final decision-makers
 
-### **`/suite/` — High-level overview of all agents**
-The central index of the entire ecosystem: roles, responsibilities, and how the agents fit
-together across the recruiting value chain.
+Metrics-aligned — all agents emit standardized events defined in the Metrics Dictionary
 
-**Live page:** `/agents/suite/`
+The suite spans intake → screening → interviews → offer → onboarding, mirroring how modern TA tooling teams structure internal platforms.
 
----
+📦 Directory Overview
+/suite/ — Full Suite Overview
 
-## 🤖 Core Agents (Fully Implemented)
+High-level architecture, roles, and how each agent fits across the recruiting value chain.
 
-### **Screening A[i]gent**  
-Hybrid-scoring application review system that evaluates experience, tenure, skills, and
-risk indicators to surface high-quality candidates and reduce top-funnel noise.
+Live page: /agents/suite/
 
-- Demo → `/agents/screening/`
-- Playbook → `/agents/screening/playbook.html`
+🤖 Core Agents (Fully Implemented)
+Screening A[i]gent
 
----
+Rubric-driven, hybrid-scoring system for consistent, explainable resume evaluation. Surfaces hidden talent, reduces noise, and provides structured signals to downstream agents.
 
-### **Workflow A[i]gent**  
-Interview-stage automation engine handling confirmations, reminders, scorecard SLAs,
-and delay updates — creating predictable, low-drama interview loops.
+Demo: /agents/screening/
 
-- Demo → `/agents/workflow/`
-- Playbook → `/agents/workflow/playbook.html`
+Playbook: /agents/screening/playbook.html
 
----
+Workflow A[i]gent
 
-### **Metrics A[i]gent**  
-Funnel diagnostics, pass-through analysis, SLA visibility, and forecasting powered by a
-shared Metrics Dictionary.
+Interview-stage automation across confirmations, reminders, scorecard nudges, SLAs, and delay updates — creating predictable, low-drama interview cycles.
 
-- Demo → `/agents/metrics/`
-- Playbook → `/agents/metrics/playbook.html`
-- Metrics Dictionary → Google Sheet (linked within playbook)
+Demo: /agents/workflow/
 
----
+Playbook: /agents/workflow/playbook.html
 
-## 🧩 Supported / Upcoming Agents
+Metrics A[i]gent
 
-These agents are defined in the Suite Overview but are not yet fully documented:
+Funnel diagnostics, SLA visibility, pass-through analysis, and forecasting powered by a unified Metrics Dictionary.
 
-- **Kickoff A[i]gent** — transforms intake into structured scorecards & rubrics  
-- **Outreach A[i]gent** — calibrated outbound personalization & sourcing  
-- **Match A[i]gent** — rediscovery & cross-fit matching across roles  
-- **Nurture A[i]gent** — keeps silver-medalists warm  
-- **Interview A[i]gent** — guided prompts & note scaffolding  
-- **Scorecard A[i]gent** — structured feedback generation  
-- **Offer A[i]gent** — comp guardrails & approval paths  
-- **Onboarding A[i]gent** — day-1 readiness & handoff  
+Demo: /agents/metrics/
 
-As these mature, each will receive its own demo + playbook directory following the same
-format as Screening, Workflow, and Metrics.
+Playbook: /agents/metrics/playbook.html
 
----
+Metrics Dictionary: Google Sheet (linked in the playbook)
 
-## 🧱 Design Principles
+🧩 Defined / Upcoming Agents
 
-All A[i]gents follow these shared principles:
+Listed in the Suite Overview as future modules following the same architecture:
 
-- **Workflow-first** — designed around how recruiting actually operates  
-- **Evidence-first** — outputs are structured and explainable  
-- **Human-in-the-loop** — humans decide, AI assists  
-- **Modular** — each agent has a single responsibility  
-- **ATS-native** — built on top of ATS features, not replacing them  
-- **Measurable** — every agent emits standardized metrics for analysis  
+Kickoff A[i]gent — intake → scorecard + rubric generation
 
----
+Outreach A[i]gent — outbound personalization and calibrated sourcing
 
-## 📚 How to Explore the Suite
+Match A[i]gent — rediscovery and cross-role candidate fit
 
-1. Start with `/agents/suite/` for the big-picture overview  
-2. Visit each agent’s demo (`index.html`)  
-3. Read their playbooks to understand the operational model  
-4. View the Metrics Dictionary to see how data flows across the system  
+Nurture A[i]gent — silver-medalist follow-through
 
-This structure mirrors how internal tooling teams document platforms inside modern tech
-companies, enabling easy navigation for engineering, TA Ops, and People Analytics teams.
+Interview A[i]gent — guided interviewer prompts + note scaffolding
 
----
+Scorecard A[i]gent — structured, evidence-linked feedback
 
-For questions or collaboration:  
-**Diane Wilkinson** — Recruiting Operations Specialist, AI-Native TA Systems  
-[LinkedIn](https://www.linkedin.com/in/dianewilkinson) · [Email](mailto:dianewilkinson510@gmail.com)
+Offer A[i]gent — compensation guardrails and approval flow logic
+
+Onboarding A[i]gent — new-hire readiness and downstream handoffs
+
+Each will receive its own demo + playbook as they mature.
+
+🧱 Shared Design Principles
+
+All agents follow the same internal engineering-style standards:
+
+Workflow-first: built around how TA teams operate at scale
+
+Evidence-first: outputs are structured, interpretable, and auditable
+
+Human-in-the-loop: AI proposes; recruiters decide
+
+Modular: each agent has a single responsibility
+
+ATS-native: built on existing ATS capabilities, not replacing them
+
+Measurable: every agent emits standardized events for Metrics A[i]gent
+
+📚 How to Navigate the Suite
+
+Start with the Suite Overview (/agents/suite/).
+
+Explore each agent’s live demo (index.html).
+
+Read each playbook for operational and governance detail.
+
+Reference the Metrics Dictionary for cross-agent data definitions.
+
+This mirrors how internal platform teams document modular systems: intuitive for TA Ops, People Analytics, and engineering stakeholders.
+
+For questions or collaboration:
+Diane Wilkinson — Recruiting Operations Specialist, AI-Native TA Systems
+LinkedIn
+ · Email
