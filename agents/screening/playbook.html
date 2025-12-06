@@ -471,7 +471,7 @@
           </div>
         </section>
 
-        <!-- 4. System Overview -->
+                <!-- 4. System Overview -->
         <section id="overview">
           <h2>4. System Overview</h2>
 
@@ -486,9 +486,17 @@
             <li><strong>6. Output:</strong> Write scores, bands, tags, and recommendation back to ATS fields for humans and Metrics A[i]gent.</li>
           </ul>
 
+          <h3>4.1 Technical Architecture</h3>
           <p>
-            This playbook defines the rubric and scoring logic; the implementation can be done in any modern stack (LLM +
-            orchestration + ATS integration).
+            Under the hood, Screening A[i]gent runs on a modular stack:
+            a <strong>Python reasoning layer</strong> for rubric scoring and evidence extraction,
+            a <strong>lightweight orchestration layer</strong> to sequence steps and call LLMs,
+            and <strong>ATS-native integrations</strong> (e.g., Greenhouse fields) for writing structured outputs
+            back into the recruiting system of record.
+          </p>
+          <p>
+            The playbook defines the rubric and scoring logic; the same architecture pattern can be implemented
+            in any modern environment (Python notebooks, lightweight services, or internal automation platforms).
           </p>
         </section>
 
