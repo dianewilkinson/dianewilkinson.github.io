@@ -70,19 +70,6 @@
       flex:1 1 260px;
       min-width:0;
     }
-    .hero-eyebrow{
-      display:inline-flex;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,.6);
-      background:rgba(255,255,255,.9);
-      font-size:11px;
-      font-weight:500;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#4b5563;
-      margin-bottom:8px;
-    }
     .hero-title{
       margin:0 0 8px;
       font-size:22px;
@@ -99,7 +86,12 @@
     }
     .hero-actions{
       margin-top:10px;
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      gap:8px;
       font-size:13px;
+      flex-wrap:nowrap;
     }
     .hero-actions a{
       display:inline-flex;
@@ -110,56 +102,44 @@
       border:1px solid rgba(148,163,184,.8);
       background:rgba(255,255,255,.9);
       font-weight:500;
+      text-decoration:none;
+      white-space:nowrap;
     }
-
-    .hero-meta{
-      flex:0 0 260px;
-      max-width:280px;
-      min-width:0;
-      background:rgba(255,255,255,.9);
-      border-radius:16px;
-      border:1px solid rgba(229,231,235,.9);
-      padding:12px 14px 10px;
-      font-size:12px;
-      color:#4b5563;
-      box-shadow:0 6px 18px rgba(15,23,42,.07);
+    .back-pill{
+      color:#4f46e5;
     }
-    .hero-meta h3{
-      font-size:13px;
-      margin:0 0 6px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:#6b7280;
+    .back-pill:hover{
+      background:rgba(255,255,255,1);
+      color:#4338ca;
+      text-decoration:none;
     }
-    .hero-meta ul{
-      margin:0 0 4px 16px;
-      padding:0;
-    }
-    .hero-meta li{margin-bottom:4px;}
 
     @media (max-width:800px){
       .hero{padding:18px 16px 14px;}
       .hero-title{font-size:20px;}
-      .hero-meta{max-width:none;}
     }
 
-    /* Layout with TOC */
-    .content-layout{
+    /* Info row under hero – 3 cards */
+    .info-layout{
       display:grid;
-      grid-template-columns:220px minmax(0,1fr);
-      gap:24px;
-      align-items:flex-start;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+      margin-bottom:24px;
     }
-    @media (max-width:900px){
-      .content-layout{
+    @media (max-width:1100px){
+      .info-layout{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+    @media (max-width:700px){
+      .info-layout{
         grid-template-columns:1fr;
       }
     }
 
-    .toc{
-      position:sticky;
-      top:20px;
-      align-self:flex-start;
+    .hero-meta,
+    .toc-card,
+    .persona-card{
       background:var(--card);
       border-radius:14px;
       border:1px solid var(--border);
@@ -167,28 +147,47 @@
       box-shadow:0 1px 3px var(--shadow);
       font-size:13px;
     }
-    .toc h3{
+    .hero-meta h3,
+    .toc-card h3,
+    .persona-card h3{
       margin:0 0 6px;
       font-size:13px;
       text-transform:uppercase;
       letter-spacing:.08em;
       color:#6b7280;
     }
-    .toc ul{
+    .hero-meta ul,
+    .toc-card ul{
       list-style:none;
       margin:0;
       padding:0;
     }
-    .toc li{
+    .hero-meta li,
+    .toc-card li{
       margin:3px 0;
     }
-    .toc a{
+
+    .toc-card a{
       color:#374151;
       text-decoration:none;
     }
-    .toc a:hover{
+    .toc-card a:hover{
       text-decoration:underline;
       color:var(--link-soft);
+    }
+
+    .persona-pill{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:500;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      background:#e0ebff;
+      color:#1d4ed8;
+      margin-bottom:6px;
     }
 
     article{
@@ -259,6 +258,7 @@
       background:#f3f4f6;
       font-weight:600;
     }
+
     footer{
       text-align:center;
       margin:18px 0 20px;
@@ -272,7 +272,7 @@
   <div class="bar"></div>
 
   <header>
-    <h1>Screening A[i]gent – Hybrid Rubric & Candidate Evaluation Playbook</h1>
+    <h1>Screening A[i]gent – Hybrid Rubric &amp; Candidate Evaluation Playbook</h1>
     <p>
       Application Review &amp; Candidate Evaluation Engine · by Diane Wilkinson
     </p>
@@ -283,7 +283,6 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-main">
-        <div class="hero-eyebrow">Playbook · AI-Native Screening</div>
         <h2 class="hero-title">
           Give every resume a <span>real deep dive</span> — in seconds, not minutes.
         </h2>
@@ -299,35 +298,16 @@
           <a href="../index.html">
             🔎 Back to Screening A[i]gent demo
           </a>
-          
           <a href="/" class="back-pill">
             ← Back to Portfolio Home
           </a>
-          
-          <style>
-          .back-pill {
-            display:inline-flex;
-            align-items:center;
-            gap:6px;
-            margin-top:8px;
-            padding:7px 12px;
-            border-radius:999px;
-            font-size:13px;
-            font-weight:500;
-            color:#4f46e5;
-            background:rgba(255,255,255,0.9);
-            border:1px solid rgba(148,163,184,0.8);
-            text-decoration:none;
-          }
-          .back-pill:hover {
-            background:rgba(255,255,255,1);
-            text-decoration:none;
-            color:#4338ca;
-          }
-          </style>
         </div>
       </div>
+    </section>
 
+    <!-- INFO ROW UNDER HERO -->
+    <div class="info-layout">
+      <!-- Left: What this playbook covers -->
       <aside class="hero-meta">
         <h3>What this playbook covers</h3>
         <ul>
@@ -338,17 +318,10 @@
           <li>Ask-next prompts &amp; calibration workflow</li>
           <li>ATS integration and Metrics A[i]gent outputs</li>
         </ul>
-        <div class="callout">
-          <span class="pill-note">Who this is for</span><br>
-          Recruiting Ops, AI-native recruiters, and HMs who want fair, explainable, data-rich screening — without losing
-          human judgement or candidate empathy.
-        </div>
       </aside>
-    </section>
 
-    <!-- CONTENT + TOC -->
-    <div class="content-layout">
-      <nav class="toc">
+      <!-- Middle: Sections -->
+      <nav class="toc-card">
         <h3>Sections</h3>
         <ul>
           <li><a href="#problem">1. Problem &amp; Mission</a></li>
@@ -366,680 +339,690 @@
         </ul>
       </nav>
 
-      <article>
-
-        <!-- 1. Problem & Mission -->
-        <section id="problem">
-          <h2>1. Problem &amp; Mission</h2>
-
-          <h3>1.1 The Problem</h3>
-          <p>
-            At scale, most screening processes quietly optimize for speed over judgement:
-          </p>
-          <ul>
-            <li>Recruiters skim resumes for 6–10 seconds due to workload.</li>
-            <li>Top candidates get buried under noisy ATS scores and keyword stuffing.</li>
-            <li>Different recruiters apply different mental rubrics to the same role.</li>
-            <li>Reasons for rejection are rarely structured or auditable.</li>
-            <li>Funnel data is incomplete, making it hard to debug quality &amp; fairness issues later.</li>
-          </ul>
-          <p>
-            The result is the opposite of candidate excellence: inconsistency, bias, hidden talent going unnoticed, and
-            confusing signals for hiring managers.
-          </p>
-
-          <h3>1.2 Mission</h3>
-          <p>
-            Screening A[i]gent exists to give every application a consistent deep dive in seconds, not minutes — and to
-            rescue high-potential talent others miss — while keeping recruiters firmly in control of the final decision.
-          </p>
-
-          <h3>1.3 Outcomes We’re Aiming For</h3>
-          <ul>
-            <li>Fair, rubric-driven evaluation for every resume.</li>
-            <li>Clear, explainable recommendations for recruiters &amp; HMs.</li>
-            <li>Structured data that plugs directly into Workflow and Metrics A[i]gents.</li>
-            <li>Less time on “obvious no” reviews; more time on conversation and calibration.</li>
-          </ul>
-        </section>
-
-        <!-- 2. Scope & Design Principles -->
-        <section id="scope">
-          <h2>2. Scope &amp; Design Principles</h2>
-
-          <h3>2.1 In-Scope</h3>
-          <ul>
-            <li>Inbound application / resume evaluation for defined roles.</li>
-            <li>Transformation of JDs and HM requirements into role-specific rubrics.</li>
-            <li>Hybrid scoring across experience, tenure, employer fit, skills, education, and soft indicators.</li>
-            <li>Risk flagging (e.g., job hopping, gaps, inconsistent titles).</li>
-            <li>Recommendations: Advance / HM Review / Do Not Advance.</li>
-            <li>Ask-next prompts for recruiter screens.</li>
-            <li>Structured outputs into ATS fields and Metrics A[i]gent.</li>
-          </ul>
-
-          <h3>2.2 Out-of-Scope (v1)</h3>
-          <ul>
-            <li>Live interview workflows (owned by Workflow A[i]gent).</li>
-            <li>Offer, onboarding, or HRIS provisioning.</li>
-            <li>Sourcing, campaign management, or nurture flows.</li>
-            <li>Full ML-based prediction of performance (kept as a future, grounded extension).</li>
-          </ul>
-
-          <h3>2.3 Design Principles</h3>
-          <ul>
-            <li><strong>Rubric-first, model-second.</strong> The rubric is the contract; AI is the assistant.</li>
-            <li><strong>Hybrid scoring.</strong> Every category has a human-readable band and a numeric score under the hood.</li>
-            <li><strong>Explainable.</strong> Every recommendation can be traced to specific signals and weights.</li>
-            <li><strong>Human-in-the-loop.</strong> Recruiters must approve or override the agent’s recommendation.</li>
-            <li><strong>Bias-aware.</strong> Flags, not vetoes; calibration over time, not hard-coded stereotypes.</li>
-          </ul>
-
-          <h3>2.4 Global Rules</h3>
-          <ul>
-            <li>No fully automated rejection: a human must confirm “Do Not Advance.”</li>
-            <li>Every override requires a short note, creating an audit trail.</li>
-            <li>Rubrics and weights are documented and discoverable by TA &amp; HMs.</li>
-            <li>The agent does not infer or store protected characteristic data.</li>
-          </ul>
-        </section>
-
-        <!-- 3. Roles & Responsibilities -->
-        <section id="roles">
-          <h2>3. Roles &amp; Responsibilities</h2>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Role</th>
-                  <th>Responsibilities</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Recruiter</td>
-                  <td>
-                    Reviews agent output, approves/overrides recommendations, adds notes, and owns candidate communication.
-                  </td>
-                </tr>
-                <tr>
-                  <td>Hiring Manager</td>
-                  <td>
-                    Aligns on rubric and thresholds, reviews structured summaries, and provides feedback on edge cases.
-                  </td>
-                </tr>
-                <tr>
-                  <td>TA Ops / ATS Admin</td>
-                  <td>
-                    Configures fields, mappings, and integrations; maintains rubric definitions and scoring weights.
-                  </td>
-                </tr>
-                <tr>
-                  <td>People Analytics / Metrics A[i]gent Owner</td>
-                  <td>
-                    Builds dashboards on top of screening data; monitors fairness, overrides, and funnel quality.
-                  </td>
-                </tr>
-                <tr>
-                  <td>Owner</td>
-                  <td>
-                    Diane Wilkinson – design, implementation, and continuous improvement of Screening A[i]gent.
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="callout">
-            <strong>Key idea:</strong> Screening A[i]gent does the heavy lifting on evidence collection and scoring;
-            humans still decide who to speak with and who to hire.
-          </div>
-        </section>
-
-                <!-- 4. System Overview -->
-        <section id="overview">
-          <h2>4. System Overview</h2>
-
-          <p>At a high level, Screening A[i]gent runs the following loop:</p>
-
-          <ul>
-            <li><strong>1. Inputs:</strong> JD + HM priorities + resume + basic metadata (location, source, etc.).</li>
-            <li><strong>2. Rubric assembly:</strong> Convert requirements into structured rubric components.</li>
-            <li><strong>3. Evidence extraction:</strong> Parse resume and profile for roles, companies, tenure, skills, education, and signals.</li>
-            <li><strong>4. Scoring:</strong> Apply hybrid scoring across categories, with risk penalties.</li>
-            <li><strong>5. Recommendation:</strong> Generate recommended disposition and ask-next prompts.</li>
-            <li><strong>6. Output:</strong> Write scores, bands, tags, and recommendation back to ATS fields for humans and Metrics A[i]gent.</li>
-          </ul>
-
-          <h3>4.1 Technical Architecture</h3>
-          <p>
-            Under the hood, Screening A[i]gent runs on a modular stack:
-            a <strong>Python reasoning layer</strong> for rubric scoring and evidence extraction,
-            a <strong>lightweight orchestration layer</strong> to sequence steps and call LLMs,
-            and <strong>ATS-native integrations</strong> (e.g., Greenhouse fields) for writing structured outputs
-            back into the recruiting system of record.
-          </p>
-          <p>
-            The playbook defines the rubric and scoring logic; the same architecture pattern can be implemented
-            in any modern environment (Python notebooks, lightweight services, or internal automation platforms).
-          </p>
-        </section>
-
-        <!-- 5. Rubric & Signal Library -->
-        <section id="rubric">
-          <h2>5. Rubric &amp; Signal Library</h2>
-
-          <p>
-            The rubric is broken out into categories with both band-level interpretation and numeric scores. Risk flags act as
-            negative adjustments to the overall score.
-          </p>
-
-          <h3>5.1 Rubric Categories</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Max Points</th>
-                  <th>Summary</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Experience Depth</td>
-                  <td>30</td>
-                  <td>Relevancy of prior roles to this job’s scope and level.</td>
-                </tr>
-                <tr>
-                  <td>Tenure Stability</td>
-                  <td>15</td>
-                  <td>Consistency and average time-in-role, tuned for tech.</td>
-                </tr>
-                <tr>
-                  <td>Competitor / Industry Fit</td>
-                  <td>15</td>
-                  <td>Employer pedigree across competitors, adjacencies, and relevant tech.</td>
-                </tr>
-                <tr>
-                  <td>Skills &amp; Tools Match</td>
-                  <td>25</td>
-                  <td>Coverage of must-have and nice-to-have skills; transferability.</td>
-                </tr>
-                <tr>
-                  <td>Education &amp; Credentials</td>
-                  <td>5</td>
-                  <td>Baseline requirements and relevant advanced credentials.</td>
-                </tr>
-                <tr>
-                  <td>Soft Indicators</td>
-                  <td>10</td>
-                  <td>Signals like clarity, detail, follow-through, and level of polish.</td>
-                </tr>
-                <tr>
-                  <td>Risk Flags (penalty)</td>
-                  <td>-20</td>
-                  <td>Moderate negative weighting for meaningful risk patterns.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h3>5.2 Experience Depth – Signals</h3>
-          <ul>
-            <li><strong>High band:</strong> 3+ years in highly relevant roles, clearly progressive scope.</li>
-            <li><strong>Medium band:</strong> 1–3 years relevant, plus some adjacent or transferable experience.</li>
-            <li><strong>Low band:</strong> Mostly unrelated roles, unclear match to job level or domain.</li>
-          </ul>
-
-          <h3>5.3 Tenure Stability – Tech-Tuned</h3>
-          <p>Tech markets skew more dynamic, so expectations are adjusted accordingly:</p>
-          <ul>
-            <li><strong>High band:</strong> average 2–3 years per role, some longer stints, reasonable moves.</li>
-            <li><strong>Medium band:</strong> average around 1.5–2 years, a few shorter roles but overall coherent.</li>
-            <li><strong>Low band:</strong> repeated sub-12-month roles, unexplained gaps, or frequent lateral moves without progression.</li>
-          </ul>
-
-          <h3>5.4 Competitor / Industry Fit – Generous Model</h3>
-          <ul>
-            <li><strong>High band:</strong> direct competitors, adjacent companies in the same ecosystem, or strong, well-known tech brands.</li>
-            <li><strong>Medium band:</strong> general tech companies, relevant adjacent industries, or strong brands outside the core ecosystem.</li>
-            <li><strong>Low band:</strong> low-signal employers for this role (completely different domain, no clear transferrable context).</li>
-          </ul>
-
-          <h3>5.5 Skills &amp; Tools Match</h3>
-          <ul>
-            <li><strong>High band:</strong> all must-have skills present and demonstrated; several nice-to-haves.</li>
-            <li><strong>Medium band:</strong> most must-haves, strong transferable skills, some nice-to-haves missing.</li>
-            <li><strong>Low band:</strong> missing critical skills or only adjacent experience without clear transfer.</li>
-          </ul>
-
-          <h3>5.6 Education &amp; Credentials</h3>
-          <ul>
-            <li><strong>High band:</strong> required degree plus directly relevant advanced study / certifications.</li>
-            <li><strong>Medium band:</strong> required or equivalent; relevant coursework or partial credentials.</li>
-            <li><strong>Low band:</strong> missing non-negotiable requirements (where they are truly business-critical).</li>
-          </ul>
-
-          <h3>5.7 Soft Indicators</h3>
-          <ul>
-            <li>Clarity and structure of resume content.</li>
-            <li>Evidence of results (metrics, impact, ownership).</li>
-            <li>Consistency between roles, responsibilities, and claimed achievements.</li>
-          </ul>
-
-          <h3>5.8 Risk Flags (Moderate Penalty)</h3>
-          <p>Risk flags do not automatically disqualify a candidate; they trigger ask-next questions and moderate penalties.</p>
-          <ul>
-            <li>Repeated short tenures (&lt; 12 months) without obvious context.</li>
-            <li>Unexplained multi-year gaps.</li>
-            <li>Title inflation vs scope (e.g., “VP” for an IC-level role).</li>
-            <li>Overly generic or buzzword-heavy content with little evidence of outcomes.</li>
-          </ul>
-        </section>
-
-        <!-- 6. Hybrid Scoring & Recommendations -->
-        <section id="scoring">
-          <h2>6. Hybrid Scoring &amp; Recommendations</h2>
-
-          <p>
-            The hybrid model combines banded scores (for explainability) with numeric ranges (for analytics and tuning).
-          </p>
-
-          <h3>6.1 Category Bands &amp; Points</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Band</th>
-                  <th>Points (example)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Experience Depth</td>
-                  <td>High / Med / Low</td>
-                  <td>24–30 / 16–23 / 0–15</td>
-                </tr>
-                <tr>
-                  <td>Tenure Stability</td>
-                  <td>High / Med / Low</td>
-                  <td>12–15 / 8–11 / 0–7</td>
-                </tr>
-                <tr>
-                  <td>Competitor Fit</td>
-                  <td>High / Med / Low</td>
-                  <td>12–15 / 7–11 / 0–6</td>
-                </tr>
-                <tr>
-                  <td>Skills Match</td>
-                  <td>High / Med / Low</td>
-                  <td>20–25 / 12–19 / 0–11</td>
-                </tr>
-                <tr>
-                  <td>Education</td>
-                  <td>High / Med / Low</td>
-                  <td>4–5 / 2–3 / 0–1</td>
-                </tr>
-                <tr>
-                  <td>Soft Indicators</td>
-                  <td>High / Med / Low</td>
-                  <td>8–10 / 4–7 / 0–3</td>
-                </tr>
-                <tr>
-                  <td>Risk Flags</td>
-                  <td>None / Mild / Significant</td>
-                  <td>0 / -5 / -10 to -20</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h3>6.2 Overall Score Bands</h3>
-          <ul>
-            <li><strong>90–100:</strong> Strong Match</li>
-            <li><strong>75–89:</strong> Solid Match</li>
-            <li><strong>60–74:</strong> Partial Match</li>
-            <li><strong>&lt; 60:</strong> Weak Match</li>
-          </ul>
-
-          <h3>6.3 Recommendation Logic</h3>
-          <p>The recommendation is based on score + must-have requirements + risk flags:</p>
-          <ul>
-            <li><strong>Advance:</strong>
-              <ul>
-                <li>Overall score ≥ 80,</li>
-                <li>All must-have requirements met,</li>
-                <li>No “significant” (high-penalty) risk flags.</li>
-              </ul>
-            </li>
-            <li><strong>HM Review:</strong>
-              <ul>
-                <li>Score between ~65–79, or</li>
-                <li>Mixed signal (e.g., strong experience but some risk flags), or</li>
-                <li>Unusual, non-linear background with potential upside.</li>
-              </ul>
-            </li>
-            <li><strong>Do Not Advance:</strong>
-              <ul>
-                <li>Missing a non-negotiable requirement <em>and</em> overall score below threshold, or</li>
-                <li>Very low overall score (&lt; ~65) with significant risk patterns.</li>
-              </ul>
-            </li>
-          </ul>
-
-          <p>
-            The agent always emits <strong>both</strong> the band (“Strong Match”) and the numeric score (e.g., 86/100), plus
-            a plain-language explanation summarizing why.
-          </p>
-        </section>
-
-        <!-- 7. Ask-Next & HM Summaries -->
-        <section id="asknext">
-          <h2>7. Ask-Next Prompts &amp; HM Summaries</h2>
-
-          <p>
-            Recommendations are not the end of the story; they drive better conversations. Screening A[i]gent proposes:
-          </p>
-
-          <h3>7.1 Ask-Next for Recruiter Screens</h3>
-          <ul>
-            <li><strong>Experience depth:</strong> “Walk me through your work on X; what were you directly responsible for?”</li>
-            <li><strong>Tenure:</strong> “I noticed a few shorter roles in [years]. Can you share the context?”</li>
-            <li><strong>Skills:</strong> “Tell me about a recent project where you used [tool/skill] end-to-end.”</li>
-            <li><strong>Risk flags:</strong> “I see a gap between [year] and [year]. What were you focused on then?”</li>
-          </ul>
-
-          <h3>7.2 HM Preview Summary</h3>
-          <p>For candidates marked Advance or HM Review, the agent produces a short HM-facing summary:</p>
-          <ul>
-            <li>1–2 sentence overview of current/past roles and level.</li>
-            <li>Top 3 strengths relative to the rubric.</li>
-            <li>Top 1–2 concerns or open questions.</li>
-            <li>Overall band and score (e.g., “Solid Match – 82/100”).</li>
-          </ul>
-
-          <p>
-            These summaries help HMs calibrate more quickly, especially when they’re comparing multiple candidates surfaced
-            by Screening A[i]gent.
-          </p>
-        </section>
-
-        <!-- 8. Calibration & Governance -->
-        <section id="calibration">
-          <h2>8. Calibration &amp; Governance</h2>
-
-          <p>Rubrics are living documents; calibration makes them better over time.</p>
-
-          <h3>8.1 Shadow Mode</h3>
-          <ul>
-            <li>Run the agent silently alongside manual recruiter decisions for an initial period.</li>
-            <li>Compare agent recommendations vs actual decisions.</li>
-            <li>Collect examples where recruiters disagree with the agent’s call.</li>
-          </ul>
-
-          <h3>8.2 Override Tracking</h3>
-          <ul>
-            <li>Every override (both “Advance anyway” and “Do Not Advance despite high score”) requires a short note.</li>
-            <li>Metrics A[i]gent tracks override rate by role, recruiter, and segment.</li>
-            <li>High override clusters signal rubric misalignment or training gaps.</li>
-          </ul>
-
-          <h3>8.3 Rubric Reviews</h3>
-          <ul>
-            <li>Quarterly reviews with TA Ops + HMs to adjust thresholds and weights.</li>
-            <li>Use real candidate samples where the rubric under- or overscored.</li>
-            <li>Update documentation and re-communicate any changes to recruiters.</li>
-          </ul>
-
-          <h3>8.4 Fairness &amp; Bias Monitoring</h3>
-          <ul>
-            <li>Monitor pass-through and override rates across candidate groups.</li>
-            <li>Look for patterns where certain backgrounds are consistently scored lower.</li>
-            <li>Use findings to refine rubrics and ask-next prompts, not to hard-code new stereotypes.</li>
-          </ul>
-        </section>
-
-        <!-- 9. Integration -->
-        <section id="integration">
-          <h2>9. ATS Integration &amp; Outputs</h2>
-
-          <p>Screening A[i]gent is ATS-agnostic; the core requirement is a handful of stable fields.</p>
-
-          <h3>9.1 Example ATS Fields</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Field Name</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>screening_score_overall</td>
-                  <td>Number</td>
-                  <td>0–100 hybrid score.</td>
-                </tr>
-                <tr>
-                  <td>screening_band_overall</td>
-                  <td>Picklist</td>
-                  <td>Strong / Solid / Partial / Weak.</td>
-                </tr>
-                <tr>
-                  <td>screening_band_experience</td>
-                  <td>Picklist</td>
-                  <td>High / Medium / Low.</td>
-                </tr>
-                <tr>
-                  <td>screening_band_tenure</td>
-                  <td>Picklist</td>
-                  <td>High / Medium / Low.</td>
-                </tr>
-                <tr>
-                  <td>screening_band_competitor_fit</td>
-                  <td>Picklist</td>
-                  <td>High / Medium / Low.</td>
-                </tr>
-                <tr>
-                  <td>screening_band_skills</td>
-                  <td>Picklist</td>
-                  <td>High / Medium / Low.</td>
-                </tr>
-                <tr>
-                  <td>screening_risk_flags</td>
-                  <td>Multi-select</td>
-                  <td>Short tenures, gaps, title mismatch, etc.</td>
-                </tr>
-                <tr>
-                  <td>screening_recommendation</td>
-                  <td>Picklist</td>
-                  <td>Advance / HM Review / Do Not Advance.</td>
-                </tr>
-                <tr>
-                  <td>screening_override_flag</td>
-                  <td>Boolean</td>
-                  <td>Yes if recruiter overrode the agent’s recommendation.</td>
-                </tr>
-                <tr>
-                  <td>screening_decision_at</td>
-                  <td>Datetime</td>
-                  <td>Timestamp of recruiter’s final decision.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h3>9.2 Implementation Notes</h3>
-          <ul>
-            <li>Start with a minimal, stable field set; add more after adoption.</li>
-            <li>Hide internal-only fields from hiring managers if they add noise.</li>
-            <li>Ensure Screening A[i]gent writes to fields only after recruiter confirmation.</li>
-          </ul>
-        </section>
-
-        <!-- 10. Metrics & Metrics Agent -->
-        <section id="metrics">
-          <h2>10. Metrics &amp; Metrics A[i]gent Integration</h2>
-
-          <p>Screening A[i]gent feeds Metrics A[i]gent, which powers your recruiting analytics.</p>
-
-          <h3>10.1 Key Screening Metrics</h3>
-          <ul>
-            <li>Application → Screen pass-through (by source, role, recruiter).</li>
-            <li>Distribution of screening bands (how many Strong vs Partial, etc.).</li>
-            <li>Override rate and direction (Advance vs Do Not Advance overrides).</li>
-            <li>Time from application to screening decision.</li>
-            <li>Downstream performance: how often Strong / Solid matches reach late stages or offers.</li>
-          </ul>
-
-          <h3>10.2 Event Mapping</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Screening Event</th>
-                  <th>Metrics Dictionary Field</th>
-                  <th>Used For</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>screening_started_at</td>
-                  <td>screening_start_time</td>
-                  <td>Turnaround time calculations.</td>
-                </tr>
-                <tr>
-                  <td>screening_decision_at</td>
-                  <td>screening_decision_time</td>
-                  <td>Lead time from application to decision.</td>
-                </tr>
-                <tr>
-                  <td>screening_recommendation</td>
-                  <td>screening_recommendation</td>
-                  <td>Quality/fairness analysis and calibration.</td>
-                </tr>
-                <tr>
-                  <td>screening_override_flag</td>
-                  <td>screening_override_flag</td>
-                  <td>Override rate and pattern detection.</td>
-                </tr>
-                <tr>
-                  <td>screening_score_overall</td>
-                  <td>screening_score_overall</td>
-                  <td>Score distribution, downstream quality correlation.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p>
-            Taken together, these metrics help answer: “Is our screening rubric surfacing the right talent, fairly,
-            and fast enough to meet hiring goals?”
-          </p>
-        </section>
-
-        <!-- Appendix A -->
-        <section id="appendix-bands">
-          <h2>Appendix A – Bands &amp; Point Ranges</h2>
-
-          <p>This appendix summarizes the hybrid band → points mapping for quick reference.</p>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Band</th>
-                  <th>Description</th>
-                  <th>Typical Points (per category)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>High</td>
-                  <td>Clear, strong alignment with rubric expectations.</td>
-                  <td>≈ 80–100% of the max for that category.</td>
-                </tr>
-                <tr>
-                  <td>Medium</td>
-                  <td>Good but not perfect alignment; some gaps or trade-offs.</td>
-                  <td>≈ 50–79% of the max.</td>
-                </tr>
-                <tr>
-                  <td>Low</td>
-                  <td>Limited alignment or significant missing ingredients.</td>
-                  <td>≈ 0–49% of the max.</td>
-                </tr>
-                <tr>
-                  <td>No Risk</td>
-                  <td>No meaningful risk flags detected.</td>
-                  <td>0 penalty.</td>
-                </tr>
-                <tr>
-                  <td>Mild Risk</td>
-                  <td>One or two flags with plausible explanations.</td>
-                  <td>≈ -5 penalty.</td>
-                </tr>
-                <tr>
-                  <td>Significant Risk</td>
-                  <td>Multiple or severe flags that warrant caution.</td>
-                  <td>≈ -10 to -20 penalty.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p>
-            Exact ranges can be tuned per company and role; the important part is that bands are stable, documented, and
-            shared with stakeholders.
-          </p>
-        </section>
-
-        <!-- Appendix B -->
-        <section id="appendix-examples">
-          <h2>Appendix B – Example Role Profiles</h2>
-
-          <p>These examples show how the rubric might be applied to different common roles.</p>
-
-          <h3>B.1 AE / Account Executive</h3>
-          <ul>
-            <li>Experience: quota-carrying SaaS sales, similar ACV and sales cycle.</li>
-            <li>Tenure: 2–3 year stints; some startup volatility acceptable.</li>
-            <li>Competitor Fit: direct competitors, adjacent SaaS products, industry familiarity.</li>
-            <li>Skills: full-funnel sales motions, MEDDIC/BANT, CRM expertise.</li>
-          </ul>
-
-          <h3>B.2 SDR / BDR</h3>
-          <ul>
-            <li>Experience: outbound prospecting, high-volume outreach, pipeline generation.</li>
-            <li>Signals: activity-level metrics, conversion from meetings to pipeline.</li>
-            <li>Competitor Fit: tech sales, preferably similar ICP.</li>
-          </ul>
-
-          <h3>B.3 Recruiter / Talent Partner</h3>
-          <ul>
-            <li>Experience: end-to-end recruiting for similar roles and hiring managers.</li>
-            <li>Tenure: enough time in roles to show cycles and re-hire scenarios.</li>
-            <li>Skills: sourcing, stakeholder management, ATS usage, data hygiene.</li>
-          </ul>
-
-          <h3>B.4 Software Engineer</h3>
-          <ul>
-            <li>Experience: languages, frameworks, and types of systems that match the role.</li>
-            <li>Signals: shipped features, ownership of components, depth vs breadth.</li>
-            <li>Education: CS or equivalent, strong projects, open-source contributions.</li>
-          </ul>
-
-          <p>
-            In all cases, the rubric is tuned per job family, but the underlying hybrid model, scoring, and governance
-            remain consistent.
-          </p>
-        </section>
-
-      </article>
+      <!-- Right: Who this is for -->
+      <aside class="persona-card">
+        <span class="persona-pill">Who this is for</span>
+        <p>
+          Recruiting Ops, AI-native recruiters, and HMs who want fair, explainable, data-rich screening —
+          without losing human judgement or candidate empathy.
+        </p>
+      </aside>
     </div>
+
+    <!-- MAIN CONTENT -->
+    <article>
+
+      <!-- 1. Problem & Mission -->
+      <section id="problem">
+        <h2>1. Problem &amp; Mission</h2>
+
+        <h3>1.1 The Problem</h3>
+        <p>
+          At scale, most screening processes quietly optimize for speed over judgement:
+        </p>
+        <ul>
+          <li>Recruiters skim resumes for 6–10 seconds due to workload.</li>
+          <li>Top candidates get buried under noisy ATS scores and keyword stuffing.</li>
+          <li>Different recruiters apply different mental rubrics to the same role.</li>
+          <li>Reasons for rejection are rarely structured or auditable.</li>
+          <li>Funnel data is incomplete, making it hard to debug quality &amp; fairness issues later.</li>
+        </ul>
+        <p>
+          The result is the opposite of candidate excellence: inconsistency, bias, hidden talent going unnoticed, and
+          confusing signals for hiring managers.
+        </p>
+
+        <h3>1.2 Mission</h3>
+        <p>
+          Screening A[i]gent exists to give every application a consistent deep dive in seconds, not minutes — and to
+          rescue high-potential talent others miss — while keeping recruiters firmly in control of the final decision.
+        </p>
+
+        <h3>1.3 Outcomes We’re Aiming For</h3>
+        <ul>
+          <li>Fair, rubric-driven evaluation for every resume.</li>
+          <li>Clear, explainable recommendations for recruiters &amp; HMs.</li>
+          <li>Structured data that plugs directly into Workflow and Metrics A[i]gents.</li>
+          <li>Less time on “obvious no” reviews; more time on conversation and calibration.</li>
+        </ul>
+      </section>
+
+      <!-- 2. Scope & Design Principles -->
+      <section id="scope">
+        <h2>2. Scope &amp; Design Principles</h2>
+
+        <h3>2.1 In-Scope</h3>
+        <ul>
+          <li>Inbound application / resume evaluation for defined roles.</li>
+          <li>Transformation of JDs and HM requirements into role-specific rubrics.</li>
+          <li>Hybrid scoring across experience, tenure, employer fit, skills, education, and soft indicators.</li>
+          <li>Risk flagging (e.g., job hopping, gaps, inconsistent titles).</li>
+          <li>Recommendations: Advance / HM Review / Do Not Advance.</li>
+          <li>Ask-next prompts for recruiter screens.</li>
+          <li>Structured outputs into ATS fields and Metrics A[i]gent.</li>
+        </ul>
+
+        <h3>2.2 Out-of-Scope (v1)</h3>
+        <ul>
+          <li>Live interview workflows (owned by Workflow A[i]gent).</li>
+          <li>Offer, onboarding, or HRIS provisioning.</li>
+          <li>Sourcing, campaign management, or nurture flows.</li>
+          <li>Full ML-based prediction of performance (kept as a future, grounded extension).</li>
+        </ul>
+
+        <h3>2.3 Design Principles</h3>
+        <ul>
+          <li><strong>Rubric-first, model-second.</strong> The rubric is the contract; AI is the assistant.</li>
+          <li><strong>Hybrid scoring.</strong> Every category has a human-readable band and a numeric score under the hood.</li>
+          <li><strong>Explainable.</strong> Every recommendation can be traced to specific signals and weights.</li>
+          <li><strong>Human-in-the-loop.</strong> Recruiters must approve or override the agent’s recommendation.</li>
+          <li><strong>Bias-aware.</strong> Flags, not vetoes; calibration over time, not hard-coded stereotypes.</li>
+        </ul>
+
+        <h3>2.4 Global Rules</h3>
+        <ul>
+          <li>No fully automated rejection: a human must confirm “Do Not Advance.”</li>
+          <li>Every override requires a short note, creating an audit trail.</li>
+          <li>Rubrics and weights are documented and discoverable by TA &amp; HMs.</li>
+          <li>The agent does not infer or store protected characteristic data.</li>
+        </ul>
+      </section>
+
+      <!-- 3. Roles & Responsibilities -->
+      <section id="roles">
+        <h2>3. Roles &amp; Responsibilities</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Responsibilities</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Recruiter</td>
+                <td>
+                  Reviews agent output, approves/overrides recommendations, adds notes, and owns candidate communication.
+                </td>
+              </tr>
+              <tr>
+                <td>Hiring Manager</td>
+                <td>
+                  Aligns on rubric and thresholds, reviews structured summaries, and provides feedback on edge cases.
+                </td>
+              </tr>
+              <tr>
+                <td>TA Ops / ATS Admin</td>
+                <td>
+                  Configures fields, mappings, and integrations; maintains rubric definitions and scoring weights.
+                </td>
+              </tr>
+              <tr>
+                <td>People Analytics / Metrics A[i]gent Owner</td>
+                <td>
+                  Builds dashboards on top of screening data; monitors fairness, overrides, and funnel quality.
+                </td>
+              </tr>
+              <tr>
+                <td>Owner</td>
+                <td>
+                  Diane Wilkinson – design, implementation, and continuous improvement of Screening A[i]gent.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <strong>Key idea:</strong> Screening A[i]gent does the heavy lifting on evidence collection and scoring;
+          humans still decide who to speak with and who to hire.
+        </div>
+      </section>
+
+      <!-- 4. System Overview -->
+      <section id="overview">
+        <h2>4. System Overview</h2>
+
+        <p>At a high level, Screening A[i]gent runs the following loop:</p>
+
+        <ul>
+          <li><strong>1. Inputs:</strong> JD + HM priorities + resume + basic metadata (location, source, etc.).</li>
+          <li><strong>2. Rubric assembly:</strong> Convert requirements into structured rubric components.</li>
+          <li><strong>3. Evidence extraction:</strong> Parse resume and profile for roles, companies, tenure, skills, education, and signals.</li>
+          <li><strong>4. Scoring:</strong> Apply hybrid scoring across categories, with risk penalties.</li>
+          <li><strong>5. Recommendation:</strong> Generate recommended disposition and ask-next prompts.</li>
+          <li><strong>6. Output:</strong> Write scores, bands, tags, and recommendation back to ATS fields for humans and Metrics A[i]gent.</li>
+        </ul>
+
+        <h3>4.1 Technical Architecture</h3>
+        <p>
+          Under the hood, Screening A[i]gent runs on a modular stack:
+          a <strong>Python reasoning layer</strong> for rubric scoring and evidence extraction,
+          a <strong>lightweight orchestration layer</strong> to sequence steps and call LLMs,
+          and <strong>ATS-native integrations</strong> (e.g., Greenhouse fields) for writing structured outputs
+          back into the recruiting system of record.
+        </p>
+        <p>
+          The playbook defines the rubric and scoring logic; the same architecture pattern can be implemented
+          in any modern environment (Python notebooks, lightweight services, or internal automation platforms).
+        </p>
+      </section>
+
+      <!-- 5. Rubric & Signal Library -->
+      <section id="rubric">
+        <h2>5. Rubric &amp; Signal Library</h2>
+
+        <p>
+          The rubric is broken out into categories with both band-level interpretation and numeric scores. Risk flags act as
+          negative adjustments to the overall score.
+        </p>
+
+        <h3>5.1 Rubric Categories</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Max Points</th>
+                <th>Summary</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Experience Depth</td>
+                <td>30</td>
+                <td>Relevancy of prior roles to this job’s scope and level.</td>
+              </tr>
+              <tr>
+                <td>Tenure Stability</td>
+                <td>15</td>
+                <td>Consistency and average time-in-role, tuned for tech.</td>
+              </tr>
+              <tr>
+                <td>Competitor / Industry Fit</td>
+                <td>15</td>
+                <td>Employer pedigree across competitors, adjacencies, and relevant tech.</td>
+              </tr>
+              <tr>
+                <td>Skills &amp; Tools Match</td>
+                <td>25</td>
+                <td>Coverage of must-have and nice-to-have skills; transferability.</td>
+              </tr>
+              <tr>
+                <td>Education &amp; Credentials</td>
+                <td>5</td>
+                <td>Baseline requirements and relevant advanced credentials.</td>
+              </tr>
+              <tr>
+                <td>Soft Indicators</td>
+                <td>10</td>
+                <td>Signals like clarity, detail, follow-through, and level of polish.</td>
+              </tr>
+              <tr>
+                <td>Risk Flags (penalty)</td>
+                <td>-20</td>
+                <td>Moderate negative weighting for meaningful risk patterns.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>5.2 Experience Depth – Signals</h3>
+        <ul>
+          <li><strong>High band:</strong> 3+ years in highly relevant roles, clearly progressive scope.</li>
+          <li><strong>Medium band:</strong> 1–3 years relevant, plus some adjacent or transferable experience.</li>
+          <li><strong>Low band:</strong> Mostly unrelated roles, unclear match to job level or domain.</li>
+        </ul>
+
+        <h3>5.3 Tenure Stability – Tech-Tuned</h3>
+        <p>Tech markets skew more dynamic, so expectations are adjusted accordingly:</p>
+        <ul>
+          <li><strong>High band:</strong> average 2–3 years per role, some longer stints, reasonable moves.</li>
+          <li><strong>Medium band:</strong> average around 1.5–2 years, a few shorter roles but overall coherent.</li>
+          <li><strong>Low band:</strong> repeated sub-12-month roles, unexplained gaps, or frequent lateral moves without progression.</li>
+        </ul>
+
+        <h3>5.4 Competitor / Industry Fit – Generous Model</h3>
+        <ul>
+          <li><strong>High band:</strong> direct competitors, adjacent companies in the same ecosystem, or strong, well-known tech brands.</li>
+          <li><strong>Medium band:</strong> general tech companies, relevant adjacent industries, or strong brands outside the core ecosystem.</li>
+          <li><strong>Low band:</strong> low-signal employers for this role (completely different domain, no clear transferrable context).</li>
+        </ul>
+
+        <h3>5.5 Skills &amp; Tools Match</h3>
+        <ul>
+          <li><strong>High band:</strong> all must-have skills present and demonstrated; several nice-to-haves.</li>
+          <li><strong>Medium band:</strong> most must-haves, strong transferable skills, some nice-to-haves missing.</li>
+          <li><strong>Low band:</strong> missing critical skills or only adjacent experience without clear transfer.</li>
+        </ul>
+
+        <h3>5.6 Education &amp; Credentials</h3>
+        <ul>
+          <li><strong>High band:</strong> required degree plus directly relevant advanced study / certifications.</li>
+          <li><strong>Medium band:</strong> required or equivalent; relevant coursework or partial credentials.</li>
+          <li><strong>Low band:</strong> missing non-negotiable requirements (where they are truly business-critical).</li>
+        </ul>
+
+        <h3>5.7 Soft Indicators</h3>
+        <ul>
+          <li>Clarity and structure of resume content.</li>
+          <li>Evidence of results (metrics, impact, ownership).</li>
+          <li>Consistency between roles, responsibilities, and claimed achievements.</li>
+        </ul>
+
+        <h3>5.8 Risk Flags (Moderate Penalty)</h3>
+        <p>Risk flags do not automatically disqualify a candidate; they trigger ask-next questions and moderate penalties.</p>
+        <ul>
+          <li>Repeated short tenures (&lt; 12 months) without obvious context.</li>
+          <li>Unexplained multi-year gaps.</li>
+          <li>Title inflation vs scope (e.g., “VP” for an IC-level role).</li>
+          <li>Overly generic or buzzword-heavy content with little evidence of outcomes.</li>
+        </ul>
+      </section>
+
+      <!-- 6. Hybrid Scoring & Recommendations -->
+      <section id="scoring">
+        <h2>6. Hybrid Scoring &amp; Recommendations</h2>
+
+        <p>
+          The hybrid model combines banded scores (for explainability) with numeric ranges (for analytics and tuning).
+        </p>
+
+        <h3>6.1 Category Bands &amp; Points</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Band</th>
+                <th>Points (example)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Experience Depth</td>
+                <td>High / Med / Low</td>
+                <td>24–30 / 16–23 / 0–15</td>
+              </tr>
+              <tr>
+                <td>Tenure Stability</td>
+                <td>High / Med / Low</td>
+                <td>12–15 / 8–11 / 0–7</td>
+              </tr>
+              <tr>
+                <td>Competitor Fit</td>
+                <td>High / Med / Low</td>
+                <td>12–15 / 7–11 / 0–6</td>
+              </tr>
+              <tr>
+                <td>Skills Match</td>
+                <td>High / Med / Low</td>
+                <td>20–25 / 12–19 / 0–11</td>
+              </tr>
+              <tr>
+                <td>Education</td>
+                <td>High / Med / Low</td>
+                <td>4–5 / 2–3 / 0–1</td>
+              </tr>
+              <tr>
+                <td>Soft Indicators</td>
+                <td>High / Med / Low</td>
+                <td>8–10 / 4–7 / 0–3</td>
+              </tr>
+              <tr>
+                <td>Risk Flags</td>
+                <td>None / Mild / Significant</td>
+                <td>0 / -5 / -10 to -20</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>6.2 Overall Score Bands</h3>
+        <ul>
+          <li><strong>90–100:</strong> Strong Match</li>
+          <li><strong>75–89:</strong> Solid Match</li>
+          <li><strong>60–74:</strong> Partial Match</li>
+          <li><strong>&lt; 60:</strong> Weak Match</li>
+        </ul>
+
+        <h3>6.3 Recommendation Logic</h3>
+        <p>The recommendation is based on score + must-have requirements + risk flags:</p>
+        <ul>
+          <li><strong>Advance:</strong>
+            <ul>
+              <li>Overall score ≥ 80,</li>
+              <li>All must-have requirements met,</li>
+              <li>No “significant” (high-penalty) risk flags.</li>
+            </ul>
+          </li>
+          <li><strong>HM Review:</strong>
+            <ul>
+              <li>Score between ~65–79, or</li>
+              <li>Mixed signal (e.g., strong experience but some risk flags), or</li>
+              <li>Unusual, non-linear background with potential upside.</li>
+            </ul>
+          </li>
+          <li><strong>Do Not Advance:</strong>
+            <ul>
+              <li>Missing a non-negotiable requirement <em>and</em> overall score below threshold, or</li>
+              <li>Very low overall score (&lt; ~65) with significant risk patterns.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p>
+          The agent always emits <strong>both</strong> the band (“Strong Match”) and the numeric score (e.g., 86/100), plus
+          a plain-language explanation summarizing why.
+        </p>
+      </section>
+
+      <!-- 7. Ask-Next & HM Summaries -->
+      <section id="asknext">
+        <h2>7. Ask-Next Prompts &amp; HM Summaries</h2>
+
+        <p>
+          Recommendations are not the end of the story; they drive better conversations. Screening A[i]gent proposes:
+        </p>
+
+        <h3>7.1 Ask-Next for Recruiter Screens</h3>
+        <ul>
+          <li><strong>Experience depth:</strong> “Walk me through your work on X; what were you directly responsible for?”</li>
+          <li><strong>Tenure:</strong> “I noticed a few shorter roles in [years]. Can you share the context?”</li>
+          <li><strong>Skills:</strong> “Tell me about a recent project where you used [tool/skill] end-to-end.”</li>
+          <li><strong>Risk flags:</strong> “I see a gap between [year] and [year]. What were you focused on then?”</li>
+        </ul>
+
+        <h3>7.2 HM Preview Summary</h3>
+        <p>For candidates marked Advance or HM Review, the agent produces a short HM-facing summary:</p>
+        <ul>
+          <li>1–2 sentence overview of current/past roles and level.</li>
+          <li>Top 3 strengths relative to the rubric.</li>
+          <li>Top 1–2 concerns or open questions.</li>
+          <li>Overall band and score (e.g., “Solid Match – 82/100”).</li>
+        </ul>
+
+        <p>
+          These summaries help HMs calibrate more quickly, especially when they’re comparing multiple candidates surfaced
+          by Screening A[i]gent.
+        </p>
+      </section>
+
+      <!-- 8. Calibration & Governance -->
+      <section id="calibration">
+        <h2>8. Calibration &amp; Governance</h2>
+
+        <p>Rubrics are living documents; calibration makes them better over time.</p>
+
+        <h3>8.1 Shadow Mode</h3>
+        <ul>
+          <li>Run the agent silently alongside manual recruiter decisions for an initial period.</li>
+          <li>Compare agent recommendations vs actual decisions.</li>
+          <li>Collect examples where recruiters disagree with the agent’s call.</li>
+        </ul>
+
+        <h3>8.2 Override Tracking</h3>
+        <ul>
+          <li>Every override (both “Advance anyway” and “Do Not Advance despite high score”) requires a short note.</li>
+          <li>Metrics A[i]gent tracks override rate by role, recruiter, and segment.</li>
+          <li>High override clusters signal rubric misalignment or training gaps.</li>
+        </ul>
+
+        <h3>8.3 Rubric Reviews</h3>
+        <ul>
+          <li>Quarterly reviews with TA Ops + HMs to adjust thresholds and weights.</li>
+          <li>Use real candidate samples where the rubric under- or overscored.</li>
+          <li>Update documentation and re-communicate any changes to recruiters.</li>
+        </ul>
+
+        <h3>8.4 Fairness &amp; Bias Monitoring</h3>
+        <ul>
+          <li>Monitor pass-through and override rates across candidate groups.</li>
+          <li>Look for patterns where certain backgrounds are consistently scored lower.</li>
+          <li>Use findings to refine rubrics and ask-next prompts, not to hard-code new stereotypes.</li>
+        </ul>
+      </section>
+
+      <!-- 9. Integration -->
+      <section id="integration">
+        <h2>9. ATS Integration &amp; Outputs</h2>
+
+        <p>Screening A[i]gent is ATS-agnostic; the core requirement is a handful of stable fields.</p>
+
+        <h3>9.1 Example ATS Fields</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Field Name</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>screening_score_overall</td>
+                <td>Number</td>
+                <td>0–100 hybrid score.</td>
+              </tr>
+              <tr>
+                <td>screening_band_overall</td>
+                <td>Picklist</td>
+                <td>Strong / Solid / Partial / Weak.</td>
+              </tr>
+              <tr>
+                <td>screening_band_experience</td>
+                <td>Picklist</td>
+                <td>High / Medium / Low.</td>
+              </tr>
+              <tr>
+                <td>screening_band_tenure</td>
+                <td>Picklist</td>
+                <td>High / Medium / Low.</td>
+              </tr>
+              <tr>
+                <td>screening_band_competitor_fit</td>
+                <td>Picklist</td>
+                <td>High / Medium / Low.</td>
+              </tr>
+              <tr>
+                <td>screening_band_skills</td>
+                <td>Picklist</td>
+                <td>High / Medium / Low.</td>
+              </tr>
+              <tr>
+                <td>screening_risk_flags</td>
+                <td>Multi-select</td>
+                <td>Short tenures, gaps, title mismatch, etc.</td>
+              </tr>
+              <tr>
+                <td>screening_recommendation</td>
+                <td>Picklist</td>
+                <td>Advance / HM Review / Do Not Advance.</td>
+              </tr>
+              <tr>
+                <td>screening_override_flag</td>
+                <td>Boolean</td>
+                <td>Yes if recruiter overrode the agent’s recommendation.</td>
+              </tr>
+              <tr>
+                <td>screening_decision_at</td>
+                <td>Datetime</td>
+                <td>Timestamp of recruiter’s final decision.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>9.2 Implementation Notes</h3>
+        <ul>
+          <li>Start with a minimal, stable field set; add more after adoption.</li>
+          <li>Hide internal-only fields from hiring managers if they add noise.</li>
+          <li>Ensure Screening A[i]gent writes to fields only after recruiter confirmation.</li>
+        </ul>
+      </section>
+
+      <!-- 10. Metrics & Metrics Agent -->
+      <section id="metrics">
+        <h2>10. Metrics &amp; Metrics A[i]gent Integration</h2>
+
+        <p>Screening A[i]gent feeds Metrics A[i]gent, which powers your recruiting analytics.</p>
+
+        <h3>10.1 Key Screening Metrics</h3>
+        <ul>
+          <li>Application → Screen pass-through (by source, role, recruiter).</li>
+          <li>Distribution of screening bands (how many Strong vs Partial, etc.).</li>
+          <li>Override rate and direction (Advance vs Do Not Advance overrides).</li>
+          <li>Time from application to screening decision.</li>
+          <li>Downstream performance: how often Strong / Solid matches reach late stages or offers.</li>
+        </ul>
+
+        <h3>10.2 Event Mapping</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Screening Event</th>
+                <th>Metrics Dictionary Field</th>
+                <th>Used For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>screening_started_at</td>
+                <td>screening_start_time</td>
+                <td>Turnaround time calculations.</td>
+              </tr>
+              <tr>
+                <td>screening_decision_at</td>
+                <td>screening_decision_time</td>
+                <td>Lead time from application to decision.</td>
+              </tr>
+              <tr>
+                <td>screening_recommendation</td>
+                <td>screening_recommendation</td>
+                <td>Quality/fairness analysis and calibration.</td>
+              </tr>
+              <tr>
+                <td>screening_override_flag</td>
+                <td>screening_override_flag</td>
+                <td>Override rate and pattern detection.</td>
+              </tr>
+              <tr>
+                <td>screening_score_overall</td>
+                <td>screening_score_overall</td>
+                <td>Score distribution, downstream quality correlation.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Taken together, these metrics help answer: “Is our screening rubric surfacing the right talent, fairly,
+          and fast enough to meet hiring goals?”
+        </p>
+      </section>
+
+      <!-- Appendix A -->
+      <section id="appendix-bands">
+        <h2>Appendix A – Bands &amp; Point Ranges</h2>
+
+        <p>This appendix summarizes the hybrid band → points mapping for quick reference.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Band</th>
+                <th>Description</th>
+                <th>Typical Points (per category)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>High</td>
+                <td>Clear, strong alignment with rubric expectations.</td>
+                <td>≈ 80–100% of the max for that category.</td>
+              </tr>
+              <tr>
+                <td>Medium</td>
+                <td>Good but not perfect alignment; some gaps or trade-offs.</td>
+                <td>≈ 50–79% of the max.</td>
+              </tr>
+              <tr>
+                <td>Low</td>
+                <td>Limited alignment or significant missing ingredients.</td>
+                <td>≈ 0–49% of the max.</td>
+              </tr>
+              <tr>
+                <td>No Risk</td>
+                <td>No meaningful risk flags detected.</td>
+                <td>0 penalty.</td>
+              </tr>
+              <tr>
+                <td>Mild Risk</td>
+                <td>One or two flags with plausible explanations.</td>
+                <td>≈ -5 penalty.</td>
+              </tr>
+              <tr>
+                <td>Significant Risk</td>
+                <td>Multiple or severe flags that warrant caution.</td>
+                <td>≈ -10 to -20 penalty.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Exact ranges can be tuned per company and role; the important part is that bands are stable, documented, and
+          shared with stakeholders.
+        </p>
+      </section>
+
+      <!-- Appendix B -->
+      <section id="appendix-examples">
+        <h2>Appendix B – Example Role Profiles</h2>
+
+        <p>These examples show how the rubric might be applied to different common roles.</p>
+
+        <h3>B.1 AE / Account Executive</h3>
+        <ul>
+          <li>Experience: quota-carrying SaaS sales, similar ACV and sales cycle.</li>
+          <li>Tenure: 2–3 year stints; some startup volatility acceptable.</li>
+          <li>Competitor Fit: direct competitors, adjacent SaaS products, industry familiarity.</li>
+          <li>Skills: full-funnel sales motions, MEDDIC/BANT, CRM expertise.</li>
+        </ul>
+
+        <h3>B.2 SDR / BDR</h3>
+        <ul>
+          <li>Experience: outbound prospecting, high-volume outreach, pipeline generation.</li>
+          <li>Signals: activity-level metrics, conversion from meetings to pipeline.</li>
+          <li>Competitor Fit: tech sales, preferably similar ICP.</li>
+        </ul>
+
+        <h3>B.3 Recruiter / Talent Partner</h3>
+        <ul>
+          <li>Experience: end-to-end recruiting for similar roles and hiring managers.</li>
+          <li>Tenure: enough time in roles to show cycles and re-hire scenarios.</li>
+          <li>Skills: sourcing, stakeholder management, ATS usage, data hygiene.</li>
+        </ul>
+
+        <h3>B.4 Software Engineer</h3>
+        <ul>
+          <li>Experience: languages, frameworks, and types of systems that match the role.</li>
+          <li>Signals: shipped features, ownership of components, depth vs breadth.</li>
+          <li>Education: CS or equivalent, strong projects, open-source contributions.</li>
+        </ul>
+
+        <p>
+          In all cases, the rubric is tuned per job family, but the underlying hybrid model, scoring, and governance
+          remain consistent.
+        </p>
+      </section>
+
+    </article>
   </div>
 
   <footer>
