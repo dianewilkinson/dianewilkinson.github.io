@@ -97,8 +97,13 @@
       color:var(--muted);
       line-height:1.7;
     }
+
     .hero-actions{
       margin-top:10px;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:8px;
       font-size:13px;
     }
     .hero-actions a{
@@ -110,6 +115,16 @@
       border:1px solid rgba(148,163,184,.8);
       background:rgba(255,255,255,.9);
       font-weight:500;
+      text-decoration:none;
+    }
+
+    .back-pill{
+      color:#4f46e5;
+    }
+    .back-pill:hover{
+      background:rgba(255,255,255,1);
+      color:#4338ca;
+      text-decoration:none;
     }
 
     .hero-meta{
@@ -143,23 +158,20 @@
       .hero-meta{max-width:none;}
     }
 
-    /* Layout with TOC */
-    .content-layout{
+    /* Info row under hero */
+    .info-layout{
       display:grid;
-      grid-template-columns:220px minmax(0,1fr);
-      gap:24px;
-      align-items:flex-start;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-bottom:24px;
     }
     @media (max-width:900px){
-      .content-layout{
+      .info-layout{
         grid-template-columns:1fr;
       }
     }
 
-    .toc{
-      position:sticky;
-      top:20px;
-      align-self:flex-start;
+    .toc-card{
       background:var(--card);
       border-radius:14px;
       border:1px solid var(--border);
@@ -167,26 +179,26 @@
       box-shadow:0 1px 3px var(--shadow);
       font-size:13px;
     }
-    .toc h3{
+    .toc-card h3{
       margin:0 0 6px;
       font-size:13px;
       text-transform:uppercase;
       letter-spacing:.08em;
       color:#6b7280;
     }
-    .toc ul{
+    .toc-card ul{
       list-style:none;
       margin:0;
       padding:0;
     }
-    .toc li{
+    .toc-card li{
       margin:3px 0;
     }
-    .toc a{
+    .toc-card a{
       color:#374151;
       text-decoration:none;
     }
-    .toc a:hover{
+    .toc-card a:hover{
       text-decoration:underline;
       color:var(--link-soft);
     }
@@ -284,7 +296,7 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-main">
-        <div class="hero-eyebrow">Playbook · Candidate Journey & Experience</div>
+        <div class="hero-eyebrow">Playbook · Candidate Journey &amp; Experience</div>
         <h2 class="hero-title">
           Make the entire journey feel <span>intentional, predictable, and human</span> — for every candidate.
         </h2>
@@ -304,40 +316,19 @@
           <a href="./playbook-candidate-journey.pdf" target="_blank" rel="noopener">
             📄 Download full PDF playbook
           </a>
-        </div>
           <a href="/" class="back-pill">
             ← Back to Portfolio Home
           </a>
-          
-          <style>
-          .back-pill {
-            display:inline-flex;
-            align-items:center;
-            gap:6px;
-            margin-top:8px;
-            padding:7px 12px;
-            border-radius:999px;
-            font-size:13px;
-            font-weight:500;
-            color:#4f46e5;
-            background:rgba(255,255,255,0.9);
-            border:1px solid rgba(148,163,184,0.8);
-            text-decoration:none;
-          }
-          .back-pill:hover {
-            background:rgba(255,255,255,1);
-            text-decoration:none;
-            color:#4338ca;
-          }
-          </style>
         </div>
-
       </div>
+    </section>
 
+    <!-- INFO ROW UNDER HERO -->
+    <div class="info-layout">
       <aside class="hero-meta">
         <h3>What this playbook covers</h3>
         <ul>
-          <li>Standard journey stages & target experience</li>
+          <li>Standard journey stages &amp; target experience</li>
           <li>Core touchpoints and message types</li>
           <li>Where automations live vs. human touchpoints</li>
           <li>Ownership across TA, HMs, and Ops</li>
@@ -350,330 +341,328 @@
           automation-friendly but still deeply human.
         </div>
       </aside>
-    </section>
 
-    <!-- CONTENT + TOC -->
-    <div class="content-layout">
-      <nav class="toc">
+      <nav class="toc-card">
         <h3>Sections</h3>
         <ul>
-          <li><a href="#overview">1. Overview & Outcomes</a></li>
+          <li><a href="#overview">1. Overview &amp; Outcomes</a></li>
           <li><a href="#stages">2. Journey Stages</a></li>
-          <li><a href="#touchpoints">3. Core Touchpoints & Message Types</a></li>
+          <li><a href="#touchpoints">3. Core Touchpoints &amp; Message Types</a></li>
           <li><a href="#automation">4. Automation vs Human Touchpoints</a></li>
-          <li><a href="#slas">5. SLAs, Guardrails & Risk</a></li>
-          <li><a href="#metrics">6. Metrics & Feedback Loops</a></li>
+          <li><a href="#slas">5. SLAs, Guardrails &amp; Risk</a></li>
+          <li><a href="#metrics">6. Metrics &amp; Feedback Loops</a></li>
           <li><a href="#library">Appendix – Example Message Library</a></li>
         </ul>
       </nav>
-
-      <article>
-
-        <!-- 1. Overview -->
-        <section id="overview">
-          <h2>1. Overview & Outcomes</h2>
-
-          <h3>1.1 Why a Candidate Journey Playbook?</h3>
-          <p>
-            Most companies have a rough idea of their “candidate journey,” but very few have a single, shared view of:
-          </p>
-          <ul>
-            <li>What candidates should experience at each stage,</li>
-            <li>What messages they should receive (and when),</li>
-            <li>Which steps are automated vs. human-driven, and</li>
-            <li>Who actually owns each touchpoint.</li>
-          </ul>
-          <p>
-            This playbook creates that shared source of truth so that recruiters, coordinators, hiring managers,
-            and operations are all running the same play.
-          </p>
-
-          <h3>1.2 Outcomes We’re Aiming For</h3>
-          <ul>
-            <li>Predictable, transparent candidate experience from first touch through onboarding.</li>
-            <li>Minimal “black box” moments where candidates don’t know what’s happening.</li>
-            <li>Clear automation opportunities that save time without sacrificing warmth.</li>
-            <li>Fewer one-off emails; more reusable templates and workflows.</li>
-            <li>Better data for Metrics A[i]gent to analyze bottlenecks and sentiment.</li>
-          </ul>
-        </section>
-
-        <!-- 2. Stages -->
-        <section id="stages">
-          <h2>2. Journey Stages</h2>
-
-          <p>
-            The journey is broken into six core stages. Some candidates will skip stages (e.g., internal moves);
-            others may loop within stages (multiple panels), but the mental model stays consistent.
-          </p>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Stage</th>
-                  <th>Primary Goal</th>
-                  <th>Typical Owner</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>0</td>
-                  <td>Awareness & Interest</td>
-                  <td>Make the company and role feel relevant and worth exploring.</td>
-                  <td>Employer Brand, Marketing, Talent Brand, TA</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Application / Sourcing</td>
-                  <td>Capture interest and gather enough information for screening.</td>
-                  <td>Recruiters, Sourcing, Screening A[i]gent</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Initial Contact & Screen</td>
-                  <td>Confirm basics, mutual fit, and motivation.</td>
-                  <td>Recruiter / Talent Partner</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Hiring Manager & Panel Interviews</td>
-                  <td>Assess skills, behaviours, and mutual expectations.</td>
-                  <td>Hiring Manager, Interviewers, Workflow A[i]gent</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Offer & Close</td>
-                  <td>Align on details and secure a confident “yes.”</td>
-                  <td>Recruiter, HM, Comp / People Ops</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Pre-Start & Onboarding</td>
-                  <td>Transition from “candidate” to “teammate” smoothly.</td>
-                  <td>Recruiting, HR/People Ops, Manager</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p>
-            Each stage has its own set of touchpoints, message types, and automations. The next sections
-            detail those patterns.
-          </p>
-        </section>
-
-        <!-- 3. Touchpoints -->
-        <section id="touchpoints">
-          <h2>3. Core Touchpoints & Message Types</h2>
-
-          <p>
-            For each stage, we define the minimum viable touchpoints that should exist for most roles.
-            Additional role-specific messages can layer on top of this baseline.
-          </p>
-
-          <h3>3.1 Awareness & Interest</h3>
-          <ul>
-            <li>Job postings and career site pages with clear expectations and process overview.</li>
-            <li>LinkedIn / outbound messages that are personalised but templatized.</li>
-            <li>Role one-pagers or FAQ links for senior/critical roles.</li>
-          </ul>
-
-          <h3>3.2 Application / Sourcing</h3>
-          <ul>
-            <li><strong>Application confirmation</strong> – immediate, automated, with timeline expectations.</li>
-            <li><strong>“We received your application” status page</strong> – basic transparency.</li>
-            <li><strong>Early disqualification responses</strong> – respectful, quick, and clear.</li>
-          </ul>
-
-          <h3>3.3 Initial Contact & Screen</h3>
-          <ul>
-            <li>Availability request + brief outline of screen agenda.</li>
-            <li>Calendar invite with context, links, and interviewer name.</li>
-            <li>Post-screen follow-up: next steps or polite close-out with optional feedback.</li>
-          </ul>
-
-          <h3>3.4 Hiring Manager & Panel Interviews</h3>
-          <ul>
-            <li>Stage-specific prep email (“What to expect in the panel”).</li>
-            <li>Reminder email 24 hours before interviews.</li>
-            <li>Same-day logistics reminder for complex panels / onsite loops.</li>
-            <li>Post-interview update: decision, timeline, or “still reviewing” note.</li>
-          </ul>
-
-          <h3>3.5 Offer & Close</h3>
-          <ul>
-            <li>Offer call scheduling + high-level overview.</li>
-            <li>Written offer package and recap of role, team, and expectations.</li>
-            <li>“Decision support” follow-up: FAQs, benefits, equity explainers.</li>
-          </ul>
-
-          <h3>3.6 Pre-Start & Onboarding</h3>
-          <ul>
-            <li>Welcome note after acceptance with next-step checklist.</li>
-            <li>Pre-start check-ins (1–2 touchpoints depending on lead time).</li>
-            <li>Day-one logistics and team introduction note.</li>
-          </ul>
-
-          <div class="callout">
-            <strong>Design principle:</strong> every “wait” in the process should have a corresponding
-            communication, even if the message is “we’re still reviewing.”
-          </div>
-        </section>
-
-        <!-- 4. Automation vs Human -->
-        <section id="automation">
-          <h2>4. Automation vs Human Touchpoints</h2>
-
-          <p>
-            The goal is not to automate everything; it is to automate the <em>predictable</em> pieces
-            so recruiters can spend energy on judgement and relationship-building.
-          </p>
-
-          <h3>4.1 Good Candidates for Automation</h3>
-          <ul>
-            <li>Application confirmations and basic status updates.</li>
-            <li>Availability requests and calendar reminders.</li>
-            <li>Standard delay / “we’re still here” messages.</li>
-            <li>Interview reminders and thank-you notes.</li>
-          </ul>
-
-          <h3>4.2 Places to Stay Human-Led</h3>
-          <ul>
-            <li>Initial outreach to high-priority or executive candidates.</li>
-            <li>Nuanced feedback conversations and rejections late in the process.</li>
-            <li>Offer calls, negotiation, and major expectation resets.</li>
-            <li>Any time trust is at risk or context is complex.</li>
-          </ul>
-
-          <h3>4.3 How This Connects to A[i]gents</h3>
-          <ul>
-            <li><strong>Screening A[i]gent</strong> feeds structured recommendations into the “Initial Contact & Screen” stage.</li>
-            <li><strong>Workflow A[i]gent</strong> drives most interview confirmations, reminders, and delay updates.</li>
-            <li><strong>Metrics A[i]gent</strong> observes time-in-stage, communication coverage, and drop-off points.</li>
-          </ul>
-        </section>
-
-        <!-- 5. SLAs -->
-        <section id="slas">
-          <h2>5. SLAs, Guardrails & Risk</h2>
-
-          <p>
-            SLAs keep the journey moving and make it clear when something is off track. Guardrails
-            ensure automations don’t accidentally degrade experience.
-          </p>
-
-          <h3>5.1 Example SLAs</h3>
-          <ul>
-            <li><strong>Application → first review:</strong> within 3 business days.</li>
-            <li><strong>Screen → decision:</strong> within 2 business days of the interview.</li>
-            <li><strong>Panel → decision:</strong> within 5 business days, with at least one update in the meantime.</li>
-            <li><strong>Offer → written doc:</strong> within 24 hours of verbal yes.</li>
-          </ul>
-
-          <h3>5.2 Guardrails</h3>
-          <ul>
-            <li>No automated messages that contradict each other (e.g., two different statuses).</li>
-            <li>Templates are reviewed quarterly for tone, inclusivity, and clarity.</li>
-            <li>Recruiters can pause automations for sensitive or escalated candidates.</li>
-            <li>All automated communications are visible in the ATS timeline.</li>
-          </ul>
-
-          <h3>5.3 Risks & Mitigations</h3>
-          <ul>
-            <li><strong>Risk:</strong> Candidates feel like they’re talking to a robot.<br>
-                <strong>Mitigation:</strong> Use warm, specific language; mix in live touches at key inflection points.</li>
-            <li><strong>Risk:</strong> Automations fire on out-of-date data.<br>
-                <strong>Mitigation:</strong> Use clear stage-based triggers; pilot changes before global rollout.</li>
-            <li><strong>Risk:</strong> SLAs are unrealistic.<br>
-                <strong>Mitigation:</strong> Set SLAs with real recruiter bandwidth in mind and revisit quarterly.</li>
-          </ul>
-        </section>
-
-        <!-- 6. Metrics -->
-        <section id="metrics">
-          <h2>6. Metrics & Feedback Loops</h2>
-
-          <p>
-            A journey is only as good as its measurement. Metrics A[i]gent uses structured events from
-            Screening and Workflow A[i]gents to monitor how the candidate journey is actually functioning.
-          </p>
-
-          <h3>6.1 Core Journey Metrics</h3>
-          <ul>
-            <li>Time-in-stage (median and percentiles) for each stage.</li>
-            <li>Drop-off rate by stage (who stops engaging and where).</li>
-            <li>Communication coverage – % of candidates who received the expected touchpoints.</li>
-            <li>Candidate satisfaction / NPS where surveys exist.</li>
-          </ul>
-
-          <h3>6.2 Feedback Sources</h3>
-          <ul>
-            <li>Candidate surveys linked in closing or rejection emails.</li>
-            <li>Hiring manager feedback on perceived clarity and speed.</li>
-            <li>Recruiter input during retros for critical roles.</li>
-          </ul>
-
-          <h3>6.3 How This Loops Back Into Design</h3>
-          <ul>
-            <li>Stages with long time-in-stage and low comms coverage are top priorities for Workflow A[i]gent.</li>
-            <li>Drop-off analysis informs message content and channel (e.g., SMS vs. email for reminders).</li>
-            <li>Qualitative feedback guides template tone and expectation-setting tweaks.</li>
-          </ul>
-        </section>
-
-        <!-- Appendix -->
-        <section id="library">
-          <h2>Appendix – Example Message Library</h2>
-
-          <p>
-            Below are shortened examples of messages for key stages. In practice, each of these would live as
-            templates inside your ATS or communication tool, with variants by office/role/seniority.
-          </p>
-
-          <h3>A.1 Application Confirmation</h3>
-          <div class="callout">
-            <strong>Subject:</strong> Thanks for applying for [Role] at [Company]<br>
-            <strong>Body (excerpt):</strong>  
-            “Thanks so much for your interest in [Company] and the [Role] role. Our team reviews every application.
-            You can expect an update within [X] business days. In the meantime, here’s what the process typically looks like…”
-          </div>
-
-          <h3>A.2 Screen Scheduling</h3>
-          <div class="callout">
-            <strong>Subject:</strong> Quick intro chat – [Role] at [Company]<br>
-            <strong>Body (excerpt):</strong>  
-            “I’d love to connect for a short intro conversation to learn more about your background and share context on the role.
-            Here’s a link to my calendar, or reply with a few times that work for you…”
-          </div>
-
-          <h3>A.3 “We’re Still Here” During Panel Review</h3>
-          <div class="callout">
-            <strong>Subject:</strong> Quick update on your interviews with [Company]<br>
-            <strong>Body (excerpt):</strong>  
-            “Thanks again for taking the time to meet with the team. We’re still consolidating feedback and expect to have
-            next steps by [date]. I’ll reach out as soon as we have a decision, and please don’t hesitate to reply here
-            if anything changes on your side.”
-          </div>
-
-          <h3>A.4 Respectful Close-Out</h3>
-          <div class="callout">
-            <strong>Subject:</strong> Update on your application for [Role]<br>
-            <strong>Body (excerpt):</strong>  
-            “After careful review, we’ve decided not to move forward for this specific role. This wasn’t an easy decision,
-            and it reflects the match against this opening rather than your overall experience. We truly appreciate the time
-            you invested and wish you the best in your search…”
-          </div>
-
-          <p>
-            These examples are intentionally short and plain-spoken; tone and specifics can be tuned to match
-            your brand voice and regional norms.
-          </p>
-        </section>
-
-      </article>
     </div>
+
+    <!-- MAIN CONTENT -->
+    <article>
+
+      <!-- 1. Overview -->
+      <section id="overview">
+        <h2>1. Overview &amp; Outcomes</h2>
+
+        <h3>1.1 Why a Candidate Journey Playbook?</h3>
+        <p>
+          Most companies have a rough idea of their “candidate journey,” but very few have a single, shared view of:
+        </p>
+        <ul>
+          <li>What candidates should experience at each stage,</li>
+          <li>What messages they should receive (and when),</li>
+          <li>Which steps are automated vs. human-driven, and</li>
+          <li>Who actually owns each touchpoint.</li>
+        </ul>
+        <p>
+          This playbook creates that shared source of truth so that recruiters, coordinators, hiring managers,
+          and operations are all running the same play.
+        </p>
+
+        <h3>1.2 Outcomes We’re Aiming For</h3>
+        <ul>
+          <li>Predictable, transparent candidate experience from first touch through onboarding.</li>
+          <li>Minimal “black box” moments where candidates don’t know what’s happening.</li>
+          <li>Clear automation opportunities that save time without sacrificing warmth.</li>
+          <li>Fewer one-off emails; more reusable templates and workflows.</li>
+          <li>Better data for Metrics A[i]gent to analyze bottlenecks and sentiment.</li>
+        </ul>
+      </section>
+
+      <!-- 2. Stages -->
+      <section id="stages">
+        <h2>2. Journey Stages</h2>
+
+        <p>
+          The journey is broken into six core stages. Some candidates will skip stages (e.g., internal moves);
+          others may loop within stages (multiple panels), but the mental model stays consistent.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Stage</th>
+                <th>Primary Goal</th>
+                <th>Typical Owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>Awareness &amp; Interest</td>
+                <td>Make the company and role feel relevant and worth exploring.</td>
+                <td>Employer Brand, Marketing, Talent Brand, TA</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Application / Sourcing</td>
+                <td>Capture interest and gather enough information for screening.</td>
+                <td>Recruiters, Sourcing, Screening A[i]gent</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Initial Contact &amp; Screen</td>
+                <td>Confirm basics, mutual fit, and motivation.</td>
+                <td>Recruiter / Talent Partner</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Hiring Manager &amp; Panel Interviews</td>
+                <td>Assess skills, behaviours, and mutual expectations.</td>
+                <td>Hiring Manager, Interviewers, Workflow A[i]gent</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Offer &amp; Close</td>
+                <td>Align on details and secure a confident “yes.”</td>
+                <td>Recruiter, HM, Comp / People Ops</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Pre-Start &amp; Onboarding</td>
+                <td>Transition from “candidate” to “teammate” smoothly.</td>
+                <td>Recruiting, HR/People Ops, Manager</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Each stage has its own set of touchpoints, message types, and automations. The next sections
+          detail those patterns.
+        </p>
+      </section>
+
+      <!-- 3. Touchpoints -->
+      <section id="touchpoints">
+        <h2>3. Core Touchpoints &amp; Message Types</h2>
+
+        <p>
+          For each stage, we define the minimum viable touchpoints that should exist for most roles.
+          Additional role-specific messages can layer on top of this baseline.
+        </p>
+
+        <h3>3.1 Awareness &amp; Interest</h3>
+        <ul>
+          <li>Job postings and career site pages with clear expectations and process overview.</li>
+          <li>LinkedIn / outbound messages that are personalised but templatized.</li>
+          <li>Role one-pagers or FAQ links for senior/critical roles.</li>
+        </ul>
+
+        <h3>3.2 Application / Sourcing</h3>
+        <ul>
+          <li><strong>Application confirmation</strong> – immediate, automated, with timeline expectations.</li>
+          <li><strong>“We received your application” status page</strong> – basic transparency.</li>
+          <li><strong>Early disqualification responses</strong> – respectful, quick, and clear.</li>
+        </ul>
+
+        <h3>3.3 Initial Contact &amp; Screen</h3>
+        <ul>
+          <li>Availability request + brief outline of screen agenda.</li>
+          <li>Calendar invite with context, links, and interviewer name.</li>
+          <li>Post-screen follow-up: next steps or polite close-out with optional feedback.</li>
+        </ul>
+
+        <h3>3.4 Hiring Manager &amp; Panel Interviews</h3>
+        <ul>
+          <li>Stage-specific prep email (“What to expect in the panel”).</li>
+          <li>Reminder email 24 hours before interviews.</li>
+          <li>Same-day logistics reminder for complex panels / onsite loops.</li>
+          <li>Post-interview update: decision, timeline, or “still reviewing” note.</li>
+        </ul>
+
+        <h3>3.5 Offer &amp; Close</h3>
+        <ul>
+          <li>Offer call scheduling + high-level overview.</li>
+          <li>Written offer package and recap of role, team, and expectations.</li>
+          <li>“Decision support” follow-up: FAQs, benefits, equity explainers.</li>
+        </ul>
+
+        <h3>3.6 Pre-Start &amp; Onboarding</h3>
+        <ul>
+          <li>Welcome note after acceptance with next-step checklist.</li>
+          <li>Pre-start check-ins (1–2 touchpoints depending on lead time).</li>
+          <li>Day-one logistics and team introduction note.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Design principle:</strong> every “wait” in the process should have a corresponding
+          communication, even if the message is “we’re still reviewing.”
+        </div>
+      </section>
+
+      <!-- 4. Automation vs Human -->
+      <section id="automation">
+        <h2>4. Automation vs Human Touchpoints</h2>
+
+        <p>
+          The goal is not to automate everything; it is to automate the <em>predictable</em> pieces
+          so recruiters can spend energy on judgement and relationship-building.
+        </p>
+
+        <h3>4.1 Good Candidates for Automation</h3>
+        <ul>
+          <li>Application confirmations and basic status updates.</li>
+          <li>Availability requests and calendar reminders.</li>
+          <li>Standard delay / “we’re still here” messages.</li>
+          <li>Interview reminders and thank-you notes.</li>
+        </ul>
+
+        <h3>4.2 Places to Stay Human-Led</h3>
+        <ul>
+          <li>Initial outreach to high-priority or executive candidates.</li>
+          <li>Nuanced feedback conversations and rejections late in the process.</li>
+          <li>Offer calls, negotiation, and major expectation resets.</li>
+          <li>Any time trust is at risk or context is complex.</li>
+        </ul>
+
+        <h3>4.3 How This Connects to A[i]gents</h3>
+        <ul>
+          <li><strong>Screening A[i]gent</strong> feeds structured recommendations into the “Initial Contact &amp; Screen” stage.</li>
+          <li><strong>Workflow A[i]gent</strong> drives most interview confirmations, reminders, and delay updates.</li>
+          <li><strong>Metrics A[i]gent</strong> observes time-in-stage, communication coverage, and drop-off points.</li>
+        </ul>
+      </section>
+
+      <!-- 5. SLAs -->
+      <section id="slas">
+        <h2>5. SLAs, Guardrails &amp; Risk</h2>
+
+        <p>
+          SLAs keep the journey moving and make it clear when something is off track. Guardrails
+          ensure automations don’t accidentally degrade experience.
+        </p>
+
+        <h3>5.1 Example SLAs</h3>
+        <ul>
+          <li><strong>Application → first review:</strong> within 3 business days.</li>
+          <li><strong>Screen → decision:</strong> within 2 business days of the interview.</li>
+          <li><strong>Panel → decision:</strong> within 5 business days, with at least one update in the meantime.</li>
+          <li><strong>Offer → written doc:</strong> within 24 hours of verbal yes.</li>
+        </ul>
+
+        <h3>5.2 Guardrails</h3>
+        <ul>
+          <li>No automated messages that contradict each other (e.g., two different statuses).</li>
+          <li>Templates are reviewed quarterly for tone, inclusivity, and clarity.</li>
+          <li>Recruiters can pause automations for sensitive or escalated candidates.</li>
+          <li>All automated communications are visible in the ATS timeline.</li>
+        </ul>
+
+        <h3>5.3 Risks &amp; Mitigations</h3>
+        <ul>
+          <li><strong>Risk:</strong> Candidates feel like they’re talking to a robot.<br>
+              <strong>Mitigation:</strong> Use warm, specific language; mix in live touches at key inflection points.</li>
+          <li><strong>Risk:</strong> Automations fire on out-of-date data.<br>
+              <strong>Mitigation:</strong> Use clear stage-based triggers; pilot changes before global rollout.</li>
+          <li><strong>Risk:</strong> SLAs are unrealistic.<br>
+              <strong>Mitigation:</strong> Set SLAs with real recruiter bandwidth in mind and revisit quarterly.</li>
+        </ul>
+      </section>
+
+      <!-- 6. Metrics -->
+      <section id="metrics">
+        <h2>6. Metrics &amp; Feedback Loops</h2>
+
+        <p>
+          A journey is only as good as its measurement. Metrics A[i]gent uses structured events from
+          Screening and Workflow A[i]gents to monitor how the candidate journey is actually functioning.
+        </p>
+
+        <h3>6.1 Core Journey Metrics</h3>
+        <ul>
+          <li>Time-in-stage (median and percentiles) for each stage.</li>
+          <li>Drop-off rate by stage (who stops engaging and where).</li>
+          <li>Communication coverage – % of candidates who received the expected touchpoints.</li>
+          <li>Candidate satisfaction / NPS where surveys exist.</li>
+        </ul>
+
+        <h3>6.2 Feedback Sources</h3>
+        <ul>
+          <li>Candidate surveys linked in closing or rejection emails.</li>
+          <li>Hiring manager feedback on perceived clarity and speed.</li>
+          <li>Recruiter input during retros for critical roles.</li>
+        </ul>
+
+        <h3>6.3 How This Loops Back Into Design</h3>
+        <ul>
+          <li>Stages with long time-in-stage and low comms coverage are top priorities for Workflow A[i]gent.</li>
+          <li>Drop-off analysis informs message content and channel (e.g., SMS vs. email for reminders).</li>
+          <li>Qualitative feedback guides template tone and expectation-setting tweaks.</li>
+        </ul>
+      </section>
+
+      <!-- Appendix -->
+      <section id="library">
+        <h2>Appendix – Example Message Library</h2>
+
+        <p>
+          Below are shortened examples of messages for key stages. In practice, each of these would live as
+          templates inside your ATS or communication tool, with variants by office/role/seniority.
+        </p>
+
+        <h3>A.1 Application Confirmation</h3>
+        <div class="callout">
+          <strong>Subject:</strong> Thanks for applying for [Role] at [Company]<br>
+          <strong>Body (excerpt):</strong>  
+          “Thanks so much for your interest in [Company] and the [Role] role. Our team reviews every application.
+          You can expect an update within [X] business days. In the meantime, here’s what the process typically looks like…”
+        </div>
+
+        <h3>A.2 Screen Scheduling</h3>
+        <div class="callout">
+          <strong>Subject:</strong> Quick intro chat – [Role] at [Company]<br>
+          <strong>Body (excerpt):</strong>  
+          “I’d love to connect for a short intro conversation to learn more about your background and share context on the role.
+          Here’s a link to my calendar, or reply with a few times that work for you…”
+        </div>
+
+        <h3>A.3 “We’re Still Here” During Panel Review</h3>
+        <div class="callout">
+          <strong>Subject:</strong> Quick update on your interviews with [Company]<br>
+          <strong>Body (excerpt):</strong>  
+          “Thanks again for taking the time to meet with the team. We’re still consolidating feedback and expect to have
+          next steps by [date]. I’ll reach out as soon as we have a decision, and please don’t hesitate to reply here
+          if anything changes on your side.”
+        </div>
+
+        <h3>A.4 Respectful Close-Out</h3>
+        <div class="callout">
+          <strong>Subject:</strong> Update on your application for [Role]<br>
+          <strong>Body (excerpt):</strong>  
+          “After careful review, we’ve decided not to move forward for this specific role. This wasn’t an easy decision,
+          and it reflects the match against this opening rather than your overall experience. We truly appreciate the time
+          you invested and wish you the best in your search…”
+        </div>
+
+        <p>
+          These examples are intentionally short and plain-spoken; tone and specifics can be tuned to match
+          your brand voice and regional norms.
+        </p>
+      </section>
+
+    </article>
   </div>
 
   <footer>
