@@ -154,21 +154,28 @@
       .hero-title{font-size:20px;}
       .hero-meta{max-width:none;}
     }
-
+    
     /* Info row under hero */
     .info-layout{
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:repeat(3, 1fr);
       gap:18px;
       margin-bottom:24px;
     }
-    @media (max-width:900px){
+    @media (max-width:1100px){
+      .info-layout{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+    
+    @media (max-width:700px){
       .info-layout{
         grid-template-columns:1fr;
       }
     }
-
-    .toc-card{
+    .hero-meta,
+    .toc-card,
+    .persona-card{
       background:var(--card);
       border-radius:14px;
       border:1px solid var(--border);
@@ -176,21 +183,30 @@
       box-shadow:0 1px 3px var(--shadow);
       font-size:13px;
     }
-    .toc-card h3{
+    
+    .hero-meta h3,
+    .toc-card h3,
+    .persona-card h3{
       margin:0 0 6px;
       font-size:13px;
       text-transform:uppercase;
       letter-spacing:.08em;
       color:#6b7280;
     }
+    
+    .hero-meta ul,
     .toc-card ul{
       list-style:none;
       margin:0;
       padding:0;
     }
+    
+    .hero-meta li,
     .toc-card li{
       margin:3px 0;
     }
+    
+    /* Links in sections card */
     .toc-card a{
       color:#374151;
       text-decoration:none;
@@ -199,6 +215,22 @@
       text-decoration:underline;
       color:var(--link-soft);
     }
+    
+    /* “Who this is for” pill */
+    .persona-pill{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:500;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      background:#e0ebff;
+      color:#1d4ed8;
+      margin-bottom:6px;
+    }
+
 
     article{
       background:var(--card);
@@ -293,7 +325,6 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-main">
-        <div class="hero-eyebrow">Playbook · Candidate Journey &amp; Experience</div>
         <h2 class="hero-title">
           Make the entire journey feel <span>intentional, predictable, and human</span> — for every candidate.
         </h2>
@@ -322,6 +353,7 @@
 
     <!-- INFO ROW UNDER HERO -->
     <div class="info-layout">
+      <!-- Left: What this playbook covers -->
       <aside class="hero-meta">
         <h3>What this playbook covers</h3>
         <ul>
@@ -332,13 +364,9 @@
           <li>Stage SLAs, guardrails, and metrics</li>
           <li>Example message library for key stages</li>
         </ul>
-        <div class="callout">
-          <span class="pill-note">Who this is for</span><br>
-          TA leaders, Recruiting Ops, and coordinators who want a consistent candidate journey that is
-          automation-friendly but still deeply human.
-        </div>
       </aside>
 
+      <!-- Middle: Sections -->
       <nav class="toc-card">
         <h3>Sections</h3>
         <ul>
@@ -351,7 +379,17 @@
           <li><a href="#library">Appendix – Example Message Library</a></li>
         </ul>
       </nav>
+      
+      <!-- Right: Who this is for -->
+      <aside class="persona-card">
+        <span class="persona-pill">Who this is for</span>
+        <p>
+          TA leaders, Recruiting Ops, and coordinators who want a consistent candidate 
+          journey that is automation-friendly but still deeply human.
+        </p>
+      </aside>
     </div>
+
 
     <!-- MAIN CONTENT -->
     <article>
