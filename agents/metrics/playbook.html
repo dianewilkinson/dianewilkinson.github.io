@@ -628,13 +628,27 @@
           </ul>
         </section>
 
-        <!-- 8. Implementation & Stack -->
+                <!-- 8. Implementation & Stack -->
         <section id="implementation">
           <h2>8. Implementation &amp; Stack</h2>
 
           <p>Metrics A[i]gent can run on whatever BI stack the company already uses.</p>
 
-          <h3>8.1 Data Flow (Conceptual)</h3>
+          <h3>8.1 Technical Architecture</h3>
+          <p>
+            In practice, Metrics A[i]gent runs on a simple, modular stack:
+            a <strong>data warehouse or central data store</strong> (e.g., BigQuery, Snowflake, Redshift),
+            a <strong>Python or SQL transformation layer</strong> that applies Metrics Dictionary definitions,
+            and a <strong>BI layer</strong> (Looker, Tableau, internal dashboards) for surfacing views to TA, HMs,
+            and leadership.
+          </p>
+          <p>
+            Screening and Workflow A[i]gents emit structured events (scores, timestamps, recommendations) that land
+            in the same store as ATS data, so the analytics layer is just another consumer of those events — not a
+            separate shadow system.
+          </p>
+
+          <h3>8.2 Data Flow (Conceptual)</h3>
           <ul>
             <li>Export or sync ATS data (API, scheduled exports, connectors).</li>
             <li>Ingest Screening and Workflow A[i]gent events into the same warehouse.</li>
@@ -642,7 +656,7 @@
             <li>Build dashboards and reports on top of this semantic model.</li>
           </ul>
 
-          <h3>8.2 Practical Implementation Tips</h3>
+          <h3>8.3 Practical Implementation Tips</h3>
           <ul>
             <li>Start with a small set of “must-have” metrics and dashboards.</li>
             <li>Prioritize correctness and explainability over complexity.</li>
