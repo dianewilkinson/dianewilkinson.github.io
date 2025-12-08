@@ -54,7 +54,8 @@ Funnel diagnostics, SLA visibility, pass-through analysis, and forecasting power
 
 Listed in the Suite Overview as future modules following the same architecture:
 
-- **Kickoff A[i]gent** — intake → scorecard + rubric generation  
+- **Kickoff A[i]gent** — intake → scorecard + rubric generation
+- **Sourcing A[i]gent** — Tech talent sourcing & market intelligence engine  
 - **Outreach A[i]gent** — outbound personalization and calibrated sourcing  
 - **Match A[i]gent** — rediscovery and cross-role candidate fit  
 - **Nurture A[i]gent** — silver-medalist follow-through  
