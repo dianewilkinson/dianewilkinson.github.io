@@ -8,34 +8,6 @@
     name="description"
     content="Quick recruiting funnel diagnostics: pass-through by stage, bottlenecks, and root-cause prompts for TA Ops."
   />
-  
-  .demo-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-    font-size: 0.8rem;
-  }
-  .nav-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.3rem 0.8rem;
-    border-radius: 999px;
-    border: 1px solid #d1d5db;
-    background: #f9fafb;
-    color: #374151;
-    text-decoration: none;
-    font-weight: 500;
-  }
-  .nav-pill:hover {
-    background: #ffffff;
-    color: #111827;
-  }
-  .nav-pill--secondary {
-    opacity: 0.9;
-  }
 
   <style>
     :root {
@@ -105,7 +77,6 @@
       }
     }
 
-    /* Tabs row with folder rail */
     .tabs-row {
       position: relative;
       display: flex;
@@ -186,7 +157,6 @@
       font-size: 0.85rem;
     }
 
-    /* Funnel table column widths */
     colgroup col:nth-child(1) { width: 18%; }
     colgroup col:nth-child(2) { width: 34%; }
     colgroup col:nth-child(3) { width: 18%; }
@@ -214,7 +184,6 @@
       text-align: center;
     }
 
-    /* Center numbers in top funnel table */
     tbody tr td:nth-child(1),
     tbody tr td:nth-child(3),
     tbody tr td:nth-child(4),
@@ -226,7 +195,6 @@
       text-align: center;
     }
 
-    /* Smaller number boxes */
     input[type="number"] {
       width: 2.6rem;
       padding: 0.12rem 0.2rem;
@@ -242,7 +210,6 @@
       box-shadow: 0 0 0 1px #6366f1;
     }
 
-    /* Stage pills: neutral funnel shape */
     .stage-pill {
       display: inline-flex;
       align-items: center;
@@ -301,7 +268,6 @@
       color: #9ca3af;
     }
 
-    /* Diagnosis pills: gray chip, colored text/dot */
     .diag-pill {
       display: inline-flex;
       align-items: center;
@@ -347,7 +313,6 @@
       font-weight: 500;
     }
 
-    /* CVR + neutral trend */
     .conv-wrapper {
       display: inline-flex;
       align-items: center;
@@ -360,7 +325,6 @@
       color: #6b7280;
     }
 
-    /* Bottom root-cause wrapper */
     .root-card {
       margin-top: 1.4rem;
       background: #f9fafb;
@@ -383,7 +347,6 @@
       color: #374151;
     }
 
-    /* Column header row inside root card */
     .root-columns-header {
       margin: 0.55rem 1.2rem 0.25rem;
       display: grid;
@@ -414,7 +377,6 @@
       padding: 0.7rem 0.3rem;
     }
 
-    /* Issue cards inside root-card */
     .root-issues {
       display: flex;
       flex-direction: column;
@@ -498,13 +460,6 @@
   <main class="page">
     <section class="card">
       <div class="eyebrow">A[i]gents Portfolio · Demo</div>
-      
-      <!-- Nav Pills -->
-      <div class="demo-nav">
-        <a href="/agents/suite/" class="nav-pill">← Back to A[i]gent Suite</a>
-        <a href="/agents/metrics/" class="nav-pill">📘 Open Metrics A[i]gent Playbook</a>
-        <a href="/" class="nav-pill nav-pill--secondary">🏠 Portfolio Home</a>
-      </div>
 
       <div class="title-row">
         <h1>Metrics A[i]gent</h1>
@@ -623,7 +578,6 @@
         In production, these counts are pulled automatically from your ATS/HRIS.
       </div>
 
-      <!-- Root-cause bottom card -->
       <div class="root-card">
         <div class="root-header">
           <h3>Diagnostic Summary | Root Cause Table</h3>
@@ -650,7 +604,6 @@
   </main>
 
   <script>
-    /* Benchmark helper */
     function getBenchmark(stageName) {
       const name = stageName.toLowerCase();
       if (name.includes("application")) return 12;
@@ -661,7 +614,6 @@
       return null;
     }
 
-    /* Demo data per requisition */
     const REQS = {
       esd: {
         name: "Enterprise Sales Director",
@@ -695,7 +647,6 @@
       }
     };
 
-    /* Previous-quarter CVRs for neutral trend arrows (demo) */
     const PREV_CVR = {
       esd: [10, 45, 40, 25, 80],
       se: [15, 48, 35, 28, 78],
@@ -739,7 +690,6 @@
       const name = stageName.toLowerCase();
       const b = benchmark;
 
-      /* Huge over-performance vs benchmark => Alert */
       if (b && conv > b * 2) {
         return "alert";
       }
@@ -828,7 +778,6 @@
             "Are offer, policy, and benefits competitive?"
           ];
         } else {
-          /* Generic fallbacks */
           internal = [
             "Is stage coding and data capture accurate?",
             "Are decision criteria and expectations documented?"
@@ -939,7 +888,6 @@
           s.convCell.innerHTML = convHTML;
         }
 
-        /* Diagnosis pills in main table */
         if (status === "unknown") {
           s.diagCell.textContent = "—";
         } else {
@@ -1011,7 +959,6 @@
       });
     });
 
-    /* Initial load */
     applyReq(currentReqKey);
   </script>
 </body>
