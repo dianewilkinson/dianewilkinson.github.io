@@ -8,6 +8,34 @@
     name="description"
     content="Quick recruiting funnel diagnostics: pass-through by stage, bottlenecks, and root-cause prompts for TA Ops."
   />
+  
+  .demo-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.8rem;
+  }
+  .nav-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
+    background: #f9fafb;
+    color: #374151;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .nav-pill:hover {
+    background: #ffffff;
+    color: #111827;
+  }
+  .nav-pill--secondary {
+    opacity: 0.9;
+  }
 
   <style>
     :root {
@@ -470,6 +498,13 @@
   <main class="page">
     <section class="card">
       <div class="eyebrow">A[i]gents Portfolio · Demo</div>
+      
+      <!-- Nav Pills -->
+      <div class="demo-nav">
+        <a href="/agents/suite/" class="nav-pill">← Back to A[i]gent Suite</a>
+        <a href="/agents/metrics/" class="nav-pill">📘 Open Metrics A[i]gent Playbook</a>
+        <a href="/" class="nav-pill nav-pill--secondary">🏠 Portfolio Home</a>
+      </div>
 
       <div class="title-row">
         <h1>Metrics A[i]gent</h1>
