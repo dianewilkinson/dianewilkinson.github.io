@@ -65,24 +65,11 @@
       display:flex;
       flex-wrap:wrap;
       gap:16px;
-      align-items:flex-start;
+      align-items:center;
     }
     .hero-main{
-      flex:1 1 340px;
+      flex:1 1 520px;
       min-width:0;
-    }
-    .hero-eyebrow{
-      display:inline-flex;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,.6);
-      background:rgba(255,255,255,.9);
-      font-size:11px;
-      font-weight:600;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#4b5563;
-      margin-bottom:8px;
     }
     .hero-title{
       margin:0 0 8px;
@@ -186,7 +173,29 @@
       box-shadow:0 1px 3px var(--shadow);
       padding:12px 12px 10px;
       overflow:hidden;
+      position:relative;
     }
+
+    /* Subtle header tint for each column */
+    .section-card::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:46px;
+      background:var(--accent-soft);
+      opacity:.55;
+      pointer-events:none;
+    }
+
+    .section-head,
+    .section-sub,
+    .agent-card{
+      position:relative;
+      z-index:1;
+    }
+
     .section-head{
       display:flex;
       align-items:baseline;
@@ -196,15 +205,26 @@
       border-bottom:1px solid #eef2f7;
       margin-bottom:10px;
     }
+
+    /* Make section titles stand out more */
     .section-title{
       margin:0;
-      font-size:16px;
-      font-weight:800;
+      font-size:18px;
+      font-weight:900;
       letter-spacing:.01em;
       display:flex;
       align-items:center;
-      gap:8px;
+      gap:10px;
     }
+    .section-title::before{
+      content:"";
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:var(--link-soft);
+      opacity:.9;
+    }
+
     .section-sub{
       margin:8px 0 0;
       font-size:12px;
@@ -295,30 +315,30 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-main">
-        <div class="hero-eyebrow">A[i]gent Suite</div>
         <h2 class="hero-title">
-          A modular suite of <span>internal people-system agents</span> — organized by outcomes.
+          A modular suite of <span>internal people-system agents</span>.
         </h2>
         <p>
-          This page shows the suite as four obvious sections: <strong>Hire</strong>, <strong>Support</strong>, <strong>Evaluate</strong>, and <strong>Improve</strong>.
-          Each A[i]gent is explainable, controllable, and designed to plug into the systems teams already use.
+          Explainable, controllable A[i]gents designed to plug into the systems teams already use.
         </p>
 
         <div class="hero-actions">
           <a href="/" class="back-pill">← Back to Portfolio</a>
+          <!-- Optional hidden link kept (safe to delete) -->
           <a href="../agents/suite/" class="pill-link" onclick="return false;" style="display:none;">Suite</a>
         </div>
       </div>
 
+      <!-- OPTIONAL: delete this entire aside if you want the hero simpler -->
       <aside class="hero-meta">
-        <h3>Suite at a glance</h3>
+        <h3>How it’s built</h3>
         <ul>
-          <li>Designed to live inside ATS + internal tools (not as “another vendor”).</li>
-          <li>Evidence-first outputs: receipts, rationale, overrides, audit trails.</li>
-          <li>Shared primitives: Metrics Dictionary, rubrics, templates, workflow events.</li>
+          <li>Workflow-first, evidence-first outputs (receipts + rationale + overrides).</li>
+          <li>Designed for internal systems (ATS + docs + planning), not “another vendor.”</li>
+          <li>Shared building blocks: metrics, rubrics, templates, and workflow events.</li>
         </ul>
         <div class="callout">
-          Think of this as a capability map. Demos & playbooks exist where linked below.
+          Start with the live demos below, then open playbooks for deeper detail.
         </div>
       </aside>
     </section>
