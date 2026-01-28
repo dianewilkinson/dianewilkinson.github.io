@@ -1,19 +1,21 @@
-# Diane Wilkinson — AI-Native Recruiting Operations & Internal Agents  
-_Recruiting Ops Architect • Workflow Automation • TA Systems Design • AI & Analytics • Greenhouse SME_  
+# Diane Wilkinson — People Systems & Workforce Operations  
+_People Systems Architect • Workflow Automation • Internal AI & Analytics • Greenhouse SME_  
 _MBA, Data Analytics (4.0 GPA, Beta Gamma Sigma, Phi Kappa Phi)_
 
-I build **AI-native recruiting systems** — internal, workflow-first automations and explainable agents
-that make hiring loops cleaner, faster, and dramatically more predictable.  
-My work focuses on **augmenting** recruiters and hiring managers, not replacing them.
+I build **internal people and hiring systems** — workflow-first automations and human-in-the-loop AI
+that make decision-heavy processes cleaner, fairer, and more predictable at scale.
 
-This GitHub Pages site serves as the **documentation hub** for the A[i]gent Suite, my modular internal AI
-platform for Talent Acquisition.
+My work focuses on **augmenting human judgement** not replacing it.
+
+This GitHub Pages site serves as the **documentation hub** for the A[i]gent Suite, a modular,
+ATS-native internal AI platform originally developed in recruiting environments and designed to generalize
+across people and workforce operations.
 
 ---
 
-# 🧩 A[i]gent Suite — Modular Internal Recruiting Agents
+# 🧩 A[i]gent Suite — Modular Internal People Systems
 
-A growing suite of ATS-native, human-in-the-loop AI agents that work together across the recruiting lifecycle.
+A growing suite of ATS-native, human-in-the-loop AI agents that work together across high-friction people workflows where accuracy, auditability, and trust matter..
 
 - **Suite Overview**  
   End-to-end map of Screening, Workflow, Metrics, and supporting agents.  
@@ -24,17 +26,20 @@ A growing suite of ATS-native, human-in-the-loop AI agents that work together ac
 # 🤖 Core Agents (Live Demos & Playbooks)
 
 ### **Screening A[i]gent**  
-Hybrid scoring model (experience × skills × tenure × risk) with receipts, rationale, and recruiter override controls.  
+Decision-support agent for high-volume evaluation — combines experience, skills, tenure, and risk signals
+with transparent rationale and human override controls.  
 **Demo:** https://dianewilkinson.github.io/agents/screening/  
 **Playbook:** https://dianewilkinson.github.io/agents/screening/playbook.html
 
 ### **Workflow A[i]gent**  
-Interview-stage automation engine — confirmations, reminders, scorecard SLAs, and delay updates.  
+Workflow automation engine for multi-step review processes — confirmations, reminders, SLAs,
+handoffs, and delay visibility built directly into existing systems.  
 **Demo:** https://dianewilkinson.github.io/agents/workflow/  
 **Playbook:** https://dianewilkinson.github.io/agents/workflow/playbook.html
 
 ### **Metrics A[i]gent**  
-Funnel diagnostics, pass-through analysis, SLA monitoring, capacity planning — powered by a shared Metrics Dictionary.  
+Operational diagnostics for throughput, pass-through, bottlenecks, and capacity —
+powered by a shared Metrics Dictionary to keep reporting consistent and trusted.  
 **Demo:** https://dianewilkinson.github.io/agents/metrics/  
 **Playbook:** https://dianewilkinson.github.io/agents/metrics/playbook.html
 
@@ -42,11 +47,11 @@ Funnel diagnostics, pass-through analysis, SLA monitoring, capacity planning —
 
 # 📊 What I Specialize In
 
-- **Cleaner, faster loops** — time-to-screen, scheduling speed, interview SLAs, scorecard hygiene  
-- **Higher-signal funnels** — outbound + referrals; structured intake → rubric → decision  
-- **Workflow design** — mapping and automating the moments where hiring gets stuck  
-- **Human-in-the-loop AI** — explainable recommendations, override notes, zero black-box decisions  
-- **Measurement** — pass-through, time-in-stage, source quality, forecast accuracy, team capacity  
+- **System integrity** — clean handoffs, clear ownership, auditable decision paths  
+- **Workflow design** — mapping and fixing where people processes actually break  
+- **Human-in-the-loop AI** — explainable recommendations, override notes, zero black boxes  
+- **Operational analytics** — time-in-stage, pass-through, capacity, forecast accuracy  
+- **Scalable enablement** — playbooks and patterns that teams actually adopt
 
 ---
 
@@ -54,7 +59,7 @@ Funnel diagnostics, pass-through analysis, SLA monitoring, capacity planning —
 
 > “Rare talent. Listens before talking, connects ideas… the best recruiter in our sector.”  
 > “Fast turnaround of highly qualified talent.”  
-> “One of the most effective recruiters I’ve worked with.”
+> “One of the most effective operators I’ve worked with.”
 
 *20+ dated recommendations on LinkedIn.*
 
