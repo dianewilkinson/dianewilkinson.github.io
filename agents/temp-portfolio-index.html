@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DW — People Systems & Workforce Ops | Internal AI, Analytics, Process Design</title>
+
+  <!-- Open Graph / Social Preview -->
+  <meta property="og:title" content="Diane Wilkinson — People Systems & Workforce Ops | Internal AI, Analytics, Process Design">
+  <meta property="og:description" content="I build internal, workflow-first AI and analytics that make people systems faster, fairer, and auditable — without vendor sprawl.">
+  <meta property="og:image" content="https://dianewilkinson.github.io/assets/og-upwork.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dianewilkinson.github.io">
+
+  <!-- Optional: Twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Diane Wilkinson — People Systems & Workforce Ops | Internal AI, Analytics, Process Design">
+  <meta name="twitter:description" content="Building AI internally in the weeds of everyday workflows.">
+  <meta name="twitter:image" content="https://dianewilkinson.github.io/assets/og-upwork.png">
+
+  <style>
+    :root{
+      --bg:#f9fafb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#4b5563;
+      --border:#e5e7eb;
+      --link:#2563eb;
+      --link-soft:#4f46e5;
+      --shadow:rgba(15,23,42,0.08);
+      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
+      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.12),rgba(168,85,247,.12),rgba(99,102,241,.12));
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    a{color:var(--link);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    .bar{height:4px;background:var(--accent-grad);}
+
+    header{
+      text-align:center;
+      padding:32px 16px 16px;
+    }
+    header h1{
+      margin:0;
+      font-size:24px;
+      font-weight:800;
+    }
+    header p{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .wrap{
+      max-width:1120px;
+      margin:0 auto;
+      padding:20px 20px 32px;
+    }
+
+    /* HERO */
+    .hero{
+      margin:6px 0 16px;
+      border-radius:20px;
+      background:linear-gradient(120deg,#fde7ef,#f3e8ff,#e0ecff);
+      box-shadow:0 8px 24px var(--shadow);
+      padding:22px 22px 18px;
+      display:flex;
+      gap:18px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .hero-left{flex:1 1 520px; min-width:0;}
+    .hero-eyebrow{
+      display:inline-flex;
+      padding:4px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.85);
+      border:1px solid rgba(148,163,184,.5);
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:#4b5563;
+      margin-bottom:10px;
+    }
+    .hero-left h2{
+      margin:0 0 6px;
+      font-size:26px;
+      line-height:1.25;
+      font-weight:900;
+    }
+    .hero-left h2 span{color:var(--link-soft);}
+    .hero-sub{
+      margin:0;
+      font-size:15px;
+      color:var(--muted);
+      line-height:1.7;
+      max-width:760px;
+    }
+    .hero-actions{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .pill-link{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
+      color:#4f46e5;
+      background:rgba(255,255,255,0.92);
+      border:1px solid rgba(148,163,184,0.8);
+      text-decoration:none;
+    }
+    .pill-link:hover{
+      background:rgba(255,255,255,1);
+      text-decoration:none;
+      color:#4338ca;
+    }
+
+    @media (max-width:720px){
+      .hero{padding:18px 16px 16px;}
+      .hero-left h2{font-size:22px;}
+    }
+
+    /* Headings */
+    .section-title{
+      font-size:20px;
+      margin:18px 0 10px;
+      font-weight:900;
+    }
+    .section-subtitle{
+      margin:0 0 14px;
+      color:#6b7280;
+      font-size:13px;
+      line-height:1.6;
+    }
+    .section-note{
+      font-size:13px;
+      color:#6b7280;
+      margin:10px 0 14px;
+    }
+
+    /* Cards grid */
+    .grid{
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px 14px 12px;
+      box-shadow:0 1px 3px var(--shadow);
+      display:flex;
+      flex-direction:column;
+      min-height:170px;
+    }
+    .card h3{
+      margin:0 0 6px;
+      font-size:16px;
+      font-weight:900;
+    }
+    .card p{
+      margin:0 0 10px;
+      color:#374151;
+      font-size:14px;
+      line-height:1.5;
+    }
+    .meta{
+      margin-top:auto;
+      font-size:12px;
+      color:#6b7280;
+      line-height:1.6;
+    }
+    .meta a{
+      display:inline-block;
+      margin-right:10px;
+      margin-top:2px;
+      font-weight:800;
+    }
+
+    .card.cta{
+      background:var(--accent-soft);
+      border:none;
+      box-shadow:0 2px 7px var(--shadow);
+      text-align:center;
+      min-height:auto;
+    }
+    .cta-btn{
+      display:inline-block;
+      margin-top:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:#4f46e5;
+      color:#fff;
+      font-size:13px;
+      font-weight:800;
+      text-decoration:none;
+    }
+    .cta-btn:hover{background:#4338ca;text-decoration:none;}
+
+    /* --- A[i]gent Suite Preview (compact, zero-click) --- */
+    .suite{
+      margin-top:18px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:var(--card);
+      box-shadow:0 2px 8px var(--shadow);
+      overflow:hidden;
+    }
+    .suite-head{
+      padding:14px 14px 12px;
+      background:var(--accent-soft);
+      border-bottom:1px solid rgba(229,231,235,.9);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .suite-head h3{
+      margin:0;
+      font-size:16px;
+      font-weight:900;
+    }
+    .suite-head p{
+      margin:6px 0 0;
+      color:#6b7280;
+      font-size:12.5px;
+      line-height:1.55;
+      max-width:780px;
+    }
+    .suite-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:2px;
+    }
+
+    .suite-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(220px,1fr));
+      gap:0;
+    }
+    @media (max-width:1100px){
+      .suite-grid{grid-template-columns:repeat(2, minmax(220px,1fr));}
+    }
+    @media (max-width:640px){
+      .suite-grid{grid-template-columns:1fr;}
+    }
+
+    .suite-col{
+      padding:12px 12px 12px;
+      border-right:1px solid #eef2f7;
+    }
+    .suite-col:last-child{border-right:none;}
+    @media (max-width:1100px){
+      .suite-col:nth-child(2n){border-right:none;}
+      .suite-col{border-bottom:1px solid #eef2f7;}
+      .suite-col:nth-last-child(-n+2){border-bottom:none;}
+    }
+    @media (max-width:640px){
+      .suite-col{border-right:none;border-bottom:1px solid #eef2f7;}
+      .suite-col:last-child{border-bottom:none;}
+    }
+
+    .suite-col h4{
+      margin:0 0 10px;
+      font-size:14px;
+      font-weight:900;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .suite-col h4 span{
+      font-size:11px;
+      font-weight:800;
+      padding:3px 8px;
+      border-radius:999px;
+      background:rgba(129,140,248,.12);
+      color:#4f46e5;
+      border:1px solid rgba(129,140,248,.18);
+      white-space:nowrap;
+    }
+
+    .suite-list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .suite-item{
+      padding:8px 10px;
+      border:1px solid #eef2f7;
+      border-radius:12px;
+      background:#fff;
+      box-shadow:0 1px 2px rgba(15,23,42,.04);
+      line-height:1.35;
+    }
+    .suite-item a{color:#111827;text-decoration:none;font-weight:900;}
+    .suite-item a:hover{text-decoration:underline;}
+    .suite-item .hint{
+      display:block;
+      margin-top:3px;
+      font-size:12px;
+      color:#6b7280;
+      font-weight:600;
+    }
+
+    /* Footer */
+    footer{
+      text-align:center;
+      margin:16px 0 20px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    footer .footline{
+      max-width:1120px;
+      margin:10px auto 0;
+      padding:0 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bar"></div>
+
+  <header>
+    <h1>👋 Diane Wilkinson — People Systems &amp; Workforce Operations</h1>
+    <p>
+      I help People Ops &amp; Talent teams replace vendor sprawl with workflow-first automations, analytics, and internal AI built directly inside the systems they already use.
+      <br>
+      People Ops &amp; Systems · AI-Enabled Workflows · Greenhouse SME · MBA, Data Analytics (4.0 GPA) ·
+      <a href="../credentials/" target="_blank" rel="noopener">Credentials &amp; Recommendations</a>
+    </p>
+  </header>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-eyebrow">people systems · internal ai · workflow-first</div>
+
+        <h2>We don't need more <span>AI vendors.</span></h2>
+
+        <p class="hero-sub">
+          The future belongs to teams building internal capabilities inside everyday workflows — where decisions need evidence, controls, and human judgment.
+        </p>
+
+        <div class="hero-actions">
+          <a class="pill-link" href="./suite/" target="_blank" rel="noopener">Open A[i]gent Suite Map</a>
+          <a class="pill-link" href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">Read: Why AI Pilots Fail</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Title -->
+    <h2 class="section-title">What I Build for People &amp; Workforce Operations</h2>
+    <p class="section-subtitle">
+      Workflow-first internal agents and analytics that reduce manual work, improve decision quality, and keep systems auditable.
+    </p>
+
+    <!-- Cards (fast scan) -->
+    <div class="grid">
+      <div class="card">
+        <h3>🤖 AI Tool: Workflow A[i]gent</h3>
+        <p>
+          Workflow automation across hiring and people workflows so teams spend less time on manual follow-ups
+          and more time making decisions.
+        </p>
+        <p class="meta">
+          <a href="../agents/workflow/" target="_blank" rel="noopener">Open Demo</a>
+          <a href="../agents/workflow/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🤖 AI Tool: Screening A[i]gent</h3>
+        <p>
+          Human-in-the-loop decision support: surfaces evidence, highlights risk, and improves signal quality
+          without turning screening into a black box.
+        </p>
+        <p class="meta">
+          <a href="../agents/screening/" target="_blank" rel="noopener">Open Demo</a>
+          <a href="../agents/screening/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🤖 AI Tool: Metrics A[i]gent</h3>
+        <p>
+          Diagnostics for throughput, pass-through, and bottlenecks: helps Ops and Analytics teams see where workflows stall
+          and what to test next.
+        </p>
+        <p class="meta">
+          <a href="../agents/metrics/" target="_blank" rel="noopener">Open Demo</a>
+          <a href="../agents/metrics/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>⚙️ Tool: Recruiting Pipeline Calculator</h3>
+        <p>
+          Interactive funnel calculator to plan realistic targets by stage and identify bottlenecks.
+          Useful for workforce planning and capacity conversations.
+        </p>
+        <p class="meta">
+          <a href="https://docs.google.com/spreadsheets/d/1EYf9S4L6QljiCZ0-mUVpmb7DIvw74j1XUJOt8p42qsw/edit?usp=sharing" target="_blank" rel="noopener">
+            Open Google Sheet
+          </a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>⚙️ Tool: Metrics Dictionary</h3>
+        <p>
+          Standardized KPI definitions for hiring and people operations — aligns dashboards and reduces time spent debating which numbers are “correct.”
+        </p>
+        <p class="meta">
+          <a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link" target="_blank" rel="noopener">
+            Open Google Sheet
+          </a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📙 Playbook: AI-First Ops Model</h3>
+        <p>
+          Guardrails for where AI assists vs. where humans decide — evidence, control, and transparency in people workflows.
+        </p>
+        <p class="meta">
+          <a href="../playbooks/ai-first-ops-model.html" target="_blank" rel="noopener">Open Playbook</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- SUITE PREVIEW (embedded) -->
+    <section class="suite" aria-label="A[i]gent Suite Preview">
+      <div class="suite-head">
+        <div>
+          <h3>A[i]gent Suite — People Systems Lifecycle (Zero-Click Map)</h3>
+          <p>Browse the lifecycle here. Open demos/playbooks only when you want depth.</p>
+        </div>
+        <div class="suite-actions">
+          <a class="pill-link" href="./suite/" target="_blank" rel="noopener">Open Full Suite</a>
+        </div>
+      </div>
+
+      <div class="suite-grid">
+        <div class="suite-col">
+          <h4>Hire <span>selection</span></h4>
+          <ul class="suite-list">
+            <li class="suite-item">
+              <a href="../agents/screening/" target="_blank" rel="noopener">Screening</a>
+              <span class="hint">hybrid scoring + receipts + controls</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Kickoff</a>
+              <span class="hint">intake → rubric + scorecard</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Outreach</a>
+              <span class="hint">specific messaging + clean logging</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Match</a>
+              <span class="hint">cross-fit + rediscovery</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Nurture</a>
+              <span class="hint">timed touchpoints + trust</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="suite-col">
+          <h4>Support <span>run the system</span></h4>
+          <ul class="suite-list">
+            <li class="suite-item">
+              <a href="../agents/workflow/" target="_blank" rel="noopener">Workflow</a>
+              <span class="hint">orchestration + SLAs + nudges</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Onboarding</a>
+              <span class="hint">handoffs + readiness artifacts</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">InfoHub</a>
+              <span class="hint">doc retrieval + version confidence</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Planning</a>
+              <span class="hint">requests → prioritized plans</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="suite-col">
+          <h4>Evaluate <span>evidence</span></h4>
+          <ul class="suite-list">
+            <li class="suite-item">
+              <a href="../agents/metrics/" target="_blank" rel="noopener">Metrics</a>
+              <span class="hint">throughput + pass-through + capacity</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Scorecard</a>
+              <span class="hint">auditable decisions + calibration</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Listening</a>
+              <span class="hint">themes: friction + confusion + risk</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Sentiment</a>
+              <span class="hint">narrative drift + trust signals</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Skills</a>
+              <span class="hint">inventory + gaps + planning signals</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="suite-col">
+          <h4>Improve <span>close the loop</span></h4>
+          <ul class="suite-list">
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Enablement</a>
+              <span class="hint">training + playbooks + scaffolds</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Quality</a>
+              <span class="hint">detect drift + propose fixes</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Mobility</a>
+              <span class="hint">growth paths + redeploy + retain</span>
+            </li>
+            <li class="suite-item">
+              <a href="./suite/" target="_blank" rel="noopener">Brand</a>
+              <span class="hint">align messaging with experience</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Article -->
+    <p class="section-note">
+      📄 Read my article:
+      <a href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">
+        Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently
+      </a>
+    </p>
+
+    <!-- CTA -->
+    <div class="grid" style="margin-top:12px;">
+      <div class="card cta">
+        <h3>Book a 15-Minute Intro</h3>
+        <p>
+          Let’s connect to discuss people systems, workforce operations, and internal AI adoption.
+          I’m especially interested in AI-forward teams building internal capabilities.
+        </p>
+        <p class="meta">
+          <a class="cta-btn" href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">📅 Book Appointment</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p class="footline">
+      Based in the San Francisco Bay Area · Always open to connect about people systems, workforce operations, internal AI adoption, and hiring process design.
+      <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
+      <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </footer>
+</body>
+</html>
