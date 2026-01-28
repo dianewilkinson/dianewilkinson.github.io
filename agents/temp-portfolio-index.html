@@ -29,7 +29,7 @@
       --link-soft:#4f46e5;
       --shadow:rgba(15,23,42,0.08);
       --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
-      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.12),rgba(168,85,247,.12),rgba(99,102,241,.12));
+      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.10),rgba(168,85,247,.10),rgba(99,102,241,.10));
     }
     *{box-sizing:border-box;}
     body{
@@ -44,12 +44,13 @@
 
     header{
       text-align:center;
-      padding:32px 16px 16px;
+      padding:28px 16px 14px;
     }
     header h1{
       margin:0;
       font-size:24px;
-      font-weight:800;
+      font-weight:850;
+      letter-spacing:-.01em;
     }
     header p{
       margin:10px 0 0;
@@ -61,48 +62,43 @@
     .wrap{
       max-width:1120px;
       margin:0 auto;
-      padding:20px 20px 32px;
+      padding:18px 20px 32px;
     }
 
-    /* HERO */
+    /* HERO (simplified) */
     .hero{
       margin:6px 0 16px;
       border-radius:20px;
       background:linear-gradient(120deg,#fde7ef,#f3e8ff,#e0ecff);
       box-shadow:0 8px 24px var(--shadow);
-      padding:22px 22px 18px;
-      display:flex;
-      gap:18px;
-      align-items:flex-start;
-      flex-wrap:wrap;
+      padding:20px 20px 16px;
     }
-    .hero-left{flex:1 1 520px; min-width:0;}
     .hero-eyebrow{
       display:inline-flex;
       padding:4px 10px;
       border-radius:999px;
       background:rgba(255,255,255,.85);
-      border:1px solid rgba(148,163,184,.5);
+      border:1px solid rgba(148,163,184,.45);
       font-size:11px;
-      font-weight:600;
+      font-weight:700;
       letter-spacing:.04em;
       text-transform:uppercase;
       color:#4b5563;
       margin-bottom:10px;
     }
-    .hero-left h2{
+    .hero h2{
       margin:0 0 6px;
       font-size:26px;
-      line-height:1.25;
-      font-weight:900;
+      line-height:1.2;
+      font-weight:950;
     }
-    .hero-left h2 span{color:var(--link-soft);}
-    .hero-sub{
+    .hero h2 span{color:var(--link-soft);}
+    .hero p{
       margin:0;
       font-size:15px;
       color:var(--muted);
-      line-height:1.7;
-      max-width:760px;
+      line-height:1.65;
+      max-width:820px;
     }
     .hero-actions{
       margin-top:12px;
@@ -118,10 +114,10 @@
       padding:7px 12px;
       border-radius:999px;
       font-size:13px;
-      font-weight:800;
+      font-weight:850;
       color:#4f46e5;
       background:rgba(255,255,255,0.92);
-      border:1px solid rgba(148,163,184,0.8);
+      border:1px solid rgba(148,163,184,0.75);
       text-decoration:none;
     }
     .pill-link:hover{
@@ -129,28 +125,27 @@
       text-decoration:none;
       color:#4338ca;
     }
-
-    @media (max-width:720px){
-      .hero{padding:18px 16px 16px;}
-      .hero-left h2{font-size:22px;}
+    .pill-link.secondary{
+      color:#374151;
+      border-color:rgba(209,213,219,.95);
     }
 
-    /* Headings */
+    @media (max-width:720px){
+      .hero{padding:18px 16px 14px;}
+      .hero h2{font-size:22px;}
+    }
+
     .section-title{
       font-size:20px;
-      margin:18px 0 10px;
-      font-weight:900;
+      margin:18px 0 8px;
+      font-weight:950;
+      letter-spacing:-.01em;
     }
     .section-subtitle{
       margin:0 0 14px;
       color:#6b7280;
       font-size:13px;
       line-height:1.6;
-    }
-    .section-note{
-      font-size:13px;
-      color:#6b7280;
-      margin:10px 0 14px;
     }
 
     /* Cards grid */
@@ -172,7 +167,7 @@
     .card h3{
       margin:0 0 6px;
       font-size:16px;
-      font-weight:900;
+      font-weight:950;
     }
     .card p{
       margin:0 0 10px;
@@ -190,59 +185,34 @@
       display:inline-block;
       margin-right:10px;
       margin-top:2px;
-      font-weight:800;
+      font-weight:900;
     }
 
-    .card.cta{
-      background:var(--accent-soft);
-      border:none;
-      box-shadow:0 2px 7px var(--shadow);
-      text-align:center;
-      min-height:auto;
-    }
-    .cta-btn{
-      display:inline-block;
-      margin-top:8px;
-      padding:8px 14px;
-      border-radius:999px;
-      background:#4f46e5;
-      color:#fff;
-      font-size:13px;
-      font-weight:800;
-      text-decoration:none;
-    }
-    .cta-btn:hover{background:#4338ca;text-decoration:none;}
-
-    /* --- A[i]gent Suite Preview (compact, zero-click) --- */
-    .suite{
-      margin-top:18px;
-      border-radius:18px;
+    /* Compact suite card */
+    .suite-card{
+      margin-top:16px;
+      border-radius:16px;
       border:1px solid var(--border);
       background:var(--card);
       box-shadow:0 2px 8px var(--shadow);
-      overflow:hidden;
-    }
-    .suite-head{
       padding:14px 14px 12px;
-      background:var(--accent-soft);
-      border-bottom:1px solid rgba(229,231,235,.9);
       display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
       gap:12px;
+      justify-content:space-between;
+      align-items:flex-start;
       flex-wrap:wrap;
     }
-    .suite-head h3{
-      margin:0;
+    .suite-card h3{
+      margin:0 0 4px;
       font-size:16px;
-      font-weight:900;
+      font-weight:950;
     }
-    .suite-head p{
-      margin:6px 0 0;
+    .suite-card p{
+      margin:0;
       color:#6b7280;
-      font-size:12.5px;
+      font-size:13px;
       line-height:1.55;
-      max-width:780px;
+      max-width:760px;
     }
     .suite-actions{
       display:flex;
@@ -250,6 +220,35 @@
       flex-wrap:wrap;
       align-items:center;
       margin-top:2px;
+    }
+
+    /* Collapsible suite map (default closed) */
+    details.suite-details{
+      margin-top:10px;
+      border-radius:16px;
+      border:1px solid #eef2f7;
+      background:#fff;
+      box-shadow:0 1px 3px rgba(15,23,42,.06);
+      overflow:hidden;
+    }
+    details.suite-details summary{
+      list-style:none;
+      cursor:pointer;
+      padding:12px 14px;
+      background:var(--accent-soft);
+      border-bottom:1px solid rgba(229,231,235,.9);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      color:#111827;
+    }
+    details.suite-details summary::-webkit-details-marker{display:none;}
+    .summary-hint{
+      font-weight:700;
+      color:#6b7280;
+      font-size:12px;
     }
 
     .suite-grid{
@@ -265,7 +264,7 @@
     }
 
     .suite-col{
-      padding:12px 12px 12px;
+      padding:12px 12px 14px;
       border-right:1px solid #eef2f7;
     }
     .suite-col:last-child{border-right:none;}
@@ -282,23 +281,8 @@
     .suite-col h4{
       margin:0 0 10px;
       font-size:14px;
-      font-weight:900;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
+      font-weight:950;
     }
-    .suite-col h4 span{
-      font-size:11px;
-      font-weight:800;
-      padding:3px 8px;
-      border-radius:999px;
-      background:rgba(129,140,248,.12);
-      color:#4f46e5;
-      border:1px solid rgba(129,140,248,.18);
-      white-space:nowrap;
-    }
-
     .suite-list{
       margin:0;
       padding:0;
@@ -312,20 +296,36 @@
       border:1px solid #eef2f7;
       border-radius:12px;
       background:#fff;
-      box-shadow:0 1px 2px rgba(15,23,42,.04);
       line-height:1.35;
     }
-    .suite-item a{color:#111827;text-decoration:none;font-weight:900;}
-    .suite-item a:hover{text-decoration:underline;}
-    .suite-item .hint{
-      display:block;
-      margin-top:3px;
-      font-size:12px;
-      color:#6b7280;
-      font-weight:600;
+    .suite-item a{
+      color:#111827;
+      text-decoration:none;
+      font-weight:950;
     }
+    .suite-item a:hover{text-decoration:underline;}
 
-    /* Footer */
+    /* CTA */
+    .card.cta{
+      background:var(--accent-soft);
+      border:none;
+      box-shadow:0 2px 7px var(--shadow);
+      text-align:center;
+      min-height:auto;
+    }
+    .cta-btn{
+      display:inline-block;
+      margin-top:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:#4f46e5;
+      color:#fff;
+      font-size:13px;
+      font-weight:900;
+      text-decoration:none;
+    }
+    .cta-btn:hover{background:#4338ca;text-decoration:none;}
+
     footer{
       text-align:center;
       margin:16px 0 20px;
@@ -336,6 +336,7 @@
       max-width:1120px;
       margin:10px auto 0;
       padding:0 20px;
+      line-height:1.65;
     }
   </style>
 </head>
@@ -357,29 +358,22 @@
 
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-left">
-        <div class="hero-eyebrow">people systems · internal ai · workflow-first</div>
-
-        <h2>We don't need more <span>AI vendors.</span></h2>
-
-        <p class="hero-sub">
-          The future belongs to teams building internal capabilities inside everyday workflows — where decisions need evidence, controls, and human judgment.
-        </p>
-
-        <div class="hero-actions">
-          <a class="pill-link" href="./suite/" target="_blank" rel="noopener">Open A[i]gent Suite Map</a>
-          <a class="pill-link" href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">Read: Why AI Pilots Fail</a>
-        </div>
+      <h2>We don't need more <span>AI vendors.</span></h2>
+      <p>
+        The future belongs to teams building internal capabilities inside everyday workflows.
+      </p>
+      <div class="hero-actions">
+        <a class="pill-link" href="./suite/" target="_blank" rel="noopener">Open A[i]gent Suite Map</a>
+        <a class="pill-link secondary" href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">Read: Why AI Pilots Fail</a>
       </div>
     </section>
 
-    <!-- Title -->
+    <!-- Selected Work -->
     <h2 class="section-title">What I Build for People &amp; Workforce Operations</h2>
     <p class="section-subtitle">
       Workflow-first internal agents and analytics that reduce manual work, improve decision quality, and keep systems auditable.
     </p>
 
-    <!-- Cards (fast scan) -->
     <div class="grid">
       <div class="card">
         <h3>🤖 AI Tool: Workflow A[i]gent</h3>
@@ -453,127 +447,73 @@
       </div>
     </div>
 
-    <!-- SUITE PREVIEW (embedded) -->
-    <section class="suite" aria-label="A[i]gent Suite Preview">
-      <div class="suite-head">
-        <div>
-          <h3>A[i]gent Suite — People Systems Lifecycle (Zero-Click Map)</h3>
-          <p>Browse the lifecycle here. Open demos/playbooks only when you want depth.</p>
-        </div>
-        <div class="suite-actions">
-          <a class="pill-link" href="./suite/" target="_blank" rel="noopener">Open Full Suite</a>
-        </div>
+    <!-- A[i]gent Suite (compact + optional detail) -->
+    <div class="suite-card" aria-label="A[i]gent Suite Summary">
+      <div>
+        <h3>A[i]gent Suite — People Systems Lifecycle</h3>
+        <p>Map of the suite across Hire, Support, Evaluate, Improve. Demos/playbooks live on the agent pages.</p>
       </div>
+      <div class="suite-actions">
+        <a class="pill-link" href="./suite/" target="_blank" rel="noopener">Open Full Suite</a>
+      </div>
+    </div>
+
+    <details class="suite-details">
+      <summary>
+        <span>Show lifecycle map (optional)</span>
+        <span class="summary-hint">kept collapsed to reduce noise</span>
+      </summary>
 
       <div class="suite-grid">
         <div class="suite-col">
-          <h4>Hire <span>selection</span></h4>
+          <h4>Hire</h4>
           <ul class="suite-list">
-            <li class="suite-item">
-              <a href="../agents/screening/" target="_blank" rel="noopener">Screening</a>
-              <span class="hint">hybrid scoring + receipts + controls</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Kickoff</a>
-              <span class="hint">intake → rubric + scorecard</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Outreach</a>
-              <span class="hint">specific messaging + clean logging</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Match</a>
-              <span class="hint">cross-fit + rediscovery</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Nurture</a>
-              <span class="hint">timed touchpoints + trust</span>
-            </li>
+            <li class="suite-item"><a href="../agents/screening/" target="_blank" rel="noopener">Screening</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Kickoff</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Outreach</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Match</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Nurture</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Interview</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Offer</a></li>
           </ul>
         </div>
 
         <div class="suite-col">
-          <h4>Support <span>run the system</span></h4>
+          <h4>Support</h4>
           <ul class="suite-list">
-            <li class="suite-item">
-              <a href="../agents/workflow/" target="_blank" rel="noopener">Workflow</a>
-              <span class="hint">orchestration + SLAs + nudges</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Onboarding</a>
-              <span class="hint">handoffs + readiness artifacts</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">InfoHub</a>
-              <span class="hint">doc retrieval + version confidence</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Planning</a>
-              <span class="hint">requests → prioritized plans</span>
-            </li>
+            <li class="suite-item"><a href="../agents/workflow/" target="_blank" rel="noopener">Workflow</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Onboarding</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">InfoHub</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Planning</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Enablement</a></li>
           </ul>
         </div>
 
         <div class="suite-col">
-          <h4>Evaluate <span>evidence</span></h4>
+          <h4>Evaluate</h4>
           <ul class="suite-list">
-            <li class="suite-item">
-              <a href="../agents/metrics/" target="_blank" rel="noopener">Metrics</a>
-              <span class="hint">throughput + pass-through + capacity</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Scorecard</a>
-              <span class="hint">auditable decisions + calibration</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Listening</a>
-              <span class="hint">themes: friction + confusion + risk</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Sentiment</a>
-              <span class="hint">narrative drift + trust signals</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Skills</a>
-              <span class="hint">inventory + gaps + planning signals</span>
-            </li>
+            <li class="suite-item"><a href="../agents/metrics/" target="_blank" rel="noopener">Metrics</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Listening</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Sentiment</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Skills</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Scorecard</a></li>
           </ul>
         </div>
 
         <div class="suite-col">
-          <h4>Improve <span>close the loop</span></h4>
+          <h4>Improve</h4>
           <ul class="suite-list">
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Enablement</a>
-              <span class="hint">training + playbooks + scaffolds</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Quality</a>
-              <span class="hint">detect drift + propose fixes</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Mobility</a>
-              <span class="hint">growth paths + redeploy + retain</span>
-            </li>
-            <li class="suite-item">
-              <a href="./suite/" target="_blank" rel="noopener">Brand</a>
-              <span class="hint">align messaging with experience</span>
-            </li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Quality</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Mobility</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Brand</a></li>
+            <li class="suite-item"><a href="./suite/" target="_blank" rel="noopener">Innovation</a></li>
           </ul>
         </div>
       </div>
-    </section>
-
-    <!-- Article -->
-    <p class="section-note">
-      📄 Read my article:
-      <a href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">
-        Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently
-      </a>
-    </p>
+    </details>
 
     <!-- CTA -->
-    <div class="grid" style="margin-top:12px;">
+    <div class="grid" style="margin-top:14px;">
       <div class="card cta">
         <h3>Book a 15-Minute Intro</h3>
         <p>
