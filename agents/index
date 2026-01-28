@@ -215,6 +215,131 @@
       text-decoration:none;
     }
 
+    /* Suite preview (zero-click map) */
+    .suite{
+      margin-top:26px;
+      border:1px solid var(--border);
+      background:var(--card);
+      border-radius:18px;
+      box-shadow:0 2px 8px var(--shadow);
+      overflow:hidden;
+    }
+    .suite-head{
+      padding:14px 14px 12px;
+      background:var(--accent-soft);
+      border-bottom:1px solid rgba(229,231,235,.9);
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .suite-head h2{
+      margin:0;
+      font-size:16px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .suite-head p{
+      margin:6px 0 0;
+      color:#6b7280;
+      font-size:12.5px;
+      line-height:1.55;
+      max-width:760px;
+    }
+    .suite-head .suite-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:2px;
+    }
+
+    .suite-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(220px, 1fr));
+      gap:0;
+    }
+    @media (max-width:1100px){
+      .suite-grid{ grid-template-columns:repeat(2, minmax(220px, 1fr)); }
+    }
+    @media (max-width:620px){
+      .suite-grid{ grid-template-columns:1fr; }
+    }
+
+    .suite-col{
+      padding:14px 14px 12px;
+      border-right:1px solid #eef2f7;
+    }
+    .suite-col:last-child{ border-right:none; }
+    @media (max-width:1100px){
+      .suite-col:nth-child(2n){ border-right:none; }
+      .suite-col{ border-bottom:1px solid #eef2f7; }
+      .suite-col:nth-last-child(-n+2){ border-bottom:none; }
+    }
+    @media (max-width:620px){
+      .suite-col{ border-right:none; border-bottom:1px solid #eef2f7; }
+      .suite-col:last-child{ border-bottom:none; }
+    }
+
+    .suite-col h3{
+      margin:0 0 10px;
+      font-size:14px;
+      font-weight:800;
+      letter-spacing:.01em;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .suite-col h3 .tag{
+      font-size:11px;
+      font-weight:600;
+      padding:3px 8px;
+      border-radius:999px;
+      background:rgba(129,140,248,.12);
+      color:#4f46e5;
+      border:1px solid rgba(129,140,248,.18);
+      white-space:nowrap;
+    }
+
+    .suite-list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .suite-item{
+      display:flex;
+      gap:8px;
+      align-items:baseline;
+      padding:8px 10px;
+      border:1px solid #eef2f7;
+      border-radius:12px;
+      background:#fff;
+      box-shadow:0 1px 2px rgba(15,23,42,.04);
+    }
+    .suite-item strong{
+      font-size:12.5px;
+      font-weight:800;
+    }
+    .suite-item span{
+      font-size:12px;
+      color:#6b7280;
+      line-height:1.4;
+    }
+    .suite-item a{
+      color:inherit;
+      text-decoration:none;
+    }
+    .suite-item a:hover{
+      text-decoration:underline;
+      color:#1f2937;
+    }
+
     /* Footer */
     footer{
       text-align:center;
@@ -257,141 +382,236 @@
         </p>
 
         <div class="hero-actions">
+          <!-- NOTE: When testing inside /agents/, you may need to change these paths to ../ -->
           <a class="pill-link" href="agents/suite/" target="_blank" rel="noopener">Open A[i]gent Suite Map</a>
           <a class="pill-link" href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">Read: Why AI Pilots Fail</a>
         </div>
       </div>
     </section>
 
-    <!-- HIRE -->
-    <section aria-label="Hire">
-      <h2 class="section-title"><span class="emoji">🧲</span>Hire</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>🤖 AI Tool: Screening A[i]gent</h3>
+    <!-- Selected work (format-based, easy scanning) -->
+    <h2 class="section-title"><span class="emoji">🧩</span>Featured Work</h2>
+    <div class="grid">
+      <!-- AI Tools -->
+      <div class="card">
+        <h3>🤖 AI Tool: Screening A[i]gent</h3>
+        <p>
+          Human-in-the-loop decision support for top-funnel chaos and hidden talent recovery: surfaces evidence, highlights risks, and improves signal quality
+          without turning screening into a black box.
+        </p>
+        <p class="meta">
+          <a href="agents/screening/" target="_blank" rel="noopener">Open Demo</a>
+          <a href="agents/screening/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🤖 AI Tool: Workflow A[i]gent</h3>
+        <p>
+          Workflow automation across hiring stages so teams spend less time on manual follow-ups
+          and more time making decisions.
+        </p>
+        <p class="meta">
+          <a href="agents/workflow/" target="_blank" rel="noopener">Open Demo</a>
+          <a href="agents/workflow/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🤖 AI Tool: Metrics A[i]gent</h3>
+        <p>
+          Diagnostics for throughput, pass-through, and bottlenecks: helps Recruiting Ops, People Ops, and People Analytics see where workflows stall
+          and what to test next.
+        </p>
+        <p class="meta">
+          <a href="agents/metrics/" target="_blank" rel="noopener">Open Demo</a>
+          <a href="agents/metrics/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
+        </p>
+      </div>
+
+      <!-- Tools -->
+      <div class="card">
+        <h3>⚙️ Tool: Recruiting Pipeline Calculator</h3>
+        <p>
+          Interactive funnel calculator to eliminate bottlenecks and plan realistic hiring targets by stage.
+          Designed for TA leadership, People Ops, and workforce planning conversations.
+        </p>
+        <p class="meta">
+          <a href="https://docs.google.com/spreadsheets/d/1EYf9S4L6QljiCZ0-mUVpmb7DIvw74j1XUJOt8p42qsw/edit?usp=sharing"
+             target="_blank" rel="noopener">Open Google Sheet</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>⚙️ Tool: Metrics Dictionary</h3>
+        <p>
+          Standardized KPI definitions for hiring and people operations — aligns dashboards and reduces time spent
+          debating which numbers are “correct.”
+        </p>
+        <p class="meta">
+          <a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link"
+             target="_blank" rel="noopener">Open Google Sheet</a>
+        </p>
+      </div>
+
+      <!-- Playbook -->
+      <div class="card">
+        <h3>📙 Playbook: AI-First Ops Model</h3>
+        <p>
+          Defines where AI assists versus where humans decide — guardrails for evidence, control,
+          and transparency in AI-assisted people workflows.
+        </p>
+        <p class="meta">
+          <a href="playbooks/ai-first-ops-model.html" target="_blank" rel="noopener">Open Playbook</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Zero-click Suite preview -->
+    <section class="suite" aria-label="A[i]gent Suite Lifecycle Preview">
+      <div class="suite-head">
+        <div>
+          <h2>🧠 A[i]gent Suite — People Systems Lifecycle</h2>
           <p>
-            Human-in-the-loop decision support for top-funnel chaos and hidden talent recovery: surfaces evidence, highlights risks, and improves signal quality
-            without turning screening into a black box.
-          </p>
-          <p class="meta">
-            <a href="agents/screening/" target="_blank" rel="noopener">Open Demo</a>
-            <a href="agents/screening/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
+            Zero-click map of the suite. Each agent has a demo and/or playbook on its own page when you want depth.
           </p>
         </div>
+        <div class="suite-actions">
+          <a class="pill-link" href="agents/suite/" target="_blank" rel="noopener">Open Full Suite Page</a>
+        </div>
+      </div>
 
-        <div class="card">
-          <h3>📘 Playbook: Candidate Source Quality</h3>
-          <p>
-            How inbound, outbound, and referrals actually perform — and how to rebalance spend and recruiter time
-            toward the highest-quality sources.
-          </p>
-          <p class="meta">
-            <a href="playbooks/sourcing-quality.html" target="_blank" rel="noopener">Open Playbook</a>
-          </p>
+      <div class="suite-grid">
+        <div class="suite-col">
+          <h3>Hire <span class="tag">selection</span></h3>
+          <ul class="suite-list">
+            <li class="suite-item">
+              <a href="agents/screening/" target="_blank" rel="noopener"><strong>Screening</strong></a>
+              <span>hybrid scoring + receipts + controls</span>
+            </li>
+            <li class="suite-item">
+              <strong>Kickoff</strong>
+              <span>intake → scorecard + rubric</span>
+            </li>
+            <li class="suite-item">
+              <strong>Outreach</strong>
+              <span>personalized messaging + clean logging</span>
+            </li>
+            <li class="suite-item">
+              <strong>Match</strong>
+              <span>cross-fit + rediscovery</span>
+            </li>
+            <li class="suite-item">
+              <strong>Nurture</strong>
+              <span>keep future-fit talent warm</span>
+            </li>
+            <li class="suite-item">
+              <strong>Interview</strong>
+              <span>guided prompts + structured feedback</span>
+            </li>
+            <li class="suite-item">
+              <strong>Offer</strong>
+              <span>approvals + readiness + close</span>
+            </li>
+          </ul>
         </div>
 
-        <div class="card">
-          <h3>⚙️ Tool: Recruiting Pipeline Calculator</h3>
-          <p>
-            Interactive funnel calculator to eliminate bottlenecks and plan realistic hiring targets by stage.
-            Designed for TA leadership, People Ops, and workforce planning conversations.
-          </p>
-          <p class="meta">
-            <a href="https://docs.google.com/spreadsheets/d/1EYf9S4L6QljiCZ0-mUVpmb7DIvw74j1XUJOt8p42qsw/edit?usp=sharing"
-               target="_blank" rel="noopener">Open Google Sheet</a>
-          </p>
+        <div class="suite-col">
+          <h3>Support <span class="tag">run the system</span></h3>
+          <ul class="suite-list">
+            <li class="suite-item">
+              <a href="agents/workflow/" target="_blank" rel="noopener"><strong>Workflow</strong></a>
+              <span>orchestration + SLAs + nudges</span>
+            </li>
+            <li class="suite-item">
+              <strong>Onboarding</strong>
+              <span>handoffs + readiness artifacts</span>
+            </li>
+            <li class="suite-item">
+              <strong>InfoHub</strong>
+              <span>doc retrieval + version confidence</span>
+            </li>
+            <li class="suite-item">
+              <strong>Planning</strong>
+              <span>requests → prioritized plans</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="suite-col">
+          <h3>Evaluate <span class="tag">evidence</span></h3>
+          <ul class="suite-list">
+            <li class="suite-item">
+              <a href="agents/metrics/" target="_blank" rel="noopener"><strong>Metrics</strong></a>
+              <span>throughput + pass-through + capacity</span>
+            </li>
+            <li class="suite-item">
+              <strong>Scorecard</strong>
+              <span>auditable decisions (hiring, manager, process)</span>
+            </li>
+            <li class="suite-item">
+              <strong>Listening</strong>
+              <span>themes: friction + confusion + risk</span>
+            </li>
+            <li class="suite-item">
+              <strong>Sentiment</strong>
+              <span>narrative drift + trust signals</span>
+            </li>
+            <li class="suite-item">
+              <strong>Skills</strong>
+              <span>inventory + gaps + planning signals</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="suite-col">
+          <h3>Improve <span class="tag">close the loop</span></h3>
+          <ul class="suite-list">
+            <li class="suite-item">
+              <strong>Enablement</strong>
+              <span>playbooks + training + scaffolds</span>
+            </li>
+            <li class="suite-item">
+              <strong>Quality</strong>
+              <span>detect process decay + propose fixes</span>
+            </li>
+            <li class="suite-item">
+              <strong>Mobility</strong>
+              <span>growth paths + redeploy + retain</span>
+            </li>
+            <li class="suite-item">
+              <strong>Brand</strong>
+              <span>align messaging with lived experience</span>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- SUPPORT -->
-    <section aria-label="Support">
-      <h2 class="section-title"><span class="emoji">🛠️</span>Support</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>🤖 AI Tool: Workflow A[i]gent</h3>
-          <p>
-            Workflow automation across hiring stages so teams spend less time on manual follow-ups
-            and more time making decisions.
-          </p>
-          <p class="meta">
-            <a href="agents/workflow/" target="_blank" rel="noopener">Open Demo</a>
-            <a href="agents/workflow/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
-          </p>
-        </div>
+    <!-- More (optional, still low-click) -->
+    <p class="section-note" style="margin-top:16px;">
+      📄 Read my article:
+      <a href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">
+        Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently
+      </a>
+    </p>
 
-        <div class="card">
-          <h3>📕 Playbook: Candidate Journey</h3>
-          <p>
-            End-to-end candidate journey mapping with touchpoints, expectations, and communications
-            that tie directly into Workflow A[i]gent.
-          </p>
-          <p class="meta">
-            <a href="playbooks/candidate-journey.html" target="_blank" rel="noopener">Open Playbook</a>
-          </p>
-        </div>
+    <!-- CTA -->
+    <h2 class="section-title"><span class="emoji">🤝</span>Connect</h2>
+    <div class="grid">
+      <div class="card cta">
+        <h3>Book a 15-Minute Intro</h3>
+        <p>
+          Let’s connect to discuss people systems, workforce operations, and internal AI adoption.
+          I’m especially interested in AI-forward teams building internal capabilities.
+        </p>
+        <p class="meta">
+          <a class="cta-btn" href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">
+            📅 Book Appointment
+          </a>
+        </p>
       </div>
-    </section>
-
-    <!-- EVALUATE -->
-    <section aria-label="Evaluate">
-      <h2 class="section-title"><span class="emoji">🧾</span>Evaluate</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>🤖 AI Tool: Metrics A[i]gent</h3>
-          <p>
-            Diagnostics for throughput, pass-through, and bottlenecks: helps Recruiting Ops, People Ops, and People Analytics see where workflows stall
-            and what to test next.
-          </p>
-          <p class="meta">
-            <a href="agents/metrics/" target="_blank" rel="noopener">Open Demo</a>
-            <a href="agents/metrics/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>⚙️ Tool: Metrics Dictionary</h3>
-          <p>
-            Standardized KPI definitions for hiring and people operations — aligns dashboards and reduces time spent
-            debating which numbers are “correct.”
-          </p>
-          <p class="meta">
-            <a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link"
-               target="_blank" rel="noopener">Open Google Sheet</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- IMPROVE -->
-    <section aria-label="Improve">
-      <h2 class="section-title"><span class="emoji">📈</span>Improve</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>📙 Playbook: AI-First Ops Model</h3>
-          <p>
-            Defines where AI assists versus where humans decide — guardrails for evidence, control,
-            and transparency in AI-assisted people workflows.
-          </p>
-          <p class="meta">
-            <a href="playbooks/ai-first-ops-model.html" target="_blank" rel="noopener">Open Playbook</a>
-          </p>
-        </div>
-
-        <div class="card cta">
-          <h3>Book a 15-Minute Intro</h3>
-          <p>
-            Let’s connect to discuss people systems, workforce operations, and internal AI adoption.
-            I’m especially interested in AI-forward teams building internal capabilities.
-          </p>
-          <p class="meta">
-            <a class="cta-btn" href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">
-              📅 Book Appointment
-            </a>
-          </p>
-        </div>
-      </div>
-    </section>
+    </div>
 
   </div>
 
