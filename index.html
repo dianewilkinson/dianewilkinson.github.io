@@ -57,8 +57,6 @@
       font-size:14px;
       line-height:1.6;
     }
-
-    /* Second line spacing + emphasis */
     header p .subline{
       display:block;
       margin-top:10px;
@@ -101,7 +99,6 @@
       line-height:1.7;
       max-width:860px;
     }
-
     @media (max-width:720px){
       .hero{padding:20px 18px 18px;}
       .hero-left h2{font-size:22px;}
@@ -113,16 +110,22 @@
       margin:6px 0 14px;
     }
 
-    /* Selected work header */
+    /* ✅ FIX: restore size for “What I Build…” section */
+    .selected-work{
+      margin:4px 0 10px;
+    }
     .selected-work h2{
-      margin:18px 0 6px;
-      font-size:18px;
+      margin:10px 0 6px;
+      font-size:18px;     /* bigger like your left screenshot */
+      font-weight:800;
+      color:#111827;
+      letter-spacing:-0.01em;
     }
     .section-subtitle{
-      margin:0 0 14px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
+      margin:0 0 12px;
+      font-size:14px;     /* readable subtitle */
+      line-height:1.55;
+      color:#4b5563;
     }
 
     /* Cards grid */
@@ -164,12 +167,15 @@
       font-weight:600;
     }
 
+    /* ✅ FIX: CTA full width like the left screenshot */
     .card.cta{
+      grid-column: 1 / -1;          /* spans full row */
       background:var(--accent-soft);
       border:none;
       box-shadow:0 2px 7px var(--shadow);
       text-align:center;
       min-height:auto;
+      padding:16px 18px 16px;
     }
 
     .card.cta h3{margin-bottom:8px;}
@@ -289,55 +295,76 @@
       gap:8px;
     }
 
-    /* NEW: hover-actions pattern */
+    /* Each item becomes a row so hover actions don't wreck layout */
     .suite-item{
-      position:relative;
-      padding:9px 10px;
       border-radius:12px;
       border:1px solid #eef2f7;
       background:#fbfdff;
+      padding:0; /* padding moved to inner row for clean hover */
+    }
+
+    .suite-row{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
+      padding:9px 10px;
     }
+
     .suite-name{
+      display:block;
       font-size:13px;
       font-weight:500;
       color:#6b7280;
-      line-height:1.2;
-    }
-    .suite-actions-inline{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      opacity:0;
-      transform:translateX(-4px);
-      transition:opacity .15s ease, transform .15s ease;
-      pointer-events:none;
+      text-decoration:none;
+      min-width:0;
       white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
-    .suite-item:hover .suite-actions-inline,
-    .suite-item:focus-within .suite-actions-inline{
+    .suite-name:hover{
+      text-decoration:underline;
+      color:#374151;
+    }
+
+    /* Hover actions: hidden unless hover/focus-within */
+    .suite-actions-mini{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      opacity:0;
+      transform:translateY(1px);
+      pointer-events:none;
+      transition:opacity .15s ease, transform .15s ease;
+      flex-shrink:0;
+    }
+    .suite-item:hover .suite-actions-mini,
+    .suite-item:focus-within .suite-actions-mini{
       opacity:1;
-      transform:translateX(0);
+      transform:translateY(0);
       pointer-events:auto;
     }
-    .suite-actions-inline a{
-      font-size:12px;
-      font-weight:600;
+
+    .mini{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.55);
+      background:rgba(255,255,255,.9);
+      font-size:11px;
+      font-weight:700;
       color:#4f46e5;
       text-decoration:none;
-      padding:2px 6px;
-      border-radius:6px;
-      background:rgba(99,102,241,0.08);
+      white-space:nowrap;
     }
-    .suite-actions-inline a:hover{
-      background:rgba(99,102,241,0.15);
+    .mini:hover{
+      background:#fff;
+      color:#4338ca;
       text-decoration:none;
     }
 
-    /* Footer */
     footer{
       text-align:center;
       margin:16px 0 20px;
@@ -356,7 +383,7 @@
   <div class="bar"></div>
 
   <header>
-    <h1>👋 Diane Wilkinson — People Systems &amp; Workforce Operations</h1>
+    <h1>👋 Diane Wilkinson — People Systems & Workforce Operations</h1>
     <p>
       I help People Ops &amp; Talent teams replace vendor sprawl with workflow-first automations, analytics, and internal AI built directly inside the systems they already use.
       <span class="subline">
@@ -501,7 +528,7 @@
         </p>
       </div>
 
-      <!-- CTA -->
+      <!-- ✅ CTA full width -->
       <div class="card cta">
         <h3>Book a 15-Minute Intro</h3>
         <p>
@@ -520,12 +547,12 @@
     <section class="suite" aria-label="A[i]gent Suite lifecycle map">
       <div class="suite-head">
         <div class="suite-left">
-          <p class="suite-title">A[i]gent Suite — People Systems Lifecycle</p>
+          <p class="suite-title">🤖 A[i]gent Suite — People Systems Lifecycle</p>
           <p class="suite-sub">Browse the lifecycle here. Open demos/playbooks for details.</p>
         </div>
         <div class="suite-actions">
-          <!-- FIXED: remove trailing slash and point to /agents/ -->
-          <a class="suite-btn" href="/agents/" target="_blank" rel="noopener">Open Full Suite</a>
+          <!-- ✅ FIX: correct link -->
+          <a class="suite-btn" href="agents/" target="_blank" rel="noopener">Open Full Suite</a>
         </div>
       </div>
 
@@ -533,193 +560,99 @@
         <div class="suite-grid">
 
           <div class="suite-col">
-            <h4>Hire</h4>
+            <h4>🎯 Hire</h4>
             <ul class="suite-list">
               <li class="suite-item">
-                <span class="suite-name">Screening</span>
-                <span class="suite-actions-inline">
-                  <a href="agents/screening/" target="_blank" rel="noopener">▶ Demo</a>
-                  <a href="agents/screening/playbook.html" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
+                <div class="suite-row">
+                  <a class="suite-name" href="agents/screening/" target="_blank" rel="noopener">Screening</a>
+                  <div class="suite-actions-mini">
+                    <a class="mini" href="agents/screening/" target="_blank" rel="noopener" title="Open Demo">🧪 Demo</a>
+                    <a class="mini" href="agents/screening/playbook.html" target="_blank" rel="noopener" title="Open Playbook">📘 Playbook</a>
+                  </div>
+                </div>
               </li>
 
               <li class="suite-item">
-                <span class="suite-name">Sourcing</span>
-                <span class="suite-actions-inline">
-                  <a href="agents/sourcing/playbook.html" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
+                <div class="suite-row">
+                  <a class="suite-name" href="agents/sourcing/" target="_blank" rel="noopener">Sourcing</a>
+                  <div class="suite-actions-mini">
+                    <a class="mini" href="agents/sourcing/playbook.html" target="_blank" rel="noopener" title="Open Playbook">📘 Playbook</a>
+                  </div>
+                </div>
               </li>
 
-              <li class="suite-item">
-                <span class="suite-name">Kickoff</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Outreach</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Match</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Nurture</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Interview</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Offer</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Kickoff</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Outreach</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Match</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Nurture</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Interview</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Offer</a><div class="suite-actions-mini"></div></div></li>
             </ul>
           </div>
 
           <div class="suite-col">
-            <h4>Support</h4>
+            <h4>🦾 Support</h4>
             <ul class="suite-list">
               <li class="suite-item">
-                <span class="suite-name">Workflow</span>
-                <span class="suite-actions-inline">
-                  <a href="agents/workflow/" target="_blank" rel="noopener">▶ Demo</a>
-                  <a href="agents/workflow/playbook.html" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
+                <div class="suite-row">
+                  <a class="suite-name" href="agents/workflow/" target="_blank" rel="noopener">Workflow</a>
+                  <div class="suite-actions-mini">
+                    <a class="mini" href="agents/workflow/" target="_blank" rel="noopener" title="Open Demo">🧪 Demo</a>
+                    <a class="mini" href="agents/workflow/playbook.html" target="_blank" rel="noopener" title="Open Playbook">📘 Playbook</a>
+                  </div>
+                </div>
               </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Onboarding</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">InfoHub</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Planning</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Enablement</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Coaching</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Onboarding</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">InfoHub</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Planning</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Enablement</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Coaching</a><div class="suite-actions-mini"></div></div></li>
             </ul>
           </div>
 
           <div class="suite-col">
-            <h4>Evaluate</h4>
+            <h4>📊 Evaluate</h4>
             <ul class="suite-list">
               <li class="suite-item">
-                <span class="suite-name">Metrics</span>
-                <span class="suite-actions-inline">
-                  <a href="agents/metrics/" target="_blank" rel="noopener">▶ Demo</a>
-                  <a href="agents/metrics/playbook.html" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
+                <div class="suite-row">
+                  <a class="suite-name" href="agents/metrics/" target="_blank" rel="noopener">Metrics</a>
+                  <div class="suite-actions-mini">
+                    <a class="mini" href="agents/metrics/" target="_blank" rel="noopener" title="Open Demo">🧪 Demo</a>
+                    <a class="mini" href="agents/metrics/playbook.html" target="_blank" rel="noopener" title="Open Playbook">📘 Playbook</a>
+                  </div>
+                </div>
               </li>
 
               <li class="suite-item">
-                <span class="suite-name">Listening</span>
-                <span class="suite-actions-inline">
-                  <a href="agents/listening/" target="_blank" rel="noopener">▶ Demo</a>
-                  <a href="agents/listening/playbook.html" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
+                <div class="suite-row">
+                  <a class="suite-name" href="agents/listening/" target="_blank" rel="noopener">Listening</a>
+                  <div class="suite-actions-mini">
+                    <a class="mini" href="agents/listening/playbook.html" target="_blank" rel="noopener" title="Open Playbook">📘 Playbook</a>
+                  </div>
+                </div>
               </li>
 
-              <li class="suite-item">
-                <span class="suite-name">Sentiment</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Skills</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Scorecard</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Sentiment</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Skills</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Scorecard</a><div class="suite-actions-mini"></div></div></li>
             </ul>
           </div>
 
           <div class="suite-col">
-            <h4>Improve</h4>
+            <h4>🏅 Improve</h4>
             <ul class="suite-list">
-              <li class="suite-item">
-                <span class="suite-name">Training</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Training</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Quality</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Mobility</a><div class="suite-actions-mini"></div></div></li>
+              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Brand</a><div class="suite-actions-mini"></div></div></li>
 
               <li class="suite-item">
-                <span class="suite-name">Quality</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Mobility</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Brand</span>
-                <span class="suite-actions-inline">
-                  <a href="/agents/" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
-              </li>
-
-              <li class="suite-item">
-                <span class="suite-name">Innovation</span>
-                <span class="suite-actions-inline">
-                  <a href="agents/innovation/playbook.html" target="_blank" rel="noopener">📘 Playbook</a>
-                </span>
+                <div class="suite-row">
+                  <a class="suite-name" href="agents/innovation/" target="_blank" rel="noopener">Innovation</a>
+                  <div class="suite-actions-mini">
+                    <a class="mini" href="agents/innovation/playbook.html" target="_blank" rel="noopener" title="Open Playbook">📘 Playbook</a>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>
