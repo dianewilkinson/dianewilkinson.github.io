@@ -94,6 +94,7 @@
       font-size:12px;
       font-weight:800;
       color:#374151;
+      white-space:nowrap;
     }
     .iconbtn{
       width:34px;height:34px;
@@ -106,6 +107,72 @@
       cursor:pointer;
     }
     .iconbtn:hover{background:#fbfbff;border-color:rgba(99,102,241,.45);}
+
+    /* ---------- App dock (top icons with unread badges) ---------- */
+    .appdock{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .appbtn{
+      position:relative;
+      width:34px;
+      height:34px;
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      user-select:none;
+      box-shadow:0 1px 2px var(--shadow);
+    }
+    .appbtn:hover{background:#fbfbff;border-color:rgba(99,102,241,.45);}
+    .appmark{
+      width:18px;
+      height:18px;
+      border-radius:6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:950;
+      font-size:12px;
+      line-height:1;
+      color:#fff;
+      letter-spacing:-0.01em;
+    }
+    /* brand-ish marks */
+    .m-slack{background:#4A154B;}
+    .m-gmail{background:#EA4335;}
+    .m-in{background:#0A66C2;}
+    .m-wa{background:#25D366;}
+    .m-gd{background:#111827;}
+    .m-ashby{background:#111827;}
+    .m-drive{background:#1A73E8;}
+    .m-greenhouse{background:#22C55E;}
+    .m-gem{background:#7C3AED;}
+    .m-metaview{background:#0F172A;}
+    .m-goodtime{background:#2563EB;}
+
+    .badgecount{
+      position:absolute;
+      top:-6px;
+      right:-6px;
+      min-width:18px;
+      height:18px;
+      padding:0 6px;
+      border-radius:999px;
+      background:#111827;
+      color:#fff;
+      font-size:11px;
+      font-weight:950;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:2px solid #fff;
+    }
+    .badgecount.hide{display:none;}
 
     /* Main panel */
     .panel{
@@ -179,6 +246,7 @@
       display:flex;
       align-items:center;
       gap:6px;
+      white-space:nowrap;
     }
 
     .cardbody{padding:10px 12px;}
@@ -230,6 +298,7 @@
       font-weight:950;
       letter-spacing:-0.01em;
       user-select:none;
+      white-space:nowrap;
     }
     .sp-good{color:var(--good);}
     .sp-warn{color:var(--warn);}
@@ -252,18 +321,16 @@
       border-bottom:1px solid var(--border);
       background:var(--accent-soft);
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:space-between;
       gap:10px;
       flex-wrap:wrap;
     }
     .helptitle{
-      display:flex;
-      align-items:center;
-      gap:10px;
       font-weight:950;
       letter-spacing:-0.01em;
       color:var(--purple);
+      font-size:15px;
     }
     .chiefmark{
       display:flex;
@@ -272,6 +339,7 @@
       color:#374151;
       font-weight:900;
       font-size:12px;
+      margin-top:4px;
     }
     .helpbody{
       padding:12px 14px;
@@ -583,11 +651,57 @@
       <div class="brand">
         <div class="logo" id="brandLogo">LOGO</div>
       </div>
+
       <div class="topright">
         <span class="pill" id="datePill">📅 Thu, Jan 29</span>
         <span class="pill" id="timePill">🕒 01:26 PM</span>
         <span class="pill" id="weatherPill">☀️ 58°F · San Francisco</span>
-        <button class="iconbtn" id="settingsBtn" title="Settings (stub)">⚙️</button>
+
+        <!-- App icons (icons only, unread in superscript badges) -->
+        <div class="appdock" aria-label="Recruiting apps">
+          <button class="appbtn" id="appSlack" title="Slack">
+            <span class="appmark m-slack">S</span>
+            <span class="badgecount" id="badgeSlack">0</span>
+          </button>
+
+          <button class="appbtn" id="appGmail" title="Gmail">
+            <span class="appmark m-gmail">G</span>
+            <span class="badgecount" id="badgeEmail">0</span>
+          </button>
+
+          <button class="appbtn" id="appIn" title="LinkedIn">
+            <span class="appmark m-in">in</span>
+            <span class="badgecount" id="badgeInmail">0</span>
+          </button>
+
+          <button class="appbtn" id="appWA" title="WhatsApp">
+            <span class="appmark m-wa">W</span>
+            <span class="badgecount" id="badgeWA">0</span>
+          </button>
+
+          <!-- Optional recruiter stack shortcuts (no badges by default) -->
+          <button class="appbtn" id="appGreenhouse" title="Greenhouse">
+            <span class="appmark m-greenhouse">G</span>
+            <span class="badgecount hide" id="badgeGreenhouse">0</span>
+          </button>
+
+          <button class="appbtn" id="appAshby" title="Ashby">
+            <span class="appmark m-ashby">A</span>
+            <span class="badgecount hide" id="badgeAshby">0</span>
+          </button>
+
+          <button class="appbtn" id="appDrive" title="Google Drive">
+            <span class="appmark m-drive">D</span>
+            <span class="badgecount hide" id="badgeDrive">0</span>
+          </button>
+
+          <button class="appbtn" id="appGlassdoor" title="Glassdoor">
+            <span class="appmark m-gd">GD</span>
+            <span class="badgecount hide" id="badgeGlassdoor">0</span>
+          </button>
+        </div>
+
+        <button class="iconbtn" id="settingsBtn" title="Settings">⚙️</button>
       </div>
     </div>
 
@@ -717,47 +831,7 @@
           </div>
         </div>
 
-        <!-- Messaging -->
-        <div class="card" data-card="messaging">
-          <div class="cardhead">
-            <h3>Messaging</h3>
-            <span class="headmeta">💬 <span style="color:#374151;font-weight:900;">Unread</span></span>
-          </div>
-          <div class="cardbody">
-            <div class="list">
-              <div class="row" data-msg="slack">
-                <div class="rowleft">
-                  <div class="rowtitle">Slack</div>
-                  <div class="rowsub">7 unread</div>
-                </div>
-                <div class="rowright"><span class="statuspill sp-info">7</span></div>
-              </div>
-              <div class="row" data-msg="email">
-                <div class="rowleft">
-                  <div class="rowtitle">Email</div>
-                  <div class="rowsub">12 unread</div>
-                </div>
-                <div class="rowright"><span class="statuspill sp-info">12</span></div>
-              </div>
-              <div class="row" data-msg="inmail">
-                <div class="rowleft">
-                  <div class="rowtitle">LinkedIn InMails</div>
-                  <div class="rowsub">3 unread</div>
-                </div>
-                <div class="rowright"><span class="statuspill sp-info">3</span></div>
-              </div>
-              <div class="row" data-msg="whatsapp">
-                <div class="rowleft">
-                  <div class="rowtitle">WhatsApp</div>
-                  <div class="rowsub">2 unread</div>
-                </div>
-                <div class="rowright"><span class="statuspill sp-info">2</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- News -->
+        <!-- Company & Industry News -->
         <div class="card" data-card="news">
           <div class="cardhead">
             <h3>Company & Industry News</h3>
@@ -796,6 +870,47 @@
             </div>
           </div>
         </div>
+
+        <!-- Tools (replaces Messaging card; top dock shows unread instead) -->
+        <div class="card" data-card="tools">
+          <div class="cardhead">
+            <h3>Recruiting Tools</h3>
+            <span class="headmeta">🧩 <span style="color:#374151;font-weight:900;">Shortcuts</span></span>
+          </div>
+          <div class="cardbody">
+            <div class="list">
+              <div class="row" data-tool="greenhouse">
+                <div class="rowleft">
+                  <div class="rowtitle">Greenhouse</div>
+                  <div class="rowsub">ATS queue, scorecards, approvals</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Open</span></div>
+              </div>
+              <div class="row" data-tool="ashby">
+                <div class="rowleft">
+                  <div class="rowtitle">Ashby</div>
+                  <div class="rowsub">Pipeline, scheduling, automation</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Open</span></div>
+              </div>
+              <div class="row" data-tool="drive">
+                <div class="rowleft">
+                  <div class="rowtitle">Google Drive</div>
+                  <div class="rowsub">Templates, scorecards, market maps</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Open</span></div>
+              </div>
+              <div class="row" data-tool="gem">
+                <div class="rowleft">
+                  <div class="rowtitle">Gem</div>
+                  <div class="rowsub">Sequences, outreach analytics</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Open</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1002,6 +1117,8 @@
       const arr = DATA.inbox[tab] || [];
       if(arr[0]) selectItem(arr[0].id);
       else renderPreviewEmpty();
+
+      syncBadges();
     }
 
     tabs.addEventListener("click", (e)=>{
@@ -1078,11 +1195,29 @@
       showToast(`${label} (demo)`);
     });
 
-    // Messaging rows in Overview open the modal
-    document.querySelectorAll("[data-msg]").forEach(row=>{
+    // Top app dock opens the modal
+    document.getElementById("appSlack")?.addEventListener("click", ()=> openModal("slack"));
+    document.getElementById("appGmail")?.addEventListener("click", ()=> openModal("email"));
+    document.getElementById("appIn")?.addEventListener("click", ()=> openModal("inmail"));
+    document.getElementById("appWA")?.addEventListener("click", ()=> openModal("whatsapp"));
+
+    // Optional stack shortcuts (demo routing)
+    document.getElementById("appGreenhouse")?.addEventListener("click", ()=> showToast("Would open Greenhouse (demo)."));
+    document.getElementById("appAshby")?.addEventListener("click", ()=> showToast("Would open Ashby (demo)."));
+    document.getElementById("appDrive")?.addEventListener("click", ()=> showToast("Would open Drive (demo)."));
+    document.getElementById("appGlassdoor")?.addEventListener("click", ()=> showToast("Would open Glassdoor (demo)."));
+
+    // Tools card rows (demo routing)
+    document.querySelectorAll("[data-tool]").forEach(row=>{
       row.addEventListener("click", ()=>{
-        const tab = row.getAttribute("data-msg");
-        openModal(tab);
+        const id = row.getAttribute("data-tool");
+        const map = {
+          greenhouse:"Would open Greenhouse queue (demo).",
+          ashby:"Would open Ashby pipeline (demo).",
+          drive:"Would open Drive templates (demo).",
+          gem:"Would open Gem sequences (demo)."
+        };
+        showToast(map[id] || "Would open tool (demo).");
       });
     });
 
@@ -1114,6 +1249,33 @@
       chatInput.value = "";
     });
 
+    // Badges sync from DATA
+    function syncBadges(){
+      const slack = (DATA.inbox.slack || []).length;
+      const email = (DATA.inbox.email || []).length;
+      const inmail = (DATA.inbox.inmail || []).length;
+      const wa = (DATA.inbox.whatsapp || []).length;
+
+      const set = (id, n)=>{
+        const el = document.getElementById(id);
+        if(!el) return;
+        el.textContent = String(n);
+        el.classList.toggle("hide", n <= 0);
+      };
+
+      set("badgeSlack", slack);
+      set("badgeEmail", email);
+      set("badgeInmail", inmail);
+      set("badgeWA", wa);
+
+      // Optional placeholders
+      document.getElementById("badgeGreenhouse")?.classList.add("hide");
+      document.getElementById("badgeAshby")?.classList.add("hide");
+      document.getElementById("badgeDrive")?.classList.add("hide");
+      document.getElementById("badgeGlassdoor")?.classList.add("hide");
+    }
+    syncBadges();
+
     // Utility
     function escapeHtml(s){
       return String(s ?? "")
@@ -1124,10 +1286,10 @@
         .replaceAll("'","&#39;");
     }
 
-    // Settings (stub)
-    document.getElementById("settingsBtn").addEventListener("click", ()=>showToast("Settings (demo stub)."));
+    // Settings
+    document.getElementById("settingsBtn").addEventListener("click", ()=>showToast("Settings (demo)."));
 
-    // Optional: update time quickly (still a demo)
+    // Update time/date
     function tick(){
       const d = new Date();
       const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
