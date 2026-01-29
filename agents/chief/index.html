@@ -46,6 +46,7 @@
       max-width:1120px;
       margin:0 auto;
       padding:10px 16px 22px;
+      overflow:visible; /* allow top badges to pop out */
     }
 
     /* Top chrome */
@@ -55,6 +56,7 @@
       justify-content:space-between;
       gap:12px;
       padding:10px 0 12px;
+      overflow:visible; /* allow badges to pop out */
     }
 
     /* LEFT: app icons */
@@ -63,7 +65,12 @@
       align-items:center;
       gap:10px;
       flex-wrap:wrap;
+      overflow:visible; /* allow badges to pop out */
     }
+
+    /* normalize button rendering across browsers */
+    button{ -webkit-appearance:none; appearance:none; }
+
     .appbtn{
       position:relative;
       width:34px;height:34px;
@@ -75,25 +82,34 @@
       justify-content:center;
       cursor:pointer;
       box-shadow:0 1px 2px var(--shadow);
-      padding:5px;
+      padding:6px;
+      overflow:visible; /* IMPORTANT: don't clip badge */
+      line-height:0;
     }
     .appbtn:hover{background:#fbfbff;border-color:rgba(99,102,241,.45);}
+
+    /* key fix: prevent logo cropping + normalize all logos (incl. WhatsApp) */
     .appimg{
-      width:100%;height:100%;
+      width:22px;
+      height:22px;
       display:block;
-      object-fit:cover;
-      border-radius:8px;
+      object-fit:contain;   /* IMPORTANT: no cropping */
+      border-radius:6px;
     }
+
     .appfallback{
       font-size:12px;
       font-weight:950;
       color:#374151;
       user-select:none;
+      line-height:1;
     }
+
+    /* badge “pops out” */
     .badge{
       position:absolute;
-      top:-6px;
-      right:-6px;
+      top:-9px;
+      right:-9px;
       min-width:18px;
       height:18px;
       padding:0 5px;
@@ -104,7 +120,10 @@
       font-weight:950;
       line-height:18px;
       border:2px solid #fff;
-      box-shadow:0 6px 14px rgba(0,0,0,.18);
+      box-shadow:0 10px 18px rgba(0,0,0,.20);
+      transform:translate(2px,-2px); /* subtle pop */
+      pointer-events:none;
+      z-index:5;
     }
     .badge.hide{display:none;}
 
@@ -115,6 +134,7 @@
       gap:10px;
       flex-wrap:wrap;
       justify-content:flex-end;
+      overflow:visible;
     }
     .pill{
       display:inline-flex;
@@ -853,7 +873,6 @@
             </div>
           </div>
 
-          <!-- Empty spacer card so the news area still feels balanced on wide screens -->
           <div class="card" aria-hidden="true">
             <div class="cardhead">
               <h3 style="color:#6b7280;">Notes</h3>
@@ -861,7 +880,7 @@
             </div>
             <div class="cardbody">
               <div style="font-size:13px;color:#6b7280;line-height:1.6;">
-                Keep this area light. If News ever feels busy again, delete this entire <code>#newsWrap</code> block and the “Show News” button.
+                Keep this area light. If News feels busy again, delete the <code>#newsWrap</code> block and the “Show News” button.
               </div>
             </div>
           </div>
@@ -936,15 +955,11 @@
             <button class="tab" data-tab="whatsapp">📱 WhatsApp</button>
           </div>
 
-          <div class="inboxlist" id="inboxList">
-            <!-- injected -->
-          </div>
+          <div class="inboxlist" id="inboxList"></div>
         </div>
 
         <div class="content">
-          <div class="preview" id="preview">
-            <!-- injected -->
-          </div>
+          <div class="preview" id="preview"></div>
 
           <div class="actions" id="actions">
             <button class="act" data-act="summarize">✨ Summarize</button>
@@ -1160,7 +1175,7 @@
       showToast(`${label} (demo)`);
     });
 
-    // Top icon clicks open modal (THIS is your “messages pop up opens if you click unread”)
+    // Top icon clicks open modal
     document.getElementById("appSlack")?.addEventListener("click", ()=>openModal("slack"));
     document.getElementById("appGmail")?.addEventListener("click", ()=>openModal("email"));
     document.getElementById("appInmail")?.addEventListener("click", ()=>openModal("inmail"));
