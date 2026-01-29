@@ -58,6 +58,14 @@
       line-height:1.6;
     }
 
+    /* NEW: second line spacing + emphasis */
+header p .subline{
+  display:block;        /* forces a true new line */
+  margin-top:10px;      /* space away from line above */
+  font-weight:600;      /* bolder */
+  color:#374151;        /* slightly darker than muted */
+}
+
     .wrap{
       max-width:1120px;
       margin:0 auto;
@@ -306,11 +314,13 @@
   <header>
     <h1>👋 Diane Wilkinson — People Systems & Workforce Operations</h1>
     <p>
-      I help People Ops &amp; Talent teams replace vendor sprawl with workflow-first automations, analytics, and internal AI built directly inside the systems they already use.
-      <br>
-      People Ops &amp; Systems · AI-Enabled Workflows · Greenhouse SME · MBA, Data Analytics (4.0 GPA) ·
-      <a href="credentials/" target="_blank" rel="noopener">Credentials &amp; Recommendations</a>
-    </p>
+  I help People Ops &amp; Talent teams replace vendor sprawl with workflow-first automations, analytics, and internal AI built directly inside the systems they already use.
+  <span class="subline">
+    People Ops &amp; Systems · AI-Enabled Workflows · Greenhouse SME · MBA, Data Analytics (4.0 GPA) ·
+    <a href="credentials/" target="_blank" rel="noopener">Credentials &amp; Recommendations</a>
+  </span>
+</p>
+
   </header>
 
   <div class="wrap">
