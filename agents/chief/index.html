@@ -824,17 +824,6 @@
                 </div>
               </div>
 
-              <div class="list">
-                ${DATA.messaging.items.map(m=>`
-                  <div class="row" data-message-item="${m.id}">
-                    <div class="rowleft">
-                      <div class="rowtitle">${m.src}: ${m.title}</div>
-                      <div class="rowsub">${m.sub}</div>
-                    </div>
-                    <div class="rowright">${statusPill("info","Open")}</div>
-                  </div>
-                `).join("")}
-              </div>
             </div>
           </div>
 
