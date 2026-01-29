@@ -695,49 +695,46 @@
   <div class="bar"></div>
 
   <div class="wrap">
-    <div class="top">
-      <div class="brand">
-        <div class="logo" id="brandLogo">LOGO</div>
-      </div>
+<div class="top">
+  <!-- LEFT: message icons -->
+  <div class="appicons">
+    <button class="appbtn" id="appSlack" title="Slack">
+      <img class="appimg" src="/assets/logos/slack.png" alt="Slack"
+        onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
+      <span class="appfallback" style="display:none;">S</span>
+      <span class="badge" id="badgeSlack">7</span>
+    </button>
 
-      <div class="topright">
-        <span class="pill" id="datePill">📅 Thu, Jan 29</span>
-        <span class="pill" id="timePill">🕒 02:49 PM</span>
-        <span class="pill" id="weatherPill">☀️ 58°F · San Francisco</span>
+    <button class="appbtn" id="appGmail" title="Gmail">
+      <img class="appimg" src="/assets/logos/gmail.png" alt="Gmail"
+        onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
+      <span class="appfallback" style="display:none;">G</span>
+      <span class="badge" id="badgeGmail">12</span>
+    </button>
 
-        <!-- App icons (click opens modal) -->
-        <button class="appbtn" id="appSlack" title="Slack">
-          <img class="appimg" src="/assets/logos/slack.png" alt="Slack"
-     onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
-          <span class="appfallback" style="display:none;">S</span>
-          <span class="badge" id="badgeSlack">7</span>
-        </button>
+    <button class="appbtn" id="appInmail" title="LinkedIn InMail">
+      <img class="appimg" src="/assets/logos/inmail.png" alt="InMail"
+        onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
+      <span class="appfallback" style="display:none;">in</span>
+      <span class="badge" id="badgeInmail">3</span>
+    </button>
 
-        <button class="appbtn" id="appGmail" title="Gmail">
-          <img class="appimg" src="/assets/logos/gmail.png" alt="Gmail"
-     onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
-          <span class="appfallback" style="display:none;">G</span>
-          <span class="badge" id="badgeGmail">12</span>
-        </button>
+    <button class="appbtn" id="appWhatsapp" title="WhatsApp">
+      <img class="appimg" src="/assets/logos/whatsapp.png" alt="WhatsApp"
+        onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
+      <span class="appfallback" style="display:none;">W</span>
+      <span class="badge" id="badgeWhatsapp">2</span>
+    </button>
+  </div>
 
-        <button class="appbtn" id="appInmail" title="LinkedIn InMail">
-          <img class="appimg" src="/assets/logos/inmail.png" alt="InMail"
-     onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
-          <span class="appfallback" style="display:none;">in</span>
-          <span class="badge" id="badgeInmail">3</span>
-        </button>
-
-        <button class="appbtn" id="appWhatsapp" title="WhatsApp">
-          ="appimg" src="/assets/logos/whatsapp.png" alt="WhatsApp"
-     onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
-          <span class="appfallback" style="display:none;">W</span>
-          <span class="badge" id="badgeWhatsapp">2</span>
-        </button>
-
-        <button class="iconbtn" id="settingsBtn" title="Settings (stub)">⚙️</button>
-      </div>
-    </div>
-
+  <!-- RIGHT: date/time/weather + settings -->
+  <div class="topright">
+    <span class="pill" id="datePill">📅 Thu, Jan 29</span>
+    <span class="pill" id="timePill">🕒 02:49 PM</span>
+    <span class="pill" id="weatherPill">☀️ 58°F · San Francisco</span>
+    <button class="iconbtn" id="settingsBtn" title="Settings (stub)">⚙️</button>
+  </div>
+</div>
     <!-- Overview -->
     <section class="panel" aria-label="Overview">
       <div class="panelhead">
