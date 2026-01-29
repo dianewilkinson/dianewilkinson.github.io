@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chief — Orchestrated People Ops (Demo)</title>
+
+  <meta property="og:title" content="Chief — Orchestrated People Ops (Demo)">
+  <meta property="og:description" content="Hybrid chat + cards: Chief briefs, routes work to A[i]gents, and keeps humans in the loop at decision boundaries.">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root{
+      --bg:#f9fafb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#4b5563;
+      --border:#e5e7eb;
+      --shadow:rgba(15,23,42,0.08);
+      --link:#2563eb;
+      --link-soft:#4f46e5;
+
+      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
+      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.10),rgba(168,85,247,.10),rgba(99,102,241,.10));
+
+      --good:#16a34a;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+      --info:#2563eb;
+    }
+
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    a{color:var(--link);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+
+    .bar{height:4px;background:var(--accent-grad);}
+
+    /* Top header */
+    header{
+      padding:18px 16px 10px;
+      text-align:center;
+    }
+    header h1{
+      margin:0;
+      font-size:20px;
+      font-weight:800;
+      letter-spacing:-0.01em;
+    }
+    header p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .wrap{
+      max-width:1200px;
+      margin:0 auto;
+      padding:10px 16px 22px;
+    }
+
+    /* Layout: left chat + right cards */
+    .shell{
+      display:grid;
+      grid-template-columns: 380px 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width:980px){
+      .shell{grid-template-columns:1fr;}
+    }
+
+    /* Panels */
+    .panel{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:0 1px 3px var(--shadow);
+      overflow:hidden;
+      min-height:560px;
+      display:flex;
+      flex-direction:column;
+    }
+    .panel-head{
+      padding:12px 12px 10px;
+      border-bottom:1px solid var(--border);
+      background:var(--accent-soft);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .panel-title{
+      margin:0;
+      font-weight:800;
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#374151;
+    }
+    .panel-sub{
+      margin:4px 0 0;
+      color:#6b7280;
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    /* CHAT */
+    .chat-body{
+      padding:12px;
+      overflow:auto;
+      flex:1;
+      background:linear-gradient(180deg,#fff, #fbfdff);
+    }
+    .msg{
+      display:flex;
+      gap:10px;
+      margin:10px 0;
+      align-items:flex-start;
+    }
+    .avatar{
+      width:28px;height:28px;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+      border:1px solid rgba(148,163,184,.55);
+      background:rgba(255,255,255,.95);
+      flex:0 0 auto;
+    }
+    .bubble{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:14px;
+      padding:10px 10px 9px;
+      box-shadow:0 1px 2px var(--shadow);
+      max-width:100%;
+    }
+    .who{
+      font-size:12px;
+      font-weight:700;
+      color:#374151;
+      margin:0 0 4px;
+    }
+    .text{
+      font-size:13px;
+      color:#374151;
+      line-height:1.55;
+      margin:0;
+    }
+    .meta{
+      margin-top:6px;
+      font-size:11px;
+      color:#6b7280;
+    }
+
+    .chip-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .chip{
+      border:1px solid rgba(148,163,184,.55);
+      background:rgba(255,255,255,.95);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      color:#4f46e5;
+      cursor:pointer;
+      user-select:none;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition:transform .12s ease, background .12s ease;
+    }
+    .chip:hover{transform:translateY(-1px); background:#fff;}
+    .chip:active{transform:translateY(0);}
+
+    .chat-foot{
+      padding:10px 12px 12px;
+      border-top:1px solid var(--border);
+      background:#fff;
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .input{
+      flex:1;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px 10px;
+      font-size:13px;
+      outline:none;
+      background:#fbfdff;
+    }
+    .btn{
+      border:1px solid rgba(148,163,184,.65);
+      background:rgba(255,255,255,.98);
+      color:#4f46e5;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btn:hover{background:#fff; color:#4338ca;}
+
+    /* RIGHT: Review Surface */
+    .review-body{
+      padding:12px;
+      overflow:auto;
+      flex:1;
+      background:linear-gradient(180deg,#fff,#fbfdff);
+    }
+
+    .stage{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin:2px 0 10px;
+      flex-wrap:wrap;
+    }
+    .stage-left{
+      min-width:220px;
+    }
+    .stage h2{
+      margin:0;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:-0.01em;
+    }
+    .stage p{
+      margin:5px 0 0;
+      font-size:13px;
+      color:#6b7280;
+      line-height:1.45;
+    }
+
+    .stage-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.55);
+      background:rgba(255,255,255,.95);
+      font-size:12px;
+      font-weight:800;
+      color:#374151;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 1px 3px var(--shadow);
+      padding:12px 12px 10px;
+      margin:10px 0;
+    }
+    .card h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:-0.005em;
+    }
+    .card p{
+      margin:0;
+      font-size:13px;
+      color:#374151;
+      line-height:1.55;
+    }
+
+    .kpis{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(160px, 1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+    @media (max-width:980px){
+      .kpis{grid-template-columns:1fr;}
+    }
+    .kpi{
+      border:1px solid #eef2f7;
+      background:#fbfdff;
+      border-radius:14px;
+      padding:10px;
+    }
+    .kpi .label{
+      font-size:11px;
+      color:#6b7280;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-weight:800;
+      margin-bottom:6px;
+    }
+    .kpi .value{
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:-0.01em;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:900;
+      border:1px solid rgba(148,163,184,.55);
+      background:rgba(255,255,255,.95);
+      margin-top:8px;
+    }
+    .b-warn{color:#92400e; border-color:rgba(245,158,11,.35); background:rgba(245,158,11,.08);}
+    .b-info{color:#1d4ed8; border-color:rgba(37,99,235,.35); background:rgba(37,99,235,.08);}
+    .b-good{color:#166534; border-color:rgba(22,163,74,.35); background:rgba(22,163,74,.08);}
+    .b-bad{color:#991b1b; border-color:rgba(239,68,68,.35); background:rgba(239,68,68,.08);}
+
+    .divider{
+      margin:12px 0;
+      border-top:1px dashed #e5e7eb;
+    }
+
+    /* Decision buttons inside review surface */
+    .decision-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .action{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:14px;
+      border:1px solid rgba(148,163,184,.65);
+      background:rgba(255,255,255,.98);
+      color:#4f46e5;
+      font-size:13px;
+      font-weight:900;
+      cursor:pointer;
+      user-select:none;
+    }
+    .action:hover{background:#fff; color:#4338ca;}
+    .action.primary{
+      background:#4f46e5;
+      border-color:#4f46e5;
+      color:#fff;
+    }
+    .action.primary:hover{background:#4338ca; border-color:#4338ca; color:#fff;}
+
+    .small{
+      font-size:11px;
+      color:#6b7280;
+      margin-top:8px;
+      line-height:1.4;
+    }
+
+    /* Toast (small confirmation) */
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      background:#111827;
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .18s ease, transform .18s ease;
+    }
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bar"></div>
+
+  <header>
+    <h1>Chief — Personal Chief of Staff (Demo)</h1>
+    <p>Hybrid chat + review cards. Chat is context; cards are the work surface.</p>
+  </header>
+
+  <div class="wrap">
+    <div class="shell">
+
+      <!-- LEFT: CHAT CONTEXT -->
+      <section class="panel" aria-label="Chief chat">
+        <div class="panel-head">
+          <div>
+            <p class="panel-title">Chat Context</p>
+            <p class="panel-sub">Chief briefs + recommends. Click chips to load review cards →</p>
+          </div>
+          <span class="pill">🕘 9:02 AM</span>
+        </div>
+
+        <div class="chat-body" id="chatBody">
+          <div class="msg">
+            <div class="avatar">👤</div>
+            <div class="bubble">
+              <p class="who">You</p>
+              <p class="text">Good morning. What needs attention today?</p>
+            </div>
+          </div>
+
+          <div class="msg">
+            <div class="avatar">🧠</div>
+            <div class="bubble">
+              <p class="who">Chief</p>
+              <p class="text">
+                Morning brief is ready. Two items require review: a pipeline risk and an outreach signal dip.
+                I recommend addressing outreach first (low risk, reversible).
+              </p>
+              <div class="chip-row">
+                <div class="chip" data-view="brief">📌 Open Morning Brief</div>
+                <div class="chip" data-view="outreach">✉️ Review Outreach Adjustment</div>
+                <div class="chip" data-view="forecast">📈 View Forecast Impact</div>
+              </div>
+              <div class="meta">Sources: Metrics A[i]gent · Listening · Outreach</div>
+            </div>
+          </div>
+
+          <div class="msg">
+            <div class="avatar">🧠</div>
+            <div class="bubble">
+              <p class="who">Chief</p>
+              <p class="text">
+                Note: Outreach A[i]gent has already run guardrailed tests (subject line only). Nothing has been sent outside approved rules.
+              </p>
+              <div class="chip-row">
+                <div class="chip" data-view="diff">🔍 Review Proposed Diff</div>
+                <div class="chip" data-view="controls">✅ Approve / ⏸ Pause Controls</div>
+              </div>
+              <div class="meta">Guardrails: role-only · auto-revert · audit logged</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-foot">
+          <input class="input" id="chatInput" placeholder="Type here (demo stub)…" />
+          <button class="btn" id="sendBtn">Send</button>
+        </div>
+      </section>
+
+      <!-- RIGHT: REVIEW SURFACE -->
+      <section class="panel" aria-label="Review surface">
+        <div class="panel-head">
+          <div>
+            <p class="panel-title">Review Surface</p>
+            <p class="panel-sub">Cards you’re reviewing right now (not buried in chat history).</p>
+          </div>
+          <div class="stage-actions">
+            <span class="pill" id="modePill">📌 Morning Brief</span>
+            <span class="pill">🧩 Orchestrated</span>
+          </div>
+        </div>
+
+        <div class="review-body" id="reviewBody">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Saved.</div>
+
+  <script>
+    const reviewBody = document.getElementById("reviewBody");
+    const modePill = document.getElementById("modePill");
+    const toast = document.getElementById("toast");
+
+    function showToast(text){
+      toast.textContent = text;
+      toast.classList.add("show");
+      setTimeout(()=>toast.classList.remove("show"), 1200);
+    }
+
+    function setMode(label){
+      modePill.textContent = label;
+    }
+
+    function tplBrief(){
+      setMode("📌 Morning Brief");
+      return `
+        <div class="stage">
+          <div class="stage-left">
+            <h2>Good morning.</h2>
+            <p>Here’s what needs attention today. Click an item to review decisions.</p>
+          </div>
+          <div class="stage-actions">
+            <span class="pill">Sources: Metrics · Listening · Outreach</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>⚠️ Pipeline Risk Detected — Backend Engineer (US)</h3>
+          <p>Pipeline volume trending <strong>−18% vs plan</strong>. Risk concentrated at <strong>Screen → Hiring Manager</strong>.</p>
+
+          <div class="kpis">
+            <div class="kpi">
+              <div class="label">Risk Level</div>
+              <div class="value">High</div>
+              <div class="badge b-bad">⛔ Miss-start risk</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Primary Break</div>
+              <div class="value">Screen → HM</div>
+              <div class="badge b-warn">⚠️ Conversion dip</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Impact</div>
+              <div class="value">2 roles</div>
+              <div class="badge b-info">📆 Start dates</div>
+            </div>
+          </div>
+
+          <div class="decision-row">
+            <div class="action primary" data-next="outreach">✉️ Address outreach first</div>
+            <div class="action" data-next="forecast">📈 Review forecast impact</div>
+          </div>
+
+          <div class="small">Updated 12 minutes ago · Metrics A[i]gent</div>
+        </div>
+
+        <div class="card">
+          <h3>📉 Early Signal Identified — Outreach Response Dip</h3>
+          <p>Candidate reply rate dropped <strong>9% week over week</strong>. Decline began after compensation language update. EU unaffected.</p>
+          <div class="decision-row">
+            <div class="action primary" data-next="outreach">Review outreach adjustment</div>
+            <div class="action" data-next="diff">See proposed subject line diff</div>
+          </div>
+          <div class="small">Listening + Outreach A[i]gent</div>
+        </div>
+      `;
+    }
+
+    function tplOutreach(){
+      setMode("✉️ Outreach Adjustment");
+      return `
+        <div class="stage">
+          <div class="stage-left">
+            <h2>Outreach adjustment</h2>
+            <p>Chief shows what’s already in motion. You approve at decision boundaries.</p>
+          </div>
+          <div class="stage-actions">
+            <span class="pill">Guardrailed autonomy</span>
+            <span class="pill">Audit logged</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>✉️ Outreach A[i]gent Status</h3>
+          <p>
+            Detected response dip yesterday. Tested <strong>2 subject line variants</strong> overnight.
+            Early open rates: <strong>+6% vs baseline</strong>. No changes to comp details.
+          </p>
+
+          <div class="divider"></div>
+
+          <p><strong>Current state:</strong> Running within approved guardrails</p>
+          <div class="badge b-info">🛡️ subject line only · role-specific · auto-revert</div>
+
+          <div class="decision-row">
+            <div class="action primary" data-action="approve">✅ Let this continue</div>
+            <div class="action" data-next="diff">👀 Review proposed changes</div>
+            <div class="action" data-action="pause">⏸ Pause & revert</div>
+          </div>
+
+          <div class="small">Outreach A[i]gent</div>
+        </div>
+      `;
+    }
+
+    function tplDiff(){
+      setMode("🔍 Proposed Diff");
+      return `
+        <div class="stage">
+          <div class="stage-left">
+            <h2>Review proposed change</h2>
+            <p>Diff-style review. Approve for this role only, or revert.</p>
+          </div>
+          <div class="stage-actions">
+            <span class="pill">Low risk</span>
+            <span class="pill">Reversible</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Subject line change</h3>
+          <p><strong>Before</strong><br>“Backend Engineer — Growth Team”</p>
+          <div class="divider"></div>
+          <p><strong>After</strong><br>“Backend Engineer — Ownership of Core Systems”</p>
+
+          <div class="divider"></div>
+
+          <p><strong>Why this change</strong></p>
+          <ul style="margin:8px 0 0 18px; padding:0; color:#374151; font-size:13px; line-height:1.55;">
+            <li>Higher engagement among senior engineers</li>
+            <li>Matches language used by recently accepted candidates</li>
+            <li>No impact on compensation or leveling expectations</li>
+          </ul>
+
+          <div class="decision-row">
+            <div class="action primary" data-action="approve">✅ Approve & continue</div>
+            <div class="action" data-action="approveRole">✅ Approve (role only)</div>
+            <div class="action" data-action="revert">↩️ Reject & revert</div>
+          </div>
+
+          <div class="small">Generated + tested by Outreach A[i]gent · Evidence attached</div>
+        </div>
+      `;
+    }
+
+    function tplForecast(){
+      setMode("📈 Forecast Impact");
+      return `
+        <div class="stage">
+          <div class="stage-left">
+            <h2>Forecast impact</h2>
+            <p>Planning lives in the sheet. Chief summarizes the risk so you can decide quickly.</p>
+          </div>
+          <div class="stage-actions">
+            <span class="pill">Planning Engine: Sheet</span>
+            <span class="pill">Health: Metrics</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Pipeline planning summary (from the Forecasting Sheet)</h3>
+          <p>
+            If conversion remains at current levels for 7 days, projected shortfall is <strong>~18 screens</strong>
+            to support the planned HM interview volume.
+          </p>
+
+          <div class="kpis">
+            <div class="kpi">
+              <div class="label">Shortfall Driver</div>
+              <div class="value">Top funnel</div>
+              <div class="badge b-warn">⚠️ Volume</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Fastest lever</div>
+              <div class="value">Outreach</div>
+              <div class="badge b-good">✅ Low lift</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Backup lever</div>
+              <div class="value">Sourcing</div>
+              <div class="badge b-info">🧪 Increase input</div>
+            </div>
+          </div>
+
+          <div class="decision-row">
+            <div class="action primary" data-next="outreach">✉️ Proceed with outreach fix</div>
+            <div class="action" data-action="openSheet">📄 Open the planning sheet</div>
+          </div>
+
+          <div class="small">Source: Pipeline Planning Sheet (Google Sheets)</div>
+        </div>
+      `;
+    }
+
+    function tplControls(){
+      setMode("✅ Controls");
+      return `
+        <div class="stage">
+          <div class="stage-left">
+            <h2>Human-in-the-loop controls</h2>
+            <p>Chief routes work. Humans approve at boundaries. Everything is reversible.</p>
+          </div>
+          <div class="stage-actions">
+            <span class="pill">Governance</span>
+            <span class="pill">Safety</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Decision options</h3>
+          <p>Choose how autonomous this should be for Outreach A[i]gent:</p>
+
+          <div class="decision-row">
+            <div class="action primary" data-action="approve">✅ Autopilot within guardrails</div>
+            <div class="action" data-action="reviewFirst">👀 Require review for each change</div>
+            <div class="action" data-action="pause">⏸ Pause all experiments</div>
+          </div>
+
+          <div class="small">These settings can be role-based (e.g., exec searches vs high-volume hiring).</div>
+        </div>
+      `;
+    }
+
+    const views = {
+      brief: tplBrief,
+      outreach: tplOutreach,
+      diff: tplDiff,
+      forecast: tplForecast,
+      controls: tplControls
+    };
+
+    function render(viewKey){
+      const fn = views[viewKey] || views.brief;
+      reviewBody.innerHTML = fn();
+      wireReviewClicks();
+    }
+
+    function wireReviewClicks(){
+      // For navigation buttons inside review surface
+      reviewBody.querySelectorAll("[data-next]").forEach(el=>{
+        el.addEventListener("click", ()=> render(el.getAttribute("data-next")));
+      });
+
+      // For actions (demo stubs)
+      reviewBody.querySelectorAll("[data-action]").forEach(el=>{
+        el.addEventListener("click", ()=>{
+          const action = el.getAttribute("data-action");
+          if(action === "openSheet"){
+            showToast("Would open Google Sheet (stub).");
+            return;
+          }
+          if(action === "approve"){
+            showToast("Approved. Chief will monitor + report back.");
+            return;
+          }
+          if(action === "approveRole"){
+            showToast("Approved for this role only.");
+            return;
+          }
+          if(action === "revert"){
+            showToast("Reverted. Experiments paused for this role.");
+            return;
+          }
+          if(action === "pause"){
+            showToast("Paused. Guardrails enforced.");
+            return;
+          }
+          if(action === "reviewFirst"){
+            showToast("Set: require review for each change.");
+            return;
+          }
+          showToast("Saved.");
+        });
+      });
+    }
+
+    // Wire chips in chat to render corresponding review view
+    document.querySelectorAll(".chip").forEach(chip=>{
+      chip.addEventListener("click", ()=>{
+        render(chip.getAttribute("data-view"));
+      });
+    });
+
+    // Fake send action (keeps it simple)
+    const chatBody = document.getElementById("chatBody");
+    const chatInput = document.getElementById("chatInput");
+    document.getElementById("sendBtn").addEventListener("click", ()=>{
+      const t = (chatInput.value || "").trim();
+      if(!t) return;
+
+      const node = document.createElement("div");
+      node.className = "msg";
+      node.innerHTML = `
+        <div class="avatar">👤</div>
+        <div class="bubble">
+          <p class="who">You</p>
+          <p class="text"></p>
+        </div>
+      `;
+      node.querySelector(".text").textContent = t;
+      chatBody.appendChild(node);
+      chatInput.value = "";
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      // Demo: if user types keywords, route view
+      const lower = t.toLowerCase();
+      if(lower.includes("outreach")) render("outreach");
+      else if(lower.includes("forecast")) render("forecast");
+      else if(lower.includes("diff")) render("diff");
+      else render("brief");
+    });
+
+    // Default view
+    render("brief");
+  </script>
+</body>
+</html>
