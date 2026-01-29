@@ -3,11 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Chief — Morning Brief (Demo)</title>
-
-  <meta property="og:title" content="Chief — Morning Brief (Demo)">
-  <meta property="og:description" content="Recruiter morning brief: interviews, open reqs, projects, employer brand — with tiered autonomy + guardrails.">
-  <meta property="og:type" content="website">
+  <title>Chief — Personal Chief of Staff (Demo)</title>
 
   <style>
     :root{
@@ -16,70 +12,59 @@
       --text:#111827;
       --muted:#6b7280;
       --border:#e5e7eb;
-      --shadow:rgba(15,23,42,0.08);
-      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
-      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.10),rgba(168,85,247,.10),rgba(99,102,241,.10));
+      --shadow:rgba(15,23,42,.08);
+      --accent:#4f46e5;
 
       --good:#16a34a;
       --warn:#f59e0b;
       --bad:#ef4444;
-      --info:#2563eb;
+
+      --soft:rgba(79,70,229,.08);
     }
 
-    *{box-sizing:border-box;}
+    *{ box-sizing:border-box; }
     body{
       margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
 
-    .bar{height:4px;background:var(--accent-grad);}
-
-    /* Top context bar */
-    .top{
-      max-width:1120px;
-      margin:0 auto;
-      padding:14px 16px 10px;
+    /* Top bar */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:10;
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:12px;
+      align-items:center;
+      padding:12px 16px;
+      border-bottom:1px solid var(--border);
+      background:#fff;
     }
     .brand{
       display:flex;
       align-items:center;
       gap:10px;
-      min-width:220px;
+      font-weight:950;
+      letter-spacing:-.01em;
     }
-    .mark{
+    .logo{
       width:34px;height:34px;
       border-radius:12px;
       display:flex;
       align-items:center;
       justify-content:center;
-      background:var(--accent-soft);
+      background:var(--soft);
       border:1px solid var(--border);
-      font-size:16px;
       box-shadow:0 1px 2px var(--shadow);
     }
-    .brand h1{
-      margin:0;
-      font-size:14px;
-      font-weight:950;
-      letter-spacing:-0.01em;
-      line-height:1.1;
-    }
-    .brand .sub{
-      margin-top:2px;
-      font-size:12px;
-      color:var(--muted);
-    }
-
-    .context{
+    .meta{
       display:flex;
-      gap:10px;
       align-items:center;
+      gap:10px;
+      font-size:13px;
+      color:var(--muted);
       flex-wrap:wrap;
       justify-content:flex-end;
     }
@@ -91,102 +76,54 @@
       border-radius:999px;
       border:1px solid rgba(148,163,184,.55);
       background:rgba(255,255,255,.95);
-      font-size:12px;
-      font-weight:900;
+      font-weight:800;
       color:#374151;
       box-shadow:0 1px 2px var(--shadow);
       white-space:nowrap;
     }
-
-    /* Chat bar (moved up under top context) */
-    .chat{
-      max-width:1120px;
-      margin:0 auto;
-      padding:0 16px 10px;
-    }
-    .chat-inner{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px;
-      border-radius:18px;
-      border:1px solid var(--border);
-      background:#fff;
-      box-shadow:0 12px 30px rgba(0,0,0,.08);
-    }
-    .chat-icon{
-      width:34px;height:34px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:var(--accent-soft);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:16px;
-      flex:0 0 auto;
-    }
-    .input{
-      flex:1;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:11px 12px;
-      font-size:13px;
-      outline:none;
-      background:#fbfdff;
-    }
-    .btn{
+    .iconbtn{
       border:1px solid rgba(148,163,184,.65);
-      background:rgba(255,255,255,.98);
-      color:#4f46e5;
-      border-radius:14px;
-      padding:9px 12px;
-      font-size:13px;
-      font-weight:950;
+      background:#fff;
+      border-radius:12px;
+      padding:8px 10px;
+      font-weight:900;
       cursor:pointer;
-      white-space:nowrap;
       box-shadow:0 1px 2px var(--shadow);
     }
-    .btn:hover{background:#fff; color:#4338ca;}
-    .btn.primary{
-      background:#4f46e5;
-      border-color:#4f46e5;
-      color:#fff;
-    }
-    .btn.primary:hover{background:#4338ca;border-color:#4338ca;color:#fff;}
-    .btn.ghost{ color:#111827; }
+    .iconbtn:hover{ border-color:#c7d2fe; }
 
-    /* Main panel */
+    /* Layout */
     .wrap{
       max-width:1120px;
       margin:0 auto;
-      padding:0 16px 18px;
+      padding:16px;
     }
+
     .panel{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:18px;
       box-shadow:0 1px 3px var(--shadow);
       overflow:hidden;
-      min-height:560px;
     }
-    .panel-head{
+    .panelhead{
       padding:12px 14px;
       border-bottom:1px solid var(--border);
-      background:var(--accent-soft);
+      background:linear-gradient(135deg, rgba(79,70,229,.10), rgba(249,115,129,.10));
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
       flex-wrap:wrap;
     }
-    .panel-head .title{
+    .paneltitle{
       display:flex;
       align-items:center;
       gap:10px;
       font-weight:950;
-      letter-spacing:-0.01em;
+      letter-spacing:-.01em;
     }
-    .panel-head .title .emoji{
+    .paneltitle .badgeicon{
       width:30px;height:30px;
       border-radius:12px;
       border:1px solid var(--border);
@@ -196,33 +133,15 @@
       justify-content:center;
       box-shadow:0 1px 2px var(--shadow);
     }
-    .panel-head .hint{
-      font-size:12px;
+    .panelhint{
       color:var(--muted);
+      font-size:12px;
       font-weight:800;
     }
 
     .body{
       padding:14px;
       background:linear-gradient(180deg,#fff,#fbfdff);
-    }
-
-    /* Empty state */
-    .empty{
-      padding:26px 8px;
-      text-align:center;
-    }
-    .empty h2{
-      margin:0 0 8px;
-      font-size:18px;
-      font-weight:950;
-      letter-spacing:-0.02em;
-    }
-    .empty p{
-      margin:0;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.5;
     }
 
     /* Dashboard cards */
@@ -232,7 +151,9 @@
       gap:12px;
       align-items:stretch;
     }
-    @media (max-width:980px){ .grid{grid-template-columns:1fr;} }
+    @media (max-width:980px){
+      .grid{ grid-template-columns:1fr; }
+    }
 
     .card{
       border:1px solid var(--border);
@@ -241,7 +162,7 @@
       box-shadow:0 1px 3px var(--shadow);
       padding:12px 12px 10px;
     }
-    .card-top{
+    .cardtop{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
@@ -252,7 +173,7 @@
       margin:0;
       font-size:14px;
       font-weight:950;
-      letter-spacing:-0.01em;
+      letter-spacing:-.01em;
       line-height:1.2;
     }
     .badge{
@@ -269,17 +190,16 @@
     }
     .b-good{color:#166534; border-color:rgba(22,163,74,.35); background:rgba(22,163,74,.08);}
     .b-warn{color:#92400e; border-color:rgba(245,158,11,.35); background:rgba(245,158,11,.08);}
-    .b-bad{color:#991b1b; border-color:rgba(239,68,68,.35); background:rgba(239,68,68,.08);}
+    .b-bad{ color:#991b1b; border-color:rgba(239,68,68,.35); background:rgba(239,68,68,.08);}
     .b-info{color:#1d4ed8; border-color:rgba(37,99,235,.35); background:rgba(37,99,235,.08);}
 
-    /* Mini list inside cards */
-    .mini{
+    .list{
       display:flex;
       flex-direction:column;
       gap:8px;
       margin-top:6px;
     }
-    .mini-row{
+    .row{
       border:1px solid var(--border);
       border-radius:14px;
       padding:9px 10px;
@@ -292,26 +212,23 @@
       cursor:pointer;
       transition:transform .12s ease, box-shadow .12s ease;
     }
-    .mini-row:hover{
-      transform:translateY(-1px);
-      box-shadow:0 10px 26px rgba(0,0,0,.06);
-    }
-    .mini-left{min-width:0;}
-    .mini-title{
+    .row:hover{ transform:translateY(-1px); box-shadow:0 10px 26px rgba(0,0,0,.06); }
+    .rowleft{ min-width:0; }
+    .rowtitle{
       margin:0;
       font-size:12.5px;
       font-weight:950;
-      letter-spacing:-0.01em;
+      letter-spacing:-.01em;
       color:#111827;
       line-height:1.25;
     }
-    .mini-sub{
+    .rowsub{
       margin-top:4px;
       font-size:12px;
       color:var(--muted);
       line-height:1.35;
     }
-    .mini-right{
+    .rowright{
       display:flex;
       gap:8px;
       align-items:center;
@@ -320,12 +237,115 @@
       flex:0 0 auto;
     }
 
-    /* Detail pages */
-    .detail{
-      max-width:900px;
-      margin:0 auto;
+    /* Help section BELOW cards */
+    .help{
+      margin-top:16px;
+      border-top:1px solid var(--border);
+      padding-top:14px;
     }
-    .detail-head{
+    .help h4{
+      margin:0 0 10px;
+      font-size:16px;
+      font-weight:950;
+      letter-spacing:-.01em;
+    }
+    .controls{
+      display:grid;
+      grid-template-columns:1.1fr 1fr 1.2fr;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    @media (max-width:980px){
+      .controls{ grid-template-columns:1fr; }
+    }
+    .control{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:10px;
+      box-shadow:0 1px 2px var(--shadow);
+    }
+    .label{
+      font-size:11px;
+      font-weight:950;
+      color:#374151;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .muted{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.4;
+    }
+    .sliderwrap{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    input[type="range"]{ width:100%; }
+    select, textarea{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px;
+      font-size:13px;
+      outline:none;
+      background:#fbfdff;
+    }
+    textarea{ min-height:42px; resize:vertical; }
+
+    /* Chat line under help controls */
+    .chatline{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-top:10px;
+    }
+    .chaticon{
+      width:34px;height:34px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:var(--soft);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:16px;
+      box-shadow:0 1px 2px var(--shadow);
+      flex:0 0 auto;
+    }
+    .chatinput{
+      flex:1;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:11px 12px;
+      font-size:13px;
+      outline:none;
+      background:#fbfdff;
+    }
+    .btn{
+      border:1px solid rgba(148,163,184,.65);
+      background:#fff;
+      color:#111827;
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+      white-space:nowrap;
+      box-shadow:0 1px 2px var(--shadow);
+    }
+    .btn.primary{
+      background:var(--accent);
+      border-color:var(--accent);
+      color:#fff;
+    }
+    .btn:hover{ border-color:#c7d2fe; }
+    .btn.primary:hover{ background:#4338ca; border-color:#4338ca; }
+
+    /* Detail views */
+    .detail{ max-width:900px; margin:0 auto; }
+    .detailhead{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
@@ -333,18 +353,18 @@
       flex-wrap:wrap;
       margin-bottom:10px;
     }
-    .detail-head h2{
+    .detailhead h2{
       margin:0;
       font-size:18px;
       font-weight:950;
-      letter-spacing:-0.02em;
+      letter-spacing:-.02em;
     }
-    .detail-head p{
+    .detailhead p{
       margin:6px 0 0;
       font-size:13px;
       color:var(--muted);
       line-height:1.45;
-      max-width:68ch;
+      max-width:72ch;
     }
     .section{
       border:1px solid var(--border);
@@ -354,31 +374,21 @@
       padding:12px;
       margin:12px 0;
     }
-    .section h4{
+    .section h5{
       margin:0 0 6px;
       font-size:13px;
       font-weight:950;
-      letter-spacing:-0.01em;
+      letter-spacing:-.01em;
     }
-    .small{
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.5;
-      margin:0;
-    }
-    .divider{
-      margin:12px 0;
-      border-top:1px dashed #e5e7eb;
-    }
+    .divider{ margin:12px 0; border-top:1px dashed #e5e7eb; }
 
-    /* “Choose your adventure” tiles */
     .tiles{
       display:grid;
       grid-template-columns:repeat(3, minmax(220px, 1fr));
       gap:10px;
       margin-top:10px;
     }
-    @media (max-width:980px){ .tiles{grid-template-columns:1fr;} }
+    @media (max-width:980px){ .tiles{ grid-template-columns:1fr; } }
     .tile{
       border:1px solid var(--border);
       border-radius:18px;
@@ -388,21 +398,54 @@
       cursor:pointer;
       transition:transform .12s ease, box-shadow .12s ease;
     }
-    .tile:hover{transform:translateY(-1px); box-shadow:0 10px 30px rgba(0,0,0,.06);}
-    .tile h5{
-      margin:0 0 6px;
-      font-size:13px;
-      font-weight:950;
-      letter-spacing:-0.01em;
-    }
-    .tile p{
-      margin:0;
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.45;
-    }
+    .tile:hover{ transform:translateY(-1px); box-shadow:0 10px 30px rgba(0,0,0,.06); }
+    .tile strong{ display:block; font-weight:950; margin-bottom:6px; }
+    .tile span{ font-size:12px; color:var(--muted); line-height:1.45; }
 
-    /* Toast */
+    /* Settings modal */
+    .modalback{
+      position:fixed; inset:0;
+      background:rgba(17,24,39,.35);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:50;
+    }
+    .modal{
+      width:min(720px, 100%);
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow:0 30px 80px rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+    .modalhead{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      background:var(--soft);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .modalhead strong{ font-weight:950; }
+    .modalbody{ padding:14px; }
+    .rowgrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width:860px){ .rowgrid{ grid-template-columns:1fr; } }
+    .check{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      box-shadow:0 1px 2px var(--shadow);
+    }
+    .check input{ margin-top:3px; }
     .toast{
       position:fixed;
       left:50%;
@@ -418,52 +461,88 @@
       opacity:0;
       pointer-events:none;
       transition:opacity .18s ease, transform .18s ease;
+      z-index:60;
     }
     .toast.show{ opacity:1; transform:translateX(-50%) translateY(-2px); }
   </style>
 </head>
 
 <body>
-  <div class="bar"></div>
 
-  <!-- TOP CONTEXT -->
-  <div class="top">
+  <!-- TOP BAR -->
+  <div class="topbar">
     <div class="brand">
-      <div class="mark">🧠</div>
-      <div>
-        <h1>Chief</h1>
-        <div class="sub" id="dateLine">—</div>
-      </div>
+      <div class="logo">🧠</div>
+      <div>Chief</div>
     </div>
 
-    <div class="context" aria-label="Date, time, and weather">
-      <span class="pill" id="timePill">🕘 —</span>
-      <span class="pill" id="weatherPill">☀️ Weather —</span>
-    </div>
-  </div>
-
-  <!-- CHAT BAR (MOVED UP) -->
-  <div class="chat" aria-label="Chat input">
-    <div class="chat-inner">
-      <div class="chat-icon">💬</div>
-      <input class="input" id="chatInput" />
-      <button class="btn primary" id="sendBtn">Send</button>
+    <div class="meta">
+      <span class="pill" id="datePill">—</span>
+      <span class="pill" id="timePill">—</span>
+      <span class="pill" id="weatherPill">☀️ 58°F · SF (stub)</span>
+      <button class="iconbtn" id="settingsBtn" title="Settings">⚙️</button>
     </div>
   </div>
 
-  <!-- MAIN -->
   <div class="wrap">
-    <div class="panel" aria-label="Morning brief dashboard">
-      <div class="panel-head">
-        <div class="title">
-          <div class="emoji">📋</div>
-          <div id="panelTitle">Morning Brief</div>
+    <div class="panel">
+      <div class="panelhead">
+        <div class="paneltitle">
+          <div class="badgeicon" id="panelIcon">📌</div>
+          <div id="panelTitle">Overview</div>
         </div>
-        <div class="hint" id="statusHint">Press Enter to review your morning brief.</div>
+        <div class="panelhint" id="panelHint">Click into cards for details.</div>
       </div>
 
-      <div class="body" id="mainBody">
-        <!-- injected -->
+      <div class="body" id="mainBody"></div>
+    </div>
+  </div>
+
+  <!-- SETTINGS MODAL -->
+  <div class="modalback" id="modalBack" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Settings">
+      <div class="modalhead">
+        <strong>Settings</strong>
+        <button class="iconbtn" id="closeSettings">✕</button>
+      </div>
+      <div class="modalbody">
+        <div class="rowgrid">
+          <div class="control">
+            <div class="label">Learning threshold</div>
+            <div class="muted">Minimum sends before learning-based changes are allowed (global default).</div>
+            <div class="divider"></div>
+            <input id="minSendsInput" type="number" min="1" step="1" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:12px;font-size:13px;" />
+          </div>
+
+          <div class="control">
+            <div class="label">Data use</div>
+            <div class="muted">Set once. You can change it anytime. Chief will not re-ask.</div>
+            <div class="divider"></div>
+
+            <div class="check">
+              <input type="checkbox" id="usePersonal" />
+              <div>
+                <div style="font-weight:950;">Use to personalize my experience</div>
+                <div class="muted">Improves prioritization and assistance behavior.</div>
+              </div>
+            </div>
+
+            <div style="height:10px;"></div>
+
+            <div class="check">
+              <input type="checkbox" id="useAnon" />
+              <div>
+                <div style="font-weight:950;">Share anonymously (optional)</div>
+                <div class="muted">Aggregated only. No individual reporting.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap;">
+          <button class="btn" id="resetSettings">Reset</button>
+          <button class="btn primary" id="saveSettings">Save</button>
+        </div>
       </div>
     </div>
   </div>
@@ -472,45 +551,24 @@
 
   <script>
     /***********************
-     * Policy (global default + role overrides when approved)
-     * (Not shown on the morning brief dashboard; appears only on Outreach detail views.)
-     ***********************/
-    const POLICY = {
-      globalMinSendsForLearning: 100,
-      roleOverrides: {
-        // example: "Executive Search (VP Eng)": { minSendsForLearning: 250 }
-      }
-    };
-
-    function getRolePolicy(roleName){
-      const override = POLICY.roleOverrides[roleName];
-      return {
-        minSendsForLearning: (override && override.minSendsForLearning)
-          ? override.minSendsForLearning
-          : POLICY.globalMinSendsForLearning
-      };
-    }
-
-    /***********************
-     * Demo data (stub)
+     * Demo data
      ***********************/
     const DATA = {
-      locationLabel: "San Francisco (stub)",
-      weatherLabel: "☀️ 58°F",
+      weatherLabel: "☀️ 58°F · SF (stub)",
+
       interviews: [
-        { id:"i1", time:"10:30", candidate:"A. Chen", stage:"HM Screen", interviewer:"J. Rivera", reqId:"r1", prepNeeded:true },
-        { id:"i2", time:"11:15", candidate:"M. Patel", stage:"Tech Screen", interviewer:"S. Kim", reqId:"r1", prepNeeded:false },
-        { id:"i3", time:"1:00",  candidate:"L. Gomez", stage:"Panel",     interviewer:"Panel (3)", reqId:"r2", prepNeeded:true },
-        { id:"i4", time:"2:30",  candidate:"K. Nguyen", stage:"Recruiter Screen", interviewer:"You", reqId:"r3", prepNeeded:false },
-        { id:"i5", time:"4:00",  candidate:"R. Singh", stage:"Offer Chat", interviewer:"HM + You", reqId:"r2", prepNeeded:false }
+        { id:"i1", time:"10:30", candidate:"Alex Morgan", stage:"HM Screen", interviewer:"J. Rivera", reqId:"r1", prepNeeded:true },
+        { id:"i2", time:"12:00", candidate:"Priya Shah", stage:"Tech Screen", interviewer:"S. Kim", reqId:"r1", prepNeeded:false },
+        { id:"i3", time:"3:00",  candidate:"Diego Ruiz", stage:"Panel", interviewer:"Panel (3)", reqId:"r2", prepNeeded:true },
       ],
+
       requisitions: [
         {
           id:"r1",
           title:"Backend Engineer (US)",
           location:"Remote / US",
           health:"at_risk", // healthy | early | at_risk
-          why:"Break at Screen → HM. Volume trending below plan.",
+          why:"Break at Screen → Hiring Manager. Volume trending below plan.",
           sendsToDate:143,
           replyDipWoW:9,
           pipelineDeltaVsPlan:-18,
@@ -518,7 +576,7 @@
           autonomy:{
             applied:[
               { tier:1, label:"Send window optimization", detail:"Adjusted send time within approved window (no content changes)." },
-              { tier:2, label:"Subject ordering", detail:"Reordered approved subject lines after threshold met." },
+              { tier:2, label:"Subject rotation", detail:"Rotated only approved subject lines after threshold met." },
               { tier:3, label:"Variant pruning", detail:"Paused underperforming approved subject line (reversible)." }
             ],
             pending:[
@@ -528,7 +586,7 @@
         },
         {
           id:"r2",
-          title:"Data Engineer (SF)",
+          title:"Product Designer",
           location:"San Francisco, CA",
           health:"early",
           why:"Early signal: response softening in senior band.",
@@ -545,49 +603,77 @@
         },
         {
           id:"r3",
-          title:"Recruiting Operations (Contract)",
+          title:"Data Analyst",
           location:"Remote",
           health:"healthy",
-          why:"On track. Interview loop is staffed and moving.",
+          why:"On track. Interview loop staffed and moving.",
           sendsToDate:210,
           replyDipWoW:1,
           pipelineDeltaVsPlan:3,
           breakPoint:"—",
-          autonomy:{
-            applied:[
-              { tier:1, label:"Send scheduling", detail:"Aligned send time to approved window." }
-            ],
-            pending:[]
-          }
+          autonomy:{ applied:[{ tier:1, label:"Send scheduling", detail:"Aligned send time to approved window." }], pending:[] }
         }
       ],
+
       projects: [
-        { id:"p1", title:"Market map — ML Platform (next quarter req)", due:"Tue", status:"Needs attention", next:"Finalize target company list + share with HM." },
-        { id:"p2", title:"New req intake — Security Eng (opens next week)", due:"Fri", status:"In progress", next:"Draft kickoff doc + calibration questions." },
-        { id:"p3", title:"Interview loop cleanup", due:"—", status:"Backlog", next:"Standardize scorecard rubric for Eng roles." }
+        { id:"p1", title:"Market map — ML Eng", due:"Fri", status:"Needs attention", next:"Finalize target company list + share with HM." },
+        { id:"p2", title:"Hiring kickoff prep", due:"Tomorrow", status:"In progress", next:"Draft kickoff doc + calibration questions." }
       ],
-      brand: {
-        items: [
-          { id:"b1", type:"Glassdoor", title:"Response needed: 3★ review", status:"Pending", note:"Draft ready (Tier 4 approval if posting)." },
-          { id:"b2", type:"Glassdoor", title:"Response needed: 2★ review", status:"Pending", note:"No draft yet." },
-          { id:"b3", type:"LinkedIn", title:"Scheduled post: Hiring update", status:"Scheduled", note:"Goes out at 12:05 (Tier 1 scheduling)." }
-        ]
-      }
+
+      brand: [
+        { id:"b1", type:"Glassdoor", title:"Response needed: 3★ review", status:"Pending", note:"Draft available (approval required to post)." },
+        { id:"b2", type:"LinkedIn", title:"Post: Hiring update", status:"Scheduled", note:"Scheduled time set (Tier 1 scheduling)." }
+      ]
     };
 
     /***********************
-     * Helpers
+     * Settings (persist in localStorage)
      ***********************/
+    const DEFAULT_SETTINGS = {
+      minSendsForLearning: 100,
+      usePersonal: true,
+      useAnon: false
+    };
+
+    function loadSettings(){
+      try{
+        const raw = localStorage.getItem("chief_settings_v1");
+        if(!raw) return {...DEFAULT_SETTINGS};
+        const parsed = JSON.parse(raw);
+        return { ...DEFAULT_SETTINGS, ...parsed };
+      }catch(e){
+        return {...DEFAULT_SETTINGS};
+      }
+    }
+    function saveSettingsObj(obj){
+      localStorage.setItem("chief_settings_v1", JSON.stringify(obj));
+    }
+    let SETTINGS = loadSettings();
+
+    /***********************
+     * DOM + Toast
+     ***********************/
+    const mainBody = document.getElementById("mainBody");
+    const panelTitle = document.getElementById("panelTitle");
+    const panelHint = document.getElementById("panelHint");
+    const panelIcon = document.getElementById("panelIcon");
     const toast = document.getElementById("toast");
+
     function showToast(text){
       toast.textContent = text;
       toast.classList.add("show");
       setTimeout(()=>toast.classList.remove("show"), 1200);
     }
 
+    function setHeader(icon, title, hint){
+      panelIcon.textContent = icon;
+      panelTitle.textContent = title;
+      panelHint.textContent = hint || "";
+    }
+
     function fmtDate(){
       const d = new Date();
-      return d.toLocaleDateString(undefined, { weekday:"long", year:"numeric", month:"long", day:"numeric" });
+      return d.toLocaleDateString(undefined, { weekday:"short", month:"short", day:"numeric" });
     }
     function fmtTime(){
       const d = new Date();
@@ -601,54 +687,28 @@
     }
 
     /***********************
-     * Render state
-     ***********************/
-    const mainBody = document.getElementById("mainBody");
-    const statusHint = document.getElementById("statusHint");
-    const panelTitle = document.getElementById("panelTitle");
-
-    function setHeader(title, hint){
-      panelTitle.textContent = title;
-      statusHint.textContent = hint;
-    }
-
-    /***********************
      * Templates
      ***********************/
-    function tplEmpty(){
-      setHeader("Morning Brief", "Press Enter to review your morning brief.");
+    function tplOverview(){
+      const prepCount = DATA.interviews.filter(i=>i.prepNeeded).length;
+
+      setHeader("📌", "Overview", "Click into cards for details.");
       return `
-        <div class="empty">
-          <h2>Good morning.</h2>
-          <p>Press Enter to load your day: interviews, open requisitions, projects, and employer brand.</p>
-        </div>
-      `;
-    }
+        <div class="grid">
 
-    function tplBrief(){
-      const prepNeeded = DATA.interviews.filter(i=>i.prepNeeded).length;
-
-      setHeader("Morning Brief", "Click an item for details.");
-      return `
-        <div class="grid" role="list">
-
-          <!-- Interviews -->
-          <div class="card" role="listitem">
-            <div class="card-top">
+          <div class="card">
+            <div class="cardtop">
               <h3>Today’s Interviews</h3>
-              <span class="badge ${prepNeeded ? "b-warn" : "b-good"}">
-                ${prepNeeded ? `⚠️ Prep: ${prepNeeded}` : "✅ Ready"}
-              </span>
+              <span class="badge ${prepCount ? "b-warn" : "b-good"}">${prepCount ? `⚠️ Prep: ${prepCount}` : "✅ Ready"}</span>
             </div>
-
-            <div class="mini">
+            <div class="list">
               ${DATA.interviews.map(i=>`
-                <div class="mini-row" data-interview="${i.id}">
-                  <div class="mini-left">
-                    <div class="mini-title">${i.time} — ${i.candidate}</div>
-                    <div class="mini-sub">${i.stage} · ${i.interviewer}</div>
+                <div class="row" data-interview="${i.id}">
+                  <div class="rowleft">
+                    <div class="rowtitle">${i.time} — ${i.candidate}</div>
+                    <div class="rowsub">${i.stage} · ${i.interviewer}</div>
                   </div>
-                  <div class="mini-right">
+                  <div class="rowright">
                     ${i.prepNeeded ? `<span class="badge b-warn">Prep</span>` : `<span class="badge b-good">Ready</span>`}
                   </div>
                 </div>
@@ -656,21 +716,19 @@
             </div>
           </div>
 
-          <!-- Open reqs -->
-          <div class="card" role="listitem">
-            <div class="card-top">
+          <div class="card">
+            <div class="cardtop">
               <h3>Open Requisitions</h3>
               <span class="badge b-info">📌 ${DATA.requisitions.length} open</span>
             </div>
-
-            <div class="mini">
+            <div class="list">
               ${DATA.requisitions.map(r=>`
-                <div class="mini-row" data-req="${r.id}">
-                  <div class="mini-left">
-                    <div class="mini-title">${r.title}</div>
-                    <div class="mini-sub">${r.location}</div>
+                <div class="row" data-req="${r.id}">
+                  <div class="rowleft">
+                    <div class="rowtitle">${r.title}</div>
+                    <div class="rowsub">${r.location}</div>
                   </div>
-                  <div class="mini-right">
+                  <div class="rowright">
                     ${healthBadge(r.health)}
                   </div>
                 </div>
@@ -678,43 +736,39 @@
             </div>
           </div>
 
-          <!-- Projects -->
-          <div class="card" role="listitem">
-            <div class="card-top">
+          <div class="card">
+            <div class="cardtop">
               <h3>Projects & Deadlines</h3>
               <span class="badge b-info">🧩 ${DATA.projects.length} active</span>
             </div>
-
-            <div class="mini">
+            <div class="list">
               ${DATA.projects.map(p=>`
-                <div class="mini-row" data-project="${p.id}">
-                  <div class="mini-left">
-                    <div class="mini-title">${p.title}</div>
-                    <div class="mini-sub">Due: ${p.due} · ${p.status}</div>
+                <div class="row" data-project="${p.id}">
+                  <div class="rowleft">
+                    <div class="rowtitle">${p.title}</div>
+                    <div class="rowsub">Due: ${p.due} · ${p.status}</div>
                   </div>
-                  <div class="mini-right">
-                    <span class="badge b-info">Next</span>
+                  <div class="rowright">
+                    <span class="badge b-info">Review</span>
                   </div>
                 </div>
               `).join("")}
             </div>
           </div>
 
-          <!-- Brand -->
-          <div class="card" role="listitem">
-            <div class="card-top">
+          <div class="card">
+            <div class="cardtop">
               <h3>Employer Brand / Socials</h3>
-              <span class="badge b-info">💬 ${DATA.brand.items.length} items</span>
+              <span class="badge b-info">💬 ${DATA.brand.length} items</span>
             </div>
-
-            <div class="mini">
-              ${DATA.brand.items.map(b=>`
-                <div class="mini-row" data-brand="${b.id}">
-                  <div class="mini-left">
-                    <div class="mini-title">${b.type}: ${b.title}</div>
-                    <div class="mini-sub">${b.status} · ${b.note}</div>
+            <div class="list">
+              ${DATA.brand.map(b=>`
+                <div class="row" data-brand="${b.id}">
+                  <div class="rowleft">
+                    <div class="rowtitle">${b.type}: ${b.title}</div>
+                    <div class="rowsub">${b.status} · ${b.note}</div>
                   </div>
-                  <div class="mini-right">
+                  <div class="rowright">
                     <span class="badge b-info">Review</span>
                   </div>
                 </div>
@@ -723,94 +777,121 @@
           </div>
 
         </div>
-      `;
-    }
 
-    function tplInterviewDetail(interviewId){
-      const i = DATA.interviews.find(x=>x.id===interviewId);
-      if(!i) return tplBrief();
+        <!-- HELP + CHAT (below cards) -->
+        <div class="help">
+          <h4>How can I help?</h4>
 
-      const req = DATA.requisitions.find(r=>r.id===i.reqId);
-
-      setHeader("Interview Prep", "Review summary, then choose next action.");
-      return `
-        <div class="detail">
-          <div class="detail-head">
-            <div>
-              <h2>${i.time} — ${i.candidate} (${i.stage})</h2>
-              <p>${req ? req.title : "Requisition"} · Interviewer: ${i.interviewer}</p>
+          <div class="controls">
+            <div class="control">
+              <div class="label">Bandwidth</div>
+              <div class="muted" id="bandLabel">Medium</div>
+              <div class="divider"></div>
+              <div class="sliderwrap">
+                <input id="bandwidth" type="range" min="0" max="2" step="1" value="1" />
+              </div>
+              <div class="muted" style="margin-top:8px;">Controls how proactive Chief should be.</div>
             </div>
-            <button class="btn ghost" data-nav="brief">← Back</button>
-          </div>
 
-          <div class="section">
-            <h4>Candidate summary (stub)</h4>
-            <p class="small">
-              6+ years backend · Python/Go · scaled services to 10M+ users. Strength: ownership + reliability.
-              Risk: limited distributed tracing depth. Focus: incidents, tradeoffs, boundaries.
-            </p>
+            <div class="control">
+              <div class="label">Focus preference</div>
+              <select id="focusSel">
+                <option value="headsdown">Heads down (minimize interruptions)</option>
+                <option value="normal" selected>Normal</option>
+                <option value="help">I want help / suggestions</option>
+              </select>
+              <div class="muted" style="margin-top:8px;">Affects notifications + suggestions.</div>
+            </div>
 
-            <div class="divider"></div>
-
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button class="btn" data-toast="Would open scorecard (stub).">Open scorecard</button>
-              <button class="btn" data-toast="Would send reminder within Tier 1 (stub).">Send reminder</button>
-              ${req ? `<button class="btn primary" data-req="${req.id}" data-nav="req_detail">View req brief</button>` : ""}
+            <div class="control">
+              <div class="label">Additional notes (optional)</div>
+              <textarea id="notes" placeholder="Anything Chief should know? (optional)"></textarea>
+              <div class="muted" style="margin-top:8px;">Used only per your Settings.</div>
             </div>
           </div>
 
-          <div class="section">
-            <h4>Prep status</h4>
-            <p class="small">${i.prepNeeded ? "⚠️ Prep flagged: key notes missing. Consider reviewing last interview feedback before start." : "✅ Prep complete."}</p>
+          <div class="chatline" aria-label="Chat input">
+            <div class="chaticon">💬</div>
+            <input class="chatinput" id="chatInput" placeholder="Type a request… (e.g., 'Show req risks' or 'Prep my 10:30')" />
+            <button class="btn primary" id="sendBtn">Send</button>
           </div>
         </div>
       `;
     }
 
-    function tplReqDetail(reqId){
-      const r = DATA.requisitions.find(x=>x.id===reqId);
-      if(!r) return tplBrief();
+    function tplInterviewDetail(id){
+      const i = DATA.interviews.find(x=>x.id===id);
+      if(!i) return tplOverview();
+      const r = DATA.requisitions.find(x=>x.id===i.reqId);
 
-      const rp = getRolePolicy(r.title);
-      const thresholdMet = r.sendsToDate >= rp.minSendsForLearning;
-
-      setHeader("Req Brief", "Choose your adventure: Pipeline, Outreach, or Loop.");
+      setHeader("🗓️", "Interview", "Review details or jump to the associated req.");
       return `
         <div class="detail">
-          <div class="detail-head">
+          <div class="detailhead">
+            <div>
+              <h2>${i.time} — ${i.candidate} (${i.stage})</h2>
+              <p>${r ? r.title : "Requisition"} · Interviewer: ${i.interviewer}</p>
+            </div>
+            <button class="btn" data-nav="overview">← Back</button>
+          </div>
+
+          <div class="section">
+            <h5>Candidate summary (stub)</h5>
+            <p class="muted">
+              Strength: ownership + reliability. Risk: limited observability depth. Focus: tradeoffs, incidents, boundaries.
+            </p>
+            <div class="divider"></div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn primary" data-toast="Would open scorecard (stub).">Open scorecard</button>
+              <button class="btn" data-toast="Would open resume + notes (stub).">Open resume</button>
+              ${r ? `<button class="btn" data-req="${r.id}" data-nav="req">View req</button>` : ``}
+            </div>
+          </div>
+
+          <div class="section">
+            <h5>Prep status</h5>
+            <p class="muted">${i.prepNeeded ? "⚠️ Prep flagged: consider reviewing last feedback before start." : "✅ Prep complete."}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function tplReqDetail(id){
+      const r = DATA.requisitions.find(x=>x.id===id);
+      if(!r) return tplOverview();
+
+      setHeader("📌", "Requisition", "Choose your adventure: Pipeline, Outreach, or Loop.");
+      return `
+        <div class="detail">
+          <div class="detailhead">
             <div>
               <h2>${r.title}</h2>
               <p>${r.location} · ${healthBadge(r.health)} · ${r.why}</p>
             </div>
-            <button class="btn ghost" data-nav="brief">← Back</button>
+            <button class="btn" data-nav="overview">← Back</button>
           </div>
 
           <div class="section">
-            <h4>Quick status</h4>
-            <p class="small">
+            <h5>Quick status</h5>
+            <p class="muted">
               Pipeline vs plan: <strong>${r.pipelineDeltaVsPlan}%</strong> · Break: <strong>${r.breakPoint}</strong> · Sends: <strong>${r.sendsToDate}</strong> · Reply dip: <strong>${r.replyDipWoW}% WoW</strong>
             </p>
-            <div class="divider"></div>
-            <p class="small">
-              Learning threshold: <strong>${rp.minSendsForLearning}</strong> (${thresholdMet ? "met" : "not met"}).
-              Below threshold, Chief will not make learning-based changes unless you explicitly command it.
-            </p>
           </div>
 
           <div class="section">
-            <h4>Choose your adventure</h4>
+            <h5>Choose your adventure</h5>
             <div class="tiles">
               <div class="tile" data-nav="req_pipeline" data-req="${r.id}">
-                <h5>📊 Pipeline</h5>
-                <p>Bottlenecks, stage breaks, throughput levers.</p>
+                <strong>📊 Pipeline</strong>
+                <span>Bottlenecks, stage breaks, throughput levers.</span>
               </div>
               <div class="tile" data-nav="req_outreach" data-req="${r.id}">
-                <h5>✉️ Outreach</h5>
-                <p>Signals, learning threshold, tiered autonomy.</p>
+                <strong>✉️ Outreach</strong>
+                <span>Signals, thresholds, tiered autonomy.</span>
               </div>
               <div class="tile" data-nav="req_loop" data-req="${r.id}">
-                <h5>🧩 Interview Loop</h5>
-                <p>Scorecards, SLA, decision friction.</p>
+                <strong>🧩 Interview loop</strong>
+                <span>Scorecards, SLAs, decision friction.</span>
               </div>
             </div>
           </div>
@@ -818,124 +899,112 @@
       `;
     }
 
-    function tplReqPipeline(reqId){
-      const r = DATA.requisitions.find(x=>x.id===reqId);
-      if(!r) return tplBrief();
+    function tplReqPipeline(id){
+      const r = DATA.requisitions.find(x=>x.id===id);
+      if(!r) return tplOverview();
 
-      setHeader("Req · Pipeline", "Troubleshoot bottlenecks and levers.");
+      setHeader("📊", "Req · Pipeline", "Troubleshoot bottlenecks and levers.");
       return `
         <div class="detail">
-          <div class="detail-head">
+          <div class="detailhead">
             <div>
               <h2>${r.title} — Pipeline</h2>
-              <p>Decision-first: where flow breaks and what lever is lowest-lift.</p>
+              <p>Decision-first view of where flow breaks and the lowest-lift lever.</p>
             </div>
-            <button class="btn ghost" data-nav="req_detail" data-req="${r.id}">← Back</button>
+            <button class="btn" data-nav="req" data-req="${r.id}">← Back</button>
           </div>
 
           <div class="section">
-            <h4>What changed</h4>
-            <p class="small">Pipeline trending <strong>${r.pipelineDeltaVsPlan}% vs plan</strong>. Primary breakpoint: <strong>${r.breakPoint}</strong>.</p>
-          </div>
-
-          <div class="section">
-            <h4>Next actions (choose)</h4>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <h5>What changed</h5>
+            <p class="muted">Pipeline trending <strong>${r.pipelineDeltaVsPlan}% vs plan</strong>. Primary breakpoint: <strong>${r.breakPoint}</strong>.</p>
+            <div class="divider"></div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
               <button class="btn primary" data-nav="req_outreach" data-req="${r.id}">Review outreach levers</button>
-              <button class="btn" data-toast="Would open forecasting sheet (stub).">Open planning sheet</button>
-              <button class="btn" data-toast="Would generate HM calibration prompts (stub).">Generate HM calibration prompts</button>
+              <button class="btn" data-toast="Would open planning sheet (stub).">Open planning sheet</button>
+              <button class="btn" data-toast="Would draft HM calibration prompts (stub).">Draft HM calibration prompts</button>
             </div>
           </div>
         </div>
       `;
     }
 
-    function tplReqOutreach(reqId){
-      const r = DATA.requisitions.find(x=>x.id===reqId);
-      if(!r) return tplBrief();
+    function tplReqOutreach(id){
+      const r = DATA.requisitions.find(x=>x.id===id);
+      if(!r) return tplOverview();
 
-      const rp = getRolePolicy(r.title);
-      const thresholdMet = r.sendsToDate >= rp.minSendsForLearning;
+      const threshold = SETTINGS.minSendsForLearning;
+      const met = r.sendsToDate >= threshold;
 
-      setHeader("Req · Outreach", "Tiered autonomy + threshold guardrails.");
+      setHeader("✉️", "Req · Outreach", "Tiered autonomy lives here (not on the overview).");
       return `
         <div class="detail">
-          <div class="detail-head">
+          <div class="detailhead">
             <div>
               <h2>${r.title} — Outreach</h2>
-              <p>Below <strong>${rp.minSendsForLearning}</strong> sends: monitor only unless commanded. Above threshold: Tier 1–3 may run within approved scope.</p>
+              <p>Learning threshold: <strong>${threshold}</strong> sends. ${met ? "✅ Met." : "⏳ Not met."}</p>
             </div>
-            <button class="btn ghost" data-nav="req_detail" data-req="${r.id}">← Back</button>
+            <button class="btn" data-nav="req" data-req="${r.id}">← Back</button>
           </div>
 
           <div class="section">
-            <h4>Signal + threshold</h4>
-            <p class="small">Sends: <strong>${r.sendsToDate}</strong> · Reply dip: <strong>${r.replyDipWoW}% WoW</strong></p>
+            <h5>Signal + threshold</h5>
+            <p class="muted">Sends: <strong>${r.sendsToDate}</strong> · Reply dip: <strong>${r.replyDipWoW}% WoW</strong></p>
             <div class="divider"></div>
-            <p class="small">
-              Learning threshold: <strong>${rp.minSendsForLearning}</strong> (${thresholdMet ? "✅ met" : "⏳ not met"}).
-              ${thresholdMet
-                ? "Tier 2–3 optimization is permitted within the approved scope (send time + approved subject lines)."
-                : "No learning-based changes will be made below threshold unless you explicitly command it."
-              }
+            <p class="muted">
+              Below threshold, Chief will <strong>monitor only</strong> unless you explicitly command learning-based changes.
+              Above threshold, Tier 1–3 may run within approved scope (send time + approved subject lines).
             </p>
           </div>
 
           <div class="section">
-            <h4>Already applied (Tier 1–3) — within boundaries</h4>
-            ${r.autonomy.applied.length
-              ? `<ul style="margin:0 0 0 18px;padding:0;color:#374151;font-size:13px;line-height:1.55;">
-                  ${r.autonomy.applied.map(a=>`<li><strong>Tier ${a.tier}:</strong> ${a.label} — ${a.detail}</li>`).join("")}
-                 </ul>`
-              : `<p class="small">No within-boundary changes applied for this req.</p>`
-            }
+            <h5>Already applied (Tier 1–3) — within boundaries</h5>
+            ${r.autonomy.applied.length ? `
+              <ul style="margin:0 0 0 18px;padding:0;color:#374151;font-size:13px;line-height:1.55;">
+                ${r.autonomy.applied.map(a=>`<li><strong>Tier ${a.tier}:</strong> ${a.label} — ${a.detail}</li>`).join("")}
+              </ul>
+            ` : `<p class="muted">No within-boundary changes applied.</p>`}
           </div>
 
           <div class="section">
-            <h4>Pending approval (Tier 4) — scope expansion</h4>
-            ${r.autonomy.pending.length
-              ? r.autonomy.pending.map(p=>`
-                  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
-                    <div>
-                      <div style="font-weight:950;font-size:13px;">Tier ${p.tier}: ${p.label}</div>
-                      <div class="small" style="margin-top:6px;">${p.detail}</div>
-                    </div>
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                      <button class="btn primary" data-toast="Approved Tier 4 (demo). Would apply + audit log.">Approve</button>
-                      <button class="btn" data-toast="Rejected Tier 4 (demo). Draft discarded.">Reject</button>
-                    </div>
-                  </div>
-                `).join("")
-              : `<p class="small">No Tier 4 items pending.</p>`
-            }
-            <div class="divider"></div>
-            <p class="small"><strong>Global default:</strong> ${POLICY.globalMinSendsForLearning} sends. Role overrides can be approved when needed.</p>
+            <h5>Pending approval (Tier 4) — scope expansion</h5>
+            ${r.autonomy.pending.length ? r.autonomy.pending.map(p=>`
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+                <div>
+                  <div style="font-weight:950;font-size:13px;">Tier ${p.tier}: ${p.label}</div>
+                  <div class="muted" style="margin-top:6px;">${p.detail}</div>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                  <button class="btn primary" data-toast="Approved Tier 4 (demo). Would apply + audit log.">Approve</button>
+                  <button class="btn" data-toast="Rejected Tier 4 (demo). Draft discarded.">Reject</button>
+                </div>
+              </div>
+            `).join("") : `<p class="muted">No Tier 4 items pending.</p>`}
           </div>
         </div>
       `;
     }
 
-    function tplReqLoop(reqId){
-      const r = DATA.requisitions.find(x=>x.id===reqId);
-      if(!r) return tplBrief();
+    function tplReqLoop(id){
+      const r = DATA.requisitions.find(x=>x.id===id);
+      if(!r) return tplOverview();
 
-      setHeader("Req · Interview Loop", "Speed, coverage, scorecards, decision friction.");
+      setHeader("🧩", "Req · Interview Loop", "Speed, coverage, scorecards, decision friction.");
       return `
         <div class="detail">
-          <div class="detail-head">
+          <div class="detailhead">
             <div>
               <h2>${r.title} — Interview Loop</h2>
-              <p>Recruiter-native view: what’s blocking decisions and where the loop is leaking.</p>
+              <p>Recruiter-native view of what’s blocking decisions.</p>
             </div>
-            <button class="btn ghost" data-nav="req_detail" data-req="${r.id}">← Back</button>
+            <button class="btn" data-nav="req" data-req="${r.id}">← Back</button>
           </div>
 
           <div class="section">
-            <h4>Loop status (stub)</h4>
-            <p class="small">Panel coverage: ✅ staffed · Scorecards: ⚠️ 2 pending from yesterday · Decision SLA: 48 hours target</p>
+            <h5>Loop status (stub)</h5>
+            <p class="muted">Panel coverage: ✅ staffed · Scorecards: ⚠️ 2 pending · Decision SLA: 48 hours target</p>
             <div class="divider"></div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button class="btn" data-toast="Would nudge interviewers (Tier 1, stub).">Send scorecard nudges</button>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn primary" data-toast="Would send scorecard nudges (Tier 1, stub).">Send scorecard nudges</button>
               <button class="btn" data-toast="Would open scorecard dashboard (stub).">Open scorecard dashboard</button>
             </div>
           </div>
@@ -943,58 +1012,56 @@
       `;
     }
 
-    function tplProjectDetail(projectId){
-      const p = DATA.projects.find(x=>x.id===projectId);
-      if(!p) return tplBrief();
+    function tplProjectDetail(id){
+      const p = DATA.projects.find(x=>x.id===id);
+      if(!p) return tplOverview();
 
-      setHeader("Project", "Review next step, then act.");
+      setHeader("🧩", "Project", "Review next step, then act.");
       return `
         <div class="detail">
-          <div class="detail-head">
+          <div class="detailhead">
             <div>
               <h2>${p.title}</h2>
               <p>Due: ${p.due} · Status: ${p.status}</p>
             </div>
-            <button class="btn ghost" data-nav="brief">← Back</button>
+            <button class="btn" data-nav="overview">← Back</button>
           </div>
 
           <div class="section">
-            <h4>Next action</h4>
-            <p class="small">${p.next}</p>
+            <h5>Next action</h5>
+            <p class="muted">${p.next}</p>
             <div class="divider"></div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button class="btn primary" data-toast="Would draft a project update (stub).">Draft update</button>
-              <button class="btn" data-toast="Would open project doc (stub).">Open doc</button>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn primary" data-toast="Would draft an update (stub).">Draft update</button>
+              <button class="btn" data-toast="Would open the project doc (stub).">Open doc</button>
             </div>
           </div>
         </div>
       `;
     }
 
-    function tplBrandDetail(brandId){
-      const b = DATA.brand.items.find(x=>x.id===brandId);
-      if(!b) return tplBrief();
+    function tplBrandDetail(id){
+      const b = DATA.brand.find(x=>x.id===id);
+      if(!b) return tplOverview();
 
-      setHeader("Brand Item", "Drafts are allowed; posting requires approval.");
+      setHeader("💬", "Employer Brand", "Drafts allowed. Posting requires approval.");
       return `
         <div class="detail">
-          <div class="detail-head">
+          <div class="detailhead">
             <div>
               <h2>${b.type}: ${b.title}</h2>
               <p>Status: ${b.status} · ${b.note}</p>
             </div>
-            <button class="btn ghost" data-nav="brief">← Back</button>
+            <button class="btn" data-nav="overview">← Back</button>
           </div>
 
           <div class="section">
-            <h4>Recommended next step</h4>
-            <p class="small">
-              Chief can draft a response (Tier 4) and hold it for approval. No posting occurs without explicit confirmation.
-            </p>
+            <h5>Recommended next step</h5>
+            <p class="muted">Chief can draft a response (Tier 4) and hold it for approval. No posting occurs without explicit confirmation.</p>
             <div class="divider"></div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
               <button class="btn primary" data-toast="Would generate a draft response (stub).">Generate draft</button>
-              <button class="btn" data-toast="Would open Glassdoor (stub).">Open Glassdoor</button>
+              <button class="btn" data-toast="Would open the platform (stub).">Open platform</button>
             </div>
           </div>
         </div>
@@ -1002,105 +1069,200 @@
     }
 
     /***********************
-     * Renderer
+     * Router
      ***********************/
-    function render(view, payload={}){
-      if(view === "empty"){ mainBody.innerHTML = tplEmpty(); wireNav(); return; }
-      if(view === "brief"){ mainBody.innerHTML = tplBrief(); wireNav(); return; }
+    function render(route, payload={}){
+      if(route === "overview"){
+        mainBody.innerHTML = tplOverview();
+        wireOverview();
+        return;
+      }
+      if(route === "interview"){
+        mainBody.innerHTML = tplInterviewDetail(payload.id);
+        wireNav();
+        return;
+      }
+      if(route === "req"){
+        mainBody.innerHTML = tplReqDetail(payload.id);
+        wireNav();
+        return;
+      }
+      if(route === "req_pipeline"){
+        mainBody.innerHTML = tplReqPipeline(payload.id);
+        wireNav();
+        return;
+      }
+      if(route === "req_outreach"){
+        mainBody.innerHTML = tplReqOutreach(payload.id);
+        wireNav();
+        return;
+      }
+      if(route === "req_loop"){
+        mainBody.innerHTML = tplReqLoop(payload.id);
+        wireNav();
+        return;
+      }
+      if(route === "project"){
+        mainBody.innerHTML = tplProjectDetail(payload.id);
+        wireNav();
+        return;
+      }
+      if(route === "brand"){
+        mainBody.innerHTML = tplBrandDetail(payload.id);
+        wireNav();
+        return;
+      }
 
-      if(view === "interview_detail"){ mainBody.innerHTML = tplInterviewDetail(payload.interviewId); wireNav(); return; }
-      if(view === "req_detail"){ mainBody.innerHTML = tplReqDetail(payload.reqId); wireNav(); return; }
-      if(view === "req_pipeline"){ mainBody.innerHTML = tplReqPipeline(payload.reqId); wireNav(); return; }
-      if(view === "req_outreach"){ mainBody.innerHTML = tplReqOutreach(payload.reqId); wireNav(); return; }
-      if(view === "req_loop"){ mainBody.innerHTML = tplReqLoop(payload.reqId); wireNav(); return; }
-
-      if(view === "project_detail"){ mainBody.innerHTML = tplProjectDetail(payload.projectId); wireNav(); return; }
-      if(view === "brand_detail"){ mainBody.innerHTML = tplBrandDetail(payload.brandId); wireNav(); return; }
-
-      mainBody.innerHTML = tplEmpty();
-      wireNav();
+      // fallback
+      render("overview");
     }
 
     function wireNav(){
-      // back buttons + tiles
+      // Back / nav buttons
       mainBody.querySelectorAll("[data-nav]").forEach(el=>{
         el.addEventListener("click", ()=>{
-          const to = el.getAttribute("data-nav");
-          const reqId = el.getAttribute("data-req");
-          if(to && (to.startsWith("req_") || to === "req_detail")){
-            render(to, { reqId });
-            return;
+          const nav = el.getAttribute("data-nav");
+          if(nav === "overview") return render("overview");
+
+          if(nav === "req"){
+            return render("req", { id: el.getAttribute("data-req") });
           }
-          render(to);
+          if(nav === "req_pipeline"){
+            return render("req_pipeline", { id: el.getAttribute("data-req") });
+          }
+          if(nav === "req_outreach"){
+            return render("req_outreach", { id: el.getAttribute("data-req") });
+          }
+          if(nav === "req_loop"){
+            return render("req_loop", { id: el.getAttribute("data-req") });
+          }
         });
       });
 
-      // card mini items
-      mainBody.querySelectorAll("[data-interview]").forEach(el=>{
-        el.addEventListener("click", ()=> render("interview_detail", { interviewId: el.getAttribute("data-interview") }));
-      });
-      mainBody.querySelectorAll("[data-req]").forEach(el=>{
-        el.addEventListener("click", ()=> render("req_detail", { reqId: el.getAttribute("data-req") }));
-      });
-      mainBody.querySelectorAll("[data-project]").forEach(el=>{
-        el.addEventListener("click", ()=> render("project_detail", { projectId: el.getAttribute("data-project") }));
-      });
-      mainBody.querySelectorAll("[data-brand]").forEach(el=>{
-        el.addEventListener("click", ()=> render("brand_detail", { brandId: el.getAttribute("data-brand") }));
-      });
-
-      // toast buttons
+      // Toast stubs
       mainBody.querySelectorAll("[data-toast]").forEach(el=>{
         el.addEventListener("click", ()=> showToast(el.getAttribute("data-toast")));
       });
     }
 
-    /***********************
-     * Chat behavior
-     ***********************/
-    const chatInput = document.getElementById("chatInput");
-    const sendBtn = document.getElementById("sendBtn");
+    function wireOverview(){
+      // row click handlers
+      mainBody.querySelectorAll("[data-interview]").forEach(el=>{
+        el.addEventListener("click", ()=> render("interview", { id: el.getAttribute("data-interview") }));
+      });
+      mainBody.querySelectorAll("[data-req]").forEach(el=>{
+        el.addEventListener("click", ()=> render("req", { id: el.getAttribute("data-req") }));
+      });
+      mainBody.querySelectorAll("[data-project]").forEach(el=>{
+        el.addEventListener("click", ()=> render("project", { id: el.getAttribute("data-project") }));
+      });
+      mainBody.querySelectorAll("[data-brand]").forEach(el=>{
+        el.addEventListener("click", ()=> render("brand", { id: el.getAttribute("data-brand") }));
+      });
 
-    function handleSend(){
-      const t = (chatInput.value || "").trim();
-      if(!t) return;
-
-      const lower = t.toLowerCase();
-      if(lower.includes("review morning brief") || lower.includes("morning brief")){
-        render("brief");
-        showToast("Morning brief loaded.");
-        return;
+      // bandwidth label
+      const band = document.getElementById("bandwidth");
+      const bandLabel = document.getElementById("bandLabel");
+      if(band && bandLabel){
+        const labels = ["Low","Medium","High"];
+        const sync = ()=> bandLabel.textContent = labels[Number(band.value)] || "Medium";
+        band.addEventListener("input", sync);
+        sync();
       }
 
-      showToast("Try: “Review Morning Brief”. (Demo stub)");
+      // chat send (simple stub routing)
+      const chatInput = document.getElementById("chatInput");
+      const sendBtn = document.getElementById("sendBtn");
+      function handleSend(){
+        const t = (chatInput.value || "").trim();
+        if(!t) return;
+        const lower = t.toLowerCase();
+
+        if(lower.includes("prep") || lower.includes("interview")){
+          showToast("Would open interview prep (stub).");
+          return;
+        }
+        if(lower.includes("req") || lower.includes("requisition") || lower.includes("risk")){
+          // jump to first at-risk req for demo
+          const atRisk = DATA.requisitions.find(r=>r.health==="at_risk") || DATA.requisitions[0];
+          if(atRisk) render("req", { id: atRisk.id });
+          return;
+        }
+        showToast("Captured. (Demo stub)");
+        chatInput.value = "";
+      }
+      if(sendBtn) sendBtn.addEventListener("click", handleSend);
+      if(chatInput){
+        chatInput.addEventListener("keydown", (e)=>{
+          if(e.key === "Enter"){ e.preventDefault(); handleSend(); }
+        });
+      }
     }
 
-    sendBtn.addEventListener("click", handleSend);
-    chatInput.addEventListener("keydown", (e)=>{
-      if(e.key === "Enter"){ e.preventDefault(); handleSend(); }
+    /***********************
+     * Settings modal
+     ***********************/
+    const modalBack = document.getElementById("modalBack");
+    const settingsBtn = document.getElementById("settingsBtn");
+    const closeSettings = document.getElementById("closeSettings");
+    const minSendsInput = document.getElementById("minSendsInput");
+    const usePersonal = document.getElementById("usePersonal");
+    const useAnon = document.getElementById("useAnon");
+    const saveSettingsBtn = document.getElementById("saveSettings");
+    const resetSettingsBtn = document.getElementById("resetSettings");
+
+    function openSettings(){
+      minSendsInput.value = SETTINGS.minSendsForLearning;
+      usePersonal.checked = !!SETTINGS.usePersonal;
+      useAnon.checked = !!SETTINGS.useAnon;
+      modalBack.style.display = "flex";
+      modalBack.setAttribute("aria-hidden", "false");
+    }
+    function closeSettingsModal(){
+      modalBack.style.display = "none";
+      modalBack.setAttribute("aria-hidden", "true");
+    }
+
+    settingsBtn.addEventListener("click", openSettings);
+    closeSettings.addEventListener("click", closeSettingsModal);
+    modalBack.addEventListener("click", (e)=>{ if(e.target === modalBack) closeSettingsModal(); });
+
+    saveSettingsBtn.addEventListener("click", ()=>{
+      const n = Number(minSendsInput.value);
+      SETTINGS = {
+        minSendsForLearning: Number.isFinite(n) && n > 0 ? Math.floor(n) : DEFAULT_SETTINGS.minSendsForLearning,
+        usePersonal: !!usePersonal.checked,
+        useAnon: !!useAnon.checked
+      };
+      saveSettingsObj(SETTINGS);
+      closeSettingsModal();
+      showToast("Settings saved.");
+      // no re-asking; this only affects behavior inside views
     });
 
-    // Pre-fill prompt
-    chatInput.value = "Review Morning Brief";
-    chatInput.setSelectionRange(chatInput.value.length, chatInput.value.length);
+    resetSettingsBtn.addEventListener("click", ()=>{
+      SETTINGS = { ...DEFAULT_SETTINGS };
+      saveSettingsObj(SETTINGS);
+      minSendsInput.value = SETTINGS.minSendsForLearning;
+      usePersonal.checked = SETTINGS.usePersonal;
+      useAnon.checked = SETTINGS.useAnon;
+      showToast("Settings reset.");
+    });
 
     /***********************
-     * Top context (date/time/weather)
+     * Top bar date/time/weather
      ***********************/
-    document.getElementById("dateLine").textContent = fmtDate();
-
+    document.getElementById("datePill").textContent = "📅 " + fmtDate();
     const timePill = document.getElementById("timePill");
     function tickTime(){ timePill.textContent = "🕘 " + fmtTime(); }
     tickTime();
     setInterval(tickTime, 15000);
-
-    const weatherPill = document.getElementById("weatherPill");
-    weatherPill.textContent = `${DATA.weatherLabel} · ${DATA.locationLabel}`;
+    document.getElementById("weatherPill").textContent = DATA.weatherLabel;
 
     /***********************
      * Boot
      ***********************/
-    render("empty");
+    render("overview");
   </script>
 </body>
 </html>
