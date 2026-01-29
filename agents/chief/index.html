@@ -23,6 +23,8 @@
       --soft:rgba(79,70,229,.08);
       --headerBand:linear-gradient(135deg, rgba(79,70,229,.10), rgba(249,115,129,.10));
       --statusBg:#f3f4f6;
+
+      --charcoal:#374151;
     }
 
     *{ box-sizing:border-box; }
@@ -52,17 +54,22 @@
       font-weight:950;
       letter-spacing:-.01em;
     }
+    /* Company logo placeholder (replace with image later) */
     .logo{
       width:38px;height:38px;
       border-radius:14px;
       display:flex;
       align-items:center;
       justify-content:center;
-      background:var(--soft);
+      background:linear-gradient(180deg,#fff,#fbfdff);
       border:1px solid var(--border);
       box-shadow:0 1px 2px var(--shadow);
-      font-size:16px;
+      font-size:11px;
+      font-weight:950;
+      color:var(--charcoal);
+      user-select:none;
     }
+
     .meta{
       display:flex;
       align-items:center;
@@ -184,7 +191,19 @@
       font-weight:950;
       letter-spacing:-.01em;
       line-height:1.2;
+      color:var(--accent); /* card titles purple */
     }
+    /* Header meta: no pill — just heading text */
+    .headmeta{
+      font-size:12px;
+      font-weight:950;
+      color:var(--charcoal);
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      white-space:nowrap;
+    }
+
     .cardbody{
       padding:12px;
     }
@@ -265,9 +284,12 @@
     }
     .helpMeta{
       margin:6px 0 0;
-      color:var(--muted);
+      color:var(--charcoal);
       font-size:12.5px;
-      font-weight:850;
+      font-weight:950;
+      display:flex;
+      align-items:center;
+      gap:6px;
     }
 
     .controls{
@@ -363,65 +385,6 @@
     .btn:hover{ border-color:#c7d2fe; }
     .btn.primary:hover{ background:#4338ca; border-color:#4338ca; }
 
-    /* Detail views */
-    .detail{ max-width:900px; margin:0 auto; }
-    .detailhead{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-    .detailhead h2{
-      margin:0;
-      font-size:18px;
-      font-weight:950;
-      letter-spacing:-.02em;
-    }
-    .detailhead p{
-      margin:6px 0 0;
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.45;
-      max-width:72ch;
-    }
-    .section{
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:18px;
-      box-shadow:0 1px 3px var(--shadow);
-      padding:12px;
-      margin:12px 0;
-    }
-    .section h5{
-      margin:0 0 6px;
-      font-size:13px;
-      font-weight:950;
-      letter-spacing:-.01em;
-    }
-    .divider{ margin:12px 0; border-top:1px dashed #e5e7eb; }
-
-    .tiles{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(220px, 1fr));
-      gap:10px;
-      margin-top:10px;
-    }
-    @media (max-width:980px){ .tiles{ grid-template-columns:1fr; } }
-    .tile{
-      border:1px solid var(--border);
-      border-radius:18px;
-      background:#fff;
-      box-shadow:0 1px 3px var(--shadow);
-      padding:12px;
-      cursor:pointer;
-      transition:transform .12s ease, box-shadow .12s ease;
-    }
-    .tile:hover{ transform:translateY(-1px); box-shadow:0 10px 30px rgba(0,0,0,.06); }
-    .tile strong{ display:block; font-weight:950; margin-bottom:6px; }
-    .tile span{ font-size:12px; color:var(--muted); line-height:1.45; }
-
     /* Settings modal + toast */
     .modalback{
       position:fixed; inset:0;
@@ -466,6 +429,9 @@
       box-shadow:0 1px 2px var(--shadow);
     }
     .check input{ margin-top:3px; }
+
+    .divider{ margin:12px 0; border-top:1px dashed #e5e7eb; }
+
     .toast{
       position:fixed;
       left:50%;
@@ -492,7 +458,7 @@
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="brand" aria-label="App home">
-      <div class="logo" title="Chief">🧠</div>
+      <div class="logo" title="Company Logo">LOGO</div>
     </div>
 
     <div class="meta">
@@ -511,7 +477,7 @@
           <div class="badgeicon" id="overviewIcon">📌</div>
           <div id="overviewTitle">Overview</div>
         </div>
-        <div class="panelhint" id="overviewHint">Click into cards for details.</div>
+        <div class="panelhint" id="overviewHint">Select Cards for Details</div>
       </div>
       <div class="body" id="overviewBody"></div>
     </div>
@@ -523,10 +489,10 @@
           <div class="badgeicon">💬</div>
           <div>
             <div class="helpTitle">How can I help?</div>
-            <div class="helpMeta">Chief</div>
+            <div class="helpMeta"><span>🧠</span><span>Chief</span></div>
           </div>
         </div>
-        <div class="panelhint">Optional. You can ignore and click into cards.</div>
+        <div class="panelhint"></div>
       </div>
       <div class="body" id="helpBody"></div>
     </div>
@@ -551,14 +517,13 @@
 
           <div class="control">
             <div class="label">News defaults</div>
-            <div class="muted">Controls what shows in Announcements & News. Change anytime.</div>
+            <div class="muted">Controls what shows in Company & Industry News. Change anytime.</div>
             <div class="divider"></div>
             <select id="newsMode">
               <option value="recruiting_ops" selected>Recruiting Ops + People Analytics</option>
               <option value="company_only">Company announcements only</option>
               <option value="hiring_market">Hiring market + recruiting</option>
             </select>
-            <div class="muted" style="margin-top:8px;">(Demo stub — sources not live.)</div>
           </div>
 
           <div class="control">
@@ -610,10 +575,9 @@
 
   <script>
     /***********************
-     * Demo data
+     * Demo data (no "stub" anywhere)
      ***********************/
     const DATA = {
-      // removed "(stub)" from the visible label
       weatherLabel: "☀️ 58°F · San Francisco",
 
       interviews: [
@@ -623,59 +587,14 @@
       ],
 
       requisitions: [
-        {
-          id:"r1",
-          title:"Backend Engineer (US)",
-          location:"Remote / US",
-          health:"at_risk", // healthy | early | at_risk
-          why:"Break at Screen → Hiring Manager. Volume trending below plan.",
-          sendsToDate:143,
-          replyDipWoW:9,
-          pipelineDeltaVsPlan:-18,
-          breakPoint:"Screen → Hiring Manager",
-          autonomy:{
-            applied:[
-              { tier:1, label:"Send window optimization", detail:"Adjusted send time within approved window (no content changes)." },
-              { tier:2, label:"Subject rotation", detail:"Rotated only approved subject lines after threshold met." },
-              { tier:3, label:"Variant pruning", detail:"Paused underperforming approved subject line (reversible)." }
-            ],
-            pending:[
-              { tier:4, label:"Draft body revision", detail:"Prepared revised body copy. Requires approval before use." }
-            ]
-          }
-        },
-        {
-          id:"r2",
-          title:"Product Designer",
-          location:"San Francisco, CA",
-          health:"early",
-          why:"Early signal: response softening in senior band.",
-          sendsToDate:98,
-          replyDipWoW:4,
-          pipelineDeltaVsPlan:-6,
-          breakPoint:"Sourcing → Screen",
-          autonomy:{
-            applied:[ { tier:1, label:"Delivery hygiene", detail:"Retried failed sends; cleaned formatting (no meaning changes)." } ],
-            pending:[]
-          }
-        },
-        {
-          id:"r3",
-          title:"Data Analyst",
-          location:"Remote",
-          health:"healthy",
-          why:"On track. Interview loop staffed and moving.",
-          sendsToDate:210,
-          replyDipWoW:1,
-          pipelineDeltaVsPlan:3,
-          breakPoint:"—",
-          autonomy:{ applied:[{ tier:1, label:"Send scheduling", detail:"Aligned send time to approved window." }], pending:[] }
-        }
+        { id:"r1", title:"Backend Engineer (US)", location:"Remote / US", health:"at_risk" },
+        { id:"r2", title:"Product Designer", location:"San Francisco, CA", health:"early" },
+        { id:"r3", title:"Data Analyst", location:"Remote", health:"healthy" }
       ],
 
       projects: [
-        { id:"p1", title:"Market map — ML Eng", due:"Fri", status:"Needs attention", next:"Finalize target company list + share with HM." },
-        { id:"p2", title:"Hiring kickoff prep", due:"Tomorrow", status:"In progress", next:"Draft kickoff doc + calibration questions." }
+        { id:"p1", title:"Market map — ML Eng", due:"Fri", status:"Needs attention" },
+        { id:"p2", title:"Hiring kickoff prep", due:"Tomorrow", status:"In progress" }
       ],
 
       brand: [
@@ -695,16 +614,12 @@
         ]
       },
 
-      announcements: {
-        company: [
-          { id:"a1", title:"Comp bands updated", sub:"New leveling guidance effective next pay cycle" },
-          { id:"a2", title:"Hiring plan review", sub:"Q1 headcount recalibration meeting Friday" }
-        ],
-        news: [
-          { id:"n1", title:"Hiring market pulse", sub:"Tech interviews trending longer in senior bands (stub)" },
-          { id:"n2", title:"Recruiting ops note", sub:"More teams moving from surveys to lightweight signals (stub)" }
-        ]
-      }
+      news: [
+        { id:"a1", title:"Comp bands updated", sub:"New leveling guidance effective next pay cycle" },
+        { id:"a2", title:"Interviewer training refreshed", sub:"New rubrics + calibration guide published" },
+        { id:"n1", title:"Hiring market pulse", sub:"Senior-loop cycle time increasing across tech this month" },
+        { id:"n2", title:"Industry report released", sub:"New quarterly hiring report: roles, pay, and demand shifts" }
+      ]
     };
 
     /***********************
@@ -783,7 +698,7 @@
           <div class="card">
             <div class="cardhead">
               <h3>Today’s Interviews</h3>
-              ${prepCount ? statusPill("warn", `Prep: ${prepCount}`) : statusPill("good","Ready")}
+              <span class="headmeta">⚠️ Prep: ${prepCount}</span>
             </div>
             <div class="cardbody">
               <div class="list">
@@ -806,7 +721,7 @@
           <div class="card">
             <div class="cardhead">
               <h3>Open Requisitions</h3>
-              ${statusPill("info", `${DATA.requisitions.length} open`)}
+              <span class="headmeta">📌 ${DATA.requisitions.length} open</span>
             </div>
             <div class="cardbody">
               <div class="list">
@@ -829,7 +744,7 @@
           <div class="card">
             <div class="cardhead">
               <h3>Projects & Deadlines</h3>
-              ${statusPill("info", `${DATA.projects.length} active`)}
+              <span class="headmeta">🗂️ ${DATA.projects.length} active</span>
             </div>
             <div class="cardbody">
               <div class="list">
@@ -852,7 +767,7 @@
           <div class="card">
             <div class="cardhead">
               <h3>Employer Brand / Socials</h3>
-              ${statusPill("info", `${DATA.brand.length} items`)}
+              <span class="headmeta">🗣️ ${DATA.brand.length} items</span>
             </div>
             <div class="cardbody">
               <div class="list">
@@ -875,7 +790,7 @@
           <div class="card">
             <div class="cardhead">
               <h3>Messaging</h3>
-              ${statusPill("info","Unread")}
+              <span class="headmeta">💬 Unread</span>
             </div>
             <div class="cardbody">
               <div class="list" style="margin-bottom:10px;">
@@ -909,7 +824,6 @@
                 </div>
               </div>
 
-              <div class="muted" style="font-weight:900;margin:6px 0 8px;">Needs attention</div>
               <div class="list">
                 ${DATA.messaging.items.map(m=>`
                   <div class="row" data-message-item="${m.id}">
@@ -924,33 +838,19 @@
             </div>
           </div>
 
-          <!-- Announcements + News -->
+          <!-- Company & Industry News -->
           <div class="card">
             <div class="cardhead">
-              <h3>Announcements & News</h3>
-              ${statusPill("info","Today")}
+              <h3>Company & Industry News</h3>
+              <span class="headmeta">📰 Today</span>
             </div>
             <div class="cardbody">
-              <div class="muted" style="font-weight:900;margin:0 0 8px;">Company</div>
-              <div class="list" style="margin-bottom:12px;">
-                ${DATA.announcements.company.map(a=>`
-                  <div class="row" data-announce="${a.id}">
-                    <div class="rowleft">
-                      <div class="rowtitle">${a.title}</div>
-                      <div class="rowsub">${a.sub}</div>
-                    </div>
-                    <div class="rowright">${statusPill("info","Read")}</div>
-                  </div>
-                `).join("")}
-              </div>
-
-              <div class="muted" style="font-weight:900;margin:0 0 8px;">Industry (per defaults)</div>
               <div class="list">
-                ${DATA.announcements.news.map(n=>`
-                  <div class="row" data-news="${n.id}">
+                ${DATA.news.map(x=>`
+                  <div class="row" data-news="${x.id}">
                     <div class="rowleft">
-                      <div class="rowtitle">${n.title}</div>
-                      <div class="rowsub">${n.sub}</div>
+                      <div class="rowtitle">${x.title}</div>
+                      <div class="rowsub">${x.sub}</div>
                     </div>
                     <div class="rowright">${statusPill("info","Read")}</div>
                   </div>
@@ -1006,32 +906,29 @@
     }
 
     /***********************
-     * Basic click wiring (demo stubs)
+     * Click wiring (demo stubs)
      ***********************/
     function wireOverview(){
       overviewBody.querySelectorAll("[data-interview]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open interview details (stub)."));
+        el.addEventListener("click", ()=> showToast("Would open interview details."));
       });
       overviewBody.querySelectorAll("[data-req]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open requisition details (stub)."));
+        el.addEventListener("click", ()=> showToast("Would open requisition details."));
       });
       overviewBody.querySelectorAll("[data-project]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open project details (stub)."));
+        el.addEventListener("click", ()=> showToast("Would open project details."));
       });
       overviewBody.querySelectorAll("[data-brand]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open employer brand details (stub)."));
+        el.addEventListener("click", ()=> showToast("Would open employer brand details."));
       });
       overviewBody.querySelectorAll("[data-msg]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open messaging inbox (stub)."));
+        el.addEventListener("click", ()=> showToast("Would open messaging inbox."));
       });
       overviewBody.querySelectorAll("[data-message-item]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open message thread (stub)."));
-      });
-      overviewBody.querySelectorAll("[data-announce]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open announcement (stub)."));
+        el.addEventListener("click", ()=> showToast("Would open message thread."));
       });
       overviewBody.querySelectorAll("[data-news]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open news item (stub)."));
+        el.addEventListener("click", ()=> showToast("Would open news item."));
       });
     }
 
@@ -1050,7 +947,7 @@
       function handleSend(){
         const t = (chatInput.value || "").trim();
         if(!t) return;
-        showToast("Captured. (Demo stub)");
+        showToast("Captured.");
         chatInput.value = "";
       }
       if(sendBtn) sendBtn.addEventListener("click", handleSend);
@@ -1074,17 +971,6 @@
     const weatherCity = document.getElementById("weatherCity");
     const saveSettingsBtn = document.getElementById("saveSettings");
     const resetSettingsBtn = document.getElementById("resetSettings");
-
-    function loadSettings(){
-      try{
-        const raw = localStorage.getItem("chief_settings_v2");
-        if(!raw) return {...DEFAULT_SETTINGS};
-        const parsed = JSON.parse(raw);
-        return { ...DEFAULT_SETTINGS, ...parsed };
-      }catch(e){
-        return {...DEFAULT_SETTINGS};
-      }
-    }
 
     function openSettings(){
       SETTINGS = loadSettings();
@@ -1114,14 +1000,14 @@
         newsMode: newsMode.value,
         weatherCity: weatherCity.value
       };
-      localStorage.setItem("chief_settings_v2", JSON.stringify(SETTINGS));
+      saveSettingsObj(SETTINGS);
       closeSettingsModal();
       showToast("Settings saved.");
     });
 
     resetSettingsBtn.addEventListener("click", ()=>{
       SETTINGS = { ...DEFAULT_SETTINGS };
-      localStorage.setItem("chief_settings_v2", JSON.stringify(SETTINGS));
+      saveSettingsObj(SETTINGS);
       minSendsInput.value = SETTINGS.minSendsForLearning;
       usePersonal.checked = SETTINGS.usePersonal;
       useAnon.checked = SETTINGS.useAnon;
