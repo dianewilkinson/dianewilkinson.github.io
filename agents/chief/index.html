@@ -98,11 +98,68 @@
       white-space:nowrap;
     }
 
+    /* Chat bar (moved up under top context) */
+    .chat{
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 16px 10px;
+    }
+    .chat-inner{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:#fff;
+      box-shadow:0 12px 30px rgba(0,0,0,.08);
+    }
+    .chat-icon{
+      width:34px;height:34px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:var(--accent-soft);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:16px;
+      flex:0 0 auto;
+    }
+    .input{
+      flex:1;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:11px 12px;
+      font-size:13px;
+      outline:none;
+      background:#fbfdff;
+    }
+    .btn{
+      border:1px solid rgba(148,163,184,.65);
+      background:rgba(255,255,255,.98);
+      color:#4f46e5;
+      border-radius:14px;
+      padding:9px 12px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+      white-space:nowrap;
+      box-shadow:0 1px 2px var(--shadow);
+    }
+    .btn:hover{background:#fff; color:#4338ca;}
+    .btn.primary{
+      background:#4f46e5;
+      border-color:#4f46e5;
+      color:#fff;
+    }
+    .btn.primary:hover{background:#4338ca;border-color:#4338ca;color:#fff;}
+    .btn.ghost{ color:#111827; }
+
     /* Main panel */
     .wrap{
       max-width:1120px;
       margin:0 auto;
-      padding:0 16px 96px; /* space for fixed chat */
+      padding:0 16px 18px;
     }
     .panel{
       background:var(--card);
@@ -183,12 +240,6 @@
       border-radius:18px;
       box-shadow:0 1px 3px var(--shadow);
       padding:12px 12px 10px;
-      cursor:pointer;
-      transition:transform .12s ease, box-shadow .12s ease;
-    }
-    .card:hover{
-      transform:translateY(-1px);
-      box-shadow:0 10px 30px rgba(0,0,0,.06);
     }
     .card-top{
       display:flex;
@@ -203,12 +254,6 @@
       font-weight:950;
       letter-spacing:-0.01em;
       line-height:1.2;
-    }
-    .card p{
-      margin:0;
-      font-size:13px;
-      color:#374151;
-      line-height:1.55;
     }
     .badge{
       display:inline-flex;
@@ -226,6 +271,54 @@
     .b-warn{color:#92400e; border-color:rgba(245,158,11,.35); background:rgba(245,158,11,.08);}
     .b-bad{color:#991b1b; border-color:rgba(239,68,68,.35); background:rgba(239,68,68,.08);}
     .b-info{color:#1d4ed8; border-color:rgba(37,99,235,.35); background:rgba(37,99,235,.08);}
+
+    /* Mini list inside cards */
+    .mini{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top:6px;
+    }
+    .mini-row{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:9px 10px;
+      background:#fff;
+      box-shadow:0 1px 2px var(--shadow);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      cursor:pointer;
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+    .mini-row:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 26px rgba(0,0,0,.06);
+    }
+    .mini-left{min-width:0;}
+    .mini-title{
+      margin:0;
+      font-size:12.5px;
+      font-weight:950;
+      letter-spacing:-0.01em;
+      color:#111827;
+      line-height:1.25;
+    }
+    .mini-sub{
+      margin-top:4px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.35;
+    }
+    .mini-right{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      flex:0 0 auto;
+    }
 
     /* Detail pages */
     .detail{
@@ -253,28 +346,6 @@
       line-height:1.45;
       max-width:68ch;
     }
-
-    .btn{
-      border:1px solid rgba(148,163,184,.65);
-      background:rgba(255,255,255,.98);
-      color:#4f46e5;
-      border-radius:14px;
-      padding:9px 12px;
-      font-size:13px;
-      font-weight:950;
-      cursor:pointer;
-      white-space:nowrap;
-      box-shadow:0 1px 2px var(--shadow);
-    }
-    .btn:hover{background:#fff; color:#4338ca;}
-    .btn.primary{
-      background:#4f46e5;
-      border-color:#4f46e5;
-      color:#fff;
-    }
-    .btn.primary:hover{background:#4338ca;border-color:#4338ca;color:#fff;}
-    .btn.ghost{ color:#111827; }
-
     .section{
       border:1px solid var(--border);
       background:#fff;
@@ -298,53 +369,6 @@
     .divider{
       margin:12px 0;
       border-top:1px dashed #e5e7eb;
-    }
-
-    /* Lists */
-    .list{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-    .row{
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:10px 10px;
-      background:#fff;
-      box-shadow:0 1px 3px var(--shadow);
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      cursor:pointer;
-      transition:transform .12s ease, box-shadow .12s ease;
-    }
-    .row:hover{
-      transform:translateY(-1px);
-      box-shadow:0 10px 30px rgba(0,0,0,.06);
-    }
-    .row .left{
-      min-width:0;
-    }
-    .row .title{
-      font-weight:950;
-      font-size:13px;
-      margin:0;
-      color:#111827;
-    }
-    .row .meta{
-      margin-top:4px;
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.4;
-    }
-    .row .right{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      flex:0 0 auto;
     }
 
     /* “Choose your adventure” tiles */
@@ -378,53 +402,11 @@
       line-height:1.45;
     }
 
-    /* Fixed chat (bottom) */
-    .chat{
-      position:fixed;
-      left:0; right:0;
-      bottom:0;
-      padding:12px 12px 14px;
-      background:linear-gradient(180deg, rgba(249,250,251,0), rgba(249,250,251,.95) 30%, rgba(249,250,251,1));
-      backdrop-filter:saturate(120%) blur(6px);
-    }
-    .chat-inner{
-      max-width:1120px;
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px;
-      border-radius:18px;
-      border:1px solid var(--border);
-      background:#fff;
-      box-shadow:0 12px 30px rgba(0,0,0,.08);
-    }
-    .chat-icon{
-      width:34px;height:34px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:var(--accent-soft);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:16px;
-      flex:0 0 auto;
-    }
-    .input{
-      flex:1;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:11px 12px;
-      font-size:13px;
-      outline:none;
-      background:#fbfdff;
-    }
-
     /* Toast */
     .toast{
       position:fixed;
       left:50%;
-      bottom:74px;
+      bottom:18px;
       transform:translateX(-50%);
       background:#111827;
       color:#fff;
@@ -460,6 +442,15 @@
     </div>
   </div>
 
+  <!-- CHAT BAR (MOVED UP) -->
+  <div class="chat" aria-label="Chat input">
+    <div class="chat-inner">
+      <div class="chat-icon">💬</div>
+      <input class="input" id="chatInput" />
+      <button class="btn primary" id="sendBtn">Send</button>
+    </div>
+  </div>
+
   <!-- MAIN -->
   <div class="wrap">
     <div class="panel" aria-label="Morning brief dashboard">
@@ -477,20 +468,12 @@
     </div>
   </div>
 
-  <!-- FIXED CHAT INPUT (BOTTOM) -->
-  <div class="chat" aria-label="Chat input">
-    <div class="chat-inner">
-      <div class="chat-icon">💬</div>
-      <input class="input" id="chatInput" />
-      <button class="btn primary" id="sendBtn">Send</button>
-    </div>
-  </div>
-
   <div class="toast" id="toast">Saved.</div>
 
   <script>
     /***********************
      * Policy (global default + role overrides when approved)
+     * (Not shown on the morning brief dashboard; appears only on Outreach detail views.)
      ***********************/
     const POLICY = {
       globalMinSendsForLearning: 100,
@@ -584,9 +567,6 @@
         { id:"p3", title:"Interview loop cleanup", due:"—", status:"Backlog", next:"Standardize scorecard rubric for Eng roles." }
       ],
       brand: {
-        glassdoorPending: 2,
-        glassdoorDraftsReady: 1,
-        linkedinScheduled: 1,
         items: [
           { id:"b1", type:"Glassdoor", title:"Response needed: 3★ review", status:"Pending", note:"Draft ready (Tier 4 approval if posting)." },
           { id:"b2", type:"Glassdoor", title:"Response needed: 2★ review", status:"Pending", note:"No draft yet." },
@@ -620,40 +600,12 @@
       return `<span class="badge b-bad">⛔ At risk</span>`;
     }
 
-    function healthLabelCounts(){
-      const total = DATA.requisitions.length;
-      const healthy = DATA.requisitions.filter(r=>r.health==="healthy").length;
-      const early = DATA.requisitions.filter(r=>r.health==="early").length;
-      const atRisk = DATA.requisitions.filter(r=>r.health==="at_risk").length;
-      return { total, healthy, early, atRisk };
-    }
-
-    function nextInterview(){
-      // stub: first in list
-      return DATA.interviews[0] || null;
-    }
-
-    function nextProjectDue(){
-      // stub: first
-      return DATA.projects[0] || null;
-    }
-
-    function getReq(reqId){
-      return DATA.requisitions.find(r=>r.id===reqId);
-    }
-
     /***********************
      * Render state
      ***********************/
     const mainBody = document.getElementById("mainBody");
     const statusHint = document.getElementById("statusHint");
     const panelTitle = document.getElementById("panelTitle");
-
-    const state = {
-      view: "empty",
-      reqId: null,
-      interviewId: null
-    };
 
     function setHeader(title, hint){
       panelTitle.textContent = title;
@@ -674,113 +626,113 @@
     }
 
     function tplBrief(){
-      const counts = healthLabelCounts();
-      const ni = nextInterview();
       const prepNeeded = DATA.interviews.filter(i=>i.prepNeeded).length;
-      const np = nextProjectDue();
 
-      const interviewLine = ni
-        ? `${ni.time} — ${ni.candidate} (${ni.stage})`
-        : `No interviews scheduled`;
-
-      const projectsLine = np
-        ? `${DATA.projects.length} active · Next due: ${np.due} — ${np.title}`
-        : `${DATA.projects.length} active`;
-
-      const brandLine =
-        `${DATA.brand.glassdoorPending} Glassdoor pending · ${DATA.brand.linkedinScheduled} LinkedIn scheduled`;
-
-      setHeader("Morning Brief", "Click a card to review details.");
+      setHeader("Morning Brief", "Click an item for details.");
       return `
         <div class="grid" role="list">
-          <div class="card" role="listitem" data-nav="interviews">
+
+          <!-- Interviews -->
+          <div class="card" role="listitem">
             <div class="card-top">
               <h3>Today’s Interviews</h3>
-              <span class="badge ${prepNeeded ? "b-warn" : "b-good"}">${prepNeeded ? `⚠️ Prep needed: ${prepNeeded}` : "✅ Ready"}</span>
+              <span class="badge ${prepNeeded ? "b-warn" : "b-good"}">
+                ${prepNeeded ? `⚠️ Prep: ${prepNeeded}` : "✅ Ready"}
+              </span>
             </div>
-            <p>${interviewLine}</p>
+
+            <div class="mini">
+              ${DATA.interviews.map(i=>`
+                <div class="mini-row" data-interview="${i.id}">
+                  <div class="mini-left">
+                    <div class="mini-title">${i.time} — ${i.candidate}</div>
+                    <div class="mini-sub">${i.stage} · ${i.interviewer}</div>
+                  </div>
+                  <div class="mini-right">
+                    ${i.prepNeeded ? `<span class="badge b-warn">Prep</span>` : `<span class="badge b-good">Ready</span>`}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
           </div>
 
-          <div class="card" role="listitem" data-nav="reqs">
+          <!-- Open reqs -->
+          <div class="card" role="listitem">
             <div class="card-top">
               <h3>Open Requisitions</h3>
-              <span class="badge b-info">📌 ${counts.total} open</span>
+              <span class="badge b-info">📌 ${DATA.requisitions.length} open</span>
             </div>
-            <p>${counts.healthy} healthy · ${counts.early} early signal · ${counts.atRisk} at risk</p>
+
+            <div class="mini">
+              ${DATA.requisitions.map(r=>`
+                <div class="mini-row" data-req="${r.id}">
+                  <div class="mini-left">
+                    <div class="mini-title">${r.title}</div>
+                    <div class="mini-sub">${r.location}</div>
+                  </div>
+                  <div class="mini-right">
+                    ${healthBadge(r.health)}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
           </div>
 
-          <div class="card" role="listitem" data-nav="projects">
+          <!-- Projects -->
+          <div class="card" role="listitem">
             <div class="card-top">
               <h3>Projects & Deadlines</h3>
-              <span class="badge b-info">🧩 Active</span>
+              <span class="badge b-info">🧩 ${DATA.projects.length} active</span>
             </div>
-            <p>${projectsLine}</p>
+
+            <div class="mini">
+              ${DATA.projects.map(p=>`
+                <div class="mini-row" data-project="${p.id}">
+                  <div class="mini-left">
+                    <div class="mini-title">${p.title}</div>
+                    <div class="mini-sub">Due: ${p.due} · ${p.status}</div>
+                  </div>
+                  <div class="mini-right">
+                    <span class="badge b-info">Next</span>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
           </div>
 
-          <div class="card" role="listitem" data-nav="brand">
+          <!-- Brand -->
+          <div class="card" role="listitem">
             <div class="card-top">
               <h3>Employer Brand / Socials</h3>
-              <span class="badge b-info">💬 Queues</span>
+              <span class="badge b-info">💬 ${DATA.brand.items.length} items</span>
             </div>
-            <p>${brandLine}</p>
-          </div>
-        </div>
 
-        <div style="max-width:900px;margin:14px auto 0;">
-          <div class="section">
-            <h4>Policy snapshot</h4>
-            <p class="small">
-              Global learning threshold is <strong>${POLICY.globalMinSendsForLearning}</strong> sends.
-              Tier 1–3 actions may be applied within approved boundaries; Tier 4 scope expansion requires explicit approval.
-            </p>
-          </div>
-        </div>
-      `;
-    }
-
-    function tplInterviews(){
-      setHeader("Today’s Interviews", "Click an interview to review candidate prep.");
-      const list = DATA.interviews.map(i=>{
-        const req = getReq(i.reqId);
-        const reqTag = req ? req.title : "—";
-        return `
-          <div class="row" data-interview="${i.id}">
-            <div class="left">
-              <div class="title">${i.time} — ${i.candidate} <span style="font-weight:800;color:#6b7280;">· ${i.stage}</span></div>
-              <div class="meta">${reqTag} · Interviewer: ${i.interviewer}</div>
-            </div>
-            <div class="right">
-              ${i.prepNeeded ? `<span class="badge b-warn">⚠️ Prep</span>` : `<span class="badge b-good">✅ Ready</span>`}
-              <span class="badge b-info">Review</span>
+            <div class="mini">
+              ${DATA.brand.items.map(b=>`
+                <div class="mini-row" data-brand="${b.id}">
+                  <div class="mini-left">
+                    <div class="mini-title">${b.type}: ${b.title}</div>
+                    <div class="mini-sub">${b.status} · ${b.note}</div>
+                  </div>
+                  <div class="mini-right">
+                    <span class="badge b-info">Review</span>
+                  </div>
+                </div>
+              `).join("")}
             </div>
           </div>
-        `;
-      }).join("");
 
-      return `
-        <div class="detail">
-          <div class="detail-head">
-            <div>
-              <h2>Today’s Interviews</h2>
-              <p>Fast list-first view. Drill down only where you need context.</p>
-            </div>
-            <button class="btn ghost" data-nav="brief">← Back</button>
-          </div>
-
-          <div class="section">
-            <h4>Schedule</h4>
-            <div class="list">${list || `<p class="small">No interviews scheduled.</p>`}</div>
-          </div>
         </div>
       `;
     }
 
     function tplInterviewDetail(interviewId){
       const i = DATA.interviews.find(x=>x.id===interviewId);
-      if(!i) return tplInterviews();
-      const req = getReq(i.reqId);
+      if(!i) return tplBrief();
 
-      setHeader("Interview Prep", "Review summary, then choose your next action.");
+      const req = DATA.requisitions.find(r=>r.id===i.reqId);
+
+      setHeader("Interview Prep", "Review summary, then choose next action.");
       return `
         <div class="detail">
           <div class="detail-head">
@@ -788,16 +740,14 @@
               <h2>${i.time} — ${i.candidate} (${i.stage})</h2>
               <p>${req ? req.title : "Requisition"} · Interviewer: ${i.interviewer}</p>
             </div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button class="btn ghost" data-nav="interviews">← Back</button>
-            </div>
+            <button class="btn ghost" data-nav="brief">← Back</button>
           </div>
 
           <div class="section">
             <h4>Candidate summary (stub)</h4>
             <p class="small">
               6+ years backend · Python/Go · scaled services to 10M+ users. Strength: ownership + reliability.
-              Risk: limited distributed tracing depth. Focus questions: incident handling, tradeoffs, system boundaries.
+              Risk: limited distributed tracing depth. Focus: incidents, tradeoffs, boundaries.
             </p>
 
             <div class="divider"></div>
@@ -817,48 +767,12 @@
       `;
     }
 
-    function tplReqs(){
-      const counts = healthLabelCounts();
-      setHeader("Open Requisitions", "Each req has a health rating. Click to troubleshoot.");
-      const list = DATA.requisitions.map(r=>`
-        <div class="row" data-req="${r.id}">
-          <div class="left">
-            <div class="title">${r.title} <span style="font-weight:800;color:#6b7280;">· ${r.location}</span></div>
-            <div class="meta">${r.why}</div>
-          </div>
-          <div class="right">
-            ${healthBadge(r.health)}
-            <span class="badge b-info">Review</span>
-          </div>
-        </div>
-      `).join("");
-
-      return `
-        <div class="detail">
-          <div class="detail-head">
-            <div>
-              <h2>Open Requisitions</h2>
-              <p>${counts.total} open · ${counts.healthy} healthy · ${counts.early} early signal · ${counts.atRisk} at risk</p>
-            </div>
-            <button class="btn ghost" data-nav="brief">← Back</button>
-          </div>
-
-          <div class="section">
-            <h4>Requisition list</h4>
-            <div class="list">${list}</div>
-          </div>
-        </div>
-      `;
-    }
-
     function tplReqDetail(reqId){
-      const r = getReq(reqId);
-      if(!r) return tplReqs();
+      const r = DATA.requisitions.find(x=>x.id===reqId);
+      if(!r) return tplBrief();
 
       const rp = getRolePolicy(r.title);
       const thresholdMet = r.sendsToDate >= rp.minSendsForLearning;
-      const appliedCount = r.autonomy.applied.length;
-      const pendingCount = r.autonomy.pending.length;
 
       setHeader("Req Brief", "Choose your adventure: Pipeline, Outreach, or Loop.");
       return `
@@ -868,9 +782,7 @@
               <h2>${r.title}</h2>
               <p>${r.location} · ${healthBadge(r.health)} · ${r.why}</p>
             </div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button class="btn ghost" data-nav="reqs">← Back</button>
-            </div>
+            <button class="btn ghost" data-nav="brief">← Back</button>
           </div>
 
           <div class="section">
@@ -880,7 +792,7 @@
             </p>
             <div class="divider"></div>
             <p class="small">
-              <strong>Learning threshold:</strong> ${rp.minSendsForLearning} sends (${thresholdMet ? "met" : "not met"}).
+              Learning threshold: <strong>${rp.minSendsForLearning}</strong> (${thresholdMet ? "met" : "not met"}).
               Below threshold, Chief will not make learning-based changes unless you explicitly command it.
             </p>
           </div>
@@ -894,30 +806,21 @@
               </div>
               <div class="tile" data-nav="req_outreach" data-req="${r.id}">
                 <h5>✉️ Outreach</h5>
-                <p>Response signals, learning threshold, content tiers.</p>
+                <p>Signals, learning threshold, tiered autonomy.</p>
               </div>
               <div class="tile" data-nav="req_loop" data-req="${r.id}">
                 <h5>🧩 Interview Loop</h5>
-                <p>Panel coverage, scorecards, speed, decision friction.</p>
+                <p>Scorecards, SLA, decision friction.</p>
               </div>
             </div>
-          </div>
-
-          <div class="section">
-            <h4>Autonomy (scoped to this req)</h4>
-            <p class="small">
-              Applied within boundaries (Tier 1–3): <strong>${appliedCount}</strong> · Pending approval (Tier 4): <strong>${pendingCount}</strong>
-            </p>
-            <div class="divider"></div>
-            <button class="btn" data-nav="req_outreach" data-req="${r.id}">Review autonomy + outreach details</button>
           </div>
         </div>
       `;
     }
 
     function tplReqPipeline(reqId){
-      const r = getReq(reqId);
-      if(!r) return tplReqs();
+      const r = DATA.requisitions.find(x=>x.id===reqId);
+      if(!r) return tplBrief();
 
       setHeader("Req · Pipeline", "Troubleshoot bottlenecks and levers.");
       return `
@@ -925,11 +828,9 @@
           <div class="detail-head">
             <div>
               <h2>${r.title} — Pipeline</h2>
-              <p>Focus: where flow breaks and what lever is lowest-lift.</p>
+              <p>Decision-first: where flow breaks and what lever is lowest-lift.</p>
             </div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button class="btn ghost" data-nav="req_detail" data-req="${r.id}">← Back</button>
-            </div>
+            <button class="btn ghost" data-nav="req_detail" data-req="${r.id}">← Back</button>
           </div>
 
           <div class="section">
@@ -944,22 +845,17 @@
               <button class="btn" data-toast="Would open forecasting sheet (stub).">Open planning sheet</button>
               <button class="btn" data-toast="Would generate HM calibration prompts (stub).">Generate HM calibration prompts</button>
             </div>
-            <div class="divider"></div>
-            <p class="small">Note: detailed analytics can live elsewhere — this view stays decision-first.</p>
           </div>
         </div>
       `;
     }
 
     function tplReqOutreach(reqId){
-      const r = getReq(reqId);
-      if(!r) return tplReqs();
+      const r = DATA.requisitions.find(x=>x.id===reqId);
+      if(!r) return tplBrief();
 
       const rp = getRolePolicy(r.title);
       const thresholdMet = r.sendsToDate >= rp.minSendsForLearning;
-
-      const applied = r.autonomy.applied;
-      const pending = r.autonomy.pending;
 
       setHeader("Req · Outreach", "Tiered autonomy + threshold guardrails.");
       return `
@@ -967,11 +863,9 @@
           <div class="detail-head">
             <div>
               <h2>${r.title} — Outreach</h2>
-              <p>Below <strong>${rp.minSendsForLearning}</strong> sends, Chief monitors only unless commanded. Above threshold, Tier 1–3 optimizations may run within policy.</p>
+              <p>Below <strong>${rp.minSendsForLearning}</strong> sends: monitor only unless commanded. Above threshold: Tier 1–3 may run within approved scope.</p>
             </div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button class="btn ghost" data-nav="req_detail" data-req="${r.id}">← Back</button>
-            </div>
+            <button class="btn ghost" data-nav="req_detail" data-req="${r.id}">← Back</button>
           </div>
 
           <div class="section">
@@ -989,9 +883,9 @@
 
           <div class="section">
             <h4>Already applied (Tier 1–3) — within boundaries</h4>
-            ${applied.length
+            ${r.autonomy.applied.length
               ? `<ul style="margin:0 0 0 18px;padding:0;color:#374151;font-size:13px;line-height:1.55;">
-                  ${applied.map(a=>`<li><strong>Tier ${a.tier}:</strong> ${a.label} — ${a.detail}</li>`).join("")}
+                  ${r.autonomy.applied.map(a=>`<li><strong>Tier ${a.tier}:</strong> ${a.label} — ${a.detail}</li>`).join("")}
                  </ul>`
               : `<p class="small">No within-boundary changes applied for this req.</p>`
             }
@@ -999,8 +893,8 @@
 
           <div class="section">
             <h4>Pending approval (Tier 4) — scope expansion</h4>
-            ${pending.length
-              ? pending.map(p=>`
+            ${r.autonomy.pending.length
+              ? r.autonomy.pending.map(p=>`
                   <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
                     <div>
                       <div style="font-weight:950;font-size:13px;">Tier ${p.tier}: ${p.label}</div>
@@ -1015,17 +909,15 @@
               : `<p class="small">No Tier 4 items pending.</p>`
             }
             <div class="divider"></div>
-            <p class="small">
-              <strong>Global default:</strong> ${POLICY.globalMinSendsForLearning} sends. Role overrides exist, but require approval to change.
-            </p>
+            <p class="small"><strong>Global default:</strong> ${POLICY.globalMinSendsForLearning} sends. Role overrides can be approved when needed.</p>
           </div>
         </div>
       `;
     }
 
     function tplReqLoop(reqId){
-      const r = getReq(reqId);
-      if(!r) return tplReqs();
+      const r = DATA.requisitions.find(x=>x.id===reqId);
+      if(!r) return tplBrief();
 
       setHeader("Req · Interview Loop", "Speed, coverage, scorecards, decision friction.");
       return `
@@ -1035,57 +927,17 @@
               <h2>${r.title} — Interview Loop</h2>
               <p>Recruiter-native view: what’s blocking decisions and where the loop is leaking.</p>
             </div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button class="btn ghost" data-nav="req_detail" data-req="${r.id}">← Back</button>
-            </div>
+            <button class="btn ghost" data-nav="req_detail" data-req="${r.id}">← Back</button>
           </div>
 
           <div class="section">
-            <h4>Today’s loop status (stub)</h4>
+            <h4>Loop status (stub)</h4>
             <p class="small">Panel coverage: ✅ staffed · Scorecards: ⚠️ 2 pending from yesterday · Decision SLA: 48 hours target</p>
             <div class="divider"></div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
               <button class="btn" data-toast="Would nudge interviewers (Tier 1, stub).">Send scorecard nudges</button>
               <button class="btn" data-toast="Would open scorecard dashboard (stub).">Open scorecard dashboard</button>
-              <button class="btn primary" data-nav="interviews">Go to today’s interviews</button>
             </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function tplProjects(){
-      setHeader("Projects & Deadlines", "Click a project to review next action.");
-      const list = DATA.projects.map(p=>`
-        <div class="row" data-project="${p.id}">
-          <div class="left">
-            <div class="title">${p.title}</div>
-            <div class="meta">Due: ${p.due} · Status: ${p.status}</div>
-          </div>
-          <div class="right">
-            <span class="badge b-info">Next</span>
-          </div>
-        </div>
-      `).join("");
-
-      return `
-        <div class="detail">
-          <div class="detail-head">
-            <div>
-              <h2>Projects & Deadlines</h2>
-              <p>${DATA.projects.length} active items. Keep this list small and decisive.</p>
-            </div>
-            <button class="btn ghost" data-nav="brief">← Back</button>
-          </div>
-
-          <div class="section">
-            <h4>Active work</h4>
-            <div class="list">${list}</div>
-          </div>
-
-          <div class="section">
-            <h4>Note</h4>
-            <p class="small">Projects can include market maps, intake prep, process improvements, and cross-functional workstreams.</p>
           </div>
         </div>
       `;
@@ -1093,7 +945,7 @@
 
     function tplProjectDetail(projectId){
       const p = DATA.projects.find(x=>x.id===projectId);
-      if(!p) return tplProjects();
+      if(!p) return tplBrief();
 
       setHeader("Project", "Review next step, then act.");
       return `
@@ -1103,7 +955,7 @@
               <h2>${p.title}</h2>
               <p>Due: ${p.due} · Status: ${p.status}</p>
             </div>
-            <button class="btn ghost" data-nav="projects">← Back</button>
+            <button class="btn ghost" data-nav="brief">← Back</button>
           </div>
 
           <div class="section">
@@ -1119,50 +971,9 @@
       `;
     }
 
-    function tplBrand(){
-      setHeader("Employer Brand / Socials", "Glassdoor + social queues (manual work made visible).");
-      const list = DATA.brand.items.map(b=>`
-        <div class="row" data-brand="${b.id}">
-          <div class="left">
-            <div class="title">${b.type}: ${b.title}</div>
-            <div class="meta">${b.status} · ${b.note}</div>
-          </div>
-          <div class="right">
-            <span class="badge b-info">Review</span>
-          </div>
-        </div>
-      `).join("");
-
-      return `
-        <div class="detail">
-          <div class="detail-head">
-            <div>
-              <h2>Employer Brand / Socials</h2>
-              <p>Glassdoor responses, posts, and other brand stewardship tasks.</p>
-            </div>
-            <button class="btn ghost" data-nav="brief">← Back</button>
-          </div>
-
-          <div class="section">
-            <h4>Queues</h4>
-            <p class="small">
-              Glassdoor pending: <strong>${DATA.brand.glassdoorPending}</strong> · Drafts ready: <strong>${DATA.brand.glassdoorDraftsReady}</strong> · LinkedIn scheduled: <strong>${DATA.brand.linkedinScheduled}</strong>
-            </p>
-            <div class="divider"></div>
-            <div class="list">${list}</div>
-          </div>
-
-          <div class="section">
-            <h4>Autonomy note</h4>
-            <p class="small">Tier 4 applies to posting full-text responses. Chief can draft, but will not post without approval.</p>
-          </div>
-        </div>
-      `;
-    }
-
     function tplBrandDetail(brandId){
       const b = DATA.brand.items.find(x=>x.id===brandId);
-      if(!b) return tplBrand();
+      if(!b) return tplBrief();
 
       setHeader("Brand Item", "Drafts are allowed; posting requires approval.");
       return `
@@ -1172,7 +983,7 @@
               <h2>${b.type}: ${b.title}</h2>
               <p>Status: ${b.status} · ${b.note}</p>
             </div>
-            <button class="btn ghost" data-nav="brand">← Back</button>
+            <button class="btn ghost" data-nav="brief">← Back</button>
           </div>
 
           <div class="section">
@@ -1194,82 +1005,26 @@
      * Renderer
      ***********************/
     function render(view, payload={}){
-      state.view = view;
+      if(view === "empty"){ mainBody.innerHTML = tplEmpty(); wireNav(); return; }
+      if(view === "brief"){ mainBody.innerHTML = tplBrief(); wireNav(); return; }
 
-      if(view === "empty"){
-        mainBody.innerHTML = tplEmpty();
-        wireNav();
-        return;
-      }
-      if(view === "brief"){
-        mainBody.innerHTML = tplBrief();
-        wireNav();
-        return;
-      }
-      if(view === "interviews"){
-        mainBody.innerHTML = tplInterviews();
-        wireNav();
-        return;
-      }
-      if(view === "interview_detail"){
-        mainBody.innerHTML = tplInterviewDetail(payload.interviewId);
-        wireNav();
-        return;
-      }
-      if(view === "reqs"){
-        mainBody.innerHTML = tplReqs();
-        wireNav();
-        return;
-      }
-      if(view === "req_detail"){
-        mainBody.innerHTML = tplReqDetail(payload.reqId);
-        wireNav();
-        return;
-      }
-      if(view === "req_pipeline"){
-        mainBody.innerHTML = tplReqPipeline(payload.reqId);
-        wireNav();
-        return;
-      }
-      if(view === "req_outreach"){
-        mainBody.innerHTML = tplReqOutreach(payload.reqId);
-        wireNav();
-        return;
-      }
-      if(view === "req_loop"){
-        mainBody.innerHTML = tplReqLoop(payload.reqId);
-        wireNav();
-        return;
-      }
-      if(view === "projects"){
-        mainBody.innerHTML = tplProjects();
-        wireNav();
-        return;
-      }
-      if(view === "project_detail"){
-        mainBody.innerHTML = tplProjectDetail(payload.projectId);
-        wireNav();
-        return;
-      }
-      if(view === "brand"){
-        mainBody.innerHTML = tplBrand();
-        wireNav();
-        return;
-      }
-      if(view === "brand_detail"){
-        mainBody.innerHTML = tplBrandDetail(payload.brandId);
-        wireNav();
-        return;
-      }
+      if(view === "interview_detail"){ mainBody.innerHTML = tplInterviewDetail(payload.interviewId); wireNav(); return; }
+      if(view === "req_detail"){ mainBody.innerHTML = tplReqDetail(payload.reqId); wireNav(); return; }
+      if(view === "req_pipeline"){ mainBody.innerHTML = tplReqPipeline(payload.reqId); wireNav(); return; }
+      if(view === "req_outreach"){ mainBody.innerHTML = tplReqOutreach(payload.reqId); wireNav(); return; }
+      if(view === "req_loop"){ mainBody.innerHTML = tplReqLoop(payload.reqId); wireNav(); return; }
+
+      if(view === "project_detail"){ mainBody.innerHTML = tplProjectDetail(payload.projectId); wireNav(); return; }
+      if(view === "brand_detail"){ mainBody.innerHTML = tplBrandDetail(payload.brandId); wireNav(); return; }
 
       mainBody.innerHTML = tplEmpty();
       wireNav();
     }
 
     function wireNav(){
-      // top-level navigation from cards/buttons
+      // back buttons + tiles
       mainBody.querySelectorAll("[data-nav]").forEach(el=>{
-        el.addEventListener("click", (e)=>{
+        el.addEventListener("click", ()=>{
           const to = el.getAttribute("data-nav");
           const reqId = el.getAttribute("data-req");
           if(to && (to.startsWith("req_") || to === "req_detail")){
@@ -1280,41 +1035,23 @@
         });
       });
 
-      // list row click: interviews
+      // card mini items
       mainBody.querySelectorAll("[data-interview]").forEach(el=>{
-        el.addEventListener("click", ()=>{
-          render("interview_detail", { interviewId: el.getAttribute("data-interview") });
-        });
+        el.addEventListener("click", ()=> render("interview_detail", { interviewId: el.getAttribute("data-interview") }));
       });
-
-      // list row click: reqs
       mainBody.querySelectorAll("[data-req]").forEach(el=>{
-        // avoid double-binding when element already handled by [data-nav]
-        if(el.hasAttribute("data-nav")) return;
-        el.addEventListener("click", ()=>{
-          render("req_detail", { reqId: el.getAttribute("data-req") });
-        });
+        el.addEventListener("click", ()=> render("req_detail", { reqId: el.getAttribute("data-req") }));
       });
-
-      // list row click: projects
       mainBody.querySelectorAll("[data-project]").forEach(el=>{
-        el.addEventListener("click", ()=>{
-          render("project_detail", { projectId: el.getAttribute("data-project") });
-        });
+        el.addEventListener("click", ()=> render("project_detail", { projectId: el.getAttribute("data-project") }));
       });
-
-      // list row click: brand items
       mainBody.querySelectorAll("[data-brand]").forEach(el=>{
-        el.addEventListener("click", ()=>{
-          render("brand_detail", { brandId: el.getAttribute("data-brand") });
-        });
+        el.addEventListener("click", ()=> render("brand_detail", { brandId: el.getAttribute("data-brand") }));
       });
 
       // toast buttons
       mainBody.querySelectorAll("[data-toast]").forEach(el=>{
-        el.addEventListener("click", ()=>{
-          showToast(el.getAttribute("data-toast"));
-        });
+        el.addEventListener("click", ()=> showToast(el.getAttribute("data-toast")));
       });
     }
 
@@ -1329,38 +1066,18 @@
       if(!t) return;
 
       const lower = t.toLowerCase();
-
       if(lower.includes("review morning brief") || lower.includes("morning brief")){
         render("brief");
         showToast("Morning brief loaded.");
         return;
       }
-      if(lower.includes("interview")){
-        render("interviews");
-        return;
-      }
-      if(lower.includes("req") || lower.includes("requisition") || lower.includes("open roles")){
-        render("reqs");
-        return;
-      }
-      if(lower.includes("project")){
-        render("projects");
-        return;
-      }
-      if(lower.includes("glassdoor") || lower.includes("brand") || lower.includes("social")){
-        render("brand");
-        return;
-      }
 
-      showToast("Try: “Review Morning Brief”, “Interviews”, “Open reqs”, “Projects”, “Glassdoor”.");
+      showToast("Try: “Review Morning Brief”. (Demo stub)");
     }
 
     sendBtn.addEventListener("click", handleSend);
     chatInput.addEventListener("keydown", (e)=>{
-      if(e.key === "Enter"){
-        e.preventDefault();
-        handleSend();
-      }
+      if(e.key === "Enter"){ e.preventDefault(); handleSend(); }
     });
 
     // Pre-fill prompt
@@ -1373,9 +1090,7 @@
     document.getElementById("dateLine").textContent = fmtDate();
 
     const timePill = document.getElementById("timePill");
-    function tickTime(){
-      timePill.textContent = "🕘 " + fmtTime();
-    }
+    function tickTime(){ timePill.textContent = "🕘 " + fmtTime(); }
     tickTime();
     setInterval(tickTime, 15000);
 
