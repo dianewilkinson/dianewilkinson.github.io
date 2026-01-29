@@ -29,8 +29,14 @@
       --bad:#ef4444;
       --info:#2563eb;
 
-      --pillbg:#f3f4f6; /* gray background for all pills */
+      --pillbg:#f3f4f6;
       --pillbd:rgba(148,163,184,.45);
+
+      --news-bg:#0b1220;
+      --news-card:#0f172a;
+      --news-border:rgba(148,163,184,.22);
+      --news-muted:#a7b0c2;
+      --news-text:#e6e9f2;
     }
 
     *{box-sizing:border-box;}
@@ -63,8 +69,8 @@
       gap:10px;
     }
     .logo{
-      width:36px;height:36px;
-      border-radius:12px;
+      width:44px;height:44px;
+      border-radius:14px;
       border:1px solid var(--border);
       background:#fff;
       display:flex;
@@ -76,6 +82,7 @@
       box-shadow:0 1px 2px var(--shadow);
       user-select:none;
     }
+
     .topright{
       display:flex;
       align-items:center;
@@ -94,7 +101,6 @@
       font-size:12px;
       font-weight:800;
       color:#374151;
-      white-space:nowrap;
     }
     .iconbtn{
       width:34px;height:34px;
@@ -108,57 +114,32 @@
     }
     .iconbtn:hover{background:#fbfbff;border-color:rgba(99,102,241,.45);}
 
-    /* ---------- App dock (top icons with unread badges) ---------- */
+    /* App shortcuts dock (logos + unread superscripts) */
     .appdock{
       display:flex;
       align-items:center;
       gap:8px;
+      padding-left:2px;
     }
     .appbtn{
       position:relative;
-      width:34px;
-      height:34px;
+      width:32px;height:32px;
       border-radius:12px;
       border:1px solid rgba(148,163,184,.55);
       background:#fff;
+      box-shadow:0 1px 2px var(--shadow);
       display:flex;
       align-items:center;
       justify-content:center;
       cursor:pointer;
       user-select:none;
-      box-shadow:0 1px 2px var(--shadow);
     }
-    .appbtn:hover{background:#fbfbff;border-color:rgba(99,102,241,.45);}
-    .appmark{
-      width:18px;
-      height:18px;
-      border-radius:6px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:950;
-      font-size:12px;
-      line-height:1;
-      color:#fff;
-      letter-spacing:-0.01em;
-    }
-    /* brand-ish marks */
-    .m-slack{background:#4A154B;}
-    .m-gmail{background:#EA4335;}
-    .m-in{background:#0A66C2;}
-    .m-wa{background:#25D366;}
-    .m-gd{background:#111827;}
-    .m-ashby{background:#111827;}
-    .m-drive{background:#1A73E8;}
-    .m-greenhouse{background:#22C55E;}
-    .m-gem{background:#7C3AED;}
-    .m-metaview{background:#0F172A;}
-    .m-goodtime{background:#2563EB;}
-
-    .badgecount{
+    .appbtn:hover{border-color:rgba(99,102,241,.55); background:#fbfbff;}
+    .appbtn svg{width:20px;height:20px;display:block;}
+    .badge{
       position:absolute;
-      top:-6px;
-      right:-6px;
+      top:-7px;
+      right:-7px;
       min-width:18px;
       height:18px;
       padding:0 6px;
@@ -171,8 +152,10 @@
       align-items:center;
       justify-content:center;
       border:2px solid #fff;
+      cursor:pointer;
+      line-height:1;
     }
-    .badgecount.hide{display:none;}
+    .badge.hide{display:none;}
 
     /* Main panel */
     .panel{
@@ -246,9 +229,7 @@
       display:flex;
       align-items:center;
       gap:6px;
-      white-space:nowrap;
     }
-
     .cardbody{padding:10px 12px;}
 
     .list{display:flex; flex-direction:column; gap:8px;}
@@ -298,7 +279,6 @@
       font-weight:950;
       letter-spacing:-0.01em;
       user-select:none;
-      white-space:nowrap;
     }
     .sp-good{color:var(--good);}
     .sp-warn{color:var(--warn);}
@@ -306,6 +286,87 @@
     .sp-info{color:var(--info);}
     .sp-neutral{color:#374151;}
     .sp-purple{color:var(--purple);}
+
+    /* Full-width News strip (dark contrast) */
+    .span2{grid-column:1 / -1;}
+    .newswrap{
+      grid-column:1 / -1;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid var(--news-border);
+      background:linear-gradient(180deg,var(--news-bg), var(--news-card));
+      box-shadow:0 12px 30px rgba(0,0,0,.08);
+    }
+    .newshead{
+      padding:12px 14px;
+      border-bottom:1px solid rgba(148,163,184,.18);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .newshead .t{
+      font-weight:950;
+      color:var(--news-text);
+      letter-spacing:-0.01em;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .newshead .m{
+      font-size:12px;
+      font-weight:900;
+      color:var(--news-muted);
+    }
+    .newsgrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      padding:12px 14px 14px;
+    }
+    @media (max-width:980px){
+      .newsgrid{grid-template-columns:1fr;}
+    }
+    .newsitem{
+      border:1px solid rgba(148,163,184,.16);
+      background:rgba(255,255,255,.04);
+      border-radius:14px;
+      padding:10px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      cursor:pointer;
+    }
+    .newsitem:hover{background:rgba(255,255,255,.06); border-color:rgba(99,102,241,.22);}
+    .newsitem .tt{
+      font-size:13px;
+      font-weight:950;
+      color:var(--news-text);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .newsitem .ss{
+      margin-top:2px;
+      font-size:12px;
+      color:var(--news-muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .newsbtn{
+      min-width:92px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.22);
+      background:rgba(255,255,255,.06);
+      color:#c7d2fe;
+      font-size:12px;
+      font-weight:950;
+      text-align:center;
+      user-select:none;
+    }
 
     /* Help section */
     .help{
@@ -321,16 +382,18 @@
       border-bottom:1px solid var(--border);
       background:var(--accent-soft);
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:space-between;
       gap:10px;
       flex-wrap:wrap;
     }
     .helptitle{
+      display:flex;
+      align-items:center;
+      gap:10px;
       font-weight:950;
       letter-spacing:-0.01em;
       color:var(--purple);
-      font-size:15px;
     }
     .chiefmark{
       display:flex;
@@ -339,7 +402,6 @@
       color:#374151;
       font-weight:900;
       font-size:12px;
-      margin-top:4px;
     }
     .helpbody{
       padding:12px 14px;
@@ -379,10 +441,8 @@
       outline:none;
       background:#fff;
     }
-    .slider{
-      width:100%;
-      accent-color: var(--purple);
-    }
+    .slider{width:100%; accent-color: var(--purple);}
+
     .chatbar{
       border-top:1px solid var(--border);
       padding:10px 12px;
@@ -654,54 +714,75 @@
 
       <div class="topright">
         <span class="pill" id="datePill">📅 Thu, Jan 29</span>
-        <span class="pill" id="timePill">🕒 01:26 PM</span>
+        <span class="pill" id="timePill">🕒 02:08 PM</span>
         <span class="pill" id="weatherPill">☀️ 58°F · San Francisco</span>
 
-        <!-- App icons (icons only, unread in superscript badges) -->
-        <div class="appdock" aria-label="Recruiting apps">
-          <button class="appbtn" id="appSlack" title="Slack">
-            <span class="appmark m-slack">S</span>
-            <span class="badgecount" id="badgeSlack">0</span>
-          </button>
+        <!-- Shortcuts: click logo to "open app"; click badge to open in-browser inbox preview -->
+        <div class="appdock" aria-label="Recruiting app shortcuts">
+          <!-- Slack -->
+          <div class="appbtn" data-app="slack" title="Slack">
+            <!-- Slack-like glyph -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#36C5F0" d="M9.5 2.8a2.2 2.2 0 1 0 0 4.4H12V5a2.2 2.2 0 0 0-2.5-2.2z"/>
+              <path fill="#36C5F0" d="M7.3 9.5a2.2 2.2 0 1 0-4.4 0V12h2.2a2.2 2.2 0 0 0 2.2-2.5z"/>
+              <path fill="#2EB67D" d="M21.1 9.5a2.2 2.2 0 1 0-4.4 0V12h2.2a2.2 2.2 0 0 0 2.2-2.5z"/>
+              <path fill="#2EB67D" d="M14.5 2.8A2.2 2.2 0 0 0 12 5v2.2h2.5a2.2 2.2 0 1 0 0-4.4z"/>
+              <path fill="#ECB22E" d="M21.1 14.5A2.2 2.2 0 0 0 18.9 12h-2.2v2.5a2.2 2.2 0 1 0 4.4 0z"/>
+              <path fill="#ECB22E" d="M14.5 21.2A2.2 2.2 0 1 0 14.5 16H12v2.2a2.2 2.2 0 0 0 2.5 3z"/>
+              <path fill="#E01E5A" d="M2.9 14.5A2.2 2.2 0 0 0 5.1 12h2.2v2.5a2.2 2.2 0 1 1-4.4 0z"/>
+              <path fill="#E01E5A" d="M9.5 21.2A2.2 2.2 0 1 1 9.5 16H12v2.2a2.2 2.2 0 0 1-2.5 3z"/>
+            </svg>
+            <div class="badge" data-badge="slack">7</div>
+          </div>
 
-          <button class="appbtn" id="appGmail" title="Gmail">
-            <span class="appmark m-gmail">G</span>
-            <span class="badgecount" id="badgeEmail">0</span>
-          </button>
+          <!-- Gmail -->
+          <div class="appbtn" data-app="gmail" title="Gmail">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#EA4335" d="M3 6.5 12 12l9-5.5V8l-9 5.6L3 8z"/>
+              <path fill="#4285F4" d="M3 8v11a2 2 0 0 0 2 2h3V12z"/>
+              <path fill="#34A853" d="M21 8v11a2 2 0 0 1-2 2h-3V12z"/>
+              <path fill="#FBBC04" d="M8 21h8V12l-4 2.4L8 12z"/>
+            </svg>
+            <div class="badge" data-badge="email">12</div>
+          </div>
 
-          <button class="appbtn" id="appIn" title="LinkedIn">
-            <span class="appmark m-in">in</span>
-            <span class="badgecount" id="badgeInmail">0</span>
-          </button>
+          <!-- LinkedIn (in) -->
+          <div class="appbtn" data-app="linkedin" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="2.5" y="2.5" width="19" height="19" rx="3.5" fill="#0A66C2"/>
+              <path fill="#fff" d="M7.3 10.2h2.2v7.5H7.3zM8.4 6.7a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6zM11 10.2h2.1v1c.3-.6 1.1-1.2 2.3-1.2 2.5 0 3 1.6 3 3.7v4h-2.2v-3.5c0-.8 0-1.9-1.2-1.9s-1.4.9-1.4 1.9v3.6H11z"/>
+            </svg>
+            <div class="badge" data-badge="inmail">3</div>
+          </div>
 
-          <button class="appbtn" id="appWA" title="WhatsApp">
-            <span class="appmark m-wa">W</span>
-            <span class="badgecount" id="badgeWA">0</span>
-          </button>
+          <!-- WhatsApp -->
+          <div class="appbtn" data-app="whatsapp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#25D366" d="M12 2.5a9.5 9.5 0 0 0-8.2 14.3L3 22l5.3-1.7A9.5 9.5 0 1 0 12 2.5z"/>
+              <path fill="#fff" d="M9.2 7.8c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.7 2.7 4.2 3.7 2 .8 2.4.6 2.9.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.4l-1.3-.6c-.3-.1-.5-.2-.7.2-.2.4-.8 1.2-1 1.4-.2.2-.4.2-.7.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.4-1.8-1.6-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6z"/>
+            </svg>
+            <div class="badge" data-badge="whatsapp">2</div>
+          </div>
 
-          <!-- Optional recruiter stack shortcuts (no badges by default) -->
-          <button class="appbtn" id="appGreenhouse" title="Greenhouse">
-            <span class="appmark m-greenhouse">G</span>
-            <span class="badgecount hide" id="badgeGreenhouse">0</span>
-          </button>
+          <!-- Greenhouse -->
+          <div class="appbtn" data-app="greenhouse" title="Greenhouse">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#16a34a" d="M12 2.8c4.1 0 7.4 3.3 7.4 7.4S16.1 22 12 22 4.6 18.7 4.6 14.6c0-2.1.9-4 2.3-5.4l1.7 1.7a5 5 0 1 0 8.7 3.5c0-2.8-2.2-5-5-5h-1.4V2.8z"/>
+            </svg>
+            <div class="badge hide" data-badge="greenhouse">0</div>
+          </div>
 
-          <button class="appbtn" id="appAshby" title="Ashby">
-            <span class="appmark m-ashby">A</span>
-            <span class="badgecount hide" id="badgeAshby">0</span>
-          </button>
-
-          <button class="appbtn" id="appDrive" title="Google Drive">
-            <span class="appmark m-drive">D</span>
-            <span class="badgecount hide" id="badgeDrive">0</span>
-          </button>
-
-          <button class="appbtn" id="appGlassdoor" title="Glassdoor">
-            <span class="appmark m-gd">GD</span>
-            <span class="badgecount hide" id="badgeGlassdoor">0</span>
-          </button>
+          <!-- Gem -->
+          <div class="appbtn" data-app="gem" title="Gem">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#10b981" d="M12 2.7 20.3 10 12 21.3 3.7 10 12 2.7z"/>
+              <path fill="#34d399" d="M12 2.7 15.8 10 12 21.3 8.2 10 12 2.7z"/>
+            </svg>
+            <div class="badge hide" data-badge="gem">0</div>
+          </div>
         </div>
 
-        <button class="iconbtn" id="settingsBtn" title="Settings">⚙️</button>
+        <button class="iconbtn" id="settingsBtn" title="Settings (demo)">⚙️</button>
       </div>
     </div>
 
@@ -831,86 +912,47 @@
           </div>
         </div>
 
-        <!-- Company & Industry News -->
-        <div class="card" data-card="news">
-          <div class="cardhead">
-            <h3>Company & Industry News</h3>
-            <span class="headmeta">📰 <span style="color:#374151;font-weight:900;">Today</span></span>
+        <!-- Full-width Company & Industry News (dark section) -->
+        <section class="newswrap" aria-label="Company & Industry News">
+          <div class="newshead">
+            <div class="t">📰 Company & Industry News</div>
+            <div class="m">Today</div>
           </div>
-          <div class="cardbody">
-            <div class="list">
-              <div class="row" data-news="n1">
-                <div class="rowleft">
-                  <div class="rowtitle">Comp bands updated</div>
-                  <div class="rowsub">New leveling guidance effective next pay cycle</div>
-                </div>
-                <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+
+          <div class="newsgrid">
+            <div class="newsitem" data-news="n1">
+              <div style="min-width:0;">
+                <div class="tt">Comp bands updated</div>
+                <div class="ss">New leveling guidance effective next pay cycle</div>
               </div>
-              <div class="row" data-news="n2">
-                <div class="rowleft">
-                  <div class="rowtitle">Interviewer training refreshed</div>
-                  <div class="rowsub">New rubrics + calibration guide published</div>
-                </div>
-                <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+              <div class="newsbtn">Read</div>
+            </div>
+
+            <div class="newsitem" data-news="n2">
+              <div style="min-width:0;">
+                <div class="tt">Interviewer training refreshed</div>
+                <div class="ss">New rubrics + calibration guide published</div>
               </div>
-              <div class="row" data-news="n3">
-                <div class="rowleft">
-                  <div class="rowtitle">Hiring market pulse</div>
-                  <div class="rowsub">Senior-loop cycle time increasing across tech this month</div>
-                </div>
-                <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+              <div class="newsbtn">Read</div>
+            </div>
+
+            <div class="newsitem" data-news="n3">
+              <div style="min-width:0;">
+                <div class="tt">Hiring market pulse</div>
+                <div class="ss">Senior-loop cycle time increasing across tech this month</div>
               </div>
-              <div class="row" data-news="n4">
-                <div class="rowleft">
-                  <div class="rowtitle">Quarterly industry report released</div>
-                  <div class="rowsub">New report: roles, pay, demand shifts</div>
-                </div>
-                <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+              <div class="newsbtn">Read</div>
+            </div>
+
+            <div class="newsitem" data-news="n4">
+              <div style="min-width:0;">
+                <div class="tt">Quarterly industry report released</div>
+                <div class="ss">New report: roles, pay, demand shifts</div>
               </div>
+              <div class="newsbtn">Read</div>
             </div>
           </div>
-        </div>
-
-        <!-- Tools (replaces Messaging card; top dock shows unread instead) -->
-        <div class="card" data-card="tools">
-          <div class="cardhead">
-            <h3>Recruiting Tools</h3>
-            <span class="headmeta">🧩 <span style="color:#374151;font-weight:900;">Shortcuts</span></span>
-          </div>
-          <div class="cardbody">
-            <div class="list">
-              <div class="row" data-tool="greenhouse">
-                <div class="rowleft">
-                  <div class="rowtitle">Greenhouse</div>
-                  <div class="rowsub">ATS queue, scorecards, approvals</div>
-                </div>
-                <div class="rowright"><span class="statuspill sp-purple">Open</span></div>
-              </div>
-              <div class="row" data-tool="ashby">
-                <div class="rowleft">
-                  <div class="rowtitle">Ashby</div>
-                  <div class="rowsub">Pipeline, scheduling, automation</div>
-                </div>
-                <div class="rowright"><span class="statuspill sp-purple">Open</span></div>
-              </div>
-              <div class="row" data-tool="drive">
-                <div class="rowleft">
-                  <div class="rowtitle">Google Drive</div>
-                  <div class="rowsub">Templates, scorecards, market maps</div>
-                </div>
-                <div class="rowright"><span class="statuspill sp-purple">Open</span></div>
-              </div>
-              <div class="row" data-tool="gem">
-                <div class="rowleft">
-                  <div class="rowtitle">Gem</div>
-                  <div class="rowsub">Sequences, outreach analytics</div>
-                </div>
-                <div class="rowright"><span class="statuspill sp-purple">Open</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        </section>
       </div>
     </section>
 
@@ -980,15 +1022,11 @@
             <button class="tab" data-tab="whatsapp">📱 WhatsApp</button>
           </div>
 
-          <div class="inboxlist" id="inboxList">
-            <!-- injected -->
-          </div>
+          <div class="inboxlist" id="inboxList"></div>
         </div>
 
         <div class="content">
-          <div class="preview" id="preview">
-            <!-- injected -->
-          </div>
+          <div class="preview" id="preview"></div>
 
           <div class="actions" id="actions">
             <button class="act" data-act="summarize">✨ Summarize</button>
@@ -1010,6 +1048,20 @@
   <script>
     // ---------- Demo data ----------
     const DATA = {
+      unread: {
+        slack: 7,
+        email: 12,
+        inmail: 3,
+        whatsapp: 2
+      },
+      appLinks: {
+        slack: "https://slack.com/",
+        gmail: "https://mail.google.com/",
+        linkedin: "https://www.linkedin.com/",
+        whatsapp: "https://web.whatsapp.com/",
+        greenhouse: "https://app.greenhouse.io/",
+        gem: "https://www.gem.com/"
+      },
       inbox: {
         slack: [
           { id:"s1", from:"#eng-hiring", subject:"HM wants a tighter bar for Backend Eng", snippet:"Can we calibrate on seniority expectations…", when:"12m ago",
@@ -1085,9 +1137,7 @@
       modal.classList.add("show");
       setActiveTab(tab || "slack");
     }
-    function hideModal(){
-      modal.classList.remove("show");
-    }
+    function hideModal(){ modal.classList.remove("show"); }
     closeModal.addEventListener("click", hideModal);
     modal.addEventListener("click", (e)=>{ if(e.target === modal) hideModal(); });
     window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") hideModal(); });
@@ -1096,29 +1146,25 @@
       activeTab = tab;
       activeItemId = null;
 
-      // Tabs UI
       [...tabs.querySelectorAll(".tab")].forEach(t=>{
         t.classList.toggle("active", t.getAttribute("data-tab") === tab);
       });
 
-      // Header
       const head = {
         slack:{icon:"💬", name:"Slack", sub:"In-browser Slack view (demo)"},
         email:{icon:"✉️", name:"Email", sub:"In-browser inbox view (demo)"},
         inmail:{icon:"🔗", name:"LinkedIn InMail", sub:"In-browser InMail view (demo)"},
         whatsapp:{icon:"📱", name:"WhatsApp", sub:"In-browser WhatsApp view (demo)"}
       }[tab];
+
       sheetIcon.textContent = head.icon;
       sheetName.textContent = head.name;
       sheetSub.textContent = head.sub;
 
       renderInboxList();
-      // default select first item
       const arr = DATA.inbox[tab] || [];
       if(arr[0]) selectItem(arr[0].id);
       else renderPreviewEmpty();
-
-      syncBadges();
     }
 
     tabs.addEventListener("click", (e)=>{
@@ -1180,7 +1226,6 @@
         return;
       }
 
-      // Fake agent routing
       const policyLine = (act==="route" || act==="draft")
         ? "Guardrails: policy-checked · tone-safe · audit logged"
         : "Guardrails: read-only · audit logged";
@@ -1195,33 +1240,52 @@
       showToast(`${label} (demo)`);
     });
 
-    // Top app dock opens the modal
-    document.getElementById("appSlack")?.addEventListener("click", ()=> openModal("slack"));
-    document.getElementById("appGmail")?.addEventListener("click", ()=> openModal("email"));
-    document.getElementById("appIn")?.addEventListener("click", ()=> openModal("inmail"));
-    document.getElementById("appWA")?.addEventListener("click", ()=> openModal("whatsapp"));
+    // ---------- App shortcuts behavior ----------
+    function refreshBadges(){
+      const map = {
+        slack: DATA.unread.slack,
+        email: DATA.unread.email,
+        inmail: DATA.unread.inmail,
+        whatsapp: DATA.unread.whatsapp,
+        greenhouse: 0,
+        gem: 0
+      };
+      Object.entries(map).forEach(([k,v])=>{
+        const b = document.querySelector(`[data-badge="${k}"]`);
+        if(!b) return;
+        if(v && v > 0){
+          b.textContent = String(v);
+          b.classList.remove("hide");
+        } else {
+          b.classList.add("hide");
+        }
+      });
+    }
+    refreshBadges();
 
-    // Optional stack shortcuts (demo routing)
-    document.getElementById("appGreenhouse")?.addEventListener("click", ()=> showToast("Would open Greenhouse (demo)."));
-    document.getElementById("appAshby")?.addEventListener("click", ()=> showToast("Would open Ashby (demo)."));
-    document.getElementById("appDrive")?.addEventListener("click", ()=> showToast("Would open Drive (demo)."));
-    document.getElementById("appGlassdoor")?.addEventListener("click", ()=> showToast("Would open Glassdoor (demo)."));
+    // Click logo opens app (demo); click unread badge opens modal inbox
+    document.querySelectorAll(".appbtn").forEach(btn=>{
+      btn.addEventListener("click", (e)=>{
+        const app = btn.getAttribute("data-app");
 
-    // Tools card rows (demo routing)
-    document.querySelectorAll("[data-tool]").forEach(row=>{
-      row.addEventListener("click", ()=>{
-        const id = row.getAttribute("data-tool");
-        const map = {
-          greenhouse:"Would open Greenhouse queue (demo).",
-          ashby:"Would open Ashby pipeline (demo).",
-          drive:"Would open Drive templates (demo).",
-          gem:"Would open Gem sequences (demo)."
-        };
-        showToast(map[id] || "Would open tool (demo).");
+        // If badge clicked, open inbox modal (where supported)
+        const badge = e.target.closest(".badge");
+        if(badge){
+          const tabMap = { slack:"slack", gmail:"email", linkedin:"inmail", whatsapp:"whatsapp" };
+          const tab = tabMap[app];
+          if(tab) openModal(tab);
+          else showToast("No in-browser inbox for this app (demo).");
+          return;
+        }
+
+        // Otherwise: open app link (demo)
+        const url = DATA.appLinks[app] || "#";
+        // For portfolio demos, you may prefer a toast instead of a new tab:
+        window.open(url, "_blank", "noopener,noreferrer");
       });
     });
 
-    // Other cards: send you somewhere (demo)
+    // ---------- Other cards: send you somewhere (demo) ----------
     function navStub(kind, id){
       showToast(`Would open ${kind} details (${id}) (demo).`);
     }
@@ -1239,7 +1303,7 @@
       const lower = t.toLowerCase();
 
       if(lower.includes("slack")) openModal("slack");
-      else if(lower.includes("email")) openModal("email");
+      else if(lower.includes("email") || lower.includes("gmail")) openModal("email");
       else if(lower.includes("inmail") || lower.includes("linkedin")) openModal("inmail");
       else if(lower.includes("whatsapp")) openModal("whatsapp");
       else if(lower.includes("prep")) showToast("Would generate prep pack (demo).");
@@ -1248,33 +1312,6 @@
 
       chatInput.value = "";
     });
-
-    // Badges sync from DATA
-    function syncBadges(){
-      const slack = (DATA.inbox.slack || []).length;
-      const email = (DATA.inbox.email || []).length;
-      const inmail = (DATA.inbox.inmail || []).length;
-      const wa = (DATA.inbox.whatsapp || []).length;
-
-      const set = (id, n)=>{
-        const el = document.getElementById(id);
-        if(!el) return;
-        el.textContent = String(n);
-        el.classList.toggle("hide", n <= 0);
-      };
-
-      set("badgeSlack", slack);
-      set("badgeEmail", email);
-      set("badgeInmail", inmail);
-      set("badgeWA", wa);
-
-      // Optional placeholders
-      document.getElementById("badgeGreenhouse")?.classList.add("hide");
-      document.getElementById("badgeAshby")?.classList.add("hide");
-      document.getElementById("badgeDrive")?.classList.add("hide");
-      document.getElementById("badgeGlassdoor")?.classList.add("hide");
-    }
-    syncBadges();
 
     // Utility
     function escapeHtml(s){
@@ -1286,10 +1323,10 @@
         .replaceAll("'","&#39;");
     }
 
-    // Settings
+    // Settings (demo)
     document.getElementById("settingsBtn").addEventListener("click", ()=>showToast("Settings (demo)."));
 
-    // Update time/date
+    // Time/date ticking
     function tick(){
       const d = new Date();
       const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
