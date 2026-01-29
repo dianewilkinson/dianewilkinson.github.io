@@ -91,7 +91,7 @@
       flex-wrap:wrap;
       align-items:center;
     }
-    .back-pill, .pill-link{
+    .back-pill{
       display:inline-flex;
       align-items:center;
       gap:6px;
@@ -104,7 +104,7 @@
       border:1px solid rgba(148,163,184,0.8);
       text-decoration:none;
     }
-    .back-pill:hover, .pill-link:hover{
+    .back-pill:hover{
       background:rgba(255,255,255,1);
       text-decoration:none;
       color:#4338ca;
@@ -122,20 +122,7 @@
       color:#4b5563;
       box-shadow:0 6px 18px rgba(15,23,42,.07);
     }
-    .hero-meta h3{
-      font-size:12px;
-      margin:0 0 6px;
-      text-transform:uppercase;
-      letter-spacing:.1em;
-      color:#6b7280;
-    }
-    .hero-meta ul{
-      margin:0 0 6px 16px;
-      padding:0;
-    }
-    .hero-meta li{margin-bottom:4px;}
     .callout{
-      margin-top:10px;
       padding:10px 12px;
       border-radius:12px;
       background:rgba(239,246,255,.85);
@@ -183,14 +170,13 @@
       top:0;
       left:0;
       right:0;
-      height:46px;
+      height:52px;
       background:var(--accent-soft);
       opacity:.55;
       pointer-events:none;
     }
 
     .section-head,
-    .section-sub,
     .agent-card{
       position:relative;
       z-index:1;
@@ -206,18 +192,16 @@
       margin-bottom:10px;
     }
 
-    /* Make section titles stand out more */
+    /* Section titles: bigger, purple, clearly above agent names */
     .section-title{
       margin:0;
-      font-size:18px;
-      font-weight:900;
+      font-size:20px;
+      font-weight:800;
       letter-spacing:.01em;
-      display:flex;
-      align-items:center;
-      gap:10px;
+      color:var(--link-soft);
     }
 
-    /* Agent cards (no numbers) */
+    /* Agent cards */
     .agent-card{
       border:1px solid #eef2f7;
       border-radius:14px;
@@ -233,18 +217,24 @@
       justify-content:space-between;
       gap:10px;
     }
+
+    /* Agent names: smaller, lighter, thinner, less dark */
     .agent-name{
-      font-size:14px;
+      font-size:13px;
       margin:0;
-      font-weight:800;
+      font-weight:600;
+      color:#4b5563;
       line-height:1.25;
+      letter-spacing:.01em;
     }
+
     .agent-role{
       margin:6px 0 0;
       font-size:12.5px;
-      color:#4b5563;
+      color:#6b7280;
       line-height:1.55;
     }
+
     .agent-meta{
       margin-top:8px;
       display:flex;
@@ -265,7 +255,7 @@
       border:1px solid #e5e7eb;
       background:#f9fafb;
       font-size:11px;
-      color:#4b5563;
+      color:#6b7280;
       white-space:nowrap;
     }
     .links{
@@ -277,7 +267,6 @@
     }
     .links a{font-weight:600;}
 
-    /* Footer */
     footer{
       text-align:center;
       margin:18px 0 20px;
@@ -301,7 +290,7 @@
     <section class="hero">
       <div class="hero-main">
         <h2 class="hero-title">
-          <span>AI Agents</span> at Every Step of the People Lifecycle.
+          <span>AI agents</span> at every step of the people lifecycle.
         </h2>
         <p>
           Faster execution, cleaner decisions, and fewer dropped balls—without adding another vendor layer.
@@ -309,12 +298,10 @@
 
         <div class="hero-actions">
           <a href="/" class="back-pill">← Back to Portfolio</a>
-          <a href="../agents/suite/" class="pill-link" onclick="return false;" style="display:none;">Suite</a>
         </div>
       </div>
 
       <aside class="hero-meta">
-        
         <div class="callout">
           Browse the lifecycle below. Open a demo/playbook when you want depth.
         </div>
@@ -327,10 +314,10 @@
       <!-- HIRE -->
       <div class="section-card">
         <div class="section-head">
-          <h3 class="section-title">🧲 Hire</h3>
+          <h3 class="section-title">Hire</h3>
         </div>
 
-                <div class="agent-card">
+        <div class="agent-card">
           <div class="agent-top">
             <h4 class="agent-name">Screening A[i]gent</h4>
           </div>
@@ -456,7 +443,7 @@
       <!-- SUPPORT -->
       <div class="section-card">
         <div class="section-head">
-          <h3 class="section-title">🛠️ Support</h3>
+          <h3 class="section-title">Support</h3>
         </div>
 
         <div class="agent-card">
@@ -476,23 +463,6 @@
               <a href="../workflow/" target="_blank" rel="noopener">Demo</a>
               <a href="../workflow/playbook.html" target="_blank" rel="noopener">Playbook</a>
             </div>
-          </div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-top">
-            <h4 class="agent-name">Enablement A[i]gent</h4>
-          </div>
-          <p class="agent-role">
-            Ships playbooks, training prompts, and “how we do it here” scaffolds so improvements actually stick.
-          </p>
-          <div class="agent-meta">
-            <div class="pillset">
-              <span class="pill">Training</span>
-              <span class="pill">Adoption</span>
-              <span class="pill">Playbooks</span>
-            </div>
-            <div class="links"></div>
           </div>
         </div>
 
@@ -543,9 +513,8 @@
             <div class="links"></div>
           </div>
         </div>
-      </div>
 
-      <div class="agent-card">
+        <div class="agent-card">
           <div class="agent-top">
             <h4 class="agent-name">Coaching A[i]gent</h4>
           </div>
@@ -566,7 +535,7 @@
       <!-- EVALUATE -->
       <div class="section-card">
         <div class="section-head">
-          <h3 class="section-title">🧾 Evaluate</h3>
+          <h3 class="section-title">Evaluate</h3>
         </div>
 
         <div class="agent-card">
@@ -662,7 +631,7 @@
       <!-- IMPROVE -->
       <div class="section-card">
         <div class="section-head">
-          <h3 class="section-title">📈 Improve</h3>
+          <h3 class="section-title">Improve</h3>
         </div>
 
         <div class="agent-card">
@@ -677,6 +646,23 @@
               <span class="pill">Curriculum</span>
               <span class="pill">Role-based</span>
               <span class="pill">Enablement</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Enablement A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Ships playbooks, training prompts, and “how we do it here” scaffolds so improvements actually stick.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Adoption</span>
+              <span class="pill">Playbooks</span>
+              <span class="pill">Scaffolds</span>
             </div>
             <div class="links"></div>
           </div>
