@@ -2,99 +2,781 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Innovation A[i]gent — Continuous Improvement & Experimentation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Innovation A[i]gent – Improvement & Experimentation Playbook</title>
+
+  <meta property="og:title" content="Innovation A[i]gent – Improvement & Experimentation Playbook">
+  <meta property="og:description" content="Turns scattered ideas into prioritized experiments, decision logs, and measurable workflow improvements — without idea black holes.">
+  <meta property="og:type" content="article">
 
   <style>
+    :root{
+      --bg:#f9fafb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#4b5563;
+      --border:#e5e7eb;
+      --link:#2563eb;
+      --link-soft:#4f46e5;
+      --shadow:rgba(15,23,42,0.08);
+      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
+      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.09),rgba(168,85,247,.09),rgba(99,102,241,.09));
+    }
+    *{box-sizing:border-box;}
     body{
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:#f9fafb;
-      color:#111827;
       margin:0;
-      padding:32px;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    a{color:var(--link);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    .bar{height:4px;background:var(--accent-grad);}
+
+    header{
+      padding:24px 16px 10px;
+      text-align:center;
+    }
+    header h1{
+      margin:0;
+      font-size:24px;
+      font-weight:700;
+    }
+    header p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:14px;
       line-height:1.6;
     }
-    h1,h2,h3{line-height:1.3;}
-    h1{font-size:28px;}
-    h2{margin-top:32px;}
-    p,ul{max-width:900px;}
-    .note{
-      background:#ecfeff;
-      padding:16px;
+
+    .wrap{
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 20px 32px;
+    }
+
+    /* Hero card */
+    .hero{
+      margin:16px 0 24px;
+      border-radius:20px;
+      background:linear-gradient(120deg,#fde7ef,#f3e8ff,#e0ecff);
+      box-shadow:0 8px 24px var(--shadow);
+      padding:22px 22px 18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+    }
+    .hero-main{
+      flex:1 1 260px;
+      min-width:0;
+    }
+    .hero-title{
+      margin:0 0 8px;
+      font-size:22px;
+      line-height:1.35;
+    }
+    .hero-title span{
+      color:var(--link-soft);
+    }
+    .hero-main p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .hero-actions{
+      margin-top:10px;
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+      flex-wrap:nowrap;
+    }
+    .hero-actions a{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 12px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.8);
+      background:rgba(255,255,255,.9);
+      font-weight:500;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .back-pill{
+      color:#4f46e5;
+    }
+    .back-pill:hover{
+      background:rgba(255,255,255,1);
+      color:#4338ca;
+      text-decoration:none;
+    }
+
+    @media (max-width:800px){
+      .hero{padding:18px 16px 14px;}
+      .hero-title{font-size:20px;}
+      .hero-actions{flex-wrap:wrap;}
+    }
+
+    /* Info row under hero – 3 cards */
+    .info-layout{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+      margin-bottom:24px;
+    }
+    @media (max-width:1100px){
+      .info-layout{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+    @media (max-width:700px){
+      .info-layout{
+        grid-template-columns:1fr;
+      }
+    }
+
+    .hero-meta,
+    .toc-card,
+    .persona-card{
+      background:var(--card);
+      border-radius:14px;
+      border:1px solid var(--border);
+      padding:12px 12px 10px;
+      box-shadow:0 1px 3px var(--shadow);
+      font-size:13px;
+    }
+    .hero-meta h3,
+    .toc-card h3,
+    .persona-card h3{
+      margin:0 0 6px;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#6b7280;
+    }
+    .hero-meta ul,
+    .toc-card ul{
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    .hero-meta li,
+    .toc-card li{
+      margin:3px 0;
+    }
+
+    .toc-card a{
+      color:#374151;
+      text-decoration:none;
+    }
+    .toc-card a:hover{
+      text-decoration:underline;
+      color:var(--link-soft);
+    }
+
+    .persona-pill{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:500;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      background:#e0ebff;
+      color:#1d4ed8;
+      margin-bottom:6px;
+    }
+
+    article{
+      background:var(--card);
+      border-radius:16px;
+      border:1px solid var(--border);
+      box-shadow:0 1px 3px var(--shadow);
+      padding:18px 20px 18px;
+      font-size:14px;
+      line-height:1.7;
+      color:#111827;
+    }
+    article h2{
+      font-size:18px;
+      margin:18px 0 6px;
+    }
+    article h3{
+      font-size:15px;
+      margin:14px 0 4px;
+    }
+    article h2:first-of-type{
+      margin-top:0;
+    }
+    article p{
+      margin:2px 0 8px;
+    }
+    article ul{
+      margin:4px 0 10px 18px;
+      padding:0;
+    }
+    article li{
+      margin-bottom:3px;
+    }
+    .pill-note{
+      display:inline-block;
+      padding:3px 8px;
+      border-radius:999px;
+      background:rgba(219,234,254,.7);
+      color:#1d4ed8;
+      font-size:11px;
+      font-weight:500;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+    .callout{
+      margin:10px 0 12px;
+      padding:10px 12px;
       border-radius:12px;
-      margin:24px 0;
+      background:rgba(239,246,255,.8);
+      border:1px solid #bfdbfe;
+      font-size:13px;
+    }
+    .table-wrap{
+      margin:6px 0 10px;
+      overflow-x:auto;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:13px;
+    }
+    th, td{
+      border:1px solid #e5e7eb;
+      padding:4px 6px;
+      text-align:left;
+      vertical-align:top;
+    }
+    th{
+      background:#f3f4f6;
+      font-weight:600;
+    }
+    code{
+      background:#f3f4f6;
+      padding:1px 6px;
+      border-radius:6px;
+      font-size:12.5px;
+    }
+    footer{
+      text-align:center;
+      margin:18px 0 20px;
+      color:var(--muted);
+      font-size:12px;
     }
   </style>
 </head>
 
 <body>
+  <div class="bar"></div>
 
-<h1>Innovation A[i]gent — Structured Improvement Without Chaos</h1>
-<p><em>Turning ideas into tested changes — not endless pilots.</em></p>
+  <header>
+    <h1>Innovation A[i]gent – Improvement &amp; Experimentation</h1>
+    <p>
+      Continuous Improvement &amp; Experimentation Engine · by Diane Wilkinson
+    </p>
+  </header>
 
-<div class="note">
-<strong>Purpose:</strong><br/>
-Innovation A[i]gent creates a lightweight, evidence-based system for testing improvements in people workflows — without “innovation theater” or tool sprawl.
-</div>
+  <div class="wrap">
 
-<h2>1. The Problem</h2>
-<p>
-Most innovation efforts in people systems fail because they are:
-</p>
-<ul>
-  <li>Detached from real operational pain</li>
-  <li>Run as one-off pilots</li>
-  <li>Unmeasured or over-measured</li>
-  <li>Forgotten when priorities shift</li>
-</ul>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-main">
+        <h2 class="hero-title">
+          Turn scattered ideas into <span>shipped improvements</span> — with measurable outcomes.
+        </h2>
+        <p>
+          Innovation A[i]gent prevents “idea black holes” by creating a structured intake, triage, and experimentation loop
+          for people systems and workforce operations improvements.
+        </p>
+        <p>
+          It helps teams convert pain points and signals into hypotheses, prioritize what to test, track decisions, and
+          document what changed — with a clear ownership model and audit trail.
+        </p>
+        <div class="hero-actions">
+          <a href="../index.html">
+            🔁 Back to Innovation A[i]gent demo
+          </a>
+          <a href="/agents/suite/" class="back-pill">
+            🧩 View full A[i]gent Suite
+          </a>
 
-<h2>2. What the Innovation A[i]gent Does</h2>
-<ul>
-  <li>Captures improvement ideas tied to real workflows</li>
-  <li>Frames ideas as testable hypotheses</li>
-  <li>Defines success metrics before launch</li>
-  <li>Tracks outcomes and decisions</li>
-</ul>
+          <a href="/" class="back-pill">
+            🏠 Back to Portfolio Home
+          </a>
+        </div>
+      </div>
+    </section>
 
-<h2>3. Inputs</h2>
-<ul>
-  <li>Insights from Listening A[i]gent</li>
-  <li>Metrics anomalies and bottlenecks</li>
-  <li>Operator suggestions (recruiters, ops, managers)</li>
-  <li>Post-mortems and retrospectives</li>
-</ul>
+    <!-- INFO ROW UNDER HERO -->
+    <div class="info-layout">
+      <!-- Left: What this playbook covers -->
+      <aside class="hero-meta">
+        <h3>What this playbook covers</h3>
+        <ul>
+          <li>Why improvement ideas die in most orgs</li>
+          <li>Intake + triage model (fast, lightweight)</li>
+          <li>Experiment design and measurement</li>
+          <li>Decision logs and “what changed” artifacts</li>
+          <li>Workflow library for common ops experiments</li>
+          <li>Integration with Listening + Metrics</li>
+        </ul>
+      </aside>
 
-<h2>4. Experiment Design Principles</h2>
-<ul>
-  <li>Small, reversible changes first</li>
-  <li>One variable per test where possible</li>
-  <li>Time-boxed experiments</li>
-  <li>Pre-defined success and stop criteria</li>
-</ul>
+      <!-- Middle: Sections -->
+      <nav class="toc-card">
+        <h3>Sections</h3>
+        <ul>
+          <li><a href="#problem">1. Problem &amp; Purpose</a></li>
+          <li><a href="#intake">2. Intake &amp; Triage</a></li>
+          <li><a href="#guardrails">3. Guardrails &amp; Governance</a></li>
+          <li><a href="#experiments">4. Experiment Design</a></li>
+          <li><a href="#library">5. Workflow Library</a></li>
+          <li><a href="#outputs">6. Outputs &amp; Decision Logs</a></li>
+          <li><a href="#implementation">7. Implementation Notes</a></li>
+          <li><a href="#suite">8. Fit in the A[i]gents Suite</a></li>
+          <li><a href="#risks">9. Risks &amp; Mitigations</a></li>
+          <li><a href="#appendix">Appendix A – Example Intake Fields</a></li>
+        </ul>
+      </nav>
 
-<h2>5. Outputs</h2>
-<ul>
-  <li>Documented experiments and learnings</li>
-  <li>Adopt / iterate / retire decisions</li>
-  <li>Reusable patterns and playbooks</li>
-  <li>Clear ownership of changes</li>
-</ul>
+      <!-- Right: Who this is for -->
+      <aside class="persona-card">
+        <span class="persona-pill">Who this is for</span>
+        <p>
+          People Systems, Recruiting Ops, HR Ops, and People Analytics teams who need a repeatable way to
+          prioritize and ship improvements — without “innovation theater.”
+        </p>
+      </aside>
+    </div>
 
-<h2>6. Where It Fits in the A[i]gent Suite</h2>
-<ul>
-  <li>Consumes signals from Listening and Metrics A[i]gents</li>
-  <li>Feeds improvements into Workflow A[i]gent</li>
-  <li>Informs Enablement and Training updates</li>
-</ul>
+    <!-- MAIN CONTENT -->
+    <article>
 
-<h2>7. What This Is Not</h2>
-<ul>
-  <li>Not an idea backlog graveyard</li>
-  <li>Not a hackathon replacement</li>
-  <li>Not AI deciding what to change</li>
-</ul>
+      <!-- 1. Problem & Purpose -->
+      <section id="problem">
+        <h2>1. Problem &amp; Purpose</h2>
 
-<p><em>Innovation works when it’s operational, owned, and measurable.</em></p>
+        <h3>1.1 The Problem</h3>
+        <p>Most ops improvement pipelines fail because:</p>
+        <ul>
+          <li>Ideas are scattered across docs, chats, and hallway conversations</li>
+          <li>No clear triage owner or prioritization framework</li>
+          <li>Experiments aren’t defined, so nothing is measurable</li>
+          <li>Decisions aren’t logged, so teams repeat the same debates</li>
+          <li>People stop contributing because “nothing changes”</li>
+        </ul>
 
+        <h3>1.2 Purpose</h3>
+        <p>
+          Innovation A[i]gent provides a lightweight operating system for improvement:
+          capture → prioritize → test → decide → document → measure → repeat.
+        </p>
+
+        <h3>1.3 Outcomes We’re Aiming For</h3>
+        <ul>
+          <li>Higher throughput of meaningful operational improvements</li>
+          <li>Faster decision-making with less rework and debate</li>
+          <li>Clear evidence of what changed and why</li>
+          <li>Measurable impact on cycle time, quality, and experience</li>
+        </ul>
+      </section>
+
+      <!-- 2. Intake -->
+      <section id="intake">
+        <h2>2. Intake &amp; Triage</h2>
+
+        <p class="pill-note">Low-lift by design</p>
+        <p>
+          Intake should feel easier than writing a Slack message — but structured enough to avoid ambiguity.
+        </p>
+
+        <h3>2.1 Intake Sources</h3>
+        <ul>
+          <li>Signals from Listening A[i]gent (themes, repeated friction)</li>
+          <li>Ops retro items and post-mortems</li>
+          <li>Stakeholder requests (leaders, recruiters, HRBPs)</li>
+          <li>Tooling constraints (ATS/HRIS limitations and workarounds)</li>
+        </ul>
+
+        <h3>2.2 Triage Categories</h3>
+        <ul>
+          <li><strong>Fix Now:</strong> low effort, high pain, clear owner</li>
+          <li><strong>Experiment:</strong> needs a hypothesis + measurable outcome</li>
+          <li><strong>Defer:</strong> useful but not now (log why)</li>
+          <li><strong>Decline:</strong> not aligned or unsafe (log rationale)</li>
+        </ul>
+
+        <h3>2.3 Prioritization (Simple Model)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th>Question</th>
+                <th>Values</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Impact</td>
+                <td>Does this materially improve speed, quality, trust, or experience?</td>
+                <td>Low / Med / High</td>
+              </tr>
+              <tr>
+                <td>Effort</td>
+                <td>How hard is it to ship?</td>
+                <td>1 day / 1 week / 1+ weeks</td>
+              </tr>
+              <tr>
+                <td>Risk</td>
+                <td>Could this introduce fairness, compliance, or privacy issues?</td>
+                <td>Low / Med / High</td>
+              </tr>
+              <tr>
+                <td>Confidence</td>
+                <td>Is this validated (data + signal), or just a hunch?</td>
+                <td>Single / Emerging / Confirmed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <strong>Owner:</strong> Diane Wilkinson – design, prioritization model, and implementation of Innovation A[i]gent.
+        </div>
+      </section>
+
+      <!-- 3. Guardrails -->
+      <section id="guardrails">
+        <h2>3. Guardrails &amp; Governance</h2>
+
+        <h3>3.1 Governance Rules</h3>
+        <ul>
+          <li><strong>No “experiments” on protected classes or sensitive topics.</strong></li>
+          <li><strong>No automation without an override path.</strong></li>
+          <li><strong>Define success metrics before shipping changes.</strong></li>
+          <li><strong>Document the decision</strong> even when you say “no.”</li>
+          <li><strong>Ship in slices</strong> and monitor leading indicators.</li>
+        </ul>
+
+        <h3>3.2 Roles &amp; Responsibilities</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Responsibilities</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ops Owner</td>
+                <td>Runs triage, sets priorities, assigns owners, publishes decisions.</td>
+              </tr>
+              <tr>
+                <td>Experiment Owner</td>
+                <td>Defines hypothesis, plan, metrics; executes and reports results.</td>
+              </tr>
+              <tr>
+                <td>People Analytics</td>
+                <td>Validates measurement approach; monitors for unintended impacts.</td>
+              </tr>
+              <tr>
+                <td>Legal / Privacy</td>
+                <td>Reviews risk for changes involving data, automation, or monitoring.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 4. Experiment Design -->
+      <section id="experiments">
+        <h2>4. Experiment Design</h2>
+
+        <h3>4.1 Standard Experiment Template</h3>
+        <ul>
+          <li><strong>Problem statement:</strong> what’s broken, and where?</li>
+          <li><strong>Hypothesis:</strong> if we change X, we expect Y.</li>
+          <li><strong>Success metrics:</strong> what will move (and by how much)?</li>
+          <li><strong>Scope:</strong> which roles/teams/stages are included?</li>
+          <li><strong>Risks:</strong> what could go wrong?</li>
+          <li><strong>Rollback plan:</strong> how to reverse quickly.</li>
+        </ul>
+
+        <h3>4.2 Measurement Examples</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Change Type</th>
+                <th>Primary Metric</th>
+                <th>Secondary / Guardrail Metrics</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Interview workflow automation</td>
+                <td>No-show rate, time-to-schedule</td>
+                <td>Candidate complaints, reschedule rate</td>
+              </tr>
+              <tr>
+                <td>Scorecard nudges / SLAs</td>
+                <td>% scorecards within SLA</td>
+                <td>Interviewer satisfaction, quality notes</td>
+              </tr>
+              <tr>
+                <td>Template / comms changes</td>
+                <td>Reply rate, conversion</td>
+                <td>Candidate confusion signals</td>
+              </tr>
+              <tr>
+                <td>Process step removal</td>
+                <td>Cycle time reduction</td>
+                <td>Quality of hire proxies, pass-through stability</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <strong>Principle:</strong> if you can’t measure it, it’s not an experiment — it’s a preference.
+        </div>
+      </section>
+
+      <!-- 5. Workflow Library -->
+      <section id="library">
+        <h2>5. Workflow Library</h2>
+
+        <p>Common ops experiments Innovation A[i]gent supports:</p>
+
+        <h3>5.1 Experiment Catalog</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Experiment</th>
+                <th>Hypothesis</th>
+                <th>Metric</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>E1</td>
+                <td>Reduce scheduling back-and-forth</td>
+                <td>Structured availability requests decrease time-to-schedule</td>
+                <td>Days to booked interview</td>
+              </tr>
+              <tr>
+                <td>E2</td>
+                <td>Scorecard SLA nudges</td>
+                <td>Timely nudges increase on-time feedback</td>
+                <td>% scorecards within SLA</td>
+              </tr>
+              <tr>
+                <td>E3</td>
+                <td>Template standardization</td>
+                <td>Consistent comms reduce confusion and drop-off</td>
+                <td>Drop-off rate, questions volume</td>
+              </tr>
+              <tr>
+                <td>E4</td>
+                <td>Remove redundant steps</td>
+                <td>Eliminating a low-signal step shortens cycle time without quality loss</td>
+                <td>Cycle time + pass-through stability</td>
+              </tr>
+              <tr>
+                <td>E5</td>
+                <td>Calibration loop improvements</td>
+                <td>Better rubrics reduce inconsistent decisions</td>
+                <td>Variance in feedback, rework</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>5.2 “Ship Small” Pattern</h3>
+        <ul>
+          <li>Start with 1 role family or 1 team</li>
+          <li>Measure leading indicators in week 1</li>
+          <li>Ship iteration 2 quickly (template tweak, trigger tweak, doc fix)</li>
+          <li>Scale only after impact is confirmed</li>
+        </ul>
+      </section>
+
+      <!-- 6. Outputs -->
+      <section id="outputs">
+        <h2>6. Outputs &amp; Decision Logs</h2>
+
+        <h3>6.1 Outputs</h3>
+        <ul>
+          <li>Prioritized backlog of improvements with owners</li>
+          <li>Experiment briefs (hypothesis → plan → metrics)</li>
+          <li>Decision logs (ship / iterate / rollback / decline)</li>
+          <li>“What changed” release notes for trust and adoption</li>
+        </ul>
+
+        <h3>6.2 Decision Log Example</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Decision</th>
+                <th>Reason</th>
+                <th>Evidence</th>
+                <th>Next Step</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ship</td>
+                <td>Impact high, effort low</td>
+                <td>2-week pilot improved time-to-schedule by 22%</td>
+                <td>Roll out to all roles; monitor no-show rate</td>
+              </tr>
+              <tr>
+                <td>Iterate</td>
+                <td>Mixed results</td>
+                <td>Improved SLA but interviewer complaints rose</td>
+                <td>Adjust cadence; add override path</td>
+              </tr>
+              <tr>
+                <td>Rollback</td>
+                <td>Unintended harm</td>
+                <td>Candidate confusion signals increased</td>
+                <td>Revert and redesign template</td>
+              </tr>
+              <tr>
+                <td>Decline</td>
+                <td>Misaligned / risky</td>
+                <td>Privacy concern; cannot measure safely</td>
+                <td>Close with documented rationale</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 7. Implementation -->
+      <section id="implementation">
+        <h2>7. Implementation Notes</h2>
+
+        <h3>7.1 Minimal Stack</h3>
+        <ul>
+          <li>Backlog table (sheet / Airtable / simple DB)</li>
+          <li>Standard intake form (structured fields)</li>
+          <li>Weekly triage cadence + owner assignment</li>
+          <li>Metrics capture via Metrics A[i]gent (or existing BI)</li>
+        </ul>
+
+        <h3>7.2 Success Metrics</h3>
+        <ul>
+          <li>Time from idea → decision</li>
+          <li>Experiment throughput per month</li>
+          <li>% shipped items with measured outcomes</li>
+          <li>Reduction in repeat friction themes (from Listening)</li>
+        </ul>
+      </section>
+
+      <!-- 8. Fit -->
+      <section id="suite">
+        <h2>8. How This Fits in the A[i]gents Suite</h2>
+        <ul>
+          <li><strong>Listening A[i]gent</strong> identifies recurring friction and themes.</li>
+          <li><strong>Innovation A[i]gent</strong> turns themes into tests and decisions.</li>
+          <li><strong>Workflow A[i]gent</strong> executes changes in the system of work.</li>
+          <li><strong>Metrics A[i]gent</strong> measures impact and guards against unintended outcomes.</li>
+        </ul>
+        <p>This is the continuous-improvement loop for people systems: listen → test → ship → measure.</p>
+      </section>
+
+      <!-- 9. Risks -->
+      <section id="risks">
+        <h2>9. Risks &amp; Mitigations</h2>
+        <ul>
+          <li>
+            <strong>Risk:</strong> Teams create “innovation theater” without shipping.<br>
+            <strong>Mitigation:</strong> decision logs + “what changed” release notes as a requirement.
+          </li>
+          <li>
+            <strong>Risk:</strong> Experiments break trust or fairness.<br>
+            <strong>Mitigation:</strong> guardrail metrics, privacy review, and human approval gates.
+          </li>
+          <li>
+            <strong>Risk:</strong> Measurement is inconsistent or disputed.<br>
+            <strong>Mitigation:</strong> shared metric definitions via Metrics A[i]gent / Metrics Dictionary.
+          </li>
+        </ul>
+      </section>
+
+      <!-- Appendix -->
+      <section id="appendix">
+        <h2>Appendix A – Example Intake Fields</h2>
+
+        <p>Suggested intake fields (enough structure to act, not so much that people stop submitting):</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Problem</td>
+                <td>“Hiring managers delay feedback for days; candidates drop.”</td>
+              </tr>
+              <tr>
+                <td>Workflow</td>
+                <td>Interview → Debrief → Decision</td>
+              </tr>
+              <tr>
+                <td>Hypothesis</td>
+                <td>“If we add SLA nudges, % on-time scorecards will increase.”</td>
+              </tr>
+              <tr>
+                <td>Impact</td>
+                <td>Speed, candidate experience, close rate</td>
+              </tr>
+              <tr>
+                <td>Effort</td>
+                <td>~1 day to implement</td>
+              </tr>
+              <tr>
+                <td>Risk</td>
+                <td>Low (no sensitive data)</td>
+              </tr>
+              <tr>
+                <td>Owner</td>
+                <td>Recruiting Ops</td>
+              </tr>
+              <tr>
+                <td>Success Metric</td>
+                <td>% scorecards within 24h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+    </article>
+  </div>
+
+  <footer>
+    Part of the A[i]gents suite – internal, workflow-first AI and automation for people systems.
+  </footer>
 </body>
 </html>
