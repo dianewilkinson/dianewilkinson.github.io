@@ -18,8 +18,11 @@
       --good:#16a34a;
       --warn:#f59e0b;
       --bad:#ef4444;
+      --info:#2563eb;
 
       --soft:rgba(79,70,229,.08);
+      --headerBand:linear-gradient(135deg, rgba(79,70,229,.10), rgba(249,115,129,.10));
+      --statusBg:#f3f4f6;
     }
 
     *{ box-sizing:border-box; }
@@ -50,14 +53,15 @@
       letter-spacing:-.01em;
     }
     .logo{
-      width:34px;height:34px;
-      border-radius:12px;
+      width:38px;height:38px;
+      border-radius:14px;
       display:flex;
       align-items:center;
       justify-content:center;
       background:var(--soft);
       border:1px solid var(--border);
       box-shadow:0 1px 2px var(--shadow);
+      font-size:16px;
     }
     .meta{
       display:flex;
@@ -76,7 +80,7 @@
       border-radius:999px;
       border:1px solid rgba(148,163,184,.55);
       background:rgba(255,255,255,.95);
-      font-weight:800;
+      font-weight:900;
       color:#374151;
       box-shadow:0 1px 2px var(--shadow);
       white-space:nowrap;
@@ -86,7 +90,7 @@
       background:#fff;
       border-radius:12px;
       padding:8px 10px;
-      font-weight:900;
+      font-weight:950;
       cursor:pointer;
       box-shadow:0 1px 2px var(--shadow);
     }
@@ -97,6 +101,9 @@
       max-width:1120px;
       margin:0 auto;
       padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
     }
 
     .panel{
@@ -109,7 +116,7 @@
     .panelhead{
       padding:12px 14px;
       border-bottom:1px solid var(--border);
-      background:linear-gradient(135deg, rgba(79,70,229,.10), rgba(249,115,129,.10));
+      background:var(--headerBand);
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -127,7 +134,7 @@
       width:30px;height:30px;
       border-radius:12px;
       border:1px solid var(--border);
-      background:rgba(255,255,255,.9);
+      background:rgba(255,255,255,.92);
       display:flex;
       align-items:center;
       justify-content:center;
@@ -136,7 +143,7 @@
     .panelhint{
       color:var(--muted);
       font-size:12px;
-      font-weight:800;
+      font-weight:900;
     }
 
     .body{
@@ -144,7 +151,7 @@
       background:linear-gradient(180deg,#fff,#fbfdff);
     }
 
-    /* Dashboard cards */
+    /* Cards */
     .grid{
       display:grid;
       grid-template-columns:repeat(2, minmax(320px, 1fr));
@@ -160,44 +167,55 @@
       background:#fff;
       border-radius:18px;
       box-shadow:0 1px 3px var(--shadow);
-      padding:12px 12px 10px;
+      overflow:hidden;
     }
-    .cardtop{
+    .cardhead{
+      padding:10px 12px;
+      border-bottom:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(79,70,229,.08), rgba(255,255,255,0));
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:space-between;
       gap:10px;
-      margin-bottom:8px;
     }
-    .card h3{
+    .cardhead h3{
       margin:0;
-      font-size:14px;
+      font-size:14.5px;
       font-weight:950;
       letter-spacing:-.01em;
       line-height:1.2;
     }
-    .badge{
+    .cardbody{
+      padding:12px;
+    }
+
+    /* Unified status pill (same size) */
+    .statuspill{
+      width:110px;
+      height:26px;
       display:inline-flex;
       align-items:center;
+      justify-content:center;
       gap:6px;
-      padding:4px 10px;
+      padding:0 10px;
       border-radius:999px;
-      font-size:11px;
+      border:1px solid #e5e7eb;
+      background:var(--statusBg);
+      font-size:11.5px;
       font-weight:950;
-      border:1px solid rgba(148,163,184,.55);
-      background:rgba(255,255,255,.95);
+      letter-spacing:-.01em;
       white-space:nowrap;
+      flex:0 0 auto;
     }
-    .b-good{color:#166534; border-color:rgba(22,163,74,.35); background:rgba(22,163,74,.08);}
-    .b-warn{color:#92400e; border-color:rgba(245,158,11,.35); background:rgba(245,158,11,.08);}
-    .b-bad{ color:#991b1b; border-color:rgba(239,68,68,.35); background:rgba(239,68,68,.08);}
-    .b-info{color:#1d4ed8; border-color:rgba(37,99,235,.35); background:rgba(37,99,235,.08);}
+    .s-good{ color:var(--good); }
+    .s-warn{ color:var(--warn); }
+    .s-bad{  color:var(--bad);  }
+    .s-info{ color:var(--info); }
 
     .list{
       display:flex;
       flex-direction:column;
       gap:8px;
-      margin-top:6px;
     }
     .row{
       border:1px solid var(--border);
@@ -216,7 +234,7 @@
     .rowleft{ min-width:0; }
     .rowtitle{
       margin:0;
-      font-size:12.5px;
+      font-size:12.8px;
       font-weight:950;
       letter-spacing:-.01em;
       color:#111827;
@@ -237,18 +255,21 @@
       flex:0 0 auto;
     }
 
-    /* Help section BELOW cards */
-    .help{
-      margin-top:16px;
-      border-top:1px solid var(--border);
-      padding-top:14px;
-    }
-    .help h4{
-      margin:0 0 10px;
+    /* Help panel */
+    .helpTitle{
+      margin:0;
       font-size:16px;
       font-weight:950;
       letter-spacing:-.01em;
+      color:var(--accent);
     }
+    .helpMeta{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:12.5px;
+      font-weight:850;
+    }
+
     .controls{
       display:grid;
       grid-template-columns:1.1fr 1fr 1.2fr;
@@ -295,7 +316,6 @@
     }
     textarea{ min-height:42px; resize:vertical; }
 
-    /* Chat line under help controls */
     .chatline{
       display:flex;
       gap:10px;
@@ -402,7 +422,7 @@
     .tile strong{ display:block; font-weight:950; margin-bottom:6px; }
     .tile span{ font-size:12px; color:var(--muted); line-height:1.45; }
 
-    /* Settings modal */
+    /* Settings modal + toast */
     .modalback{
       position:fixed; inset:0;
       background:rgba(17,24,39,.35);
@@ -471,30 +491,44 @@
 
   <!-- TOP BAR -->
   <div class="topbar">
-    <div class="brand">
-      <div class="logo">🧠</div>
-      <div>Chief</div>
+    <div class="brand" aria-label="App home">
+      <div class="logo" title="Chief">🧠</div>
     </div>
 
     <div class="meta">
       <span class="pill" id="datePill">—</span>
       <span class="pill" id="timePill">—</span>
-      <span class="pill" id="weatherPill">☀️ 58°F · SF (stub)</span>
+      <span class="pill" id="weatherPill">—</span>
       <button class="iconbtn" id="settingsBtn" title="Settings">⚙️</button>
     </div>
   </div>
 
   <div class="wrap">
+    <!-- OVERVIEW PANEL -->
     <div class="panel">
       <div class="panelhead">
         <div class="paneltitle">
-          <div class="badgeicon" id="panelIcon">📌</div>
-          <div id="panelTitle">Overview</div>
+          <div class="badgeicon" id="overviewIcon">📌</div>
+          <div id="overviewTitle">Overview</div>
         </div>
-        <div class="panelhint" id="panelHint">Click into cards for details.</div>
+        <div class="panelhint" id="overviewHint">Click into cards for details.</div>
       </div>
+      <div class="body" id="overviewBody"></div>
+    </div>
 
-      <div class="body" id="mainBody"></div>
+    <!-- HOW CAN I HELP PANEL (separate) -->
+    <div class="panel">
+      <div class="panelhead">
+        <div class="paneltitle">
+          <div class="badgeicon">💬</div>
+          <div>
+            <div class="helpTitle">How can I help?</div>
+            <div class="helpMeta">Chief</div>
+          </div>
+        </div>
+        <div class="panelhint">Optional. You can ignore and click into cards.</div>
+      </div>
+      <div class="body" id="helpBody"></div>
     </div>
   </div>
 
@@ -511,7 +545,20 @@
             <div class="label">Learning threshold</div>
             <div class="muted">Minimum sends before learning-based changes are allowed (global default).</div>
             <div class="divider"></div>
-            <input id="minSendsInput" type="number" min="1" step="1" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:12px;font-size:13px;" />
+            <input id="minSendsInput" type="number" min="1" step="1"
+              style="width:100%;padding:10px;border:1px solid var(--border);border-radius:12px;font-size:13px;" />
+          </div>
+
+          <div class="control">
+            <div class="label">News defaults</div>
+            <div class="muted">Controls what shows in Announcements & News. Change anytime.</div>
+            <div class="divider"></div>
+            <select id="newsMode">
+              <option value="recruiting_ops" selected>Recruiting Ops + People Analytics</option>
+              <option value="company_only">Company announcements only</option>
+              <option value="hiring_market">Hiring market + recruiting</option>
+            </select>
+            <div class="muted" style="margin-top:8px;">(Demo stub — sources not live.)</div>
           </div>
 
           <div class="control">
@@ -537,6 +584,18 @@
               </div>
             </div>
           </div>
+
+          <div class="control">
+            <div class="label">Weather</div>
+            <div class="muted">Demo placeholder. Replace with live weather feed later.</div>
+            <div class="divider"></div>
+            <select id="weatherCity">
+              <option value="sf" selected>San Francisco</option>
+              <option value="sj">San Jose</option>
+              <option value="oak">Oakland</option>
+              <option value="sac">Sacramento</option>
+            </select>
+          </div>
         </div>
 
         <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap;">
@@ -554,7 +613,8 @@
      * Demo data
      ***********************/
     const DATA = {
-      weatherLabel: "☀️ 58°F · SF (stub)",
+      // removed "(stub)" from the visible label
+      weatherLabel: "☀️ 58°F · San Francisco",
 
       interviews: [
         { id:"i1", time:"10:30", candidate:"Alex Morgan", stage:"HM Screen", interviewer:"J. Rivera", reqId:"r1", prepNeeded:true },
@@ -595,9 +655,7 @@
           pipelineDeltaVsPlan:-6,
           breakPoint:"Sourcing → Screen",
           autonomy:{
-            applied:[
-              { tier:1, label:"Delivery hygiene", detail:"Retried failed sends; cleaned formatting (no meaning changes)." }
-            ],
+            applied:[ { tier:1, label:"Delivery hygiene", detail:"Retried failed sends; cleaned formatting (no meaning changes)." } ],
             pending:[]
           }
         },
@@ -623,7 +681,30 @@
       brand: [
         { id:"b1", type:"Glassdoor", title:"Response needed: 3★ review", status:"Pending", note:"Draft available (approval required to post)." },
         { id:"b2", type:"LinkedIn", title:"Post: Hiring update", status:"Scheduled", note:"Scheduled time set (Tier 1 scheduling)." }
-      ]
+      ],
+
+      messaging: {
+        slackUnread: 7,
+        emailUnread: 12,
+        inmailsUnread: 3,
+        whatsappUnread: 2,
+        items: [
+          { id:"m1", src:"Slack", title:"#eng-hiring", sub:"2 mentions · 1 thread awaiting reply" },
+          { id:"m2", src:"Email", title:"Offer approval needed", sub:"Finance approval requested (EOD)" },
+          { id:"m3", src:"InMail", title:"Candidate follow-up", sub:"Senior designer asking about comp band" },
+        ]
+      },
+
+      announcements: {
+        company: [
+          { id:"a1", title:"Comp bands updated", sub:"New leveling guidance effective next pay cycle" },
+          { id:"a2", title:"Hiring plan review", sub:"Q1 headcount recalibration meeting Friday" }
+        ],
+        news: [
+          { id:"n1", title:"Hiring market pulse", sub:"Tech interviews trending longer in senior bands (stub)" },
+          { id:"n2", title:"Recruiting ops note", sub:"More teams moving from surveys to lightweight signals (stub)" }
+        ]
+      }
     };
 
     /***********************
@@ -632,12 +713,14 @@
     const DEFAULT_SETTINGS = {
       minSendsForLearning: 100,
       usePersonal: true,
-      useAnon: false
+      useAnon: false,
+      newsMode: "recruiting_ops",
+      weatherCity: "sf"
     };
 
     function loadSettings(){
       try{
-        const raw = localStorage.getItem("chief_settings_v1");
+        const raw = localStorage.getItem("chief_settings_v2");
         if(!raw) return {...DEFAULT_SETTINGS};
         const parsed = JSON.parse(raw);
         return { ...DEFAULT_SETTINGS, ...parsed };
@@ -646,29 +729,21 @@
       }
     }
     function saveSettingsObj(obj){
-      localStorage.setItem("chief_settings_v1", JSON.stringify(obj));
+      localStorage.setItem("chief_settings_v2", JSON.stringify(obj));
     }
     let SETTINGS = loadSettings();
 
     /***********************
      * DOM + Toast
      ***********************/
-    const mainBody = document.getElementById("mainBody");
-    const panelTitle = document.getElementById("panelTitle");
-    const panelHint = document.getElementById("panelHint");
-    const panelIcon = document.getElementById("panelIcon");
+    const overviewBody = document.getElementById("overviewBody");
+    const helpBody = document.getElementById("helpBody");
     const toast = document.getElementById("toast");
 
     function showToast(text){
       toast.textContent = text;
       toast.classList.add("show");
       setTimeout(()=>toast.classList.remove("show"), 1200);
-    }
-
-    function setHeader(icon, title, hint){
-      panelIcon.textContent = icon;
-      panelTitle.textContent = title;
-      panelHint.textContent = hint || "";
     }
 
     function fmtDate(){
@@ -680,487 +755,287 @@
       return d.toLocaleTimeString([], { hour:"2-digit", minute:"2-digit" });
     }
 
-    function healthBadge(health){
-      if(health === "healthy") return `<span class="badge b-good">✅ Healthy</span>`;
-      if(health === "early") return `<span class="badge b-warn">📉 Early signal</span>`;
-      return `<span class="badge b-bad">⛔ At risk</span>`;
+    function statusPill(kind, label){
+      const cls =
+        kind === "good" ? "statuspill s-good" :
+        kind === "warn" ? "statuspill s-warn" :
+        kind === "bad"  ? "statuspill s-bad"  :
+                          "statuspill s-info";
+      return `<span class="${cls}">${label}</span>`;
+    }
+
+    function reqStatusPill(health){
+      if(health === "healthy") return statusPill("good","Healthy");
+      if(health === "early")   return statusPill("warn","Early signal");
+      return statusPill("bad","At risk");
     }
 
     /***********************
-     * Templates
+     * Overview cards
      ***********************/
     function tplOverview(){
       const prepCount = DATA.interviews.filter(i=>i.prepNeeded).length;
 
-      setHeader("📌", "Overview", "Click into cards for details.");
       return `
         <div class="grid">
 
+          <!-- Interviews -->
           <div class="card">
-            <div class="cardtop">
+            <div class="cardhead">
               <h3>Today’s Interviews</h3>
-              <span class="badge ${prepCount ? "b-warn" : "b-good"}">${prepCount ? `⚠️ Prep: ${prepCount}` : "✅ Ready"}</span>
+              ${prepCount ? statusPill("warn", `Prep: ${prepCount}`) : statusPill("good","Ready")}
             </div>
-            <div class="list">
-              ${DATA.interviews.map(i=>`
-                <div class="row" data-interview="${i.id}">
-                  <div class="rowleft">
-                    <div class="rowtitle">${i.time} — ${i.candidate}</div>
-                    <div class="rowsub">${i.stage} · ${i.interviewer}</div>
+            <div class="cardbody">
+              <div class="list">
+                ${DATA.interviews.map(i=>`
+                  <div class="row" data-interview="${i.id}">
+                    <div class="rowleft">
+                      <div class="rowtitle">${i.time} — ${i.candidate}</div>
+                      <div class="rowsub">${i.stage} · ${i.interviewer}</div>
+                    </div>
+                    <div class="rowright">
+                      ${i.prepNeeded ? statusPill("warn","Prep") : statusPill("good","Ready")}
+                    </div>
                   </div>
-                  <div class="rowright">
-                    ${i.prepNeeded ? `<span class="badge b-warn">Prep</span>` : `<span class="badge b-good">Ready</span>`}
-                  </div>
-                </div>
-              `).join("")}
+                `).join("")}
+              </div>
             </div>
           </div>
 
+          <!-- Reqs -->
           <div class="card">
-            <div class="cardtop">
+            <div class="cardhead">
               <h3>Open Requisitions</h3>
-              <span class="badge b-info">📌 ${DATA.requisitions.length} open</span>
+              ${statusPill("info", `${DATA.requisitions.length} open`)}
             </div>
-            <div class="list">
-              ${DATA.requisitions.map(r=>`
-                <div class="row" data-req="${r.id}">
-                  <div class="rowleft">
-                    <div class="rowtitle">${r.title}</div>
-                    <div class="rowsub">${r.location}</div>
+            <div class="cardbody">
+              <div class="list">
+                ${DATA.requisitions.map(r=>`
+                  <div class="row" data-req="${r.id}">
+                    <div class="rowleft">
+                      <div class="rowtitle">${r.title}</div>
+                      <div class="rowsub">${r.location}</div>
+                    </div>
+                    <div class="rowright">
+                      ${reqStatusPill(r.health)}
+                    </div>
                   </div>
-                  <div class="rowright">
-                    ${healthBadge(r.health)}
-                  </div>
-                </div>
-              `).join("")}
+                `).join("")}
+              </div>
             </div>
           </div>
 
+          <!-- Projects -->
           <div class="card">
-            <div class="cardtop">
+            <div class="cardhead">
               <h3>Projects & Deadlines</h3>
-              <span class="badge b-info">🧩 ${DATA.projects.length} active</span>
+              ${statusPill("info", `${DATA.projects.length} active`)}
             </div>
-            <div class="list">
-              ${DATA.projects.map(p=>`
-                <div class="row" data-project="${p.id}">
-                  <div class="rowleft">
-                    <div class="rowtitle">${p.title}</div>
-                    <div class="rowsub">Due: ${p.due} · ${p.status}</div>
+            <div class="cardbody">
+              <div class="list">
+                ${DATA.projects.map(p=>`
+                  <div class="row" data-project="${p.id}">
+                    <div class="rowleft">
+                      <div class="rowtitle">${p.title}</div>
+                      <div class="rowsub">Due: ${p.due} · ${p.status}</div>
+                    </div>
+                    <div class="rowright">
+                      ${statusPill("info","Review")}
+                    </div>
                   </div>
-                  <div class="rowright">
-                    <span class="badge b-info">Review</span>
-                  </div>
-                </div>
-              `).join("")}
+                `).join("")}
+              </div>
             </div>
           </div>
 
+          <!-- Brand -->
           <div class="card">
-            <div class="cardtop">
+            <div class="cardhead">
               <h3>Employer Brand / Socials</h3>
-              <span class="badge b-info">💬 ${DATA.brand.length} items</span>
+              ${statusPill("info", `${DATA.brand.length} items`)}
             </div>
-            <div class="list">
-              ${DATA.brand.map(b=>`
-                <div class="row" data-brand="${b.id}">
+            <div class="cardbody">
+              <div class="list">
+                ${DATA.brand.map(b=>`
+                  <div class="row" data-brand="${b.id}">
+                    <div class="rowleft">
+                      <div class="rowtitle">${b.type}: ${b.title}</div>
+                      <div class="rowsub">${b.status} · ${b.note}</div>
+                    </div>
+                    <div class="rowright">
+                      ${statusPill("info","Review")}
+                    </div>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+
+          <!-- Messaging -->
+          <div class="card">
+            <div class="cardhead">
+              <h3>Messaging</h3>
+              ${statusPill("info","Unread")}
+            </div>
+            <div class="cardbody">
+              <div class="list" style="margin-bottom:10px;">
+                <div class="row" data-msg="slack">
                   <div class="rowleft">
-                    <div class="rowtitle">${b.type}: ${b.title}</div>
-                    <div class="rowsub">${b.status} · ${b.note}</div>
+                    <div class="rowtitle">Slack</div>
+                    <div class="rowsub">${DATA.messaging.slackUnread} unread</div>
                   </div>
-                  <div class="rowright">
-                    <span class="badge b-info">Review</span>
+                  <div class="rowright">${statusPill("info", String(DATA.messaging.slackUnread))}</div>
+                </div>
+                <div class="row" data-msg="email">
+                  <div class="rowleft">
+                    <div class="rowtitle">Email</div>
+                    <div class="rowsub">${DATA.messaging.emailUnread} unread</div>
                   </div>
+                  <div class="rowright">${statusPill("info", String(DATA.messaging.emailUnread))}</div>
                 </div>
-              `).join("")}
-            </div>
-          </div>
-
-        </div>
-
-        <!-- HELP + CHAT (below cards) -->
-        <div class="help">
-          <h4>How can I help?</h4>
-
-          <div class="controls">
-            <div class="control">
-              <div class="label">Bandwidth</div>
-              <div class="muted" id="bandLabel">Medium</div>
-              <div class="divider"></div>
-              <div class="sliderwrap">
-                <input id="bandwidth" type="range" min="0" max="2" step="1" value="1" />
-              </div>
-              <div class="muted" style="margin-top:8px;">Controls how proactive Chief should be.</div>
-            </div>
-
-            <div class="control">
-              <div class="label">Focus preference</div>
-              <select id="focusSel">
-                <option value="headsdown">Heads down (minimize interruptions)</option>
-                <option value="normal" selected>Normal</option>
-                <option value="help">I want help / suggestions</option>
-              </select>
-              <div class="muted" style="margin-top:8px;">Affects notifications + suggestions.</div>
-            </div>
-
-            <div class="control">
-              <div class="label">Additional notes (optional)</div>
-              <textarea id="notes" placeholder="Anything Chief should know? (optional)"></textarea>
-              <div class="muted" style="margin-top:8px;">Used only per your Settings.</div>
-            </div>
-          </div>
-
-          <div class="chatline" aria-label="Chat input">
-            <div class="chaticon">💬</div>
-            <input class="chatinput" id="chatInput" placeholder="Type a request… (e.g., 'Show req risks' or 'Prep my 10:30')" />
-            <button class="btn primary" id="sendBtn">Send</button>
-          </div>
-        </div>
-      `;
-    }
-
-    function tplInterviewDetail(id){
-      const i = DATA.interviews.find(x=>x.id===id);
-      if(!i) return tplOverview();
-      const r = DATA.requisitions.find(x=>x.id===i.reqId);
-
-      setHeader("🗓️", "Interview", "Review details or jump to the associated req.");
-      return `
-        <div class="detail">
-          <div class="detailhead">
-            <div>
-              <h2>${i.time} — ${i.candidate} (${i.stage})</h2>
-              <p>${r ? r.title : "Requisition"} · Interviewer: ${i.interviewer}</p>
-            </div>
-            <button class="btn" data-nav="overview">← Back</button>
-          </div>
-
-          <div class="section">
-            <h5>Candidate summary (stub)</h5>
-            <p class="muted">
-              Strength: ownership + reliability. Risk: limited observability depth. Focus: tradeoffs, incidents, boundaries.
-            </p>
-            <div class="divider"></div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <button class="btn primary" data-toast="Would open scorecard (stub).">Open scorecard</button>
-              <button class="btn" data-toast="Would open resume + notes (stub).">Open resume</button>
-              ${r ? `<button class="btn" data-req="${r.id}" data-nav="req">View req</button>` : ``}
-            </div>
-          </div>
-
-          <div class="section">
-            <h5>Prep status</h5>
-            <p class="muted">${i.prepNeeded ? "⚠️ Prep flagged: consider reviewing last feedback before start." : "✅ Prep complete."}</p>
-          </div>
-        </div>
-      `;
-    }
-
-    function tplReqDetail(id){
-      const r = DATA.requisitions.find(x=>x.id===id);
-      if(!r) return tplOverview();
-
-      setHeader("📌", "Requisition", "Choose your adventure: Pipeline, Outreach, or Loop.");
-      return `
-        <div class="detail">
-          <div class="detailhead">
-            <div>
-              <h2>${r.title}</h2>
-              <p>${r.location} · ${healthBadge(r.health)} · ${r.why}</p>
-            </div>
-            <button class="btn" data-nav="overview">← Back</button>
-          </div>
-
-          <div class="section">
-            <h5>Quick status</h5>
-            <p class="muted">
-              Pipeline vs plan: <strong>${r.pipelineDeltaVsPlan}%</strong> · Break: <strong>${r.breakPoint}</strong> · Sends: <strong>${r.sendsToDate}</strong> · Reply dip: <strong>${r.replyDipWoW}% WoW</strong>
-            </p>
-          </div>
-
-          <div class="section">
-            <h5>Choose your adventure</h5>
-            <div class="tiles">
-              <div class="tile" data-nav="req_pipeline" data-req="${r.id}">
-                <strong>📊 Pipeline</strong>
-                <span>Bottlenecks, stage breaks, throughput levers.</span>
-              </div>
-              <div class="tile" data-nav="req_outreach" data-req="${r.id}">
-                <strong>✉️ Outreach</strong>
-                <span>Signals, thresholds, tiered autonomy.</span>
-              </div>
-              <div class="tile" data-nav="req_loop" data-req="${r.id}">
-                <strong>🧩 Interview loop</strong>
-                <span>Scorecards, SLAs, decision friction.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function tplReqPipeline(id){
-      const r = DATA.requisitions.find(x=>x.id===id);
-      if(!r) return tplOverview();
-
-      setHeader("📊", "Req · Pipeline", "Troubleshoot bottlenecks and levers.");
-      return `
-        <div class="detail">
-          <div class="detailhead">
-            <div>
-              <h2>${r.title} — Pipeline</h2>
-              <p>Decision-first view of where flow breaks and the lowest-lift lever.</p>
-            </div>
-            <button class="btn" data-nav="req" data-req="${r.id}">← Back</button>
-          </div>
-
-          <div class="section">
-            <h5>What changed</h5>
-            <p class="muted">Pipeline trending <strong>${r.pipelineDeltaVsPlan}% vs plan</strong>. Primary breakpoint: <strong>${r.breakPoint}</strong>.</p>
-            <div class="divider"></div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <button class="btn primary" data-nav="req_outreach" data-req="${r.id}">Review outreach levers</button>
-              <button class="btn" data-toast="Would open planning sheet (stub).">Open planning sheet</button>
-              <button class="btn" data-toast="Would draft HM calibration prompts (stub).">Draft HM calibration prompts</button>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function tplReqOutreach(id){
-      const r = DATA.requisitions.find(x=>x.id===id);
-      if(!r) return tplOverview();
-
-      const threshold = SETTINGS.minSendsForLearning;
-      const met = r.sendsToDate >= threshold;
-
-      setHeader("✉️", "Req · Outreach", "Tiered autonomy lives here (not on the overview).");
-      return `
-        <div class="detail">
-          <div class="detailhead">
-            <div>
-              <h2>${r.title} — Outreach</h2>
-              <p>Learning threshold: <strong>${threshold}</strong> sends. ${met ? "✅ Met." : "⏳ Not met."}</p>
-            </div>
-            <button class="btn" data-nav="req" data-req="${r.id}">← Back</button>
-          </div>
-
-          <div class="section">
-            <h5>Signal + threshold</h5>
-            <p class="muted">Sends: <strong>${r.sendsToDate}</strong> · Reply dip: <strong>${r.replyDipWoW}% WoW</strong></p>
-            <div class="divider"></div>
-            <p class="muted">
-              Below threshold, Chief will <strong>monitor only</strong> unless you explicitly command learning-based changes.
-              Above threshold, Tier 1–3 may run within approved scope (send time + approved subject lines).
-            </p>
-          </div>
-
-          <div class="section">
-            <h5>Already applied (Tier 1–3) — within boundaries</h5>
-            ${r.autonomy.applied.length ? `
-              <ul style="margin:0 0 0 18px;padding:0;color:#374151;font-size:13px;line-height:1.55;">
-                ${r.autonomy.applied.map(a=>`<li><strong>Tier ${a.tier}:</strong> ${a.label} — ${a.detail}</li>`).join("")}
-              </ul>
-            ` : `<p class="muted">No within-boundary changes applied.</p>`}
-          </div>
-
-          <div class="section">
-            <h5>Pending approval (Tier 4) — scope expansion</h5>
-            ${r.autonomy.pending.length ? r.autonomy.pending.map(p=>`
-              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
-                <div>
-                  <div style="font-weight:950;font-size:13px;">Tier ${p.tier}: ${p.label}</div>
-                  <div class="muted" style="margin-top:6px;">${p.detail}</div>
+                <div class="row" data-msg="inmail">
+                  <div class="rowleft">
+                    <div class="rowtitle">LinkedIn InMails</div>
+                    <div class="rowsub">${DATA.messaging.inmailsUnread} unread</div>
+                  </div>
+                  <div class="rowright">${statusPill("info", String(DATA.messaging.inmailsUnread))}</div>
                 </div>
-                <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                  <button class="btn primary" data-toast="Approved Tier 4 (demo). Would apply + audit log.">Approve</button>
-                  <button class="btn" data-toast="Rejected Tier 4 (demo). Draft discarded.">Reject</button>
+                <div class="row" data-msg="whatsapp">
+                  <div class="rowleft">
+                    <div class="rowtitle">WhatsApp</div>
+                    <div class="rowsub">${DATA.messaging.whatsappUnread} unread</div>
+                  </div>
+                  <div class="rowright">${statusPill("info", String(DATA.messaging.whatsappUnread))}</div>
                 </div>
               </div>
-            `).join("") : `<p class="muted">No Tier 4 items pending.</p>`}
-          </div>
-        </div>
-      `;
-    }
 
-    function tplReqLoop(id){
-      const r = DATA.requisitions.find(x=>x.id===id);
-      if(!r) return tplOverview();
-
-      setHeader("🧩", "Req · Interview Loop", "Speed, coverage, scorecards, decision friction.");
-      return `
-        <div class="detail">
-          <div class="detailhead">
-            <div>
-              <h2>${r.title} — Interview Loop</h2>
-              <p>Recruiter-native view of what’s blocking decisions.</p>
-            </div>
-            <button class="btn" data-nav="req" data-req="${r.id}">← Back</button>
-          </div>
-
-          <div class="section">
-            <h5>Loop status (stub)</h5>
-            <p class="muted">Panel coverage: ✅ staffed · Scorecards: ⚠️ 2 pending · Decision SLA: 48 hours target</p>
-            <div class="divider"></div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <button class="btn primary" data-toast="Would send scorecard nudges (Tier 1, stub).">Send scorecard nudges</button>
-              <button class="btn" data-toast="Would open scorecard dashboard (stub).">Open scorecard dashboard</button>
+              <div class="muted" style="font-weight:900;margin:6px 0 8px;">Needs attention</div>
+              <div class="list">
+                ${DATA.messaging.items.map(m=>`
+                  <div class="row" data-message-item="${m.id}">
+                    <div class="rowleft">
+                      <div class="rowtitle">${m.src}: ${m.title}</div>
+                      <div class="rowsub">${m.sub}</div>
+                    </div>
+                    <div class="rowright">${statusPill("info","Open")}</div>
+                  </div>
+                `).join("")}
+              </div>
             </div>
           </div>
-        </div>
-      `;
-    }
 
-    function tplProjectDetail(id){
-      const p = DATA.projects.find(x=>x.id===id);
-      if(!p) return tplOverview();
-
-      setHeader("🧩", "Project", "Review next step, then act.");
-      return `
-        <div class="detail">
-          <div class="detailhead">
-            <div>
-              <h2>${p.title}</h2>
-              <p>Due: ${p.due} · Status: ${p.status}</p>
+          <!-- Announcements + News -->
+          <div class="card">
+            <div class="cardhead">
+              <h3>Announcements & News</h3>
+              ${statusPill("info","Today")}
             </div>
-            <button class="btn" data-nav="overview">← Back</button>
-          </div>
+            <div class="cardbody">
+              <div class="muted" style="font-weight:900;margin:0 0 8px;">Company</div>
+              <div class="list" style="margin-bottom:12px;">
+                ${DATA.announcements.company.map(a=>`
+                  <div class="row" data-announce="${a.id}">
+                    <div class="rowleft">
+                      <div class="rowtitle">${a.title}</div>
+                      <div class="rowsub">${a.sub}</div>
+                    </div>
+                    <div class="rowright">${statusPill("info","Read")}</div>
+                  </div>
+                `).join("")}
+              </div>
 
-          <div class="section">
-            <h5>Next action</h5>
-            <p class="muted">${p.next}</p>
-            <div class="divider"></div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <button class="btn primary" data-toast="Would draft an update (stub).">Draft update</button>
-              <button class="btn" data-toast="Would open the project doc (stub).">Open doc</button>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function tplBrandDetail(id){
-      const b = DATA.brand.find(x=>x.id===id);
-      if(!b) return tplOverview();
-
-      setHeader("💬", "Employer Brand", "Drafts allowed. Posting requires approval.");
-      return `
-        <div class="detail">
-          <div class="detailhead">
-            <div>
-              <h2>${b.type}: ${b.title}</h2>
-              <p>Status: ${b.status} · ${b.note}</p>
-            </div>
-            <button class="btn" data-nav="overview">← Back</button>
-          </div>
-
-          <div class="section">
-            <h5>Recommended next step</h5>
-            <p class="muted">Chief can draft a response (Tier 4) and hold it for approval. No posting occurs without explicit confirmation.</p>
-            <div class="divider"></div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <button class="btn primary" data-toast="Would generate a draft response (stub).">Generate draft</button>
-              <button class="btn" data-toast="Would open the platform (stub).">Open platform</button>
+              <div class="muted" style="font-weight:900;margin:0 0 8px;">Industry (per defaults)</div>
+              <div class="list">
+                ${DATA.announcements.news.map(n=>`
+                  <div class="row" data-news="${n.id}">
+                    <div class="rowleft">
+                      <div class="rowtitle">${n.title}</div>
+                      <div class="rowsub">${n.sub}</div>
+                    </div>
+                    <div class="rowright">${statusPill("info","Read")}</div>
+                  </div>
+                `).join("")}
+              </div>
             </div>
           </div>
+
         </div>
       `;
     }
 
     /***********************
-     * Router
+     * Help panel
      ***********************/
-    function render(route, payload={}){
-      if(route === "overview"){
-        mainBody.innerHTML = tplOverview();
-        wireOverview();
-        return;
-      }
-      if(route === "interview"){
-        mainBody.innerHTML = tplInterviewDetail(payload.id);
-        wireNav();
-        return;
-      }
-      if(route === "req"){
-        mainBody.innerHTML = tplReqDetail(payload.id);
-        wireNav();
-        return;
-      }
-      if(route === "req_pipeline"){
-        mainBody.innerHTML = tplReqPipeline(payload.id);
-        wireNav();
-        return;
-      }
-      if(route === "req_outreach"){
-        mainBody.innerHTML = tplReqOutreach(payload.id);
-        wireNav();
-        return;
-      }
-      if(route === "req_loop"){
-        mainBody.innerHTML = tplReqLoop(payload.id);
-        wireNav();
-        return;
-      }
-      if(route === "project"){
-        mainBody.innerHTML = tplProjectDetail(payload.id);
-        wireNav();
-        return;
-      }
-      if(route === "brand"){
-        mainBody.innerHTML = tplBrandDetail(payload.id);
-        wireNav();
-        return;
-      }
+    function tplHelp(){
+      return `
+        <div class="controls">
+          <div class="control">
+            <div class="label">Bandwidth</div>
+            <div class="muted" id="bandLabel">Medium</div>
+            <div class="divider"></div>
+            <div class="sliderwrap">
+              <input id="bandwidth" type="range" min="0" max="2" step="1" value="1" />
+            </div>
+            <div class="muted" style="margin-top:8px;">Controls how proactive Chief should be.</div>
+          </div>
 
-      // fallback
-      render("overview");
+          <div class="control">
+            <div class="label">Focus preference</div>
+            <select id="focusSel">
+              <option value="headsdown">Heads down (minimize interruptions)</option>
+              <option value="normal" selected>Normal</option>
+              <option value="help">I want help / suggestions</option>
+            </select>
+            <div class="muted" style="margin-top:8px;">Affects notifications + suggestions.</div>
+          </div>
+
+          <div class="control">
+            <div class="label">Additional notes (optional)</div>
+            <textarea id="notes" placeholder="Anything Chief should know? (optional)"></textarea>
+            <div class="muted" style="margin-top:8px;">Used only per your Settings.</div>
+          </div>
+        </div>
+
+        <div class="chatline" aria-label="Chat input">
+          <div class="chaticon">💬</div>
+          <input class="chatinput" id="chatInput"
+            placeholder="Type a request… (e.g., 'Show req risks' or 'Prep my 10:30')" />
+          <button class="btn primary" id="sendBtn">Send</button>
+        </div>
+      `;
     }
 
-    function wireNav(){
-      // Back / nav buttons
-      mainBody.querySelectorAll("[data-nav]").forEach(el=>{
-        el.addEventListener("click", ()=>{
-          const nav = el.getAttribute("data-nav");
-          if(nav === "overview") return render("overview");
-
-          if(nav === "req"){
-            return render("req", { id: el.getAttribute("data-req") });
-          }
-          if(nav === "req_pipeline"){
-            return render("req_pipeline", { id: el.getAttribute("data-req") });
-          }
-          if(nav === "req_outreach"){
-            return render("req_outreach", { id: el.getAttribute("data-req") });
-          }
-          if(nav === "req_loop"){
-            return render("req_loop", { id: el.getAttribute("data-req") });
-          }
-        });
-      });
-
-      // Toast stubs
-      mainBody.querySelectorAll("[data-toast]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast(el.getAttribute("data-toast")));
-      });
-    }
-
+    /***********************
+     * Basic click wiring (demo stubs)
+     ***********************/
     function wireOverview(){
-      // row click handlers
-      mainBody.querySelectorAll("[data-interview]").forEach(el=>{
-        el.addEventListener("click", ()=> render("interview", { id: el.getAttribute("data-interview") }));
+      overviewBody.querySelectorAll("[data-interview]").forEach(el=>{
+        el.addEventListener("click", ()=> showToast("Would open interview details (stub)."));
       });
-      mainBody.querySelectorAll("[data-req]").forEach(el=>{
-        el.addEventListener("click", ()=> render("req", { id: el.getAttribute("data-req") }));
+      overviewBody.querySelectorAll("[data-req]").forEach(el=>{
+        el.addEventListener("click", ()=> showToast("Would open requisition details (stub)."));
       });
-      mainBody.querySelectorAll("[data-project]").forEach(el=>{
-        el.addEventListener("click", ()=> render("project", { id: el.getAttribute("data-project") }));
+      overviewBody.querySelectorAll("[data-project]").forEach(el=>{
+        el.addEventListener("click", ()=> showToast("Would open project details (stub)."));
       });
-      mainBody.querySelectorAll("[data-brand]").forEach(el=>{
-        el.addEventListener("click", ()=> render("brand", { id: el.getAttribute("data-brand") }));
+      overviewBody.querySelectorAll("[data-brand]").forEach(el=>{
+        el.addEventListener("click", ()=> showToast("Would open employer brand details (stub)."));
       });
+      overviewBody.querySelectorAll("[data-msg]").forEach(el=>{
+        el.addEventListener("click", ()=> showToast("Would open messaging inbox (stub)."));
+      });
+      overviewBody.querySelectorAll("[data-message-item]").forEach(el=>{
+        el.addEventListener("click", ()=> showToast("Would open message thread (stub)."));
+      });
+      overviewBody.querySelectorAll("[data-announce]").forEach(el=>{
+        el.addEventListener("click", ()=> showToast("Would open announcement (stub)."));
+      });
+      overviewBody.querySelectorAll("[data-news]").forEach(el=>{
+        el.addEventListener("click", ()=> showToast("Would open news item (stub)."));
+      });
+    }
 
-      // bandwidth label
+    function wireHelp(){
       const band = document.getElementById("bandwidth");
       const bandLabel = document.getElementById("bandLabel");
       if(band && bandLabel){
@@ -1170,24 +1045,11 @@
         sync();
       }
 
-      // chat send (simple stub routing)
       const chatInput = document.getElementById("chatInput");
       const sendBtn = document.getElementById("sendBtn");
       function handleSend(){
         const t = (chatInput.value || "").trim();
         if(!t) return;
-        const lower = t.toLowerCase();
-
-        if(lower.includes("prep") || lower.includes("interview")){
-          showToast("Would open interview prep (stub).");
-          return;
-        }
-        if(lower.includes("req") || lower.includes("requisition") || lower.includes("risk")){
-          // jump to first at-risk req for demo
-          const atRisk = DATA.requisitions.find(r=>r.health==="at_risk") || DATA.requisitions[0];
-          if(atRisk) render("req", { id: atRisk.id });
-          return;
-        }
         showToast("Captured. (Demo stub)");
         chatInput.value = "";
       }
@@ -1208,13 +1070,29 @@
     const minSendsInput = document.getElementById("minSendsInput");
     const usePersonal = document.getElementById("usePersonal");
     const useAnon = document.getElementById("useAnon");
+    const newsMode = document.getElementById("newsMode");
+    const weatherCity = document.getElementById("weatherCity");
     const saveSettingsBtn = document.getElementById("saveSettings");
     const resetSettingsBtn = document.getElementById("resetSettings");
 
+    function loadSettings(){
+      try{
+        const raw = localStorage.getItem("chief_settings_v2");
+        if(!raw) return {...DEFAULT_SETTINGS};
+        const parsed = JSON.parse(raw);
+        return { ...DEFAULT_SETTINGS, ...parsed };
+      }catch(e){
+        return {...DEFAULT_SETTINGS};
+      }
+    }
+
     function openSettings(){
+      SETTINGS = loadSettings();
       minSendsInput.value = SETTINGS.minSendsForLearning;
       usePersonal.checked = !!SETTINGS.usePersonal;
       useAnon.checked = !!SETTINGS.useAnon;
+      newsMode.value = SETTINGS.newsMode || "recruiting_ops";
+      weatherCity.value = SETTINGS.weatherCity || "sf";
       modalBack.style.display = "flex";
       modalBack.setAttribute("aria-hidden", "false");
     }
@@ -1232,37 +1110,41 @@
       SETTINGS = {
         minSendsForLearning: Number.isFinite(n) && n > 0 ? Math.floor(n) : DEFAULT_SETTINGS.minSendsForLearning,
         usePersonal: !!usePersonal.checked,
-        useAnon: !!useAnon.checked
+        useAnon: !!useAnon.checked,
+        newsMode: newsMode.value,
+        weatherCity: weatherCity.value
       };
-      saveSettingsObj(SETTINGS);
+      localStorage.setItem("chief_settings_v2", JSON.stringify(SETTINGS));
       closeSettingsModal();
       showToast("Settings saved.");
-      // no re-asking; this only affects behavior inside views
     });
 
     resetSettingsBtn.addEventListener("click", ()=>{
       SETTINGS = { ...DEFAULT_SETTINGS };
-      saveSettingsObj(SETTINGS);
+      localStorage.setItem("chief_settings_v2", JSON.stringify(SETTINGS));
       minSendsInput.value = SETTINGS.minSendsForLearning;
       usePersonal.checked = SETTINGS.usePersonal;
       useAnon.checked = SETTINGS.useAnon;
+      newsMode.value = SETTINGS.newsMode;
+      weatherCity.value = SETTINGS.weatherCity;
       showToast("Settings reset.");
     });
 
     /***********************
-     * Top bar date/time/weather
+     * Boot
      ***********************/
     document.getElementById("datePill").textContent = "📅 " + fmtDate();
     const timePill = document.getElementById("timePill");
     function tickTime(){ timePill.textContent = "🕘 " + fmtTime(); }
     tickTime();
     setInterval(tickTime, 15000);
+
     document.getElementById("weatherPill").textContent = DATA.weatherLabel;
 
-    /***********************
-     * Boot
-     ***********************/
-    render("overview");
+    overviewBody.innerHTML = tplOverview();
+    helpBody.innerHTML = tplHelp();
+    wireOverview();
+    wireHelp();
   </script>
 </body>
 </html>
