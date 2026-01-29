@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Chief — Orchestrated People Ops (Demo)</title>
+  <title>Chief — Morning Brief (Demo)</title>
 
-  <meta property="og:title" content="Chief — Orchestrated People Ops (Demo)">
-  <meta property="og:description" content="Clean morning brief: top context bar + dashboard cards + chat input (bottom).">
+  <meta property="og:title" content="Chief — Morning Brief (Demo)">
+  <meta property="og:description" content="Recruiter morning brief: interviews, open reqs, projects, employer brand — with tiered autonomy + guardrails.">
   <meta property="og:type" content="website">
 
   <style>
@@ -36,9 +36,9 @@
 
     .bar{height:4px;background:var(--accent-grad);}
 
-    /* Top context bar (date/time/weather) */
+    /* Top context bar */
     .top{
-      max-width:1100px;
+      max-width:1120px;
       margin:0 auto;
       padding:14px 16px 10px;
       display:flex;
@@ -66,7 +66,7 @@
     .brand h1{
       margin:0;
       font-size:14px;
-      font-weight:900;
+      font-weight:950;
       letter-spacing:-0.01em;
       line-height:1.1;
     }
@@ -92,7 +92,7 @@
       border:1px solid rgba(148,163,184,.55);
       background:rgba(255,255,255,.95);
       font-size:12px;
-      font-weight:800;
+      font-weight:900;
       color:#374151;
       box-shadow:0 1px 2px var(--shadow);
       white-space:nowrap;
@@ -100,20 +100,18 @@
 
     /* Main panel */
     .wrap{
-      max-width:1100px;
+      max-width:1120px;
       margin:0 auto;
-      padding:0 16px 90px; /* leave space for fixed chat */
+      padding:0 16px 96px; /* space for fixed chat */
     }
-
     .panel{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:18px;
       box-shadow:0 1px 3px var(--shadow);
       overflow:hidden;
-      min-height:520px;
+      min-height:560px;
     }
-
     .panel-head{
       padding:12px 14px;
       border-bottom:1px solid var(--border);
@@ -128,7 +126,7 @@
       display:flex;
       align-items:center;
       gap:10px;
-      font-weight:900;
+      font-weight:950;
       letter-spacing:-0.01em;
     }
     .panel-head .title .emoji{
@@ -144,7 +142,7 @@
     .panel-head .hint{
       font-size:12px;
       color:var(--muted);
-      font-weight:700;
+      font-weight:800;
     }
 
     .body{
@@ -173,8 +171,9 @@
     /* Dashboard cards */
     .grid{
       display:grid;
-      grid-template-columns:repeat(3, minmax(220px, 1fr));
+      grid-template-columns:repeat(2, minmax(320px, 1fr));
       gap:12px;
+      align-items:stretch;
     }
     @media (max-width:980px){ .grid{grid-template-columns:1fr;} }
 
@@ -228,9 +227,9 @@
     .b-bad{color:#991b1b; border-color:rgba(239,68,68,.35); background:rgba(239,68,68,.08);}
     .b-info{color:#1d4ed8; border-color:rgba(37,99,235,.35); background:rgba(37,99,235,.08);}
 
-    /* Detail view */
+    /* Detail pages */
     .detail{
-      max-width:820px;
+      max-width:900px;
       margin:0 auto;
     }
     .detail-head{
@@ -252,8 +251,9 @@
       font-size:13px;
       color:var(--muted);
       line-height:1.45;
-      max-width:60ch;
+      max-width:68ch;
     }
+
     .btn{
       border:1px solid rgba(148,163,184,.65);
       background:rgba(255,255,255,.98);
@@ -261,7 +261,7 @@
       border-radius:14px;
       padding:9px 12px;
       font-size:13px;
-      font-weight:900;
+      font-weight:950;
       cursor:pointer;
       white-space:nowrap;
       box-shadow:0 1px 2px var(--shadow);
@@ -273,9 +273,7 @@
       color:#fff;
     }
     .btn.primary:hover{background:#4338ca;border-color:#4338ca;color:#fff;}
-    .btn.ghost{
-      color:#111827;
-    }
+    .btn.ghost{ color:#111827; }
 
     .section{
       border:1px solid var(--border);
@@ -291,7 +289,7 @@
       font-weight:950;
       letter-spacing:-0.01em;
     }
-    .section .small{
+    .small{
       font-size:12px;
       color:var(--muted);
       line-height:1.5;
@@ -302,31 +300,82 @@
       border-top:1px dashed #e5e7eb;
     }
 
-    .kpis{
+    /* Lists */
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .row{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:10px 10px;
+      background:#fff;
+      box-shadow:0 1px 3px var(--shadow);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      cursor:pointer;
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+    .row:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+    }
+    .row .left{
+      min-width:0;
+    }
+    .row .title{
+      font-weight:950;
+      font-size:13px;
+      margin:0;
+      color:#111827;
+    }
+    .row .meta{
+      margin-top:4px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.4;
+    }
+    .row .right{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      flex:0 0 auto;
+    }
+
+    /* “Choose your adventure” tiles */
+    .tiles{
       display:grid;
-      grid-template-columns:repeat(3, minmax(180px, 1fr));
+      grid-template-columns:repeat(3, minmax(220px, 1fr));
       gap:10px;
       margin-top:10px;
     }
-    @media (max-width:980px){ .kpis{grid-template-columns:1fr;} }
-    .kpi{
-      border:1px solid #eef2f7;
-      background:#fbfdff;
-      border-radius:16px;
-      padding:10px;
+    @media (max-width:980px){ .tiles{grid-template-columns:1fr;} }
+    .tile{
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:#fff;
+      box-shadow:0 1px 3px var(--shadow);
+      padding:12px;
+      cursor:pointer;
+      transition:transform .12s ease, box-shadow .12s ease;
     }
-    .kpi .label{
-      font-size:11px;
-      color:var(--muted);
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      font-weight:900;
-      margin-bottom:6px;
-    }
-    .kpi .value{
-      font-size:16px;
+    .tile:hover{transform:translateY(-1px); box-shadow:0 10px 30px rgba(0,0,0,.06);}
+    .tile h5{
+      margin:0 0 6px;
+      font-size:13px;
       font-weight:950;
       letter-spacing:-0.01em;
+    }
+    .tile p{
+      margin:0;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.45;
     }
 
     /* Fixed chat (bottom) */
@@ -339,7 +388,7 @@
       backdrop-filter:saturate(120%) blur(6px);
     }
     .chat-inner{
-      max-width:1100px;
+      max-width:1120px;
       margin:0 auto;
       display:flex;
       align-items:center;
@@ -382,7 +431,7 @@
       padding:10px 12px;
       border-radius:999px;
       font-size:12px;
-      font-weight:900;
+      font-weight:950;
       box-shadow:0 12px 30px rgba(0,0,0,.18);
       opacity:0;
       pointer-events:none;
@@ -417,9 +466,9 @@
       <div class="panel-head">
         <div class="title">
           <div class="emoji">📋</div>
-          <div>Morning Brief</div>
+          <div id="panelTitle">Morning Brief</div>
         </div>
-        <div class="hint" id="statusHint">Type “Review Morning Brief” below and press Enter.</div>
+        <div class="hint" id="statusHint">Press Enter to review your morning brief.</div>
       </div>
 
       <div class="body" id="mainBody">
@@ -441,38 +490,107 @@
 
   <script>
     /***********************
-     * Demo policy defaults
+     * Policy (global default + role overrides when approved)
      ***********************/
     const POLICY = {
-      globalMinSendsForLearning: 100,        // default threshold (global)
-      roleOverrides: {                       // easily customizable when needed + approved
-        // "Backend Engineer (US)": { minSendsForLearning: 200 }
+      globalMinSendsForLearning: 100,
+      roleOverrides: {
+        // example: "Executive Search (VP Eng)": { minSendsForLearning: 250 }
       }
     };
+
+    function getRolePolicy(roleName){
+      const override = POLICY.roleOverrides[roleName];
+      return {
+        minSendsForLearning: (override && override.minSendsForLearning)
+          ? override.minSendsForLearning
+          : POLICY.globalMinSendsForLearning
+      };
+    }
 
     /***********************
      * Demo data (stub)
      ***********************/
-    const DEMO = {
+    const DATA = {
       locationLabel: "San Francisco (stub)",
       weatherLabel: "☀️ 58°F",
-      roles: {
-        "Backend Engineer (US)": {
-          sendsToDate: 143,
-          replyDipWoW: 9,
-          openLiftFromSubjectOrder: 6,
-          pipelineDeltaVsPlan: -18,
-          breakPoint: "Screen → Hiring Manager"
+      interviews: [
+        { id:"i1", time:"10:30", candidate:"A. Chen", stage:"HM Screen", interviewer:"J. Rivera", reqId:"r1", prepNeeded:true },
+        { id:"i2", time:"11:15", candidate:"M. Patel", stage:"Tech Screen", interviewer:"S. Kim", reqId:"r1", prepNeeded:false },
+        { id:"i3", time:"1:00",  candidate:"L. Gomez", stage:"Panel",     interviewer:"Panel (3)", reqId:"r2", prepNeeded:true },
+        { id:"i4", time:"2:30",  candidate:"K. Nguyen", stage:"Recruiter Screen", interviewer:"You", reqId:"r3", prepNeeded:false },
+        { id:"i5", time:"4:00",  candidate:"R. Singh", stage:"Offer Chat", interviewer:"HM + You", reqId:"r2", prepNeeded:false }
+      ],
+      requisitions: [
+        {
+          id:"r1",
+          title:"Backend Engineer (US)",
+          location:"Remote / US",
+          health:"at_risk", // healthy | early | at_risk
+          why:"Break at Screen → HM. Volume trending below plan.",
+          sendsToDate:143,
+          replyDipWoW:9,
+          pipelineDeltaVsPlan:-18,
+          breakPoint:"Screen → Hiring Manager",
+          autonomy:{
+            applied:[
+              { tier:1, label:"Send window optimization", detail:"Adjusted send time within approved window (no content changes)." },
+              { tier:2, label:"Subject ordering", detail:"Reordered approved subject lines after threshold met." },
+              { tier:3, label:"Variant pruning", detail:"Paused underperforming approved subject line (reversible)." }
+            ],
+            pending:[
+              { tier:4, label:"Draft body revision", detail:"Prepared revised body copy. Requires approval before use." }
+            ]
+          }
+        },
+        {
+          id:"r2",
+          title:"Data Engineer (SF)",
+          location:"San Francisco, CA",
+          health:"early",
+          why:"Early signal: response softening in senior band.",
+          sendsToDate:98,
+          replyDipWoW:4,
+          pipelineDeltaVsPlan:-6,
+          breakPoint:"Sourcing → Screen",
+          autonomy:{
+            applied:[
+              { tier:1, label:"Delivery hygiene", detail:"Retried failed sends; cleaned formatting (no meaning changes)." }
+            ],
+            pending:[]
+          }
+        },
+        {
+          id:"r3",
+          title:"Recruiting Operations (Contract)",
+          location:"Remote",
+          health:"healthy",
+          why:"On track. Interview loop is staffed and moving.",
+          sendsToDate:210,
+          replyDipWoW:1,
+          pipelineDeltaVsPlan:3,
+          breakPoint:"—",
+          autonomy:{
+            applied:[
+              { tier:1, label:"Send scheduling", detail:"Aligned send time to approved window." }
+            ],
+            pending:[]
+          }
         }
-      },
-      autonomy: {
-        applied: [
-          { tier: 1, label: "Send window optimization", detail: "Adjusted send time within approved window (no content changes)." },
-          { tier: 2, label: "Subject ordering", detail: "Reordered approved subject lines after threshold met." },
-          { tier: 3, label: "Variant pruning", detail: "Paused underperforming approved subject line (reversible)." }
-        ],
-        pending: [
-          { tier: 4, label: "Draft body revision", detail: "Prepared a revised email body to address objections. Requires approval before any use." }
+      ],
+      projects: [
+        { id:"p1", title:"Market map — ML Platform (next quarter req)", due:"Tue", status:"Needs attention", next:"Finalize target company list + share with HM." },
+        { id:"p2", title:"New req intake — Security Eng (opens next week)", due:"Fri", status:"In progress", next:"Draft kickoff doc + calibration questions." },
+        { id:"p3", title:"Interview loop cleanup", due:"—", status:"Backlog", next:"Standardize scorecard rubric for Eng roles." }
+      ],
+      brand: {
+        glassdoorPending: 2,
+        glassdoorDraftsReady: 1,
+        linkedinScheduled: 1,
+        items: [
+          { id:"b1", type:"Glassdoor", title:"Response needed: 3★ review", status:"Pending", note:"Draft ready (Tier 4 approval if posting)." },
+          { id:"b2", type:"Glassdoor", title:"Response needed: 2★ review", status:"Pending", note:"No draft yet." },
+          { id:"b3", type:"LinkedIn", title:"Scheduled post: Hiring update", status:"Scheduled", note:"Goes out at 12:05 (Tier 1 scheduling)." }
         ]
       }
     };
@@ -487,13 +605,6 @@
       setTimeout(()=>toast.classList.remove("show"), 1200);
     }
 
-    function getRolePolicy(roleName){
-      const override = POLICY.roleOverrides[roleName];
-      return {
-        minSendsForLearning: (override && override.minSendsForLearning) ? override.minSendsForLearning : POLICY.globalMinSendsForLearning
-      };
-    }
-
     function fmtDate(){
       const d = new Date();
       return d.toLocaleDateString(undefined, { weekday:"long", year:"numeric", month:"long", day:"numeric" });
@@ -503,279 +614,707 @@
       return d.toLocaleTimeString([], { hour:"2-digit", minute:"2-digit" });
     }
 
+    function healthBadge(health){
+      if(health === "healthy") return `<span class="badge b-good">✅ Healthy</span>`;
+      if(health === "early") return `<span class="badge b-warn">📉 Early signal</span>`;
+      return `<span class="badge b-bad">⛔ At risk</span>`;
+    }
+
+    function healthLabelCounts(){
+      const total = DATA.requisitions.length;
+      const healthy = DATA.requisitions.filter(r=>r.health==="healthy").length;
+      const early = DATA.requisitions.filter(r=>r.health==="early").length;
+      const atRisk = DATA.requisitions.filter(r=>r.health==="at_risk").length;
+      return { total, healthy, early, atRisk };
+    }
+
+    function nextInterview(){
+      // stub: first in list
+      return DATA.interviews[0] || null;
+    }
+
+    function nextProjectDue(){
+      // stub: first
+      return DATA.projects[0] || null;
+    }
+
+    function getReq(reqId){
+      return DATA.requisitions.find(r=>r.id===reqId);
+    }
+
     /***********************
-     * UI templates
+     * Render state
      ***********************/
     const mainBody = document.getElementById("mainBody");
     const statusHint = document.getElementById("statusHint");
+    const panelTitle = document.getElementById("panelTitle");
 
+    const state = {
+      view: "empty",
+      reqId: null,
+      interviewId: null
+    };
+
+    function setHeader(title, hint){
+      panelTitle.textContent = title;
+      statusHint.textContent = hint;
+    }
+
+    /***********************
+     * Templates
+     ***********************/
     function tplEmpty(){
+      setHeader("Morning Brief", "Press Enter to review your morning brief.");
       return `
         <div class="empty">
           <h2>Good morning.</h2>
-          <p>Press Enter to review your morning brief.</p>
+          <p>Press Enter to load your day: interviews, open requisitions, projects, and employer brand.</p>
         </div>
       `;
     }
 
-    function tplDashboard(){
-      const role = DEMO.roles["Backend Engineer (US)"];
-      const rolePolicy = getRolePolicy("Backend Engineer (US)");
-      const thresholdMet = role.sendsToDate >= rolePolicy.minSendsForLearning;
+    function tplBrief(){
+      const counts = healthLabelCounts();
+      const ni = nextInterview();
+      const prepNeeded = DATA.interviews.filter(i=>i.prepNeeded).length;
+      const np = nextProjectDue();
 
-      const autonomyAppliedCount = DEMO.autonomy.applied.length;
-      const autonomyPendingCount = DEMO.autonomy.pending.length;
+      const interviewLine = ni
+        ? `${ni.time} — ${ni.candidate} (${ni.stage})`
+        : `No interviews scheduled`;
 
+      const projectsLine = np
+        ? `${DATA.projects.length} active · Next due: ${np.due} — ${np.title}`
+        : `${DATA.projects.length} active`;
+
+      const brandLine =
+        `${DATA.brand.glassdoorPending} Glassdoor pending · ${DATA.brand.linkedinScheduled} LinkedIn scheduled`;
+
+      setHeader("Morning Brief", "Click a card to review details.");
       return `
         <div class="grid" role="list">
-          <div class="card" role="listitem" data-card="pipeline">
+          <div class="card" role="listitem" data-nav="interviews">
             <div class="card-top">
-              <h3>Pipeline Health</h3>
-              <span class="badge b-bad">⛔ At risk</span>
+              <h3>Today’s Interviews</h3>
+              <span class="badge ${prepNeeded ? "b-warn" : "b-good"}">${prepNeeded ? `⚠️ Prep needed: ${prepNeeded}` : "✅ Ready"}</span>
             </div>
-            <p><strong>Backend Engineer (US)</strong> trending <strong>${role.pipelineDeltaVsPlan}% vs plan</strong>. Break at <strong>${role.breakPoint}</strong>.</p>
+            <p>${interviewLine}</p>
           </div>
 
-          <div class="card" role="listitem" data-card="outreach">
+          <div class="card" role="listitem" data-nav="reqs">
             <div class="card-top">
-              <h3>Outreach Signals</h3>
-              <span class="badge b-warn">📉 Early signal</span>
+              <h3>Open Requisitions</h3>
+              <span class="badge b-info">📌 ${counts.total} open</span>
             </div>
-            <p>Reply rate down <strong>${role.replyDipWoW}% WoW</strong>. Learning threshold: <strong>${rolePolicy.minSendsForLearning}</strong> sends (${thresholdMet ? "met" : "not met"}).</p>
+            <p>${counts.healthy} healthy · ${counts.early} early signal · ${counts.atRisk} at risk</p>
           </div>
 
-          <div class="card" role="listitem" data-card="autonomy">
+          <div class="card" role="listitem" data-nav="projects">
             <div class="card-top">
-              <h3>Autonomy</h3>
-              <span class="badge b-info">🧭 Tiered</span>
+              <h3>Projects & Deadlines</h3>
+              <span class="badge b-info">🧩 Active</span>
             </div>
-            <p><strong>${autonomyAppliedCount}</strong> corrections applied within boundaries (Tier 1–3). <strong>${autonomyPendingCount}</strong> scope-expansion item pending approval (Tier 4).</p>
+            <p>${projectsLine}</p>
+          </div>
+
+          <div class="card" role="listitem" data-nav="brand">
+            <div class="card-top">
+              <h3>Employer Brand / Socials</h3>
+              <span class="badge b-info">💬 Queues</span>
+            </div>
+            <p>${brandLine}</p>
           </div>
         </div>
 
-        <div style="max-width:820px;margin:14px auto 0;">
+        <div style="max-width:900px;margin:14px auto 0;">
           <div class="section">
-            <h4>Summary</h4>
+            <h4>Policy snapshot</h4>
             <p class="small">
-              Chief applied low-risk optimizations within policy and is holding scope-expansion changes for approval.
-              Default learning threshold is <strong>${POLICY.globalMinSendsForLearning}</strong> sends (global), with role-based overrides available when approved.
+              Global learning threshold is <strong>${POLICY.globalMinSendsForLearning}</strong> sends.
+              Tier 1–3 actions may be applied within approved boundaries; Tier 4 scope expansion requires explicit approval.
             </p>
           </div>
         </div>
       `;
     }
 
-    function tplDetailPipeline(){
-      const role = DEMO.roles["Backend Engineer (US)"];
+    function tplInterviews(){
+      setHeader("Today’s Interviews", "Click an interview to review candidate prep.");
+      const list = DATA.interviews.map(i=>{
+        const req = getReq(i.reqId);
+        const reqTag = req ? req.title : "—";
+        return `
+          <div class="row" data-interview="${i.id}">
+            <div class="left">
+              <div class="title">${i.time} — ${i.candidate} <span style="font-weight:800;color:#6b7280;">· ${i.stage}</span></div>
+              <div class="meta">${reqTag} · Interviewer: ${i.interviewer}</div>
+            </div>
+            <div class="right">
+              ${i.prepNeeded ? `<span class="badge b-warn">⚠️ Prep</span>` : `<span class="badge b-good">✅ Ready</span>`}
+              <span class="badge b-info">Review</span>
+            </div>
+          </div>
+        `;
+      }).join("");
+
       return `
         <div class="detail">
           <div class="detail-head">
             <div>
-              <h2>Pipeline Health — Backend Engineer (US)</h2>
-              <p>High risk flagged. This is a situational overview for decision-making (not a full analytics report).</p>
+              <h2>Today’s Interviews</h2>
+              <p>Fast list-first view. Drill down only where you need context.</p>
             </div>
-            <button class="btn ghost" data-back="1">← Back</button>
+            <button class="btn ghost" data-nav="brief">← Back</button>
+          </div>
+
+          <div class="section">
+            <h4>Schedule</h4>
+            <div class="list">${list || `<p class="small">No interviews scheduled.</p>`}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function tplInterviewDetail(interviewId){
+      const i = DATA.interviews.find(x=>x.id===interviewId);
+      if(!i) return tplInterviews();
+      const req = getReq(i.reqId);
+
+      setHeader("Interview Prep", "Review summary, then choose your next action.");
+      return `
+        <div class="detail">
+          <div class="detail-head">
+            <div>
+              <h2>${i.time} — ${i.candidate} (${i.stage})</h2>
+              <p>${req ? req.title : "Requisition"} · Interviewer: ${i.interviewer}</p>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn ghost" data-nav="interviews">← Back</button>
+            </div>
+          </div>
+
+          <div class="section">
+            <h4>Candidate summary (stub)</h4>
+            <p class="small">
+              6+ years backend · Python/Go · scaled services to 10M+ users. Strength: ownership + reliability.
+              Risk: limited distributed tracing depth. Focus questions: incident handling, tradeoffs, system boundaries.
+            </p>
+
+            <div class="divider"></div>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn" data-toast="Would open scorecard (stub).">Open scorecard</button>
+              <button class="btn" data-toast="Would send reminder within Tier 1 (stub).">Send reminder</button>
+              ${req ? `<button class="btn primary" data-req="${req.id}" data-nav="req_detail">View req brief</button>` : ""}
+            </div>
+          </div>
+
+          <div class="section">
+            <h4>Prep status</h4>
+            <p class="small">${i.prepNeeded ? "⚠️ Prep flagged: key notes missing. Consider reviewing last interview feedback before start." : "✅ Prep complete."}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function tplReqs(){
+      const counts = healthLabelCounts();
+      setHeader("Open Requisitions", "Each req has a health rating. Click to troubleshoot.");
+      const list = DATA.requisitions.map(r=>`
+        <div class="row" data-req="${r.id}">
+          <div class="left">
+            <div class="title">${r.title} <span style="font-weight:800;color:#6b7280;">· ${r.location}</span></div>
+            <div class="meta">${r.why}</div>
+          </div>
+          <div class="right">
+            ${healthBadge(r.health)}
+            <span class="badge b-info">Review</span>
+          </div>
+        </div>
+      `).join("");
+
+      return `
+        <div class="detail">
+          <div class="detail-head">
+            <div>
+              <h2>Open Requisitions</h2>
+              <p>${counts.total} open · ${counts.healthy} healthy · ${counts.early} early signal · ${counts.atRisk} at risk</p>
+            </div>
+            <button class="btn ghost" data-nav="brief">← Back</button>
+          </div>
+
+          <div class="section">
+            <h4>Requisition list</h4>
+            <div class="list">${list}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function tplReqDetail(reqId){
+      const r = getReq(reqId);
+      if(!r) return tplReqs();
+
+      const rp = getRolePolicy(r.title);
+      const thresholdMet = r.sendsToDate >= rp.minSendsForLearning;
+      const appliedCount = r.autonomy.applied.length;
+      const pendingCount = r.autonomy.pending.length;
+
+      setHeader("Req Brief", "Choose your adventure: Pipeline, Outreach, or Loop.");
+      return `
+        <div class="detail">
+          <div class="detail-head">
+            <div>
+              <h2>${r.title}</h2>
+              <p>${r.location} · ${healthBadge(r.health)} · ${r.why}</p>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn ghost" data-nav="reqs">← Back</button>
+            </div>
+          </div>
+
+          <div class="section">
+            <h4>Quick status</h4>
+            <p class="small">
+              Pipeline vs plan: <strong>${r.pipelineDeltaVsPlan}%</strong> · Break: <strong>${r.breakPoint}</strong> · Sends: <strong>${r.sendsToDate}</strong> · Reply dip: <strong>${r.replyDipWoW}% WoW</strong>
+            </p>
+            <div class="divider"></div>
+            <p class="small">
+              <strong>Learning threshold:</strong> ${rp.minSendsForLearning} sends (${thresholdMet ? "met" : "not met"}).
+              Below threshold, Chief will not make learning-based changes unless you explicitly command it.
+            </p>
+          </div>
+
+          <div class="section">
+            <h4>Choose your adventure</h4>
+            <div class="tiles">
+              <div class="tile" data-nav="req_pipeline" data-req="${r.id}">
+                <h5>📊 Pipeline</h5>
+                <p>Bottlenecks, stage breaks, throughput levers.</p>
+              </div>
+              <div class="tile" data-nav="req_outreach" data-req="${r.id}">
+                <h5>✉️ Outreach</h5>
+                <p>Response signals, learning threshold, content tiers.</p>
+              </div>
+              <div class="tile" data-nav="req_loop" data-req="${r.id}">
+                <h5>🧩 Interview Loop</h5>
+                <p>Panel coverage, scorecards, speed, decision friction.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <h4>Autonomy (scoped to this req)</h4>
+            <p class="small">
+              Applied within boundaries (Tier 1–3): <strong>${appliedCount}</strong> · Pending approval (Tier 4): <strong>${pendingCount}</strong>
+            </p>
+            <div class="divider"></div>
+            <button class="btn" data-nav="req_outreach" data-req="${r.id}">Review autonomy + outreach details</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function tplReqPipeline(reqId){
+      const r = getReq(reqId);
+      if(!r) return tplReqs();
+
+      setHeader("Req · Pipeline", "Troubleshoot bottlenecks and levers.");
+      return `
+        <div class="detail">
+          <div class="detail-head">
+            <div>
+              <h2>${r.title} — Pipeline</h2>
+              <p>Focus: where flow breaks and what lever is lowest-lift.</p>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn ghost" data-nav="req_detail" data-req="${r.id}">← Back</button>
+            </div>
           </div>
 
           <div class="section">
             <h4>What changed</h4>
-            <p class="small">Pipeline volume trending <strong>${role.pipelineDeltaVsPlan}% vs plan</strong>. Primary breakpoint: <strong>${role.breakPoint}</strong>.</p>
-
-            <div class="kpis">
-              <div class="kpi">
-                <div class="label">Risk Level</div>
-                <div class="value">High</div>
-                <div class="badge b-bad">⛔ Miss-start risk</div>
-              </div>
-              <div class="kpi">
-                <div class="label">Primary Break</div>
-                <div class="value">${role.breakPoint}</div>
-                <div class="badge b-warn">⚠️ Conversion dip</div>
-              </div>
-              <div class="kpi">
-                <div class="label">Fastest Lever</div>
-                <div class="value">Outreach</div>
-                <div class="badge b-good">✅ Low lift</div>
-              </div>
-            </div>
+            <p class="small">Pipeline trending <strong>${r.pipelineDeltaVsPlan}% vs plan</strong>. Primary breakpoint: <strong>${r.breakPoint}</strong>.</p>
           </div>
 
           <div class="section">
-            <h4>Recommended next review</h4>
-            <p class="small">Review Outreach Signals first. It’s reversible and the fastest input lever.</p>
+            <h4>Next actions (choose)</h4>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn primary" data-nav="req_outreach" data-req="${r.id}">Review outreach levers</button>
+              <button class="btn" data-toast="Would open forecasting sheet (stub).">Open planning sheet</button>
+              <button class="btn" data-toast="Would generate HM calibration prompts (stub).">Generate HM calibration prompts</button>
+            </div>
             <div class="divider"></div>
-            <button class="btn primary" data-go="outreach">Review Outreach Signals</button>
+            <p class="small">Note: detailed analytics can live elsewhere — this view stays decision-first.</p>
           </div>
         </div>
       `;
     }
 
-    function tplDetailOutreach(){
-      const roleName = "Backend Engineer (US)";
-      const role = DEMO.roles[roleName];
-      const rolePolicy = getRolePolicy(roleName);
-      const thresholdMet = role.sendsToDate >= rolePolicy.minSendsForLearning;
+    function tplReqOutreach(reqId){
+      const r = getReq(reqId);
+      if(!r) return tplReqs();
 
+      const rp = getRolePolicy(r.title);
+      const thresholdMet = r.sendsToDate >= rp.minSendsForLearning;
+
+      const applied = r.autonomy.applied;
+      const pending = r.autonomy.pending;
+
+      setHeader("Req · Outreach", "Tiered autonomy + threshold guardrails.");
       return `
         <div class="detail">
           <div class="detail-head">
             <div>
-              <h2>Outreach Signals — ${roleName}</h2>
-              <p>Tiered autonomy applies: time-of-day + approved subject lines may optimize only after minimum sends.</p>
+              <h2>${r.title} — Outreach</h2>
+              <p>Below <strong>${rp.minSendsForLearning}</strong> sends, Chief monitors only unless commanded. Above threshold, Tier 1–3 optimizations may run within policy.</p>
             </div>
-            <button class="btn ghost" data-back="1">← Back</button>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn ghost" data-nav="req_detail" data-req="${r.id}">← Back</button>
+            </div>
           </div>
 
           <div class="section">
-            <h4>Signal</h4>
-            <p class="small">Reply rate down <strong>${role.replyDipWoW}% week over week</strong>. Send count to date: <strong>${role.sendsToDate}</strong>.</p>
-
-            <div class="kpis">
-              <div class="kpi">
-                <div class="label">Learning threshold</div>
-                <div class="value">${rolePolicy.minSendsForLearning}</div>
-                <div class="badge ${thresholdMet ? "b-good" : "b-warn"}">${thresholdMet ? "✅ Met" : "⏳ Not met"}</div>
-              </div>
-              <div class="kpi">
-                <div class="label">Within-boundary action</div>
-                <div class="value">Subject ordering</div>
-                <div class="badge b-info">Tier 2–3</div>
-              </div>
-              <div class="kpi">
-                <div class="label">Projected lift</div>
-                <div class="value">+${role.openLiftFromSubjectOrder}% opens</div>
-                <div class="badge b-good">✅ Reversible</div>
-              </div>
-            </div>
-
+            <h4>Signal + threshold</h4>
+            <p class="small">Sends: <strong>${r.sendsToDate}</strong> · Reply dip: <strong>${r.replyDipWoW}% WoW</strong></p>
             <div class="divider"></div>
-
             <p class="small">
-              <strong>Rule:</strong> below <strong>${rolePolicy.minSendsForLearning}</strong> sends, Chief will not change optimization strategy
-              (no learning-based updates) unless you explicitly command it. This prevents noisy conclusions from small samples.
+              Learning threshold: <strong>${rp.minSendsForLearning}</strong> (${thresholdMet ? "✅ met" : "⏳ not met"}).
+              ${thresholdMet
+                ? "Tier 2–3 optimization is permitted within the approved scope (send time + approved subject lines)."
+                : "No learning-based changes will be made below threshold unless you explicitly command it."
+              }
             </p>
           </div>
 
           <div class="section">
-            <h4>What was applied (within boundaries)</h4>
-            <p class="small">If threshold is met, Chief may optimize <strong>send time</strong> and <strong>approved subject lines</strong> (Tier 1–3) and report outcomes.</p>
-            <div class="divider"></div>
-            <button class="btn" data-toast="Noted. This is an applied Tier 2–3 adjustment (demo).">Acknowledge</button>
+            <h4>Already applied (Tier 1–3) — within boundaries</h4>
+            ${applied.length
+              ? `<ul style="margin:0 0 0 18px;padding:0;color:#374151;font-size:13px;line-height:1.55;">
+                  ${applied.map(a=>`<li><strong>Tier ${a.tier}:</strong> ${a.label} — ${a.detail}</li>`).join("")}
+                 </ul>`
+              : `<p class="small">No within-boundary changes applied for this req.</p>`
+            }
           </div>
 
           <div class="section">
-            <h4>What requires approval</h4>
-            <p class="small"><strong>Tier 4:</strong> rewriting the full email body (or changing meaning/claims) is held for explicit approval.</p>
+            <h4>Pending approval (Tier 4) — scope expansion</h4>
+            ${pending.length
+              ? pending.map(p=>`
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+                    <div>
+                      <div style="font-weight:950;font-size:13px;">Tier ${p.tier}: ${p.label}</div>
+                      <div class="small" style="margin-top:6px;">${p.detail}</div>
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                      <button class="btn primary" data-toast="Approved Tier 4 (demo). Would apply + audit log.">Approve</button>
+                      <button class="btn" data-toast="Rejected Tier 4 (demo). Draft discarded.">Reject</button>
+                    </div>
+                  </div>
+                `).join("")
+              : `<p class="small">No Tier 4 items pending.</p>`
+            }
             <div class="divider"></div>
-            <button class="btn primary" data-go="autonomy">Review Tier 4 pending item</button>
+            <p class="small">
+              <strong>Global default:</strong> ${POLICY.globalMinSendsForLearning} sends. Role overrides exist, but require approval to change.
+            </p>
           </div>
         </div>
       `;
     }
 
-    function tplDetailAutonomy(){
-      const applied = DEMO.autonomy.applied;
-      const pending = DEMO.autonomy.pending;
+    function tplReqLoop(reqId){
+      const r = getReq(reqId);
+      if(!r) return tplReqs();
+
+      setHeader("Req · Interview Loop", "Speed, coverage, scorecards, decision friction.");
+      return `
+        <div class="detail">
+          <div class="detail-head">
+            <div>
+              <h2>${r.title} — Interview Loop</h2>
+              <p>Recruiter-native view: what’s blocking decisions and where the loop is leaking.</p>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn ghost" data-nav="req_detail" data-req="${r.id}">← Back</button>
+            </div>
+          </div>
+
+          <div class="section">
+            <h4>Today’s loop status (stub)</h4>
+            <p class="small">Panel coverage: ✅ staffed · Scorecards: ⚠️ 2 pending from yesterday · Decision SLA: 48 hours target</p>
+            <div class="divider"></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn" data-toast="Would nudge interviewers (Tier 1, stub).">Send scorecard nudges</button>
+              <button class="btn" data-toast="Would open scorecard dashboard (stub).">Open scorecard dashboard</button>
+              <button class="btn primary" data-nav="interviews">Go to today’s interviews</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function tplProjects(){
+      setHeader("Projects & Deadlines", "Click a project to review next action.");
+      const list = DATA.projects.map(p=>`
+        <div class="row" data-project="${p.id}">
+          <div class="left">
+            <div class="title">${p.title}</div>
+            <div class="meta">Due: ${p.due} · Status: ${p.status}</div>
+          </div>
+          <div class="right">
+            <span class="badge b-info">Next</span>
+          </div>
+        </div>
+      `).join("");
 
       return `
         <div class="detail">
           <div class="detail-head">
             <div>
-              <h2>Autonomy — Tiered Policy</h2>
-              <p>Global default: <strong>${POLICY.globalMinSendsForLearning}</strong> sends before learning-based changes. Overrides are available when needed and approved.</p>
+              <h2>Projects & Deadlines</h2>
+              <p>${DATA.projects.length} active items. Keep this list small and decisive.</p>
             </div>
-            <button class="btn ghost" data-back="1">← Back</button>
+            <button class="btn ghost" data-nav="brief">← Back</button>
           </div>
 
           <div class="section">
-            <h4>Completed within boundaries (Tier 1–3)</h4>
-            <p class="small">These were applied autonomously because they’re low-risk and reversible.</p>
+            <h4>Active work</h4>
+            <div class="list">${list}</div>
+          </div>
+
+          <div class="section">
+            <h4>Note</h4>
+            <p class="small">Projects can include market maps, intake prep, process improvements, and cross-functional workstreams.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function tplProjectDetail(projectId){
+      const p = DATA.projects.find(x=>x.id===projectId);
+      if(!p) return tplProjects();
+
+      setHeader("Project", "Review next step, then act.");
+      return `
+        <div class="detail">
+          <div class="detail-head">
+            <div>
+              <h2>${p.title}</h2>
+              <p>Due: ${p.due} · Status: ${p.status}</p>
+            </div>
+            <button class="btn ghost" data-nav="projects">← Back</button>
+          </div>
+
+          <div class="section">
+            <h4>Next action</h4>
+            <p class="small">${p.next}</p>
             <div class="divider"></div>
-            <ul style="margin:0 0 0 18px;padding:0;color:#374151;font-size:13px;line-height:1.55;">
-              ${applied.map(a=>`<li><strong>Tier ${a.tier}:</strong> ${a.label} — ${a.detail}</li>`).join("")}
-            </ul>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn primary" data-toast="Would draft a project update (stub).">Draft update</button>
+              <button class="btn" data-toast="Would open project doc (stub).">Open doc</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function tplBrand(){
+      setHeader("Employer Brand / Socials", "Glassdoor + social queues (manual work made visible).");
+      const list = DATA.brand.items.map(b=>`
+        <div class="row" data-brand="${b.id}">
+          <div class="left">
+            <div class="title">${b.type}: ${b.title}</div>
+            <div class="meta">${b.status} · ${b.note}</div>
+          </div>
+          <div class="right">
+            <span class="badge b-info">Review</span>
+          </div>
+        </div>
+      `).join("");
+
+      return `
+        <div class="detail">
+          <div class="detail-head">
+            <div>
+              <h2>Employer Brand / Socials</h2>
+              <p>Glassdoor responses, posts, and other brand stewardship tasks.</p>
+            </div>
+            <button class="btn ghost" data-nav="brief">← Back</button>
           </div>
 
           <div class="section">
-            <h4>Pending approval (Tier 4)</h4>
-            <p class="small">Scope expansion changes are drafted but not applied.</p>
-            <div class="divider"></div>
-            ${pending.map(p=>`
-              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
-                <div>
-                  <div style="font-weight:950;font-size:13px;">Tier ${p.tier}: ${p.label}</div>
-                  <div class="small" style="margin-top:6px;">${p.detail}</div>
-                </div>
-                <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                  <button class="btn primary" data-toast="Approved Tier 4 (demo). Chief would apply and monitor.">Approve</button>
-                  <button class="btn" data-toast="Rejected Tier 4 (demo). Draft discarded.">Reject</button>
-                </div>
-              </div>
-            `).join("")}
-          </div>
-
-          <div class="section">
-            <h4>Override controls (concept)</h4>
+            <h4>Queues</h4>
             <p class="small">
-              Overrides are role-based and require approval to change thresholds (e.g., exec roles: higher threshold).
-              This demo keeps overrides as a configuration concept (no UI controls needed on the morning screen).
+              Glassdoor pending: <strong>${DATA.brand.glassdoorPending}</strong> · Drafts ready: <strong>${DATA.brand.glassdoorDraftsReady}</strong> · LinkedIn scheduled: <strong>${DATA.brand.linkedinScheduled}</strong>
             </p>
+            <div class="divider"></div>
+            <div class="list">${list}</div>
+          </div>
+
+          <div class="section">
+            <h4>Autonomy note</h4>
+            <p class="small">Tier 4 applies to posting full-text responses. Chief can draft, but will not post without approval.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function tplBrandDetail(brandId){
+      const b = DATA.brand.items.find(x=>x.id===brandId);
+      if(!b) return tplBrand();
+
+      setHeader("Brand Item", "Drafts are allowed; posting requires approval.");
+      return `
+        <div class="detail">
+          <div class="detail-head">
+            <div>
+              <h2>${b.type}: ${b.title}</h2>
+              <p>Status: ${b.status} · ${b.note}</p>
+            </div>
+            <button class="btn ghost" data-nav="brand">← Back</button>
+          </div>
+
+          <div class="section">
+            <h4>Recommended next step</h4>
+            <p class="small">
+              Chief can draft a response (Tier 4) and hold it for approval. No posting occurs without explicit confirmation.
+            </p>
+            <div class="divider"></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn primary" data-toast="Would generate a draft response (stub).">Generate draft</button>
+              <button class="btn" data-toast="Would open Glassdoor (stub).">Open Glassdoor</button>
+            </div>
           </div>
         </div>
       `;
     }
 
     /***********************
-     * Rendering + wiring
+     * Renderer
      ***********************/
-    function render(view){
+    function render(view, payload={}){
+      state.view = view;
+
       if(view === "empty"){
         mainBody.innerHTML = tplEmpty();
-        statusHint.textContent = "Press Enter to review your morning brief.";
+        wireNav();
         return;
       }
       if(view === "brief"){
-        mainBody.innerHTML = tplDashboard();
-        statusHint.textContent = "Click a card to review details.";
-        wireCards();
+        mainBody.innerHTML = tplBrief();
+        wireNav();
         return;
       }
-      if(view === "pipeline"){
-        mainBody.innerHTML = tplDetailPipeline();
-        wireDetail();
+      if(view === "interviews"){
+        mainBody.innerHTML = tplInterviews();
+        wireNav();
         return;
       }
-      if(view === "outreach"){
-        mainBody.innerHTML = tplDetailOutreach();
-        wireDetail();
+      if(view === "interview_detail"){
+        mainBody.innerHTML = tplInterviewDetail(payload.interviewId);
+        wireNav();
         return;
       }
-      if(view === "autonomy"){
-        mainBody.innerHTML = tplDetailAutonomy();
-        wireDetail();
+      if(view === "reqs"){
+        mainBody.innerHTML = tplReqs();
+        wireNav();
         return;
       }
-      render("empty");
+      if(view === "req_detail"){
+        mainBody.innerHTML = tplReqDetail(payload.reqId);
+        wireNav();
+        return;
+      }
+      if(view === "req_pipeline"){
+        mainBody.innerHTML = tplReqPipeline(payload.reqId);
+        wireNav();
+        return;
+      }
+      if(view === "req_outreach"){
+        mainBody.innerHTML = tplReqOutreach(payload.reqId);
+        wireNav();
+        return;
+      }
+      if(view === "req_loop"){
+        mainBody.innerHTML = tplReqLoop(payload.reqId);
+        wireNav();
+        return;
+      }
+      if(view === "projects"){
+        mainBody.innerHTML = tplProjects();
+        wireNav();
+        return;
+      }
+      if(view === "project_detail"){
+        mainBody.innerHTML = tplProjectDetail(payload.projectId);
+        wireNav();
+        return;
+      }
+      if(view === "brand"){
+        mainBody.innerHTML = tplBrand();
+        wireNav();
+        return;
+      }
+      if(view === "brand_detail"){
+        mainBody.innerHTML = tplBrandDetail(payload.brandId);
+        wireNav();
+        return;
+      }
+
+      mainBody.innerHTML = tplEmpty();
+      wireNav();
     }
 
-    function wireCards(){
-      mainBody.querySelectorAll("[data-card]").forEach(el=>{
-        el.addEventListener("click", ()=>{
-          const key = el.getAttribute("data-card");
-          render(key);
+    function wireNav(){
+      // top-level navigation from cards/buttons
+      mainBody.querySelectorAll("[data-nav]").forEach(el=>{
+        el.addEventListener("click", (e)=>{
+          const to = el.getAttribute("data-nav");
+          const reqId = el.getAttribute("data-req");
+          if(to && (to.startsWith("req_") || to === "req_detail")){
+            render(to, { reqId });
+            return;
+          }
+          render(to);
         });
       });
-    }
 
-    function wireDetail(){
-      mainBody.querySelectorAll("[data-back]").forEach(btn=>{
-        btn.addEventListener("click", ()=> render("brief"));
+      // list row click: interviews
+      mainBody.querySelectorAll("[data-interview]").forEach(el=>{
+        el.addEventListener("click", ()=>{
+          render("interview_detail", { interviewId: el.getAttribute("data-interview") });
+        });
       });
-      mainBody.querySelectorAll("[data-go]").forEach(btn=>{
-        btn.addEventListener("click", ()=> render(btn.getAttribute("data-go")));
+
+      // list row click: reqs
+      mainBody.querySelectorAll("[data-req]").forEach(el=>{
+        // avoid double-binding when element already handled by [data-nav]
+        if(el.hasAttribute("data-nav")) return;
+        el.addEventListener("click", ()=>{
+          render("req_detail", { reqId: el.getAttribute("data-req") });
+        });
       });
-      mainBody.querySelectorAll("[data-toast]").forEach(btn=>{
-        btn.addEventListener("click", ()=> showToast(btn.getAttribute("data-toast")));
+
+      // list row click: projects
+      mainBody.querySelectorAll("[data-project]").forEach(el=>{
+        el.addEventListener("click", ()=>{
+          render("project_detail", { projectId: el.getAttribute("data-project") });
+        });
+      });
+
+      // list row click: brand items
+      mainBody.querySelectorAll("[data-brand]").forEach(el=>{
+        el.addEventListener("click", ()=>{
+          render("brand_detail", { brandId: el.getAttribute("data-brand") });
+        });
+      });
+
+      // toast buttons
+      mainBody.querySelectorAll("[data-toast]").forEach(el=>{
+        el.addEventListener("click", ()=>{
+          showToast(el.getAttribute("data-toast"));
+        });
       });
     }
 
@@ -790,16 +1329,30 @@
       if(!t) return;
 
       const lower = t.toLowerCase();
+
       if(lower.includes("review morning brief") || lower.includes("morning brief")){
         render("brief");
         showToast("Morning brief loaded.");
         return;
       }
-      if(lower.includes("pipeline")){ render("pipeline"); return; }
-      if(lower.includes("outreach")){ render("outreach"); return; }
-      if(lower.includes("autonomy") || lower.includes("tier")){ render("autonomy"); return; }
+      if(lower.includes("interview")){
+        render("interviews");
+        return;
+      }
+      if(lower.includes("req") || lower.includes("requisition") || lower.includes("open roles")){
+        render("reqs");
+        return;
+      }
+      if(lower.includes("project")){
+        render("projects");
+        return;
+      }
+      if(lower.includes("glassdoor") || lower.includes("brand") || lower.includes("social")){
+        render("brand");
+        return;
+      }
 
-      showToast("Try: “Review Morning Brief”.");
+      showToast("Try: “Review Morning Brief”, “Interviews”, “Open reqs”, “Projects”, “Glassdoor”.");
     }
 
     sendBtn.addEventListener("click", handleSend);
@@ -810,7 +1363,7 @@
       }
     });
 
-    // Pre-fill prompt + focus behavior
+    // Pre-fill prompt
     chatInput.value = "Review Morning Brief";
     chatInput.setSelectionRange(chatInput.value.length, chatInput.value.length);
 
@@ -827,7 +1380,7 @@
     setInterval(tickTime, 15000);
 
     const weatherPill = document.getElementById("weatherPill");
-    weatherPill.textContent = `${DEMO.weatherLabel} · ${DEMO.locationLabel}`;
+    weatherPill.textContent = `${DATA.weatherLabel} · ${DATA.locationLabel}`;
 
     /***********************
      * Boot
