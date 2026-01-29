@@ -1,47 +1,34 @@
-# Diane Wilkinson — People Systems & Workforce Operations  
+# Diane Wilkinson — People Systems & Workforce Operations
+
 _People Systems Architect • Workflow Automation • Internal AI & Analytics • Greenhouse SME_  
-_MBA, Data Analytics (4.0 GPA, Beta Gamma Sigma, Phi Kappa Phi)_
+_MBA, Data Analytics (4.0 GPA)_
 
-I build **internal people and hiring systems** — workflow-first automations and human-in-the-loop AI
-that make decision-heavy processes cleaner, fairer, and more predictable at scale.
+I build **internal people and hiring systems** — workflow-first automations and human-in-the-loop AI that improve decision quality without creating black boxes or vendor sprawl. My work focuses on **augmenting human judgement** not replacing it.
 
-My work focuses on **augmenting human judgement** not replacing it.
-
-This GitHub Pages site serves as the **documentation hub** for the A[i]gent Suite, a modular,
-ATS-native internal AI platform originally developed in recruiting environments and designed to generalize
-across people and workforce operations.
+This GitHub Pages site is the **documentation and demo hub** for my work in people systems, recruiting operations, and internal AI.
 
 ---
 
-# 🧩 A[i]gent Suite — Modular Internal People Systems
+# 🧩 A[i]gent Suite— Modular Internal People Systems
 
-A growing suite of ATS-native, human-in-the-loop AI agents that work together across high-friction people workflows where accuracy, auditability, and trust matter..
+A growing suite of ATS-native, human-in-the-loop AI agents that work together across high-friction people workflows where **accuracy, auditability, and trust matter**.
 
-- **Suite Overview**  
-  End-to-end map of Screening, Workflow, Metrics, and supporting agents.  
-  🔗 https://dianewilkinson.github.io/agents/suite/
+It includes agents for hiring, workflow orchestration, and operational analytics, along with supporting playbooks and patterns.
+
+👉 **Explore the full suite:**  
+https://dianewilkinson.github.io/agents/
 
 ---
 
-# 🤖 Core Agents (Live Demos & Playbooks)
+# ⚙️ About This Site
 
-### **Screening A[i]gent**  
-Decision-support agent for high-volume evaluation — combines experience, skills, tenure, and risk signals
-with transparent rationale and human override controls.  
-**Demo:** https://dianewilkinson.github.io/agents/screening/  
-**Playbook:** https://dianewilkinson.github.io/agents/screening/playbook.html
+This site contains:
+- Live demos of internal agents
+- Playbooks and workflow patterns
+- Operational analytics tools
+- Articles on AI adoption in people systems
 
-### **Workflow A[i]gent**  
-Workflow automation engine for multi-step review processes — confirmations, reminders, SLAs,
-handoffs, and delay visibility built directly into existing systems.  
-**Demo:** https://dianewilkinson.github.io/agents/workflow/  
-**Playbook:** https://dianewilkinson.github.io/agents/workflow/playbook.html
-
-### **Metrics A[i]gent**  
-Operational diagnostics for throughput, pass-through, bottlenecks, and capacity —
-powered by a shared Metrics Dictionary to keep reporting consistent and trusted.  
-**Demo:** https://dianewilkinson.github.io/agents/metrics/  
-**Playbook:** https://dianewilkinson.github.io/agents/metrics/playbook.html
+Examples are illustrative and redacted. No proprietary data is used.
 
 ---
 
@@ -55,7 +42,7 @@ powered by a shared Metrics Dictionary to keep reporting consistent and trusted.
 
 ---
 
-# 🏆 Recommendations (Samples)
+## 🏆 Recommendations (Samples)
 
 > “Rare talent. Listens before talking, connects ideas… the best recruiter in our sector.”  
 > “Fast turnaround of highly qualified talent.”  
@@ -65,7 +52,7 @@ powered by a shared Metrics Dictionary to keep reporting consistent and trusted.
 
 ---
 
-# 🎓 Credentials & Certifications
+## 🎓 Credentials & Certifications
 
 - **MBA — Data Analytics (4.0 GPA)** — Beta Gamma Sigma, Phi Kappa Phi  
 - Wharton People Analytics  
@@ -75,13 +62,9 @@ powered by a shared Metrics Dictionary to keep reporting consistent and trusted.
 
 ---
 
-# ✉️ Contact & Intro Call
+# ✉️ Contact
 
-- **15-Minute Intro:** https://dianewilkinson.github.io/book/  
+- **Intro call:** https://dianewilkinson.github.io/book/  
 - **Email:** dianewilkinson510@gmail.com  
 - **LinkedIn:** https://linkedin.com/in/dianewilkinson  
-- San Francisco Bay Area  
-
----
-
-> All examples are illustrative/redacted. No proprietary candidate, company, or performance data is ever used.
+- San Francisco Bay Area
