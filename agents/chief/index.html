@@ -40,7 +40,6 @@
       color:var(--text);
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
-
     .bar{height:4px;background:var(--accent-grad);}
 
     .wrap{
@@ -57,26 +56,59 @@
       gap:12px;
       padding:10px 0 12px;
     }
-    .brand{
+
+    /* LEFT: app icons */
+    .appicons{
       display:flex;
       align-items:center;
       gap:10px;
+      flex-wrap:wrap;
     }
-    .logo{
-      width:36px;height:36px;
+    .appbtn{
+      position:relative;
+      width:34px;height:34px;
       border-radius:12px;
-      border:1px solid var(--border);
+      border:1px solid rgba(148,163,184,.55);
       background:#fff;
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:11px;
-      font-weight:900;
-      color:#6b7280;
+      cursor:pointer;
       box-shadow:0 1px 2px var(--shadow);
+      padding:0;
+    }
+    .appbtn:hover{background:#fbfbff;border-color:rgba(99,102,241,.45);}
+    .appimg{
+      width:22px;height:22px;
+      display:block;
+      object-fit:contain;
+      border-radius:6px;
+    }
+    .appfallback{
+      font-size:12px;
+      font-weight:950;
+      color:#374151;
       user-select:none;
     }
+    .badge{
+      position:absolute;
+      top:-6px;
+      right:-6px;
+      min-width:18px;
+      height:18px;
+      padding:0 5px;
+      border-radius:999px;
+      background:#111827;
+      color:#fff;
+      font-size:11px;
+      font-weight:950;
+      line-height:18px;
+      border:2px solid #fff;
+      box-shadow:0 6px 14px rgba(0,0,0,.18);
+    }
+    .badge.hide{display:none;}
 
+    /* RIGHT: pills */
     .topright{
       display:flex;
       align-items:center;
@@ -84,7 +116,6 @@
       flex-wrap:wrap;
       justify-content:flex-end;
     }
-
     .pill{
       display:inline-flex;
       align-items:center;
@@ -98,7 +129,6 @@
       color:#374151;
       white-space:nowrap;
     }
-
     .iconbtn{
       width:34px;height:34px;
       border-radius:12px;
@@ -108,57 +138,9 @@
       align-items:center;
       justify-content:center;
       cursor:pointer;
+      box-shadow:0 1px 2px var(--shadow);
     }
     .iconbtn:hover{background:#fbfbff;border-color:rgba(99,102,241,.45);}
-
-    /* App icon buttons (top shortcuts) */
-    .appbtn{
-      position:relative;
-      width:36px;height:36px;
-      border-radius:12px;
-      border:1px solid rgba(148,163,184,.55);
-      background:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      box-shadow:0 1px 2px var(--shadow);
-      overflow:hidden;
-    }
-    .appbtn:hover{border-color:rgba(99,102,241,.45);}
-
-    .appimg{
-      width:22px;height:22px;
-      object-fit:contain;
-      display:block;
-    }
-
-    /* fallback letter if icon missing */
-    .appfallback{
-      font-size:12px;
-      font-weight:950;
-      color:#374151;
-      user-select:none;
-    }
-
-    .badge{
-      position:absolute;
-      top:-6px;
-      right:-6px;
-      min-width:20px;
-      height:20px;
-      padding:0 6px;
-      border-radius:999px;
-      background:#111827;
-      color:#fff;
-      font-size:11px;
-      font-weight:950;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border:2px solid #fff;
-    }
-    .badge.hide{display:none;}
 
     /* Main panel */
     .panel{
@@ -186,14 +168,14 @@
       letter-spacing:-0.01em;
     }
     .panelmeta{
-      display:flex;
-      align-items:center;
-      gap:10px;
       font-size:12px;
       font-weight:800;
       color:#6b7280;
+      display:flex;
+      align-items:center;
+      gap:10px;
     }
-    .tinybtn{
+    .smallbtn{
       border:1px solid rgba(148,163,184,.55);
       background:#fff;
       border-radius:999px;
@@ -203,7 +185,7 @@
       cursor:pointer;
       color:#374151;
     }
-    .tinybtn:hover{border-color:rgba(99,102,241,.45); color:var(--purple);}
+    .smallbtn:hover{border-color:rgba(99,102,241,.45); color:var(--purple);}
 
     /* Cards grid */
     .grid{
@@ -298,7 +280,6 @@
       font-weight:950;
       letter-spacing:-0.01em;
       user-select:none;
-      white-space:nowrap;
     }
     .sp-good{color:var(--good);}
     .sp-warn{color:var(--warn);}
@@ -307,52 +288,19 @@
     .sp-neutral{color:#374151;}
     .sp-purple{color:var(--purple);}
 
-    /* News block (collapsible, not busy) */
+    /* News: full-width + optional toggle */
     .newswrap{
       padding:0 14px 14px;
+      display:none; /* toggled by button */
     }
-    .news{
-      border:1px solid var(--border);
-      border-radius:14px;
-      overflow:hidden;
-      background:#fff;
-      box-shadow:0 1px 2px var(--shadow);
+    .newsgrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
     }
-    .newshead{
-      padding:10px 12px;
-      border-bottom:1px solid #eef2f7;
-      background:linear-gradient(180deg,rgba(79,70,229,.06), rgba(255,255,255,0));
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      cursor:pointer;
-      user-select:none;
+    @media (max-width:980px){
+      .newsgrid{grid-template-columns:1fr;}
     }
-    .newshead .t{
-      margin:0;
-      font-size:13px;
-      font-weight:950;
-      color:var(--purple);
-      letter-spacing:-0.01em;
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-    .newshead .m{
-      font-size:12px;
-      font-weight:900;
-      color:#6b7280;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      white-space:nowrap;
-    }
-    .newsbody{
-      display:none;
-      padding:10px 12px 12px;
-    }
-    .news.show .newsbody{display:block;}
 
     /* Help section */
     .help{
@@ -427,10 +375,8 @@
       outline:none;
       background:#fff;
     }
-    .slider{
-      width:100%;
-      accent-color: var(--purple);
-    }
+    .slider{width:100%; accent-color: var(--purple);}
+
     .chatbar{
       border-top:1px solid var(--border);
       padding:10px 12px;
@@ -695,54 +641,53 @@
   <div class="bar"></div>
 
   <div class="wrap">
-<div class="top">
-  <!-- LEFT: message icons -->
-  <div class="appicons">
-    <button class="appbtn" id="appSlack" title="Slack">
-      <img class="appimg" src="/assets/logos/slack.png" alt="Slack"
-        onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
-      <span class="appfallback" style="display:none;">S</span>
-      <span class="badge" id="badgeSlack">7</span>
-    </button>
+    <!-- TOP: icons on LEFT, pills on RIGHT -->
+    <div class="top">
+      <div class="appicons">
+        <button class="appbtn" id="appSlack" title="Slack (click to open)">
+          <img class="appimg" src="/assets/logos/slack.png" alt="Slack"
+            onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
+          <span class="appfallback" style="display:none;">S</span>
+          <span class="badge" id="badgeSlack">7</span>
+        </button>
 
-    <button class="appbtn" id="appGmail" title="Gmail">
-      <img class="appimg" src="/assets/logos/gmail.png" alt="Gmail"
-        onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
-      <span class="appfallback" style="display:none;">G</span>
-      <span class="badge" id="badgeGmail">12</span>
-    </button>
+        <button class="appbtn" id="appGmail" title="Gmail (click to open)">
+          <img class="appimg" src="/assets/logos/gmail.png" alt="Gmail"
+            onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
+          <span class="appfallback" style="display:none;">G</span>
+          <span class="badge" id="badgeGmail">12</span>
+        </button>
 
-    <button class="appbtn" id="appInmail" title="LinkedIn InMail">
-      <img class="appimg" src="/assets/logos/inmail.png" alt="InMail"
-        onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
-      <span class="appfallback" style="display:none;">in</span>
-      <span class="badge" id="badgeInmail">3</span>
-    </button>
+        <button class="appbtn" id="appInmail" title="LinkedIn InMail (click to open)">
+          <img class="appimg" src="/assets/logos/inmail.png" alt="InMail"
+            onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
+          <span class="appfallback" style="display:none;">in</span>
+          <span class="badge" id="badgeInmail">3</span>
+        </button>
 
-    <button class="appbtn" id="appWhatsapp" title="WhatsApp">
-      <img class="appimg" src="/assets/logos/whatsapp.png" alt="WhatsApp"
-        onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
-      <span class="appfallback" style="display:none;">W</span>
-      <span class="badge" id="badgeWhatsapp">2</span>
-    </button>
-  </div>
+        <button class="appbtn" id="appWhatsapp" title="WhatsApp (click to open)">
+          <img class="appimg" src="/assets/logos/whatsapp.png" alt="WhatsApp"
+            onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
+          <span class="appfallback" style="display:none;">W</span>
+          <span class="badge" id="badgeWhatsapp">2</span>
+        </button>
+      </div>
 
-  <!-- RIGHT: date/time/weather + settings -->
-  <div class="topright">
-    <span class="pill" id="datePill">📅 Thu, Jan 29</span>
-    <span class="pill" id="timePill">🕒 02:49 PM</span>
-    <span class="pill" id="weatherPill">☀️ 58°F · San Francisco</span>
-    <button class="iconbtn" id="settingsBtn" title="Settings (stub)">⚙️</button>
-  </div>
-</div>
+      <div class="topright">
+        <span class="pill" id="datePill">📅 Thu, Jan 29</span>
+        <span class="pill" id="timePill">🕒 03:10 PM</span>
+        <span class="pill" id="weatherPill">☀️ 58°F · San Francisco</span>
+        <button class="iconbtn" id="settingsBtn" title="Settings (stub)">⚙️</button>
+      </div>
+    </div>
+
     <!-- Overview -->
     <section class="panel" aria-label="Overview">
       <div class="panelhead">
         <div class="paneltitle">📌 Overview</div>
         <div class="panelmeta">
           <span>Select Cards for Details</span>
-          <!-- News toggle (keeps it from feeling busy) -->
-          <button class="tinybtn" id="toggleNewsBtn" type="button">Show News</button>
+          <button class="smallbtn" id="toggleNewsBtn" type="button">Show News</button>
         </div>
       </div>
 
@@ -866,7 +811,60 @@
         </div>
       </div>
 
-      
+      <!-- Optional News (hidden by default) -->
+      <div class="newswrap" id="newsWrap">
+        <div class="newsgrid">
+          <div class="card" data-card="news">
+            <div class="cardhead">
+              <h3>Company & Industry News</h3>
+              <span class="headmeta">📰 <span style="color:#374151;font-weight:900;">Today</span></span>
+            </div>
+            <div class="cardbody">
+              <div class="list">
+                <div class="row" data-news="n1">
+                  <div class="rowleft">
+                    <div class="rowtitle">Comp bands updated</div>
+                    <div class="rowsub">New leveling guidance effective next pay cycle</div>
+                  </div>
+                  <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+                </div>
+                <div class="row" data-news="n2">
+                  <div class="rowleft">
+                    <div class="rowtitle">Interviewer training refreshed</div>
+                    <div class="rowsub">New rubrics + calibration guide published</div>
+                  </div>
+                  <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+                </div>
+                <div class="row" data-news="n3">
+                  <div class="rowleft">
+                    <div class="rowtitle">Hiring market pulse</div>
+                    <div class="rowsub">Senior-loop cycle time increasing across tech this month</div>
+                  </div>
+                  <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+                </div>
+                <div class="row" data-news="n4">
+                  <div class="rowleft">
+                    <div class="rowtitle">Quarterly industry report released</div>
+                    <div class="rowsub">New report: roles, pay, demand shifts</div>
+                  </div>
+                  <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty spacer card so the news area still feels balanced on wide screens -->
+          <div class="card" aria-hidden="true">
+            <div class="cardhead">
+              <h3 style="color:#6b7280;">Notes</h3>
+              <span class="headmeta">🧠</span>
+            </div>
+            <div class="cardbody">
+              <div style="font-size:13px;color:#6b7280;line-height:1.6;">
+                Keep this area light. If News ever feels busy again, delete this entire <code>#newsWrap</code> block and the “Show News” button.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -938,11 +936,15 @@
             <button class="tab" data-tab="whatsapp">📱 WhatsApp</button>
           </div>
 
-          <div class="inboxlist" id="inboxList"></div>
+          <div class="inboxlist" id="inboxList">
+            <!-- injected -->
+          </div>
         </div>
 
         <div class="content">
-          <div class="preview" id="preview"></div>
+          <div class="preview" id="preview">
+            <!-- injected -->
+          </div>
 
           <div class="actions" id="actions">
             <button class="act" data-act="summarize">✨ Summarize</button>
@@ -964,43 +966,44 @@
   <script>
     // ---------- Demo data ----------
     const DATA = {
+      counts: { slack: 7, email: 12, inmail: 3, whatsapp: 2 },
       inbox: {
         slack: [
           { id:"s1", from:"#eng-hiring", subject:"HM wants a tighter bar for Backend Eng", snippet:"Can we calibrate on seniority expectations…", when:"12m ago",
-            body:"Thread in #eng-hiring\\n\\nHM: We need a tighter bar for Backend Eng.\\nRecruiter: Agree—can we align on seniority expectations?\\nHM: Yes. Also prioritize ownership examples.\\n\\nChief suggestion: run a quick calibration prompt + update screening rubric (Tier 2)."
+            body:"Thread in #eng-hiring\n\nHM: We need a tighter bar for Backend Eng.\nRecruiter: Agree—can we align on seniority expectations?\nHM: Yes. Also prioritize ownership examples.\n\nChief suggestion: run a quick calibration prompt + update screening rubric (Tier 2)."
           },
           { id:"s2", from:"@J.Rivera", subject:"Alex Morgan screen notes", snippet:"Alex has strong ownership, needs depth on…", when:"32m ago",
-            body:"DM from J. Rivera\\n\\nAlex Morgan:\\n- Strong ownership signals\\n- Needs deeper systems design examples\\n- Recommend: proceed to tech screen\\n\\nChief suggestion: generate candidate summary card + prep questions for 10:30."
+            body:"DM from J. Rivera\n\nAlex Morgan:\n- Strong ownership signals\n- Needs deeper systems design examples\n- Recommend: proceed to tech screen\n\nChief suggestion: generate candidate summary card + prep questions for 10:30."
           },
           { id:"s3", from:"#recruiting-ops", subject:"New rubric template posted", snippet:"Updated scorecard sections for consistency…", when:"1h ago",
-            body:"Announcement in #recruiting-ops\\n\\nNew rubric template posted.\\n- Standardized competencies\\n- Updated leveling language\\n\\nChief suggestion: apply template to open reqs (Tier 1)."
+            body:"Announcement in #recruiting-ops\n\nNew rubric template posted.\n- Standardized competencies\n- Updated leveling language\n\nChief suggestion: apply template to open reqs (Tier 1)."
           }
         ],
         email: [
           { id:"e1", from:"Finance", subject:"Offer approval needed — BE (US)", snippet:"Please confirm comp band alignment…", when:"18m ago",
-            body:"From: Finance\\nSubject: Offer approval needed — Backend Engineer (US)\\n\\nPlease confirm comp band alignment and provide leveling rationale.\\n\\nChief suggestion: generate a 3-bullet justification + attach comp band policy excerpt."
+            body:"From: Finance\nSubject: Offer approval needed — Backend Engineer (US)\n\nPlease confirm comp band alignment and provide leveling rationale.\n\nChief suggestion: generate a 3-bullet justification + attach comp band policy excerpt."
           },
           { id:"e2", from:"HRBP", subject:"Hiring plan notes for Q1", snippet:"Sharing headcount assumptions + changes…", when:"2h ago",
-            body:"From: HRBP\\nSubject: Hiring plan notes for Q1\\n\\nSharing headcount assumptions and changes.\\n\\nChief suggestion: flag impacted reqs and update pipeline plan (Tier 2)."
+            body:"From: HRBP\nSubject: Hiring plan notes for Q1\n\nSharing headcount assumptions and changes.\n\nChief suggestion: flag impacted reqs and update pipeline plan (Tier 2)."
           },
           { id:"e3", from:"Candidate", subject:"Re: Product Designer — scheduling", snippet:"Thanks—can we do later this week?", when:"3h ago",
-            body:"From: Candidate\\n\\nThanks—can we do later this week?\\n\\nChief suggestion: propose 3 times within constraints (Tier 1)."
+            body:"From: Candidate\n\nThanks—can we do later this week?\n\nChief suggestion: propose 3 times within constraints (Tier 1)."
           }
         ],
         inmail: [
           { id:"l1", from:"Senior Designer", subject:"Role scope + leveling question", snippet:"Is this IC6 or IC5? Comp band range…", when:"41m ago",
-            body:"LinkedIn InMail\\n\\nIs this IC6 or IC5? What’s the comp band range?\\n\\nChief suggestion: draft response that preserves policy + routes to HM for scope confirmation (Tier 3)."
+            body:"LinkedIn InMail\n\nIs this IC6 or IC5? What’s the comp band range?\n\nChief suggestion: draft response that preserves policy + routes to HM for scope confirmation (Tier 3)."
           },
           { id:"l2", from:"Backend Eng", subject:"Interested — remote policy?", snippet:"I’m in NYC—does the role allow remote…", when:"4h ago",
-            body:"LinkedIn InMail\\n\\nI’m in NYC—does the role allow remote?\\n\\nChief suggestion: reply with approved policy wording + alternatives (Tier 1)."
+            body:"LinkedIn InMail\n\nI’m in NYC—does the role allow remote?\n\nChief suggestion: reply with approved policy wording + alternatives (Tier 1)."
           }
         ],
         whatsapp: [
           { id:"w1", from:"Hiring Manager", subject:"Quick question before panel", snippet:"Can we swap one interviewer?…", when:"9m ago",
-            body:"WhatsApp\\n\\nCan we swap one interviewer? Conflicting meeting.\\n\\nChief suggestion: propose replacement from panel pool + update calendar (Tier 2)."
+            body:"WhatsApp\n\nCan we swap one interviewer? Conflicting meeting.\n\nChief suggestion: propose replacement from panel pool + update calendar (Tier 2)."
           },
           { id:"w2", from:"Coordinator", subject:"Candidate is running 5 min late", snippet:"FYI — they’re in traffic…", when:"27m ago",
-            body:"WhatsApp\\n\\nFYI candidate running 5 min late.\\n\\nChief suggestion: notify panel + adjust start time within SLA (Tier 1)."
+            body:"WhatsApp\n\nFYI candidate running 5 min late.\n\nChief suggestion: notify panel + adjust start time within SLA (Tier 1)."
           }
         ]
       }
@@ -1014,6 +1017,19 @@
       clearTimeout(window.__toastT);
       window.__toastT = setTimeout(()=>toast.classList.remove("show"), 1200);
     }
+
+    // ---------- Badge rendering ----------
+    function setBadge(id, n){
+      const el = document.getElementById(id);
+      if(!el) return;
+      const v = Number(n || 0);
+      el.textContent = String(v);
+      el.classList.toggle("hide", v <= 0);
+    }
+    setBadge("badgeSlack", DATA.counts.slack);
+    setBadge("badgeGmail", DATA.counts.email);
+    setBadge("badgeInmail", DATA.counts.inmail);
+    setBadge("badgeWhatsapp", DATA.counts.whatsapp);
 
     // ---------- Bandwidth label ----------
     const bwSlider = document.getElementById("bwSlider");
@@ -1056,7 +1072,7 @@
 
       const head = {
         slack:{icon:"💬", name:"Slack", sub:"In-browser Slack view (demo)"},
-        email:{icon:"✉️", name:"Gmail", sub:"In-browser inbox view (demo)"},
+        email:{icon:"✉️", name:"Email", sub:"In-browser inbox view (demo)"},
         inmail:{icon:"🔗", name:"LinkedIn InMail", sub:"In-browser InMail view (demo)"},
         whatsapp:{icon:"📱", name:"WhatsApp", sub:"In-browser WhatsApp view (demo)"}
       }[tab];
@@ -1066,7 +1082,6 @@
       sheetSub.textContent = head.sub;
 
       renderInboxList();
-
       const arr = DATA.inbox[tab] || [];
       if(arr[0]) selectItem(arr[0].id);
       else renderPreviewEmpty();
@@ -1114,6 +1129,7 @@
       `;
     }
 
+    // Actions (agent demo)
     document.getElementById("actions").addEventListener("click", (e)=>{
       const btn = e.target.closest("[data-act]");
       if(!btn) return;
@@ -1144,8 +1160,16 @@
       showToast(`${label} (demo)`);
     });
 
-    // Other cards: demo stubs
-    function navStub(kind, id){ showToast(`Would open ${kind} details (${id}) (demo).`); }
+    // Top icon clicks open modal (THIS is your “messages pop up opens if you click unread”)
+    document.getElementById("appSlack")?.addEventListener("click", ()=>openModal("slack"));
+    document.getElementById("appGmail")?.addEventListener("click", ()=>openModal("email"));
+    document.getElementById("appInmail")?.addEventListener("click", ()=>openModal("inmail"));
+    document.getElementById("appWhatsapp")?.addEventListener("click", ()=>openModal("whatsapp"));
+
+    // Other cards: stub navigation
+    function navStub(kind, id){
+      showToast(`Would open ${kind} details (${id}) (demo).`);
+    }
     document.querySelectorAll("[data-interview]").forEach(r=>r.addEventListener("click", ()=>navStub("interview", r.getAttribute("data-interview"))));
     document.querySelectorAll("[data-req]").forEach(r=>r.addEventListener("click", ()=>navStub("requisition", r.getAttribute("data-req"))));
     document.querySelectorAll("[data-project]").forEach(r=>r.addEventListener("click", ()=>navStub("project", r.getAttribute("data-project"))));
@@ -1160,7 +1184,7 @@
       const lower = t.toLowerCase();
 
       if(lower.includes("slack")) openModal("slack");
-      else if(lower.includes("gmail") || lower.includes("email")) openModal("email");
+      else if(lower.includes("email") || lower.includes("gmail")) openModal("email");
       else if(lower.includes("inmail") || lower.includes("linkedin")) openModal("inmail");
       else if(lower.includes("whatsapp")) openModal("whatsapp");
       else if(lower.includes("prep")) showToast("Would generate prep pack (demo).");
@@ -1168,6 +1192,17 @@
       else showToast("Routed to Chief (demo).");
 
       chatInput.value = "";
+    });
+
+    // News toggle
+    const newsWrap = document.getElementById("newsWrap");
+    const toggleNewsBtn = document.getElementById("toggleNewsBtn");
+    let newsShown = false;
+    toggleNewsBtn.addEventListener("click", ()=>{
+      newsShown = !newsShown;
+      newsWrap.style.display = newsShown ? "block" : "none";
+      toggleNewsBtn.textContent = newsShown ? "Hide News" : "Show News";
+      showToast(newsShown ? "News shown" : "News hidden");
     });
 
     // Utility
@@ -1183,7 +1218,7 @@
     // Settings (stub)
     document.getElementById("settingsBtn").addEventListener("click", ()=>showToast("Settings (demo stub)."));
 
-    // Tick time/date
+    // Optional: update time quickly (still a demo)
     function tick(){
       const d = new Date();
       const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -1196,54 +1231,6 @@
       document.getElementById("datePill").textContent = `📅 ${days[d.getDay()]}, ${mons[d.getMonth()]} ${d.getDate()}`;
     }
     tick(); setInterval(tick, 15000);
-
-    // Unread badges wired to DATA counts
-    function setBadge(id, n){
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.textContent = String(n);
-      el.classList.toggle("hide", !n || n <= 0);
-    }
-    setBadge("badgeSlack", (DATA.inbox.slack||[]).length);
-    setBadge("badgeGmail", (DATA.inbox.email||[]).length);
-    setBadge("badgeInmail", (DATA.inbox.inmail||[]).length);
-    setBadge("badgeWhatsapp", (DATA.inbox.whatsapp||[]).length);
-
-    // App buttons open the modal
-    document.getElementById("appSlack").addEventListener("click", ()=>openModal("slack"));
-    document.getElementById("appGmail").addEventListener("click", ()=>openModal("email"));
-    document.getElementById("appInmail").addEventListener("click", ()=>openModal("inmail"));
-    document.getElementById("appWhatsapp").addEventListener("click", ()=>openModal("whatsapp"));
-
-    // News: collapsed by default + toggle controls
-    const newsWrap = document.getElementById("newsWrap");
-    const newsBox = document.getElementById("newsBox");
-    const newsHead = document.getElementById("newsHead");
-    const chev = document.getElementById("newsChevron");
-    const toggleNewsBtn = document.getElementById("toggleNewsBtn");
-
-    // start collapsed + hidden (so it doesn’t feel busy)
-    let newsVisible = false;
-    newsWrap.style.display = "none";
-
-    function setNewsVisible(v){
-      newsVisible = !!v;
-      newsWrap.style.display = newsVisible ? "block" : "none";
-      toggleNewsBtn.textContent = newsVisible ? "Hide News" : "Show News";
-      if(newsVisible){
-        newsBox.classList.remove("show"); // still collapsed; click header to expand
-        chev.textContent = "▾";
-      }
-    }
-
-    toggleNewsBtn.addEventListener("click", ()=> setNewsVisible(!newsVisible));
-
-    newsHead.addEventListener("click", ()=>{
-      const isOpen = newsBox.classList.toggle("show");
-      chev.textContent = isOpen ? "▴" : "▾";
-    });
-
-    // ---------- Optional: quick open on "select cards" / etc left as-is ----------
   </script>
 </body>
 </html>
