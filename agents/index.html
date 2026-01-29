@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A[i]gent Suite – People Systems Agents Overview</title>
+
+  <meta property="og:title" content="A[i]gent Suite – People Systems Agents Overview">
+  <meta property="og:description" content="AI agents at every step of the people lifecycle: Hire, Support, Evaluate, and Improve—workflow-first, evidence-first, human-in-the-loop.">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root{
+      --bg:#f9fafb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#4b5563;
+      --border:#e5e7eb;
+      --link:#2563eb;
+      --link-soft:#4f46e5;
+      --shadow:rgba(15,23,42,0.08);
+      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
+      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.09),rgba(168,85,247,.09),rgba(99,102,241,.09));
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    a{color:var(--link);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    .bar{height:4px;background:var(--accent-grad);}
+
+    header{
+      padding:24px 16px 10px;
+      text-align:center;
+    }
+    header h1{
+      margin:0;
+      font-size:24px;
+      font-weight:700;
+    }
+    header p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .wrap{
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 20px 32px;
+    }
+
+    /* Hero */
+    .hero{
+      margin:16px 0 18px;
+      border-radius:20px;
+      background:linear-gradient(120deg,#fde7ef,#f3e8ff,#e0ecff);
+      box-shadow:0 8px 24px var(--shadow);
+      padding:18px 18px 14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      align-items:center;
+    }
+    .hero-main{
+      flex:1 1 520px;
+      min-width:0;
+    }
+    .hero-title{
+      margin:0 0 8px;
+      font-size:22px;
+      line-height:1.35;
+    }
+    .hero-title span{color:var(--link-soft);}
+    .hero-main p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .hero-actions{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .back-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:600;
+      color:#4f46e5;
+      background:rgba(255,255,255,0.92);
+      border:1px solid rgba(148,163,184,0.8);
+      text-decoration:none;
+    }
+    .back-pill:hover{
+      background:rgba(255,255,255,1);
+      text-decoration:none;
+      color:#4338ca;
+    }
+
+    .hero-meta{
+      flex:0 0 300px;
+      max-width:360px;
+      min-width:0;
+      background:rgba(255,255,255,.92);
+      border-radius:16px;
+      border:1px solid rgba(229,231,235,.95);
+      padding:12px 14px 10px;
+      font-size:12px;
+      color:#4b5563;
+      box-shadow:0 6px 18px rgba(15,23,42,.07);
+    }
+    .callout{
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(239,246,255,.85);
+      border:1px solid #bfdbfe;
+      font-size:13px;
+      color:#1f2937;
+      line-height:1.55;
+    }
+
+    @media (max-width:860px){
+      .hero{padding:16px 14px 12px;}
+      .hero-title{font-size:20px;}
+      .hero-meta{max-width:none; flex:1 1 280px;}
+    }
+
+    /* Four-column layout */
+    .sections-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(240px, 1fr));
+      gap:14px;
+      margin-top:10px;
+      align-items:start;
+    }
+    @media (max-width:1100px){
+      .sections-grid{grid-template-columns:repeat(2, minmax(240px, 1fr));}
+    }
+    @media (max-width:640px){
+      .sections-grid{grid-template-columns:1fr;}
+    }
+
+    .section-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:0 1px 3px var(--shadow);
+      padding:12px 12px 10px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    /* Subtle header tint for each column */
+    .section-card::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:52px;
+      background:var(--accent-soft);
+      opacity:.55;
+      pointer-events:none;
+    }
+
+    .section-head,
+    .agent-card{
+      position:relative;
+      z-index:1;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:10px;
+      padding-bottom:10px;
+      border-bottom:1px solid #eef2f7;
+      margin-bottom:10px;
+    }
+
+    /* Section titles: bigger, purple, clearly above agent names */
+    .section-title{
+      margin:0;
+      font-size:20px;
+      font-weight:800;
+      letter-spacing:.01em;
+      color:var(--link-soft);
+    }
+
+    /* Agent cards */
+    .agent-card{
+      border:1px solid #eef2f7;
+      border-radius:14px;
+      padding:10px 10px 8px;
+      background:#fff;
+      box-shadow:0 1px 2px rgba(15,23,42,.04);
+      margin-bottom:10px;
+    }
+    .agent-card:last-child{margin-bottom:0;}
+    .agent-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    /* Agent names: smaller, lighter, thinner, less dark */
+    .agent-name{
+      font-size:13px;
+      margin:0;
+      font-weight:600;
+      color:#4b5563;
+      line-height:1.25;
+      letter-spacing:.01em;
+    }
+
+    .agent-role{
+      margin:6px 0 0;
+      font-size:12.5px;
+      color:#6b7280;
+      line-height:1.55;
+    }
+
+    .agent-meta{
+      margin-top:8px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .pillset{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .pill{
+      display:inline-flex;
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+      font-size:11px;
+      color:#6b7280;
+      white-space:nowrap;
+    }
+    .links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:12px;
+      color:#6b7280;
+    }
+    .links a{font-weight:600;}
+
+    footer{
+      text-align:center;
+      margin:18px 0 20px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bar"></div>
+
+  <header>
+    <h1>A[i]gent Suite – People Systems Overview</h1>
+    <p>AI agents at every step of the people lifecycle—workflow-first, evidence-first, human-in-the-loop.</p>
+  </header>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-main">
+        <h2 class="hero-title">
+          <span>AI Agents</span> at Every Step of the People Lifecycle.
+        </h2>
+        <p>
+          Faster execution, cleaner decisions, and fewer dropped balls—without adding another vendor layer.
+        </p>
+
+        <div class="hero-actions">
+          <a href="/" class="back-pill">← Back to Portfolio</a>
+        </div>
+      </div>
+
+      <aside class="hero-meta">
+        <div class="callout">
+          Browse the lifecycle below. Open a demo/playbook for details.
+        </div>
+      </aside>
+    </section>
+
+    <!-- FOUR SECTIONS SIDE-BY-SIDE -->
+    <section aria-label="A[i]gent Suite Sections" class="sections-grid">
+
+      <!-- HIRE -->
+      <div class="section-card">
+        <div class="section-head">
+          <h3 class="section-title"><span class="section-emoji">🎯</span>Hire</h3>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Screening A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Hybrid scoring with receipts + recruiter controls—raises signal without turning hiring into a black box.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Hybrid scoring</span>
+              <span class="pill">Receipts</span>
+              <span class="pill">Override</span>
+            </div>
+            <div class="links">
+              <a href="../screening/" target="_blank" rel="noopener">Demo</a>
+              <a href="../screening/playbook.html" target="_blank" rel="noopener">Playbook</a>
+              <a href="../../assets/screening-agent-explainer.pdf" target="_blank" rel="noopener">PDF</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Kickoff A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Converts intake + JD into a measurable scorecard, rubric, and must-have signals the suite can reuse.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Role design</span>
+              <span class="pill">Rubrics</span>
+              <span class="pill">Scorecards</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Outreach A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Generates on-brand outreach that’s genuinely specific—then logs activity back to ATS/CRM cleanly.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Sourcing</span>
+              <span class="pill">Personalization</span>
+              <span class="pill">Campaigns</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Match A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Surfaces cross-fit talent across open roles and rediscovers strong candidates already in your database.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Rediscovery</span>
+              <span class="pill">Cross-fit</span>
+              <span class="pill">Internal mobility</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Nurture A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Keeps silver medalists warm with relevant touchpoints and timing—aligned to employer brand and role demand.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Talent community</span>
+              <span class="pill">Timing</span>
+              <span class="pill">Candidate experience</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Interview A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Guides interviewers with scorecard-aligned prompts and turns notes into structured, bias-aware feedback.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Guided prompts</span>
+              <span class="pill">Structured feedback</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Offer A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Keeps approvals, narratives, and readiness checks moving—so offers ship fast and close inside guardrails.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Approvals</span>
+              <span class="pill">Readiness</span>
+              <span class="pill">Close rate</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUPPORT -->
+      <div class="section-card">
+        <div class="section-head">
+          <h3 class="section-title"><span class="section-emoji">🛠️</span>Support</h3>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Workflow A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Orchestrates confirmations, reminders, scorecard SLAs, and status nudges across every stage.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Automation</span>
+              <span class="pill">SLAs</span>
+              <span class="pill">Templates</span>
+            </div>
+            <div class="links">
+              <a href="../workflow/" target="_blank" rel="noopener">Demo</a>
+              <a href="../workflow/playbook.html" target="_blank" rel="noopener">Playbook</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Enablement A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Ships playbooks, training prompts, and “how we do it here” scaffolds so improvements actually stick.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Adoption</span>
+              <span class="pill">Playbooks</span>
+              <span class="pill">Scaffolds</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Onboarding A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Bridges TA → People Ops handoff with clean artifacts: checklists, expectations, and Day-1 readiness signals.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Handoffs</span>
+              <span class="pill">Day-1 readiness</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">InfoHub A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Answers “where’s the latest doc?” instantly—retrieves current SOPs, policies, and protocols with version confidence.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Knowledge retrieval</span>
+              <span class="pill">Versioning</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Planning A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Turns requests into prioritized plans—reduces “busywork thrash” and makes work visible across teams.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Prioritization</span>
+              <span class="pill">Task planning</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Coaching A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Reinforces “how we work” through manager and team coaching loops—drives consistent usage without heavy change management.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Manager support</span>
+              <span class="pill">Reinforcement</span>
+              <span class="pill">Adoption</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EVALUATE -->
+      <div class="section-card">
+        <div class="section-head">
+          <h3 class="section-title"><span class="section-emoji">🧾</span>Evaluate</h3>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Metrics A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Centralizes throughput, pass-through, SLAs, and capacity with a shared Metrics Dictionary—one operating truth.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Diagnostics</span>
+              <span class="pill">Capacity</span>
+              <span class="pill">Plan vs actual</span>
+            </div>
+            <div class="links">
+              <a href="../metrics/" target="_blank" rel="noopener">Demo</a>
+              <a href="../metrics/playbook.html" target="_blank" rel="noopener">Playbook</a>
+              <a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link" target="_blank" rel="noopener">Dictionary</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Scorecard A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Translates qualitative input into structured, auditable decisions—hiring, manager, performance, and process templates.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Performance</span>
+              <span class="pill">Calibration</span>
+              <span class="pill">Audit trail</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Listening A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Summarizes recurring friction and risk themes with guardrails—so leaders see what’s breaking before it escalates.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Themes</span>
+              <span class="pill">Friction</span>
+              <span class="pill">Risk signals</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Sentiment A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Tracks narrative drift (internal + external) that impacts attraction, retention, and trust—then flags what’s moving.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Narratives</span>
+              <span class="pill">Reputation</span>
+              <span class="pill">Trust</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Skills A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Maps what exists, what’s missing, and what’s next—supports headcount planning, upskilling, and succession signals.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Workforce planning</span>
+              <span class="pill">Upskilling</span>
+              <span class="pill">Succession</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMPROVE -->
+      <div class="section-card">
+        <div class="section-head">
+          <h3 class="section-title"><span class="section-emoji">📈</span>Improve</h3>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Training A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Turns playbooks into repeatable learning—curriculum, practice prompts, and role-based training that upgrades capability over time.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Curriculum</span>
+              <span class="pill">Role-based</span>
+              <span class="pill">Enablement</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Quality A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Detects process decay (missed steps, inconsistent usage, drift from standards) and proposes targeted fixes.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Standards</span>
+              <span class="pill">Auditability</span>
+              <span class="pill">Continuous improvement</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Mobility A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Turns Skills + Scorecards into internal growth paths—redeploy, develop, and retain talent intentionally.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Internal mobility</span>
+              <span class="pill">Career paths</span>
+              <span class="pill">Retention</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-top">
+            <h4 class="agent-name">Brand A[i]gent</h4>
+          </div>
+          <p class="agent-role">
+            Aligns messaging with reality—strengthens trust by closing gaps in the candidate and employee experience.
+          </p>
+          <div class="agent-meta">
+            <div class="pillset">
+              <span class="pill">Employer brand</span>
+              <span class="pill">Experience gaps</span>
+            </div>
+            <div class="links"></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <footer>
+    Let’s talk people systems &amp; internal A[i]gents –
+    <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
+    <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+  </footer>
+</body>
+</html>
