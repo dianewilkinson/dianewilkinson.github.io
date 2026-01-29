@@ -32,36 +32,6 @@ Examples are illustrative and redacted. No proprietary data is used.
 
 ---
 
-# 📊 What I Specialize In
-
-- **System integrity** — clean handoffs, clear ownership, auditable decision paths  
-- **Workflow design** — mapping and fixing where people processes actually break  
-- **Human-in-the-loop AI** — explainable recommendations, override notes, zero black boxes  
-- **Operational analytics** — time-in-stage, pass-through, capacity, forecast accuracy  
-- **Scalable enablement** — playbooks and patterns that teams actually adopt
-
----
-
-## 🏆 Recommendations (Samples)
-
-> “Rare talent. Listens before talking, connects ideas… the best recruiter in our sector.”  
-> “Fast turnaround of highly qualified talent.”  
-> “One of the most effective operators I’ve worked with.”
-
-*20+ dated recommendations on LinkedIn.*
-
----
-
-## 🎓 Credentials & Certifications
-
-- **MBA — Data Analytics (4.0 GPA)** — Beta Gamma Sigma, Phi Kappa Phi  
-- Wharton People Analytics  
-- AIRS: CIR, CDR, CSMR  
-- SHRM: Employing Abilities at Work  
-- AI in Recruiting (CASR)  
-
----
-
 # ✉️ Contact
 
 - **Intro call:** https://dianewilkinson.github.io/book/  
