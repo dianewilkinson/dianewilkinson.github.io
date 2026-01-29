@@ -3,127 +3,122 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Chief — Personal Chief of Staff (Demo)</title>
+  <title>Chief — Orchestrated People Ops (Demo)</title>
+
+  <meta property="og:title" content="Chief — Orchestrated People Ops (Demo)">
+  <meta property="og:description" content="Dashboard + ask: Chief surfaces what matters, routes work to A[i]gents, and keeps humans at decision boundaries.">
+  <meta property="og:type" content="website">
 
   <style>
     :root{
       --bg:#f9fafb;
       --card:#ffffff;
       --text:#111827;
-      --muted:#6b7280;
+      --muted:#4b5563;
       --border:#e5e7eb;
-      --shadow:rgba(15,23,42,.08);
-      --accent:#4f46e5;
+      --shadow:rgba(15,23,42,0.08);
+
+      --purple:#4f46e5;
+      --purple-2:#4338ca;
+
+      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
+      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.10),rgba(168,85,247,.10),rgba(99,102,241,.10));
 
       --good:#16a34a;
       --warn:#f59e0b;
       --bad:#ef4444;
       --info:#2563eb;
 
-      --soft:rgba(79,70,229,.08);
-      --headerBand:linear-gradient(135deg, rgba(79,70,229,.10), rgba(249,115,129,.10));
-      --statusBg:#f3f4f6;
-
-      --charcoal:#374151;
+      --pillbg:#f3f4f6; /* gray background for all pills */
+      --pillbd:rgba(148,163,184,.45);
     }
 
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box;}
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
 
-    /* Top bar */
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:10;
+    .bar{height:4px;background:var(--accent-grad);}
+
+    .wrap{
+      max-width:1120px;
+      margin:0 auto;
+      padding:10px 16px 22px;
+    }
+
+    /* Top chrome */
+    .top{
       display:flex;
-      justify-content:space-between;
       align-items:center;
-      padding:12px 16px;
-      border-bottom:1px solid var(--border);
-      background:#fff;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
     }
     .brand{
       display:flex;
       align-items:center;
       gap:10px;
-      font-weight:950;
-      letter-spacing:-.01em;
     }
-    /* Company logo placeholder (replace with image later) */
     .logo{
-      width:38px;height:38px;
-      border-radius:14px;
+      width:36px;height:36px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
       display:flex;
       align-items:center;
       justify-content:center;
-      background:linear-gradient(180deg,#fff,#fbfdff);
-      border:1px solid var(--border);
-      box-shadow:0 1px 2px var(--shadow);
       font-size:11px;
-      font-weight:950;
-      color:var(--charcoal);
+      font-weight:900;
+      color:#6b7280;
+      box-shadow:0 1px 2px var(--shadow);
       user-select:none;
     }
-
-    .meta{
+    .topright{
       display:flex;
       align-items:center;
       gap:10px;
-      font-size:13px;
-      color:var(--muted);
       flex-wrap:wrap;
       justify-content:flex-end;
     }
     .pill{
       display:inline-flex;
       align-items:center;
-      gap:8px;
+      gap:6px;
       padding:7px 10px;
       border-radius:999px;
       border:1px solid rgba(148,163,184,.55);
-      background:rgba(255,255,255,.95);
-      font-weight:900;
+      background:#fff;
+      font-size:12px;
+      font-weight:800;
       color:#374151;
-      box-shadow:0 1px 2px var(--shadow);
-      white-space:nowrap;
     }
     .iconbtn{
-      border:1px solid rgba(148,163,184,.65);
-      background:#fff;
+      width:34px;height:34px;
       border-radius:12px;
-      padding:8px 10px;
-      font-weight:950;
-      cursor:pointer;
-      box-shadow:0 1px 2px var(--shadow);
-    }
-    .iconbtn:hover{ border-color:#c7d2fe; }
-
-    /* Layout */
-    .wrap{
-      max-width:1120px;
-      margin:0 auto;
-      padding:16px;
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
       display:flex;
-      flex-direction:column;
-      gap:14px;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
     }
+    .iconbtn:hover{background:#fbfbff;border-color:rgba(99,102,241,.45);}
 
+    /* Main panel */
     .panel{
       background:var(--card);
       border:1px solid var(--border);
-      border-radius:18px;
+      border-radius:16px;
       box-shadow:0 1px 3px var(--shadow);
       overflow:hidden;
     }
     .panelhead{
       padding:12px 14px;
       border-bottom:1px solid var(--border);
-      background:var(--headerBand);
+      background:var(--accent-soft);
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -134,52 +129,37 @@
       display:flex;
       align-items:center;
       gap:10px;
-      font-weight:950;
-      letter-spacing:-.01em;
-    }
-    .paneltitle .badgeicon{
-      width:30px;height:30px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.92);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow:0 1px 2px var(--shadow);
-    }
-    .panelhint{
-      color:var(--muted);
-      font-size:12px;
       font-weight:900;
+      letter-spacing:-0.01em;
+    }
+    .panelmeta{
+      font-size:12px;
+      font-weight:800;
+      color:#6b7280;
     }
 
-    .body{
-      padding:14px;
-      background:linear-gradient(180deg,#fff,#fbfdff);
-    }
-
-    /* Cards */
+    /* Cards grid */
     .grid{
       display:grid;
-      grid-template-columns:repeat(2, minmax(320px, 1fr));
+      grid-template-columns: 1fr 1fr;
       gap:12px;
-      align-items:stretch;
+      padding:14px;
     }
     @media (max-width:980px){
-      .grid{ grid-template-columns:1fr; }
+      .grid{grid-template-columns:1fr;}
     }
 
     .card{
       border:1px solid var(--border);
       background:#fff;
-      border-radius:18px;
-      box-shadow:0 1px 3px var(--shadow);
+      border-radius:14px;
+      box-shadow:0 1px 2px var(--shadow);
       overflow:hidden;
     }
     .cardhead{
       padding:10px 12px;
-      border-bottom:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(79,70,229,.08), rgba(255,255,255,0));
+      border-bottom:1px solid #eef2f7;
+      background:linear-gradient(180deg,rgba(79,70,229,.06), rgba(255,255,255,0));
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -187,251 +167,196 @@
     }
     .cardhead h3{
       margin:0;
-      font-size:14.5px;
+      font-size:13px;
       font-weight:950;
-      letter-spacing:-.01em;
-      line-height:1.2;
-      color:var(--accent); /* card titles purple */
+      color:var(--purple);
+      letter-spacing:-0.01em;
     }
-    /* Header meta: no pill — just heading text */
     .headmeta{
       font-size:12px;
-      font-weight:950;
-      color:var(--charcoal);
-      display:inline-flex;
+      font-weight:900;
+      color:#374151;
+      display:flex;
       align-items:center;
       gap:6px;
+    }
+
+    .cardbody{padding:10px 12px;}
+
+    .list{display:flex; flex-direction:column; gap:8px;}
+    .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:9px 10px;
+      border:1px solid #eef2f7;
+      background:#fbfdff;
+      border-radius:12px;
+      cursor:pointer;
+    }
+    .row:hover{background:#fff;border-color:rgba(99,102,241,.25);}
+    .row:active{transform:translateY(0.5px);}
+
+    .rowleft{min-width:0;}
+    .rowtitle{
+      font-size:13px;
+      font-weight:900;
+      color:#111827;
       white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .rowsub{
+      margin-top:2px;
+      font-size:12px;
+      color:#6b7280;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
-    .cardbody{
-      padding:12px;
-    }
-
-    /* Unified status pill (same size) */
+    /* unified gray pills with colored text */
     .statuspill{
-      width:110px;
-      height:26px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:6px;
-      padding:0 10px;
+      min-width:92px;
+      padding:6px 10px;
       border-radius:999px;
-      border:1px solid #e5e7eb;
-      background:var(--statusBg);
-      font-size:11.5px;
+      border:1px solid var(--pillbd);
+      background:var(--pillbg);
+      font-size:12px;
       font-weight:950;
-      letter-spacing:-.01em;
-      white-space:nowrap;
-      flex:0 0 auto;
+      letter-spacing:-0.01em;
+      user-select:none;
     }
-    .s-good{ color:var(--good); }
-    .s-warn{ color:var(--warn); }
-    .s-bad{  color:var(--bad);  }
-    .s-info{ color:var(--info); }
+    .sp-good{color:var(--good);}
+    .sp-warn{color:var(--warn);}
+    .sp-bad{color:var(--bad);}
+    .sp-info{color:var(--info);}
+    .sp-neutral{color:#374151;}
+    .sp-purple{color:var(--purple);}
 
-    .list{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-    .row{
+    /* Help section */
+    .help{
+      margin-top:14px;
       border:1px solid var(--border);
-      border-radius:14px;
-      padding:9px 10px;
+      border-radius:16px;
+      box-shadow:0 1px 3px var(--shadow);
+      overflow:hidden;
       background:#fff;
-      box-shadow:0 1px 2px var(--shadow);
+    }
+    .helphead{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      background:var(--accent-soft);
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:space-between;
       gap:10px;
-      cursor:pointer;
-      transition:transform .12s ease, box-shadow .12s ease;
-    }
-    .row:hover{ transform:translateY(-1px); box-shadow:0 10px 26px rgba(0,0,0,.06); }
-    .rowleft{ min-width:0; }
-    .rowtitle{
-      margin:0;
-      font-size:12.8px;
-      font-weight:950;
-      letter-spacing:-.01em;
-      color:#111827;
-      line-height:1.25;
-    }
-    .rowsub{
-      margin-top:4px;
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.35;
-    }
-    .rowright{
-      display:flex;
-      gap:8px;
-      align-items:center;
       flex-wrap:wrap;
-      justify-content:flex-end;
-      flex:0 0 auto;
     }
-
-    /* Help panel */
-    .helpTitle{
-      margin:0;
-      font-size:16px;
-      font-weight:950;
-      letter-spacing:-.01em;
-      color:var(--accent);
-    }
-    .helpMeta{
-      margin:6px 0 0;
-      color:var(--charcoal);
-      font-size:12.5px;
-      font-weight:950;
+    .helptitle{
       display:flex;
       align-items:center;
-      gap:6px;
-    }
-
-    .controls{
-      display:grid;
-      grid-template-columns:1.1fr 1fr 1.2fr;
       gap:10px;
-      margin-bottom:10px;
+      font-weight:950;
+      letter-spacing:-0.01em;
+      color:var(--purple);
+    }
+    .chiefmark{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:#374151;
+      font-weight:900;
+      font-size:12px;
+    }
+    .helpbody{
+      padding:12px 14px;
+      display:grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap:12px;
     }
     @media (max-width:980px){
-      .controls{ grid-template-columns:1fr; }
+      .helpbody{grid-template-columns:1fr;}
     }
-    .control{
-      border:1px solid var(--border);
+    .helpbox{
+      border:1px solid #eef2f7;
       border-radius:14px;
-      background:#fff;
-      padding:10px;
-      box-shadow:0 1px 2px var(--shadow);
+      background:#fbfdff;
+      padding:10px 10px 12px;
     }
     .label{
       font-size:11px;
-      font-weight:950;
-      color:#374151;
+      color:#6b7280;
       letter-spacing:.08em;
       text-transform:uppercase;
-      margin-bottom:8px;
+      font-weight:900;
+      margin-bottom:6px;
     }
-    .muted{
+    .mini{
       font-size:12px;
-      color:var(--muted);
+      color:#6b7280;
+      margin-top:6px;
       line-height:1.4;
     }
-    .sliderwrap{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    input[type="range"]{ width:100%; }
-    select, textarea{
+    .select, .notes{
       width:100%;
       border:1px solid var(--border);
       border-radius:12px;
       padding:10px;
       font-size:13px;
       outline:none;
-      background:#fbfdff;
+      background:#fff;
     }
-    textarea{ min-height:42px; resize:vertical; }
-
-    .chatline{
+    .slider{
+      width:100%;
+      accent-color: var(--purple);
+    }
+    .chatbar{
+      border-top:1px solid var(--border);
+      padding:10px 12px;
       display:flex;
       gap:10px;
       align-items:center;
-      margin-top:10px;
+      background:#fff;
     }
     .chaticon{
       width:34px;height:34px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:var(--soft);
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:16px;
-      box-shadow:0 1px 2px var(--shadow);
-      flex:0 0 auto;
+      color:#6b7280;
+      user-select:none;
     }
-    .chatinput{
+    .input{
       flex:1;
       border:1px solid var(--border);
-      border-radius:14px;
+      border-radius:12px;
       padding:11px 12px;
       font-size:13px;
       outline:none;
       background:#fbfdff;
     }
     .btn{
-      border:1px solid rgba(148,163,184,.65);
-      background:#fff;
-      color:#111827;
-      border-radius:14px;
-      padding:10px 12px;
+      border:1px solid rgba(99,102,241,.45);
+      background:var(--purple);
+      color:#fff;
+      border-radius:12px;
+      padding:11px 14px;
       font-size:13px;
       font-weight:950;
       cursor:pointer;
       white-space:nowrap;
-      box-shadow:0 1px 2px var(--shadow);
     }
-    .btn.primary{
-      background:var(--accent);
-      border-color:var(--accent);
-      color:#fff;
-    }
-    .btn:hover{ border-color:#c7d2fe; }
-    .btn.primary:hover{ background:#4338ca; border-color:#4338ca; }
+    .btn:hover{background:var(--purple-2);}
 
-    /* Settings modal + toast */
-    .modalback{
-      position:fixed; inset:0;
-      background:rgba(17,24,39,.35);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:16px;
-      z-index:50;
-    }
-    .modal{
-      width:min(720px, 100%);
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:18px;
-      box-shadow:0 30px 80px rgba(0,0,0,.25);
-      overflow:hidden;
-    }
-    .modalhead{
-      padding:12px 14px;
-      border-bottom:1px solid var(--border);
-      background:var(--soft);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .modalhead strong{ font-weight:950; }
-    .modalbody{ padding:14px; }
-    .rowgrid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    }
-    @media (max-width:860px){ .rowgrid{ grid-template-columns:1fr; } }
-    .check{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:10px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fff;
-      box-shadow:0 1px 2px var(--shadow);
-    }
-    .check input{ margin-top:3px; }
-
-    .divider{ margin:12px 0; border-top:1px dashed #e5e7eb; }
-
+    /* Toast */
     .toast{
       position:fixed;
       left:50%;
@@ -442,130 +367,524 @@
       padding:10px 12px;
       border-radius:999px;
       font-size:12px;
-      font-weight:950;
+      font-weight:900;
       box-shadow:0 12px 30px rgba(0,0,0,.18);
       opacity:0;
       pointer-events:none;
       transition:opacity .18s ease, transform .18s ease;
-      z-index:60;
+      z-index:999;
     }
-    .toast.show{ opacity:1; transform:translateX(-50%) translateY(-2px); }
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(-2px);}
+
+    /* Modal (in-browser inbox + agent demo surface) */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(17,24,39,.48);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:1000;
+    }
+    .modal.show{display:flex;}
+    .sheet{
+      width:min(980px, 100%);
+      height:min(640px, 92vh);
+      background:#fff;
+      border:1px solid rgba(148,163,184,.45);
+      border-radius:18px;
+      box-shadow:0 30px 80px rgba(0,0,0,.20);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .sheethead{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      background:var(--accent-soft);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .sheettitle{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:950;
+      color:#111827;
+      letter-spacing:-0.01em;
+    }
+    .sheettitle .sub{
+      font-size:12px;
+      font-weight:900;
+      color:#6b7280;
+    }
+    .close{
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
+      border-radius:12px;
+      padding:8px 10px;
+      font-size:12px;
+      font-weight:950;
+      cursor:pointer;
+    }
+    .close:hover{border-color:rgba(99,102,241,.45);}
+
+    .sheetbody{
+      flex:1;
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      min-height:0;
+    }
+    @media (max-width:860px){
+      .sheetbody{grid-template-columns:1fr;}
+    }
+
+    .sidebar{
+      border-right:1px solid #eef2f7;
+      padding:10px;
+      background:#fbfdff;
+      min-height:0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .tabs{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .tab{
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      font-weight:950;
+      cursor:pointer;
+      color:#374151;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .tab.active{
+      border-color:rgba(99,102,241,.55);
+      color:var(--purple);
+      background:rgba(79,70,229,.06);
+    }
+    .inboxlist{
+      overflow:auto;
+      border:1px solid #eef2f7;
+      border-radius:14px;
+      background:#fff;
+      min-height:0;
+    }
+    .item{
+      padding:10px 10px;
+      border-bottom:1px solid #eef2f7;
+      cursor:pointer;
+    }
+    .item:hover{background:#fbfdff;}
+    .item.active{background:rgba(79,70,229,.06);}
+    .item .t{
+      font-size:13px;
+      font-weight:950;
+      color:#111827;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .item .s{
+      margin-top:2px;
+      font-size:12px;
+      color:#6b7280;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .content{
+      padding:12px 12px 14px;
+      min-height:0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .preview{
+      border:1px solid #eef2f7;
+      border-radius:14px;
+      background:#fff;
+      padding:12px;
+      min-height:0;
+      overflow:auto;
+    }
+    .preview h4{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:950;
+      color:#111827;
+    }
+    .preview .meta{
+      font-size:12px;
+      color:#6b7280;
+      margin-bottom:10px;
+    }
+    .preview .body{
+      font-size:13px;
+      color:#374151;
+      line-height:1.6;
+      white-space:pre-wrap;
+    }
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .act{
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
+      border-radius:12px;
+      padding:9px 10px;
+      font-size:12px;
+      font-weight:950;
+      cursor:pointer;
+      color:#374151;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .act:hover{border-color:rgba(99,102,241,.45); color:var(--purple);}
+    .act.primary{
+      background:var(--purple);
+      border-color:var(--purple);
+      color:#fff;
+    }
+    .act.primary:hover{background:var(--purple-2);border-color:var(--purple-2);color:#fff;}
+    .agentlog{
+      border:1px solid #eef2f7;
+      border-radius:14px;
+      background:#fbfdff;
+      padding:10px;
+      font-size:12px;
+      color:#6b7280;
+      line-height:1.5;
+    }
+    .agentlog strong{color:#374151;}
   </style>
 </head>
 
 <body>
-
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <div class="brand" aria-label="App home">
-      <div class="logo" title="Company Logo">LOGO</div>
-    </div>
-
-    <div class="meta">
-      <span class="pill" id="datePill">—</span>
-      <span class="pill" id="timePill">—</span>
-      <span class="pill" id="weatherPill">—</span>
-      <button class="iconbtn" id="settingsBtn" title="Settings">⚙️</button>
-    </div>
-  </div>
+  <div class="bar"></div>
 
   <div class="wrap">
-    <!-- OVERVIEW PANEL -->
-    <div class="panel">
-      <div class="panelhead">
-        <div class="paneltitle">
-          <div class="badgeicon" id="overviewIcon">📌</div>
-          <div id="overviewTitle">Overview</div>
-        </div>
-        <div class="panelhint" id="overviewHint">Select Cards for Details</div>
+    <div class="top">
+      <div class="brand">
+        <div class="logo" id="brandLogo">LOGO</div>
       </div>
-      <div class="body" id="overviewBody"></div>
+      <div class="topright">
+        <span class="pill" id="datePill">📅 Thu, Jan 29</span>
+        <span class="pill" id="timePill">🕒 01:26 PM</span>
+        <span class="pill" id="weatherPill">☀️ 58°F · San Francisco</span>
+        <button class="iconbtn" id="settingsBtn" title="Settings (stub)">⚙️</button>
+      </div>
     </div>
 
-    <!-- HOW CAN I HELP PANEL (separate) -->
-    <div class="panel">
+    <!-- Overview -->
+    <section class="panel" aria-label="Overview">
       <div class="panelhead">
-        <div class="paneltitle">
-          <div class="badgeicon">💬</div>
-          <div>
-            <div class="helpTitle">How can I help?</div>
-            <div class="helpMeta"><span>🧠</span><span>Chief</span></div>
+        <div class="paneltitle">📌 Overview</div>
+        <div class="panelmeta">Select Cards for Details</div>
+      </div>
+
+      <div class="grid" id="overviewGrid">
+        <!-- Today's Interviews -->
+        <div class="card" data-card="interviews">
+          <div class="cardhead">
+            <h3>Today's Interviews</h3>
+            <span class="headmeta">⚠️ <span style="color:#374151;font-weight:900;">Prep:</span> 2</span>
+          </div>
+          <div class="cardbody">
+            <div class="list">
+              <div class="row" data-interview="i1">
+                <div class="rowleft">
+                  <div class="rowtitle">10:30 — Alex Morgan</div>
+                  <div class="rowsub">HM Screen · J. Rivera</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-warn">⚠️ Prep</span></div>
+              </div>
+              <div class="row" data-interview="i2">
+                <div class="rowleft">
+                  <div class="rowtitle">12:00 — Priya Shah</div>
+                  <div class="rowsub">Tech Screen · S. Kim</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-good">✅ Ready</span></div>
+              </div>
+              <div class="row" data-interview="i3">
+                <div class="rowleft">
+                  <div class="rowtitle">3:00 — Diego Ruiz</div>
+                  <div class="rowsub">Panel · Panel (3)</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-warn">⚠️ Prep</span></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="panelhint"></div>
+
+        <!-- Open Reqs -->
+        <div class="card" data-card="reqs">
+          <div class="cardhead">
+            <h3>Open Requisitions</h3>
+            <span class="headmeta">📌 <span style="color:#374151;font-weight:900;">3 open</span></span>
+          </div>
+          <div class="cardbody">
+            <div class="list">
+              <div class="row" data-req="r1">
+                <div class="rowleft">
+                  <div class="rowtitle">Backend Engineer (US)</div>
+                  <div class="rowsub">Remote / US</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-bad">At risk</span></div>
+              </div>
+              <div class="row" data-req="r2">
+                <div class="rowleft">
+                  <div class="rowtitle">Product Designer</div>
+                  <div class="rowsub">San Francisco, CA</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-warn">Early signal</span></div>
+              </div>
+              <div class="row" data-req="r3">
+                <div class="rowleft">
+                  <div class="rowtitle">Data Analyst</div>
+                  <div class="rowsub">Remote</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-good">Healthy</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="card" data-card="projects">
+          <div class="cardhead">
+            <h3>Projects & Deadlines</h3>
+            <span class="headmeta">🗂️ <span style="color:#374151;font-weight:900;">2 active</span></span>
+          </div>
+          <div class="cardbody">
+            <div class="list">
+              <div class="row" data-project="p1">
+                <div class="rowleft">
+                  <div class="rowtitle">Market map — ML Eng</div>
+                  <div class="rowsub">Due: Fri · Needs attention</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Review</span></div>
+              </div>
+              <div class="row" data-project="p2">
+                <div class="rowleft">
+                  <div class="rowtitle">Hiring kickoff prep</div>
+                  <div class="rowsub">Due: Tomorrow · In progress</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Review</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Employer Brand -->
+        <div class="card" data-card="socials">
+          <div class="cardhead">
+            <h3>Employer Brand / Socials</h3>
+            <span class="headmeta">💬 <span style="color:#374151;font-weight:900;">2 items</span></span>
+          </div>
+          <div class="cardbody">
+            <div class="list">
+              <div class="row" data-social="s1">
+                <div class="rowleft">
+                  <div class="rowtitle">Glassdoor: Response needed (3★)</div>
+                  <div class="rowsub">Draft available (approval required to post)</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Review</span></div>
+              </div>
+              <div class="row" data-social="s2">
+                <div class="rowleft">
+                  <div class="rowtitle">LinkedIn: Post — Hiring update</div>
+                  <div class="rowsub">Scheduled · time set (Tier 1 scheduling)</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Review</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Messaging -->
+        <div class="card" data-card="messaging">
+          <div class="cardhead">
+            <h3>Messaging</h3>
+            <span class="headmeta">💬 <span style="color:#374151;font-weight:900;">Unread</span></span>
+          </div>
+          <div class="cardbody">
+            <div class="list">
+              <div class="row" data-msg="slack">
+                <div class="rowleft">
+                  <div class="rowtitle">Slack</div>
+                  <div class="rowsub">7 unread</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-info">7</span></div>
+              </div>
+              <div class="row" data-msg="email">
+                <div class="rowleft">
+                  <div class="rowtitle">Email</div>
+                  <div class="rowsub">12 unread</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-info">12</span></div>
+              </div>
+              <div class="row" data-msg="inmail">
+                <div class="rowleft">
+                  <div class="rowtitle">LinkedIn InMails</div>
+                  <div class="rowsub">3 unread</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-info">3</span></div>
+              </div>
+              <div class="row" data-msg="whatsapp">
+                <div class="rowleft">
+                  <div class="rowtitle">WhatsApp</div>
+                  <div class="rowsub">2 unread</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-info">2</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- News -->
+        <div class="card" data-card="news">
+          <div class="cardhead">
+            <h3>Company & Industry News</h3>
+            <span class="headmeta">📰 <span style="color:#374151;font-weight:900;">Today</span></span>
+          </div>
+          <div class="cardbody">
+            <div class="list">
+              <div class="row" data-news="n1">
+                <div class="rowleft">
+                  <div class="rowtitle">Comp bands updated</div>
+                  <div class="rowsub">New leveling guidance effective next pay cycle</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+              </div>
+              <div class="row" data-news="n2">
+                <div class="rowleft">
+                  <div class="rowtitle">Interviewer training refreshed</div>
+                  <div class="rowsub">New rubrics + calibration guide published</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+              </div>
+              <div class="row" data-news="n3">
+                <div class="rowleft">
+                  <div class="rowtitle">Hiring market pulse</div>
+                  <div class="rowsub">Senior-loop cycle time increasing across tech this month</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+              </div>
+              <div class="row" data-news="n4">
+                <div class="rowleft">
+                  <div class="rowtitle">Quarterly industry report released</div>
+                  <div class="rowsub">New report: roles, pay, demand shifts</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="body" id="helpBody"></div>
-    </div>
+    </section>
+
+    <!-- How can I help? -->
+    <section class="help" aria-label="How can I help">
+      <div class="helphead">
+        <div>
+          <div class="helptitle">How can I help?</div>
+          <div class="chiefmark">🧠 Chief</div>
+        </div>
+      </div>
+
+      <div class="helpbody">
+        <div class="helpbox">
+          <div class="label">Bandwidth</div>
+          <div style="font-size:13px;font-weight:900;color:#374151;margin-bottom:6px;" id="bwLabel">Medium</div>
+          <input class="slider" id="bwSlider" type="range" min="1" max="5" value="3" />
+          <div class="mini">Controls how proactive Chief should be.</div>
+        </div>
+
+        <div class="helpbox">
+          <div class="label">Focus Preference</div>
+          <select class="select" id="focusSel">
+            <option>Normal</option>
+            <option>Interviews</option>
+            <option>Requisitions</option>
+            <option>Projects</option>
+            <option>Employer Brand</option>
+            <option>Inbox Zero</option>
+          </select>
+          <div class="mini">Affects which cards Chief prioritizes.</div>
+        </div>
+
+        <div class="helpbox">
+          <div class="label">Additional Notes</div>
+          <textarea class="notes" id="notes" rows="3" placeholder="Anything Chief should know?"></textarea>
+          <div class="mini">Used only per your Settings.</div>
+        </div>
+      </div>
+
+      <div class="chatbar">
+        <div class="chaticon">💬</div>
+        <input class="input" id="chatInput" placeholder="Type a request… (e.g., “Prep my 10:30” or “Show req risks”)">
+        <button class="btn" id="sendBtn">Send</button>
+      </div>
+    </section>
   </div>
 
-  <!-- SETTINGS MODAL -->
-  <div class="modalback" id="modalBack" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-label="Settings">
-      <div class="modalhead">
-        <strong>Settings</strong>
-        <button class="iconbtn" id="closeSettings">✕</button>
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="In-browser inbox">
+      <div class="sheethead">
+        <div class="sheettitle">
+          <span id="sheetIcon">💬</span>
+          <span id="sheetName">Messaging</span>
+          <span class="sub" id="sheetSub">In-browser preview (demo)</span>
+        </div>
+        <button class="close" id="closeModal">Close</button>
       </div>
-      <div class="modalbody">
-        <div class="rowgrid">
-          <div class="control">
-            <div class="label">Learning threshold</div>
-            <div class="muted">Minimum sends before learning-based changes are allowed (global default).</div>
-            <div class="divider"></div>
-            <input id="minSendsInput" type="number" min="1" step="1"
-              style="width:100%;padding:10px;border:1px solid var(--border);border-radius:12px;font-size:13px;" />
+
+      <div class="sheetbody">
+        <div class="sidebar">
+          <div class="tabs" id="tabs">
+            <button class="tab active" data-tab="slack">💬 Slack</button>
+            <button class="tab" data-tab="email">✉️ Email</button>
+            <button class="tab" data-tab="inmail">🔗 InMail</button>
+            <button class="tab" data-tab="whatsapp">📱 WhatsApp</button>
           </div>
 
-          <div class="control">
-            <div class="label">News defaults</div>
-            <div class="muted">Controls what shows in Company & Industry News. Change anytime.</div>
-            <div class="divider"></div>
-            <select id="newsMode">
-              <option value="recruiting_ops" selected>Recruiting Ops + People Analytics</option>
-              <option value="company_only">Company announcements only</option>
-              <option value="hiring_market">Hiring market + recruiting</option>
-            </select>
-          </div>
-
-          <div class="control">
-            <div class="label">Data use</div>
-            <div class="muted">Set once. You can change it anytime. Chief will not re-ask.</div>
-            <div class="divider"></div>
-
-            <div class="check">
-              <input type="checkbox" id="usePersonal" />
-              <div>
-                <div style="font-weight:950;">Use to personalize my experience</div>
-                <div class="muted">Improves prioritization and assistance behavior.</div>
-              </div>
-            </div>
-
-            <div style="height:10px;"></div>
-
-            <div class="check">
-              <input type="checkbox" id="useAnon" />
-              <div>
-                <div style="font-weight:950;">Share anonymously (optional)</div>
-                <div class="muted">Aggregated only. No individual reporting.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="control">
-            <div class="label">Weather</div>
-            <div class="muted">Demo placeholder. Replace with live weather feed later.</div>
-            <div class="divider"></div>
-            <select id="weatherCity">
-              <option value="sf" selected>San Francisco</option>
-              <option value="sj">San Jose</option>
-              <option value="oak">Oakland</option>
-              <option value="sac">Sacramento</option>
-            </select>
+          <div class="inboxlist" id="inboxList">
+            <!-- injected -->
           </div>
         </div>
 
-        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap;">
-          <button class="btn" id="resetSettings">Reset</button>
-          <button class="btn primary" id="saveSettings">Save</button>
+        <div class="content">
+          <div class="preview" id="preview">
+            <!-- injected -->
+          </div>
+
+          <div class="actions" id="actions">
+            <button class="act" data-act="summarize">✨ Summarize</button>
+            <button class="act" data-act="draft">✍️ Draft reply</button>
+            <button class="act primary" data-act="route">🧩 Route to A[i]gent</button>
+            <button class="act" data-act="closeLoop">✅ Close loop</button>
+          </div>
+
+          <div class="agentlog" id="agentLog">
+            <strong>Agent demo:</strong> actions here simulate Chief routing work to specialized A[i]gents (reply drafting, tone checks, policy validation, logging).
+          </div>
         </div>
       </div>
     </div>
@@ -574,452 +893,253 @@
   <div class="toast" id="toast">Saved.</div>
 
   <script>
-    /***********************
-     * Demo data (no "stub" anywhere)
-     ***********************/
+    // ---------- Demo data ----------
     const DATA = {
-      weatherLabel: "☀️ 58°F · San Francisco",
-
-      interviews: [
-        { id:"i1", time:"10:30", candidate:"Alex Morgan", stage:"HM Screen", interviewer:"J. Rivera", reqId:"r1", prepNeeded:true },
-        { id:"i2", time:"12:00", candidate:"Priya Shah", stage:"Tech Screen", interviewer:"S. Kim", reqId:"r1", prepNeeded:false },
-        { id:"i3", time:"3:00",  candidate:"Diego Ruiz", stage:"Panel", interviewer:"Panel (3)", reqId:"r2", prepNeeded:true },
-      ],
-
-      requisitions: [
-        { id:"r1", title:"Backend Engineer (US)", location:"Remote / US", health:"at_risk" },
-        { id:"r2", title:"Product Designer", location:"San Francisco, CA", health:"early" },
-        { id:"r3", title:"Data Analyst", location:"Remote", health:"healthy" }
-      ],
-
-      projects: [
-        { id:"p1", title:"Market map — ML Eng", due:"Fri", status:"Needs attention" },
-        { id:"p2", title:"Hiring kickoff prep", due:"Tomorrow", status:"In progress" }
-      ],
-
-      brand: [
-        { id:"b1", type:"Glassdoor", title:"Response needed: 3★ review", status:"Pending", note:"Draft available (approval required to post)." },
-        { id:"b2", type:"LinkedIn", title:"Post: Hiring update", status:"Scheduled", note:"Scheduled time set (Tier 1 scheduling)." }
-      ],
-
-      messaging: {
-        slackUnread: 7,
-        emailUnread: 12,
-        inmailsUnread: 3,
-        whatsappUnread: 2,
-        items: [
-          { id:"m1", src:"Slack", title:"#eng-hiring", sub:"2 mentions · 1 thread awaiting reply" },
-          { id:"m2", src:"Email", title:"Offer approval needed", sub:"Finance approval requested (EOD)" },
-          { id:"m3", src:"InMail", title:"Candidate follow-up", sub:"Senior designer asking about comp band" },
+      inbox: {
+        slack: [
+          { id:"s1", from:"#eng-hiring", subject:"HM wants a tighter bar for Backend Eng", snippet:"Can we calibrate on seniority expectations…", when:"12m ago",
+            body:"Thread in #eng-hiring\n\nHM: We need a tighter bar for Backend Eng.\nRecruiter: Agree—can we align on seniority expectations?\nHM: Yes. Also prioritize ownership examples.\n\nChief suggestion: run a quick calibration prompt + update screening rubric (Tier 2)."
+          },
+          { id:"s2", from:"@J.Rivera", subject:"Alex Morgan screen notes", snippet:"Alex has strong ownership, needs depth on…", when:"32m ago",
+            body:"DM from J. Rivera\n\nAlex Morgan:\n- Strong ownership signals\n- Needs deeper systems design examples\n- Recommend: proceed to tech screen\n\nChief suggestion: generate candidate summary card + prep questions for 10:30."
+          },
+          { id:"s3", from:"#recruiting-ops", subject:"New rubric template posted", snippet:"Updated scorecard sections for consistency…", when:"1h ago",
+            body:"Announcement in #recruiting-ops\n\nNew rubric template posted.\n- Standardized competencies\n- Updated leveling language\n\nChief suggestion: apply template to open reqs (Tier 1)."
+          }
+        ],
+        email: [
+          { id:"e1", from:"Finance", subject:"Offer approval needed — BE (US)", snippet:"Please confirm comp band alignment…", when:"18m ago",
+            body:"From: Finance\nSubject: Offer approval needed — Backend Engineer (US)\n\nPlease confirm comp band alignment and provide leveling rationale.\n\nChief suggestion: generate a 3-bullet justification + attach comp band policy excerpt."
+          },
+          { id:"e2", from:"HRBP", subject:"Hiring plan notes for Q1", snippet:"Sharing headcount assumptions + changes…", when:"2h ago",
+            body:"From: HRBP\nSubject: Hiring plan notes for Q1\n\nSharing headcount assumptions and changes.\n\nChief suggestion: flag impacted reqs and update pipeline plan (Tier 2)."
+          },
+          { id:"e3", from:"Candidate", subject:"Re: Product Designer — scheduling", snippet:"Thanks—can we do later this week?", when:"3h ago",
+            body:"From: Candidate\n\nThanks—can we do later this week?\n\nChief suggestion: propose 3 times within constraints (Tier 1)."
+          }
+        ],
+        inmail: [
+          { id:"l1", from:"Senior Designer", subject:"Role scope + leveling question", snippet:"Is this IC6 or IC5? Comp band range…", when:"41m ago",
+            body:"LinkedIn InMail\n\nIs this IC6 or IC5? What’s the comp band range?\n\nChief suggestion: draft response that preserves policy + routes to HM for scope confirmation (Tier 3)."
+          },
+          { id:"l2", from:"Backend Eng", subject:"Interested — remote policy?", snippet:"I’m in NYC—does the role allow remote…", when:"4h ago",
+            body:"LinkedIn InMail\n\nI’m in NYC—does the role allow remote?\n\nChief suggestion: reply with approved policy wording + alternatives (Tier 1)."
+          }
+        ],
+        whatsapp: [
+          { id:"w1", from:"Hiring Manager", subject:"Quick question before panel", snippet:"Can we swap one interviewer?…", when:"9m ago",
+            body:"WhatsApp\n\nCan we swap one interviewer? Conflicting meeting.\n\nChief suggestion: propose replacement from panel pool + update calendar (Tier 2)."
+          },
+          { id:"w2", from:"Coordinator", subject:"Candidate is running 5 min late", snippet:"FYI — they’re in traffic…", when:"27m ago",
+            body:"WhatsApp\n\nFYI candidate running 5 min late.\n\nChief suggestion: notify panel + adjust start time within SLA (Tier 1)."
+          }
         ]
-      },
-
-      news: [
-        { id:"a1", title:"Comp bands updated", sub:"New leveling guidance effective next pay cycle" },
-        { id:"a2", title:"Interviewer training refreshed", sub:"New rubrics + calibration guide published" },
-        { id:"n1", title:"Hiring market pulse", sub:"Senior-loop cycle time increasing across tech this month" },
-        { id:"n2", title:"Industry report released", sub:"New quarterly hiring report: roles, pay, and demand shifts" }
-      ]
-    };
-
-    /***********************
-     * Settings (persist in localStorage)
-     ***********************/
-    const DEFAULT_SETTINGS = {
-      minSendsForLearning: 100,
-      usePersonal: true,
-      useAnon: false,
-      newsMode: "recruiting_ops",
-      weatherCity: "sf"
-    };
-
-    function loadSettings(){
-      try{
-        const raw = localStorage.getItem("chief_settings_v2");
-        if(!raw) return {...DEFAULT_SETTINGS};
-        const parsed = JSON.parse(raw);
-        return { ...DEFAULT_SETTINGS, ...parsed };
-      }catch(e){
-        return {...DEFAULT_SETTINGS};
       }
-    }
-    function saveSettingsObj(obj){
-      localStorage.setItem("chief_settings_v2", JSON.stringify(obj));
-    }
-    let SETTINGS = loadSettings();
+    };
 
-    /***********************
-     * DOM + Toast
-     ***********************/
-    const overviewBody = document.getElementById("overviewBody");
-    const helpBody = document.getElementById("helpBody");
+    // ---------- Toast ----------
     const toast = document.getElementById("toast");
-
     function showToast(text){
       toast.textContent = text;
       toast.classList.add("show");
-      setTimeout(()=>toast.classList.remove("show"), 1200);
+      clearTimeout(window.__toastT);
+      window.__toastT = setTimeout(()=>toast.classList.remove("show"), 1200);
     }
 
-    function fmtDate(){
-      const d = new Date();
-      return d.toLocaleDateString(undefined, { weekday:"short", month:"short", day:"numeric" });
+    // ---------- Bandwidth label ----------
+    const bwSlider = document.getElementById("bwSlider");
+    const bwLabel = document.getElementById("bwLabel");
+    const bwMap = {1:"Low",2:"Low-Med",3:"Medium",4:"High",5:"Max"};
+    bwSlider.addEventListener("input", ()=> bwLabel.textContent = bwMap[bwSlider.value] || "Medium");
+
+    // ---------- Modal wiring ----------
+    const modal = document.getElementById("modal");
+    const closeModal = document.getElementById("closeModal");
+    const inboxList = document.getElementById("inboxList");
+    const preview = document.getElementById("preview");
+    const tabs = document.getElementById("tabs");
+    const sheetIcon = document.getElementById("sheetIcon");
+    const sheetName = document.getElementById("sheetName");
+    const sheetSub = document.getElementById("sheetSub");
+    const agentLog = document.getElementById("agentLog");
+
+    let activeTab = "slack";
+    let activeItemId = null;
+
+    function openModal(tab){
+      modal.classList.add("show");
+      setActiveTab(tab || "slack");
     }
-    function fmtTime(){
-      const d = new Date();
-      return d.toLocaleTimeString([], { hour:"2-digit", minute:"2-digit" });
+    function hideModal(){
+      modal.classList.remove("show");
+    }
+    closeModal.addEventListener("click", hideModal);
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) hideModal(); });
+    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") hideModal(); });
+
+    function setActiveTab(tab){
+      activeTab = tab;
+      activeItemId = null;
+
+      // Tabs UI
+      [...tabs.querySelectorAll(".tab")].forEach(t=>{
+        t.classList.toggle("active", t.getAttribute("data-tab") === tab);
+      });
+
+      // Header
+      const head = {
+        slack:{icon:"💬", name:"Slack", sub:"In-browser Slack view (demo)"},
+        email:{icon:"✉️", name:"Email", sub:"In-browser inbox view (demo)"},
+        inmail:{icon:"🔗", name:"LinkedIn InMail", sub:"In-browser InMail view (demo)"},
+        whatsapp:{icon:"📱", name:"WhatsApp", sub:"In-browser WhatsApp view (demo)"}
+      }[tab];
+      sheetIcon.textContent = head.icon;
+      sheetName.textContent = head.name;
+      sheetSub.textContent = head.sub;
+
+      renderInboxList();
+      // default select first item
+      const arr = DATA.inbox[tab] || [];
+      if(arr[0]) selectItem(arr[0].id);
+      else renderPreviewEmpty();
     }
 
-    function statusPill(kind, label){
-      const cls =
-        kind === "good" ? "statuspill s-good" :
-        kind === "warn" ? "statuspill s-warn" :
-        kind === "bad"  ? "statuspill s-bad"  :
-                          "statuspill s-info";
-      return `<span class="${cls}">${label}</span>`;
-    }
+    tabs.addEventListener("click", (e)=>{
+      const btn = e.target.closest(".tab");
+      if(!btn) return;
+      setActiveTab(btn.getAttribute("data-tab"));
+    });
 
-    function reqStatusPill(health){
-      if(health === "healthy") return statusPill("good","Healthy");
-      if(health === "early")   return statusPill("warn","Early signal");
-      return statusPill("bad","At risk");
-    }
-
-    /***********************
-     * Overview cards
-     ***********************/
-    function tplOverview(){
-      const prepCount = DATA.interviews.filter(i=>i.prepNeeded).length;
-
-      return `
-        <div class="grid">
-
-          <!-- Interviews -->
-          <div class="card">
-            <div class="cardhead">
-              <h3>Today’s Interviews</h3>
-              <span class="headmeta">⚠️ Prep: ${prepCount}</span>
-            </div>
-            <div class="cardbody">
-              <div class="list">
-                ${DATA.interviews.map(i=>`
-                  <div class="row" data-interview="${i.id}">
-                    <div class="rowleft">
-                      <div class="rowtitle">${i.time} — ${i.candidate}</div>
-                      <div class="rowsub">${i.stage} · ${i.interviewer}</div>
-                    </div>
-                    <div class="rowright">
-                      ${i.prepNeeded ? statusPill("warn","Prep") : statusPill("good","Ready")}
-                    </div>
-                  </div>
-                `).join("")}
-              </div>
-            </div>
-          </div>
-
-          <!-- Reqs -->
-          <div class="card">
-            <div class="cardhead">
-              <h3>Open Requisitions</h3>
-              <span class="headmeta">📌 ${DATA.requisitions.length} open</span>
-            </div>
-            <div class="cardbody">
-              <div class="list">
-                ${DATA.requisitions.map(r=>`
-                  <div class="row" data-req="${r.id}">
-                    <div class="rowleft">
-                      <div class="rowtitle">${r.title}</div>
-                      <div class="rowsub">${r.location}</div>
-                    </div>
-                    <div class="rowright">
-                      ${reqStatusPill(r.health)}
-                    </div>
-                  </div>
-                `).join("")}
-              </div>
-            </div>
-          </div>
-
-          <!-- Projects -->
-          <div class="card">
-            <div class="cardhead">
-              <h3>Projects & Deadlines</h3>
-              <span class="headmeta">🗂️ ${DATA.projects.length} active</span>
-            </div>
-            <div class="cardbody">
-              <div class="list">
-                ${DATA.projects.map(p=>`
-                  <div class="row" data-project="${p.id}">
-                    <div class="rowleft">
-                      <div class="rowtitle">${p.title}</div>
-                      <div class="rowsub">Due: ${p.due} · ${p.status}</div>
-                    </div>
-                    <div class="rowright">
-                      ${statusPill("info","Review")}
-                    </div>
-                  </div>
-                `).join("")}
-              </div>
-            </div>
-          </div>
-
-          <!-- Brand -->
-          <div class="card">
-            <div class="cardhead">
-              <h3>Employer Brand / Socials</h3>
-              <span class="headmeta">🗣️ ${DATA.brand.length} items</span>
-            </div>
-            <div class="cardbody">
-              <div class="list">
-                ${DATA.brand.map(b=>`
-                  <div class="row" data-brand="${b.id}">
-                    <div class="rowleft">
-                      <div class="rowtitle">${b.type}: ${b.title}</div>
-                      <div class="rowsub">${b.status} · ${b.note}</div>
-                    </div>
-                    <div class="rowright">
-                      ${statusPill("info","Review")}
-                    </div>
-                  </div>
-                `).join("")}
-              </div>
-            </div>
-          </div>
-
-          <!-- Messaging -->
-          <div class="card">
-            <div class="cardhead">
-              <h3>Messaging</h3>
-              <span class="headmeta">💬 Unread</span>
-            </div>
-            <div class="cardbody">
-              <div class="list" style="margin-bottom:10px;">
-                <div class="row" data-msg="slack">
-                  <div class="rowleft">
-                    <div class="rowtitle">Slack</div>
-                    <div class="rowsub">${DATA.messaging.slackUnread} unread</div>
-                  </div>
-                  <div class="rowright">${statusPill("info", String(DATA.messaging.slackUnread))}</div>
-                </div>
-                <div class="row" data-msg="email">
-                  <div class="rowleft">
-                    <div class="rowtitle">Email</div>
-                    <div class="rowsub">${DATA.messaging.emailUnread} unread</div>
-                  </div>
-                  <div class="rowright">${statusPill("info", String(DATA.messaging.emailUnread))}</div>
-                </div>
-                <div class="row" data-msg="inmail">
-                  <div class="rowleft">
-                    <div class="rowtitle">LinkedIn InMails</div>
-                    <div class="rowsub">${DATA.messaging.inmailsUnread} unread</div>
-                  </div>
-                  <div class="rowright">${statusPill("info", String(DATA.messaging.inmailsUnread))}</div>
-                </div>
-                <div class="row" data-msg="whatsapp">
-                  <div class="rowleft">
-                    <div class="rowtitle">WhatsApp</div>
-                    <div class="rowsub">${DATA.messaging.whatsappUnread} unread</div>
-                  </div>
-                  <div class="rowright">${statusPill("info", String(DATA.messaging.whatsappUnread))}</div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Company & Industry News -->
-          <div class="card">
-            <div class="cardhead">
-              <h3>Company & Industry News</h3>
-              <span class="headmeta">📰 Today</span>
-            </div>
-            <div class="cardbody">
-              <div class="list">
-                ${DATA.news.map(x=>`
-                  <div class="row" data-news="${x.id}">
-                    <div class="rowleft">
-                      <div class="rowtitle">${x.title}</div>
-                      <div class="rowsub">${x.sub}</div>
-                    </div>
-                    <div class="rowright">${statusPill("info","Read")}</div>
-                  </div>
-                `).join("")}
-              </div>
-            </div>
-          </div>
-
+    function renderInboxList(){
+      const arr = DATA.inbox[activeTab] || [];
+      inboxList.innerHTML = arr.map(m => `
+        <div class="item ${m.id===activeItemId ? "active":""}" data-item="${m.id}">
+          <div class="t">${escapeHtml(m.from)} · ${escapeHtml(m.subject)}</div>
+          <div class="s">${escapeHtml(m.snippet)} · ${escapeHtml(m.when)}</div>
         </div>
+      `).join("") || `<div class="item"><div class="t">No items</div><div class="s">You're caught up.</div></div>`;
+
+      inboxList.querySelectorAll("[data-item]").forEach(el=>{
+        el.addEventListener("click", ()=> selectItem(el.getAttribute("data-item")));
+      });
+    }
+
+    function selectItem(id){
+      activeItemId = id;
+      renderInboxList();
+      const arr = DATA.inbox[activeTab] || [];
+      const msg = arr.find(x=>x.id===id);
+      if(!msg) return renderPreviewEmpty();
+      preview.innerHTML = `
+        <h4>${escapeHtml(msg.subject)}</h4>
+        <div class="meta">${escapeHtml(msg.from)} · ${escapeHtml(msg.when)}</div>
+        <div class="body">${escapeHtml(msg.body)}</div>
+      `;
+      agentLog.innerHTML = `<strong>Agent demo:</strong> select an action to show how Chief routes this item (logging + guardrails).`;
+    }
+
+    function renderPreviewEmpty(){
+      preview.innerHTML = `
+        <h4>Nothing selected</h4>
+        <div class="meta">Choose an item on the left.</div>
+        <div class="body">Chief will route work to an A[i]gent once you choose an action.</div>
       `;
     }
 
-    /***********************
-     * Help panel
-     ***********************/
-    function tplHelp(){
-      return `
-        <div class="controls">
-          <div class="control">
-            <div class="label">Bandwidth</div>
-            <div class="muted" id="bandLabel">Medium</div>
-            <div class="divider"></div>
-            <div class="sliderwrap">
-              <input id="bandwidth" type="range" min="0" max="2" step="1" value="1" />
-            </div>
-            <div class="muted" style="margin-top:8px;">Controls how proactive Chief should be.</div>
-          </div>
+    // Actions (agent demo)
+    document.getElementById("actions").addEventListener("click", (e)=>{
+      const btn = e.target.closest("[data-act]");
+      if(!btn) return;
+      const act = btn.getAttribute("data-act");
+      const label = {
+        summarize:"Summarize",
+        draft:"Draft reply",
+        route:"Route to A[i]gent",
+        closeLoop:"Close loop"
+      }[act] || "Action";
 
-          <div class="control">
-            <div class="label">Focus preference</div>
-            <select id="focusSel">
-              <option value="headsdown">Heads down (minimize interruptions)</option>
-              <option value="normal" selected>Normal</option>
-              <option value="help">I want help / suggestions</option>
-            </select>
-            <div class="muted" style="margin-top:8px;">Affects notifications + suggestions.</div>
-          </div>
+      if(!activeItemId){
+        showToast("Select a message first.");
+        return;
+      }
 
-          <div class="control">
-            <div class="label">Additional notes (optional)</div>
-            <textarea id="notes" placeholder="Anything Chief should know? (optional)"></textarea>
-            <div class="muted" style="margin-top:8px;">Used only per your Settings.</div>
-          </div>
-        </div>
+      // Fake agent routing
+      const policyLine = (act==="route" || act==="draft")
+        ? "Guardrails: policy-checked · tone-safe · audit logged"
+        : "Guardrails: read-only · audit logged";
 
-        <div class="chatline" aria-label="Chat input">
-          <div class="chaticon">💬</div>
-          <input class="chatinput" id="chatInput"
-            placeholder="Type a request… (e.g., 'Show req risks' or 'Prep my 10:30')" />
-          <button class="btn primary" id="sendBtn">Send</button>
-        </div>
+      agentLog.innerHTML = `
+        <strong>Chief → Agent routing</strong><br>
+        Item: <code>${activeTab}:${activeItemId}</code><br>
+        Action: <strong>${label}</strong><br>
+        ${policyLine}<br><br>
+        <strong>Result (demo):</strong> Generated output ready for review in this panel.
       `;
-    }
-
-    /***********************
-     * Click wiring (demo stubs)
-     ***********************/
-    function wireOverview(){
-      overviewBody.querySelectorAll("[data-interview]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open interview details."));
-      });
-      overviewBody.querySelectorAll("[data-req]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open requisition details."));
-      });
-      overviewBody.querySelectorAll("[data-project]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open project details."));
-      });
-      overviewBody.querySelectorAll("[data-brand]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open employer brand details."));
-      });
-      overviewBody.querySelectorAll("[data-msg]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open messaging inbox."));
-      });
-      overviewBody.querySelectorAll("[data-message-item]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open message thread."));
-      });
-      overviewBody.querySelectorAll("[data-news]").forEach(el=>{
-        el.addEventListener("click", ()=> showToast("Would open news item."));
-      });
-    }
-
-    function wireHelp(){
-      const band = document.getElementById("bandwidth");
-      const bandLabel = document.getElementById("bandLabel");
-      if(band && bandLabel){
-        const labels = ["Low","Medium","High"];
-        const sync = ()=> bandLabel.textContent = labels[Number(band.value)] || "Medium";
-        band.addEventListener("input", sync);
-        sync();
-      }
-
-      const chatInput = document.getElementById("chatInput");
-      const sendBtn = document.getElementById("sendBtn");
-      function handleSend(){
-        const t = (chatInput.value || "").trim();
-        if(!t) return;
-        showToast("Captured.");
-        chatInput.value = "";
-      }
-      if(sendBtn) sendBtn.addEventListener("click", handleSend);
-      if(chatInput){
-        chatInput.addEventListener("keydown", (e)=>{
-          if(e.key === "Enter"){ e.preventDefault(); handleSend(); }
-        });
-      }
-    }
-
-    /***********************
-     * Settings modal
-     ***********************/
-    const modalBack = document.getElementById("modalBack");
-    const settingsBtn = document.getElementById("settingsBtn");
-    const closeSettings = document.getElementById("closeSettings");
-    const minSendsInput = document.getElementById("minSendsInput");
-    const usePersonal = document.getElementById("usePersonal");
-    const useAnon = document.getElementById("useAnon");
-    const newsMode = document.getElementById("newsMode");
-    const weatherCity = document.getElementById("weatherCity");
-    const saveSettingsBtn = document.getElementById("saveSettings");
-    const resetSettingsBtn = document.getElementById("resetSettings");
-
-    function openSettings(){
-      SETTINGS = loadSettings();
-      minSendsInput.value = SETTINGS.minSendsForLearning;
-      usePersonal.checked = !!SETTINGS.usePersonal;
-      useAnon.checked = !!SETTINGS.useAnon;
-      newsMode.value = SETTINGS.newsMode || "recruiting_ops";
-      weatherCity.value = SETTINGS.weatherCity || "sf";
-      modalBack.style.display = "flex";
-      modalBack.setAttribute("aria-hidden", "false");
-    }
-    function closeSettingsModal(){
-      modalBack.style.display = "none";
-      modalBack.setAttribute("aria-hidden", "true");
-    }
-
-    settingsBtn.addEventListener("click", openSettings);
-    closeSettings.addEventListener("click", closeSettingsModal);
-    modalBack.addEventListener("click", (e)=>{ if(e.target === modalBack) closeSettingsModal(); });
-
-    saveSettingsBtn.addEventListener("click", ()=>{
-      const n = Number(minSendsInput.value);
-      SETTINGS = {
-        minSendsForLearning: Number.isFinite(n) && n > 0 ? Math.floor(n) : DEFAULT_SETTINGS.minSendsForLearning,
-        usePersonal: !!usePersonal.checked,
-        useAnon: !!useAnon.checked,
-        newsMode: newsMode.value,
-        weatherCity: weatherCity.value
-      };
-      saveSettingsObj(SETTINGS);
-      closeSettingsModal();
-      showToast("Settings saved.");
+      showToast(`${label} (demo)`);
     });
 
-    resetSettingsBtn.addEventListener("click", ()=>{
-      SETTINGS = { ...DEFAULT_SETTINGS };
-      saveSettingsObj(SETTINGS);
-      minSendsInput.value = SETTINGS.minSendsForLearning;
-      usePersonal.checked = SETTINGS.usePersonal;
-      useAnon.checked = SETTINGS.useAnon;
-      newsMode.value = SETTINGS.newsMode;
-      weatherCity.value = SETTINGS.weatherCity;
-      showToast("Settings reset.");
+    // Messaging rows in Overview open the modal
+    document.querySelectorAll("[data-msg]").forEach(row=>{
+      row.addEventListener("click", ()=>{
+        const tab = row.getAttribute("data-msg");
+        openModal(tab);
+      });
     });
 
-    /***********************
-     * Boot
-     ***********************/
-    document.getElementById("datePill").textContent = "📅 " + fmtDate();
-    const timePill = document.getElementById("timePill");
-    function tickTime(){ timePill.textContent = "🕘 " + fmtTime(); }
-    tickTime();
-    setInterval(tickTime, 15000);
+    // Other cards: send you somewhere (demo)
+    function navStub(kind, id){
+      showToast(`Would open ${kind} details (${id}) (demo).`);
+    }
+    document.querySelectorAll("[data-interview]").forEach(r=>r.addEventListener("click", ()=>navStub("interview", r.getAttribute("data-interview"))));
+    document.querySelectorAll("[data-req]").forEach(r=>r.addEventListener("click", ()=>navStub("requisition", r.getAttribute("data-req"))));
+    document.querySelectorAll("[data-project]").forEach(r=>r.addEventListener("click", ()=>navStub("project", r.getAttribute("data-project"))));
+    document.querySelectorAll("[data-social]").forEach(r=>r.addEventListener("click", ()=>navStub("employer brand item", r.getAttribute("data-social"))));
+    document.querySelectorAll("[data-news]").forEach(r=>r.addEventListener("click", ()=>navStub("news item", r.getAttribute("data-news"))));
 
-    document.getElementById("weatherPill").textContent = DATA.weatherLabel;
+    // Chat send (routes to a relevant demo)
+    const chatInput = document.getElementById("chatInput");
+    document.getElementById("sendBtn").addEventListener("click", ()=>{
+      const t = (chatInput.value || "").trim();
+      if(!t) return;
+      const lower = t.toLowerCase();
 
-    overviewBody.innerHTML = tplOverview();
-    helpBody.innerHTML = tplHelp();
-    wireOverview();
-    wireHelp();
+      if(lower.includes("slack")) openModal("slack");
+      else if(lower.includes("email")) openModal("email");
+      else if(lower.includes("inmail") || lower.includes("linkedin")) openModal("inmail");
+      else if(lower.includes("whatsapp")) openModal("whatsapp");
+      else if(lower.includes("prep")) showToast("Would generate prep pack (demo).");
+      else if(lower.includes("req")) showToast("Would open req risk view (demo).");
+      else showToast("Routed to Chief (demo).");
+
+      chatInput.value = "";
+    });
+
+    // Utility
+    function escapeHtml(s){
+      return String(s ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+    }
+
+    // Settings (stub)
+    document.getElementById("settingsBtn").addEventListener("click", ()=>showToast("Settings (demo stub)."));
+
+    // Optional: update time quickly (still a demo)
+    function tick(){
+      const d = new Date();
+      const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+      const mons = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      const hh = d.getHours();
+      const mm = String(d.getMinutes()).padStart(2,"0");
+      const ampm = hh >= 12 ? "PM" : "AM";
+      const hh12 = ((hh + 11) % 12) + 1;
+      document.getElementById("timePill").textContent = `🕒 ${String(hh12).padStart(2,"0")}:${mm} ${ampm}`;
+      document.getElementById("datePill").textContent = `📅 ${days[d.getDay()]}, ${mons[d.getMonth()]} ${d.getDate()}`;
+    }
+    tick(); setInterval(tick, 15000);
   </script>
 </body>
 </html>
