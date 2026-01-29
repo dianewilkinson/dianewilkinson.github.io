@@ -32,11 +32,13 @@
       --pillbg:#f3f4f6;
       --pillbd:rgba(148,163,184,.45);
 
-      --news-bg:#0b1220;
-      --news-card:#0f172a;
-      --news-border:rgba(148,163,184,.22);
-      --news-muted:#a7b0c2;
-      --news-text:#e6e9f2;
+      /* News = soft contrast band (NOT dark) */
+      --news-band-1: rgba(79,70,229,.08);
+      --news-band-2: rgba(168,85,247,.06);
+      --news-border: rgba(148,163,184,.28);
+      --news-chip: rgba(79,70,229,.10);
+      --news-chip-border: rgba(99,102,241,.28);
+      --news-chip-text: #3730a3;
     }
 
     *{box-sizing:border-box;}
@@ -103,15 +105,8 @@
       color:#374151;
       user-select:none;
     }
-    .pill.clickable{
-      cursor:pointer;
-    }
-    .pill.clickable:hover{
-      background:#fbfbff;
-      border-color:rgba(99,102,241,.45);
-    }
 
-    /* Unread "chips" in top bar (no shortcuts) */
+    /* Inbox chips (top bar) */
     .inboxchips{
       display:flex;
       align-items:center;
@@ -151,7 +146,6 @@
       font-weight:950;
       line-height:1;
     }
-    .chip.hide{display:none;}
 
     .iconbtn{
       width:34px;height:34px;
@@ -238,6 +232,7 @@
       align-items:center;
       gap:6px;
     }
+
     .cardbody{padding:10px 12px;}
 
     .list{display:flex; flex-direction:column; gap:8px;}
@@ -295,18 +290,20 @@
     .sp-neutral{color:#374151;}
     .sp-purple{color:var(--purple);}
 
-    /* Full-width News strip (dark contrast) */
+    /* ---------- NEWS: full-width soft band ---------- */
     .newswrap{
       grid-column:1 / -1;
       border-radius:16px;
       overflow:hidden;
       border:1px solid var(--news-border);
-      background:linear-gradient(180deg,var(--news-bg), var(--news-card));
-      box-shadow:0 12px 30px rgba(0,0,0,.08);
+      background:
+        linear-gradient(180deg, var(--news-band-1), rgba(255,255,255,.92)),
+        radial-gradient(1200px 220px at 15% 0%, var(--news-band-2), transparent 60%);
+      box-shadow:0 10px 26px rgba(15,23,42,.06);
     }
     .newshead{
       padding:12px 14px;
-      border-bottom:1px solid rgba(148,163,184,.18);
+      border-bottom:1px solid rgba(148,163,184,.22);
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -314,16 +311,16 @@
     }
     .newshead .t{
       font-weight:950;
-      color:var(--news-text);
       letter-spacing:-0.01em;
       display:flex;
       align-items:center;
       gap:10px;
+      color:#111827;
     }
     .newshead .m{
       font-size:12px;
       font-weight:900;
-      color:var(--news-muted);
+      color:#6b7280;
     }
     .newsgrid{
       display:grid;
@@ -334,9 +331,11 @@
     @media (max-width:980px){
       .newsgrid{grid-template-columns:1fr;}
     }
+
+    /* News items look like normal cards, not dark blocks */
     .newsitem{
-      border:1px solid rgba(148,163,184,.16);
-      background:rgba(255,255,255,.04);
+      border:1px solid #eef2f7;
+      background:#ffffff;
       border-radius:14px;
       padding:10px 10px;
       display:flex;
@@ -344,12 +343,17 @@
       justify-content:space-between;
       gap:10px;
       cursor:pointer;
+      box-shadow:0 1px 2px rgba(15,23,42,.04);
     }
-    .newsitem:hover{background:rgba(255,255,255,.06); border-color:rgba(99,102,241,.22);}
+    .newsitem:hover{
+      border-color:rgba(99,102,241,.22);
+      box-shadow:0 10px 22px rgba(15,23,42,.06);
+      transform:translateY(-0.5px);
+    }
     .newsitem .tt{
       font-size:13px;
       font-weight:950;
-      color:var(--news-text);
+      color:#111827;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
@@ -357,7 +361,7 @@
     .newsitem .ss{
       margin-top:2px;
       font-size:12px;
-      color:var(--news-muted);
+      color:#6b7280;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
@@ -366,9 +370,9 @@
       min-width:92px;
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(148,163,184,.22);
-      background:rgba(255,255,255,.06);
-      color:#c7d2fe;
+      border:1px solid var(--news-chip-border);
+      background:var(--news-chip);
+      color:var(--news-chip-text);
       font-size:12px;
       font-weight:950;
       text-align:center;
@@ -621,7 +625,7 @@
       border-bottom:1px solid #eef2f7;
       cursor:pointer;
     }
-    .item:hover{background:#fbfdff;}
+    .item:hover{background:#fbfbff;}
     .item.active{background:rgba(79,70,229,.06);}
     .item .t{
       font-size:13px;
@@ -724,7 +728,6 @@
         <span class="pill" id="timePill">🕒 02:08 PM</span>
         <span class="pill" id="weatherPill">☀️ 58°F · San Francisco</span>
 
-        <!-- Keep ONLY these four (no shortcut logos) -->
         <div class="inboxchips" aria-label="Unread inbox counts">
           <div class="chip" data-open="slack" title="Open Slack inbox (demo)">
             💬 Slack <span class="count" data-count="slack">7</span>
@@ -870,7 +873,7 @@
           </div>
         </div>
 
-        <!-- Full-width Company & Industry News (dark section) -->
+        <!-- Company & Industry News (soft full-width band) -->
         <section class="newswrap" aria-label="Company & Industry News">
           <div class="newshead">
             <div class="t">📰 Company & Industry News</div>
@@ -979,7 +982,6 @@
             <button class="tab" data-tab="inmail">🔗 InMail</button>
             <button class="tab" data-tab="whatsapp">📱 WhatsApp</button>
           </div>
-
           <div class="inboxlist" id="inboxList"></div>
         </div>
 
@@ -1006,12 +1008,7 @@
   <script>
     // ---------- Demo data ----------
     const DATA = {
-      unread: {
-        slack: 7,
-        email: 12,
-        inmail: 3,
-        whatsapp: 2
-      },
+      unread: { slack: 7, email: 12, inmail: 3, whatsapp: 2 },
       inbox: {
         slack: [
           { id:"s1", from:"#eng-hiring", subject:"HM wants a tighter bar for Backend Eng", snippet:"Can we calibrate on seniority expectations…", when:"12m ago",
@@ -1164,17 +1161,9 @@
       const btn = e.target.closest("[data-act]");
       if(!btn) return;
       const act = btn.getAttribute("data-act");
-      const label = {
-        summarize:"Summarize",
-        draft:"Draft reply",
-        route:"Route to A[i]gent",
-        closeLoop:"Close loop"
-      }[act] || "Action";
+      const label = { summarize:"Summarize", draft:"Draft reply", route:"Route to A[i]gent", closeLoop:"Close loop" }[act] || "Action";
 
-      if(!activeItemId){
-        showToast("Select a message first.");
-        return;
-      }
+      if(!activeItemId){ showToast("Select a message first."); return; }
 
       const policyLine = (act==="route" || act==="draft")
         ? "Guardrails: policy-checked · tone-safe · audit logged"
@@ -1190,24 +1179,20 @@
       showToast(`${label} (demo)`);
     });
 
-    // ---------- Top chips -> open modal ----------
+    // Top chips -> open modal
     document.querySelectorAll("[data-open]").forEach(chip=>{
-      chip.addEventListener("click", ()=>{
-        openModal(chip.getAttribute("data-open"));
-      });
+      chip.addEventListener("click", ()=> openModal(chip.getAttribute("data-open")));
     });
 
-    // ---------- Other cards: demo nav ----------
-    function navStub(kind, id){
-      showToast(`Would open ${kind} details (${id}) (demo).`);
-    }
+    // Other cards: demo nav
+    function navStub(kind, id){ showToast(`Would open ${kind} details (${id}) (demo).`); }
     document.querySelectorAll("[data-interview]").forEach(r=>r.addEventListener("click", ()=>navStub("interview", r.getAttribute("data-interview"))));
     document.querySelectorAll("[data-req]").forEach(r=>r.addEventListener("click", ()=>navStub("requisition", r.getAttribute("data-req"))));
     document.querySelectorAll("[data-project]").forEach(r=>r.addEventListener("click", ()=>navStub("project", r.getAttribute("data-project"))));
     document.querySelectorAll("[data-social]").forEach(r=>r.addEventListener("click", ()=>navStub("employer brand item", r.getAttribute("data-social"))));
     document.querySelectorAll("[data-news]").forEach(r=>r.addEventListener("click", ()=>navStub("news item", r.getAttribute("data-news"))));
 
-    // Chat send (routes to a relevant demo)
+    // Chat send
     const chatInput = document.getElementById("chatInput");
     document.getElementById("sendBtn").addEventListener("click", ()=>{
       const t = (chatInput.value || "").trim();
@@ -1225,7 +1210,6 @@
       chatInput.value = "";
     });
 
-    // Utility
     function escapeHtml(s){
       return String(s ?? "")
         .replaceAll("&","&amp;")
@@ -1235,7 +1219,6 @@
         .replaceAll("'","&#39;");
     }
 
-    // Settings (demo)
     document.getElementById("settingsBtn").addEventListener("click", ()=>showToast("Settings (demo)."));
 
     // Time/date ticking
