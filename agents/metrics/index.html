@@ -690,7 +690,7 @@
       const name = stageName.toLowerCase();
       const b = benchmark;
 
-      // "Alert" = major outlier vs benchmark (too high or too low)
+      // Alert = major outlier vs benchmark (too high or too low)
       if (b && (conv > b * 2 || conv < b * 0.35)) {
         return "alert";
       }
@@ -744,6 +744,10 @@
       const r = (seed % 1000) / 1000;
       return clamp(base + (r - 0.5) * spread, 0, 100);
     }
+    function demoDays(seed, base, spread) {
+      const r = (seed % 1000) / 1000;
+      return Math.max(0, Math.round(base + (r - 0.5) * spread));
+    }
 
     function computeMetrics(stage) {
       const bench = stage.benchmark;
@@ -781,52 +785,105 @@
         return parts.join(" ");
       };
 
-      // Hiring Manager bottleneck: explicit structure you asked for
+      // -----------------------------
+      // Hiring Manager Interview
+      // -----------------------------
       if (sLower.includes("hiring manager")) {
         analysis.push("Quantified pass-through vs benchmark and prior snapshot.");
         analysis.push("Segmented outcomes to distinguish likely HM rejection vs candidate withdrawal (demo heuristic).");
-        analysis.push("Checked variance signal by interviewer/panel (demo simulation) to flag calibration risk.");
-        analysis.push("Reviewed upstream quality indicators (source mix + recruiter screen integrity check placeholder).");
+        analysis.push("Compared pass-through by interviewer/panel (demo simulation) to flag calibration variance.");
+        analysis.push("Reviewed upstream quality indicators (source mix + recruiter screen integrity placeholder).");
 
         findings.push(metricLine());
-        findings.push(`Most candidates do not advance at HM stage (${blocked}/${n}). This is the primary throughput constraint in the funnel.`);
+        findings.push(`Primary constraint is at HM decision point: ${blocked}/${n} did not advance at HM stage.`);
         // simulated interviewer variance (demo-only, deterministic)
         const seed = hashSeed(currentReqKey + "|hm");
-        const a = demoPct(seed + 11, 78, 20);
-        const b = demoPct(seed + 37, 64, 18);
-        const c = demoPct(seed + 91, 38, 22);
-        findings.push(`Interviewer variance signal (demo): Panel A reject-rate ~${a.toFixed(0)}%, Panel B ~${b.toFixed(0)}%, Panel C ~${c.toFixed(0)}%.`);
-        findings.push("Interpretation: variance + low HM CVR suggests calibration and/or upstream quality mismatch (source/rubric alignment).");
+        const rejA = demoPct(seed + 11, 78, 20);
+        const rejB = demoPct(seed + 37, 64, 18);
+        const rejC = demoPct(seed + 91, 38, 22);
+        findings.push(`Calibration variance signal (demo): Panel A reject-rate ~${rejA.toFixed(0)}%, Panel B ~${rejB.toFixed(0)}%, Panel C ~${rejC.toFixed(0)}%.`);
+        findings.push("Insight: high variance at the same stage suggests inconsistent rubric application and/or misaligned must-haves vs nice-to-haves.");
 
         conclusion =
-          "Conclusion: HM Interview is a bottleneck. Metrics recommends a calibration-focused readout (decline themes + variance) and a source/rubric integrity check. This conclusion should feed Chief’s action selection (e.g., add calibration topic to weekly review agenda, adjust sourcing mix, tighten screen rubric).";
+          "Conclusion: HM Interview is a bottleneck driven by calibration variance and rubric alignment risk. Chief actions should focus on calibration + interview design and validating upstream screen/source alignment (not simply adding top-of-funnel volume).";
         return { stageLabel, kind: stage.status, analysis, findings, conclusion, metrics: m };
       }
 
-      // Final Interview alert: outlier high conversion => investigate validity + process signals
-      if (sLower.includes("final")) {
-        analysis.push("Validated whether the outlier could be explained by small sample size (n) and stage mapping risk.");
-        analysis.push("Checked for recent workflow/process changes that could inflate conversion (demo placeholder).");
-        analysis.push("Pulled candidate feedback + interviewer notes themes (demo placeholder: ‘feedback scan’).");
-        analysis.push("Compared conversion by interviewer/panel to see whether the outlier is localized (demo placeholder).");
+      // -----------------------------
+      // Offer (Tier 1 must run; no deferral)
+      // -----------------------------
+      if (sLower.includes("offer")) {
+        analysis.push("Triggered Tier 1 Offer investigation: market comp alignment check (demo).");
+        analysis.push("Ran talent pool pressure scan: competing-offer risk + supply tightness proxy (demo).");
+        analysis.push("Measured offer workflow latency: time-to-offer and time-to-accept risk indicators (demo).");
+        analysis.push("Synthesized candidate + HM feedback themes for declines/hesitation (demo placeholder).");
 
         findings.push(metricLine());
-        if (n <= 6) {
-          findings.push("Small-n warning: this outlier may be volatility rather than a structural change.");
-        }
-        findings.push("Outlier direction is positive (Final → next step well above benchmark), which can indicate stronger pre-vetting OR a data-mapping issue.");
-        findings.push("Risk: if stage definitions changed (or ‘Offer’ is being captured earlier), metrics will show an inflated Final conversion.");
+
+        const seed = hashSeed(currentReqKey + "|offer");
+        // demo signals
+        const compGap = demoPct(seed + 7, 12, 16);            // "gap" magnitude proxy
+        const compAligned = compGap < 10;                     // threshold for narrative
+        const tOffer = demoDays(seed + 19, 7, 8);             // days final->offer
+        const tAccept = demoDays(seed + 41, 5, 6);            // days offer->decision
+        const compOfferRisk = demoPct(seed + 83, 55, 30);      // competing offer probability proxy
+        const declineComp = demoPct(seed + 101, 48, 30);
+        const declinePolicy = demoPct(seed + 121, 22, 20);
+        const declineTiming = demoPct(seed + 141, 30, 24);
+
+        // Findings must be "insight", not "obvious"
+        if (n <= 4) findings.push("Small-n caution: interpret offer-stage signals directionally; corroborate with last 30–60 days of offers.");
+        findings.push(`Market comp signal (demo): offered package is ${compAligned ? "within" : "outside"} expected range; comp gap proxy ~${compGap.toFixed(0)}%.`);
+        findings.push(`Speed signal (demo): median Final → Offer ~${tOffer} days; Offer → Decision ~${tAccept} days (delay increases competing-offer risk).`);
+        findings.push(`Competitive pressure (demo): competing-offer risk proxy ~${compOfferRisk.toFixed(0)}% for this req family.`);
+        findings.push(`Decline theme mix (demo): comp ~${declineComp.toFixed(0)}%, policy/location ~${declinePolicy.toFixed(0)}%, timing/process ~${declineTiming.toFixed(0)}%.`);
 
         conclusion =
-          "Conclusion: Final Interview is an alert because conversion is far above benchmark. Metrics recommends an integrity check first (stage mapping + timestamps). If valid, treat as a ‘what’s working’ signal: capture what changed (panel design, evaluation bar, candidate prep) and standardize it.";
+          "Conclusion: Offer is a bottleneck driven primarily by market competitiveness and/or offer-cycle latency (comp + speed), with secondary risk from policy/location fit. Chief actions should focus on comp alignment and reducing time-to-offer/decision, informed by decline theme distribution.";
         return { stageLabel, kind: stage.status, analysis, findings, conclusion, metrics: m };
       }
 
-      // Other stages (keep minimal — only shown when bottleneck/alert)
-      analysis.push("Compared conversion to benchmark and prior snapshot.");
-      analysis.push("Checked basic data integrity (counts, stage naming, timing placeholders).");
+      // -----------------------------
+      // Final Interview (Alert: far above benchmark)
+      // Tier 1 must investigate bar/scoring/bias/sources + mapping
+      // -----------------------------
+      if (sLower.includes("final")) {
+        analysis.push("Validated data integrity for the outlier (stage mapping + timestamps + duplicate counting checks; demo placeholder).");
+        analysis.push("Pulled hiring committee and HM feedback to test for bar shift (demo placeholder).");
+        analysis.push("Checked scoring consistency: variance across interviewers/panels + rubric adherence proxy (demo).");
+        analysis.push("Ran bias + source analysis: pass-through by source mix and subgroup risk flags (demo placeholders).");
+
+        findings.push(metricLine());
+
+        const seed = hashSeed(currentReqKey + "|final");
+        const barShift = demoPct(seed + 13, 42, 40);          // higher => more likely bar lowered
+        const scoreVar = demoPct(seed + 27, 22, 28);          // lower => compressed variance
+        const sourceSkew = demoPct(seed + 55, 48, 34);        // higher => skew in source mix (e.g., referrals)
+        const mappingRisk = demoPct(seed + 71, 28, 34);       // higher => mapping/timing risk
+
+        if (n <= 6) findings.push("Small-n warning: outlier magnitude may be volatility; validate against last 8–12 finalists for this req family.");
+        findings.push(`Bar shift signal (demo): committee/HM feedback pattern suggests ${barShift > 55 ? "possible bar relaxation" : "no strong bar-relaxation signal"} (proxy ${barShift.toFixed(0)}%).`);
+        findings.push(`Scoring consistency (demo): interviewer variance is ${scoreVar < 20 ? "compressed" : "mixed"} (variance proxy ${scoreVar.toFixed(0)}%) — investigate rubric calibration and consistent scoring.`);
+        findings.push(`Source mix (demo): final-stage pool shows ${sourceSkew > 60 ? "elevated" : "normal"} skew (proxy ${sourceSkew.toFixed(0)}%) — check whether uplift is driven by referrals/targeted sourcing vs process change.`);
+        findings.push(`Data mapping risk (demo): ${mappingRisk > 55 ? "elevated" : "moderate"} (proxy ${mappingRisk.toFixed(0)}%) — confirm Final→Offer definition hasn’t shifted earlier in workflow.`);
+
+        conclusion =
+          "Conclusion: Final Interview alert requires validation. Most likely drivers are (1) stage mapping/timestamp issues OR (2) a real uplift caused by bar/scoring changes and/or source mix shift. Chief should treat this as a ‘validate + standardize’ event: confirm integrity, then codify what changed (rubric, committee calibration, sourcing strategy) without introducing bias.";
+        return { stageLabel, kind: stage.status, analysis, findings, conclusion, metrics: m };
+      }
+
+      // -----------------------------
+      // Other stages (only shown if flagged; keep clean + non-deferring)
+      // -----------------------------
+      analysis.push("Quantified pass-through vs benchmark and prior snapshot.");
+      analysis.push("Segmented performance by recruiter/source/location (demo placeholder).");
+      analysis.push("Checked basic data integrity (counts + stage naming + timing placeholders).");
+
       findings.push(metricLine());
-      conclusion = "Conclusion: Metrics flagged this stage as a bottleneck/alert; deeper investigation can be added if this is prioritized by Chief.";
+      findings.push("Insight: stage performance is outside expected range; the most likely drivers are data integrity, upstream quality shifts, or process friction. Metrics would expand segmentation and variance analysis for this stage in production.");
+
+      conclusion =
+        "Conclusion: Stage is flagged and requires investigation before downstream actions. Metrics recommends validating integrity first, then segmenting outcomes by source/recruiter/location and reviewing process friction points to isolate the driver.";
       return { stageLabel, kind: stage.status, analysis, findings, conclusion, metrics: m };
     }
 
