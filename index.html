@@ -28,16 +28,14 @@
       --link-soft:#4f46e5;
       --shadow:rgba(15,23,42,0.08);
 
-      /* Gradients */
-      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1); /* pink-purple (HERO only) */
-      --cool-grad:linear-gradient(135deg,#93c5fd,#a78bfa,#6366f1);         /* blue-purple (chapters) */
+      /* Top bar gradient */
+      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
 
+      /* Hero uses pink family */
       --accent-soft:linear-gradient(135deg,rgba(249,115,129,.12),rgba(168,85,247,.12),rgba(99,102,241,.12));
-      --cool-soft:linear-gradient(135deg,rgba(147,197,253,.18),rgba(167,139,250,.16),rgba(99,102,241,.14));
 
-      /* Buttons */
-      --pill:#eef2ff;
-      --pilltext:#3730a3;
+      /* Chapter dividers use blue-purple */
+      --cool-soft:linear-gradient(135deg,rgba(147,197,253,.18),rgba(167,139,250,.16),rgba(99,102,241,.14));
     }
 
     *{box-sizing:border-box;}
@@ -53,7 +51,7 @@
 
     header{
       text-align:center;
-      padding:30px 16px 12px;
+      padding:30px 16px 6px;
     }
     header h1{
       margin:0;
@@ -61,28 +59,23 @@
       font-weight:700;
       letter-spacing:-0.02em;
     }
-    header p{
-      margin:10px 0 0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-    }
-    header p .subline{
-      display:block;
+    header .subline{
       margin-top:10px;
+      font-size:13px;
       font-weight:600;
       color:#475569;
+      line-height:1.55;
     }
 
     .wrap{
       max-width:1120px;
       margin:0 auto;
-      padding:16px 20px 34px;
+      padding:14px 20px 34px;
     }
 
-    /* HERO (pink only) */
+    /* HERO (pink) */
     .hero{
-      margin:6px 0 10px;
+      margin:10px 0 10px;
       border-radius:20px;
       background:var(--accent-soft);
       box-shadow:0 8px 24px var(--shadow);
@@ -108,22 +101,37 @@
       .hero h2{font-size:22px;}
     }
 
-    /* Chapters (blue-purple) */
+    /* Moved intro sentence (was under title) */
+    .introline{
+      margin:10px 0 10px;
+      color:#475569;
+      font-size:14.5px;
+      line-height:1.7;
+      max-width:980px;
+    }
+
+    /* Small utility lines */
+    .note{
+      font-size:13px;
+      color:var(--muted);
+      margin:6px 0 14px;
+    }
+
+    /* Chapter dividers (blue-purple) */
     .chapter{
       margin:18px 0 12px;
       border-radius:18px;
       background:var(--cool-soft);
       box-shadow:0 6px 18px var(--shadow);
-      padding:18px 18px 14px;
+      padding:16px 18px 14px;
       border:1px solid rgba(148,163,184,0.28);
     }
     .chapter .kicker{
-      font-size:13px;
-      font-weight:800;
-      color:#4f46e5;
-      letter-spacing:.02em;
-      text-transform:none;
       margin:0 0 6px;
+      font-size:14px;       /* not tiny */
+      font-weight:800;
+      color:#334155;        /* not purple */
+      letter-spacing:-0.01em;
     }
     .chapter h2{
       margin:0 0 6px;
@@ -140,31 +148,7 @@
       max-width:980px;
     }
 
-    .note{
-      font-size:13px;
-      color:var(--muted);
-      margin:8px 0 14px;
-    }
-
-    /* Sections */
-    .section{
-      margin:14px 0 8px;
-    }
-    .section h2{
-      margin:0 0 8px;
-      font-size:22px;
-      font-weight:700;
-      letter-spacing:-0.02em;
-    }
-    .section p.sub{
-      margin:0 0 14px;
-      color:#334155;
-      font-size:15px;
-      line-height:1.7;
-      max-width:920px;
-    }
-
-    /* Grid and cards */
+    /* Cards */
     .grid{
       display:grid;
       gap:16px;
@@ -179,6 +163,7 @@
       display:flex;
       flex-direction:column;
       min-height:170px;
+      width:100%;
     }
     .card h3{
       margin:0 0 6px;
@@ -205,21 +190,28 @@
       font-weight:800;
     }
 
-    /* What I Solve: chapter divider uses cool gradient */
-    .chapter.solve{ margin-top:12px; }
-
     /* System grid: fixed 2x2 */
     .system-grid{
       display:grid;
       gap:16px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       margin-top:12px;
+      align-items:stretch;
     }
     @media (max-width:720px){
       .system-grid{ grid-template-columns:1fr; }
     }
 
-    /* Case cards: slightly darker surface to differentiate from system/tool cards */
+    .mini-list{
+      margin:0;
+      padding-left:18px;
+      color:#334155;
+      font-size:14px;
+      line-height:1.65;
+    }
+    .mini-list li{margin:6px 0;}
+
+    /* Case cards: slightly darker surface */
     .case-grid{
       display:grid;
       gap:16px;
@@ -227,7 +219,7 @@
       margin-top:12px;
     }
     .case-card{
-      background:#f1f5f9;              /* hair darker than page bg */
+      background:#f1f5f9;
       border:1px solid #e2e8f0;
       border-radius:16px;
       padding:14px 14px 12px;
@@ -235,6 +227,7 @@
       display:flex;
       flex-direction:column;
       min-height:160px;
+      width:100%;
     }
     .case-card h3{
       margin:0 0 6px;
@@ -259,19 +252,9 @@
       font-weight:800;
     }
 
-    /* Lists */
-    .mini-list{
-      margin:0;
-      padding-left:18px;
-      color:#334155;
-      font-size:14px;
-      line-height:1.65;
-    }
-    .mini-list li{margin:6px 0;}
-
-    /* Buttons strip (Where tools live) */
+    /* Buttons strip (moved to bottom) */
     .bottom-strip{
-      margin:16px 0 4px;
+      margin:18px 0 6px;
       display:flex;
       gap:10px;
       flex-wrap:wrap;
@@ -300,7 +283,7 @@
     }
     .btn.primary:hover{background:#4338ca; color:#fff;}
 
-    /* How I Work layout: force equal width (2 columns) */
+    /* How I Work: true 50/50 */
     .how-grid{
       display:grid;
       gap:16px;
@@ -308,11 +291,11 @@
       margin-top:12px;
       align-items:stretch;
     }
+    .how-grid .card{ min-height: 100%; }
     @media (max-width:900px){
       .how-grid{ grid-template-columns:1fr; }
     }
 
-    /* Guardrail tier blocks */
     .tier{
       display:flex;
       flex-direction:column;
@@ -346,24 +329,33 @@
   <div class="bar"></div>
 
   <header>
-    <h1>👋 Diane Wilkinson — AI-Native People Ops & Talent Analytics</h1>
-    <p>
-      I design workflow-first internal AI and analytics that make people systems faster, fairer, and auditable — without vendor sprawl.
-      <span class="subline">
-        People Ops &amp; Systems · Talent Intelligence · Human-in-the-loop AI · Greenhouse SME · MBA, Data Analytics (4.0 GPA) ·
-        <a href="credentials/" target="_blank" rel="noopener">Credentials &amp; Recommendations</a>
-      </span>
-    </p>
+    <h1>👋 Diane Wilkinson — AI-Native People Ops &amp; Talent Analytics</h1>
+    <div class="subline">
+      People Ops &amp; Systems · Talent Intelligence · Human-in-the-loop AI · Greenhouse SME · MBA, Data Analytics (4.0 GPA) ·
+      <a href="credentials/" target="_blank" rel="noopener">Credentials &amp; Recommendations</a>
+    </div>
   </header>
 
   <div class="wrap">
 
-    <!-- HERO (pink only, moved up under title) -->
+    <!-- HERO (pink) -->
     <section class="hero" aria-label="Hero">
       <h2>We don't need more <span>AI vendors.</span></h2>
       <p>The future belongs to those building AI internally in the weeds of everyday workflows.</p>
     </section>
 
+    <!-- moved subtitle line (was under title) -->
+    <p class="introline">
+      I design workflow-first internal AI and analytics that make people systems faster, fairer, and auditable — without vendor sprawl.
+    </p>
+
+    <!-- moved "What I Solve" paragraph ABOVE article line -->
+    <p class="introline" style="margin-top:0;">
+      People systems break in predictable ways: signals get noisy, workflows stall, and leaders make decisions without shared definitions or auditability.
+      I rebuild the system so the work is measurable, governable, and easier for humans to run.
+    </p>
+
+    <!-- Article line now comes AFTER the solve paragraph -->
     <p class="note">
       📄 Read my article:
       <a href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">
@@ -371,13 +363,10 @@
       </a>
     </p>
 
-    <!-- WHAT I SOLVE (blue-purple divider, moved down just above cards) -->
-    <section class="chapter solve" aria-label="What I Solve">
+    <!-- WHAT I SOLVE divider (now just a chapter header, cards carry the content) -->
+    <section class="chapter" aria-label="What I Solve">
       <h2>What I Solve</h2>
-      <p>
-        People systems break in predictable ways: signals get noisy, workflows stall, and leaders make decisions without shared definitions or auditability.
-        I rebuild the system so the work is measurable, governable, and easier for humans to run.
-      </p>
+      <p>Three predictable failure modes — and how I rebuild the system so humans can run it.</p>
     </section>
 
     <div class="grid">
@@ -400,7 +389,7 @@
       </div>
     </div>
 
-    <!-- HOW I SOLVE (blue-purple chapter divider, "How I Solve" on its own line) -->
+    <!-- HOW I SOLVE divider (kicker is now same weight/color style, not tiny or different) -->
     <section class="chapter" aria-label="How I Solve">
       <p class="kicker">How I Solve</p>
       <h2>AI-Native People Operating System</h2>
@@ -453,7 +442,7 @@
       </div>
     </div>
 
-    <!-- Case studies (no "Proof" header; darker cards; book emojis like library) -->
+    <!-- Case studies (no "Proof" header/line; darker cards; book emojis) -->
     <div class="case-grid" aria-label="Case Studies">
       <div class="case-card">
         <h3>📘 Case 1: Diagnosing Pipeline Bottlenecks</h3>
@@ -481,13 +470,7 @@
       </div>
     </div>
 
-    <!-- Where the tools live: delete block content, keep buttons only in a bottom strip -->
-    <div class="bottom-strip" aria-label="Where the tools live">
-      <a class="btn primary" href="library.html">📚 Open Artifact Library</a>
-      <a class="btn" href="agents/" target="_blank" rel="noopener">Browse Agents Directory</a>
-    </div>
-
-    <!-- HOW I WORK (blue-purple chapter divider + equal-width cards) -->
+    <!-- HOW I WORK divider (blue-purple) -->
     <section class="chapter" aria-label="How I Work" style="margin-top:18px;">
       <h2>How I Work</h2>
       <p>
@@ -496,6 +479,7 @@
       </p>
     </section>
 
+    <!-- How I Work cards (true 50/50) -->
     <div class="how-grid">
       <div class="card">
         <h3>Operating principles</h3>
@@ -532,6 +516,12 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Buttons moved to the LAST block (bottom strip) -->
+    <div class="bottom-strip" aria-label="Where the tools live">
+      <a class="btn primary" href="library.html">📚 Open Artifact Library</a>
+      <a class="btn" href="agents/" target="_blank" rel="noopener">Browse Agents Directory</a>
     </div>
 
   </div>
