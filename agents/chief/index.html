@@ -1189,7 +1189,20 @@
       showToast(`Would open ${kind} details (${id}) (demo).`);
     }
     document.querySelectorAll("[data-interview]").forEach(r=>r.addEventListener("click", ()=>navStub("interview", r.getAttribute("data-interview"))));
-    document.querySelectorAll("[data-req]").forEach(r=>r.addEventListener("click", ()=>navStub("requisition", r.getAttribute("data-req"))));
+    document.querySelectorAll("[data-req]").forEach(r=>{
+  r.addEventListener("click", ()=>{
+    const tab = r.getAttribute("data-metrics-tab");
+    if(tab){
+      // If you're using the iframe modal approach:
+      // openMetrics(tab);
+
+      // If you're NOT using a modal yet, at least deep-link:
+      window.location.href = `/agents/metrics/?req=${encodeURIComponent(tab)}`;
+      return;
+    }
+    navStub("requisition", r.getAttribute("data-req"));
+  });
+});
     document.querySelectorAll("[data-project]").forEach(r=>r.addEventListener("click", ()=>navStub("project", r.getAttribute("data-project"))));
     document.querySelectorAll("[data-social]").forEach(r=>r.addEventListener("click", ()=>navStub("employer brand item", r.getAttribute("data-social"))));
     document.querySelectorAll("[data-news]").forEach(r=>r.addEventListener("click", ()=>navStub("news item", r.getAttribute("data-news"))));
