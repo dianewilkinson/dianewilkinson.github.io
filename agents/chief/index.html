@@ -1103,6 +1103,33 @@
     modal.addEventListener("click", (e)=>{ if(e.target === modal) hideModal(); });
     window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") hideModal(); });
 
+    // ---------- Metrics modal wiring (NEW) ----------
+const metricsModal = document.getElementById("metricsModal");
+const metricsFrame = document.getElementById("metricsFrame");
+const closeMetrics = document.getElementById("closeMetrics");
+
+function openMetrics(tabSlug){
+  metricsModal.classList.add("show");
+  metricsFrame.src = `/agents/metrics/?req=${encodeURIComponent(tabSlug || "")}`;
+}
+
+function hideMetrics(){
+  metricsModal.classList.remove("show");
+  metricsFrame.src = ""; // optional: unload when closed
+}
+
+closeMetrics.addEventListener("click", hideMetrics);
+metricsModal.addEventListener("click", (e)=>{ if(e.target === metricsModal) hideMetrics(); });
+
+// keep your existing Escape handler for #modal, and ALSO close metrics:
+window.addEventListener("keydown", (e)=>{
+  if(e.key === "Escape"){
+    hideModal();
+    hideMetrics();
+  }
+});
+
+
     function setActiveTab(tab){
       activeTab = tab;
       activeItemId = null;
