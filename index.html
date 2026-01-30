@@ -25,7 +25,10 @@
       --muted:#64748b;
       --border:#e5e7eb;
       --link:#2563eb;
+
+      /* Purple used previously */
       --link-soft:#4f46e5;
+
       --shadow:rgba(15,23,42,0.08);
 
       /* Top bar gradient */
@@ -126,13 +129,6 @@
       padding:16px 18px 14px;
       border:1px solid rgba(148,163,184,0.28);
     }
-    .chapter .kicker{
-      margin:0 0 6px;
-      font-size:14px;       /* not tiny */
-      font-weight:800;
-      color:#334155;        /* not purple */
-      letter-spacing:-0.01em;
-    }
     .chapter h2{
       margin:0 0 6px;
       font-size:22px;
@@ -146,6 +142,12 @@
       font-size:14.5px;
       line-height:1.65;
       max-width:980px;
+    }
+
+    /* Special title color for the system name */
+    .system-name{
+      color:var(--link-soft);
+      font-weight:900;
     }
 
     /* Cards */
@@ -252,15 +254,7 @@
       font-weight:800;
     }
 
-    /* Buttons strip (moved to bottom) */
-    .bottom-strip{
-      margin:18px 0 6px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-start;
-    }
+    /* Buttons */
     .btn{
       display:inline-flex;
       align-items:center;
@@ -310,6 +304,53 @@
     }
     .tier-item b{display:block; font-size:13px; margin-bottom:4px; color:#0f172a;}
     .tier-item span{display:block; font-size:13px; color:#475569; line-height:1.5;}
+
+    /* Bottom "Let's Connect" strip */
+    .connect{
+      margin-top:18px;
+      border-radius:18px;
+      background:var(--cool-soft);
+      border:1px solid rgba(148,163,184,0.28);
+      box-shadow:0 6px 18px var(--shadow);
+      padding:16px 18px 14px;
+    }
+    .connect-row{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .connect h2{
+      margin:0 0 6px;
+      font-size:20px;
+      font-weight:900;
+      letter-spacing:-0.02em;
+    }
+    .connect p{
+      margin:0;
+      color:#475569;
+      font-size:14.5px;
+      line-height:1.65;
+      max-width:760px;
+    }
+    .connect-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:10px;
+    }
+    .connect-strip{
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px solid rgba(148,163,184,0.35);
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-start;
+    }
 
     footer{
       text-align:center;
@@ -363,7 +404,7 @@
       </a>
     </p>
 
-    <!-- WHAT I SOLVE divider (now just a chapter header, cards carry the content) -->
+    <!-- WHAT I SOLVE -->
     <section class="chapter" aria-label="What I Solve">
       <h2>What I Solve</h2>
       <p>Three predictable failure modes — and how I rebuild the system so humans can run it.</p>
@@ -389,11 +430,11 @@
       </div>
     </div>
 
-    <!-- HOW I SOLVE divider (kicker is now same weight/color style, not tiny or different) -->
+    <!-- HOW I SOLVE (now same as other chapter titles) -->
     <section class="chapter" aria-label="How I Solve">
-      <p class="kicker">How I Solve</p>
-      <h2>AI-Native People Operating System</h2>
-      <p>
+      <h2>How I Solve</h2>
+      <p class="sub" style="margin:0;color:#475569;font-size:14.5px;line-height:1.65;max-width:980px;">
+        <span class="system-name">AI-Native People Ops System</span><br>
         A case-based portfolio showing how I build internal people systems across <b>Hire</b>, <b>Support</b>, <b>Evaluate</b>, and <b>Improve</b> —
         with human-in-the-loop governance and auditability. Each lifecycle stage uses shared capabilities for signals, flow, and decision governance.
       </p>
@@ -470,7 +511,7 @@
       </div>
     </div>
 
-    <!-- HOW I WORK divider (blue-purple) -->
+    <!-- HOW I WORK -->
     <section class="chapter" aria-label="How I Work" style="margin-top:18px;">
       <h2>How I Work</h2>
       <p>
@@ -518,11 +559,29 @@
       </div>
     </div>
 
-    <!-- Buttons moved to the LAST block (bottom strip) -->
-    <div class="bottom-strip" aria-label="Where the tools live">
-      <a class="btn primary" href="library.html">📚 Open Artifact Library</a>
-      <a class="btn" href="agents/" target="_blank" rel="noopener">Browse Agents Directory</a>
-    </div>
+    <!-- Bottom strip: Let's Connect + the two buttons inside the strip -->
+    <section class="connect" aria-label="Let's Connect">
+      <div class="connect-row">
+        <div>
+          <h2>Let’s Connect</h2>
+          <p>
+            Open to roles in People Analytics, Talent Intelligence, People Ops, and Recruiting Operations — especially teams building internal AI capabilities.
+          </p>
+
+          <div class="connect-actions">
+            <a class="btn primary" href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">📅 Book 15 minutes</a>
+            <a class="btn" href="mailto:dianewilkinson510@gmail.com">Email</a>
+            <a class="btn" href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons moved here (inside the strip) -->
+      <div class="connect-strip">
+        <a class="btn primary" href="library.html">📚 Open Artifact Library</a>
+        <a class="btn" href="agents/" target="_blank" rel="noopener">Browse Agents Directory</a>
+      </div>
+    </section>
 
   </div>
 
