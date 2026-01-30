@@ -173,6 +173,19 @@
       min-height:auto;
       padding:16px 18px 16px;
     }
+    /* System grid: fixed 2x2 */
+.system-grid{
+  display:grid;
+  gap:16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 720px){
+  .system-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
 
     /* Buttons */
     .btn{
@@ -333,7 +346,7 @@
     <!-- THE SYSTEM (hero merged into System section) -->
     <section class="section" id="system">
       <div class="hero" aria-label="System hero">
-        <h2>How I Solve: AI-native <span>People Operating System</span></h2>
+        <h2>How I Solve with an AI-Native <span>People Operating System</span></h2>
         <p>
           A case-based portfolio showing how I build internal people systems across <b>Hire</b>, <b>Support</b>, <b>Evaluate</b>, and <b>Improve</b> —
           with human-in-the-loop governance and auditability. Each lifecycle stage uses shared capabilities for signals, flow, and decision governance.
@@ -341,7 +354,7 @@
 
       </div>
 
-      <div class="grid">
+      <div class="system-grid">
         <div class="card">
           <h3>🎯 Hire</h3>
           <p>Build predictable, fair hiring systems: funnel health, capacity constraints, and evidence-based decisions.</p>
