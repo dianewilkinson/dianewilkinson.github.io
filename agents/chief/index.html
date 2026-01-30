@@ -46,29 +46,26 @@
       max-width:1120px;
       margin:0 auto;
       padding:10px 16px 22px;
-      overflow:visible; /* allow top badges to pop out */
+      overflow:visible;
     }
 
-    /* Top chrome */
     .top{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
       padding:10px 0 12px;
-      overflow:visible; /* allow badges to pop out */
+      overflow:visible;
     }
 
-    /* LEFT: app icons */
     .appicons{
       display:flex;
       align-items:center;
       gap:10px;
       flex-wrap:wrap;
-      overflow:visible; /* allow badges to pop out */
+      overflow:visible;
     }
 
-    /* normalize button rendering across browsers */
     button{ -webkit-appearance:none; appearance:none; }
 
     .appbtn{
@@ -83,17 +80,16 @@
       cursor:pointer;
       box-shadow:0 1px 2px var(--shadow);
       padding:6px;
-      overflow:visible; /* IMPORTANT: don't clip badge */
+      overflow:visible;
       line-height:0;
     }
     .appbtn:hover{background:#fbfbff;border-color:rgba(99,102,241,.45);}
 
-    /* key fix: prevent logo cropping + normalize all logos (incl. WhatsApp) */
     .appimg{
       width:22px;
       height:22px;
       display:block;
-      object-fit:contain;   /* IMPORTANT: no cropping */
+      object-fit:contain;
       border-radius:6px;
     }
 
@@ -105,7 +101,6 @@
       line-height:1;
     }
 
-    /* badge “pops out” */
     .badge{
       position:absolute;
       top:-9px;
@@ -121,13 +116,12 @@
       line-height:18px;
       border:2px solid #fff;
       box-shadow:0 10px 18px rgba(0,0,0,.20);
-      transform:translate(2px,-2px); /* subtle pop */
+      transform:translate(2px,-2px);
       pointer-events:none;
       z-index:5;
     }
     .badge.hide{display:none;}
 
-    /* RIGHT: pills */
     .topright{
       display:flex;
       align-items:center;
@@ -162,7 +156,6 @@
     }
     .iconbtn:hover{background:#fbfbff;border-color:rgba(99,102,241,.45);}
 
-    /* Main panel */
     .panel{
       background:var(--card);
       border:1px solid var(--border);
@@ -207,7 +200,6 @@
     }
     .smallbtn:hover{border-color:rgba(99,102,241,.45); color:var(--purple);}
 
-    /* Cards grid */
     .grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -286,7 +278,6 @@
       text-overflow:ellipsis;
     }
 
-    /* unified gray pills with colored text */
     .statuspill{
       display:inline-flex;
       align-items:center;
@@ -308,10 +299,9 @@
     .sp-neutral{color:#374151;}
     .sp-purple{color:var(--purple);}
 
-    /* News: full-width + optional toggle */
     .newswrap{
       padding:0 14px 14px;
-      display:none; /* toggled by button */
+      display:none;
     }
     .newsgrid{
       display:grid;
@@ -322,7 +312,6 @@
       .newsgrid{grid-template-columns:1fr;}
     }
 
-    /* Help section */
     .help{
       margin-top:14px;
       border:1px solid var(--border);
@@ -438,7 +427,6 @@
     }
     .btn:hover{background:var(--purple-2);}
 
-    /* Toast */
     .toast{
       position:fixed;
       left:50%;
@@ -458,7 +446,6 @@
     }
     .toast.show{opacity:1; transform:translateX(-50%) translateY(-2px);}
 
-    /* Modal (in-browser inbox + agent demo surface) */
     .modal{
       position:fixed;
       inset:0;
@@ -661,7 +648,6 @@
   <div class="bar"></div>
 
   <div class="wrap">
-    <!-- TOP: icons on LEFT, pills on RIGHT -->
     <div class="top">
       <div class="appicons">
         <button class="appbtn" id="appSlack" title="Slack (click to open)">
@@ -712,7 +698,6 @@
       </div>
 
       <div class="grid" id="overviewGrid">
-        <!-- Today's Interviews -->
         <div class="card" data-card="interviews">
           <div class="cardhead">
             <h3>Today's Interviews</h3>
@@ -754,29 +739,28 @@
           <div class="cardbody">
             <div class="list">
               <div class="row" data-req="r1" data-metrics-tab="enterprise-sales-director">
-  <div class="rowleft">
-    <div class="rowtitle">Enterprise Sales Director</div>
-    <div class="rowsub">Active search · Metrics demo</div>
-  </div>
-  <div class="rowright"><span class="statuspill sp-warn">Watch</span></div>
-</div>
+                <div class="rowleft">
+                  <div class="rowtitle">Enterprise Sales Director</div>
+                  <div class="rowsub">Active search · Metrics demo</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-warn">Watch</span></div>
+              </div>
 
-<div class="row" data-req="r2" data-metrics-tab="software-engineer">
-  <div class="rowleft">
-    <div class="rowtitle">Software Engineer</div>
-    <div class="rowsub">Active search · Metrics demo</div>
-  </div>
-  <div class="rowright"><span class="statuspill sp-bad">Bottleneck</span></div>
-</div>
+              <div class="row" data-req="r2" data-metrics-tab="software-engineer">
+                <div class="rowleft">
+                  <div class="rowtitle">Software Engineer</div>
+                  <div class="rowsub">Active search · Metrics demo</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-bad">Bottleneck</span></div>
+              </div>
 
-<div class="row" data-req="r3" data-metrics-tab="senior-data-analyst">
-  <div class="rowleft">
-    <div class="rowtitle">Senior Data Analyst</div>
-    <div class="rowsub">Active search · Metrics demo</div>
-  </div>
-  <div class="rowright"><span class="statuspill sp-bad">Bottleneck</span></div>
-</div>
-
+              <div class="row" data-req="r3" data-metrics-tab="senior-data-analyst">
+                <div class="rowleft">
+                  <div class="rowtitle">Senior Data Analyst</div>
+                  <div class="rowsub">Active search · Metrics demo</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-bad">Bottleneck</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -834,7 +818,7 @@
         </div>
       </div>
 
-      <!-- Optional News (hidden by default) -->
+      <!-- Optional News -->
       <div class="newswrap" id="newsWrap">
         <div class="newsgrid">
           <div class="card" data-card="news">
@@ -889,10 +873,9 @@
           </div>
         </div>
       </div>
-
     </section>
 
-    <!-- How can I help? -->
+    <!-- Help -->
     <section class="help" aria-label="How can I help">
       <div class="helphead">
         <div>
@@ -937,7 +920,7 @@
     </section>
   </div>
 
-  <!-- Modal -->
+  <!-- INBOX MODAL -->
   <div class="modal" id="modal">
     <div class="sheet" role="dialog" aria-modal="true" aria-label="In-browser inbox">
       <div class="sheethead">
@@ -946,29 +929,6 @@
           <span id="sheetName">Messaging</span>
           <span class="sub" id="sheetSub">In-browser preview (demo)</span>
         </div>
-          <!-- Metrics Modal (NEW) -->
-  <div class="modal" id="metricsModal">
-    <div class="sheet" role="dialog" aria-modal="true" aria-label="Metrics A[i]gent">
-      <div class="sheethead">
-        <div class="sheettitle">
-          <span>📊</span>
-          <span>Metrics A[i]gent</span>
-          <span class="sub" id="metricsSub">Pipeline Health Diagnostics</span>
-        </div>
-        <button class="close" id="closeMetrics">Close</button>
-      </div>
-
-      <div style="flex:1; min-height:0;">
-        <iframe
-          id="metricsFrame"
-          title="Metrics A[i]gent"
-          style="width:100%; height:100%; border:0;"
-          loading="lazy"
-        ></iframe>
-      </div>
-    </div>
-  </div>
-
         <button class="close" id="closeModal">Close</button>
       </div>
 
@@ -1002,6 +962,25 @@
     </div>
   </div>
 
+  <!-- ✅ METRICS MODAL (MOVED OUTSIDE inbox modal; not nested) -->
+  <div class="modal" id="metricsModal">
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="Metrics A[i]gent">
+      <div class="sheethead">
+        <div class="sheettitle">
+          <span>📊</span>
+          <span>Metrics A[i]gent</span>
+          <span class="sub" id="metricsSub">Pipeline Health Diagnostics</span>
+        </div>
+        <button class="close" id="closeMetrics">Close</button>
+      </div>
+
+      <div style="flex:1; min-height:0;">
+        <iframe id="metricsFrame" title="Metrics A[i]gent"
+          style="width:100%; height:100%; border:0;" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast">Saved.</div>
 
   <script>
@@ -1011,40 +990,40 @@
       inbox: {
         slack: [
           { id:"s1", from:"#eng-hiring", subject:"HM wants a tighter bar for Backend Eng", snippet:"Can we calibrate on seniority expectations…", when:"12m ago",
-            body:"Thread in #eng-hiring\n\nHM: We need a tighter bar for Backend Eng.\nRecruiter: Agree—can we align on seniority expectations?\nHM: Yes. Also prioritize ownership examples.\n\nChief suggestion: run a quick calibration prompt + update screening rubric (Tier 2)."
+            body:"Thread in #eng-hiring\\n\\nHM: We need a tighter bar for Backend Eng.\\nRecruiter: Agree—can we align on seniority expectations?\\nHM: Yes. Also prioritize ownership examples.\\n\\nChief suggestion: run a quick calibration prompt + update screening rubric (Tier 2)."
           },
           { id:"s2", from:"@J.Rivera", subject:"Alex Morgan screen notes", snippet:"Alex has strong ownership, needs depth on…", when:"32m ago",
-            body:"DM from J. Rivera\n\nAlex Morgan:\n- Strong ownership signals\n- Needs deeper systems design examples\n- Recommend: proceed to tech screen\n\nChief suggestion: generate candidate summary card + prep questions for 10:30."
+            body:"DM from J. Rivera\\n\\nAlex Morgan:\\n- Strong ownership signals\\n- Needs deeper systems design examples\\n- Recommend: proceed to tech screen\\n\\nChief suggestion: generate candidate summary card + prep questions for 10:30."
           },
           { id:"s3", from:"#recruiting-ops", subject:"New rubric template posted", snippet:"Updated scorecard sections for consistency…", when:"1h ago",
-            body:"Announcement in #recruiting-ops\n\nNew rubric template posted.\n- Standardized competencies\n- Updated leveling language\n\nChief suggestion: apply template to open reqs (Tier 1)."
+            body:"Announcement in #recruiting-ops\\n\\nNew rubric template posted.\\n- Standardized competencies\\n- Updated leveling language\\n\\nChief suggestion: apply template to open reqs (Tier 1)."
           }
         ],
         email: [
           { id:"e1", from:"Finance", subject:"Offer approval needed — BE (US)", snippet:"Please confirm comp band alignment…", when:"18m ago",
-            body:"From: Finance\nSubject: Offer approval needed — Backend Engineer (US)\n\nPlease confirm comp band alignment and provide leveling rationale.\n\nChief suggestion: generate a 3-bullet justification + attach comp band policy excerpt."
+            body:"From: Finance\\nSubject: Offer approval needed — Backend Engineer (US)\\n\\nPlease confirm comp band alignment and provide leveling rationale.\\n\\nChief suggestion: generate a 3-bullet justification + attach comp band policy excerpt."
           },
           { id:"e2", from:"HRBP", subject:"Hiring plan notes for Q1", snippet:"Sharing headcount assumptions + changes…", when:"2h ago",
-            body:"From: HRBP\nSubject: Hiring plan notes for Q1\n\nSharing headcount assumptions and changes.\n\nChief suggestion: flag impacted reqs and update pipeline plan (Tier 2)."
+            body:"From: HRBP\\nSubject: Hiring plan notes for Q1\\n\\nSharing headcount assumptions and changes.\\n\\nChief suggestion: flag impacted reqs and update pipeline plan (Tier 2)."
           },
           { id:"e3", from:"Candidate", subject:"Re: Product Designer — scheduling", snippet:"Thanks—can we do later this week?", when:"3h ago",
-            body:"From: Candidate\n\nThanks—can we do later this week?\n\nChief suggestion: propose 3 times within constraints (Tier 1)."
+            body:"From: Candidate\\n\\nThanks—can we do later this week?\\n\\nChief suggestion: propose 3 times within constraints (Tier 1)."
           }
         ],
         inmail: [
           { id:"l1", from:"Senior Designer", subject:"Role scope + leveling question", snippet:"Is this IC6 or IC5? Comp band range…", when:"41m ago",
-            body:"LinkedIn InMail\n\nIs this IC6 or IC5? What’s the comp band range?\n\nChief suggestion: draft response that preserves policy + routes to HM for scope confirmation (Tier 3)."
+            body:"LinkedIn InMail\\n\\nIs this IC6 or IC5? What’s the comp band range?\\n\\nChief suggestion: draft response that preserves policy + routes to HM for scope confirmation (Tier 3)."
           },
           { id:"l2", from:"Backend Eng", subject:"Interested — remote policy?", snippet:"I’m in NYC—does the role allow remote…", when:"4h ago",
-            body:"LinkedIn InMail\n\nI’m in NYC—does the role allow remote?\n\nChief suggestion: reply with approved policy wording + alternatives (Tier 1)."
+            body:"LinkedIn InMail\\n\\nI’m in NYC—does the role allow remote?\\n\\nChief suggestion: reply with approved policy wording + alternatives (Tier 1)."
           }
         ],
         whatsapp: [
           { id:"w1", from:"Hiring Manager", subject:"Quick question before panel", snippet:"Can we swap one interviewer?…", when:"9m ago",
-            body:"WhatsApp\n\nCan we swap one interviewer? Conflicting meeting.\n\nChief suggestion: propose replacement from panel pool + update calendar (Tier 2)."
+            body:"WhatsApp\\n\\nCan we swap one interviewer? Conflicting meeting.\\n\\nChief suggestion: propose replacement from panel pool + update calendar (Tier 2)."
           },
           { id:"w2", from:"Coordinator", subject:"Candidate is running 5 min late", snippet:"FYI — they’re in traffic…", when:"27m ago",
-            body:"WhatsApp\n\nFYI candidate running 5 min late.\n\nChief suggestion: notify panel + adjust start time within SLA (Tier 1)."
+            body:"WhatsApp\\n\\nFYI candidate running 5 min late.\\n\\nChief suggestion: notify panel + adjust start time within SLA (Tier 1)."
           }
         ]
       }
@@ -1078,7 +1057,7 @@
     const bwMap = {1:"Low",2:"Low-Med",3:"Medium",4:"High",5:"Max"};
     bwSlider.addEventListener("input", ()=> bwLabel.textContent = bwMap[bwSlider.value] || "Medium");
 
-    // ---------- Modal wiring ----------
+    // ---------- Inbox modal wiring ----------
     const modal = document.getElementById("modal");
     const closeModal = document.getElementById("closeModal");
     const inboxList = document.getElementById("inboxList");
@@ -1101,34 +1080,31 @@
     }
     closeModal.addEventListener("click", hideModal);
     modal.addEventListener("click", (e)=>{ if(e.target === modal) hideModal(); });
-    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") hideModal(); });
 
-    // ---------- Metrics modal wiring (NEW) ----------
-const metricsModal = document.getElementById("metricsModal");
-const metricsFrame = document.getElementById("metricsFrame");
-const closeMetrics = document.getElementById("closeMetrics");
+    // ---------- Metrics modal wiring ----------
+    const metricsModal = document.getElementById("metricsModal");
+    const metricsFrame = document.getElementById("metricsFrame");
+    const closeMetrics = document.getElementById("closeMetrics");
 
-function openMetrics(tabSlug){
-  metricsModal.classList.add("show");
-  metricsFrame.src = `/agents/metrics/?req=${encodeURIComponent(tabSlug || "")}`;
-}
+    function openMetrics(slug){
+      metricsModal.classList.add("show");
+      metricsFrame.src = `/agents/metrics/?req=${encodeURIComponent(slug || "")}`;
+      showToast("Opening Metrics…");
+    }
+    function hideMetrics(){
+      metricsModal.classList.remove("show");
+      metricsFrame.src = "";
+    }
+    closeMetrics.addEventListener("click", hideMetrics);
+    metricsModal.addEventListener("click", (e)=>{ if(e.target === metricsModal) hideMetrics(); });
 
-function hideMetrics(){
-  metricsModal.classList.remove("show");
-  metricsFrame.src = ""; // optional: unload when closed
-}
-
-closeMetrics.addEventListener("click", hideMetrics);
-metricsModal.addEventListener("click", (e)=>{ if(e.target === metricsModal) hideMetrics(); });
-
-// keep your existing Escape handler for #modal, and ALSO close metrics:
-window.addEventListener("keydown", (e)=>{
-  if(e.key === "Escape"){
-    hideModal();
-    hideMetrics();
-  }
-});
-
+    // ✅ One Escape handler closes both
+    window.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape"){
+        hideModal();
+        hideMetrics();
+      }
+    });
 
     function setActiveTab(tab){
       activeTab = tab;
@@ -1197,7 +1173,7 @@ window.addEventListener("keydown", (e)=>{
       `;
     }
 
-    // Actions (agent demo)
+    // Actions demo
     document.getElementById("actions").addEventListener("click", (e)=>{
       const btn = e.target.closest("[data-act]");
       if(!btn) return;
@@ -1228,44 +1204,35 @@ window.addEventListener("keydown", (e)=>{
       showToast(`${label} (demo)`);
     });
 
-    // Top icon clicks open modal
+    // Top icon clicks open inbox modal
     document.getElementById("appSlack")?.addEventListener("click", ()=>openModal("slack"));
     document.getElementById("appGmail")?.addEventListener("click", ()=>openModal("email"));
     document.getElementById("appInmail")?.addEventListener("click", ()=>openModal("inmail"));
     document.getElementById("appWhatsapp")?.addEventListener("click", ()=>openModal("whatsapp"));
 
-    // Other cards: stub navigation
+    // Stub navigation
     function navStub(kind, id){
       showToast(`Would open ${kind} details (${id}) (demo).`);
     }
     document.querySelectorAll("[data-interview]").forEach(r=>r.addEventListener("click", ()=>navStub("interview", r.getAttribute("data-interview"))));
+
+    // ✅ CLEAN REQ CLICK WIRING (single handler, no nesting)
     document.querySelectorAll("[data-req]").forEach(r=>{
-  r.addEventListener("click", ()=>{
-    const tab = r.getAttribute("data-metrics-tab");
-    if(tab){
-      // If you're using the iframe modal approach:
-      // openMetrics(tab);
+      r.addEventListener("click", ()=>{
+        const tab = r.getAttribute("data-metrics-tab");
+        if(tab){
+          openMetrics(tab);
+          return;
+        }
+        navStub("requisition", r.getAttribute("data-req"));
+      });
+    });
 
-      // If you're NOT using a modal yet, at least deep-link:
-      document.querySelectorAll("[data-req]").forEach(r=>{
-  r.addEventListener("click", ()=>{
-    const tab = r.getAttribute("data-metrics-tab");
-    if(tab){
-      openMetrics(tab);   // ✅ stay in Chief, open iframe modal
-      return;
-    }
-    navStub("requisition", r.getAttribute("data-req"));
-  });
-});
-
-    navStub("requisition", r.getAttribute("data-req"));
-  });
-});
     document.querySelectorAll("[data-project]").forEach(r=>r.addEventListener("click", ()=>navStub("project", r.getAttribute("data-project"))));
     document.querySelectorAll("[data-social]").forEach(r=>r.addEventListener("click", ()=>navStub("employer brand item", r.getAttribute("data-social"))));
     document.querySelectorAll("[data-news]").forEach(r=>r.addEventListener("click", ()=>navStub("news item", r.getAttribute("data-news"))));
 
-    // Chat send (routes to a relevant demo)
+    // Chat send
     const chatInput = document.getElementById("chatInput");
     document.getElementById("sendBtn").addEventListener("click", ()=>{
       const t = (chatInput.value || "").trim();
@@ -1307,7 +1274,7 @@ window.addEventListener("keydown", (e)=>{
     // Settings (stub)
     document.getElementById("settingsBtn").addEventListener("click", ()=>showToast("Settings (demo stub)."));
 
-    // Optional: update time quickly (still a demo)
+    // Update time
     function tick(){
       const d = new Date();
       const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
