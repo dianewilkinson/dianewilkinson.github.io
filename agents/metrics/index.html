@@ -289,24 +289,16 @@
       background: #9ca3af;
     }
 
-    .diag-pill.healthy {
-      color: #15803d;
-    }
+    .diag-pill.healthy { color: #15803d; }
     .diag-pill.healthy .diag-dot { background: #22c55e; }
 
-    .diag-pill.warn {
-      color: #9a3412;
-    }
+    .diag-pill.warn { color: #9a3412; }
     .diag-pill.warn .diag-dot { background: #f97316; }
 
-    .diag-pill.bottleneck {
-      color: #b91c1c;
-    }
+    .diag-pill.bottleneck { color: #b91c1c; }
     .diag-pill.bottleneck .diag-dot { background: #ef4444; }
 
-    .diag-pill.alert {
-      color: #7e22ce;
-    }
+    .diag-pill.alert { color: #7e22ce; }
     .diag-pill.alert .diag-dot { background: #7e22ce; }
 
     .diag-label-pill {
@@ -496,67 +488,37 @@
         </thead>
         <tbody id="funnel-body">
           <tr data-index="0">
-            <td>
-              <input type="number" min="0" value="320" class="in-input" />
-            </td>
-            <td class="stage-cell">
-              <span class="stage-pill stage-pill--1">Application Stage | 12%</span>
-            </td>
-            <td>
-              <input type="number" min="0" value="40" class="out-input" />
-            </td>
+            <td><input type="number" min="0" value="320" class="in-input" /></td>
+            <td class="stage-cell"><span class="stage-pill stage-pill--1">Application Stage | 12%</span></td>
+            <td><input type="number" min="0" value="40" class="out-input" /></td>
             <td><span class="conv-cell">–</span></td>
             <td><span class="diag-cell"></span></td>
           </tr>
           <tr data-index="1">
-            <td>
-              <input type="number" min="0" value="40" class="in-input" />
-            </td>
-            <td class="stage-cell">
-              <span class="stage-pill stage-pill--2">Recruiter Interview | 50%</span>
-            </td>
-            <td>
-              <input type="number" min="0" value="16" class="out-input" />
-            </td>
+            <td><input type="number" min="0" value="40" class="in-input" /></td>
+            <td class="stage-cell"><span class="stage-pill stage-pill--2">Recruiter Interview | 50%</span></td>
+            <td><input type="number" min="0" value="16" class="out-input" /></td>
             <td><span class="conv-cell">–</span></td>
             <td><span class="diag-cell"></span></td>
           </tr>
           <tr data-index="2">
-            <td>
-              <input type="number" min="0" value="16" class="in-input" />
-            </td>
-            <td class="stage-cell">
-              <span class="stage-pill stage-pill--3">Hiring Manager Interview | 70%</span>
-            </td>
-            <td>
-              <input type="number" min="0" value="4" class="out-input" />
-            </td>
+            <td><input type="number" min="0" value="16" class="in-input" /></td>
+            <td class="stage-cell"><span class="stage-pill stage-pill--3">Hiring Manager Interview | 70%</span></td>
+            <td><input type="number" min="0" value="4" class="out-input" /></td>
             <td><span class="conv-cell">–</span></td>
             <td><span class="diag-cell"></span></td>
           </tr>
           <tr data-index="3">
-            <td>
-              <input type="number" min="0" value="4" class="in-input" />
-            </td>
-            <td class="stage-cell">
-              <span class="stage-pill stage-pill--4">Final Interview | 30%</span>
-            </td>
-            <td>
-              <input type="number" min="0" value="3" class="out-input" />
-            </td>
+            <td><input type="number" min="0" value="4" class="in-input" /></td>
+            <td class="stage-cell"><span class="stage-pill stage-pill--4">Final Interview | 30%</span></td>
+            <td><input type="number" min="0" value="3" class="out-input" /></td>
             <td><span class="conv-cell">–</span></td>
             <td><span class="diag-cell"></span></td>
           </tr>
           <tr data-index="4">
-            <td>
-              <input type="number" min="0" value="3" class="in-input" />
-            </td>
-            <td class="stage-cell">
-              <span class="stage-pill stage-pill--5">Offer | 85%</span>
-            </td>
-            <td>
-              <input type="number" min="0" value="2" class="out-input" />
-            </td>
+            <td><input type="number" min="0" value="3" class="in-input" /></td>
+            <td class="stage-cell"><span class="stage-pill stage-pill--5">Offer | 85%</span></td>
+            <td><input type="number" min="0" value="2" class="out-input" /></td>
             <td><span class="conv-cell">–</span></td>
             <td><span class="diag-cell"></span></td>
           </tr>
@@ -655,6 +617,25 @@
 
     let currentReqKey = "esd";
 
+    // --- NEW: read req from URL (supports Chief slugs + your keys) ---
+    function getReqKeyFromUrl() {
+      const qs = new URLSearchParams(window.location.search);
+      const raw = (qs.get("req") || "").trim().toLowerCase();
+      if (!raw) return null;
+
+      // allow your existing keys
+      if (raw === "esd" || raw === "se" || raw === "sda") return raw;
+
+      // map Chief slugs -> your keys
+      const map = {
+        "enterprise-sales-director": "esd",
+        "software-engineer": "se",
+        "senior-data-analyst": "sda",
+      };
+
+      return map[raw] || null;
+    }
+
     function getFunnelData() {
       const rows = Array.from(document.querySelectorAll("#funnel-body tr"));
       const stages = [];
@@ -732,67 +713,102 @@
       return "healthy";
     }
 
+    // --- NEW: turn prompt-questions into Findings/Evidence/Recommended action ---
+    function buildAnsweredRowsForStage(stage) {
+      const stageLabel = stage.name.split("|")[0].trim();
+      const bench = stage.benchmark;
+      const cvr = isNaN(stage.conv) ? null : stage.conv;
+
+      const prevArr = PREV_CVR[currentReqKey] || [];
+      const prev = prevArr[stage.index];
+      const hasPrev = !isNaN(prev);
+      const delta = (cvr != null && hasPrev) ? (cvr - prev) : null;
+
+      const evidence = [];
+      if (cvr != null) evidence.push(`Current CVR: ${cvr.toFixed(1)}%`);
+      if (bench != null) evidence.push(`Benchmark CVR: ${bench}%`);
+      if (delta != null) {
+        const sign = delta > 0 ? "+" : "";
+        evidence.push(`Trend vs prior snapshot: ${sign}${delta.toFixed(1)} pts`);
+      }
+      evidence.push(`Counts: ${stage.moved} advanced / ${stage.entered} entered`);
+
+      // Generic helpers
+      const findingBase = () => {
+        if (stage.status === "bottleneck") return `This stage is constraining throughput vs benchmark for ${stageLabel}.`;
+        if (stage.status === "alert") return `This stage is an outlier vs benchmark for ${stageLabel} (validate signal).`;
+        return `This stage is within expected range for ${stageLabel}.`;
+      };
+
+      const actions = [];
+      const sLower = stageLabel.toLowerCase();
+
+      // Stage-specific recommended actions (still "metrics-safe" — options + evidence)
+      if (sLower.includes("application")) {
+        actions.push("Segment by source and channel; compare CVR by source to isolate low-quality volume.");
+        actions.push("Check screening rules / knockout questions; validate they match current role requirements.");
+        actions.push("Review job post clarity and comp band alignment; confirm applicant intent matches role reality.");
+      } else if (sLower.includes("recruiter")) {
+        actions.push("Audit recruiter screen rubric alignment; compare pass-through by recruiter / region / level.");
+        actions.push("Check scheduling latency and candidate drop reasons; validate process friction.");
+        actions.push("Spot-check sample of declines for consistency (calibration).");
+      } else if (sLower.includes("hiring manager")) {
+        actions.push("Pull HM decline reasons distribution; identify top 1–2 patterns to address.");
+        actions.push("Run a quick calibration with HM: must-haves vs nice-to-haves, scope/level alignment.");
+        actions.push("Compare pass-through by interviewer / panel; validate bar consistency and interview design.");
+      } else if (sLower.includes("final")) {
+        actions.push("Validate data capture (stage mapping, duplicates, offer/hire timing) before acting on the outlier.");
+        actions.push("If signal holds: compare by interview panel / location; identify where outcomes diverge.");
+        actions.push("Review interview loop design: are we testing the right competencies for decision confidence?");
+      } else if (sLower.includes("offer")) {
+        actions.push("Break down declines by reason (comp, leveling, location, competing offer) and by segment.");
+        actions.push("Measure time-to-offer + time-to-accept; reduce delays that increase competing-offer risk.");
+        actions.push("Compare offer close rate by recruiter/HM; identify best practices to replicate.");
+      } else {
+        actions.push("Segment performance by recruiter, source, and location to locate variance drivers.");
+        actions.push("Validate stage definitions and data hygiene for consistent reporting.");
+      }
+
+      // “Answer the questions” by transforming to a structured output:
+      const internalFinding = stage.status === "bottleneck"
+        ? "Internal driver likely (process/bar) until proven otherwise."
+        : stage.status === "alert"
+        ? "Validate internal data integrity first (outliers often indicate mapping or workflow changes)."
+        : "No immediate internal signal flagged.";
+
+      const externalFinding = stage.status === "bottleneck"
+        ? "External driver possible (market/comp/candidate experience) — confirm via segmentation."
+        : stage.status === "alert"
+        ? "External shift possible — confirm with recent candidate feedback + source mix changes."
+        : "No immediate external signal flagged.";
+
+      return {
+        status: stage.status,
+        stageLabel,
+        finding: findingBase(),
+        evidence,
+        internalFinding,
+        externalFinding,
+        actions
+      };
+    }
+
     function buildRootCauseRows(classified) {
       const rows = [];
 
       classified.forEach((s) => {
-        const status = s.status;
-        if (status !== "bottleneck" && status !== "alert") return;
+        if (s.status !== "bottleneck" && s.status !== "alert") return;
 
-        const nameLower = s.name.toLowerCase();
-        const isHM = nameLower.includes("hiring manager");
-        const isFinal = nameLower.includes("final");
-        const isOffer = nameLower.includes("offer");
-
-        let internal = [];
-        let external = [];
-
-        if (isHM && status === "bottleneck") {
-          internal = [
-            "What is HM decline rationale?",
-            "Are expectations aligned with level & scope?",
-            "Have hiring needs changed?"
-          ];
-          external = [
-            "What themes show up in candidate feedback?",
-            "Is the process slow or heavy?",
-            "Are comp, policy, and benefits competitive?"
-          ];
-        } else if (isFinal && status === "alert") {
-          internal = [
-            "Is the data reported correctly?",
-            "Is there a technical issue?"
-          ];
-          external = [
-            "Has the market changed?",
-            "Has candidate quality changed?",
-            "Does the benchmark need updating?"
-          ];
-        } else if (isOffer && status === "bottleneck") {
-          internal = [
-            "Is the data reported correctly?",
-            "Is there a technical issue?"
-          ];
-          external = [
-            "Has the market changed?",
-            "Are offer, policy, and benefits competitive?"
-          ];
-        } else {
-          internal = [
-            "Is stage coding and data capture accurate?",
-            "Are decision criteria and expectations documented?"
-          ];
-          external = [
-            "Has candidate volume or quality changed?",
-            "Has the market or role attractiveness shifted?"
-          ];
-        }
+        const answered = buildAnsweredRowsForStage(s);
 
         rows.push({
-          status,
-          stageLabel: s.name.split("|")[0].trim(),
-          internal,
-          external
+          status: answered.status,
+          stageLabel: answered.stageLabel,
+          finding: answered.finding,
+          evidence: answered.evidence,
+          internalFinding: answered.internalFinding,
+          externalFinding: answered.externalFinding,
+          actions: answered.actions
         });
       });
 
@@ -834,15 +850,31 @@
                 <span class="diag-label-pill">${labelText}</span>
               </span>
               <span class="root-stage-name">${row.stageLabel}</span>
-            </div>
-            <div class="root-issue-col root-issue-col--internal">
-              <div class="root-list">
-                ${row.internal.map((q) => `<div>${q}</div>`).join("")}
+              <div style="margin-top:.35rem;font-size:.76rem;color:#4b5563;line-height:1.35;">
+                <div style="font-weight:600;color:#111827;margin-bottom:.15rem;">Finding</div>
+                <div>${row.finding}</div>
+                <div style="margin-top:.35rem;">
+                  <span style="font-weight:600;color:#111827;">Evidence:</span>
+                  ${row.evidence.map((e)=>`<span style="display:block;">• ${e}</span>`).join("")}
+                </div>
+                <div style="margin-top:.35rem;">
+                  <span style="font-weight:600;color:#111827;">Recommended action:</span>
+                  ${row.actions.slice(0,3).map((a)=>`<span style="display:block;">• ${a}</span>`).join("")}
+                </div>
               </div>
             </div>
-            <div class="root-issue-col root-issue-col--external">
+
+            <div class="root-issue-col root-issue-col--internal">
+              <div class="root-col-title">Source: Internal | Org</div>
               <div class="root-list">
-                ${row.external.map((q) => `<div>${q}</div>`).join("")}
+                <div>${row.internalFinding}</div>
+              </div>
+            </div>
+
+            <div class="root-issue-col root-issue-col--external">
+              <div class="root-col-title">Source: External | Candidate</div>
+              <div class="root-list">
+                <div>${row.externalFinding}</div>
               </div>
             </div>
           </div>
@@ -881,9 +913,7 @@
           const convHTML =
             `<span class="conv-wrapper">` +
             `<span class="conv-value">${conv.toFixed(1)}%</span>` +
-            (trendSymbol
-              ? `<span class="trend">${trendSymbol}</span>`
-              : "") +
+            (trendSymbol ? `<span class="trend">${trendSymbol}</span>` : "") +
             `</span>`;
           s.convCell.innerHTML = convHTML;
         }
@@ -898,15 +928,10 @@
           const label = document.createElement("span");
           label.className = "diag-label-pill";
 
-          if (status === "bottleneck") {
-            label.textContent = "Bottleneck";
-          } else if (status === "alert") {
-            label.textContent = "Alert";
-          } else if (status === "warn") {
-            label.textContent = "Watch";
-          } else {
-            label.textContent = "Healthy";
-          }
+          if (status === "bottleneck") label.textContent = "Bottleneck";
+          else if (status === "alert") label.textContent = "Alert";
+          else if (status === "warn") label.textContent = "Watch";
+          else label.textContent = "Healthy";
 
           pill.appendChild(dot);
           pill.appendChild(label);
@@ -944,13 +969,8 @@
       runDiagnostics();
     }
 
-    document
-      .getElementById("analyze-btn")
-      .addEventListener("click", runDiagnostics);
-
-    document
-      .getElementById("reset-btn")
-      .addEventListener("click", () => applyReq(currentReqKey));
+    document.getElementById("analyze-btn").addEventListener("click", runDiagnostics);
+    document.getElementById("reset-btn").addEventListener("click", () => applyReq(currentReqKey));
 
     document.querySelectorAll(".tab").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -958,29 +978,10 @@
         applyReq(key);
       });
     });
-    // --- NEW: read req from URL (supports Chief slugs + your keys) ---
-function getReqKeyFromUrl(){
-  const qs = new URLSearchParams(window.location.search);
-  const raw = (qs.get("req") || "").trim().toLowerCase();
-  if(!raw) return null;
 
-  // allow your existing keys
-  if (raw === "esd" || raw === "se" || raw === "sda") return raw;
-
-  // map Chief slugs -> your keys
-  const map = {
-    "enterprise-sales-director": "esd",
-    "software-engineer": "se",
-    "senior-data-analyst": "sda",
-  };
-
-  return map[raw] || null;
-}
-
-const fromUrl = getReqKeyFromUrl();
-applyReq(fromUrl || currentReqKey);
-
-    applyReq(currentReqKey);
+    // ✅ FIXED: applyReq only once on load (URL param wins)
+    const fromUrl = getReqKeyFromUrl();
+    applyReq(fromUrl || currentReqKey);
   </script>
 </body>
 </html>
