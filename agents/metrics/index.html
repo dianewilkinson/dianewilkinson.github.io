@@ -958,6 +958,27 @@
         applyReq(key);
       });
     });
+    // --- NEW: read req from URL (supports Chief slugs + your keys) ---
+function getReqKeyFromUrl(){
+  const qs = new URLSearchParams(window.location.search);
+  const raw = (qs.get("req") || "").trim().toLowerCase();
+  if(!raw) return null;
+
+  // allow your existing keys
+  if (raw === "esd" || raw === "se" || raw === "sda") return raw;
+
+  // map Chief slugs -> your keys
+  const map = {
+    "enterprise-sales-director": "esd",
+    "software-engineer": "se",
+    "senior-data-analyst": "sda",
+  };
+
+  return map[raw] || null;
+}
+
+const fromUrl = getReqKeyFromUrl();
+applyReq(fromUrl || currentReqKey);
 
     applyReq(currentReqKey);
   </script>
