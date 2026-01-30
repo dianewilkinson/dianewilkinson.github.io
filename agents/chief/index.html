@@ -1247,9 +1247,17 @@ window.addEventListener("keydown", (e)=>{
       // openMetrics(tab);
 
       // If you're NOT using a modal yet, at least deep-link:
-      window.location.href = `/agents/metrics/?req=${encodeURIComponent(tab)}`;
+      document.querySelectorAll("[data-req]").forEach(r=>{
+  r.addEventListener("click", ()=>{
+    const tab = r.getAttribute("data-metrics-tab");
+    if(tab){
+      openMetrics(tab);   // ✅ stay in Chief, open iframe modal
       return;
     }
+    navStub("requisition", r.getAttribute("data-req"));
+  });
+});
+
     navStub("requisition", r.getAttribute("data-req"));
   });
 });
