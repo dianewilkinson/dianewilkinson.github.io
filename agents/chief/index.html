@@ -946,6 +946,29 @@
           <span id="sheetName">Messaging</span>
           <span class="sub" id="sheetSub">In-browser preview (demo)</span>
         </div>
+          <!-- Metrics Modal (NEW) -->
+  <div class="modal" id="metricsModal">
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="Metrics A[i]gent">
+      <div class="sheethead">
+        <div class="sheettitle">
+          <span>📊</span>
+          <span>Metrics A[i]gent</span>
+          <span class="sub" id="metricsSub">Pipeline Health Diagnostics</span>
+        </div>
+        <button class="close" id="closeMetrics">Close</button>
+      </div>
+
+      <div style="flex:1; min-height:0;">
+        <iframe
+          id="metricsFrame"
+          title="Metrics A[i]gent"
+          style="width:100%; height:100%; border:0;"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
         <button class="close" id="closeModal">Close</button>
       </div>
 
