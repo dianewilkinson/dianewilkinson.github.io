@@ -104,7 +104,7 @@
       .hero h2{font-size:22px;}
     }
 
-    /* Moved intro sentence (was under title) */
+    /* Intro lines */
     .introline{
       margin:10px 0 10px;
       color:#475569;
@@ -150,7 +150,7 @@
       font-weight:900;
     }
 
-    /* Optional inline system link */
+    /* Inline system link */
     .system-link{
       display:inline-block;
       margin-top:8px;
@@ -287,17 +287,9 @@
     }
     .btn.primary:hover{background:#4338ca; color:#fff;}
 
-    /* How I Work: true 50/50 */
-    .how-grid{
-      display:grid;
-      gap:16px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* Guardrails full-width card spacing */
+    .full{
       margin-top:12px;
-      align-items:stretch;
-    }
-    .how-grid .card{ min-height: 100%; }
-    @media (max-width:900px){
-      .how-grid{ grid-template-columns:1fr; }
     }
 
     .tier{
@@ -319,17 +311,10 @@
     .connect{
       margin-top:18px;
       border-radius:18px;
-      background:var(--accent-soft); /* pink, per your rule */
+      background:var(--accent-soft);
       border:1px solid rgba(148,163,184,0.28);
       box-shadow:0 6px 18px var(--shadow);
       padding:16px 18px 14px;
-    }
-    .connect-row{
-      display:flex;
-      justify-content:space-between;
-      gap:14px;
-      align-items:flex-start;
-      flex-wrap:wrap;
     }
     .connect h2{
       margin:0 0 6px;
@@ -342,16 +327,11 @@
       color:#475569;
       font-size:14.5px;
       line-height:1.65;
-      max-width:760px;
+      max-width:860px;
     }
+
+    /* ONE-LINE BUTTON ROW (wraps on mobile) */
     .connect-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-top:10px;
-    }
-    .connect-strip{
       margin-top:12px;
       padding-top:12px;
       border-top:1px solid rgba(148,163,184,0.35);
@@ -395,18 +375,15 @@
       <p>The future belongs to those building AI internally in the weeds of everyday workflows.</p>
     </section>
 
-    <!-- moved subtitle line (was under title) -->
     <p class="introline">
       I design workflow-first internal AI and analytics that make people systems faster, fairer, and auditable — without vendor sprawl.
     </p>
 
-    <!-- moved "What I Solve" paragraph ABOVE article line -->
     <p class="introline" style="margin-top:0;">
       People systems break in predictable ways: signals get noisy, workflows stall, and leaders make decisions without shared definitions or auditability.
       I rebuild the system so the work is measurable, governable, and easier for humans to run.
     </p>
 
-    <!-- Article line now comes AFTER the solve paragraph -->
     <p class="note">
       📄 Read my article:
       <a href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">
@@ -440,7 +417,7 @@
       </div>
     </div>
 
-    <!-- HOW I SOLVE (same as other chapter titles) -->
+    <!-- HOW I SOLVE -->
     <section class="chapter" aria-label="How I Solve">
       <h2>How I Solve</h2>
       <p style="margin:0;color:#475569;font-size:14.5px;line-height:1.65;max-width:980px;">
@@ -448,8 +425,8 @@
         A case-based portfolio showing how I build internal people systems across <b>Hire</b>, <b>Support</b>, <b>Evaluate</b>, and <b>Improve</b> —
         with human-in-the-loop governance and auditability. Each lifecycle stage uses shared capabilities for signals, flow, and decision governance.
       </p>
-      <!-- optional system deep-dive page link -->
-      <a class="system-link" href="system.html">Explore the system →</a>
+      <!-- ✅ FIXED: system page lives at /system/index.html -->
+      <a class="system-link" href="system/">Explore the system →</a>
     </section>
 
     <!-- System cards (2x2) -->
@@ -495,7 +472,7 @@
       </div>
     </div>
 
-    <!-- Case studies (no "Proof" header/line; darker cards; book emojis) -->
+    <!-- Case studies -->
     <div class="case-grid" aria-label="Case Studies">
       <div class="case-card">
         <h3>📘 Case 1: Diagnosing Pipeline Bottlenecks</h3>
@@ -523,31 +500,16 @@
       </div>
     </div>
 
-    <!-- HOW I WORK -->
-    <section class="chapter" aria-label="How I Work" style="margin-top:18px;">
-      <h2>How I Work</h2>
+    <!-- HOW I KEEP US SAFE (chapter styling, NOT pink) -->
+    <section class="chapter" aria-label="How I Keep Us Safe" style="margin-top:18px;">
+      <h2>How I Keep Us Safe</h2>
       <p>
-        I build practical systems leaders can trust: workflow-first, evidence-first, human judgment preserved, and decisions made auditable —
-        with guardrails on AI autonomy.
+        Guardrails on AI autonomy: what can safely auto-execute, what requires approval, and what must always escalate — with auditability built in.
       </p>
     </section>
 
-    <!-- How I Work cards (true 50/50) -->
-    <div class="how-grid">
-      <div class="card">
-        <h3>Operating principles</h3>
-        <ul class="mini-list">
-          <li><b>Workflow-first:</b> reduce friction before adding “AI magic.”</li>
-          <li><b>Evidence-first:</b> show what drove the insight (“why this surfaced”).</li>
-          <li><b>Human-in-the-loop:</b> AI assists; humans decide when consequences exist.</li>
-          <li><b>Auditability:</b> actions and rationale are logged for review.</li>
-          <li><b>Trust-building:</b> design for adoption and reduced defensiveness.</li>
-        </ul>
-        <p class="meta">
-          <a href="playbooks/ai-first-ops-model.html" target="_blank" rel="noopener">Read: AI-First Ops Model</a>
-        </p>
-      </div>
-
+    <!-- ✅ Full-width Guardrails (Operating principles removed) -->
+    <div class="full">
       <div class="card">
         <h3>Guardrails on AI Autonomy</h3>
         <div class="tier">
@@ -571,25 +533,17 @@
       </div>
     </div>
 
-    <!-- Bottom strip: Let's Connect + the two buttons inside the strip -->
+    <!-- Bottom strip: Let's Connect (pink) + ALL buttons on ONE line -->
     <section class="connect" aria-label="Let's Connect">
-      <div class="connect-row">
-        <div>
-          <h2>Let’s Connect</h2>
-          <p>
-            Open to roles in People Analytics, Talent Intelligence, People Ops, and Recruiting Operations — especially teams building internal AI capabilities.
-          </p>
+      <h2>Let’s Connect</h2>
+      <p>
+        Open to roles in People Analytics, Talent Intelligence, People Ops, and Recruiting Operations — especially teams building internal AI capabilities.
+      </p>
 
-          <div class="connect-actions">
-            <a class="btn primary" href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">📅 Book 15 minutes</a>
-            <a class="btn" href="mailto:dianewilkinson510@gmail.com">Email</a>
-            <a class="btn" href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Buttons moved here (inside the strip) -->
-      <div class="connect-strip">
+      <div class="connect-actions">
+        <a class="btn primary" href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">📅 Book 15 minutes</a>
+        <a class="btn" href="mailto:dianewilkinson510@gmail.com">Email</a>
+        <a class="btn" href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn primary" href="library.html">📚 Open Artifact Library</a>
         <a class="btn" href="agents/" target="_blank" rel="noopener">Browse Agents Directory</a>
       </div>
