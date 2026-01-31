@@ -34,7 +34,7 @@
       /* Top bar gradient */
       --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
 
-      /* Hero uses pink family */
+      /* Hero + Connect use pink family (ONLY these two sections) */
       --accent-soft:linear-gradient(135deg,rgba(249,115,129,.12),rgba(168,85,247,.12),rgba(99,102,241,.12));
 
       /* Chapter dividers use blue-purple */
@@ -149,6 +149,16 @@
       color:var(--link-soft);
       font-weight:900;
     }
+
+    /* Optional inline system link */
+    .system-link{
+      display:inline-block;
+      margin-top:8px;
+      font-size:13px;
+      font-weight:800;
+      color:var(--link-soft);
+    }
+    .system-link:hover{color:#4338ca;}
 
     /* Cards */
     .grid{
@@ -305,11 +315,11 @@
     .tier-item b{display:block; font-size:13px; margin-bottom:4px; color:#0f172a;}
     .tier-item span{display:block; font-size:13px; color:#475569; line-height:1.5;}
 
-    /* Bottom "Let's Connect" strip */
+    /* Bottom "Let's Connect" strip (PINK) */
     .connect{
       margin-top:18px;
       border-radius:18px;
-      background:var(--cool-soft);
+      background:var(--accent-soft); /* pink, per your rule */
       border:1px solid rgba(148,163,184,0.28);
       box-shadow:0 6px 18px var(--shadow);
       padding:16px 18px 14px;
@@ -430,14 +440,16 @@
       </div>
     </div>
 
-    <!-- HOW I SOLVE (now same as other chapter titles) -->
+    <!-- HOW I SOLVE (same as other chapter titles) -->
     <section class="chapter" aria-label="How I Solve">
       <h2>How I Solve</h2>
-      <p class="sub" style="margin:0;color:#475569;font-size:14.5px;line-height:1.65;max-width:980px;">
+      <p style="margin:0;color:#475569;font-size:14.5px;line-height:1.65;max-width:980px;">
         <span class="system-name">AI-Native People Ops System</span><br>
         A case-based portfolio showing how I build internal people systems across <b>Hire</b>, <b>Support</b>, <b>Evaluate</b>, and <b>Improve</b> —
         with human-in-the-loop governance and auditability. Each lifecycle stage uses shared capabilities for signals, flow, and decision governance.
       </p>
+      <!-- optional system deep-dive page link -->
+      <a class="system-link" href="system.html">Explore the system →</a>
     </section>
 
     <!-- System cards (2x2) -->
