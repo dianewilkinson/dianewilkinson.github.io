@@ -518,6 +518,25 @@
       .orch-chief .chips{ justify-content:flex-start; }
       .orch-lines{ display:none; }
     }
+    .system-diagram {
+  margin: 28px auto 18px;
+  max-width: 960px;
+  text-align: center;
+}
+
+.system-diagram img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.system-diagram figcaption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #64748b; /* muted slate */
+  line-height: 1.5;
+}
+
   </style>
 </head>
 
@@ -597,72 +616,16 @@ I build systems and design AI-forward internal workflows that make work flow —
       <a class="system-link" href="system/">Explore the system →</a>
     </section>
 
-    <!-- ORCHESTRATION VISUAL (replaces Hire/Support/Evaluate/Improve 2x2) -->
-    <section class="orch" aria-label="System Orchestration Map">
-      <div class="orch-board">
-        <div class="orch-lines" aria-hidden="true"></div>
+    <figure class="system-diagram">
+  <img
+    src="assets/people-ops-diagram.png"
+    alt="AI-native people operations system showing human judgment, orchestration, signals, execution, and systems environment"
+    loading="lazy"
+  />
 
-        <div class="orch-grid">
-          <!-- Left satellites -->
-          <div class="orch-col">
-            <div class="orch-node">
-              <h4>📈 Metrics A[i]gent</h4>
-              <p>Detects funnel drift, bottlenecks, and “why this surfaced” diagnostics.</p>
-              <div class="meta"><a href="agents/metrics/" target="_blank" rel="noopener">Open demo →</a></div>
-            </div>
+</figure>
 
-            <div class="orch-node">
-              <h4>🧠 Listening A[i]gent</h4>
-              <p>Open-text synthesis, theme tracking, and early-warning signals.</p>
-              <div class="meta"><a href="playbooks/listening.html" target="_blank" rel="noopener">Playbook →</a></div>
-            </div>
-          </div>
-
-          <!-- Chief center -->
-          <div class="orch-chief">
-            <div class="kicker">Orchestration &amp; Governance Layer</div>
-            <h3>👑 Chief A[i]gent</h3>
-            <p>
-              Coordinates execution agents, enforces autonomy guardrails, and routes decisions
-              to humans when stakes increase — with audit trails and receipts.
-            </p>
-
-            <div class="chips" aria-label="Chief responsibilities">
-              <span class="chip">Risk tiering</span>
-              <span class="chip">Escalations</span>
-              <span class="chip">Human approvals</span>
-              <span class="chip">Audit log</span>
-              <span class="chip">Cross-agent visibility</span>
-            </div>
-
-            <div class="meta" style="margin-top:12px;">
-              <a href="agents/chief/" target="_blank" rel="noopener">Open Chief demo →</a>
-              <a href="system/" style="margin-left:10px;">System architecture →</a>
-            </div>
-          </div>
-
-          <!-- Right satellites -->
-          <div class="orch-col">
-            <div class="orch-node">
-              <h4>🧾 Screening A[i]gent</h4>
-              <p>Scales screening while keeping signal quality high and decisions reviewable.</p>
-              <div class="meta"><a href="agents/screening/" target="_blank" rel="noopener">Open demo →</a></div>
-            </div>
-
-            <div class="orch-node">
-              <h4>🦾 Workflow A[i]gent</h4>
-              <p>Routing, reminders, SLAs, and operational handoffs teams can actually run.</p>
-              <div class="meta"><a href="agents/workflow/" target="_blank" rel="noopener">Open demo →</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Optional: keep lifecycle framing without flattening hierarchy -->
-      <p class="note" style="margin-top:10px;">
-        The system spans the full lifecycle: <b>Hire</b>, <b>Support</b>, <b>Evaluate</b>, <b>Improve</b> — orchestrated under shared governance.
-      </p>
-    </section>
+  
 
     <!-- Case studies -->
     <div class="case-grid" aria-label="Case Studies">
