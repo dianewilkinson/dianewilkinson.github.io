@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Innovation A[i]gent – Real-Time Idea Closure & Signal Routing</title>
+  <meta name="description" content="Innovation A[i]gent closes the gap between insight and response by preserving institutional memory, providing immediate context, and routing net-new ideas with governance." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Innovation A[i]gent – Real-Time Idea Closure & Signal Routing" />
+  <meta property="og:description" content="Innovation A[i]gent closes the gap between insight and response by preserving institutional memory, providing immediate context, and routing net-new ideas with governance." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dianewilkinson.github.io/agents/innovation.html" />
+
+  <style>
+    :root{
+      --bg:#f9fafb;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --muted2:#64748b;
+      --border:#e5e7eb;
+      --shadow:rgba(15,23,42,0.08);
+      --radius:18px;
+
+      /* Innovation palette (no pink) */
+      --accent:#1d4ed8;      /* blue */
+      --accent2:#0ea5e9;     /* sky */
+      --accent3:#14b8a6;     /* teal */
+      --grad:linear-gradient(135deg, rgba(29,78,216,.18), rgba(14,165,233,.14), rgba(20,184,166,.12));
+      --pill:rgba(29,78,216,.08);
+      --link:#2563eb;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      background: radial-gradient(circle at 10% 0%, rgba(29,78,216,.12), transparent 45%),
+                  radial-gradient(circle at 90% 10%, rgba(14,165,233,.10), transparent 40%),
+                  radial-gradient(circle at 50% 100%, rgba(20,184,166,.10), transparent 45%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1040px; margin:0 auto; padding:28px 18px 64px}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; margin-bottom:18px;
+    }
+    .crumbs{
+      display:flex; align-items:center; gap:10px; color:var(--muted2); font-size:14px;
+      flex-wrap:wrap;
+    }
+    .crumbs a{color:var(--muted2)}
+    .crumbs .sep{opacity:.5}
+    .navlinks{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.75);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      box-shadow: 0 10px 30px var(--shadow);
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .btn:hover{background:#fff; text-decoration:none}
+    .btn.primary{
+      border-color: rgba(29,78,216,.25);
+      background: linear-gradient(135deg, rgba(29,78,216,.14), rgba(14,165,233,.10));
+    }
+
+    .hero{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.82));
+      border-radius: var(--radius);
+      padding:24px 22px;
+      box-shadow: 0 18px 55px var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: var(--grad);
+      opacity:.9;
+      filter: blur(0px);
+      pointer-events:none;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.95), rgba(0,0,0,.35), rgba(0,0,0,0));
+    }
+    .hero > *{position:relative}
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      font-size:13px; color:var(--muted2);
+      background:rgba(255,255,255,.75);
+      border:1px solid rgba(29,78,216,.18);
+      padding:6px 10px;
+      border-radius:999px;
+      backdrop-filter:saturate(120%) blur(6px);
+    }
+    h1{margin:14px 0 8px; font-size:34px; letter-spacing:-.02em}
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      max-width:82ch;
+    }
+    .ctaRow{margin-top:16px; display:flex; gap:10px; flex-wrap:wrap}
+    .tagRow{margin-top:14px; display:flex; gap:10px; flex-wrap:wrap}
+    .tag{
+      font-size:13px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(29,78,216,.18);
+      background: var(--pill);
+      color:#0b2a6b;
+    }
+
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    @media (min-width: 900px){
+      .grid{grid-template-columns: 1.1fr .9fr}
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.88);
+      border-radius: var(--radius);
+      padding:18px 18px;
+      box-shadow: 0 16px 48px var(--shadow);
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size:18px;
+      letter-spacing:-.01em;
+    }
+    .card p{margin:10px 0; color:var(--text)}
+    .muted{color:var(--muted)}
+    .small{font-size:13px; color:var(--muted2)}
+    .rule{
+      height:1px; background:var(--border); margin:14px 0;
+    }
+
+    ul{margin:10px 0 0 18px; padding:0}
+    li{margin:8px 0; color:var(--text)}
+    li span.note{color:var(--muted)}
+    ol{margin:10px 0 0 18px; padding:0}
+    ol li{margin:12px 0}
+    .quote{
+      border-left:3px solid rgba(29,78,216,.35);
+      background: rgba(29,78,216,.05);
+      padding:10px 12px;
+      border-radius:12px;
+      color: var(--text);
+      margin:10px 0;
+      font-size:14px;
+    }
+
+    .sideBox{
+      border:1px solid rgba(29,78,216,.18);
+      background: linear-gradient(180deg, rgba(29,78,216,.06), rgba(255,255,255,.82));
+      border-radius: var(--radius);
+      padding:16px 16px;
+    }
+    .sideBox h3{margin:0 0 10px; font-size:16px}
+    .sideBox a{font-weight:600}
+
+    .footer{
+      margin-top:20px;
+      color:var(--muted2);
+      font-size:13px;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      padding:10px 2px 0;
+    }
+    code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="crumbs">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <a href="/agents/">A[i]gent Suite</a>
+        <span class="sep">/</span>
+        <span>Innovation</span>
+      </div>
+
+      <div class="navlinks">
+        <a class="btn" href="/system/">System</a>
+        <a class="btn" href="/library.html">Library</a>
+        <a class="btn primary" href="/agents/innovation/playbook.html">View Playbook</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="kicker">Improve • Knowledge • Governance</div>
+      <h1>Innovation A[i]gent</h1>
+      <p class="sub">
+        Close the gap between insight and response by preserving institutional memory, providing immediate context,
+        and routing net-new ideas with guardrails.
+      </p>
+
+      <div class="tagRow">
+        <span class="tag">Idea signal preservation</span>
+        <span class="tag">Real-time closure</span>
+        <span class="tag">Institutional memory</span>
+        <span class="tag">Governed routing</span>
+      </div>
+
+      <div class="ctaRow">
+        <a class="btn primary" href="/agents/innovation/playbook.html">Innovation Playbook</a>
+        <a class="btn" href="/agents/">All A[i]gents</a>
+      </div>
+    </section>
+
+    <div class="grid">
+      <main class="card">
+        <h2>Purpose</h2>
+        <p>
+          Companies spend enormous energy trying to manufacture innovation—hack days, offsites, suggestion boxes—while
+          ignoring the quieter, more damaging failure: ideas dying in the space between insight and response.
+        </p>
+        <p>
+          Employees notice inefficiencies and better ways of working every day. But raising those ideas often means waiting
+          for a one-on-one, navigating politics, or convincing a manager who may not have the context, incentives, or safety
+          to advance them. Over time, people learn that speaking up isn’t worth the effort—and leadership never hears the
+          ideas it is actively asking for.
+        </p>
+        <p><strong>Innovation Agent exists to close that gap in real time.</strong></p>
+
+        <div class="rule"></div>
+
+        <h2>The Problem with How Innovation Works Today</h2>
+        <p>
+          Most organizations rely on managers to collect, interpret, and escalate ideas. Innovation is scheduled into
+          artificial moments—quarterly initiatives, hack days, retrospectives—rather than supported where insight actually occurs.
+        </p>
+        <p class="muted">As a result:</p>
+        <ul>
+          <li>Ideas are filtered through layers that were never designed to evaluate them</li>
+          <li>The same ideas are revisited repeatedly because institutional memory is fragmented</li>
+          <li>Employees carry unresolved frustration, assuming inefficiency or indifference</li>
+          <li>Leadership receives either noise or silence—but rarely usable signal</li>
+        </ul>
+        <p>
+          This creates latency, bias, and idea loss even in organizations that genuinely value innovation.
+        </p>
+
+        <div class="rule"></div>
+
+        <h2>What Innovation Agent Changes</h2>
+        <p>
+          Innovation Agent acts as a neutral, always-available interface between curiosity and action.
+        </p>
+        <p>
+          When an employee asks, <em>“Why don’t we do this differently?”</em>, the agent intervenes immediately—before politics,
+          time lag, or misinterpretation distort the outcome. It does four things:
+        </p>
+
+        <ol>
+          <li>
+            <strong>Checks institutional memory</strong><br />
+            <span class="muted">The agent reviews existing process documentation, prior experiments, and historical decisions
+            to determine whether the idea has already been explored.</span>
+          </li>
+
+          <li>
+            <strong>Responds immediately with context</strong>
+            <div class="quote">“This approach was tested previously and failed due to X.”</div>
+            <div class="quote">“This is already in use by team Y.”</div>
+            <div class="small">
+              This preserves trust and prevents employees from carrying unnecessary frustration or assuming organizational incompetence.
+            </div>
+          </li>
+
+          <li>
+            <strong>Identifies net-new ideas</strong><br />
+            <span class="muted">When a proposal appears novel or materially different, the agent:</span>
+            <ul>
+              <li>Flags it as new</li>
+              <li>Routes it to the appropriate owner for consideration</li>
+              <li>Communicates next steps clearly back to the employee</li>
+            </ul>
+            <div class="small">Employees receive acknowledgment and clarity instead of silence.</div>
+          </li>
+
+          <li>
+            <strong>Reduces noise for leadership</strong><br />
+            <span class="muted">Only ideas that pass basic novelty and feasibility checks are escalated—filtered, contextualized,
+            and grounded in existing knowledge.</span>
+          </li>
+        </ol>
+
+        <div class="rule"></div>
+
+        <h2>Why This Matters</h2>
+        <p><strong>Innovation doesn’t fail because employees lack ideas.</strong><br />
+          It fails because organizations introduce friction, fear, and delay between insight and response.
+        </p>
+
+        <p class="muted">By removing managerial mediation at the earliest stage—without removing accountability—Innovation Agent:</p>
+        <ul>
+          <li>Prevents idea loss caused by hierarchy and politics</li>
+          <li>Reduces negative sentiment born from perceived inaction</li>
+          <li>Preserves institutional memory so lessons aren’t relearned repeatedly</li>
+          <li>Enables faster, safer experimentation within guardrails</li>
+        </ul>
+
+        <p>
+          This is not about replacing managers.<br />
+          <strong>It’s about ensuring ideas aren’t lost before they ever have a chance to be evaluated.</strong>
+        </p>
+
+        <div class="rule"></div>
+
+        <h2>Governance &amp; Guardrails</h2>
+        <ul>
+          <li>All routed ideas include context, prior history, and rationale</li>
+          <li>Escalation thresholds are configurable and overseen by <strong>Chief A[i]gent</strong></li>
+          <li>Human decision-makers retain final authority</li>
+          <li>Feedback loops ensure employees receive closure, not silence</li>
+        </ul>
+
+        <div class="rule"></div>
+
+        <p class="small">
+          Next: update the playbook intro to link here, and add a short “Real-time Idea Closure Loop” section that mirrors the
+          four-step behavior above (without duplicating the full narrative).
+        </p>
+      </main>
+
+      <aside class="sideBox">
+        <h3>Quick Links</h3>
+        <p class="small">Innovation is part of the <strong>Improve</strong> stage of the AI-Native People Operating System.</p>
+        <div class="rule"></div>
+        <p><a href="/agents/innovation/playbook.html">Innovation Playbook</a><br />
+          <span class="small">Operating model: intake → triage → experiments → decision log</span>
+        </p>
+        <p><a href="/system/">System Architecture</a><br />
+          <span class="small">Where Innovation fits across lifecycle stages</span>
+        </p>
+        <p><a href="/agents/">All A[i]gents</a><br />
+          <span class="small">Browse the full suite</span>
+        </p>
+
+        <div class="rule"></div>
+
+        <h3>Status</h3>
+        <p class="small">
+          <strong>Overview:</strong> Live<br />
+          <strong>Playbook:</strong> Live<br />
+          <strong>Demo:</strong> Planned
+        </p>
+
+        <div class="rule"></div>
+
+        <h3>Suggested Demo (when ready)</h3>
+        <p class="small">
+          A chat UI showing:<br />
+          <code>How do we do X?</code> → policy retrieval<br />
+          <code>Why not do Y?</code> → tried vs net-new routing
+        </p>
+      </aside>
+    </div>
+
+    <div class="footer">
+      <div>© Diane Wilkinson</div>
+      <div><a href="/credentials/">Credentials</a> · <a href="/library.html">Library</a></div>
+    </div>
+  </div>
+</body>
+</html>
