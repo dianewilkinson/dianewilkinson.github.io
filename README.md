@@ -20,11 +20,11 @@ Choose the level of detail most useful:
 
 - **🏗 System Architecture (Deep Dive)**  
   How these tools fit together as an AI-native people ops system — orchestration, governance, & human-in-the-loop design all within the existing frameworks of an organization.  
-  👉 https://dianewilkinson.github.io/system/
+  👉 https://dianewilkinson.github.io/system.html
 
-- **🤖 Agents & Demos (Use Cases)**  
+- **🤖 Use Cases (Agents & Demos)**  
   Interactive demos and examples of agent-based workflows used in specific operational contexts.  
-  👉 https://dianewilkinson.github.io/agents/
+  👉 https://dianewilkinson.github.io/use-cases.html
 
 ---
 
