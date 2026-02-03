@@ -193,6 +193,7 @@
   display:grid;
   gap:12px;
   margin-top:10px;
+  width:100%;
 
   /* default: 3 across (nice balance) */
   grid-template-columns:repeat(3, minmax(0, 1fr));
@@ -200,7 +201,7 @@
 
 @media (min-width: 1200px){
   /* wide desktop: 6 across */
-  .tools-grid{ grid-template-columns:repeat(6, minmax(0, 1fr)); }
+  .tools-grid{ grid-template-columns:repeat(6, minmax(180px, 1fr)); }
 }
 
 @media (max-width: 980px){
@@ -227,6 +228,7 @@
   display:flex;
   flex-direction:column;
   min-height:120px;
+  min-width:0;
 }
 
 .tool-top{
@@ -559,39 +561,58 @@
     human-in-the-loop operation and measurable outcomes.
   </p>
 
-  <div class="tools-grid" aria-label="Tools grid">
-
-    <div id="tools-grid" class="tools-grid"></div>
-
-<script>
-fetch('/tools/tools.json')
-  .then(res => res.json())
-  .then(tools => {
-    const grid = document.getElementById('tools-grid');
-    tools.forEach(tool => {
-      const card = document.createElement('div');
-      card.className = 'tool-card';
-      card.innerHTML = `
-        <div class="tool-top">
-          <div>
-            <h3>${tool.emoji} ${tool.name}</h3>
-            <p>${tool.description}</p>
-          </div>
-          <span class="badge">${tool.type}</span>
-        </div>
-        <a class="tool-link" href="${tool.href}">Open tool →</a>
-      `;
-      grid.appendChild(card);
-    });
-  });
-</script>
-
-  </div>
+  <!-- Single grid container (do NOT nest another .tools-grid inside) -->
+  <div id="tools-grid" class="tools-grid" aria-label="Tools grid"></div>
 
   <p class="note" style="margin-top:10px; text-align:left;">
     <a href="tools/" style="font-weight:900; color:var(--link-soft);">View all tools →</a>
   </p>
 </section>
+
+<script>
+  fetch('tools/tools.json')
+    .then(res => {
+      if (!res.ok) throw new Error('Could not load tools/tools.json');
+      return res.json();
+    })
+    .then(tools => {
+      const grid = document.getElementById('tools-grid');
+      grid.innerHTML = ''; // clear in case of re-run
+
+      tools.forEach(tool => {
+        const card = document.createElement('div');
+        card.className = 'tool-card';
+        card.innerHTML = `
+          <div class="tool-top">
+            <div>
+              <h3>${tool.emoji || ''} ${tool.name}</h3>
+              <p>${tool.description}</p>
+            </div>
+            <span class="badge">${tool.type}</span>
+          </div>
+          <a class="tool-link" href="${tool.href}">Open tool →</a>
+        `;
+        grid.appendChild(card);
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      const grid = document.getElementById('tools-grid');
+      grid.innerHTML = `
+        <div class="tool-card">
+          <div class="tool-top">
+            <div>
+              <h3>⚠️ Tools failed to load</h3>
+              <p>Check that <code>tools/tools.json</code> exists and the path is correct.</p>
+            </div>
+            <span class="badge">Error</span>
+          </div>
+          <a class="tool-link" href="tools/">Browse tools →</a>
+        </div>
+      `;
+    });
+</script>
+
 
 
     <!-- USE CASES (expandable) -->
