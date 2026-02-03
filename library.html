@@ -3,33 +3,34 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DW — People Systems & Workforce Ops | Internal AI, Analytics, Process Design</title>
+  <title>Artifact Library — Diane Wilkinson | People Systems, Internal AI, Playbooks</title>
 
-  <!-- Open Graph / Social Preview -->
-  <meta property="og:title" content="Diane Wilkinson — People Systems & Workforce Ops | Internal AI, Analytics, Process Design">
-  <meta property="og:description" content="I build internal, workflow-first AI and analytics that make people systems faster, fairer, and auditable — without vendor sprawl.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Artifact Library — Diane Wilkinson">
+  <meta property="og:description" content="A browsable library of demos, playbooks, tools, and artifacts across Hire, Support, Evaluate, Improve.">
   <meta property="og:image" content="https://dianewilkinson.github.io/assets/og-upwork.png">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://dianewilkinson.github.io">
+  <meta property="og:url" content="https://dianewilkinson.github.io/library.html">
 
-  <!-- Optional: Twitter card (helps Upwork, LinkedIn, and Slack too) -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Diane Wilkinson — People Systems & Workforce Ops | Internal AI, Analytics, Process Design">
-  <meta name="twitter:description" content="Building AI internally in the weeds of everyday workflows.">
+  <meta name="twitter:title" content="Artifact Library — Diane Wilkinson">
+  <meta name="twitter:description" content="Demos, playbooks, tools, and evidence — organized for fast review.">
   <meta name="twitter:image" content="https://dianewilkinson.github.io/assets/og-upwork.png">
 
   <style>
     :root{
       --bg:#f9fafb;
       --card:#ffffff;
-      --text:#111827;
-      --muted:#4b5563;
+      --text:#0f172a;
+      --muted:#64748b;
       --border:#e5e7eb;
       --link:#2563eb;
       --link-soft:#4f46e5;
       --shadow:rgba(15,23,42,0.08);
+
       --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
       --accent-soft:linear-gradient(135deg,rgba(249,115,129,.12),rgba(168,85,247,.12),rgba(99,102,241,.12));
+      --cool-soft:linear-gradient(135deg,rgba(147,197,253,.18),rgba(167,139,250,.16),rgba(99,102,241,.14));
     }
     *{box-sizing:border-box;}
     body{
@@ -44,351 +45,298 @@
 
     header{
       text-align:center;
-      padding:32px 16px 16px;
+      padding:28px 16px 10px;
     }
     header h1{
       margin:0;
       font-size:24px;
-      font-weight:700;
+      font-weight:800;
+      letter-spacing:-0.02em;
     }
-    header p{
-      margin:10px 0 0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-    }
-    header p .subline{
-      display:block;
+    header .subline{
       margin-top:10px;
-      font-weight:600;
-      color:#374151;
+      font-size:13px;
+      font-weight:650;
+      color:#475569;
+      line-height:1.55;
     }
 
     .wrap{
-      max-width:1120px;
+      max-width:1200px;
       margin:0 auto;
-      padding:20px 20px 32px;
+      padding:10px 20px 34px;
     }
 
-    /* HERO */
+    /* HERO (pink) */
     .hero{
-      margin:6px 0 18px;
+      margin:10px 0 14px;
       border-radius:20px;
-      background:linear-gradient(120deg,#fde7ef,#f3e8ff,#e0ecff);
+      background:var(--accent-soft);
       box-shadow:0 8px 24px var(--shadow);
-      padding:26px 26px 22px;
+      padding:18px 18px 16px;
+      border:1px solid rgba(148,163,184,0.18);
       display:flex;
-      gap:24px;
-      align-items:stretch;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
       flex-wrap:wrap;
     }
-    .hero-left{
-      flex:1 1 260px;
-      min-width:0;
-    }
-    .hero-left h2{
+    .hero h2{
       margin:0 0 6px;
-      font-size:26px;
-      line-height:1.3;
+      font-size:22px;
+      font-weight:900;
+      letter-spacing:-0.02em;
     }
-    .hero-left h2 span{color:var(--link-soft);}
-    .hero-sub{
+    .hero h2 span{color:var(--link-soft);}
+    .hero p{
       margin:0;
-      font-size:15px;
-      color:var(--muted);
-      line-height:1.7;
-      max-width:860px;
+      color:#475569;
+      font-size:14.5px;
+      line-height:1.65;
+      max-width:920px;
     }
-    @media (max-width:720px){
-      .hero{padding:20px 18px 18px;}
-      .hero-left h2{font-size:22px;}
+    .hero-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:4px;
     }
 
-    .section-note{
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 13px;
+      border-radius:999px;
       font-size:13px;
-      color:#6b7280;
-      margin:6px 0 14px;
+      font-weight:800;
+      border:1px solid rgba(148,163,184,0.75);
+      background:rgba(255,255,255,0.92);
+      color:#4338ca;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .btn:hover{background:#fff; text-decoration:none; color:#3730a3;}
+    .btn.primary{
+      border:none;
+      background:#4f46e5;
+      color:#fff;
+    }
+    .btn.primary:hover{background:#4338ca; color:#fff;}
+
+    /* Controls row */
+    .controls{
+      margin:12px 0 16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .search{
+      flex:1 1 320px;
+      min-width:260px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:0 1px 3px var(--shadow);
+    }
+    .search .icon{
+      width:10px;height:10px;border-radius:999px;
+      background:linear-gradient(135deg,#c7d2fe,#fbcfe8);
+      flex:0 0 auto;
+    }
+    .search input{
+      width:100%;
+      border:none;
+      outline:none;
+      font-size:14px;
+      color:#0f172a;
+    }
+    .hint{
+      font-size:12.5px;
+      color:#64748b;
+      line-height:1.4;
     }
 
-   /* ✅ Make “What I Build…” feel like a real section header */
-.selected-work{
-  margin:4px 0 10px;
-}
-.selected-work h2{
-  margin:14px 0 8px;
-  font-size:24px;      /* was 18 */
-  font-weight:600;
-  letter-spacing:-0.025em;
-  color:#111827;
-}
-.section-subtitle{
-  margin:0 0 16px;
-  font-size:16px;    /* was 14 */
-  line-height:1.65;
-  color:#374151;
-  max-width:920px;
-}
+    .filters{
+      flex:1 1 420px;
+      min-width:280px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:flex-end;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.55);
+      background:rgba(255,255,255,0.92);
+      color:#334155;
+      font-size:12px;
+      font-weight:750;
+      cursor:pointer;
+      user-select:none;
+    }
+    .pill:hover{background:#fff;}
+    .pill.active{
+      border-color:rgba(79,70,229,0.55);
+      background:rgba(79,70,229,0.08);
+      color:#312e81;
+    }
 
-    /* Cards grid */
+    /* Section header */
+    .chapter{
+      margin:18px 0 12px;
+      border-radius:18px;
+      background:var(--cool-soft);
+      box-shadow:0 6px 18px var(--shadow);
+      padding:14px 16px 12px;
+      border:1px solid rgba(148,163,184,0.28);
+    }
+    .chapter h3{
+      margin:0 0 6px;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:-0.02em;
+    }
+    .chapter p{
+      margin:0;
+      color:#475569;
+      font-size:14px;
+      line-height:1.6;
+      max-width:980px;
+    }
+
+    /* 4-across grid */
     .grid{
       display:grid;
-      gap:16px;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:14px;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      align-items:stretch;
     }
+    @media (max-width:1100px){
+      .grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
+    }
+    @media (max-width:640px){
+      .grid{grid-template-columns:1fr;}
+    }
+
     .card{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:16px;
-      padding:14px 14px 12px;
+      padding:12px 12px 11px;
       box-shadow:0 1px 3px var(--shadow);
       display:flex;
       flex-direction:column;
-      min-height:170px;
-    }
-    .card h3{
-      margin:0 0 6px;
-      font-size:16px;
-    }
-    .card p{
-      margin:0 0 10px;
-      color:#374151;
-      font-size:14px;
-      line-height:1.5;
-    }
-    .meta{
-      margin-top:auto;
-      font-size:12px;
-      color:#6b7280;
-      line-height:1.6;
-    }
-    .meta a{
-      display:inline-block;
-      margin-right:10px;
-      margin-top:2px;
-      font-weight:600;
-    }
-
-    /* ✅ FIX: CTA full width like the left screenshot */
-    .card.cta{
-      grid-column: 1 / -1;          /* spans full row */
-      background:var(--accent-soft);
-      border:none;
-      box-shadow:0 2px 7px var(--shadow);
-      text-align:center;
-      min-height:auto;
-      padding:16px 18px 16px;
-    }
-
-    .card.cta h3{margin-bottom:8px;}
-    .cta-btn{
-      display:inline-block;
-      margin-top:8px;
-      padding:8px 14px;
-      border-radius:999px;
-      background:#4f46e5;
-      color:#fff;
-      font-size:13px;
-      font-weight:600;
-      text-decoration:none;
-    }
-    .cta-btn:hover{
-      background:#4338ca;
-      text-decoration:none;
-    }
-
-    /* Suite lifecycle section (single card) */
-    .suite{
-      margin-top:16px;
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:16px;
-      box-shadow:0 1px 3px var(--shadow);
+      min-height:160px;
       overflow:hidden;
     }
-    .suite-head{
+
+    .type-row{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      padding:12px 14px;
-      background:var(--accent-soft);
-      border-bottom:1px solid #e5e7eb;
-      flex-wrap:wrap;
-    }
-    .suite-title{
-      margin:0;
-      font-size:15px;
-      font-weight:700;
-      color:#111827;
-    }
-    .suite-sub{
-      margin:2px 0 0;
-      font-size:12px;
-      color:#6b7280;
-      line-height:1.45;
-    }
-    .suite-left{
-      min-width:260px;
-    }
-    .suite-actions{
-      display:flex;
       gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
+      margin-bottom:8px;
     }
-    .suite-btn{
+    .type{
       display:inline-flex;
       align-items:center;
-      gap:6px;
-      padding:7px 12px;
-      border-radius:999px;
-      font-size:12.5px;
-      font-weight:600;
-      color:#4f46e5;
-      background:rgba(255,255,255,0.92);
-      border:1px solid rgba(148,163,184,0.75);
-      text-decoration:none;
-      white-space:nowrap;
-    }
-    .suite-btn:hover{
-      background:#fff;
-      color:#4338ca;
-      text-decoration:none;
-    }
-
-    .suite-body{
-      padding:12px 12px 14px;
-    }
-    .suite-grid{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(220px,1fr));
-      gap:12px;
-      align-items:start;
-    }
-    @media (max-width:1100px){
-      .suite-grid{grid-template-columns:repeat(2, minmax(220px,1fr));}
-    }
-    @media (max-width:640px){
-      .suite-grid{grid-template-columns:1fr;}
-    }
-
-    @media (max-width:520px){
-  .suite-row{
-    grid-template-columns: 1fr;
-    align-items:start;
-  }
-  .suite-actions-mini{
-    justify-content:flex-start;
-    max-width:none;
-  }
-}
-
-    .suite-col{
-      border:1px solid #eef2f7;
-      border-radius:14px;
-      background:#fff;
-      padding:10px 10px 12px;
-    }
-    .suite-col h4{
-      margin:0 0 10px;
-      font-size:16.5px;
-      font-weight:800;
-      color:var(--link-soft);
-      letter-spacing:.01em;
-    }
-
-    /* Lighter agent list */
-    .suite-list{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:flex;
-      flex-direction:column;
       gap:8px;
+      padding:4px 9px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.55);
+      background:#f8fafc;
+      font-size:11px;
+      font-weight:900;
+      color:#334155;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .dot{
+      width:7px;height:7px;border-radius:999px;
+      background:linear-gradient(135deg,#fb7185,#a855f7,#6366f1);
     }
 
-    /* Each item becomes a row so hover actions don't wreck layout */
-    .suite-item{
-      border-radius:12px;
-      border:1px solid #eef2f7;
-      background:#fbfdff;
-      padding:0; /* padding moved to inner row for clean hover */
+    .card h4{
+      margin:0 0 6px;
+      font-size:15px;
+      font-weight:900;
+      letter-spacing:-0.01em;
+      color:#0f172a;
+    }
+    .card p{
+      margin:0 0 10px;
+      color:#334155;
+      font-size:13.5px;
+      line-height:1.55;
     }
 
-    .suite-row{
-  display:grid;
-  grid-template-columns: 1fr auto;
-  align-items:center;
-  gap:10px;
-  padding:9px 10px;
-}
-
-    .suite-name{
-      display:block;
-      font-size:13px;
-      font-weight:500;
-      color:#6b7280;
-      text-decoration:none;
-      min-width:0;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin:0 0 10px;
     }
-    .suite-name:hover{
-      text-decoration:underline;
-      color:#374151;
+    .tag{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+      color:#475569;
+      font-weight:700;
     }
 
-    /* Hover actions: hidden unless hover/focus-within */
-    .suite-actions-mini{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  opacity:0;
-  transform:translateY(1px);
-  pointer-events:none;
-  transition:opacity .15s ease, transform .15s ease;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-  max-width:140px;
-}
-
-    .suite-item:hover .suite-actions-mini,
-    .suite-item:focus-within .suite-actions-mini{
-      opacity:1;
-      transform:translateY(0);
-      pointer-events:auto;
+    .meta{
+      margin-top:auto;
+      font-size:12px;
+      color:#64748b;
+      line-height:1.6;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
     }
-
-    .mini{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:3px 7px;
-  border-radius:999px;
-  border:1px solid rgba(148,163,184,.55);
-  background:rgba(255,255,255,.9);
-  font-size:10.5px;
-  font-weight:800;
-  color:#4f46e5;
-  text-decoration:none;
-  white-space:nowrap;
-}
-
-    .mini:hover{
-      background:#fff;
+    .links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .links a{
+      font-weight:900;
       color:#4338ca;
       text-decoration:none;
     }
+    .links a:hover{text-decoration:underline; color:#3730a3;}
 
+    .small{
+      font-size:11.5px;
+      color:#64748b;
+      font-weight:700;
+    }
+
+    /* Footer */
     footer{
       text-align:center;
-      margin:16px 0 20px;
+      margin:18px 0 20px;
       color:var(--muted);
-      font-size:13px;
+      font-size:12.5px;
     }
     footer .footline{
-      max-width:1120px;
+      max-width:1200px;
       margin:10px auto 0;
       padding:0 20px;
     }
@@ -399,292 +347,407 @@
   <div class="bar"></div>
 
   <header>
-    <h1>👋 Diane Wilkinson — People Systems & Workforce Operations</h1>
-    <p>
-      I help People Ops &amp; Talent teams replace vendor sprawl with workflow-first automations, analytics, and internal AI built directly inside the systems they already use.
-      <span class="subline">
-        People Ops &amp; Systems · AI-Enabled Workflows · Greenhouse SME · MBA, Data Analytics (4.0 GPA) ·
-        <a href="credentials/" target="_blank" rel="noopener">Credentials &amp; Recommendations</a>
-      </span>
-    </p>
+    <h1>📚 Artifact Library</h1>
+    <div class="subline">
+      A browsable library of demos, playbooks, tools, PDFs, and evidence — organized for fast review ·
+      <a href="credentials/" target="_blank" rel="noopener">Credentials &amp; Recommendations</a>
+    </div>
   </header>
 
   <div class="wrap">
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-left">
-        <h2>We don't need more <span>AI vendors.</span></h2>
-        <p class="hero-sub">
-          The future belongs to those building AI internally in the weeds of everyday workflows.
+    <section class="hero" aria-label="Library hero">
+      <div>
+        <h2>Everything in one place — <span>easy to scan</span>.</h2>
+        <p>
+          This library is the “artifact shelf” behind the AI-Native People Ops System. If you’re reviewing quickly,
+          start with the demos and playbooks, then open the supporting tools and evidence.
         </p>
+        <div class="hero-actions">
+          <a class="btn" href="/">← Back to Portfolio Home</a>
+          <a class="btn" href="system/">Explore the System</a>
+          <a class="btn primary" href="agents/" target="_blank" rel="noopener">Browse Agents Directory</a>
+          <a class="btn primary" href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">📅 Book 15 minutes</a>
+        </div>
       </div>
     </section>
 
-    <!-- Article link -->
-    <p class="section-note">
-      📄 Read my article:
-      <a href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">
-        Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently
-      </a>
-    </p>
-
-    <!-- Selected Work -->
-    <section class="selected-work">
-      <h2>What I Build for People &amp; Workforce Operations</h2>
-      <p class="section-subtitle">
-        Workflow-first internal agents and analytics that reduce manual work, improve decision quality, and keep systems auditable.
-      </p>
-    </section>
-
-    <div class="grid">
-      <!-- Agents -->
-      <div class="card">
-        <h3>🤖 AI Tool: Workflow A[i]gent</h3>
-        <p>
-          Workflow automation across hiring stages so teams spend less time on manual follow-ups
-          and more time making decisions.
-        </p>
-        <p class="meta">
-          <a href="agents/workflow/" target="_blank" rel="noopener">Open Demo</a>
-          <a href="agents/workflow/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
-        </p>
+    <div class="controls" aria-label="Library controls">
+      <div class="search">
+        <span class="icon" aria-hidden="true"></span>
+        <input id="search" type="search" placeholder="Search artifacts (e.g., metrics, workflow, playbook, PDF, guardrails…)" autocomplete="off" />
       </div>
 
-      <div class="card">
-        <h3>🤖 AI Tool: Screening A[i]gent</h3>
-        <p>
-          Human-in-the-loop decision support for top-funnel chaos and hidden talent recovery: surfaces evidence, highlights risks, and improves signal quality
-          without turning screening into a black box.
-        </p>
-        <p class="meta">
-          <a href="agents/screening/" target="_blank" rel="noopener">Open Demo</a>
-          <a href="agents/screening/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
-        </p>
+      <div class="filters" aria-label="Quick filters">
+        <span class="pill active" data-filter="all">All</span>
+        <span class="pill" data-filter="demo">Demos</span>
+        <span class="pill" data-filter="playbook">Playbooks</span>
+        <span class="pill" data-filter="tool">Tools</span>
+        <span class="pill" data-filter="pdf">PDF</span>
+        <span class="pill" data-filter="article">Articles</span>
+        <span class="pill" data-filter="evidence">Evidence</span>
       </div>
 
-      <div class="card">
-        <h3>🤖 AI Tool: Metrics A[i]gent</h3>
-        <p>
-          Diagnostics for throughput, pass-through, and bottlenecks: helps Recruiting Ops, People Ops, and People Analytics see where workflows stall
-          and what to test next.
-        </p>
-        <p class="meta">
-          <a href="agents/metrics/" target="_blank" rel="noopener">Open Demo</a>
-          <a href="agents/metrics/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>🤖 AI Tool: Sourcing A[i]gent</h3>
-        <p>
-          Tech talent market mapping + Boolean patterns that turn fuzzy headcount goals into a concrete, repeatable sourcing plan.
-        </p>
-        <p class="meta">
-          <a href="agents/sourcing/playbook.html" target="_blank" rel="noopener">Open Playbook</a>
-        </p>
-      </div>
-
-      <!-- Tools -->
-      <div class="card">
-        <h3>⚙️ Tool: Recruiting Pipeline Calculator</h3>
-        <p>
-          Interactive funnel calculator to eliminate bottlenecks and plan realistic hiring targets by stage.
-          Designed for TA leadership, People Ops, and workforce planning conversations.
-        </p>
-        <p class="meta">
-          <a href="https://docs.google.com/spreadsheets/d/1EYf9S4L6QljiCZ0-mUVpmb7DIvw74j1XUJOt8p42qsw/edit?usp=sharing"
-             target="_blank" rel="noopener">Open Google Sheet</a>
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>⚙️ Tool: Metrics Dictionary</h3>
-        <p>
-          Standardized KPI definitions for hiring and people operations — aligns dashboards and reduces time spent
-          debating which numbers are “correct.”
-        </p>
-        <p class="meta">
-          <a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link"
-             target="_blank" rel="noopener">Open Google Sheet</a>
-        </p>
-      </div>
-
-      <!-- Playbooks -->
-      <div class="card">
-        <h3>📕 Playbook: Candidate Journey</h3>
-        <p>
-          End-to-end candidate journey mapping with touchpoints, expectations, and communications
-          that tie directly into Workflow A[i]gent.
-        </p>
-        <p class="meta">
-          <a href="playbooks/candidate-journey.html" target="_blank" rel="noopener">Open Playbook</a>
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>📘 Playbook: Candidate Source Quality</h3>
-        <p>
-          How inbound, outbound, and referrals actually perform — and how to rebalance spend and recruiter time
-          toward the highest-quality sources.
-        </p>
-        <p class="meta">
-          <a href="playbooks/sourcing-quality.html" target="_blank" rel="noopener">Open Playbook</a>
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>📙 Playbook: AI-First Ops Model</h3>
-        <p>
-          Defines where AI assists versus where humans decide — guardrails for evidence, control,
-          and transparency in AI-assisted people workflows.
-        </p>
-        <p class="meta">
-          <a href="playbooks/ai-first-ops-model.html" target="_blank" rel="noopener">Open Playbook</a>
-        </p>
-      </div>
-
-      <!-- ✅ CTA full width -->
-      <div class="card cta">
-        <h3>Book a 15-Minute Intro</h3>
-        <p>
-          Let’s connect to discuss people systems, workforce operations, and internal AI adoption.
-          I’m especially interested in AI-forward teams building internal capabilities.
-        </p>
-        <p class="meta">
-          <a class="cta-btn" href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">
-            📅 Book Appointment
-          </a>
-        </p>
+      <div class="hint">
+        Tip: Use filters for “Demos” first, then “Playbooks.” Search matches titles + tags + descriptions.
       </div>
     </div>
 
-    <!-- A[i]gent Suite lifecycle map -->
-    <section class="suite" aria-label="A[i]gent Suite lifecycle map">
-      <div class="suite-head">
-        <div class="suite-left">
-          <p class="suite-title">🤖 A[i]gent Suite — People Systems Lifecycle</p>
-          <p class="suite-sub">Browse the lifecycle here. Open demos/playbooks for details.</p>
-        </div>
-        <div class="suite-actions">
-          <!-- ✅ FIX: correct link -->
-          <a class="suite-btn" href="agents/" target="_blank" rel="noopener">Open Full Suite</a>
-        </div>
-      </div>
-
-      <div class="suite-body">
-        <div class="suite-grid">
-
-          <div class="suite-col">
-            <h4>🎯 Hire</h4>
-            <ul class="suite-list">
-              <li class="suite-item">
-                <div class="suite-row">
-                  <a class="suite-name" href="agents/screening/" target="_blank" rel="noopener">Screening</a>
-                  <div class="suite-actions-mini">
-                    <a class="mini" href="agents/screening/" target="_blank" rel="noopener" title="Open Demo">🧪 Demo</a>
-                    <a class="mini" href="agents/screening/playbook.html" target="_blank" rel="noopener" title="Open Playbook">📘 Playbook</a>
-                  </div>
-                </div>
-              </li>
-
-              <li class="suite-item">
-                <div class="suite-row">
-                  <a class="suite-name" href="agents/sourcing/" target="_blank" rel="noopener">Sourcing</a>
-                  <div class="suite-actions-mini">
-                    <a class="mini" href="agents/sourcing/playbook.html" target="_blank" rel="noopener" title="Open Playbook">📘 Playbook</a>
-                  </div>
-                </div>
-              </li>
-
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Kickoff</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Outreach</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Match</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Nurture</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Interview</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Offer</a><div class="suite-actions-mini"></div></div></li>
-            </ul>
-          </div>
-
-          <div class="suite-col">
-            <h4>🦾 Support</h4>
-            <ul class="suite-list">
-              <li class="suite-item">
-                <div class="suite-row">
-                  <a class="suite-name" href="agents/workflow/" target="_blank" rel="noopener">Workflow</a>
-                  <div class="suite-actions-mini">
-                    <a class="mini" href="agents/workflow/" target="_blank" rel="noopener" title="Open Demo">🧪 Demo</a>
-                    <a class="mini" href="agents/workflow/playbook.html" target="_blank" rel="noopener" title="Open Playbook">📘 Playbook</a>
-                  </div>
-                </div>
-              </li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Onboarding</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">InfoHub</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Planning</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Enablement</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Coaching</a><div class="suite-actions-mini"></div></div></li>
-            </ul>
-          </div>
-
-          <div class="suite-col">
-            <h4>📊 Evaluate</h4>
-            <ul class="suite-list">
-              <li class="suite-item">
-                <div class="suite-row">
-                  <a class="suite-name" href="agents/metrics/" target="_blank" rel="noopener">Metrics</a>
-                  <div class="suite-actions-mini">
-                    <a class="mini" href="agents/metrics/" target="_blank" rel="noopener" title="Open Demo">🧪 Demo</a>
-                    <a class="mini" href="agents/metrics/playbook.html" target="_blank" rel="noopener" title="Open Playbook">📘 Playbook</a>
-                  </div>
-                </div>
-              </li>
-
-              <li class="suite-item">
-                <div class="suite-row">
-                  <a class="suite-name" href="agents/listening/" target="_blank" rel="noopener">Listening</a>
-                  <div class="suite-actions-mini">
-                    <a class="mini" href="agents/listening/playbook.html" target="_blank" rel="noopener" title="Open Playbook">📘 Playbook</a>
-                  </div>
-                </div>
-              </li>
-
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Sentiment</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Skills</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Scorecard</a><div class="suite-actions-mini"></div></div></li>
-            </ul>
-          </div>
-
-          <div class="suite-col">
-            <h4>🏅 Improve</h4>
-            <ul class="suite-list">
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Training</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Quality</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Mobility</a><div class="suite-actions-mini"></div></div></li>
-              <li class="suite-item"><div class="suite-row"><a class="suite-name" href="agents/" target="_blank" rel="noopener">Brand</a><div class="suite-actions-mini"></div></div></li>
-
-              <li class="suite-item">
-                <div class="suite-row">
-                  <a class="suite-name" href="agents/innovation/" target="_blank" rel="noopener">Innovation</a>
-                  <div class="suite-actions-mini">
-                    <a class="mini" href="agents/innovation/playbook.html" target="_blank" rel="noopener" title="Open Playbook">📘 Playbook</a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
+    <!-- Demos -->
+    <section class="chapter" aria-label="Demos">
+      <h3>🤖 Demos</h3>
+      <p>Interactive examples of workflow-first internal AI for People Systems and Workforce Ops.</p>
     </section>
+
+    <div class="grid" data-section="demo">
+      <article class="card" data-kind="demo" data-tags="agents demo workflow scheduling automation slas">
+        <div class="type-row"><span class="type"><span class="dot"></span>Demo</span><span class="small">Agents</span></div>
+        <h4>Workflow A[i]gent</h4>
+        <p>Workflow automation across stages: follow-ups, nudges, and coordination to reduce dropped balls.</p>
+        <div class="tags">
+          <span class="tag">Support</span><span class="tag">Automation</span><span class="tag">SLAs</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="agents/workflow/" target="_blank" rel="noopener">Open Demo</a>
+            <a href="agents/workflow/playbook.html" target="_blank" rel="noopener">Playbook</a>
+          </div>
+          <span class="small">Human-in-loop</span>
+        </div>
+      </article>
+
+      <article class="card" data-kind="demo" data-tags="agents demo screening evidence risk guardrails">
+        <div class="type-row"><span class="type"><span class="dot"></span>Demo</span><span class="small">Agents</span></div>
+        <h4>Screening A[i]gent</h4>
+        <p>Evidence-first screening support: surfaces signal, flags risks, and keeps screening auditable.</p>
+        <div class="tags">
+          <span class="tag">Hire</span><span class="tag">Evidence</span><span class="tag">Guardrails</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="agents/screening/" target="_blank" rel="noopener">Open Demo</a>
+            <a href="agents/screening/playbook.html" target="_blank" rel="noopener">Playbook</a>
+          </div>
+          <span class="small">Auditability</span>
+        </div>
+      </article>
+
+      <article class="card" data-kind="demo" data-tags="agents demo metrics diagnostics bottlenecks throughput passthrough">
+        <div class="type-row"><span class="type"><span class="dot"></span>Demo</span><span class="small">Agents</span></div>
+        <h4>Metrics A[i]gent</h4>
+        <p>Diagnostics for throughput, pass-through, bottlenecks, and what to test next in ops.</p>
+        <div class="tags">
+          <span class="tag">Evaluate</span><span class="tag">Diagnostics</span><span class="tag">Decision-ready</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="agents/metrics/" target="_blank" rel="noopener">Open Demo</a>
+            <a href="agents/metrics/playbook.html" target="_blank" rel="noopener">Playbook</a>
+          </div>
+          <span class="small">Root cause</span>
+        </div>
+      </article>
+
+      <article class="card" data-kind="demo" data-tags="agents demo innovation experiments improvement loop">
+        <div class="type-row"><span class="type"><span class="dot"></span>Demo</span><span class="small">Agents</span></div>
+        <h4>Innovation A[i]gent</h4>
+        <p>Turns insight into experiments: hypothesis → test plan → measurement → rollout / rollback.</p>
+        <div class="tags">
+          <span class="tag">Improve</span><span class="tag">Experiment design</span><span class="tag">Compounding</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="agents/innovation/" target="_blank" rel="noopener">Open</a>
+            <a href="agents/innovation/playbook.html" target="_blank" rel="noopener">Playbook</a>
+          </div>
+          <span class="small">Governed change</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Playbooks -->
+    <section class="chapter" aria-label="Playbooks">
+      <h3>📘 Playbooks</h3>
+      <p>Operational playbooks that make workflows consistent, measurable, and automation-ready.</p>
+    </section>
+
+    <div class="grid" data-section="playbook">
+      <article class="card" data-kind="playbook" data-tags="playbook candidate journey communications workflows automation">
+        <div class="type-row"><span class="type"><span class="dot"></span>Playbook</span><span class="small">Library</span></div>
+        <h4>Candidate Journey</h4>
+        <p>Stage-by-stage journey model with comms, automation hooks, ownership, and SLAs.</p>
+        <div class="tags">
+          <span class="tag">Support</span><span class="tag">Comms</span><span class="tag">SLAs</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="playbooks/candidate-journey.html" target="_blank" rel="noopener">Open</a>
+            <a href="playbooks/playbook-candidate-journey.pdf" target="_blank" rel="noopener">PDF</a>
+          </div>
+          <span class="small">Ops-ready</span>
+        </div>
+      </article>
+
+      <article class="card" data-kind="playbook" data-tags="playbook sourcing quality inbound outbound referrals performance">
+        <div class="type-row"><span class="type"><span class="dot"></span>Playbook</span><span class="small">Library</span></div>
+        <h4>Candidate Source Quality</h4>
+        <p>How inbound/outbound/referrals perform — and how to rebalance effort toward higher-signal sources.</p>
+        <div class="tags">
+          <span class="tag">Hire</span><span class="tag">Sourcing</span><span class="tag">Signal</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="playbooks/sourcing-quality.html" target="_blank" rel="noopener">Open</a>
+          </div>
+          <span class="small">Spend discipline</span>
+        </div>
+      </article>
+
+      <article class="card" data-kind="playbook" data-tags="playbook ai-first operating model guardrails decision rights autonomy">
+        <div class="type-row"><span class="type"><span class="dot"></span>Playbook</span><span class="small">Library</span></div>
+        <h4>AI-First Operating Model</h4>
+        <p>Where AI assists vs where humans decide — plus autonomy zones, guardrails, and risk triggers.</p>
+        <div class="tags">
+          <span class="tag">Evaluate</span><span class="tag">Governance</span><span class="tag">Trust</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="playbooks/ai-first-ops-model.html" target="_blank" rel="noopener">Open</a>
+          </div>
+          <span class="small">Safety by design</span>
+        </div>
+      </article>
+
+      <article class="card" data-kind="playbook" data-tags="playbook listening employee insights open text themes">
+        <div class="type-row"><span class="type"><span class="dot"></span>Playbook</span><span class="small">Library</span></div>
+        <h4>Listening Playbook</h4>
+        <p>Multi-channel listening system: surveys, open-text, roundtables, and theme tracking tied to actions.</p>
+        <div class="tags">
+          <span class="tag">Evaluate</span><span class="tag">Insights</span><span class="tag">Actionability</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="agents/listening/playbook.html" target="_blank" rel="noopener">Open</a>
+          </div>
+          <span class="small">Decision loop</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Tools -->
+    <section class="chapter" aria-label="Tools">
+      <h3>⚙️ Tools</h3>
+      <p>Practical artifacts used to model, standardize, and scale People Systems work.</p>
+    </section>
+
+    <div class="grid" data-section="tool">
+      <article class="card" data-kind="tool" data-tags="tool spreadsheet funnel calculator capacity planning offers hiring">
+        <div class="type-row"><span class="type"><span class="dot"></span>Tool</span><span class="small">Sheet</span></div>
+        <h4>Recruiting Pipeline Calculator</h4>
+        <p>Interactive funnel calculator to plan realistic targets by stage (capacity + pass-through + timing).</p>
+        <div class="tags">
+          <span class="tag">Hire</span><span class="tag">Forecasting</span><span class="tag">Capacity</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="https://docs.google.com/spreadsheets/d/1EYf9S4L6QljiCZ0-mUVpmb7DIvw74j1XUJOt8p42qsw/edit?usp=sharing"
+               target="_blank" rel="noopener">Open</a>
+          </div>
+          <span class="small">Google Sheets</span>
+        </div>
+      </article>
+
+      <article class="card" data-kind="tool" data-tags="tool metrics dictionary kpi definitions standardization">
+        <div class="type-row"><span class="type"><span class="dot"></span>Tool</span><span class="small">Sheet</span></div>
+        <h4>Metrics Dictionary</h4>
+        <p>Standard KPI definitions so teams debate less and dashboards stay decision-relevant.</p>
+        <div class="tags">
+          <span class="tag">Evaluate</span><span class="tag">Definitions</span><span class="tag">Governance</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link"
+               target="_blank" rel="noopener">Open</a>
+          </div>
+          <span class="small">Single source of truth</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Articles -->
+    <section class="chapter" aria-label="Articles">
+      <h3>✍️ Articles</h3>
+      <p>Thought leadership that explains the “why” behind workflow-first internal AI.</p>
+    </section>
+
+    <div class="grid" data-section="article">
+      <article class="card" data-kind="article" data-tags="article ai pilots fail workflow data quality adoption trust">
+        <div class="type-row"><span class="type"><span class="dot"></span>Article</span><span class="small">Drive Human Capital</span></div>
+        <h4>Why 95% of AI Pilots Fail</h4>
+        <p>Why pilots stall (workflow + trust + data) and what the successful 5% do differently.</p>
+        <div class="tags">
+          <span class="tag">AI adoption</span><span class="tag">Workflow-first</span><span class="tag">Trust</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">Open</a>
+          </div>
+          <span class="small">External</span>
+        </div>
+      </article>
+
+      <article class="card" data-kind="article" data-tags="article ai pilots fail local html">
+        <div class="type-row"><span class="type"><span class="dot"></span>Article</span><span class="small">Local copy</span></div>
+        <h4>Why 95% of AI Pilots Fail (Local)</h4>
+        <p>Local HTML version for portfolio review and consistent rendering.</p>
+        <div class="tags">
+          <span class="tag">Archive</span><span class="tag">Portfolio</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="why-ai-pilots-fail.html" target="_blank" rel="noopener">Open</a>
+          </div>
+          <span class="small">GitHub Pages</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- PDFs -->
+    <section class="chapter" aria-label="PDFs">
+      <h3>📄 PDFs</h3>
+      <p>Downloadable artifacts used as supporting documentation.</p>
+    </section>
+
+    <div class="grid" data-section="pdf">
+      <article class="card" data-kind="pdf" data-tags="pdf recommendations linkedin feedback proof">
+        <div class="type-row"><span class="type"><span class="dot"></span>PDF</span><span class="small">Evidence</span></div>
+        <h4>Recommendations (Short PDF)</h4>
+        <p>Curated excerpts of third-party feedback (Hiring Managers, Candidates, Peers).</p>
+        <div class="tags">
+          <span class="tag">Evidence</span><span class="tag">Trust</span><span class="tag">Reputation</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="credentials/DW_Recommendations_Short.pdf" target="_blank" rel="noopener">Open PDF</a>
+            <a href="credentials/" target="_blank" rel="noopener">Credentials</a>
+          </div>
+          <span class="small">Proof hub</span>
+        </div>
+      </article>
+
+      <article class="card" data-kind="pdf" data-tags="pdf candidate journey playbook download">
+        <div class="type-row"><span class="type"><span class="dot"></span>PDF</span><span class="small">Playbook</span></div>
+        <h4>Candidate Journey (PDF)</h4>
+        <p>Downloadable full version of the candidate journey playbook.</p>
+        <div class="tags">
+          <span class="tag">Comms</span><span class="tag">Automation</span><span class="tag">Operations</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="playbooks/playbook-candidate-journey.pdf" target="_blank" rel="noopener">Open PDF</a>
+            <a href="playbooks/candidate-journey.html" target="_blank" rel="noopener">HTML</a>
+          </div>
+          <span class="small">Download</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Evidence -->
+    <section class="chapter" aria-label="Evidence">
+      <h3>🧾 Evidence</h3>
+      <p>Neutral signals: credentials, honors, certifications, and recommendations.</p>
+    </section>
+
+    <div class="grid" data-section="evidence">
+      <article class="card" data-kind="evidence" data-tags="evidence credentials certifications recommendations mba">
+        <div class="type-row"><span class="type"><span class="dot"></span>Evidence</span><span class="small">Proof</span></div>
+        <h4>Credentials &amp; Recommendations</h4>
+        <p>Academic honors, certifications, and third-party feedback — compiled as a neutral proof hub.</p>
+        <div class="tags">
+          <span class="tag">MBA (4.0)</span><span class="tag">Certifications</span><span class="tag">Recommendations</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="credentials/" target="_blank" rel="noopener">Open</a>
+            <a href="credentials/DW_Recommendations_Short.pdf" target="_blank" rel="noopener">PDF</a>
+          </div>
+          <span class="small">Fast scan</span>
+        </div>
+      </article>
+
+      <article class="card" data-kind="evidence" data-tags="evidence linkedin recommendations">
+        <div class="type-row"><span class="type"><span class="dot"></span>Evidence</span><span class="small">LinkedIn</span></div>
+        <h4>LinkedIn Recommendations</h4>
+        <p>Full, dated recommendations and work history context.</p>
+        <div class="tags">
+          <span class="tag">Public</span><span class="tag">Dated</span><span class="tag">Third-party</span>
+        </div>
+        <div class="meta">
+          <div class="links">
+            <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">Open</a>
+          </div>
+          <span class="small">External</span>
+        </div>
+      </article>
+    </div>
 
   </div>
 
   <footer>
     <p class="footline">
-      Based in the San Francisco Bay Area · Always open to connect about people systems, workforce operations, internal AI adoption, and hiring process design.
+      Based in the San Francisco Bay Area ·
       <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
-      <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">Book 15 minutes</a>
     </p>
   </footer>
+
+  <script>
+    (function(){
+      const searchEl = document.getElementById("search");
+      const pills = Array.from(document.querySelectorAll(".pill"));
+      const cards = Array.from(document.querySelectorAll(".card"));
+
+      let activeFilter = "all";
+      let query = "";
+
+      function normalize(s){ return (s || "").toLowerCase().trim(); }
+
+      function matches(card){
+        const kind = normalize(card.getAttribute("data-kind"));
+        const hay = normalize(
+          card.innerText + " " +
+          (card.getAttribute("data-tags") || "")
+        );
+
+        const passFilter = (activeFilter === "all") || (kind === activeFilter);
+        const passQuery = !query || hay.includes(query);
+
+        return passFilter && passQuery;
+      }
+
+      function render(){
+        cards.forEach(card => {
+          card.style.display = matches(card) ? "" : "none";
+        });
+      }
+
+      pills.forEach(p => {
+        p.addEventListener("click", () => {
+          pills.forEach(x => x.classList.remove("active"));
+          p.classList.add("active");
+          activeFilter = p.getAttribute("data-filter") || "all";
+          render();
+        });
+      });
+
+      searchEl.addEventListener("input", (e) => {
+        query = normalize(e.target.value);
+        render();
+      });
+
+      render();
+    })();
+  </script>
 </body>
 </html>
