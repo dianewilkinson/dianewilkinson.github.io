@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Metrics A[i]gent – Recruiting Funnel Analytics Playbook</title>
+  <title>Metrics Layer – Recruiting Funnel Analytics Playbook</title>
 
-  <meta property="og:title" content="Metrics A[i]gent – Recruiting Funnel Analytics Playbook">
+  <meta property="og:title" content="Metrics Layer – Recruiting Funnel Analytics Playbook">
   <meta property="og:description" content="Standardized metrics, data model, and dashboards for AI-native recruiting analytics built on top of a shared Metrics Dictionary.">
   <meta property="og:type" content="article">
 
@@ -274,9 +274,9 @@
   <div class="bar"></div>
 
   <header>
-    <h1>Metrics A[i]gent – Recruiting Funnel Analytics Playbook</h1>
+    <h1>Metrics Layer – Recruiting Funnel Analytics Playbook</h1>
     <p>
-      Standardized Metrics &amp; Dashboards for AI-Native Recruiting · by Diane Wilkinson
+      Standardized Metrics, Guardrails &amp; Dashboards for AI-Native Recruiting · by Diane Wilkinson
     </p>
   </header>
 
@@ -289,12 +289,13 @@
           Turn noisy recruiting data into a <span>single source of truth</span>.
         </h2>
         <p>
-          Metrics A[i]gent sits on top of ATS, spreadsheets, and agents to produce a consistent, trustable view of the
-          recruiting funnel — time-to-fill, pass-through, SLAs, and capacity — using a shared Metrics Dictionary.
+          Metrics is the diagnostics + guardrails layer for the A[i]gent Suite. It sits on top of the ATS, planning tools,
+and agent-emitted events to produce a consistent, trustable view of the recruiting funnel — time-to-fill,
+pass-through, SLAs, and capacity — using a shared Metrics Dictionary.
         </p>
         <p>
-          This playbook defines the data model, metric families, and dashboards behind Metrics A[i]gent so TA Ops, People
-          Analytics, and leadership can ask better questions and get the same answer every time.
+          This playbook defines the data model, metric families, and dashboards behind the Metrics layer so TA Ops,
+People Analytics, and leaders can ask better questions — and get the same answer every time.
         </p>
         <div class="hero-actions">
           <a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link" target="_blank" rel="noopener">
@@ -303,7 +304,7 @@
             <a href="/agents/metrics/">
               📈 View Metrics A[i]gent demo
             </a>
-          <a href="/agents/suite/">
+          <a href="/agents/">
             🧩 View full A[i]gent Suite
           </a>
 
@@ -325,7 +326,7 @@
           <li>Data model &amp; event sources (ATS + agents)</li>
           <li>Core metric families &amp; examples</li>
           <li>Dashboard blueprints &amp; use cases</li>
-          <li>Integration with Screening &amp; Workflow A[i]gents</li>
+          <li>Integration with Screening &amp; Interview A[i]gents + the execution layer</li>
           <li>Governance &amp; change management</li>
         </ul>
       </aside>
@@ -508,7 +509,7 @@
         <ul>
           <li><strong>ATS events:</strong> application created, stage changes, interview scheduled/complete, offer extended, offer accepted/declined, req opened/closed.</li>
           <li><strong>Screening A[i]gent events:</strong> screening_started_at, screening_decision_at, screening_score_overall, screening_recommendation, risk flags.</li>
-          <li><strong>Workflow A[i]gent events:</strong> stage_entered_at, interview_scheduled_at, interview_start_at, interview_end_at, scorecard_submitted_at, delay_update_sent_at.</li>
+          <li><strong>Interview A[i]gent + execution-layer events:</strong> stage_entered_at, interview_scheduled_at, interview_start_at, interview_end_at, scorecard_submitted_at, delay_update_sent_at.</li>
           <li><strong>Planner / Capacity tools:</strong> weekly hiring targets, recruiter capacity assumptions, plan vs actual comparisons.</li>
         </ul>
 
@@ -606,7 +607,7 @@
 
       <!-- 7. Integration with Agents -->
       <section id="integration">
-        <h2>7. Integration with Screening &amp; Workflow A[i]gents</h2>
+        <h2>7. Integration with Screening &amp; Interview A[i]gents</h2>
 
         <p>Metrics A[i]gent doesn’t exist in isolation; it’s downstream from other A[i]gents.</p>
 
@@ -624,7 +625,7 @@
           <li>Source quality assessments grounded in screening + downstream outcomes.</li>
         </ul>
 
-        <h3>7.2 From Workflow A[i]gent</h3>
+        <h3>7.2 From Interview A[i]gent + Execution Layer</h3>
         <ul>
           <li>Stage entry and exit timestamps for each interview stage.</li>
           <li>Interview scheduled/start/end times.</li>
@@ -781,7 +782,7 @@
   </div>
 
   <footer>
-    Part of the A[i]gents suite – Screening A[i]gent (top-of-funnel), Workflow A[i]gent (interviews), Metrics A[i]gent (analytics).
+    Part of the A[i]gent Suite – Screening (top-of-funnel), Interview (structured interview signals), Metrics (diagnostics & guardrails).
   </footer>
 </body>
 </html>
