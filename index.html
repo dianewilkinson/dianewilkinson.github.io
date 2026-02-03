@@ -354,6 +354,45 @@
     }
 
     /* System diagram */
+    /* SYSTEM: side-by-side layout */
+.system-layout{
+  display:grid;
+  grid-template-columns: 1.35fr 1fr; /* image left, text right */
+  gap:16px;
+  align-items:start;
+  margin-top:12px;
+}
+
+@media (max-width: 900px){
+  .system-layout{ grid-template-columns: 1fr; }
+}
+
+/* Let the two columns shrink properly (prevents overflow) */
+.system-left, .system-right{ min-width:0; }
+
+/* Remove centering/margins that assume single-column */
+.system-diagram{
+  margin:0;               /* was: 12px auto 14px */
+  max-width:none;         /* was: 900px */
+  width:100%;
+}
+
+/* Make bullets/cta behave as a right-side panel */
+.system-right{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.system-right .bullets{
+  margin:0;               /* was: 12px auto 0 */
+  max-width:none;         /* was: 980px */
+}
+
+.system-right .sys-cta{
+  margin-top:0;           /* was: 10px */
+}
+
 .system-diagram{
   margin: 12px auto 14px;
   max-width: 900px;              /* slightly narrower */
@@ -655,27 +694,33 @@
         <div class="chev">›</div>
       </summary>
 
-      <div class="details-body">
-        <figure class="system-diagram">
-          <img
-            src="assets/diagrams/system.png"
-            alt="AI-native people operations system showing human judgment, orchestration, signals, execution, and systems environment"
-            loading="lazy"
-          />
-        </figure>
+      <div class="system-layout">
+  <div class="system-left">
+    <figure class="system-diagram">
+      <img
+        src="assets/diagrams/system.png"
+        alt="AI-native people operations system showing human judgment, orchestration, signals, execution, and systems environment"
+        loading="lazy"
+      />
+    </figure>
+  </div>
 
-        <div class="bullets">
-          <ul>
-            <li><b>AI is infrastructure</b> — embedded inside the platforms teams already use.</li>
-            <li><b>Humans remain accountable</b> — escalation paths and auditability are built in.</li>
-            <li><b>Governance is continuous</b> — signals and workflows co-evolve with the business.</li>
-            <li><b>The system is operable, not fragile</b> — designed to run in real constraints.</li>
-          </ul>
-        </div>
+  <div class="system-right">
+    <div class="bullets">
+      <ul>
+        <li><b>AI is infrastructure</b> — embedded inside the platforms teams already use.</li>
+        <li><b>Humans remain accountable</b> — escalation paths and auditability are built in.</li>
+        <li><b>Governance is continuous</b> — signals and workflows co-evolve with the business.</li>
+        <li><b>The system is operable, not fragile</b> — designed to run in real constraints.</li>
+      </ul>
+    </div>
 
-        <div class="sys-cta">
-          <a class="btn primary" href="system/">Explore the system →</a>
-        </div>
+    <div class="sys-cta">
+      <a class="btn primary" href="system/">Explore the system →</a>
+    </div>
+  </div>
+</div>
+
       </div>
     </details>
 
