@@ -5,7 +5,7 @@
     "emoji": "📊",
     "description": "Pipeline diagnostics: bottlenecks, pass-through, root causes, and what to do next.",
     "type": "Demo",
-    "href": "/tools/metrics/",
+    "href": "tools/metrics/",
     "tags": ["metrics", "throughput", "decision-ready"]
   },
   {
@@ -14,7 +14,7 @@
     "emoji": "📝",
     "description": "Structured evaluation to increase throughput without losing signal.",
     "type": "Demo",
-    "href": "/tools/screening/",
+    "href": "tools/screening/",
     "tags": ["screening", "evidence", "bias-control"]
   },
   {
@@ -23,7 +23,7 @@
     "emoji": "🔎",
     "description": "Evidence standards, signal checks, and consistency guardrails.",
     "type": "Playbook",
-    "href": "/tools/sourcing/",
+    "href": "tools/sourcing/",
     "tags": ["sourcing", "quality", "governance"]
   },
   {
@@ -32,7 +32,7 @@
     "emoji": "🎧",
     "description": "Turn messy feedback into decision-ready themes with governance.",
     "type": "WIP",
-    "href": "/tools/listening/",
+    "href": "tools/listening/",
     "tags": ["listening", "signals", "themes"]
   },
   {
@@ -41,7 +41,7 @@
     "emoji": "🧭",
     "description": "Workflow-first ops model: routing, SLAs, escalation paths, automation.",
     "type": "Model",
-    "href": "/tools/workflow/",
+    "href": "tools/workflow/",
     "tags": ["workflow", "routing", "automation"]
   },
   {
@@ -50,7 +50,7 @@
     "emoji": "🧠",
     "description": "Orchestration layer: routing, reasoning, audit trails, delegation.",
     "type": "System",
-    "href": "/tools/chief/",
+    "href": "tools/chief/",
     "tags": ["orchestration", "governance", "audit"]
   }
 ]
