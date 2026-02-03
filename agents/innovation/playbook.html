@@ -293,17 +293,19 @@
         <h2 class="hero-title">
           Turn scattered ideas into <span>shipped improvements</span> — with measurable outcomes.
         </h2>
-        <p>
-          Innovation A[i]gent prevents “idea black holes” by creating a structured intake, triage, and experimentation loop
-          for people systems and workforce operations improvements.
-        </p>
-        <p>
-          It helps teams convert pain points and signals into hypotheses, prioritize what to test, track decisions, and
-          document what changed — with a clear ownership model and audit trail.
-        </p>
+<p>
+  Innovation A[i]gent prevents good ideas from dying in the space between insight and action.
+  It provides real-time closure in the moment an idea surfaces — either returning institutional context
+  (already tried / already in progress) or routing net-new ideas into a structured improvement pipeline, where they turn to action.
+</p>
+<p>
+  This playbook covers the operator model behind that pipeline: lightweight intake, triage, experiment design,
+  decision logs, and measurable “what changed” artifacts — with governance and guardrails.
+</p>
+
         <div class="hero-actions">
           <a href="../index.html">
-            🔁 Back to Innovation A[i]gent demo
+            🔁 Back to Innovation A[i]gent Overview
           </a>
           <a href="/agents/" class="back-pill">
             🧩 View full A[i]gent Suite
@@ -336,14 +338,15 @@
         <h3>Sections</h3>
         <ul>
           <li><a href="#problem">1. Problem &amp; Purpose</a></li>
-          <li><a href="#intake">2. Intake &amp; Triage</a></li>
-          <li><a href="#guardrails">3. Guardrails &amp; Governance</a></li>
-          <li><a href="#experiments">4. Experiment Design</a></li>
-          <li><a href="#library">5. Workflow Library</a></li>
-          <li><a href="#outputs">6. Outputs &amp; Decision Logs</a></li>
-          <li><a href="#implementation">7. Implementation Notes</a></li>
-          <li><a href="#suite">8. Fit in the A[i]gents Suite</a></li>
-          <li><a href="#risks">9. Risks &amp; Mitigations</a></li>
+          <li><a href="#closure">2. Real-Time Idea Closure Loop</a></li>
+          <li><a href="#intake">3. Intake &amp; Triage</a></li>
+          <li><a href="#guardrails">4. Guardrails &amp; Governance</a></li>
+          <li><a href="#experiments">5. Experiment Design</a></li>
+          <li><a href="#library">6. Workflow Library</a></li>
+          <li><a href="#outputs">7. Outputs &amp; Decision Logs</a></li>
+          <li><a href="#implementation">8. Implementation Notes</a></li>
+          <li><a href="#suite">9. Fit in the A[i]gents Suite</a></li>
+          <li><a href="#risks">10. Risks &amp; Mitigations</a></li>
           <li><a href="#appendix">Appendix A – Example Intake Fields</a></li>
         </ul>
       </nav>
@@ -390,16 +393,47 @@
         </ul>
       </section>
 
-      <!-- 2. Intake -->
+      <!-- 2. Real-Time Idea Closure Loop -->
+<section id="closure">
+  <h2>2. Real-Time Idea Closure Loop</h2>
+
+  <p>
+    The playbook pipeline only works if ideas reliably enter it. In most organizations, they don’t.
+    This agent’s first job is to close the gap between insight and response — in real time — before delay,
+    politics, or hierarchy erase the signal.
+  </p>
+
+  <h3>2.1 Front-Door Interaction (Chat)</h3>
+  <ul>
+    <li><strong>Employee asks:</strong> “How do we do X?” → agent retrieves current procedure and source.</li>
+    <li><strong>Employee proposes:</strong> “Why don’t we do Y?” → agent checks institutional memory.</li>
+  </ul>
+
+  <h3>2.2 Outcomes</h3>
+  <ul>
+    <li><strong>Previously tried:</strong> returns context (what happened, constraint, decision).</li>
+    <li><strong>Already in progress:</strong> points to the current owner/workstream and status.</li>
+    <li><strong>Net-new idea:</strong> routes into intake with an initial “idea packet” (summary, rationale, suggested owner).</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Why this matters:</strong> immediate closure prevents unnecessary negative sentiment and reduces re-litigation.
+    Only net-new, viable ideas enter the formal triage pipeline.
+  </div>
+</section>
+
+
+      <!-- 3. Intake -->
       <section id="intake">
-        <h2>2. Intake &amp; Triage</h2>
-
-        <p class="pill-note">Low-lift by design</p>
+        <h2>3. Intake &amp; Triage</h2>
         <p>
-          Intake should feel easier than writing a Slack message — but structured enough to avoid ambiguity.
-        </p>
+  <span class="pill-note">Low-lift by design</span><br />
+  Net-new ideas identified through the real-time closure loop enter intake here.
+  Intake should feel easier than writing a Slack message — but structured enough to avoid ambiguity.
+</p>
 
-        <h3>2.1 Intake Sources</h3>
+
+        <h3>3.1 Intake Sources</h3>
         <ul>
           <li>Signals from Listening A[i]gent (themes, repeated friction)</li>
           <li>Ops retro items and post-mortems</li>
@@ -407,7 +441,7 @@
           <li>Tooling constraints (ATS/HRIS limitations and workarounds)</li>
         </ul>
 
-        <h3>2.2 Triage Categories</h3>
+        <h3>3.2 Triage Categories</h3>
         <ul>
           <li><strong>Fix Now:</strong> low effort, high pain, clear owner</li>
           <li><strong>Experiment:</strong> needs a hypothesis + measurable outcome</li>
@@ -415,7 +449,7 @@
           <li><strong>Decline:</strong> not aligned or unsafe (log rationale)</li>
         </ul>
 
-        <h3>2.3 Prioritization (Simple Model)</h3>
+        <h3>3.3 Prioritization (Simple Model)</h3>
         <div class="table-wrap">
           <table>
             <thead>
@@ -455,11 +489,11 @@
         </div>
       </section>
 
-      <!-- 3. Guardrails -->
+      <!-- 4. Guardrails -->
       <section id="guardrails">
-        <h2>3. Guardrails &amp; Governance</h2>
+        <h2>4. Guardrails &amp; Governance</h2>
 
-        <h3>3.1 Governance Rules</h3>
+        <h3>4.1 Governance Rules</h3>
         <ul>
           <li><strong>No “experiments” on protected classes or sensitive topics.</strong></li>
           <li><strong>No automation without an override path.</strong></li>
@@ -468,7 +502,7 @@
           <li><strong>Ship in slices</strong> and monitor leading indicators.</li>
         </ul>
 
-        <h3>3.2 Roles &amp; Responsibilities</h3>
+        <h3>4.2 Roles &amp; Responsibilities</h3>
         <div class="table-wrap">
           <table>
             <thead>
@@ -499,11 +533,11 @@
         </div>
       </section>
 
-      <!-- 4. Experiment Design -->
+      <!-- 5. Experiment Design -->
       <section id="experiments">
-        <h2>4. Experiment Design</h2>
+        <h2>5. Experiment Design</h2>
 
-        <h3>4.1 Standard Experiment Template</h3>
+        <h3>5.1 Standard Experiment Template</h3>
         <ul>
           <li><strong>Problem statement:</strong> what’s broken, and where?</li>
           <li><strong>Hypothesis:</strong> if we change X, we expect Y.</li>
@@ -513,7 +547,7 @@
           <li><strong>Rollback plan:</strong> how to reverse quickly.</li>
         </ul>
 
-        <h3>4.2 Measurement Examples</h3>
+        <h3>5.2 Measurement Examples</h3>
         <div class="table-wrap">
           <table>
             <thead>
@@ -553,13 +587,13 @@
         </div>
       </section>
 
-      <!-- 5. Workflow Library -->
+      <!-- 6. Workflow Library -->
       <section id="library">
-        <h2>5. Workflow Library</h2>
+        <h2>6. Workflow Library</h2>
 
         <p>Common ops experiments Innovation A[i]gent supports:</p>
 
-        <h3>5.1 Experiment Catalog</h3>
+        <h3>6.1 Experiment Catalog</h3>
         <div class="table-wrap">
           <table>
             <thead>
@@ -605,7 +639,7 @@
           </table>
         </div>
 
-        <h3>5.2 “Ship Small” Pattern</h3>
+        <h3>6.2 “Ship Small” Pattern</h3>
         <ul>
           <li>Start with 1 role family or 1 team</li>
           <li>Measure leading indicators in week 1</li>
@@ -614,11 +648,11 @@
         </ul>
       </section>
 
-      <!-- 6. Outputs -->
+      <!-- 7. Outputs -->
       <section id="outputs">
-        <h2>6. Outputs &amp; Decision Logs</h2>
+        <h2>7. Outputs &amp; Decision Logs</h2>
 
-        <h3>6.1 Outputs</h3>
+        <h3>7.1 Outputs</h3>
         <ul>
           <li>Prioritized backlog of improvements with owners</li>
           <li>Experiment briefs (hypothesis → plan → metrics)</li>
@@ -626,7 +660,7 @@
           <li>“What changed” release notes for trust and adoption</li>
         </ul>
 
-        <h3>6.2 Decision Log Example</h3>
+        <h3>7.2 Decision Log Example</h3>
         <div class="table-wrap">
           <table>
             <thead>
@@ -667,11 +701,11 @@
         </div>
       </section>
 
-      <!-- 7. Implementation -->
+      <!-- 8. Implementation -->
       <section id="implementation">
-        <h2>7. Implementation Notes</h2>
+        <h2>8. Implementation Notes</h2>
 
-        <h3>7.1 Minimal Stack</h3>
+        <h3>8.1 Minimal Stack</h3>
         <ul>
           <li>Backlog table (sheet / Airtable / simple DB)</li>
           <li>Standard intake form (structured fields)</li>
@@ -679,7 +713,7 @@
           <li>Metrics capture via Metrics A[i]gent (or existing BI)</li>
         </ul>
 
-        <h3>7.2 Success Metrics</h3>
+        <h3>8.2 Success Metrics</h3>
         <ul>
           <li>Time from idea → decision</li>
           <li>Experiment throughput per month</li>
@@ -688,9 +722,9 @@
         </ul>
       </section>
 
-      <!-- 8. Fit -->
+      <!-- 9. Fit -->
       <section id="suite">
-        <h2>8. How This Fits in the A[i]gents Suite</h2>
+        <h2>9. How This Fits in the A[i]gents Suite</h2>
         <ul>
           <li><strong>Listening A[i]gent</strong> identifies recurring friction and themes.</li>
           <li><strong>Innovation A[i]gent</strong> turns themes into tests and decisions.</li>
@@ -700,9 +734,9 @@
         <p>This is the continuous-improvement loop for people systems: listen → test → ship → measure.</p>
       </section>
 
-      <!-- 9. Risks -->
+      <!-- 10. Risks -->
       <section id="risks">
-        <h2>9. Risks &amp; Mitigations</h2>
+        <h2>10. Risks &amp; Mitigations</h2>
         <ul>
           <li>
             <strong>Risk:</strong> Teams create “innovation theater” without shipping.<br>
