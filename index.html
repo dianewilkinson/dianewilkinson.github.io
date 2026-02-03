@@ -196,7 +196,10 @@
   width:100%;
   grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
 }
-
+/* Hard stop: never allow spill outside the section */
+.chapter { overflow: hidden; }
+.tools-grid { min-width: 0; }
+.tool-card { width: 100%; min-width: 0; }
 
 .tool-card{
   background:var(--card);
