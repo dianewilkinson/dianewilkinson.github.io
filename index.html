@@ -561,93 +561,30 @@
 
   <div class="tools-grid" aria-label="Tools grid">
 
-    <div class="tool-card">
-      <div class="tool-top">
-        <div>
-          <h3>📊 Metrics</h3>
-          <p>Pipeline diagnostics: bottlenecks, pass-through, root causes, and “what to do next.”</p>
-        </div>
-        <span class="badge">Demo</span>
-      </div>
-      <a class="tool-link" href="tools/metrics/">Open tool →</a>
-    </div>
+    <div id="tools-grid" class="tools-grid"></div>
 
-    <div class="tool-card">
-      <div class="tool-top">
-        <div>
-          <h3>📝 Screening</h3>
-          <p>Structured evaluation to increase throughput without losing signal.</p>
+<script>
+fetch('/tools/tools.json')
+  .then(res => res.json())
+  .then(tools => {
+    const grid = document.getElementById('tools-grid');
+    tools.forEach(tool => {
+      const card = document.createElement('div');
+      card.className = 'tool-card';
+      card.innerHTML = `
+        <div class="tool-top">
+          <div>
+            <h3>${tool.emoji} ${tool.name}</h3>
+            <p>${tool.description}</p>
+          </div>
+          <span class="badge">${tool.type}</span>
         </div>
-        <span class="badge">Demo</span>
-      </div>
-      <a class="tool-link" href="tools/screening/">Open tool →</a>
-    </div>
-
-    <div class="tool-card">
-      <div class="tool-top">
-        <div>
-          <h3>🔎 Sourcing Quality</h3>
-          <p>Evidence standards, signal checks, and consistency guardrails.</p>
-        </div>
-        <span class="badge">Playbook</span>
-      </div>
-      <a class="tool-link" href="tools/sourcing/">Open tool →</a>
-    </div>
-
-    <div class="tool-card">
-      <div class="tool-top">
-        <div>
-          <h3>🎧 Listening</h3>
-          <p>Turn messy feedback into decision-ready themes with governance.</p>
-        </div>
-        <span class="badge">WIP</span>
-      </div>
-      <a class="tool-link" href="tools/listening/">Open tool →</a>
-    </div>
-
-    <div class="tool-card">
-      <div class="tool-top">
-        <div>
-          <h3>🧭 Workflow</h3>
-          <p>Workflow-first ops model: routing, SLAs, escalation paths, and automation.</p>
-        </div>
-        <span class="badge">Model</span>
-      </div>
-      <a class="tool-link" href="tools/workflow/">Open tool →</a>
-    </div>
-
-    <div class="tool-card">
-      <div class="tool-top">
-        <div>
-          <h3>🧠 Chief</h3>
-          <p>Orchestration layer: routing, reasoning, audit trails, delegation.</p>
-        </div>
-        <span class="badge">System</span>
-      </div>
-      <a class="tool-link" href="tools/chief/">Open tool →</a>
-    </div>
-
-    <div class="tool-card">
-      <div class="tool-top">
-        <div>
-          <h3>🧩 Candidate Journey</h3>
-          <p>Experience design: signals, stages, handoffs, and feedback loops.</p>
-        </div>
-        <span class="badge">Map</span>
-      </div>
-      <a class="tool-link" href="tools/candidate-journey/">Open tool →</a>
-    </div>
-
-    <div class="tool-card">
-      <div class="tool-top">
-        <div>
-          <h3>💡 Innovation</h3>
-          <p>From pilot to operating capability: selection, governance, rollout.</p>
-        </div>
-        <span class="badge">Playbook</span>
-      </div>
-      <a class="tool-link" href="tools/innovation/">Open tool →</a>
-    </div>
+        <a class="tool-link" href="${tool.href}">Open tool →</a>
+      `;
+      grid.appendChild(card);
+    });
+  });
+</script>
 
   </div>
 
