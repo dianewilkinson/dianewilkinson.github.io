@@ -1,4 +1,4 @@
-# Diane Wilkinson — People Systems & Workforce Operations
+# Diane Wilkinson — AI-Native People Operations & Workforce Analytics
 
 _People Systems Architect • Workflow Automation • Internal AI & Analytics • Greenhouse SME_  
 _MBA, Data Analytics (4.0 GPA)_
