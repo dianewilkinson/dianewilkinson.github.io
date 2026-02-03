@@ -196,7 +196,7 @@
   margin-top:12px;
   width:100%;
   grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-  min-width: 0; 
+  min-width: 0;
 }
 /* Hard stop: never allow spill outside the section */
 .chapter { overflow: hidden; }
@@ -556,7 +556,7 @@
 </section>
 
 <script>
-  fetch('tools/tools.json')
+  fetch('/tools/tools.json')
     .then(res => {
       if (!res.ok) throw new Error('Could not load tools/tools.json');
       return res.json();
