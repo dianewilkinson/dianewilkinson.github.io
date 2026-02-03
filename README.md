@@ -15,7 +15,7 @@ This repository hosts my public portfolio and supporting materials.
 Choose the level of detail most useful:
 
 - **🧰 Tools & Artifacts**  
-  Practical examples of tools & workflows I’ve built to support hiring operations, analytics, and decision-making.  
+  Tools & workflows I’ve built to support hiring operations, analytics, and decision-making.  
   👉 https://dianewilkinson.github.io/tools.html
 
 - **🏗 System Architecture (Deep Dive)**  
