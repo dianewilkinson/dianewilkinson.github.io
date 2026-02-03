@@ -365,21 +365,29 @@
     }
 
     /* System diagram */
-    .system-diagram{
-      margin: 10px auto 10px;
-      max-width: 980px;
-      text-align: center;
-      background:rgba(255,255,255,0.75);
-      border:1px solid rgba(148,163,184,0.45);
-      border-radius:16px;
-      padding:12px;
-      box-shadow:0 1px 3px rgba(15,23,42,.06);
-    }
+.system-diagram{
+  margin: 12px auto 14px;
+  max-width: 900px;              /* slightly narrower */
+  text-align: center;
+  background:rgba(255,255,255,0.75);
+  border:1px solid rgba(148,163,184,0.45);
+  border-radius:16px;
+  padding:14px 16px;             /* more horizontal, less vertical */
+  box-shadow:0 1px 3px rgba(15,23,42,.06);
+}
     .system-diagram img{
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-    }
+  width: 100%;
+  height: auto;
+  max-height: 420px;          /* 👈 this is the key */
+  object-fit: contain;
+  border-radius: 12px;
+}
+@media (max-width: 640px){
+  .system-diagram img{
+    max-height: 320px;
+  }
+}
+
     .bullets{
       margin:12px auto 0;
       max-width:980px;
