@@ -129,6 +129,7 @@
       box-shadow:0 6px 18px var(--shadow);
       padding:16px 18px 14px;
       border:1px solid rgba(148,163,184,0.28);
+      overflow: hidden;
     }
     .chapter h2{
       margin:0 0 6px;
@@ -195,6 +196,7 @@
   margin-top:12px;
   width:100%;
   grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  min-width: 0; 
 }
 /* Hard stop: never allow spill outside the section */
 .chapter { overflow: hidden; }
@@ -211,6 +213,7 @@
   flex-direction:column;
   min-height:120px;
   min-width:0;
+  overflow-wrap: anywhere;
 }
 
 .tool-top{
@@ -218,6 +221,7 @@
   align-items:flex-start;
   justify-content:space-between;
   gap:10px;
+  min-width: 0;
 }
 
 .tool-card h3{
