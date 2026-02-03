@@ -16,15 +16,15 @@ Choose the level of detail most useful:
 
 - **🧰 Tools & Artifacts**  
   Tools & workflows I’ve built to support hiring operations, analytics, and decision-making.  
-  👉 https://dianewilkinson.github.io/tools.html
+  👉 https://dianewilkinson.github.io/tools/
 
 - **🏗 System Architecture (Deep Dive)**  
   How these tools fit together as an AI-native people ops system — orchestration, governance, & human-in-the-loop design all within the existing frameworks of an organization.  
-  👉 https://dianewilkinson.github.io/system.html
+  👉 https://dianewilkinson.github.io/system/
 
 - **🤖 Use Cases (Agents & Demos)**  
   Interactive demos and examples of agent-based workflows used in specific operational contexts.  
-  👉 https://dianewilkinson.github.io/use-cases.html
+  👉 https://dianewilkinson.github.io/use-cases/
 
 ---
 
