@@ -5,17 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Diane Wilkinson — AI-Native People Operating System | People Ops, Talent Intelligence</title>
 
-  <!-- Open Graph / Social Preview -->
+  <!-- Open Graph / Social Preview (keep or remove) -->
   <meta property="og:title" content="Diane Wilkinson — AI-Native People Operating System | People Ops, Talent Intelligence">
   <meta property="og:description" content="I design workflow-first internal AI and analytics across Hire, Support, Evaluate, and Improve — with human-in-the-loop governance and auditability.">
   <meta property="og:image" content="https://dianewilkinson.github.io/assets/og-upwork.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dianewilkinson.github.io">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Diane Wilkinson — AI-Native People Operating System">
-  <meta name="twitter:description" content="Internal AI in the weeds of everyday people workflows — evidence-first, human-in-the-loop.">
-  <meta name="twitter:image" content="https://dianewilkinson.github.io/assets/og-upwork.png">
 
   <style>
     :root{
@@ -25,19 +20,11 @@
       --muted:#64748b;
       --border:#e5e7eb;
       --link:#2563eb;
-
-      /* Purple used previously */
       --link-soft:#4f46e5;
-
       --shadow:rgba(15,23,42,0.08);
 
-      /* Top bar gradient */
       --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
-
-      /* Hero + Connect use pink family (ONLY these two sections) */
       --accent-soft:linear-gradient(135deg,rgba(249,115,129,.12),rgba(168,85,247,.12),rgba(99,102,241,.12));
-
-      /* Chapter dividers use blue-purple */
       --cool-soft:linear-gradient(135deg,rgba(147,197,253,.18),rgba(167,139,250,.16),rgba(99,102,241,.14));
     }
 
@@ -129,7 +116,7 @@
       box-shadow:0 6px 18px var(--shadow);
       padding:16px 18px 14px;
       border:1px solid rgba(148,163,184,0.28);
-      overflow: hidden;
+      overflow:hidden; /* prevents any “spill” */
     }
     .chapter h2{
       margin:0 0 6px;
@@ -147,11 +134,6 @@
     }
 
     /* Cards */
-    .grid{
-      display:grid;
-      gap:16px;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    }
     .card{
       background:var(--card);
       border:1px solid var(--border);
@@ -169,98 +151,71 @@
       font-weight:800;
       letter-spacing:-0.01em;
     }
-    .card p{
-      margin:0 0 10px;
-      color:#334155;
-      font-size:14px;
-      line-height:1.55;
-    }
-    .meta{
-      margin-top:auto;
-      font-size:12px;
-      color:#64748b;
-      line-height:1.6;
-    }
-    .meta a{
-      display:inline-block;
-      margin-top:2px;
-      font-weight:900;
-    }
 
     /* ==========================================================
-   TOOLS GRID
-   ========================================================== */
-.tools-grid{
-  display:grid;
-  gap:16px;
-  margin-top:12px;
-  width:100%;
-  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-  min-width: 0;
-}
-/* Hard stop: never allow spill outside the section */
-.chapter { overflow: hidden; }
-.tools-grid { min-width: 0; }
-.tool-card { width: 100%; min-width: 0; }
-
-.tool-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:12px 12px 10px;
-  box-shadow:0 1px 3px var(--shadow);
-  display:flex;
-  flex-direction:column;
-  min-height:120px;
-  min-width:0;
-  overflow-wrap: anywhere;
-}
-
-.tool-top{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:10px;
-  min-width: 0;
-}
-
-.tool-card h3{
-  margin:0 0 4px;
-  font-size:14px;
-  font-weight:900;
-  letter-spacing:-0.01em;
-}
-
-.tool-card p{
-  margin:0 0 10px;
-  color:#475569;
-  font-size:12.75px;
-  line-height:1.45;
-  overflow-wrap: anywhere;
-}
-
-.tool-link{
-  margin-top:auto;
-  font-size:12.5px;
-  font-weight:900;
-  color:var(--link-soft);
-  display:inline-flex;
-  gap:6px;
-  align-items:center;
-}
-
-.tool-link:hover{ color:#4338ca; text-decoration:none; }
-
-.badge{
-  font-size:11px;
-  font-weight:800;
-  color:#334155;
-  border:1px solid rgba(148,163,184,0.6);
-  border-radius:999px;
-  padding:4px 8px;
-  background:rgba(255,255,255,0.75);
-  white-space:nowrap;
-}
+       TOOLS GRID
+       ========================================================== */
+    .tools-grid{
+      display:grid;
+      gap:16px;
+      margin-top:12px;
+      width:100%;
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+      min-width:0;
+    }
+    .tool-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 12px 10px;
+      box-shadow:0 1px 3px var(--shadow);
+      display:flex;
+      flex-direction:column;
+      min-height:120px;
+      min-width:0;
+      width:100%;
+      overflow-wrap:anywhere;
+    }
+    .tool-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      min-width:0;
+    }
+    .tool-card h3{
+      margin:0 0 4px;
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:-0.01em;
+    }
+    .tool-card p{
+      margin:0 0 10px;
+      color:#475569;
+      font-size:12.75px;
+      line-height:1.45;
+      overflow-wrap:anywhere;
+    }
+    .tool-link{
+      margin-top:auto;
+      font-size:12.5px;
+      font-weight:900;
+      color:var(--link-soft);
+      display:inline-flex;
+      gap:6px;
+      align-items:center;
+    }
+    .tool-link:hover{ color:#4338ca; text-decoration:none; }
+    .badge{
+      font-size:11px;
+      font-weight:800;
+      color:#334155;
+      border:1px solid rgba(148,163,184,0.6);
+      border-radius:999px;
+      padding:4px 8px;
+      background:rgba(255,255,255,0.75);
+      white-space:nowrap;
+    }
 
     /* Case cards */
     .case-grid{
@@ -353,83 +308,56 @@
       padding:0 18px 16px;
     }
 
-    /* System diagram */
-    /* SYSTEM: side-by-side layout */
-.system-layout{
-  display:grid;
-  grid-template-columns: 1.35fr 1fr; /* image left, text right */
-  gap:16px;
-  align-items:start;
-  margin-top:12px;
-}
+    /* ============================
+       SYSTEM: SIDE-BY-SIDE LAYOUT
+       ============================ */
+    .system-layout{
+      display:grid;
+      grid-template-columns:1.35fr 1fr;
+      gap:16px;
+      align-items:start;
+      margin-top:12px;
+    }
+    @media (max-width: 900px){
+      .system-layout{grid-template-columns:1fr;}
+    }
 
-@media (max-width: 900px){
-  .system-layout{ grid-template-columns: 1fr; }
-}
-
-/* Let the two columns shrink properly (prevents overflow) */
-.system-left, .system-right{ min-width:0; }
-
-/* Remove centering/margins that assume single-column */
-.system-diagram{
-  margin:0;               /* was: 12px auto 14px */
-  max-width:none;         /* was: 900px */
-  width:100%;
-}
-
-/* Make bullets/cta behave as a right-side panel */
-.system-right{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.system-right .bullets{
-  margin:0;               /* was: 12px auto 0 */
-  max-width:none;         /* was: 980px */
-}
-
-.system-right .sys-cta{
-  margin-top:0;           /* was: 10px */
-}
-
-.system-diagram{
-  margin: 12px auto 14px;
-  max-width: 900px;              /* slightly narrower */
-  text-align: center;
-  background:rgba(255,255,255,0.75);
-  border:1px solid rgba(148,163,184,0.45);
-  border-radius:16px;
-  padding:14px 16px;             /* more horizontal, less vertical */
-  box-shadow:0 1px 3px rgba(15,23,42,.06);
-}
+    .system-diagram{
+      background:rgba(255,255,255,0.75);
+      border:1px solid rgba(148,163,184,0.45);
+      border-radius:16px;
+      padding:14px 16px;
+      box-shadow:0 1px 3px rgba(15,23,42,.06);
+    }
     .system-diagram img{
-  width: 100%;
-  height: auto;
-  max-height: 420px;          /* 👈 this is the key */
-  object-fit: contain;
-  border-radius: 12px;
-}
-@media (max-width: 640px){
-  .system-diagram img{
-    max-height: 320px;
-  }
-}
+      width:100%;
+      height:auto;
+      max-height:420px;
+      object-fit:contain;
+      border-radius:12px;
+      display:block;
+    }
+    @media (max-width: 640px){
+      .system-diagram img{ max-height:320px; }
+    }
+
+    .system-right{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-width:0;
+    }
 
     .bullets{
-      margin:12px auto 0;
-      max-width:980px;
       color:#334155;
       font-size:14px;
       line-height:1.6;
-      display:grid;
-      grid-template-columns:1fr;
-      gap:8px;
     }
     .bullets ul{margin:0; padding-left:18px;}
     .bullets li{margin:6px 0;}
+
     .sys-cta{
-      margin-top:10px;
+      margin-top:6px;
       display:flex;
       justify-content:flex-start;
       gap:10px;
@@ -580,66 +508,62 @@
     </p>
 
     <!-- TOOLS -->
-<section class="chapter" aria-label="Tools">
-  <h2>Tools I Built</h2>
-  <p>
-    Working tools embedded in real People Ops environments. Each tool is designed for
-    human-in-the-loop operation and measurable outcomes.
-  </p>
+    <section class="chapter" aria-label="Tools">
+      <h2>Tools I Built</h2>
+      <p>
+        Working tools embedded in real People Ops environments. Each tool is designed for
+        human-in-the-loop operation and measurable outcomes.
+      </p>
 
-  <!-- Single grid container (do NOT nest another .tools-grid inside) -->
-  <div id="tools-grid" class="tools-grid" aria-label="Tools grid"></div>
+      <div id="tools-grid" class="tools-grid" aria-label="Tools grid"></div>
 
-  <p class="note" style="margin-top:10px; text-align:left;">
-    <a href="tools/" style="font-weight:900; color:var(--link-soft);">View all tools →</a>
-  </p>
-</section>
+      <p class="note" style="margin-top:10px; text-align:left;">
+        <a href="tools/" style="font-weight:900; color:var(--link-soft);">View all tools →</a>
+      </p>
+    </section>
 
-<script>
-  fetch('/tools/tools.json')
-    .then(res => {
-      if (!res.ok) throw new Error('Could not load tools/tools.json');
-      return res.json();
-    })
-    .then(tools => {
-      const grid = document.getElementById('tools-grid');
-      grid.innerHTML = ''; // clear in case of re-run
-
-      tools.forEach(tool => {
-        const card = document.createElement('div');
-        card.className = 'tool-card';
-        card.innerHTML = `
-          <div class="tool-top">
-            <div>
-              <h3>${tool.emoji || ''} ${tool.name}</h3>
-              <p>${tool.description}</p>
+    <script>
+      fetch('/tools/tools.json')
+        .then(res => {
+          if (!res.ok) throw new Error('Could not load tools/tools.json');
+          return res.json();
+        })
+        .then(tools => {
+          const grid = document.getElementById('tools-grid');
+          grid.innerHTML = '';
+          tools.forEach(tool => {
+            const card = document.createElement('div');
+            card.className = 'tool-card';
+            card.innerHTML = `
+              <div class="tool-top">
+                <div>
+                  <h3>${tool.emoji || ''} ${tool.name}</h3>
+                  <p>${tool.description}</p>
+                </div>
+                <span class="badge">${tool.type}</span>
+              </div>
+              <a class="tool-link" href="${tool.href}">Open tool →</a>
+            `;
+            grid.appendChild(card);
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          const grid = document.getElementById('tools-grid');
+          grid.innerHTML = `
+            <div class="tool-card">
+              <div class="tool-top">
+                <div>
+                  <h3>⚠️ Tools failed to load</h3>
+                  <p>Check that <code>tools/tools.json</code> exists and the path is correct.</p>
+                </div>
+                <span class="badge">Error</span>
+              </div>
+              <a class="tool-link" href="tools/">Browse tools →</a>
             </div>
-            <span class="badge">${tool.type}</span>
-          </div>
-          <a class="tool-link" href="${tool.href}">Open tool →</a>
-        `;
-        grid.appendChild(card);
-      });
-    })
-    .catch(err => {
-      console.error(err);
-      const grid = document.getElementById('tools-grid');
-      grid.innerHTML = `
-        <div class="tool-card">
-          <div class="tool-top">
-            <div>
-              <h3>⚠️ Tools failed to load</h3>
-              <p>Check that <code>tools/tools.json</code> exists and the path is correct.</p>
-            </div>
-            <span class="badge">Error</span>
-          </div>
-          <a class="tool-link" href="tools/">Browse tools →</a>
-        </div>
-      `;
-    });
-</script>
-
-
+          `;
+        });
+    </script>
 
     <!-- USE CASES (expandable) -->
     <details aria-label="Use Cases">
@@ -694,33 +618,32 @@
         <div class="chev">›</div>
       </summary>
 
-      <div class="system-layout">
-  <div class="system-left">
-    <figure class="system-diagram">
-      <img
-        src="assets/diagrams/system.png"
-        alt="AI-native people operations system showing human judgment, orchestration, signals, execution, and systems environment"
-        loading="lazy"
-      />
-    </figure>
-  </div>
+      <div class="details-body">
+        <!-- SIDE-BY-SIDE WRAP -->
+        <div class="system-layout">
+          <div class="system-diagram">
+            <img
+              src="assets/diagrams/system.png"
+              alt="AI-native people operations system showing human judgment, orchestration, signals, execution, and systems environment"
+              loading="lazy"
+            />
+          </div>
 
-  <div class="system-right">
-    <div class="bullets">
-      <ul>
-        <li><b>AI is infrastructure</b> — embedded inside the platforms teams already use.</li>
-        <li><b>Humans remain accountable</b> — escalation paths and auditability are built in.</li>
-        <li><b>Governance is continuous</b> — signals and workflows co-evolve with the business.</li>
-        <li><b>The system is operable, not fragile</b> — designed to run in real constraints.</li>
-      </ul>
-    </div>
+          <div class="system-right">
+            <div class="bullets">
+              <ul>
+                <li><b>AI is infrastructure</b> — embedded inside the platforms teams already use.</li>
+                <li><b>Humans remain accountable</b> — escalation paths and auditability are built in.</li>
+                <li><b>Governance is continuous</b> — signals and workflows co-evolve with the business.</li>
+                <li><b>The system is operable, not fragile</b> — designed to run in real constraints.</li>
+              </ul>
+            </div>
 
-    <div class="sys-cta">
-      <a class="btn primary" href="system/">Explore the system →</a>
-    </div>
-  </div>
-</div>
-
+            <div class="sys-cta">
+              <a class="btn primary" href="system/">Explore the system →</a>
+            </div>
+          </div>
+        </div>
       </div>
     </details>
 
