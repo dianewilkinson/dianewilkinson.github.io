@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Diane Wilkinson — AI-Native People Ops & Talent Analytics</title>
+  <title>Diane Wilkinson — AI-Native People Operating System | People Ops, Talent Intelligence</title>
 
   <!-- Open Graph / Social Preview -->
-  <meta property="og:title" content="Diane Wilkinson — AI-Native People Ops & Talent Analytics">
-  <meta property="og:description" content="Workflow-first internal AI and analytics across Hire, Support, Evaluate, and Improve — with human-in-the-loop guardrails and auditability.">
+  <meta property="og:title" content="Diane Wilkinson — AI-Native People Operating System | People Ops, Talent Intelligence">
+  <meta property="og:description" content="I design workflow-first internal AI and analytics across Hire, Support, Evaluate, and Improve — with human-in-the-loop governance and auditability.">
   <meta property="og:image" content="https://dianewilkinson.github.io/assets/og-upwork.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dianewilkinson.github.io">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Diane Wilkinson — AI-Native People Ops & Talent Analytics">
+  <meta name="twitter:title" content="Diane Wilkinson — AI-Native People Operating System">
   <meta name="twitter:description" content="Internal AI in the weeds of everyday people workflows — evidence-first, human-in-the-loop.">
   <meta name="twitter:image" content="https://dianewilkinson.github.io/assets/og-upwork.png">
 
@@ -25,7 +25,10 @@
       --muted:#64748b;
       --border:#e5e7eb;
       --link:#2563eb;
+
+      /* Purple used previously */
       --link-soft:#4f46e5;
+
       --shadow:rgba(15,23,42,0.08);
 
       /* Top bar gradient */
@@ -101,6 +104,7 @@
       .hero h2{font-size:22px;}
     }
 
+    /* Intro lines */
     .introline{
       margin:10px 0 10px;
       color:#475569;
@@ -109,42 +113,13 @@
       max-width:980px;
     }
 
+    /* Small utility lines */
     .note{
       font-size:13px;
       color:var(--muted);
       margin:6px 0 14px;
       text-align:center;
     }
-
-    /* Quick links row */
-    .quicklinks{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:center;
-      margin:10px 0 2px;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:800;
-      border:1px solid rgba(148,163,184,0.7);
-      background:rgba(255,255,255,0.92);
-      color:#334155;
-      white-space:nowrap;
-      text-decoration:none;
-    }
-    .pill:hover{background:#fff;text-decoration:none;color:#0f172a;}
-    .pill.primary{
-      border:none;
-      background:#4f46e5;
-      color:#fff;
-    }
-    .pill.primary:hover{background:#4338ca;color:#fff;}
 
     /* Chapter dividers (blue-purple) */
     .chapter{
@@ -170,15 +145,18 @@
       max-width:980px;
     }
 
+    /* Special title color for the system name */
     .system-name{
       color:var(--link-soft);
       font-weight:900;
     }
+
+    /* Inline system link */
     .system-link{
       display:inline-block;
       margin-top:8px;
       font-size:13px;
-      font-weight:900;
+      font-weight:800;
       color:var(--link-soft);
     }
     .system-link:hover{color:#4338ca;}
@@ -203,7 +181,7 @@
     .card h3{
       margin:0 0 6px;
       font-size:16px;
-      font-weight:800;
+      font-weight:700;
       letter-spacing:-0.01em;
     }
     .card p{
@@ -222,10 +200,19 @@
       display:inline-block;
       margin-right:10px;
       margin-top:2px;
-      font-weight:900;
+      font-weight:800;
     }
 
-    /* Case cards */
+    .mini-list{
+      margin:0;
+      padding-left:18px;
+      color:#334155;
+      font-size:14px;
+      line-height:1.65;
+    }
+    .mini-list li{margin:6px 0;}
+
+    /* Case cards: slightly darker surface */
     .case-grid{
       display:grid;
       gap:16px;
@@ -246,7 +233,7 @@
     .case-card h3{
       margin:0 0 6px;
       font-size:15.5px;
-      font-weight:900;
+      font-weight:800;
       letter-spacing:-0.01em;
       color:#0f172a;
     }
@@ -263,11 +250,38 @@
     }
     .case-meta a{
       display:inline-block;
-      font-weight:900;
+      font-weight:800;
     }
 
-    /* Guardrails tiers */
-    .full{ margin-top:12px; }
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
+      border:1px solid rgba(148,163,184,0.75);
+      background:rgba(255,255,255,0.92);
+      color:#4338ca;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .btn:hover{background:#fff; text-decoration:none; color:#3730a3;}
+    .btn.primary{
+      border:none;
+      background:#4f46e5;
+      color:#fff;
+    }
+    .btn.primary:hover{background:#4338ca; color:#fff;}
+
+    /* Guardrails full-width card spacing */
+    .full{
+      margin-top:12px;
+    }
+
+    /* Guardrail tiers: 4 across on desktop */
     .tier{
       display:grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -301,24 +315,6 @@
       line-height:1.45;
     }
 
-    /* System diagram */
-    .system-diagram{
-      margin: 18px auto 6px;
-      max-width: 960px;
-      text-align: center;
-    }
-    .system-diagram img{
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-    }
-    .system-diagram figcaption{
-      margin-top: 10px;
-      font-size: 13px;
-      color: #64748b;
-      line-height: 1.5;
-    }
-
     /* Bottom "Let's Connect" strip (PINK) */
     .connect{
       margin-top:18px;
@@ -342,6 +338,7 @@
       max-width:860px;
     }
 
+    /* ONE-LINE BUTTON ROW (wraps on mobile) */
     .connect-actions{
       margin-top:12px;
       padding-top:12px;
@@ -352,28 +349,6 @@
       align-items:center;
       justify-content:flex-start;
     }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 13px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:900;
-      border:1px solid rgba(148,163,184,0.75);
-      background:rgba(255,255,255,0.92);
-      color:#4338ca;
-      text-decoration:none;
-      white-space:nowrap;
-    }
-    .btn:hover{background:#fff; text-decoration:none; color:#3730a3;}
-    .btn.primary{
-      border:none;
-      background:#4f46e5;
-      color:#fff;
-    }
-    .btn.primary:hover{background:#4338ca; color:#fff;}
 
     footer{
       text-align:center;
@@ -386,6 +361,182 @@
       margin:10px auto 0;
       padding:0 20px;
     }
+
+    /* ==========================================================
+       ORCHESTRATION VISUAL (Chief centered) — REPLACES 2x2 GRID
+       ========================================================== */
+    .orch{
+      margin-top:12px;
+    }
+
+    .orch-board{
+      position:relative;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:var(--card);
+      box-shadow:0 1px 3px var(--shadow);
+      padding:18px;
+      overflow:hidden;
+    }
+
+    .orch-board:before{
+      content:"";
+      position:absolute;
+      inset:-40px;
+      background:var(--cool-soft);
+      opacity:.55;
+      filter:saturate(1.05);
+      z-index:0;
+    }
+
+    .orch-grid{
+      position:relative;
+      z-index:1;
+      display:grid;
+      gap:14px;
+      grid-template-columns:1fr 1.25fr 1fr;
+      align-items:stretch;
+    }
+
+    .orch-col{
+      display:grid;
+      gap:14px;
+      align-content:center;
+    }
+
+    .orch-chief{
+      border-radius:16px;
+      border:1px solid rgba(99,102,241,0.25);
+      background:rgba(255,255,255,0.92);
+      box-shadow:0 8px 24px rgba(15,23,42,.08);
+      padding:16px 16px 14px;
+      min-height:220px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .orch-chief .kicker{
+      font-size:12px;
+      font-weight:900;
+      color:#334155;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+
+    .orch-chief h3{
+      margin:0 0 8px;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:-0.01em;
+    }
+
+    .orch-chief p{
+      margin:0;
+      color:#475569;
+      font-size:13.5px;
+      line-height:1.6;
+    }
+
+    .orch-chief .chips{
+      margin-top:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:center;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      border:1px solid rgba(148,163,184,0.6);
+      background:rgba(255,255,255,0.9);
+      color:#334155;
+    }
+
+    .orch-node{
+      border-radius:14px;
+      border:1px solid rgba(148,163,184,0.6);
+      background:rgba(255,255,255,0.88);
+      padding:12px 12px 10px;
+      box-shadow:0 1px 2px rgba(15,23,42,.06);
+    }
+
+    .orch-node h4{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:-0.01em;
+    }
+
+    .orch-node p{
+      margin:0 0 8px;
+      color:#475569;
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    /* subtle connectors (not perfect geometry; just “orchestration” vibe) */
+    .orch-lines{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      opacity:.35;
+    }
+    .orch-lines:before,
+    .orch-lines:after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:18%;
+      width:1px;
+      height:64%;
+      background:linear-gradient(to bottom, transparent, #6366f1, transparent);
+      transform:translateX(-50%);
+    }
+    .orch-lines:after{
+      left:auto;
+      right:50%;
+      top:50%;
+      width:70%;
+      height:1px;
+      background:linear-gradient(to right, transparent, #6366f1, transparent);
+      transform:translateY(-50%);
+    }
+
+    @media (max-width:860px){
+      .orch-grid{ grid-template-columns:1fr; }
+      .orch-chief{ text-align:left; align-items:flex-start; }
+      .orch-chief .chips{ justify-content:flex-start; }
+      .orch-lines{ display:none; }
+    }
+    .system-diagram {
+  margin: 28px auto 18px;
+  max-width: 960px;
+  text-align: center;
+}
+
+.system-diagram img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.system-diagram figcaption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #64748b; /* muted slate */
+  line-height: 1.5;
+}
+
   </style>
 </head>
 
@@ -402,169 +553,165 @@
 
   <div class="wrap">
 
-  <!-- HERO (pink) -->
-  <section class="hero" aria-label="Hero">
-    <h2>Internal AI belongs <span>inside the workflow.</span></h2>
-    <p>Not another vendor stack — a toolchain that runs in the tools teams already use, with guardrails and auditability.</p>
-  </section>
+    <!-- HERO (pink) -->
+    <section class="hero" aria-label="Hero">
+      <h2>We don't need more <span>AI vendors.</span></h2>
+      <p>The future belongs to those building AI internally in the weeds of everyday workflows.</p>
+    </section>
 
-  <p class="introline">
-    I build workflow-first tools for People Ops and Talent teams — then connect them into a governed system so signals turn into decisions, not dashboards.
-  </p>
-
-  <p class="note">
-    📄 Read:
-    <a href="articles/why-ai-pilots-fail.html" target="_blank" rel="noopener">
-      Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently
-    </a>
-  </p>
-
-  <!-- 1) TOOLS (PRIMARY ENTRY POINT) -->
-  <section class="chapter" aria-label="Tools">
-    <h2>Start Here: Tools</h2>
-    <p>
-      These are the working pieces — interactive demos that diagnose, route, and reduce People Ops workload inside real constraints.
-      Each tool is designed for human-in-the-loop operation and measurable outcomes.
+    <p class="introline">
+      I see the system underneath the work — not just individual tools or metrics, but how decisions, data, and humans interact. I then build the frameworks and tools to increase efficiency, and ease adoption using data, logic, common sense, and compassion.
+  
     </p>
-  </section>
 
-  <div class="grid" aria-label="Tools grid">
-    <div class="card">
-      <h3>📊 Metrics</h3>
-      <p>Pipeline health diagnostics: pass-through rates, bottlenecks, root-cause prompts, and “what to do next.”</p>
-      <p class="meta"><a href="metrics/" target="_blank" rel="noopener">Open tool →</a></p>
+    <p class="introline" style="margin-top:0;">
+      I reduce complexity without dumbing things down.
+    </p>
+
+    <p class="note">
+      📄 Read my article:
+      <a href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">
+        Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently
+      </a>
+    </p>
+
+    <!-- WHAT I SOLVE -->
+    <section class="chapter" aria-label="What I Solve">
+      <h2>What I Solve</h2>
+      <p>People systems break in predictable ways: silos, missed signals, stalled workflows, and decisions made without data or transparency.
+
+I build systems and design AI-forward internal workflows that make work flow — measured, metered, governable, and transparent — so humans can run them with ease and without vendor sprawl.</p>
+    </section>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🧩 Vendor Sprawl &amp; Messy Workflows</h3>
+        <p>Too many tools frankensteined together fail us. I reduce workload and friction by rebuilding inside the tools teams already use, leaning on AI to do the heavylifting behind the scenes.
+          </p>
+        <p class="meta">Outcome: fewer manual steps, fewer dropped balls, happier humans.</p>
+      </div>
+
+      <div class="card">
+        <h3>📉 Metrics Without Decisions & Decisions Without Metrics</h3>
+        <p>Dashboards exist, but no one knows what to do with them. My systems reduce decision bias, route insights cross-functionally where they're needed, and connect signals to action with ease.</p>
+        <p class="meta">Outcome: decision-relevant analytics (not reporting theatre).</p>
+      </div>
+
+      <div class="card">
+        <h3>⚖️ AI Without Trust</h3>
+        <p>Black boxes erode adoption. I use human-in-the-loop design, guardrails, audit trails and respect to keep AI assistive and accountable while solving problems people actually care about.</p>
+        <p class="meta">Outcome: higher adoption, less defensiveness, safer automation.</p>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>🧪 Screening</h3>
-      <p>Increase throughput without losing signal: structured evaluation, rubrics, and escalation paths.</p>
-      <p class="meta"><a href="screening/" target="_blank" rel="noopener">Open tool →</a></p>
+    <!-- HOW I SOLVE -->
+    <section class="chapter" aria-label="How I Solve">
+      <h2>How I Solve</h2>
+      <p style="margin:0;color:#475569;font-size:14.5px;line-height:1.65;max-width:980px;">
+        <span class="system-name">AI-Native People Ops System</span><br>
+        This portfolio shows how I design and operate internal people systems to <b>Hire</b>, <b>Support</b>, <b>Evaluate</b>, and <b>Improve</b> an inspired workforce — not as disjointed functions, but as an interconnected ecosystem.
+        
+        Each part is built on shared signals, clear decision logic, and human oversight. Insights surface where they matter, not just labeled actionable on a dashboard but actually acted on. The diagram below shows the system underneath the work.
+      </p>
+      <a class="system-link" href="system/">Explore the system →</a>
+    </section>
+
+    <figure class="system-diagram">
+  <img
+    src="assets/people-ops-diagram.png"
+    alt="AI-native people operations system showing human judgment, orchestration, signals, execution, and systems environment"
+    loading="lazy"
+  />
+
+</figure>
+
+  
+
+    <!-- Case studies -->
+    <div class="case-grid" aria-label="Case Studies">
+      <div class="case-card">
+        <h3>📘 Case 1: Diagnosing Pipeline Bottlenecks</h3>
+        <p>How I detect where the pipeline stalls, identify likely causes, and propose fixes that respect capacity constraints.</p>
+        <div class="case-meta">
+          <a href="agents/metrics/" target="_blank" rel="noopener">Related demo</a>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <h3>📗 Case 2: Forecasting Hiring</h3>
+        <p>How I translate demand into realistic targets using pass-through rates, capacity, and timing constraints.</p>
+        <div class="case-meta">
+          <a href="https://docs.google.com/spreadsheets/d/1EYf9S4L6QljiCZ0-mUVpmb7DIvw74j1XUJOt8p42qsw/edit?usp=sharing"
+             target="_blank" rel="noopener">Pipeline calculator</a>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <h3>📙 Case 3: Taming Inbound Chaos</h3>
+        <p>How I save hours while increasing screening volume capacity — without sacrificing signal quality or turning screening into a black box.</p>
+        <div class="case-meta">
+          <a href="agents/screening/" target="_blank" rel="noopener">Related demo</a>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>🔎 Sourcing</h3>
-      <p>Quality-first sourcing workflow: evidence standards, signal checks, and consistency guardrails.</p>
-      <p class="meta"><a href="sourcing/" target="_blank" rel="noopener">Open tool →</a></p>
+    <!-- HOW I KEEP US SAFE (chapter styling, NOT pink) -->
+    <section class="chapter" aria-label="How I Keep Us Safe" style="margin-top:18px;">
+      <h2>How I Keep Us Safe</h2>
+      <p>
+        Guardrails on AI autonomy: what can safely auto-execute, what requires approval, and what must always escalate — with auditability built in.
+      </p>
+    </section>
+
+    <!-- ✅ Full-width Guardrails (Operating principles removed) -->
+    <div class="full">
+      <div class="card">
+        <h3>Guardrails on AI Autonomy</h3>
+        <div class="tier">
+          <div class="tier-item">
+            <b>Tier 0 — Monitor</b>
+            <span>Baseline + drift detection. No action, no noise.</span>
+          </div>
+          <div class="tier-item">
+            <b>Tier 1 — Auto-execute (low risk)</b>
+            <span>Reminders, routing, refreshes, nudges, task creation. Logged and visible.</span>
+          </div>
+          <div class="tier-item">
+            <b>Tier 2 — Recommend (approval required)</b>
+            <span>Actions that affect people or process outcomes require a human decision.</span>
+          </div>
+          <div class="tier-item">
+            <b>Tier 3 — Escalate (high risk)</b>
+            <span>Employment-impacting decisions are never automated; multi-stakeholder governance applies.</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>🎧 Listening</h3>
-      <p>Turn messy feedback into decision-ready themes: survey + open-text synthesis with governance.</p>
-      <p class="meta"><a href="listening/" target="_blank" rel="noopener">Open tool →</a></p>
-    </div>
+    <!-- Bottom strip: Let's Connect (pink) + ALL buttons on ONE line -->
+    <section class="connect" aria-label="Let's Connect">
+      <h2>Let’s Connect</h2>
+      <p>
+        Open to roles in People Analytics, Talent Intelligence, People Ops, and Recruiting Operations — especially teams building internal AI capabilities.
+      </p>
+
+      <div class="connect-actions">
+        <a class="btn primary" href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">📅 Book 15 minutes</a>
+        <a class="btn" href="mailto:dianewilkinson510@gmail.com">Email</a>
+        <a class="btn" href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn primary" href="library.html">📚 Open Artifact Library</a>
+        <a class="btn" href="agents/" target="_blank" rel="noopener">Browse Agents Directory</a>
+      </div>
+    </section>
+
   </div>
-
-  <!-- 2) USE CASES (PROOF / OUTCOMES) -->
-  <section class="chapter" aria-label="Use cases">
-    <h2>Use Cases</h2>
-    <p>
-      Real problems → a tool-assisted workflow → an outcome. Each case links to the demo and the underlying system logic.
-    </p>
-  </section>
-
-  <div class="case-grid" aria-label="Use Cases">
-    <div class="case-card">
-      <h3>📘 Case: Diagnose Pipeline Bottlenecks</h3>
-      <p>Find where the funnel stalls, identify likely causes, and propose fixes that respect capacity constraints.</p>
-      <div class="case-meta">
-        <a href="metrics/" target="_blank" rel="noopener">Tool demo</a> ·
-        <a href="system/" target="_blank" rel="noopener">System logic</a>
-      </div>
-    </div>
-
-    <div class="case-card">
-      <h3>📗 Case: Forecast Hiring Realistically</h3>
-      <p>Translate demand into targets using pass-through rates, capacity, and timing constraints.</p>
-      <div class="case-meta">
-        <a href="https://docs.google.com/spreadsheets/d/1EYf9S4L6QljiCZ0-mUVpmb7DIvw74j1XUJOt8p42qsw/edit?usp=sharing" target="_blank" rel="noopener">Calculator</a> ·
-        <a href="system/" target="_blank" rel="noopener">System logic</a>
-      </div>
-    </div>
-
-    <div class="case-card">
-      <h3>📙 Case: Tame Inbound Screening Chaos</h3>
-      <p>Save hours while increasing screening capacity — without turning evaluation into a black box.</p>
-      <div class="case-meta">
-        <a href="screening/" target="_blank" rel="noopener">Tool demo</a> ·
-        <a href="system/" target="_blank" rel="noopener">System logic</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3) SYSTEM (DEEP DIVE, SECONDARY) -->
-  <section class="chapter" aria-label="System">
-    <h2>System Deep Dive</h2>
-    <p>
-      Tools are the interface. The system is the operating model: shared signals, governed decision logic, auditability, and escalation paths.
-      If you want architecture and how it all connects, start here.
-    </p>
-    <a class="system-link" href="system/">Explore the system →</a>
-  </section>
-
-  <figure class="system-diagram">
-    <img
-      src="assets/people-ops-diagram.png"
-      alt="AI-native people operations system showing human judgment, orchestration, signals, execution, and systems environment"
-      loading="lazy"
-    />
-  </figure>
-
-  <!-- 4) GUARDRAILS -->
-  <section class="chapter" aria-label="How I Keep Us Safe" style="margin-top:18px;">
-    <h2>Guardrails on Autonomy</h2>
-    <p>
-      What can safely auto-execute, what requires approval, and what must always escalate — with auditability built in.
-    </p>
-  </section>
-
-  <div class="full">
-    <div class="card">
-      <h3>Guardrails on AI Autonomy</h3>
-      <div class="tier">
-        <div class="tier-item">
-          <b>Tier 0 — Monitor</b>
-          <span>Baseline + drift detection. No action, no noise.</span>
-        </div>
-        <div class="tier-item">
-          <b>Tier 1 — Auto-execute (low risk)</b>
-          <span>Reminders, routing, refreshes, nudges. Logged and visible.</span>
-        </div>
-        <div class="tier-item">
-          <b>Tier 2 — Recommend (approval required)</b>
-          <span>Actions affecting outcomes require a human decision.</span>
-        </div>
-        <div class="tier-item">
-          <b>Tier 3 — Escalate (high risk)</b>
-          <span>Employment-impacting decisions are never automated.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CONNECT -->
-  <section class="connect" aria-label="Let's Connect">
-    <h2>Let’s Connect</h2>
-    <p>
-      Open to roles in People Analytics, Talent Intelligence, People Ops, and Recruiting Operations — especially teams building internal AI capabilities.
-    </p>
-
-    <div class="connect-actions">
-      <a class="btn primary" href="book/" target="_blank" rel="noopener">📅 Book 15 minutes</a>
-      <a class="btn" href="mailto:dianewilkinson510@gmail.com">Email</a>
-      <a class="btn" href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn primary" href="agents/" target="_blank" rel="noopener">Browse Agents</a>
-      <a class="btn" href="system/">System Deep Dive</a>
-    </div>
-  </section>
-
-</div>
-
 
   <footer>
     <p class="footline">
       Based in the San Francisco Bay Area ·
       <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
-      <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="library.html">Artifact Library</a>
     </p>
   </footer>
 </body>
