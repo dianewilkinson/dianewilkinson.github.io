@@ -4,20 +4,23 @@
     "name": "Metrics Diagnostics",
     "emoji": "📊",
     "description": "Pipeline diagnostics: bottlenecks, pass-through, root causes, and what to do next.",
+    "pill": "AI Tool",
     "type": "Demo",
-    "href": "tools/metrics/",
-
+    "links": {
+      "index": "/tools/metrics/"
+    }
   },
   {
     "id": "screening",
     "name": "Screening",
     "emoji": "📝",
     "description": "Structured evaluation to increase throughput without losing signal.",
+    "pill": "AI Tool",
     "links": {
       "index": "/tools/screening/",
       "demo": "/tools/screening/demo/",
       "playbook": "/tools/screening/playbook/"
-  },
+    },
     "status": {
       "index": "planned",
       "demo": "live",
@@ -29,32 +32,44 @@
     "name": "Sourcing Quality",
     "emoji": "🔎",
     "description": "Evidence standards, signal checks, and consistency guardrails.",
-    "href": "tools/sourcing/",
-
+    "pill": "AI Tool",
+    "type": "Playbook",
+    "links": {
+      "index": "/tools/sourcing/"
+    }
   },
   {
     "id": "listening",
     "name": "Listening",
     "emoji": "🎧",
     "description": "Turn messy feedback into decision-ready themes with governance.",
-    "href": "tools/listening/",
-
+    "pill": "AI Tool",
+    "type": "WIP",
+    "links": {
+      "index": "/tools/listening/"
+    }
   },
   {
     "id": "workflow",
     "name": "Workflow",
     "emoji": "🧭",
     "description": "Workflow-first ops model: routing, SLAs, escalation paths, automation.",
-    "href": "tools/workflow/",
-
+    "pill": "AI Tool",
+    "type": "Model",
+    "links": {
+      "index": "/tools/workflow/"
+    }
   },
   {
     "id": "chief",
     "name": "Chief",
     "emoji": "🧠",
     "description": "Orchestration layer: routing, reasoning, audit trails, delegation.",
-    "href": "tools/chief/",
-
+    "pill": "System",
+    "type": "System",
+    "links": {
+      "index": "/tools/chief/"
+    }
   },
   {
     "id": "innovation",
@@ -73,3 +88,4 @@
     }
   }
 ]
+
