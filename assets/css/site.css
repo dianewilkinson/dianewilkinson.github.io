@@ -192,6 +192,85 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
 ul{margin:10px 0 0 18px; padding:0}
 li{margin:8px 0; color:var(--text)}
 
+/* =========================
+   PLAYBOOK: 3-BOX STRUCTURE
+   ========================= */
+
+.info-layout{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap:14px;
+  margin-top:14px;
+}
+
+@media (max-width: 1100px){
+  .info-layout{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px){
+  .info-layout{ grid-template-columns: 1fr; }
+}
+
+/* These are the 3 “boxes” */
+.hero-meta,
+.toc-card,
+.persona-card{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.90);
+  border-radius: var(--radius);
+  padding:14px 14px;
+  box-shadow: 0 16px 48px var(--shadow);
+}
+
+/* Small uppercase headers inside the 3 boxes */
+.hero-meta h3,
+.toc-card h3,
+.persona-card h3{
+  margin:0 0 10px;
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted2);
+}
+
+.hero-meta ul,
+.toc-card ul{
+  margin:0;
+  padding-left:18px;
+}
+
+.hero-meta li,
+.toc-card li{
+  margin:8px 0;
+  color:var(--text);
+}
+
+/* TOC link style */
+.toc a{
+  color:var(--text);
+  font-weight:800;
+  text-decoration:none;
+}
+.toc a:hover{
+  color:var(--accent);
+  text-decoration:none;
+}
+
+/* “Who this is for” pill label */
+.persona-pill{
+  display:inline-flex;
+  align-items:center;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  background:rgba(96,165,250,.18);
+  color:#1d4ed8;
+  margin-bottom:10px;
+}
+
+
 /* Purpose outcome pills */
 .miniGrid{
   display:grid;
