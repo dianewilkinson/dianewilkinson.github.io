@@ -125,11 +125,12 @@
       max-width:86ch;
     }
     .accent{
-  color: var(--accent);
-  font-weight: 900; /* optional: makes it pop more */
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 900;
 }
-
-
     /* Back to tools (secondary CTA) */
     .backRow{
       margin:10px 2px 2px;
