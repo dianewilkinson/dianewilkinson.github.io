@@ -19,7 +19,9 @@
   /* Global top bar gradient (pink → purple like landing) */
   --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
 }
-
+/* =========================
+   BASE
+   ========================= */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
@@ -41,7 +43,9 @@ a:hover{text-decoration:underline}
 
 .wrap{max-width:1120px; margin:0 auto; padding:28px 18px 64px}
 
-/* Top bar */
+/* =========================
+   COMPONENTS: TOPBAR + BUTTONS
+   ========================= */
 .topbar{
   display:flex; align-items:center; justify-content:space-between;
   gap:14px; margin-bottom:16px;
@@ -71,7 +75,9 @@ a:hover{text-decoration:underline}
   background: linear-gradient(135deg, rgba(79,70,229,.16), rgba(96,165,250,.10));
 }
 
-/* Hero */
+/* =========================
+   COMPONENTS: HERO (shared shell)
+   ========================= */
 .hero{
   border:1px solid var(--border);
   background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.84));
@@ -91,6 +97,11 @@ a:hover{text-decoration:underline}
   mask-image: linear-gradient(180deg, rgba(0,0,0,.95), rgba(0,0,0,.38), rgba(0,0,0,0));
 }
 .hero > *{position:relative}
+
+/* Optional wrappers (used by templates) */
+.hero__back{ margin-top:10px; }
+.hero__divider{ height:1px; background:rgba(226,232,240,0.9); margin:10px 0 0; }
+.hero__addons{ margin-top:14px; }           
 
 .kicker{
   display:inline-flex; gap:8px; align-items:center;
@@ -114,7 +125,6 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   font-size:16px;
   max-width:86ch;
 }
-
 .accent{
   background: linear-gradient(90deg, var(--accent), var(--accent3));
   -webkit-background-clip: text;
@@ -123,7 +133,7 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   font-weight: 900;
 }
 
-/* Back to tools (secondary CTA) */
+/* Index “back to tools” row (only appears when template includes it) */
 .backRow{
   margin:10px 2px 2px;
   display:flex;
@@ -143,17 +153,9 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   margin:10px 0 0;
 }
 
-/* Cards / sections */
-.grid2{
-  display:grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap:14px;
-  margin-top:14px;
-}
-@media (max-width: 920px){
-  .grid2{grid-template-columns:1fr;}
-}
-
+/* =========================
+   COMPONENTS: CARDS / SECTIONS
+   ========================= */
 .card{
   border:1px solid var(--border);
   background:rgba(255,255,255,.90);
@@ -189,89 +191,40 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
 .muted{color:var(--muted)}
 .rule{height:1px; background:var(--border); margin:14px 0}
 
-ul{margin:10px 0 0 18px; padding:0}
-li{margin:8px 0; color:var(--text)}
-
-/* =========================
-   PLAYBOOK: 3-BOX STRUCTURE
-   ========================= */
-
-.info-layout{
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap:14px;
-  margin-top:14px;
+/* Scope list styling so it doesn't leak into nav/UI */
+.card ul, .full ul, .hero-meta ul, .toc-card ul, .persona-card ul, .prose ul{
+  margin:10px 0 0 18px;
+  padding:0;
 }
-
-@media (max-width: 1100px){
-  .info-layout{ grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 720px){
-  .info-layout{ grid-template-columns: 1fr; }
-}
-
-/* These are the 3 “boxes” */
-.hero-meta,
-.toc-card,
-.persona-card{
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.90);
-  border-radius: var(--radius);
-  padding:14px 14px;
-  box-shadow: 0 16px 48px var(--shadow);
-}
-
-/* Small uppercase headers inside the 3 boxes */
-.hero-meta h3,
-.toc-card h3,
-.persona-card h3{
-  margin:0 0 10px;
-  font-size:12px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--muted2);
-}
-
-.hero-meta ul,
-.toc-card ul{
-  margin:0;
-  padding-left:18px;
-}
-
-.hero-meta li,
-.toc-card li{
+.card li, .full li, .hero-meta li, .toc-card li, .persona-card li, .prose li{
   margin:8px 0;
   color:var(--text);
 }
-
-/* TOC link style */
-.toc a{
-  color:var(--text);
-  font-weight:800;
-  text-decoration:none;
+/* =========================
+   LAYOUTS: INDEX GRID + FULL WIDTH
+   ========================= */
+.grid2{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:14px;
+  margin-top:14px;
 }
-.toc a:hover{
-  color:var(--accent);
-  text-decoration:none;
+@media (max-width: 920px){
+  .grid2{grid-template-columns:1fr;}
 }
-
-/* “Who this is for” pill label */
-.persona-pill{
-  display:inline-flex;
-  align-items:center;
-  padding:4px 10px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  background:rgba(96,165,250,.18);
-  color:#1d4ed8;
-  margin-bottom:10px;
+.full{
+  margin-top:14px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.90);
+  border-radius: var(--radius);
+  padding:18px 18px;
+  box-shadow: 0 16px 48px var(--shadow);
 }
+.full h2{margin:0 0 10px; font-size:18px; letter-spacing:-.01em;}
 
-
-/* Purpose outcome pills */
+/* =========================
+   COMPONENTS: MINI GRID (shared)
+   ========================= */
 .miniGrid{
   display:grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -300,7 +253,9 @@ li{margin:8px 0; color:var(--text)}
   line-height:1.45;
 }
 
-/* Iframe demo (above the fold) */
+/* =========================
+   COMPONENTS: DEMO
+   ========================= */
 .demo{
   border:1px solid rgba(226,232,240,0.9);
   background:rgba(255,255,255,.78);
@@ -339,18 +294,9 @@ li{margin:8px 0; color:var(--text)}
   .demoFrame{height:520px;}
 }
 
-/* Full width sections */
-.full{
-  margin-top:14px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.90);
-  border-radius: var(--radius);
-  padding:18px 18px;
-  box-shadow: 0 16px 48px var(--shadow);
-}
-.full h2{margin:0 0 10px; font-size:18px; letter-spacing:-.01em;}
-
-/* CTA row */
+/* =========================
+   COMPONENTS: CTA + FOOTER
+   ========================= */
 .ctaRow{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
 .btnGhost{
   display:inline-flex; align-items:center; gap:10px;
@@ -365,7 +311,6 @@ li{margin:8px 0; color:var(--text)}
 }
 .btnGhost:hover{background:rgba(79,70,229,.10); text-decoration:none}
 
-/* Footer */
 .footer{
   margin-top:20px;
   color:var(--muted2);
@@ -376,3 +321,94 @@ li{margin:8px 0; color:var(--text)}
   flex-wrap:wrap;
   padding:10px 2px 0;
 }
+/* =========================
+   TOOL PLAYBOOK ONLY
+   ========================= */
+body[data-page="tool-playbook"] .info-layout{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap:14px;
+  margin-top:14px;
+}
+@media (max-width: 1100px){
+  body[data-page="tool-playbook"] .info-layout{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px){
+  body[data-page="tool-playbook"] .info-layout{ grid-template-columns: 1fr; }
+}
+
+body[data-page="tool-playbook"] .hero-meta,
+body[data-page="tool-playbook"] .toc-card,
+body[data-page="tool-playbook"] .persona-card{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.90);
+  border-radius: var(--radius);
+  padding:14px 14px;
+  box-shadow: 0 16px 48px var(--shadow);
+}
+
+body[data-page="tool-playbook"] .hero-meta h3,
+body[data-page="tool-playbook"] .toc-card h3,
+body[data-page="tool-playbook"] .persona-card h3{
+  margin:0 0 10px;
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted2);
+}
+
+body[data-page="tool-playbook"] .hero-meta ul,
+body[data-page="tool-playbook"] .toc-card ul{
+  margin:0;
+  padding-left:18px;
+}
+
+body[data-page="tool-playbook"] .toc a{
+  color:var(--text);
+  font-weight:800;
+  text-decoration:none;
+}
+body[data-page="tool-playbook"] .toc a:hover{
+  color:var(--accent);
+  text-decoration:none;
+}
+
+@media (min-width: 920px){
+  body[data-page="tool-playbook"] .toc-card{
+    position: sticky;
+    top: 16px;
+    align-self: start;
+  }
+}
+
+body[data-page="tool-playbook"] .persona-pill{
+  display:inline-flex;
+  align-items:center;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  background:rgba(96,165,250,.18);
+  color:#1d4ed8;
+  margin-bottom:10px;
+}
+
+/* Longform prose defaults (playbooks) */
+body[data-page="tool-playbook"] .prose{ max-width: 92ch; }
+body[data-page="tool-playbook"] .prose h2{ margin: 18px 0 10px; }
+body[data-page="tool-playbook"] .prose h3{ margin: 14px 0 8px; font-size: 15px; }
+body[data-page="tool-playbook"] .prose p{ margin: 10px 0; color: var(--text); }
+body[data-page="tool-playbook"] .prose ul{ margin: 10px 0 0 18px; }
+body[data-page="tool-playbook"] .prose li{ margin: 8px 0; }
+body[data-page="tool-playbook"] .prose code{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.95em;
+}
+
+/* =========================
+   PAGE GUARDS (prevents template bleed)
+   ========================= */
+body[data-page="tool-index"] .info-layout{ display:none; }
+body[data-page="tool-playbook"] .grid2{ display:none; }
