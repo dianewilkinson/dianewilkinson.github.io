@@ -30,7 +30,9 @@
       --grad:linear-gradient(135deg, rgba(79,70,229,.16), rgba(96,165,250,.14), rgba(167,139,250,.14));
       --pill:rgba(79,70,229,.08);
       --link:#2563eb;
+      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
     }
+    .bar{height:4px;background:var(--accent-grad);}
 
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -322,7 +324,7 @@
 </head>
 
 <body>
-  <div class="top-accent"></div>
+  <div class="bar"></div>
 
   <div class="wrap">
     <div class="topbar">
