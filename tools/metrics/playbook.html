@@ -47,73 +47,67 @@
   </div>
   <div class="hairline"></div>
 </section>
-    <section class="grid2" aria-label="Playbook quick links">
-  <div class="card">
-    <h2 class="section-title">What this playbook is</h2>
-    <p class="muted">
-      Metrics is the diagnostics + guardrails layer for Pipeline Health. It sits on top of ATS + agent-emitted events
-      to produce a consistent, trustable view of the funnel — time-to-fill, pass-through, SLAs, and capacity.
-    </p>
-    <p class="muted">
-      This playbook defines the operating model: the data model, metric families, dashboard blueprints,
-      and change control so every stakeholder gets the same answer every time.
-    </p>
+    <section class="info-layout" aria-label="Playbook structure">
+  <aside class="hero-meta">
+    <h3>What this playbook covers</h3>
+    <ul>
+      <li>Problem &amp; purpose</li>
+      <li>Scope, principles, and roles</li>
+      <li>Event model &amp; data sources</li>
+      <li>Metric families &amp; examples</li>
+      <li>Dashboard blueprints</li>
+      <li>Integration with A[i]gents</li>
+      <li>Governance &amp; change control</li>
+    </ul>
+  </aside>
 
-    <div class="ctaRow">
-      <a class="btnGhost" href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link" target="_blank" rel="noopener">
-        📊 Open Metrics Dictionary
-      </a>
-      <a class="btnGhost" href="/tools/metrics/demo.html">Open demo →</a>
-    </div>
-  </div>
+  <nav class="toc-card toc" aria-label="Sections">
+    <h3>Sections</h3>
+    <ul>
+      <li><a href="#problem">1. Problem &amp; Purpose</a></li>
+      <li><a href="#scope">2. Scope &amp; Design Principles</a></li>
+      <li><a href="#roles">3. Roles &amp; Responsibilities</a></li>
+      <li><a href="#model">4. Data Model &amp; Event Sources</a></li>
+      <li><a href="#families">5. Metric Families &amp; Definitions</a></li>
+      <li><a href="#dashboards">6. Dashboard Blueprints</a></li>
+      <li><a href="#integration">7. Integration with A[i]gents</a></li>
+      <li><a href="#implementation">8. Implementation &amp; Stack</a></li>
+      <li><a href="#governance">9. Governance &amp; Change Management</a></li>
+      <li><a href="#appendix-mapping">Appendix A</a></li>
+      <li><a href="#appendix-queries">Appendix B</a></li>
+    </ul>
+  </nav>
 
-  <aside class="card">
-    <h2 class="section-title">Quick links</h2>
-    <p class="small">Everything here supports <strong>Pipeline Health</strong> and feeds Chief escalation + governance.</p>
-    <div class="rule"></div>
-
-    <p><a href="/tools/metrics/dictionary.html"><strong>Metrics Dictionary</strong></a><br />
-      <span class="small">Definitions, owners, formulas, grain, and allowed filters.</span>
-    </p>
-
-    <p><a href="/tools/metrics/"><strong>Overview</strong></a><br />
-      <span class="small">Purpose, outcomes, and where it fits in the system.</span>
-    </p>
-
-    <p><a href="/use-cases/"><strong>Use cases</strong></a><br />
-      <span class="small">Examples of decisions enabled by the layer.</span>
-    </p>
-
-    <div class="rule"></div>
-
-    <h2 style="margin-top:0">Status</h2>
-    <p class="small">
-      <strong>Playbook:</strong> Live<br />
-      <strong>Dictionary:</strong> Live<br />
-      <strong>Demo:</strong> Live
+  <aside class="persona-card">
+    <span class="persona-pill">Who this is for</span>
+    <p class="small" style="margin:0;">
+      TA Leaders, Recruiting Ops, and People Analytics teams who want one trusted set of funnel health numbers —
+      with guardrails that support Tier-1 autonomy.
     </p>
   </aside>
 </section>
 
+    <section class="card" aria-label="What this playbook is">
+  <h2 class="section-title">What this playbook is</h2>
+  <p class="muted">
+    Metrics is the diagnostics + guardrails layer for Pipeline Health. It sits on top of ATS + agent-emitted events
+    to produce a consistent, trustable view of the funnel — time-to-fill, pass-through, SLAs, and capacity.
+  </p>
+  <p class="muted">
+    This playbook defines the operating model: the data model, metric families, dashboard blueprints,
+    and change control so every stakeholder gets the same answer every time.
+  </p>
+
+  <div class="ctaRow">
+    <a class="btnGhost" href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link" target="_blank" rel="noopener">
+      📊 Open Metrics Dictionary
+    </a>
+    <a class="btnGhost" href="/tools/metrics/demo.html">Open demo →</a>
+  </div>
+</section>
+
     <!-- MAIN CONTENT -->
     <section class="full" aria-label="Playbook Content">
-      <h2 class="section-title">Sections</h2>
-<ul>
-  <li><a href="#problem"><strong>1. Problem &amp; Purpose</strong></a></li>
-  <li><a href="#scope"><strong>2. Scope &amp; Design Principles</strong></a></li>
-  <li><a href="#roles"><strong>3. Roles &amp; Responsibilities</strong></a></li>
-  <li><a href="#model"><strong>4. Data Model &amp; Event Sources</strong></a></li>
-  <li><a href="#families"><strong>5. Metric Families &amp; Definitions</strong></a></li>
-  <li><a href="#dashboards"><strong>6. Dashboard Blueprints</strong></a></li>
-  <li><a href="#integration"><strong>7. Integration with A[i]gents</strong></a></li>
-  <li><a href="#implementation"><strong>8. Implementation &amp; Stack</strong></a></li>
-  <li><a href="#governance"><strong>9. Governance &amp; Change Management</strong></a></li>
-  <li><a href="#appendix-mapping"><strong>Appendix A</strong></a></li>
-  <li><a href="#appendix-queries"><strong>Appendix B</strong></a></li>
-</ul>
-
-<div class="rule"></div>
-
 
       <!-- 1. Problem & Purpose -->
       <section id="problem">
