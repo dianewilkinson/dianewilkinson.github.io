@@ -6,16 +6,23 @@
     "description": "Pipeline diagnostics: bottlenecks, pass-through, root causes, and what to do next.",
     "type": "Demo",
     "href": "tools/metrics/",
-    "tags": ["metrics", "throughput", "decision-ready"]
+
   },
   {
     "id": "screening",
     "name": "Screening",
     "emoji": "📝",
     "description": "Structured evaluation to increase throughput without losing signal.",
-    "type": "Demo",
-    "href": "tools/screening/",
-    "tags": ["screening", "evidence", "bias-control"]
+    "links": {
+      "index": "/tools/screening/",
+      "demo": "/tools/screening/demo/",
+      "playbook": "/tools/screening/playbook/"
+  },
+    "status": {
+      "index": "planned",
+      "demo": "live",
+      "playbook": "live"
+    }
   },
   {
     "id": "sourcing",
@@ -24,7 +31,7 @@
     "description": "Evidence standards, signal checks, and consistency guardrails.",
     "type": "Playbook",
     "href": "tools/sourcing/",
-    "tags": ["sourcing", "quality", "governance"]
+
   },
   {
     "id": "listening",
@@ -33,7 +40,7 @@
     "description": "Turn messy feedback into decision-ready themes with governance.",
     "type": "WIP",
     "href": "tools/listening/",
-    "tags": ["listening", "signals", "themes"]
+
   },
   {
     "id": "workflow",
@@ -42,7 +49,7 @@
     "description": "Workflow-first ops model: routing, SLAs, escalation paths, automation.",
     "type": "Model",
     "href": "tools/workflow/",
-    "tags": ["workflow", "routing", "automation"]
+
   },
   {
     "id": "chief",
@@ -51,6 +58,22 @@
     "description": "Orchestration layer: routing, reasoning, audit trails, delegation.",
     "type": "System",
     "href": "tools/chief/",
-    "tags": ["orchestration", "governance", "audit"]
+
+  },
+  {
+    "id": "innovation",
+    "name": "Innovation",
+    "emoji": "💡",
+    "pill": "AI Tool",
+    "description": "Routes ideas, checks institutional memory, turns insights into experiments, ensures closure.",
+    "links": {
+      "index": "/tools/innovation/",
+      "playbook": "/tools/innovation/playbook/"
+    },
+    "status": {
+      "index": "live",
+      "demo": "planned",
+      "playbook": "live"
+    }
   }
 ]
