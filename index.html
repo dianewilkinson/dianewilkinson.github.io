@@ -91,7 +91,6 @@
       .hero h2{font-size:22px;}
     }
 
-    /* Intro lines */
     .introline{
       margin:10px 0 10px;
       color:#475569;
@@ -100,7 +99,6 @@
       max-width:980px;
     }
 
-    /* Small utility lines */
     .note{
       font-size:13px;
       color:var(--muted);
@@ -108,7 +106,6 @@
       text-align:center;
     }
 
-    /* Chapter dividers (blue-purple) */
     .chapter{
       margin:18px 0 12px;
       border-radius:18px;
@@ -116,7 +113,7 @@
       box-shadow:0 6px 18px var(--shadow);
       padding:16px 18px 14px;
       border:1px solid rgba(148,163,184,0.28);
-      overflow:hidden; /* prevents any “spill” */
+      overflow:hidden;
     }
     .chapter h2{
       margin:0 0 6px;
@@ -133,7 +130,6 @@
       max-width:980px;
     }
 
-    /* Cards */
     .card{
       background:var(--card);
       border:1px solid var(--border);
@@ -152,9 +148,7 @@
       letter-spacing:-0.01em;
     }
 
-    /* ==========================================================
-       TOOLS GRID
-       ========================================================== */
+    /* TOOLS GRID */
     .tools-grid{
       display:grid;
       gap:16px;
@@ -196,16 +190,25 @@
       line-height:1.45;
       overflow-wrap:anywhere;
     }
-    .tool-link{
+
+    /* Action row (Demo / Playbook / Open etc.) */
+    .tool-actions{
       margin-top:auto;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .tool-actions a{
       font-size:12.5px;
       font-weight:900;
       color:var(--link-soft);
       display:inline-flex;
-      gap:6px;
       align-items:center;
+      gap:6px;
     }
-    .tool-link:hover{ color:#4338ca; text-decoration:none; }
+    .tool-actions a:hover{ color:#4338ca; text-decoration:none; }
+
     .badge{
       font-size:11px;
       font-weight:800;
@@ -217,50 +220,6 @@
       white-space:nowrap;
     }
 
-    /* Case cards */
-    .case-grid{
-      display:grid;
-      gap:16px;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      margin-top:12px;
-    }
-    .case-card{
-      background:#f1f5f9;
-      border:1px solid #e2e8f0;
-      border-radius:16px;
-      padding:14px 14px 12px;
-      box-shadow:0 1px 2px var(--shadow);
-      display:flex;
-      flex-direction:column;
-      min-height:160px;
-      width:100%;
-    }
-    .case-card h3{
-      margin:0 0 6px;
-      font-size:15.5px;
-      font-weight:900;
-      letter-spacing:-0.01em;
-      color:#0f172a;
-    }
-    .case-card p{
-      margin:0 0 10px;
-      color:#334155;
-      font-size:14px;
-      line-height:1.55;
-    }
-    .case-meta{
-      margin-top:auto;
-      font-size:12px;
-      color:#64748b;
-    }
-    .case-meta a{
-      display:inline-block;
-      font-weight:900;
-      color:var(--link-soft);
-    }
-    .case-meta a:hover{color:#4338ca; text-decoration:none;}
-
-    /* Details / Accordion */
     details{
       border-radius:18px;
       border:1px solid rgba(148,163,184,0.28);
@@ -308,9 +267,7 @@
       padding:0 18px 16px;
     }
 
-    /* ============================
-       SYSTEM: SIDE-BY-SIDE LAYOUT
-       ============================ */
+    /* SYSTEM: SIDE-BY-SIDE */
     .system-layout{
       display:grid;
       grid-template-columns:1.35fr 1fr;
@@ -321,7 +278,6 @@
     @media (max-width: 900px){
       .system-layout{grid-template-columns:1fr;}
     }
-
     .system-diagram{
       background:rgba(255,255,255,0.75);
       border:1px solid rgba(148,163,184,0.45);
@@ -340,14 +296,12 @@
     @media (max-width: 640px){
       .system-diagram img{ max-height:320px; }
     }
-
     .system-right{
       display:flex;
       flex-direction:column;
       gap:10px;
       min-width:0;
     }
-
     .bullets{
       color:#334155;
       font-size:14px;
@@ -364,8 +318,6 @@
       flex-wrap:wrap;
     }
 
-    /* Guardrails */
-    .full{ margin-top:12px; }
     .tier{
       display:grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -399,7 +351,6 @@
       line-height:1.45;
     }
 
-    /* Buttons */
     .btn{
       display:inline-flex;
       align-items:center;
@@ -422,7 +373,6 @@
     }
     .btn.primary:hover{background:#4338ca; color:#fff;}
 
-    /* Connect (pink) */
     .connect{
       margin-top:18px;
       border-radius:18px;
@@ -482,7 +432,6 @@
 
   <div class="wrap">
 
-    <!-- HERO (pink) -->
     <section class="hero" aria-label="Hero">
       <h2>We don't need more <span>AI vendors.</span></h2>
       <p>The future belongs to those building AI internally in the weeds of everyday workflows.</p>
@@ -491,11 +440,9 @@
     <p class="introline">
       I see the system underneath the work — not just individual tools or metrics, but how decisions are made, where signals are lost, and how data, systems, and humans actually interact.
     </p>
-
     <p class="introline">
       I build workflow-first tools for People Ops and Talent teams, then connect them through shared logic so signals turn into action in seconds — not just labeled “actionable” on dashboards.
     </p>
-
     <p class="introline" style="margin-top:0;">
       AI runs quietly in the background, embedded in the platforms teams already use, so adoption doesn’t mean ripping everything out.
     </p>
@@ -507,7 +454,6 @@
       </a>
     </p>
 
-    <!-- TOOLS -->
     <section class="chapter" aria-label="Tools">
       <h2>Tools I Built</h2>
       <p>
@@ -523,92 +469,97 @@
     </section>
 
     <script>
-      fetch('tools/tools.json')
+      // Cache-bust so you don't get stuck on an old tools.json after edits
+      const TOOLS_URL = new URL('tools/tools.json', window.location.href);
+      TOOLS_URL.searchParams.set('v', Date.now());
+
+      function absHref(href){
+        // keep your JSON relative; resolve against current page
+        return new URL(href, window.location.href).toString();
+      }
+
+      function renderToolCard(tool){
+        const emoji = tool.emoji || '';
+        const name = tool.name || 'Untitled';
+        const desc = tool.description || '';
+        const pill = tool.pill || tool.type || 'Tool';
+        const links = tool.links || {};
+        // Choose a sensible primary path for “what should I click”
+        const primary =
+          links.demo ? {label:'Demo', href: links.demo} :
+          links.index ? {label:'Open', href: links.index} :
+          links.playbook ? {label:'Playbook', href: links.playbook} :
+          null;
+
+        const actions = [];
+        if (links.demo) actions.push({label:'Demo', href: links.demo});
+        if (links.playbook) actions.push({label:'Playbook', href: links.playbook});
+        if (links.index) actions.push({label:'Overview', href: links.index});
+        if (links.pdf) actions.push({label:'PDF', href: links.pdf});
+        if (links.external) actions.push({label:'External', href: links.external});
+
+        // If you only want ONE action on landing, keep primary only:
+        const actionHtml = primary
+          ? `<div class="tool-actions">
+               <a href="${absHref(primary.href)}">${primary.label} →</a>
+             </div>`
+          : `<div class="tool-actions">
+               <a href="${absHref('tools/')}">Browse →</a>
+             </div>`;
+
+        return `
+          <div class="tool-card">
+            <div class="tool-top">
+              <div style="min-width:0;">
+                <h3>${emoji} ${name}</h3>
+                <p>${desc}</p>
+              </div>
+              <span class="badge">${pill}</span>
+            </div>
+            ${actionHtml}
+          </div>
+        `;
+      }
+
+      fetch(TOOLS_URL.toString())
         .then(res => {
-          if (!res.ok) throw new Error('Could not load tools/tools.json');
+          if (!res.ok) throw new Error('Fetch failed: ' + res.status);
           return res.json();
         })
         .then(tools => {
           const grid = document.getElementById('tools-grid');
           grid.innerHTML = '';
+          if (!Array.isArray(tools)) throw new Error('tools.json must be an array');
           tools.forEach(tool => {
-            const card = document.createElement('div');
-            card.className = 'tool-card';
-            card.innerHTML = `
-              <div class="tool-top">
-                <div>
-                  <h3>${tool.emoji || ''} ${tool.name}</h3>
-                  <p>${tool.description}</p>
-                </div>
-                <span class="badge">${tool.type}</span>
-              </div>
-              <a class="tool-link" href="${tool.href}">Open tool →</a>
-            `;
-            grid.appendChild(card);
+            const wrap = document.createElement('div');
+            wrap.innerHTML = renderToolCard(tool);
+            grid.appendChild(wrap.firstElementChild);
           });
         })
         .catch(err => {
-          console.error(err);
+          console.error('TOOLS LOAD ERROR:', err);
           const grid = document.getElementById('tools-grid');
           grid.innerHTML = `
             <div class="tool-card">
               <div class="tool-top">
                 <div>
                   <h3>⚠️ Tools failed to load</h3>
-                  <p>Check that <code>tools/tools.json</code> exists and the path is correct.</p>
+                  <p>
+                    Most common causes:
+                    <br>• <code>tools/tools.json</code> is not valid JSON (trailing commas)
+                    <br>• The file isn't published at <code>/tools/tools.json</code>
+                  </p>
                 </div>
                 <span class="badge">Error</span>
               </div>
-              <a class="tool-link" href="tools/">Browse tools →</a>
+              <div class="tool-actions">
+                <a href="tools/">Browse tools →</a>
+              </div>
             </div>
           `;
         });
     </script>
 
-    <!-- USE CASES (expandable) -->
-    <details aria-label="Use Cases">
-      <summary>
-        <div class="sum-left">
-          <h2>Use Cases</h2>
-          <p>Real problems → tool-assisted workflows → outcomes. Expand to see selected cases.</p>
-        </div>
-        <div class="chev">›</div>
-      </summary>
-
-      <div class="details-body">
-        <div class="case-grid" aria-label="Selected Use Cases">
-          <div class="case-card">
-            <h3>📘 Case 1: Diagnosing Pipeline Bottlenecks</h3>
-            <p>Detect where the pipeline stalls, identify likely causes, and propose fixes that respect capacity constraints.</p>
-            <div class="case-meta">
-              <a href="tools/metrics/">Tool demo →</a>
-            </div>
-          </div>
-
-          <div class="case-card">
-            <h3>📗 Case 2: Forecasting Hiring Realistically</h3>
-            <p>Translate demand into targets using pass-through rates, capacity, and timing constraints.</p>
-            <div class="case-meta">
-              <a href="https://docs.google.com/spreadsheets/d/1EYf9S4L6QljiCZ0-mUVpmb7DIvw74j1XUJOt8p42qsw/edit?usp=sharing" target="_blank" rel="noopener">Calculator →</a>
-            </div>
-          </div>
-
-          <div class="case-card">
-            <h3>📙 Case 3: Taming Inbound Screening Chaos</h3>
-            <p>Save hours while increasing screening capacity — without sacrificing signal quality or turning evaluation into a black box.</p>
-            <div class="case-meta">
-              <a href="tools/screening/">Tool demo →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="sys-cta">
-          <a class="btn" href="use-cases/">View all use cases</a>
-        </div>
-      </div>
-    </details>
-
-    <!-- SYSTEM (expandable) -->
     <details aria-label="System Deep Dive">
       <summary>
         <div class="sum-left">
@@ -619,7 +570,6 @@
       </summary>
 
       <div class="details-body">
-        <!-- SIDE-BY-SIDE WRAP -->
         <div class="system-layout">
           <div class="system-diagram">
             <img
@@ -647,7 +597,6 @@
       </div>
     </details>
 
-    <!-- HOW I KEEP US SAFE -->
     <section class="chapter" aria-label="How I Keep Us Safe" style="margin-top:18px;">
       <h2>How I Keep Us Safe</h2>
       <p>
@@ -655,31 +604,28 @@
       </p>
     </section>
 
-    <div class="full">
-      <div class="card">
-        <h3>Guardrails on AI Autonomy</h3>
-        <div class="tier">
-          <div class="tier-item">
-            <b>Tier 0 — Monitor</b>
-            <span>Baseline + drift detection. No action, no noise.</span>
-          </div>
-          <div class="tier-item">
-            <b>Tier 1 — Auto-execute (low risk)</b>
-            <span>Reminders, routing, refreshes, nudges, task creation. Logged and visible.</span>
-          </div>
-          <div class="tier-item">
-            <b>Tier 2 — Recommend (approval required)</b>
-            <span>Actions that affect people or process outcomes require a human decision.</span>
-          </div>
-          <div class="tier-item">
-            <b>Tier 3 — Escalate (high risk)</b>
-            <span>Employment-impacting decisions are never automated; multi-stakeholder governance applies.</span>
-          </div>
+    <div class="card">
+      <h3>Guardrails on AI Autonomy</h3>
+      <div class="tier">
+        <div class="tier-item">
+          <b>Tier 0 — Monitor</b>
+          <span>Baseline + drift detection. No action, no noise.</span>
+        </div>
+        <div class="tier-item">
+          <b>Tier 1 — Auto-execute (low risk)</b>
+          <span>Reminders, routing, refreshes, nudges, task creation. Logged and visible.</span>
+        </div>
+        <div class="tier-item">
+          <b>Tier 2 — Recommend (approval required)</b>
+          <span>Actions that affect people or process outcomes require a human decision.</span>
+        </div>
+        <div class="tier-item">
+          <b>Tier 3 — Escalate (high risk)</b>
+          <span>Employment-impacting decisions are never automated; multi-stakeholder governance applies.</span>
         </div>
       </div>
     </div>
 
-    <!-- CONNECT (pink) -->
     <section class="connect" aria-label="Let's Connect">
       <h2>Let’s Connect</h2>
       <p>
