@@ -37,11 +37,11 @@
   },
   {
     "id": "workflow",
-    "type": "model",
+    "type": "article",
     "area": "Governance & Infrastructure",
     "emoji": "🧭",
-    "title": "Workflow Model",
-    "description": "A workflow-first operating model for routing work, enforcing SLAs, managing escalation, and enabling automation safely.",
+    "title": "Workflow-First Operating Model",
+    "description": "Explains how routing, SLAs, escalation paths, and automation fit together in an AI-native People Ops system.",
     "href": "/tools/workflow/"
   },
   {
