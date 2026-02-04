@@ -29,7 +29,6 @@
     "name": "Sourcing Quality",
     "emoji": "🔎",
     "description": "Evidence standards, signal checks, and consistency guardrails.",
-    "type": "Playbook",
     "href": "tools/sourcing/",
 
   },
@@ -38,7 +37,6 @@
     "name": "Listening",
     "emoji": "🎧",
     "description": "Turn messy feedback into decision-ready themes with governance.",
-    "type": "WIP",
     "href": "tools/listening/",
 
   },
@@ -47,7 +45,6 @@
     "name": "Workflow",
     "emoji": "🧭",
     "description": "Workflow-first ops model: routing, SLAs, escalation paths, automation.",
-    "type": "Model",
     "href": "tools/workflow/",
 
   },
@@ -56,7 +53,6 @@
     "name": "Chief",
     "emoji": "🧠",
     "description": "Orchestration layer: routing, reasoning, audit trails, delegation.",
-    "type": "System",
     "href": "tools/chief/",
 
   },
