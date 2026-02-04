@@ -523,7 +523,7 @@
     </section>
 
     <script>
-      fetch('/tools/tools.json')
+      fetch('tools/tools.json')
         .then(res => {
           if (!res.ok) throw new Error('Could not load tools/tools.json');
           return res.json();
