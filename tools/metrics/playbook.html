@@ -8,279 +8,46 @@
   <meta property="og:title" content="Metrics Layer – Recruiting Funnel Analytics Playbook">
   <meta property="og:description" content="Standardized metrics, data model, and dashboards for AI-native recruiting analytics built on top of a shared Metrics Dictionary.">
   <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/assets/css/site.css?v=1">
 
-  <style>
-    :root{
-      --bg:#f9fafb;
-      --card:#ffffff;
-      --text:#111827;
-      --muted:#4b5563;
-      --border:#e5e7eb;
-      --link:#2563eb;
-      --link-soft:#4f46e5;
-      --shadow:rgba(15,23,42,0.08);
-      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
-      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.09),rgba(168,85,247,.09),rgba(99,102,241,.09));
-    }
-    *{box-sizing:border-box;}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    }
-    a{color:var(--link);text-decoration:none;}
-    a:hover{text-decoration:underline;}
-    .bar{height:4px;background:var(--accent-grad);}
-
-    header{
-      padding:24px 16px 10px;
-      text-align:center;
-    }
-    header h1{
-      margin:0;
-      font-size:24px;
-      font-weight:700;
-    }
-    header p{
-      margin:8px 0 0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-    }
-
-    .wrap{
-      max-width:1120px;
-      margin:0 auto;
-      padding:0 20px 32px;
-    }
-
-    /* Hero card */
-    .hero{
-      margin:16px 0 24px;
-      border-radius:20px;
-      background:linear-gradient(120deg,#fde7ef,#f3e8ff,#e0ecff);
-      box-shadow:0 8px 24px var(--shadow);
-      padding:22px 22px 18px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:18px;
-    }
-    .hero-main{
-      flex:1 1 260px;
-      min-width:0;
-    }
-    .hero-title{
-      margin:0 0 8px;
-      font-size:22px;
-      line-height:1.35;
-    }
-    .hero-title span{
-      color:var(--link-soft);
-    }
-    .hero-main p{
-      margin:0;
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.7;
-    }
-
-    .hero-actions{
-      margin-top:10px;
-      display:flex;
-      flex-direction:row;
-      align-items:center;
-      gap:8px;
-      font-size:13px;
-      flex-wrap:nowrap;
-    }
-    .hero-actions a{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:7px 12px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,.8);
-      background:rgba(255,255,255,.9);
-      font-weight:500;
-      text-decoration:none;
-      white-space:nowrap;
-    }
-    .back-pill{
-      color:#4f46e5;
-    }
-    .back-pill:hover{
-      background:rgba(255,255,255,1);
-      color:#4338ca;
-      text-decoration:none;
-    }
-
-    @media (max-width:800px){
-      .hero{padding:18px 16px 14px;}
-      .hero-title{font-size:20px;}
-    }
-
-    /* Info row under hero – 3 cards */
-    .info-layout{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:18px;
-      margin-bottom:24px;
-    }
-    @media (max-width:1100px){
-      .info-layout{
-        grid-template-columns:1fr 1fr;
-      }
-    }
-    @media (max-width:700px){
-      .info-layout{
-        grid-template-columns:1fr;
-      }
-    }
-
-    .hero-meta,
-    .toc-card,
-    .persona-card{
-      background:var(--card);
-      border-radius:14px;
-      border:1px solid var(--border);
-      padding:12px 12px 10px;
-      box-shadow:0 1px 3px var(--shadow);
-      font-size:13px;
-    }
-    .hero-meta h3,
-    .toc-card h3,
-    .persona-card h3{
-      margin:0 0 6px;
-      font-size:13px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:#6b7280;
-    }
-    .hero-meta ul,
-    .toc-card ul{
-      list-style:none;
-      margin:0;
-      padding:0;
-    }
-    .hero-meta li,
-    .toc-card li{
-      margin:3px 0;
-    }
-
-    .toc-card a{
-      color:#374151;
-      text-decoration:none;
-    }
-    .toc-card a:hover{
-      text-decoration:underline;
-      color:var(--link-soft);
-    }
-
-    .persona-pill{
-      display:inline-flex;
-      align-items:center;
-      padding:4px 10px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:500;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      background:#e0ebff;
-      color:#1d4ed8;
-      margin-bottom:6px;
-    }
-
-    /* Article */
-    article{
-      background:var(--card);
-      border-radius:16px;
-      border:1px solid var(--border);
-      box-shadow:0 1px 3px var(--shadow);
-      padding:18px 20px 18px;
-      font-size:14px;
-      line-height:1.7;
-      color:#111827;
-    }
-    article h2{
-      font-size:18px;
-      margin:18px 0 6px;
-    }
-    article h3{
-      font-size:15px;
-      margin:14px 0 4px;
-    }
-    article h2:first-of-type{
-      margin-top:0;
-    }
-    article p{
-      margin:2px 0 8px;
-    }
-    article ul{
-      margin:4px 0 10px 18px;
-      padding:0;
-    }
-    article li{
-      margin-bottom:3px;
-    }
-    .pill-note{
-      display:inline-block;
-      padding:3px 8px;
-      border-radius:999px;
-      background:rgba(219,234,254,.7);
-      color:#1d4ed8;
-      font-size:11px;
-      font-weight:500;
-      text-transform:uppercase;
-      letter-spacing:.06em;
-    }
-    .callout{
-      margin:10px 0 12px;
-      padding:10px 12px;
-      border-radius:12px;
-      background:rgba(239,246,255,.8);
-      border:1px solid #bfdbfe;
-      font-size:13px;
-    }
-    .table-wrap{
-      margin:6px 0 10px;
-      overflow-x:auto;
-    }
-    table{
-      width:100%;
-      border-collapse:collapse;
-      font-size:13px;
-    }
-    th, td{
-      border:1px solid #e5e7eb;
-      padding:4px 6px;
-      text-align:left;
-    }
-    th{
-      background:#f3f4f6;
-      font-weight:600;
-    }
-
-    footer{
-      text-align:center;
-      margin:18px 0 20px;
-      color:var(--muted);
-      font-size:12px;
-    }
-  </style>
 </head>
 
 <body>
   <div class="bar"></div>
 
-  <header>
-    <h1>Metrics Layer – Recruiting Funnel Analytics Playbook</h1>
-    <p>
-      Standardized Metrics, Guardrails &amp; Dashboards for AI-Native Recruiting · by Diane Wilkinson
-    </p>
-  </header>
-
   <div class="wrap">
+    <div class="topbar">
+  <div class="crumbs">
+    <a href="/">Home</a>
+    <span class="sep">/</span>
+    <a href="/tools/">Tools</a>
+    <span class="sep">/</span>
+    <a href="/tools/metrics/">Pipeline Health</a>
+    <span class="sep">/</span>
+    <span>Playbook</span>
+  </div>
+
+  <div class="navlinks" aria-label="Hero row links">
+    <a class="btn" href="/tools/metrics/">Overview</a>
+    <a class="btn primary" href="/tools/metrics/playbook.html">Playbook</a>
+    <a class="btn" href="/tools/metrics/dictionary.html">Dictionary</a>
+    <a class="btn" href="/use-cases/">Cases</a>
+  </div>
+</div>
+
+<section class="hero" aria-label="Playbook Hero">
+  <div class="kicker"><span class="kdot"></span> Playbook · Guardrails &amp; Operating Model · Autonomy Tier: 1</div>
+  <h1>Metrics Layer <span class="accent">Playbook</span></h1>
+  <p class="sub">
+    Governance, definitions, thresholds, dashboards, and change control for Pipeline Health — so teams stop debating numbers and start fixing bottlenecks.
+  </p>
+
+  <div class="backRow">
+    <a class="backLink" href="/tools/metrics/">← Back to Overview</a>
+  </div>
+  <div class="hairline"></div>
+</section>
+
 
     <!-- HERO -->
     <section class="hero">
