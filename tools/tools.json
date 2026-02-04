@@ -3,7 +3,7 @@
     "id": "metrics",
     "type": "ai_tool",
     "area": "Hiring & Mobility",
-    "emoji": "📊",
+    "emoji": "🤖",
     "title": "Metrics Diagnostics",
     "description": "Turns raw funnel and hiring data into decision-ready diagnostics—bottlenecks, throughput constraints, and what to fix next.",
     "href": "/tools/metrics/"
@@ -30,7 +30,7 @@
     "id": "listening",
     "type": "ai_tool",
     "area": "Listening & Insights",
-    "emoji": "🎧",
+    "emoji": "🤖",
     "title": "Listening A[i]gent",
     "description": "Continuously captures qualitative feedback and turns narrative signals into usable, low-noise insight.",
     "href": "/tools/listening/"
@@ -57,7 +57,7 @@
     "id": "innovation",
     "type": "ai_tool",
     "area": "Improvement & Strategy",
-    "emoji": "💡",
+    "emoji": "🤖",
     "title": "Innovation A[i]gent",
     "description": "Routes ideas into action by checking institutional memory, structuring experiments, and ensuring closure.",
     "href": "/tools/innovation/"
