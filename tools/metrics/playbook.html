@@ -48,22 +48,32 @@
   <div class="hairline"></div>
 </section>
     <section class="info-layout" aria-label="Playbook structure">
-  <aside class="hero-meta">
-    <h3>What this playbook covers</h3>
-    <ul>
-      <li>Problem &amp; purpose</li>
-      <li>Scope, principles, and roles</li>
-      <li>Event model &amp; data sources</li>
-      <li>Metric families &amp; examples</li>
-      <li>Dashboard blueprints</li>
-      <li>Integration with A[i]gents</li>
-      <li>Governance &amp; change control</li>
-    </ul>
-  </aside>
 
+  <!-- LEFT: What this playbook is (content moved here) -->
+  <section class="hero-meta" aria-label="What this playbook is">
+    <h2 class="section-title">What this playbook is</h2>
+
+    <p class="muted">
+      Metrics is the diagnostics + guardrails layer for Pipeline Health. It sits on top of ATS + agent-emitted events
+      to produce a consistent, trustable view of the funnel — time-to-fill, pass-through, SLAs, and capacity.
+    </p>
+    <p class="muted">
+      This playbook defines the operating model: the data model, metric families, dashboard blueprints,
+      and change control so every stakeholder gets the same answer every time.
+    </p>
+
+    <div class="ctaRow">
+      <a class="btnGhost" href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link" target="_blank" rel="noopener">
+        📊 Open Metrics Dictionary
+      </a>
+      <a class="btnGhost" href="/tools/metrics/demo.html">Open demo →</a>
+    </div>
+  </section>
+
+  <!-- MIDDLE: Sections (no bullets) -->
   <nav class="toc-card toc" aria-label="Sections">
-    <h3>Sections</h3>
-    <ul>
+    <h2 class="section-title">Sections</h2>
+    <ul class="tocList">
       <li><a href="#problem">1. Problem &amp; Purpose</a></li>
       <li><a href="#scope">2. Scope &amp; Design Principles</a></li>
       <li><a href="#roles">3. Roles &amp; Responsibilities</a></li>
@@ -78,32 +88,15 @@
     </ul>
   </nav>
 
-  <aside class="persona-card">
-    <span class="persona-pill">Who this is for</span>
-    <p class="small" style="margin:0;">
+  <!-- RIGHT: Who this is for (match sizes + title style) -->
+  <section class="persona-card" aria-label="Who this is for">
+    <h2 class="section-title">Who this is for</h2>
+    <p class="muted" style="margin:0;">
       TA Leaders, Recruiting Ops, and People Analytics teams who want one trusted set of funnel health numbers —
       with guardrails that support Tier-1 autonomy.
     </p>
-  </aside>
-</section>
+  </section>
 
-    <section class="card" aria-label="What this playbook is">
-  <h2 class="section-title">What this playbook is</h2>
-  <p class="muted">
-    Metrics is the diagnostics + guardrails layer for Pipeline Health. It sits on top of ATS + agent-emitted events
-    to produce a consistent, trustable view of the funnel — time-to-fill, pass-through, SLAs, and capacity.
-  </p>
-  <p class="muted">
-    This playbook defines the operating model: the data model, metric families, dashboard blueprints,
-    and change control so every stakeholder gets the same answer every time.
-  </p>
-
-  <div class="ctaRow">
-    <a class="btnGhost" href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link" target="_blank" rel="noopener">
-      📊 Open Metrics Dictionary
-    </a>
-    <a class="btnGhost" href="/tools/metrics/demo.html">Open demo →</a>
-  </div>
 </section>
 
     <!-- MAIN CONTENT -->
@@ -111,7 +104,7 @@
 
       <!-- 1. Problem & Purpose -->
       <section id="problem">
-        <h2>1. Problem &amp; Purpose</h2>
+        <h2 class="section-title">1. Problem &amp; Purpose</h2>
 
         <h3>1.1 The Problem</h3>
         <p>
@@ -142,7 +135,7 @@
 
       <!-- 2. Scope & Design Principles -->
       <section id="scope">
-        <h2>2. Scope &amp; Design Principles</h2>
+        <h2 class="section-title">2. Scope &amp; Design Principles</h2>
 
         <h3>2.1 In-Scope</h3>
         <ul>
@@ -171,7 +164,7 @@
 
       <!-- 3. Roles & Responsibilities -->
       <section id="roles">
-        <h2>3. Roles &amp; Responsibilities</h2>
+        <h2 class="section-title">3. Roles &amp; Responsibilities</h2>
 
         <div class="table-wrap">
           <table>
@@ -213,7 +206,7 @@
 
       <!-- 4. Data Model & Event Sources -->
       <section id="model">
-        <h2>4. Data Model &amp; Event Sources</h2>
+        <h2 class="section-title">4. Data Model &amp; Event Sources</h2>
 
         <p>Metrics A[i]gent is built on an event-based model:</p>
         <ul>
@@ -267,7 +260,7 @@
 
       <!-- 5. Metric Families & Definitions -->
       <section id="families">
-        <h2>5. Metric Families &amp; Definitions</h2>
+        <h2 class="section-title">5. Metric Families &amp; Definitions</h2>
 
         <p>Metrics A[i]gent organizes metrics into families, each with a use case and owner.</p>
 
@@ -316,7 +309,7 @@
 
       <!-- 6. Dashboard Blueprints -->
       <section id="dashboards">
-        <h2>6. Dashboard Blueprints</h2>
+        <h2 class="section-title">6. Dashboard Blueprints</h2>
 
         <p>Metrics A[i]gent surfaces metrics through role-based dashboards.</p>
 
@@ -354,7 +347,7 @@
 
       <!-- 7. Integration with Agents -->
       <section id="integration">
-        <h2>7. Integration with Screening &amp; Interview A[i]gents</h2>
+        <h2 class="section-title">7. Integration with Screening &amp; Interview A[i]gents</h2>
 
         <p>Metrics A[i]gent doesn’t exist in isolation; it’s downstream from other A[i]gents.</p>
 
@@ -397,7 +390,7 @@
 
       <!-- 8. Implementation & Stack -->
       <section id="implementation">
-        <h2>8. Implementation &amp; Stack</h2>
+        <h2 class="section-title">8. Implementation &amp; Stack</h2>
 
         <p>Metrics A[i]gent can run on whatever BI stack the company already uses.</p>
 
@@ -433,7 +426,7 @@
 
       <!-- 9. Governance -->
       <section id="governance">
-        <h2>9. Governance &amp; Change Management</h2>
+        <h2 class="section-title">9. Governance &amp; Change Management</h2>
 
         <p>Metrics without governance are just fancy numbers.</p>
 
@@ -459,7 +452,7 @@
 
       <!-- Appendix A -->
       <section id="appendix-mapping">
-        <h2>Appendix A – Example Metric Mapping</h2>
+        <h2 class="section-title">Appendix A – Example Metric Mapping</h2>
 
         <p>Illustrative mapping of a few key metrics to data fields and formulas.</p>
 
@@ -507,7 +500,7 @@
 
       <!-- Appendix B -->
       <section id="appendix-queries">
-        <h2>Appendix B – Example Questions &amp; Views</h2>
+        <h2 class="section-title">Appendix B – Example Questions &amp; Views</h2>
 
         <p>Metrics A[i]gent is designed to answer questions like:</p>
 
