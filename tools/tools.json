@@ -1,108 +1,65 @@
 [
   {
     "id": "metrics",
-    "name": "Metrics Diagnostics",
+    "type": "ai_tool",
+    "area": "Hiring & Mobility",
     "emoji": "📊",
-    "pill": "AI Tool",
-    "description": "Pipeline diagnostics: bottlenecks, pass-through, root causes, and what to do next.",
-    "links": {
-      "index": "tools/metrics/",
-      "demo": "tools/metrics/demo/",
-      "playbook": "tools/metrics/playbook/"
-    },
-    "status": {
-      "index": "live",
-      "demo": "live",
-      "playbook": "live"
-    }
+    "title": "Metrics Diagnostics",
+    "description": "Turns raw funnel and hiring data into decision-ready diagnostics—bottlenecks, throughput constraints, and what to fix next.",
+    "href": "/tools/metrics/"
   },
   {
     "id": "screening",
-    "name": "Screening",
-    "emoji": "📝",
-    "pill": "AI Tool",
-    "description": "Structured evaluation to increase throughput without losing signal.",
-    "links": {
-      "index": "tools/screening/",
-      "demo": "tools/screening/demo/",
-      "playbook": "tools/screening/playbook/"
-    },
-    "status": {
-      "index": "planned",
-      "demo": "live",
-      "playbook": "live"
-    }
+    "type": "ai_tool",
+    "area": "Hiring & Mobility",
+    "emoji": "🤖",
+    "title": "Screening A[i]gent",
+    "description": "Decision support that surfaces evidence and risk during screening—without turning evaluation into a black box.",
+    "href": "/tools/screening/"
   },
   {
     "id": "sourcing",
-    "name": "Sourcing Quality",
-    "emoji": "🔎",
-    "pill": "Playbook",
-    "description": "Evidence standards, signal checks, and consistency guardrails.",
-    "links": {
-      "index": "tools/sourcing/",
-      "playbook": "tools/sourcing/playbook/"
-    },
-    "status": {
-      "index": "live",
-      "playbook": "live"
-    }
+    "type": "playbook",
+    "area": "Hiring & Mobility",
+    "emoji": "📘",
+    "title": "Sourcing Quality",
+    "description": "Defines evidence standards and signal checks so inbound, outbound, and referrals are evaluated consistently.",
+    "href": "/tools/sourcing/"
   },
   {
     "id": "listening",
-    "name": "Listening",
+    "type": "ai_tool",
+    "area": "Listening & Insights",
     "emoji": "🎧",
-    "pill": "WIP",
-    "description": "Turn messy feedback into decision-ready themes with governance.",
-    "links": {
-      "index": "tools/listening/"
-    },
-    "status": {
-      "index": "planned"
-    }
+    "title": "Listening A[i]gent",
+    "description": "Continuously captures qualitative feedback and turns narrative signals into usable, low-noise insight.",
+    "href": "/tools/listening/"
   },
   {
     "id": "workflow",
-    "name": "Workflow",
+    "type": "model",
+    "area": "Governance & Infrastructure",
     "emoji": "🧭",
-    "pill": "Model",
-    "description": "Workflow-first ops model: routing, SLAs, escalation paths, automation.",
-    "links": {
-      "index": "tools/workflow/",
-      "playbook": "tools/workflow/playbook/"
-    },
-    "status": {
-      "index": "live",
-      "playbook": "live"
-    }
+    "title": "Workflow Model",
+    "description": "A workflow-first operating model for routing work, enforcing SLAs, managing escalation, and enabling automation safely.",
+    "href": "/tools/workflow/"
   },
   {
     "id": "chief",
-    "name": "Chief",
+    "type": "system",
+    "area": "Governance & Infrastructure",
     "emoji": "🧠",
-    "pill": "System",
-    "description": "Orchestration layer: routing, reasoning, audit trails, delegation.",
-    "links": {
-      "index": "tools/chief/"
-    },
-    "status": {
-      "index": "live"
-    }
+    "title": "Chief A[i]gent",
+    "description": "The orchestration layer that governs autonomy—routing decisions, enforcing guardrails, and keeping humans in the loop.",
+    "href": "/tools/chief/"
   },
   {
     "id": "innovation",
-    "name": "Innovation",
+    "type": "ai_tool",
+    "area": "Improvement & Strategy",
     "emoji": "💡",
-    "pill": "AI Tool",
-    "description": "Routes ideas, checks institutional memory, turns insights into experiments, ensures closure.",
-    "links": {
-      "index": "tools/innovation/",
-      "playbook": "tools/innovation/playbook/"
-    },
-    "status": {
-      "index": "live",
-      "demo": "planned",
-      "playbook": "live"
-    }
+    "title": "Innovation A[i]gent",
+    "description": "Routes ideas into action by checking institutional memory, structuring experiments, and ensuring closure.",
+    "href": "/tools/innovation/"
   }
 ]
