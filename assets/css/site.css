@@ -407,6 +407,23 @@ body[data-page="tool-playbook"] .prose code{
   font-size: 0.95em;
 }
 
+/* Playbook TOC: remove bullets + default spacing */
+body[data-page="tool-playbook"] .tocList{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body[data-page="tool-playbook"] .tocList li{
+  margin: 8px 0;
+  padding: 0;
+}
+body[data-page="tool-playbook"] .toc a{
+  display: inline-block;
+  line-height: 1.4;
+}
+
+
 /* =========================
    PAGE GUARDS (prevents template bleed)
    ========================= */
