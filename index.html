@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Diane Wilkinson — AI-Native People Operating System | People Ops, Talent Intelligence</title>
 
-  <!-- Open Graph / Social Preview (keep or remove) -->
   <meta property="og:title" content="Diane Wilkinson — AI-Native People Operating System | People Ops, Talent Intelligence">
   <meta property="og:description" content="I design workflow-first internal AI and analytics across Hire, Support, Evaluate, and Improve — with human-in-the-loop governance and auditability.">
   <meta property="og:image" content="https://dianewilkinson.github.io/assets/og-upwork.png">
@@ -13,173 +12,206 @@
   <meta property="og:url" content="https://dianewilkinson.github.io">
 
   <style>
+    /* =========================
+       CONTRACT — lifted from site.css
+       Keep these aligned with /site.css
+       ========================= */
     :root{
       --bg:#f9fafb;
       --card:#ffffff;
       --text:#0f172a;
-      --muted:#64748b;
+      --muted:#475569;
+      --muted2:#64748b;
       --border:#e5e7eb;
-      --link:#2563eb;
-      --link-soft:#4f46e5;
       --shadow:rgba(15,23,42,0.08);
+      --radius:18px;
+      --link:#2563eb;
 
       --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
-      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.12),rgba(168,85,247,.12),rgba(99,102,241,.12));
-      --cool-soft:linear-gradient(135deg,rgba(147,197,253,.18),rgba(167,139,250,.16),rgba(99,102,241,.14));
+
+      --cool-grad:linear-gradient(
+        135deg,
+        rgba(59,130,246,.16),
+        rgba(167,139,250,.16),
+        rgba(99,102,241,.12)
+      );
+
+      --pink-grad:linear-gradient(
+        135deg,
+        rgba(249,115,115,.18),
+        rgba(251,113,133,.16),
+        rgba(168,85,247,.14),
+        rgba(99,102,241,.10)
+      );
+
+      --page-bg:
+        radial-gradient(circle at 10% 0%, rgba(59,130,246,.06), transparent 42%),
+        radial-gradient(circle at 90% 10%, rgba(167,139,250,.06), transparent 38%),
+        radial-gradient(circle at 50% 100%, rgba(99,102,241,.05), transparent 45%),
+        var(--bg);
+
+      --accent:#4f46e5;
+      --accent2:#60a5fa;
+      --accent3:#a78bfa;
     }
 
-    *{box-sizing:border-box;}
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      background:radial-gradient(circle at top left, #eef2ff, #f8fafc 60%);
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      background: var(--page-bg);
       color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      line-height:1.55;
     }
-    a{color:var(--link);text-decoration:none;}
-    a:hover{text-decoration:underline;}
-    .bar{height:4px;background:var(--accent-grad);}
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
 
+    .bar{height:4px;background:var(--accent-grad);}
+    .wrap{max-width:1120px; margin:0 auto; padding:28px 18px 64px}
+
+    /* ===== Landing header (simple) ===== */
     header{
       text-align:center;
-      padding:30px 16px 6px;
+      padding:22px 12px 10px;
     }
     header h1{
       margin:0;
-      font-size:24px;
-      font-weight:700;
+      font-size:22px;
+      font-weight:800;
       letter-spacing:-0.02em;
     }
     header .subline{
       margin-top:10px;
       font-size:13px;
-      font-weight:600;
-      color:#475569;
+      font-weight:700;
+      color:var(--muted2);
       line-height:1.55;
     }
 
-    .wrap{
-      max-width:1120px;
-      margin:0 auto;
-      padding:14px 20px 34px;
-    }
-
-    /* HERO (pink) */
+    /* =========================
+       HERO — shared shell + landing variant
+       ========================= */
     .hero{
-      margin:10px 0 10px;
-      border-radius:20px;
-      background:var(--accent-soft);
-      box-shadow:0 8px 24px var(--shadow);
-      padding:22px 22px 18px;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.84));
+      border-radius: var(--radius);
+      padding:24px 22px 18px;
+      box-shadow: 0 18px 55px var(--shadow);
+      position:relative;
+      overflow:hidden;
+      margin-bottom:14px;
     }
-    .hero h2{ color: var(--text); }
-      margin:0 0 8px;
-      font-size:28px;
-      line-height:1.2;
-      letter-spacing:-0.02em;
-      font-weight:800;
+    .hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      opacity:.95;
+      pointer-events:none;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.95), rgba(0,0,0,.38), rgba(0,0,0,0));
     }
-    .hero h2 span{ color: var(--link-soft); }
-    .hero p{ color: var(--muted); }
+    .hero > *{position:relative}
+    .hero--home::before{ background: var(--pink-grad); }
+
+    .hero h2{
+      margin:12px 0 8px;
+      font-size:34px;
+      letter-spacing:-.02em;
+      font-weight:900;
+      color:var(--text);
+    }
+    .hero p{
       margin:0;
-      font-size:15px;
-      color:#475569;
-      line-height:1.7;
-      max-width:920px;
+      color:var(--muted);
+      font-size:16px;
+      max-width:86ch;
     }
-    @media (max-width:720px){
-      .hero{padding:18px 16px 16px;}
-      .hero h2{font-size:22px;}
-    }
-
-    .introline{
-      margin:10px 0 10px;
-      color:#475569;
-      font-size:14.5px;
-      line-height:1.7;
-      max-width:980px;
+    .accent{
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:900;
     }
 
+    /* =========================
+       PANELS / CARDS — contract surface
+       ========================= */
+    .card{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.90);
+      border-radius: var(--radius);
+      padding:18px 18px;
+      box-shadow: 0 16px 48px var(--shadow);
+    }
+    .card h3{ margin:0 0 10px; font-size:18px; letter-spacing:-.01em; }
+    .muted{color:var(--muted)}
     .note{
       font-size:13px;
-      color:var(--muted);
-      margin:6px 0 14px;
+      color:var(--muted2);
+      margin:10px 0 18px;
       text-align:center;
     }
 
-    .chapter{
-  margin:18px 0 12px;
-  border-radius:18px;
-  background:var(--card);
-  box-shadow:0 6px 18px var(--shadow);
-  padding:16px 18px 14px;
-  border:1px solid rgba(148,163,184,0.28);
-  overflow:hidden;
-  position:relative;
-}
-.chapter::before{
-  content:"";
-  position:absolute;
-  top:0;left:0;right:0;
-  height:60px;
-  background:var(--cool-soft);
-  opacity:.55;
-  pointer-events:none;
-}
-.chapter > *{ position:relative; z-index:1; }
-
-    .chapter h2{
-      margin:0 0 6px;
-      font-size:22px;
-      font-weight:800;
-      letter-spacing:-0.02em;
-      color:var(--text);
-    }
-    .chapter p{
-      margin:0;
-      color:#475569;
-      font-size:14.5px;
-      line-height:1.65;
-      max-width:980px;
-    }
-
-    .card{
-      background:var(--card);
+    /* “Tools I Built” panel matches playbook feel */
+    .panel{
       border:1px solid var(--border);
-      border-radius:16px;
-      padding:14px 14px 12px;
-      box-shadow:0 1px 3px var(--shadow);
-      display:flex;
-      flex-direction:column;
-      min-height:170px;
-      width:100%;
+      border-radius: var(--radius);
+      padding:14px;
+      box-shadow: 0 16px 48px var(--shadow);
+      background: var(--cool-grad);
+      margin-top:14px;
     }
-    .card h3{
-      margin:0 0 6px;
-      font-size:16px;
-      font-weight:800;
-      letter-spacing:-0.01em;
+    .panelInner{
+      background: rgba(255,255,255,.92);
+      border:1px solid rgba(255,255,255,.55);
+      border-radius: calc(var(--radius) - 6px);
+      padding:16px;
+    }
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-size:20px;
+      font-weight:900;
+      letter-spacing:-.015em;
+      margin:0 0 10px;
+    }
+    .section-title::before{
+      content:"";
+      width:6px;
+      height:28px;
+      border-radius:999px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2), var(--accent3));
+    }
+    .section-sub{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
     }
 
-    /* TOOLS GRID */
+    /* =========================
+       TOOLS GRID — landing-only
+       ========================= */
     .tools-grid{
       display:grid;
-      gap:16px;
-      margin-top:12px;
-      width:100%;
       grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-      min-width:0;
+      gap:12px;
+      margin-top:12px;
     }
-    .tool-card{
-  background:
-    linear-gradient(180deg, #f8fafc, #ffffff);
-  border:1px solid #e5e7eb;
-  border-radius:14px;
-  padding:12px 12px 10px;
-  box-shadow:
-    0 1px 2px rgba(15,23,42,.05),
-    0 8px 16px rgba(15,23,42,.04);
-}
 
+    /* Gray-ish surface like tool pages (NOT pure white) */
+    .tool-card{
+      border:1px solid rgba(226,232,240,0.9);
+      background: rgba(255,255,255,.90);
+      border-radius:14px;
+      padding:12px 12px;
+      box-shadow: 0 10px 30px rgba(15,23,42,.06);
+      min-width:0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
     .tool-top{
       display:flex;
       align-items:flex-start;
@@ -187,159 +219,44 @@
       gap:10px;
       min-width:0;
     }
-    .tool-card h3{
-      margin:0 0 4px;
+    .tool-card h4{
+      margin:0 0 6px;
       font-size:14px;
       font-weight:900;
-      letter-spacing:-0.01em;
+      letter-spacing:-.01em;
     }
     .tool-card p{
-      margin:0 0 10px;
-      color:#475569;
+      margin:0;
+      color:var(--muted);
       font-size:12.75px;
       line-height:1.45;
       overflow-wrap:anywhere;
     }
-
-    /* Action row (Demo / Playbook / Open etc.) */
+    .badge{
+      font-size:11px;
+      font-weight:900;
+      color:var(--muted2);
+      border:1px solid rgba(226,232,240,0.95);
+      border-radius:999px;
+      padding:4px 8px;
+      background:rgba(255,255,255,.78);
+      white-space:nowrap;
+      flex:0 0 auto;
+    }
     .tool-actions{
       margin-top:auto;
       display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
+      justify-content:flex-start;
     }
     .tool-actions a{
       font-size:12.5px;
       font-weight:900;
-      color:var(--link-soft);
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
+      color:var(--accent);
+      text-decoration:none;
     }
-    .tool-actions a:hover{ color:#4338ca; text-decoration:none; }
+    .tool-actions a:hover{color:#3730a3}
 
-    .badge{
-      font-size:11px;
-      font-weight:800;
-      color:#334155;
-      border:1px solid rgba(148,163,184,0.6);
-      border-radius:999px;
-      padding:4px 8px;
-      background:rgba(255,255,255,0.75);
-      white-space:nowrap;
-    }
-
-    details{
-  border-radius:18px;
-  border:1px solid rgba(148,163,184,0.28);
-  background:var(--card);
-  box-shadow:0 6px 18px var(--shadow);
-  padding:0;
-  overflow:hidden;
-  margin:18px 0 12px;
-  position:relative;
-}
-details::before{
-  content:"";
-  position:absolute;
-  top:0;left:0;right:0;
-  height:60px;
-  background:var(--cool-soft);
-  opacity:.55;
-  pointer-events:none;
-}
-summary, .details-body{ position:relative; z-index:1; }
-
-    summary{
-      list-style:none;
-      cursor:pointer;
-      padding:16px 18px 14px;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:14px;
-    }
-    summary::-webkit-details-marker{display:none;}
-    .sum-left h2{
-      margin:0 0 6px;
-      font-size:22px;
-      font-weight:900;
-      letter-spacing:-0.02em;
-    }
-    .sum-left p{
-      margin:0;
-      color:#475569;
-      font-size:14.5px;
-      line-height:1.65;
-      max-width:980px;
-    }
-    .chev{
-      font-weight:900;
-      color:var(--link-soft);
-      font-size:18px;
-      line-height:1;
-      margin-top:2px;
-      user-select:none;
-      transform:rotate(0deg);
-      transition:transform .15s ease;
-    }
-    details[open] .chev{transform:rotate(90deg);}
-    .details-body{
-      padding:0 18px 16px;
-    }
-
-    /* SYSTEM: SIDE-BY-SIDE */
-    .system-layout{
-      display:grid;
-      grid-template-columns:1.35fr 1fr;
-      gap:16px;
-      align-items:start;
-      margin-top:12px;
-    }
-    @media (max-width: 900px){
-      .system-layout{grid-template-columns:1fr;}
-    }
-    .system-diagram{
-      background:rgba(255,255,255,0.75);
-      border:1px solid rgba(148,163,184,0.45);
-      border-radius:16px;
-      padding:14px 16px;
-      box-shadow:0 1px 3px rgba(15,23,42,.06);
-    }
-    .system-diagram img{
-      width:100%;
-      height:auto;
-      max-height:420px;
-      object-fit:contain;
-      border-radius:12px;
-      display:block;
-    }
-    @media (max-width: 640px){
-      .system-diagram img{ max-height:320px; }
-    }
-    .system-right{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      min-width:0;
-    }
-    .bullets{
-      color:#334155;
-      font-size:14px;
-      line-height:1.6;
-    }
-    .bullets ul{margin:0; padding-left:18px;}
-    .bullets li{margin:6px 0;}
-
-    .sys-cta{
-      margin-top:6px;
-      display:flex;
-      justify-content:flex-start;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
+    /* ===== Guardrails grid (no clipping) ===== */
     .tier{
       display:grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -347,97 +264,29 @@ summary, .details-body{ position:relative; z-index:1; }
       margin-top:12px;
       align-items:stretch;
     }
-    @media (max-width: 1100px){
-      .tier{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media (max-width: 640px){
-      .tier{ grid-template-columns: 1fr; }
-    }
+    @media (max-width:1100px){ .tier{grid-template-columns:repeat(2, minmax(0,1fr));} }
+    @media (max-width:640px){ .tier{grid-template-columns:1fr;} }
+
     .tier-item{
-      border:1px solid #e2e8f0;
-      background:#fbfdff;
+      border:1px solid rgba(226,232,240,0.9);
+      background:rgba(255,255,255,.75);
       border-radius:14px;
-      padding:10px 10px;
-      min-height:100%;
+      padding:12px 12px;
     }
-    .tier-item b{
-      display:block;
-      font-size:12.5px;
-      margin-bottom:4px;
-      color:#0f172a;
-    }
-    .tier-item span{
-      display:block;
-      font-size:12.5px;
-      color:#475569;
-      line-height:1.45;
-    }
+    .tier-item b{display:block; font-size:13px; margin-bottom:6px; letter-spacing:-.01em;}
+    .tier-item span{display:block; font-size:13px; color:var(--muted); line-height:1.45;}
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 13px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:900;
-      border:1px solid rgba(148,163,184,0.75);
-      background:rgba(255,255,255,0.92);
-      color:#4338ca;
-      text-decoration:none;
-      white-space:nowrap;
-    }
-    .btn:hover{background:#fff; text-decoration:none; color:#3730a3;}
-    .btn.primary{
-      border:none;
-      background:#4f46e5;
-      color:#fff;
-    }
-    .btn.primary:hover{background:#4338ca; color:#fff;}
-
-    .connect{
-      margin-top:18px;
-      border-radius:18px;
-      background: var(--card);
-      border:1px solid rgba(148,163,184,0.28);
-      box-shadow:0 6px 18px var(--shadow);
-      padding:16px 18px 14px;
-    }
-    .connect h2{
-      margin:0 0 6px;
-      font-size:20px;
-      font-weight:900;
-      letter-spacing:-0.02em;
-    }
-    .connect p{
-      margin:0;
-      color:#475569;
-      font-size:14.5px;
-      line-height:1.65;
-      max-width:860px;
-    }
-    .connect-actions{
-      margin-top:12px;
-      padding-top:12px;
-      border-top:1px solid rgba(148,163,184,0.35);
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-start;
-    }
-
+    /* Footer */
     footer{
+      margin-top:26px;
+      padding:22px 0 28px;
+      border-top:1px solid var(--border);
+      background: rgba(255,255,255,.55);
       text-align:center;
-      margin:18px 0 20px;
-      color:var(--muted);
+      color:var(--muted2);
       font-size:13px;
     }
-    footer .footline{
-      max-width:1120px;
-      margin:10px auto 0;
-      padding:0 20px;
-    }
+    footer a{color:var(--accent)}
   </style>
 </head>
 
@@ -452,200 +301,143 @@ summary, .details-body{ position:relative; z-index:1; }
     </div>
   </header>
 
-  <div class="wrap">
+  <main class="wrap">
 
-    <section class="hero" aria-label="Hero">
-  <h2>We don't need more <span>AI vendors.</span></h2>
-  <p>The future belongs to those building AI internally in the weeds of everyday workflows.</p>
-</section>
+    <section class="hero hero--home" aria-label="Hero">
+      <h2>We don’t need more <span class="accent">AI vendors</span>.</h2>
+      <p>The future belongs to those building AI internally in the weeds of everyday workflows.</p>
+    </section>
 
-<section class="card hero-width">
-  <p class="introline" style="margin:0 0 10px;">
-    I see the system underneath the work — not just individual tools or metrics, but how decisions are made, where signals are lost, and how data, systems, and humans actually interact.
-  </p>
-  <p class="introline" style="margin:0 0 10px;">
-    I build workflow-first tools for People Ops and Talent teams, then connect them through shared logic so signals turn into action in seconds — not just labeled “actionable” on dashboards.
-  </p>
-  <p class="introline" style="margin:0;">
-    AI runs quietly in the background, embedded in the platforms teams already use, so adoption doesn’t mean ripping everything out.
-  </p>
-</section>
-
-<p class="note">
-  📄 Read my article:
-  <a href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">
-    Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently
-  </a>
-</p>
-
-  </section>
-
-    <section class="chapter" aria-label="Tools">
-      <h2>Tools I Built</h2>
-      <p>
-        Working tools embedded in real People Ops environments. Each tool is designed for
-        human-in-the-loop operation and measurable outcomes.
+    <section class="card" aria-label="Intro">
+      <p class="muted" style="margin:0 0 10px;">
+        I see the system underneath the work — not just individual tools or metrics, but how decisions are made, where signals are lost, and how data, systems, and humans actually interact.
       </p>
-
-      <div id="tools-grid" class="tools-grid" aria-label="Tools grid"></div>
-
-      <p class="note" style="margin-top:10px; text-align:left;">
-        <a href="tools/" style="font-weight:900; color:var(--link-soft);">View all tools →</a>
+      <p class="muted" style="margin:0 0 10px;">
+        I build workflow-first tools for People Ops and Talent teams, then connect them through shared logic so signals turn into action in seconds — not just labeled “actionable” on dashboards.
+      </p>
+      <p class="muted" style="margin:0;">
+        AI runs quietly in the background, embedded in the platforms teams already use, so adoption doesn’t mean ripping everything out.
       </p>
     </section>
 
-<script>
-  const TOOLS_URL = new URL('tools/tools-landing.json', window.location.href);
-  TOOLS_URL.searchParams.set('v', Date.now());
+    <p class="note">
+      📄 Read my article:
+      <a href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">
+        Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently
+      </a>
+    </p>
 
-  function absHref(href){
-    return new URL(href, window.location.href).toString();
-  }
+    <section class="panel" aria-label="Tools I Built">
+      <div class="panelInner">
+        <h3 class="section-title">Tools I Built</h3>
+        <p class="section-sub">
+          Working tools embedded in real People Ops environments. Each tool is designed for human-in-the-loop operation and measurable outcomes.
+        </p>
 
-  function normalizeTool(tool){
-    // Support BOTH schemas:
-    // Old: { name, links: { index/demo/playbook } }
-    // New: { title, href }
-    const name = tool.name || tool.title || tool.label || tool.id || 'Untitled';
-    const links = tool.links || {};
+        <div id="tools-grid" class="tools-grid" aria-label="Tools grid"></div>
 
-    // If a tool only has href, treat that as its "index" link
-    if (!links.index && tool.href) links.index = tool.href;
+        <p style="margin:14px 0 0;">
+          <a href="tools/" style="font-weight:900;">View all tools →</a>
+        </p>
+      </div>
+    </section>
 
-    // Normalize paths (ensure leading slash for internal paths)
-    for (const k of Object.keys(links)){
-      if (typeof links[k] === 'string' && links[k].startsWith('tools/')) {
-        links[k] = '/' + links[k];
+    <script>
+      const TOOLS_URL = new URL('tools/tools-landing.json', window.location.href);
+      TOOLS_URL.searchParams.set('v', Date.now());
+
+      function absHref(href){
+        return new URL(href, window.location.href).toString();
       }
-    }
 
-    const emoji = tool.emoji || '';
-    const desc = tool.description || '';
-    const pill = tool.pill || tool.type || 'Tool';
+      function normalizeTool(tool){
+        const name = tool.name || tool.title || tool.label || tool.id || 'Untitled';
+        const links = tool.links || {};
+        if (!links.index && tool.href) links.index = tool.href;
 
-    return { emoji, name, desc, pill, links };
-  }
+        for (const k of Object.keys(links)){
+          if (typeof links[k] === 'string' && links[k].startsWith('tools/')) {
+            links[k] = '/' + links[k];
+          }
+        }
+        const emoji = tool.emoji || '';
+        const desc = tool.description || '';
+        const pill = tool.pill || tool.type || 'Tool';
+        return { emoji, name, desc, pill, links };
+      }
 
-  function renderToolCard(raw){
-    const tool = normalizeTool(raw);
-    const { emoji, name, desc, pill, links } = tool;
+      function renderToolCard(raw){
+        const tool = normalizeTool(raw);
+        const { emoji, name, desc, pill, links } = tool;
 
-    const primary =
-      links.demo ? {label:'Demo', href: links.demo} :
-      links.index ? {label:'Open', href: links.index} :
-      links.playbook ? {label:'Playbook', href: links.playbook} :
-      null;
+        const primary =
+          links.demo ? {label:'Demo', href: links.demo} :
+          links.index ? {label:'Open', href: links.index} :
+          links.playbook ? {label:'Playbook', href: links.playbook} :
+          null;
 
-    const actionHtml = primary
-      ? `<div class="tool-actions">
-           <a href="${absHref(primary.href)}">${primary.label} →</a>
-         </div>`
-      : `<div class="tool-actions">
-           <a href="${absHref('tools/')}">Browse →</a>
-         </div>`;
+        const actionHtml = primary
+          ? `<div class="tool-actions"><a href="${absHref(primary.href)}">${primary.label} →</a></div>`
+          : `<div class="tool-actions"><a href="${absHref('tools/')}">Browse →</a></div>`;
 
-    return `
-      <div class="tool-card">
-        <div class="tool-top">
-          <div style="min-width:0;">
-            <h3>${emoji} ${name}</h3>
-            <p>${desc}</p>
-          </div>
-          <span class="badge">${pill}</span>
-        </div>
-        ${actionHtml}
-      </div>
-    `;
-  }
-
-  fetch(TOOLS_URL.toString())
-    .then(res => {
-      if (!res.ok) throw new Error('Fetch failed: ' + res.status);
-      return res.json();
-    })
-    .then(tools => {
-      const grid = document.getElementById('tools-grid');
-      grid.innerHTML = '';
-      if (!Array.isArray(tools)) throw new Error('tools.json must be an array');
-      tools.forEach(tool => {
-        const wrap = document.createElement('div');
-        wrap.innerHTML = renderToolCard(tool);
-        grid.appendChild(wrap.firstElementChild);
-      });
-    })
-    .catch(err => {
-      console.error('TOOLS LOAD ERROR:', err);
-      const grid = document.getElementById('tools-grid');
-      grid.innerHTML = `
-        <div class="tool-card">
-          <div class="tool-top">
-            <div>
-              <h3>⚠️ Tools failed to load</h3>
-              <p>
-                Common causes:
-                <br>• <code>tools/tools-landing.json</code> isn’t valid JSON (trailing commas)
-                <br>• It isn’t an array <code>[...]</code>
-                <br>• It’s not actually published at <code>/tools/tools.json</code>
-              </p>
+        return `
+          <div class="tool-card">
+            <div class="tool-top">
+              <div style="min-width:0;">
+                <h4>${emoji} ${name}</h4>
+                <p>${desc}</p>
+              </div>
+              <span class="badge">${pill}</span>
             </div>
-            <span class="badge">Error</span>
+            ${actionHtml}
           </div>
-          <div class="tool-actions">
-            <a href="tools/">Browse tools →</a>
-          </div>
-        </div>
-      `;
-    });
-</script>
+        `;
+      }
 
-
-    <details aria-label="System Deep Dive">
-      <summary>
-        <div class="sum-left">
-          <h2>The System Underneath</h2>
-          <p>Tools are the interface. The system is the operating model: shared signals, decision logic, guardrails, and escalation paths.</p>
-        </div>
-        <div class="chev">›</div>
-      </summary>
-
-      <div class="details-body">
-        <div class="system-layout">
-          <div class="system-diagram">
-            <img
-              src="assets/diagrams/system.png"
-              alt="AI-native people operations system showing human judgment, orchestration, signals, execution, and systems environment"
-              loading="lazy"
-            />
-          </div>
-
-          <div class="system-right">
-            <div class="bullets">
-              <ul>
-                <li><b>AI is infrastructure</b> — embedded inside the platforms teams already use.</li>
-                <li><b>Humans remain accountable</b> — escalation paths and auditability are built in.</li>
-                <li><b>Governance is continuous</b> — signals and workflows co-evolve with the business.</li>
-                <li><b>The system is operable, not fragile</b> — designed to run in real constraints.</li>
-              </ul>
+      fetch(TOOLS_URL.toString())
+        .then(res => {
+          if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+          return res.json();
+        })
+        .then(tools => {
+          const grid = document.getElementById('tools-grid');
+          grid.innerHTML = '';
+          if (!Array.isArray(tools)) throw new Error('tools-landing.json must be an array');
+          tools.forEach(tool => {
+            const wrap = document.createElement('div');
+            wrap.innerHTML = renderToolCard(tool);
+            grid.appendChild(wrap.firstElementChild);
+          });
+        })
+        .catch(err => {
+          console.error('TOOLS LOAD ERROR:', err);
+          document.getElementById('tools-grid').innerHTML = `
+            <div class="tool-card">
+              <div class="tool-top">
+                <div>
+                  <h4>⚠️ Tools failed to load</h4>
+                  <p>
+                    Common causes:
+                    <br>• <code>tools/tools-landing.json</code> isn’t valid JSON (trailing commas)
+                    <br>• It isn’t an array <code>[...]</code>
+                    <br>• It’s not published at <code>/tools/tools-landing.json</code>
+                  </p>
+                </div>
+                <span class="badge">Error</span>
+              </div>
+              <div class="tool-actions"><a href="tools/">Browse tools →</a></div>
             </div>
+          `;
+        });
+    </script>
 
-            <div class="sys-cta">
-              <a class="btn primary" href="system/">Explore the system →</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </details>
-
-    <section class="chapter" aria-label="How I Keep Us Safe" style="margin-top:18px;">
-      <h2>How I Keep Us Safe</h2>
-      <p>
+    <section class="card" style="margin-top:14px;" aria-label="How I Keep Us Safe">
+      <h3>How I Keep Us Safe</h3>
+      <p class="muted" style="margin:0 0 10px;">
         Guardrails on AI autonomy: what can safely auto-execute, what requires approval, and what must always escalate — with auditability built in.
       </p>
-    </section>
 
-    <div class="card">
-      <h3>Guardrails on AI Autonomy</h3>
-      <div class="tier">
+      <div class="tier" aria-label="Guardrails tiers">
         <div class="tier-item">
           <b>Tier 0 — Monitor</b>
           <span>Baseline + drift detection. No action, no noise.</span>
@@ -663,30 +455,28 @@ summary, .details-body{ position:relative; z-index:1; }
           <span>Employment-impacting decisions are never automated; multi-stakeholder governance applies.</span>
         </div>
       </div>
-    </div>
-
-    <section class="connect" aria-label="Let's Connect">
-      <h2>Let’s Connect</h2>
-      <p>
-        Open to roles in People Analytics, Talent Intelligence, People Ops, and Recruiting Operations — especially teams building internal AI capabilities.
-      </p>
-
-      <div class="connect-actions">
-        <a class="btn primary" href="book/" target="_blank" rel="noopener">📅 Book 15 minutes</a>
-        <a class="btn" href="mailto:dianewilkinson510@gmail.com">Email</a>
-        <a class="btn" href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="tools/">Browse tools</a>
-      </div>
     </section>
 
-  </div>
+    <section class="card" style="margin-top:14px;" aria-label="Let's Connect">
+      <h3>Let’s Connect</h3>
+      <p class="muted" style="margin:0;">
+        Open to roles in People Analytics, Talent Intelligence, People Ops, and Recruiting Operations — especially teams building internal AI capabilities.
+      </p>
+      <p style="margin:12px 0 0;">
+        <a href="book/" target="_blank" rel="noopener" style="font-weight:900;">📅 Book 15 minutes</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:dianewilkinson510@gmail.com" style="font-weight:900;">Email</a>
+        &nbsp;·&nbsp;
+        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener" style="font-weight:900;">LinkedIn</a>
+      </p>
+    </section>
+
+  </main>
 
   <footer>
-    <p class="footline">
-      Based in the San Francisco Bay Area ·
-      <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
-      <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
-    </p>
+    Based in the San Francisco Bay Area ·
+    <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
+    <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
   </footer>
 </body>
 </html>
