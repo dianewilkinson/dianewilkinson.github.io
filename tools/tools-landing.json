@@ -5,8 +5,7 @@
     "emoji": "📊",
     "description": "Pipeline diagnostics: bottlenecks, pass-through, root causes, and what to do next.",
     "type": "Demo",
-    "href": "tools/metrics/",
-
+    "href": "/tools/metrics/"
   },
   {
     "id": "screening",
@@ -17,7 +16,7 @@
       "index": "/tools/screening/",
       "demo": "/tools/screening/demo/",
       "playbook": "/tools/screening/playbook/"
-  },
+    },
     "status": {
       "index": "planned",
       "demo": "live",
@@ -29,32 +28,28 @@
     "name": "Sourcing Quality",
     "emoji": "🔎",
     "description": "Evidence standards, signal checks, and consistency guardrails.",
-    "href": "tools/sourcing/",
-
+    "href": "/tools/sourcing/"
   },
   {
     "id": "listening",
     "name": "Listening",
     "emoji": "🎧",
     "description": "Turn messy feedback into decision-ready themes with governance.",
-    "href": "tools/listening/",
-
+    "href": "/tools/listening/"
   },
   {
     "id": "workflow",
     "name": "Workflow",
     "emoji": "🧭",
     "description": "Workflow-first ops model: routing, SLAs, escalation paths, automation.",
-    "href": "tools/workflow/",
-
+    "href": "/tools/workflow/"
   },
   {
     "id": "chief",
     "name": "Chief",
     "emoji": "🧠",
     "description": "Orchestration layer: routing, reasoning, audit trails, delegation.",
-    "href": "tools/chief/",
-
+    "href": "/tools/chief/"
   },
   {
     "id": "innovation",
