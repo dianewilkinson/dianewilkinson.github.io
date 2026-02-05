@@ -23,6 +23,8 @@
   --radius:18px;
   --link:#2563eb;
 
+  --grad:linear-gradient(135deg, rgba(79,70,229,.16), rgba(96,165,250,.14), rgba(167,139,250,.14));
+   
   /* Signature top rule (pink is allowed here on all pages) */
   --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
 
@@ -215,6 +217,25 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   margin:10px 0 0;
 }
 .hero .btn{ border-radius:999px; }
+
+    /* CTA row */    
+.ctaRow{
+   margin-top:12px; 
+   display:flex; gap:10px; 
+   flex-wrap:wrap}    
+.btnGhost{      
+   display:inline-flex; 
+   align-items:center; gap:10px;      
+   border:1px solid rgba(79,70,229,.22);      
+   background:rgba(79,70,229,.06);     
+   color:#1f2a7a;      
+   padding:10px 12px;      
+   border-radius:12px;      
+   font-weight:900;      
+   font-size:14px;      
+   white-space:nowrap;    
+}
+.btnGhost:hover{background:rgba(79,70,229,.10); text-decoration:none}
 
 /* =========================
    PANELS (your “Tools I Built” block style)
