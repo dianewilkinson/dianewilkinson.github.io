@@ -13,7 +13,7 @@
     "emoji": "🦾",
     "description": "Taming top funnel chaos & rescuing hidden talent, in half the time.",
     "links": {
-      "index": "/tools/screening/",
+      "index": "/tools/screening/"
     },
     "status": {
       "index": "planned",
@@ -49,8 +49,7 @@
     "pill": "AI Tool",
     "description": "Driving innovative inspiration where it lives",
     "links": {
-      "index": "/tools/innovation/",
-      
+      "index": "/tools/innovation/"
     },
     "status": {
       "index": "live",
