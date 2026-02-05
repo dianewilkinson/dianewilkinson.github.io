@@ -463,6 +463,16 @@ body[data-page="tool-playbook"] .toc a:hover{
 
 body[data-page="tool-playbook"] .prose{ max-width: 92ch; }
 
+/* Playbook: split hero back row (back link left, CTAs right) */
+body[data-page="tool-playbook"] .backRow--split{
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Playbook: when CTAs are in hero, remove extra top margin */
+body[data-page="tool-playbook"] .ctaRow--tight{
+  margin-top: 0;
+}
 
 
 
