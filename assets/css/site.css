@@ -236,6 +236,10 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
    font-size:14px;      
    white-space:nowrap;    
 }
+.ctaRow--left{
+  justify-content: flex-start;
+}
+
 .btnGhost:hover{background:rgba(79,70,229,.10); text-decoration:none}
 
 /* =========================
