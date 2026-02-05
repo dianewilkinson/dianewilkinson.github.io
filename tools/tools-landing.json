@@ -12,6 +12,7 @@
     "name": "AI Tool: Screening A[i]gent",
     "emoji": "🦾",
     "description": "Taming top funnel chaos & rescuing hidden talent, in half the time.",
+    "type": "Hiring & Mobility",
     "links": {
       "index": "/tools/screening/"
     },
@@ -26,6 +27,7 @@
     "name": "Case: Source Quality",
     "emoji": "📚",
     "description": "Evidence standards, signal checks, and consistency guardrails.",
+    "type": "Case Study",
     "href": "/use-cases/sourcing/"
   },
   {
@@ -33,6 +35,7 @@
     "name": "AI Tool: Employee Listening",
     "emoji": "🦾",
     "description": "Turn messy feedback into decision-ready themes with governance.",
+    "type": "Listening & Insights",
     "href": "/tools/listening/"
   },
   {
@@ -40,6 +43,7 @@
     "name": "AI Orchestration Chief",
     "emoji": "🧠",
     "description": "Routing, reasoning, audit trails, delegation.",
+    "type": "Governance",
     "href": "/tools/chief/"
   },
   {
@@ -48,6 +52,7 @@
     "emoji": "🦾",
     "pill": "AI Tool",
     "description": "Driving innovative inspiration where it lives",
+    "type": "Improvement & Strategy",
     "links": {
       "index": "/tools/innovation/"
     },
