@@ -412,7 +412,15 @@ body[data-page="tool-playbook"] .hero-meta--split .metaSplit{
     grid-template-columns: 1fr;
   }
 }
+/* Ensure CTAs sit at the bottom of the left playbook meta column */
+body[data-page="tool-playbook"] .hero-meta--split .metaBlock{
+  display:flex;
+  flex-direction:column;
+}
 
+body[data-page="tool-playbook"] .hero-meta--split .ctaRow{
+  margin-top:auto;
+}
 
 body[data-page="tool-playbook"] .hero-meta,
 body[data-page="tool-playbook"] .toc-card,
