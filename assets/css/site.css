@@ -388,6 +388,31 @@ body[data-page="tool-playbook"] .info-layout{
 @media (max-width: 720px){
   body[data-page="tool-playbook"] .info-layout{ grid-template-columns: 1fr; }
 }
+/* Playbook: 2-card header layout */
+body[data-page="tool-playbook"] .info-layout--two{
+  grid-template-columns: 1.4fr 1fr;
+}
+
+@media (max-width: 1100px){
+  body[data-page="tool-playbook"] .info-layout--two{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Split content inside the combined meta card */
+body[data-page="tool-playbook"] .hero-meta--split .metaSplit{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:14px;
+  align-items:start;
+}
+
+@media (max-width: 720px){
+  body[data-page="tool-playbook"] .hero-meta--split .metaSplit{
+    grid-template-columns: 1fr;
+  }
+}
+
 
 body[data-page="tool-playbook"] .hero-meta,
 body[data-page="tool-playbook"] .toc-card,
@@ -429,6 +454,7 @@ body[data-page="tool-playbook"] .toc a:hover{
 }
 
 body[data-page="tool-playbook"] .prose{ max-width: 92ch; }
+
 
 
 
