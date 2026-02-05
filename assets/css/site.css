@@ -500,4 +500,27 @@ body[data-page="tool-playbook"] .backRow--split{
 body[data-page="tool-playbook"] .ctaRow--tight{
   margin-top: 0;
 }
-
+.autoCard{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.90);
+  border-radius: var(--radius);
+  padding:14px;
+  box-shadow: 0 16px 48px var(--shadow);
+  margin-top:14px;
+}
+.autoTitle{font-weight:900; letter-spacing:-.01em; margin-bottom:10px;}
+.autoGroup{margin:10px 0;}
+.autoLabel{font-size:12px; font-weight:900; color:var(--muted2); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;}
+.autoPills{display:flex; flex-wrap:wrap; gap:8px;}
+.pillLink{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 10px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.65);
+  background:rgba(255,255,255,.85);
+  color:var(--text);
+  font-weight:800;
+  font-size:13px;
+  text-decoration:none;
+}
+.pillLink:hover{background:#fff; text-decoration:none; color:var(--accent);}
