@@ -13,12 +13,12 @@
         "demo": "/tools/metrics/demo.html",
         "dictionary": "/tools/metrics/dictionary.html"
       },
-"relations": {
-  "fedBy": ["screening", "interviews", "outreach", "offer"],
-  "triggers": ["sourcing", "outreach"],
-  "informs": ["chief", "skills", "listening", "planning"],
-  "integrations": ["ats", "hris", "crm", "data", "messaging"]
-},
+      "relations": {
+        "fedBy": ["screening", "interviews", "outreach", "offer"],
+        "triggers": ["sourcing", "outreach"],
+        "informs": ["chief", "skills", "listening", "planning"],
+        "dependsOn": ["ats", "hris", "crm", "data", "messaging"]
+      },
       "hero": {
         "headline": "Stop debating numbers. Start fixing bottlenecks.",
         "subline": "Pipeline Health A[i]gent is an AI tool that turns raw hiring funnel data into decision-ready diagnostics so recruiters know what is broken, why, and how to fix it in real time."
@@ -32,79 +32,67 @@
         "Metrics lose credibility and trust erodes — which slows execution everywhere."
       ],
       "whatItDoes": [
-        "Diagnoses pass-through drop-offs by stage (and flags abnormal patterns).",
-        "Detects constraints (capacity, volume, timing mismatches) before teams feel them.",
-        "Surfaces likely causes and recommended next actions (operator-facing, not analytics speak).",
-        "Executes Tier-1 actions automatically when pre-approved (agenda updates, alerts, nudges)."
+        "Diagnoses pass-through drop-offs by stage and flags abnormal patterns.",
+        "Detects constraints such as capacity, volume, and timing mismatches.",
+        "Surfaces likely causes and recommended next actions in operator-facing language.",
+        "Executes Tier-1 actions automatically when pre-approved."
       ],
       "outcomes": "Faster execution. Cleaner decisions. Fewer stalled roles.",
       "whereItFits": [
-        "Downstream of Hiring & Mobility signals: interviews, offers, time-in-stage, pass-through, SLAs.",
-        "Upstream of Planning, Innovation, and Governance: makes drift and decay visible early.",
-        "Feeds Chief A[i]gent: thresholds for autonomy and escalation signals."
+        "Downstream of Hiring & Mobility signals such as interviews, offers, time-in-stage, pass-through, and SLAs.",
+        "Upstream of Planning, Innovation, and Governance, making drift and decay visible early.",
+        "Feeds Chief A[i]gent with thresholds for autonomy and escalation signals."
       ],
-      "guardrails": { "tier": 1, "label": "Tier-1 Autonomy"
+      "guardrails": {
+        "tier": 1,
+        "label": "Tier-1 Autonomy"
       },
       "crossLinks": [
-        { "label": "Pipeline Health Playbook", "href": "/tools/metrics/playbook.html" },
-        { "label": "Hiring & Mobility", "href": "/system/" }
+        {
+          "label": "Pipeline Health Playbook",
+          "href": "/tools/metrics/playbook.html"
+        },
+        {
+          "label": "Hiring & Mobility",
+          "href": "/system/"
+        }
       ]
+    },
+
+    {
+      "id": "screening",
+      "type": "ai_tool",
+      "area": "Hiring & Mobility",
+      "emoji": "🤖",
+      "title": "Screening A[i]gent",
+      "description": "Decision support that surfaces evidence and risk during screening without turning evaluation into a black box.",
+      "pages": {
+        "index": "/tools/screening/"
+      }
+    },
+
+    {
+      "id": "chief",
+      "type": "system",
+      "area": "Governance & Infrastructure",
+      "emoji": "🧠",
+      "title": "Chief A[i]gent",
+      "description": "The orchestration layer that governs autonomy, routes decisions, enforces guardrails, and keeps humans in the loop.",
+      "pages": {
+        "index": "/tools/chief/"
+      }
+    },
+
+    {
+      "id": "listening",
+      "type": "ai_tool",
+      "area": "Listening & Insights",
+      "emoji": "🤖",
+      "title": "Listening A[i]gent",
+      "description": "Continuously captures qualitative feedback and turns narrative signals into usable, low-noise insight.",
+      "pages": {
+        "index": "/tools/listening/"
+      }
     }
   ]
 }
-,
-  {
-    "id": "screening",
-    "type": "ai_tool",
-    "area": "Hiring & Mobility",
-    "emoji": "🤖",
-    "title": "Screening A[i]gent",
-    "description": "Decision support that surfaces evidence and risk during screening—without turning evaluation into a black box.",
-    "href": "/tools/screening/"
-  },
-  {
-    "id": "sourcing",
-    "type": "playbook",
-    "area": "Hiring & Mobility",
-    "emoji": "📘",
-    "title": "Sourcing Quality",
-    "description": "Defines evidence standards and signal checks so inbound, outbound, and referrals are evaluated consistently.",
-    "href": "/tools/sourcing/"
-  },
-  {
-    "id": "listening",
-    "type": "ai_tool",
-    "area": "Listening & Insights",
-    "emoji": "🤖",
-    "title": "Listening A[i]gent",
-    "description": "Continuously captures qualitative feedback and turns narrative signals into usable, low-noise insight.",
-    "href": "/tools/listening/"
-  },
-  {
-    "id": "workflow",
-    "type": "article",
-    "area": "Governance & Infrastructure",
-    "emoji": "🧭",
-    "title": "Workflow-First Operating Model",
-    "description": "Explains how routing, SLAs, escalation paths, and automation fit together in an AI-native People Ops system.",
-    "href": "/tools/workflow/"
-  },
-  {
-    "id": "chief",
-    "type": "system",
-    "area": "Governance & Infrastructure",
-    "emoji": "🧠",
-    "title": "Chief A[i]gent",
-    "description": "The orchestration layer that governs autonomy—routing decisions, enforcing guardrails, and keeping humans in the loop.",
-    "href": "/tools/chief/"
-  },
-  {
-    "id": "innovation",
-    "type": "ai_tool",
-    "area": "Improvement & Strategy",
-    "emoji": "🤖",
-    "title": "Innovation A[i]gent",
-    "description": "Routes ideas into action by checking institutional memory, structuring experiments, and ensuring closure.",
-    "href": "/tools/innovation/"
-  }
-]
