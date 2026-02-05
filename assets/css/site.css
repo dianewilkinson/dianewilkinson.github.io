@@ -284,6 +284,34 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
 .muted{color:var(--muted)}
 .rule{height:1px; background:var(--border); margin:14px 0}
 
+/* =========================
+   CALLOUT / NOTES
+   ========================= */
+.callout{
+  margin: 14px 0;
+  padding: 10px 14px;
+  background: rgba(79,70,229,.05);
+  border-left: 2px solid rgba(79,70,229,.55);
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* =========================
+   TABLE OVERFLOW GUARD
+   ========================= */
+.table-wrap{
+  margin: 12px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-wrap table{
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px; /* prevents column squish on narrow screens */
+}
+
 /* Keep lists from leaking into nav by scoping them */
 .card ul, .full ul, .hero-meta ul, .toc-card ul, .persona-card ul, .prose ul{
   margin:10px 0 0 18px;
@@ -472,3 +500,4 @@ body[data-page="tool-playbook"] .backRow--split{
 body[data-page="tool-playbook"] .ctaRow--tight{
   margin-top: 0;
 }
+
