@@ -107,14 +107,26 @@
     }
 
     .chapter{
-      margin:18px 0 12px;
-      border-radius:18px;
-      background:var(--cool-soft);
-      box-shadow:0 6px 18px var(--shadow);
-      padding:16px 18px 14px;
-      border:1px solid rgba(148,163,184,0.28);
-      overflow:hidden;
-    }
+  margin:18px 0 12px;
+  border-radius:18px;
+  background:var(--card);
+  box-shadow:0 6px 18px var(--shadow);
+  padding:16px 18px 14px;
+  border:1px solid rgba(148,163,184,0.28);
+  overflow:hidden;
+  position:relative;
+}
+.chapter::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:60px;
+  background:var(--cool-soft);
+  opacity:.55;
+  pointer-events:none;
+}
+.chapter > *{ position:relative; z-index:1; }
+
     .chapter h2{
       margin:0 0 6px;
       font-size:22px;
@@ -221,14 +233,26 @@
     }
 
     details{
-      border-radius:18px;
-      border:1px solid rgba(148,163,184,0.28);
-      background:var(--cool-soft);
-      box-shadow:0 6px 18px var(--shadow);
-      padding:0;
-      overflow:hidden;
-      margin:18px 0 12px;
-    }
+  border-radius:18px;
+  border:1px solid rgba(148,163,184,0.28);
+  background:var(--card);
+  box-shadow:0 6px 18px var(--shadow);
+  padding:0;
+  overflow:hidden;
+  margin:18px 0 12px;
+  position:relative;
+}
+details::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:60px;
+  background:var(--cool-soft);
+  opacity:.55;
+  pointer-events:none;
+}
+summary, .details-body{ position:relative; z-index:1; }
+
     summary{
       list-style:none;
       cursor:pointer;
@@ -561,7 +585,7 @@
               <h3>⚠️ Tools failed to load</h3>
               <p>
                 Common causes:
-                <br>• <code>tools/tools.json</code> isn’t valid JSON (trailing commas)
+                <br>• <code>tools/tools-landing.json</code> isn’t valid JSON (trailing commas)
                 <br>• It isn’t an array <code>[...]</code>
                 <br>• It’s not actually published at <code>/tools/tools.json</code>
               </p>
