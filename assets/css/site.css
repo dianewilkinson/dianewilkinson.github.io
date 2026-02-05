@@ -369,6 +369,17 @@ body[data-page="tool-playbook"] .persona-card{
   padding:14px 14px;
   box-shadow: 0 16px 48px var(--shadow);
 }
+/* Playbook TOC: numbered but no bullets */
+body[data-page="tool-playbook"] .tocList{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+body[data-page="tool-playbook"] .tocList li{
+  margin:8px 0;
+  padding-left:0;
+}
 
 body[data-page="tool-playbook"] .toc a{
   color:var(--text);
@@ -389,3 +400,5 @@ body[data-page="tool-playbook"] .toc a:hover{
 }
 
 body[data-page="tool-playbook"] .prose{ max-width: 92ch; }
+
+
