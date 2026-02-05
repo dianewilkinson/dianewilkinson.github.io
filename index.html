@@ -132,6 +132,92 @@
       color:transparent;
       font-weight:900;
     }
+    /* Landing hero: match playbook rhythm + height */
+.hero--home{
+  padding:22px 22px 18px;
+  min-height: 220px;            /* makes it feel like the playbook hero */
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+/* Top line inside hero (name + microcopy) */
+.hero-topline{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:10px 12px;
+  color:var(--muted2);
+  font-size:13px;
+  font-weight:800;
+  line-height:1.4;
+}
+
+.hero-name{
+  color:var(--text);
+  font-weight:900;
+  letter-spacing:-0.02em;
+}
+
+.hero-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.hero-meta span{
+  white-space:nowrap;
+}
+
+.hero-meta .dot{
+  opacity:.6;
+}
+
+/* Give breathing room between topline and headline */
+.hero-headline{
+  margin: 8px 0 0;              /* space from name line */
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:-0.02em;
+  line-height:1.15;
+}
+
+.hero-subtitle{
+  margin: 0;
+  color: var(--muted);
+  font-size:15.5px;
+  line-height:1.6;
+  max-width: 90ch;
+}
+
+/* Optional action row like playbook */
+.hero-actions{
+  margin-top:auto;               /* pushes actions to bottom -> taller feel */
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+
+.hero-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  color:#334155;
+  border:1px solid rgba(226,232,240,.95);
+  background: rgba(255,255,255,.80);
+  text-decoration:none;
+}
+.hero-pill:hover{ background: rgba(255,255,255,.92); text-decoration:none; }
+
+@media (max-width:720px){
+  .hero--home{ min-height: 0; }
+  .hero-headline{ font-size:26px; }
+}
 
     /* =========================
        PANELS / CARDS — contract surface
@@ -415,20 +501,35 @@
 <body>
   <div class="bar"></div>
 
-  <header>
-    <h1>👋 Diane Wilkinson — AI-Native People Ops &amp; Talent Analytics</h1>
-    <div class="subline">
-      People Ops &amp; Systems · Talent Intelligence · Human-in-the-loop AI · Greenhouse SME · MBA, Data Analytics (4.0 GPA) ·
-      <a href="credentials/" target="_blank" rel="noopener">Credentials &amp; Recommendations</a>
-    </div>
-  </header>
-
   <main class="wrap">
 
     <section class="hero hero--home" aria-label="Hero">
-      <h2>We don’t need more <span class="accent">AI vendors</span>.</h2>
-      <p>The future belongs to those building AI internally in the weeds of everyday workflows.</p>
-    </section>
+  <div class="hero-topline">
+    <span class="hero-name">👋 Diane Wilkinson — AI-Native People Ops &amp; Talent Analytics</span>
+
+    <span class="hero-meta">
+      <span class="dot">·</span><span>People Systems</span>
+      <span class="dot">·</span><span>Talent Intelligence</span>
+      <span class="dot">·</span><span>Human-in-the-loop AI</span>
+      <span class="dot">·</span><span>ATS SME</span>
+      <span class="dot">·</span><span>MBA, Data Analytics (4.0 GPA)</span>
+      <span class="dot">·</span>
+      <a href="credentials/" target="_blank" rel="noopener" style="font-weight:900;">Credentials &amp; Recommendations</a>
+    </span>
+  </div>
+
+  <h2 class="hero-headline">We don’t need more <span class="accent">AI vendors</span>.</h2>
+
+  <p class="hero-subtitle">
+    The future belongs to those building AI internally in the weeds of everyday workflows.
+  </p>
+
+  <div class="hero-actions">
+    <a class="hero-pill" href="tools/">Browse tools →</a>
+    <a class="hero-pill" href="system/">Explore the system →</a>
+    <a class="hero-pill" href="book/" target="_blank" rel="noopener">📅 Book 15 minutes</a>
+  </div>
+</section>
 
     <section class="card" aria-label="Intro">
       <p class="muted" style="margin:0 0 10px;">
