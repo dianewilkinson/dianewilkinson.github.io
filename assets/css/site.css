@@ -1,4 +1,12 @@
+/* =========================
+   SITE.CSS — Single source of truth
+   - One background everywhere
+   - One component system
+   - Explicit variants (home vs tool vs playbook)
+   ========================= */
+
 :root{
+  /* Core */
   --bg:#f9fafb;
   --card:#ffffff;
   --text:#0f172a;
@@ -7,18 +15,41 @@
   --border:#e5e7eb;
   --shadow:rgba(15,23,42,0.08);
   --radius:18px;
-
-  /* Metrics palette (no pink) */
-  --accent:#4f46e5;      /* indigo */
-  --accent2:#60a5fa;     /* blue */
-  --accent3:#a78bfa;     /* violet */
-  --grad:linear-gradient(135deg, rgba(79,70,229,.16), rgba(96,165,250,.14), rgba(167,139,250,.14));
-  --pill:rgba(79,70,229,.08);
   --link:#2563eb;
 
-  /* Global top bar gradient (pink → purple like landing) */
+  /* Signature top rule (pink is allowed here on all pages) */
   --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
+
+  /* Cool system gradient (used on tools + “Tools I Built” + non-home heroes) */
+  --cool-grad:linear-gradient(
+    135deg,
+    rgba(59,130,246,.16),
+    rgba(167,139,250,.16),
+    rgba(99,102,241,.12)
+  );
+
+  /* Pink hero gradient (landing hero only) */
+  --pink-grad:linear-gradient(
+    135deg,
+    rgba(249,115,115,.18),
+    rgba(251,113,133,.16),
+    rgba(168,85,247,.14),
+    rgba(99,102,241,.10)
+  );
+
+  /* Page background (same for EVERY page) */
+  --page-bg:
+    radial-gradient(circle at 10% 0%, rgba(59,130,246,.06), transparent 42%),
+    radial-gradient(circle at 90% 10%, rgba(167,139,250,.06), transparent 38%),
+    radial-gradient(circle at 50% 100%, rgba(99,102,241,.05), transparent 45%),
+    var(--bg);
+
+  /* Accents for links/buttons */
+  --accent:#4f46e5;     /* indigo */
+  --accent2:#60a5fa;    /* blue */
+  --accent3:#a78bfa;    /* violet */
 }
+
 /* =========================
    BASE
    ========================= */
@@ -27,11 +58,7 @@ html,body{height:100%}
 body{
   margin:0;
   font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
-  background:
-    radial-gradient(circle at 10% 0%, rgba(79,70,229,.10), transparent 45%),
-    radial-gradient(circle at 90% 10%, rgba(96,165,250,.10), transparent 40%),
-    radial-gradient(circle at 50% 100%, rgba(167,139,250,.10), transparent 45%),
-    var(--bg);
+  background: var(--page-bg);
   color:var(--text);
   line-height:1.55;
 }
@@ -40,11 +67,10 @@ a{color:var(--link); text-decoration:none}
 a:hover{text-decoration:underline}
 
 .bar{height:4px;background:var(--accent-grad);}
-
 .wrap{max-width:1120px; margin:0 auto; padding:28px 18px 64px}
 
 /* =========================
-   COMPONENTS: TOPBAR + BUTTONS
+   TOPBAR / NAV
    ========================= */
 .topbar{
   display:flex; align-items:center; justify-content:space-between;
@@ -61,7 +87,7 @@ a:hover{text-decoration:underline}
 .btn{
   display:inline-flex; align-items:center; gap:10px;
   border:1px solid var(--border);
-  background:rgba(255,255,255,.78);
+  background:rgba(255,255,255,.80);
   color:var(--text);
   padding:10px 12px;
   border-radius:12px;
@@ -76,7 +102,7 @@ a:hover{text-decoration:underline}
 }
 
 /* =========================
-   COMPONENTS: HERO (shared shell)
+   HERO (shared shell + explicit variants)
    ========================= */
 .hero{
   border:1px solid var(--border);
@@ -88,21 +114,23 @@ a:hover{text-decoration:underline}
   overflow:hidden;
   margin-bottom:14px;
 }
-.hero:before{
+.hero::before{
   content:"";
   position:absolute; inset:-2px;
-  background: var(--grad);
   opacity:.95;
   pointer-events:none;
+  /* masked “ink” overlay; actual gradient set by variant */
   mask-image: linear-gradient(180deg, rgba(0,0,0,.95), rgba(0,0,0,.38), rgba(0,0,0,0));
 }
 .hero > *{position:relative}
 
-/* Optional wrappers (used by templates) */
-.hero__back{ margin-top:10px; }
-.hero__divider{ height:1px; background:rgba(226,232,240,0.9); margin:10px 0 0; }
-.hero__addons{ margin-top:14px; }           
+/* Landing hero: pink overlay ONLY here */
+.hero--home::before{ background: var(--pink-grad); }
 
+/* Tools + playbooks: cool overlay */
+.hero--tool::before{ background: var(--cool-grad); }
+
+/* Hero typography helpers */
 .kicker{
   display:inline-flex; gap:8px; align-items:center;
   font-size:12.5px; color:var(--muted2);
@@ -127,13 +155,12 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
 }
 .accent{
   background: linear-gradient(90deg, var(--accent), var(--accent3));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-weight: 900;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  font-weight:900;
 }
 
-/* Index “back to tools” row (only appears when template includes it) */
 .backRow{
   margin:10px 2px 2px;
   display:flex;
@@ -154,21 +181,28 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
 }
 
 /* =========================
-   COMPONENTS: CARDS / SECTIONS
+   PANELS (your “Tools I Built” block style)
    ========================= */
-.card{
+.panel{
   border:1px solid var(--border);
-  background:rgba(255,255,255,.90);
   border-radius: var(--radius);
-  padding:18px 18px;
+  padding:14px;
   box-shadow: 0 16px 48px var(--shadow);
+  background: rgba(255,255,255,.70);
 }
-.card h2{
-  margin:0 0 10px;
-  font-size:18px;
-  letter-spacing:-.01em;
+.panel--cool{ background: var(--cool-grad); }
+.panel--pink{ background: var(--pink-grad); }
+
+.panelInner{
+  background: rgba(255,255,255,.92);
+  border:1px solid rgba(255,255,255,.55);
+  border-radius: calc(var(--radius) - 6px);
+  padding:14px;
 }
 
+/* =========================
+   SECTION TITLES / CARDS
+   ========================= */
 .section-title{
   display:flex;
   align-items:center;
@@ -186,12 +220,20 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   background: linear-gradient(180deg, var(--accent), var(--accent2), var(--accent3));
 }
 
-.card p{margin:10px 0; color:var(--text)}
+.card{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.90);
+  border-radius: var(--radius);
+  padding:18px 18px;
+  box-shadow: 0 16px 48px var(--shadow);
+}
+.card h2{ margin:0 0 10px; font-size:18px; letter-spacing:-.01em; }
+.card p{ margin:10px 0; color:var(--text); }
 .small{font-size:13px; color:var(--muted2)}
 .muted{color:var(--muted)}
 .rule{height:1px; background:var(--border); margin:14px 0}
 
-/* Scope list styling so it doesn't leak into nav/UI */
+/* Keep lists from leaking into nav by scoping them */
 .card ul, .full ul, .hero-meta ul, .toc-card ul, .persona-card ul, .prose ul{
   margin:10px 0 0 18px;
   padding:0;
@@ -200,8 +242,9 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   margin:8px 0;
   color:var(--text);
 }
+
 /* =========================
-   LAYOUTS: INDEX GRID + FULL WIDTH
+   LAYOUTS (overview + full)
    ========================= */
 .grid2{
   display:grid;
@@ -209,9 +252,8 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   gap:14px;
   margin-top:14px;
 }
-@media (max-width: 920px){
-  .grid2{grid-template-columns:1fr;}
-}
+@media (max-width: 920px){ .grid2{grid-template-columns:1fr;} }
+
 .full{
   margin-top:14px;
   border:1px solid var(--border);
@@ -222,39 +264,25 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
 }
 .full h2{margin:0 0 10px; font-size:18px; letter-spacing:-.01em;}
 
-/* =========================
-   COMPONENTS: MINI GRID (shared)
-   ========================= */
+/* Mini outcome grid (3 across) */
 .miniGrid{
   display:grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap:10px;
   margin-top:10px;
 }
-@media (max-width: 900px){
-  .miniGrid{grid-template-columns:1fr;}
-}
+@media (max-width: 900px){ .miniGrid{grid-template-columns:1fr;} }
 .mini{
   border:1px solid rgba(226,232,240,0.9);
   background:rgba(255,255,255,.75);
   border-radius:14px;
   padding:12px 12px;
 }
-.mini b{
-  display:block;
-  font-size:13px;
-  letter-spacing:-.01em;
-  margin-bottom:6px;
-}
-.mini span{
-  display:block;
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.45;
-}
+.mini b{ display:block; font-size:13px; letter-spacing:-.01em; margin-bottom:6px; }
+.mini span{ display:block; font-size:13px; color:var(--muted); line-height:1.45; }
 
 /* =========================
-   COMPONENTS: DEMO
+   DEMO (iframe)
    ========================= */
 .demo{
   border:1px solid rgba(226,232,240,0.9);
@@ -278,11 +306,7 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   width:10px;height:10px;border-radius:999px;background:var(--accent);
   box-shadow:0 0 0 3px rgba(79,70,229,.12);
 }
-.demoHead a{
-  font-size:13px;
-  font-weight:900;
-  color:var(--accent);
-}
+.demoHead a{ font-size:13px; font-weight:900; color:var(--accent); }
 .demoFrame{
   width:100%;
   height:460px;
@@ -290,12 +314,10 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   display:block;
   background:#fff;
 }
-@media (max-width: 680px){
-  .demoFrame{height:520px;}
-}
+@media (max-width: 680px){ .demoFrame{height:520px;} }
 
 /* =========================
-   COMPONENTS: CTA + FOOTER
+   CTA / FOOTER
    ========================= */
 .ctaRow{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
 .btnGhost{
@@ -321,8 +343,9 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   flex-wrap:wrap;
   padding:10px 2px 0;
 }
+
 /* =========================
-   TOOL PLAYBOOK ONLY
+   PLAYBOOK LAYOUT
    ========================= */
 body[data-page="tool-playbook"] .info-layout{
   display:grid;
@@ -347,22 +370,6 @@ body[data-page="tool-playbook"] .persona-card{
   box-shadow: 0 16px 48px var(--shadow);
 }
 
-body[data-page="tool-playbook"] .hero-meta h3,
-body[data-page="tool-playbook"] .toc-card h3,
-body[data-page="tool-playbook"] .persona-card h3{
-  margin:0 0 10px;
-  font-size:12px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--muted2);
-}
-
-body[data-page="tool-playbook"] .hero-meta ul,
-body[data-page="tool-playbook"] .toc-card ul{
-  margin:0;
-  padding-left:18px;
-}
-
 body[data-page="tool-playbook"] .toc a{
   color:var(--text);
   font-weight:800;
@@ -381,51 +388,4 @@ body[data-page="tool-playbook"] .toc a:hover{
   }
 }
 
-body[data-page="tool-playbook"] .persona-pill{
-  display:inline-flex;
-  align-items:center;
-  padding:4px 10px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  background:rgba(96,165,250,.18);
-  color:#1d4ed8;
-  margin-bottom:10px;
-}
-
-/* Longform prose defaults (playbooks) */
 body[data-page="tool-playbook"] .prose{ max-width: 92ch; }
-body[data-page="tool-playbook"] .prose h2{ margin: 18px 0 10px; }
-body[data-page="tool-playbook"] .prose h3{ margin: 14px 0 8px; font-size: 15px; }
-body[data-page="tool-playbook"] .prose p{ margin: 10px 0; color: var(--text); }
-body[data-page="tool-playbook"] .prose ul{ margin: 10px 0 0 18px; }
-body[data-page="tool-playbook"] .prose li{ margin: 8px 0; }
-body[data-page="tool-playbook"] .prose code{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 0.95em;
-}
-
-/* Playbook TOC: remove bullets + default spacing */
-body[data-page="tool-playbook"] .tocList{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-body[data-page="tool-playbook"] .tocList li{
-  margin: 8px 0;
-  padding: 0;
-}
-body[data-page="tool-playbook"] .toc a{
-  display: inline-block;
-  line-height: 1.4;
-}
-
-
-/* =========================
-   PAGE GUARDS (prevents template bleed)
-   ========================= */
-body[data-page="tool-index"] .info-layout{ display:none; }
-body[data-page="tool-playbook"] .grid2{ display:none; }
