@@ -1,13 +1,58 @@
-[
-  {
-    "id": "metrics",
-    "type": "ai_tool",
-    "area": "Hiring & Mobility",
-    "emoji": "🤖",
-    "title": "Metrics Diagnostics",
-    "description": "Turns raw funnel and hiring data into decision-ready diagnostics—bottlenecks, throughput constraints, and what to fix next.",
-    "href": "/tools/metrics/"
-  },
+{
+  "tools": [
+    {
+      "id": "metrics",
+      "type": "ai_tool",
+      "area": "Hiring & Mobility",
+      "emoji": "🤖",
+      "title": "Pipeline Health A[i]gent Tool",
+      "description": "Turns raw hiring funnel data into decision-ready diagnostics.",
+      "pages": {
+        "index": "/tools/metrics/",
+        "playbook": "/tools/metrics/playbook.html",
+        "demo": "/tools/metrics/demo.html",
+        "dictionary": "/tools/metrics/dictionary.html"
+      },
+"relations": {
+  "fedBy": ["screening", "interviews", "outreach", "offer"],
+  "triggers": ["sourcing", "outreach"],
+  "informs": ["chief", "skills", "listening", "planning"],
+  "integrations": ["ats", "hris", "crm", "data", "messaging"]
+},
+      "hero": {
+        "headline": "Stop debating numbers. Start fixing bottlenecks.",
+        "subline": "Pipeline Health A[i]gent is an AI tool that turns raw hiring funnel data into decision-ready diagnostics so recruiters know what is broken, why, and how to fix it in real time."
+      },
+      "purpose": "Hiring decisions fail when teams don’t trust or understand the numbers. Pipeline Health exists to remove ambiguity and make funnel performance explainable — not debatable.",
+      "whatBreaks": [
+        "Funnel performance is debated instead of understood.",
+        "Actionable dashboards create noise, not decisions.",
+        "Bottlenecks are discovered late, after damage is done.",
+        "KPI truth gets hidden in performative actions instead of operational reality.",
+        "Metrics lose credibility and trust erodes — which slows execution everywhere."
+      ],
+      "whatItDoes": [
+        "Diagnoses pass-through drop-offs by stage (and flags abnormal patterns).",
+        "Detects constraints (capacity, volume, timing mismatches) before teams feel them.",
+        "Surfaces likely causes and recommended next actions (operator-facing, not analytics speak).",
+        "Executes Tier-1 actions automatically when pre-approved (agenda updates, alerts, nudges)."
+      ],
+      "outcomes": "Faster execution. Cleaner decisions. Fewer stalled roles.",
+      "whereItFits": [
+        "Downstream of Hiring & Mobility signals: interviews, offers, time-in-stage, pass-through, SLAs.",
+        "Upstream of Planning, Innovation, and Governance: makes drift and decay visible early.",
+        "Feeds Chief A[i]gent: thresholds for autonomy and escalation signals."
+      ],
+      "guardrails": { "tier": 1, "label": "Tier-1 Autonomy"
+      },
+      "crossLinks": [
+        { "label": "Pipeline Health Playbook", "href": "/tools/metrics/playbook.html" },
+        { "label": "Hiring & Mobility", "href": "/system/" }
+      ]
+    }
+  ]
+}
+,
   {
     "id": "screening",
     "type": "ai_tool",
