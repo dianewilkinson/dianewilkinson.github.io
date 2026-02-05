@@ -115,6 +115,13 @@ a:hover{text-decoration:underline}
   border-color: rgba(79,70,229,.25);
   background: linear-gradient(135deg, rgba(79,70,229,.16), rgba(96,165,250,.10));
 }
+.ctaLabel{
+  font-size:13px;
+  font-weight:800;
+  color:var(--muted2);
+  padding:8px 2px;
+  white-space:nowrap;
+}
 
 /* =========================
    HERO (shared shell + explicit variants)
@@ -207,6 +214,7 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   background:rgba(226,232,240,0.9);
   margin:10px 0 0;
 }
+.hero .btn{ border-radius:999px; }
 
 /* =========================
    PANELS (your “Tools I Built” block style)
