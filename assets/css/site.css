@@ -138,6 +138,11 @@ a:hover{text-decoration:underline}
 /* Tools + playbooks: cool overlay */
 .hero--tool::before{ background: var(--cool-grad); }
 
+/* Tools hero: darker, matches "Tools I Built" intent */
+.hero--tool-strong::before{
+  background: var(--tool-hero-grad);
+}
+
 /* Hero typography helpers */
 .kicker{
   display:inline-flex; gap:8px; align-items:center;
