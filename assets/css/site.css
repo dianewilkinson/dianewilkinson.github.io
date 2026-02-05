@@ -374,75 +374,433 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
 }
 
 /* =========================
-   PLAYBOOK LAYOUT
+   CONTRACT — DO NOT EDIT
+   Changing these requires bumping CSS version
    ========================= */
+
+
+/* =========================
+   SITE.CSS — Single source of truth
+   - One background everywhere
+   - One component system
+   - Explicit variants (home vs tool vs playbook)
+   ========================= */
+
+:root{
+  /* Core */
+  --bg:#f9fafb;
+  --card:#ffffff;
+  --text:#0f172a;
+  --muted:#475569;
+  --muted2:#64748b;
+  --border:#e5e7eb;
+  --shadow:rgba(15,23,42,0.08);
+  --radius:18px;
+  --link:#2563eb;
+
+  /* Signature top rule (pink is allowed here on all pages) */
+  --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
+
+  /* Cool system gradient (used on tools + “Tools I Built” + non-home heroes) */
+  --cool-grad:linear-gradient(
+    135deg,
+    rgba(59,130,246,.16),
+    rgba(167,139,250,.16),
+    rgba(99,102,241,.12)
+  );
+
+  /* Pink hero gradient (landing hero only) */
+  --pink-grad:linear-gradient(
+    135deg,
+    rgba(249,115,115,.18),
+    rgba(251,113,133,.16),
+    rgba(168,85,247,.14),
+    rgba(99,102,241,.10)
+  );
+
+/* Darker tools hero gradient (explicit opt-in) */
+--tool-hero-grad: linear-gradient(
+  135deg,
+  rgba(79,70,229,.22),
+  rgba(96,165,250,.18),
+  rgba(167,139,250,.18)
+);
+
+
+  /* Page background (same for EVERY page) */
+  --page-bg:
+    radial-gradient(circle at 10% 0%, rgba(59,130,246,.06), transparent 42%),
+    radial-gradient(circle at 90% 10%, rgba(167,139,250,.06), transparent 38%),
+    radial-gradient(circle at 50% 100%, rgba(99,102,241,.05), transparent 45%),
+    var(--bg);
+
+  /* Accents for links/buttons */
+  --accent:#4f46e5;     /* indigo */
+  --accent2:#60a5fa;    /* blue */
+  --accent3:#a78bfa;    /* violet */
+}
+
+/* =========================
+   BASE
+   ========================= */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+  background: var(--page-bg);
+  color:var(--text);
+  line-height:1.55;
+}
+
+a{color:var(--link); text-decoration:none}
+a:hover{text-decoration:underline}
+
+.bar{height:4px;background:var(--accent-grad);}
+.wrap{max-width:1120px; margin:0 auto; padding:28px 18px 64px}
+
+/* =========================
+   TOPBAR / NAV
+   ========================= */
+.topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:14px; margin-bottom:16px;
+}
+.crumbs{
+  display:flex; align-items:center; gap:10px;
+  color:var(--muted2); font-size:14px; flex-wrap:wrap;
+}
+.crumbs a{color:var(--muted2)}
+.crumbs .sep{opacity:.5}
+
+.navlinks{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.80);
+  color:var(--text);
+  padding:10px 12px;
+  border-radius:12px;
+  box-shadow: 0 10px 30px var(--shadow);
+  font-size:14px;
+  white-space:nowrap;
+}
+.btn:hover{background:#fff; text-decoration:none}
+.btn.primary{
+  border-color: rgba(79,70,229,.25);
+  background: linear-gradient(135deg, rgba(79,70,229,.16), rgba(96,165,250,.10));
+}
+
+/* =========================
+   HERO (shared shell + explicit variants)
+   ========================= */
+.hero{
+  border:1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.84));
+  border-radius: var(--radius);
+  padding:24px 22px 18px;
+  box-shadow: 0 18px 55px var(--shadow);
+  position:relative;
+  overflow:hidden;
+  margin-bottom:14px;
+}
+.hero::before{
+  content:"";
+  position:absolute; inset:-2px;
+  opacity:.95;
+  pointer-events:none;
+  /* masked “ink” overlay; actual gradient set by variant */
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.95), rgba(0,0,0,.38), rgba(0,0,0,0));
+}
+.hero > *{position:relative}
+
+/* Landing hero: pink overlay ONLY here */
+.hero--home::before{ background: var(--pink-grad); }
+
+/* Tools + playbooks: cool overlay */
+.hero--tool::before{ background: var(--cool-grad); }
+
+/* Tools hero: darker, matches "Tools I Built" intent */
+.hero--tool-strong::before{
+  background: var(--tool-hero-grad);
+}
+
+/* Hero typography helpers */
+.kicker{
+  display:inline-flex; gap:8px; align-items:center;
+  font-size:12.5px; color:var(--muted2);
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(79,70,229,.18);
+  padding:6px 10px;
+  border-radius:999px;
+  backdrop-filter:saturate(120%) blur(6px);
+}
+.kdot{
+  width:8px; height:8px; border-radius:999px;
+  background:var(--accent);
+  box-shadow:0 0 0 3px rgba(79,70,229,.12);
+}
+
+h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
+.sub{
+  margin:0;
+  color:var(--muted);
+  font-size:16px;
+  max-width:86ch;
+}
+.accent{
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  font-weight:900;
+}
+
+.backRow{
+  margin:10px 2px 2px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.backLink{
+  display:inline-flex; align-items:center; gap:8px;
+  color:var(--muted2);
+  font-weight:700;
+  font-size:14px;
+}
+.backLink:hover{color:var(--text); text-decoration:none}
+.hairline{
+  height:1px;
+  background:rgba(226,232,240,0.9);
+  margin:10px 0 0;
+}
+
+/* =========================
+   PANELS (your “Tools I Built” block style)
+   ========================= */
+.panel{
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  padding:14px;
+  box-shadow: 0 16px 48px var(--shadow);
+  background: rgba(255,255,255,.70);
+}
+.panel--cool{ background: var(--cool-grad); }
+.panel--pink{ background: var(--pink-grad); }
+
+.panelInner{
+  background: rgba(255,255,255,.92);
+  border:1px solid rgba(255,255,255,.55);
+  border-radius: calc(var(--radius) - 6px);
+  padding:14px;
+}
+/* Chapter = document-level panel */
+.chapter{
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  padding:14px;
+  box-shadow: 0 16px 48px var(--shadow);
+  background: var(--cool-soft, var(--cool-grad));
+}
+
+.chapter__inner{
+  background: rgba(255,255,255,.92);
+  border:1px solid rgba(255,255,255,.55);
+  border-radius: calc(var(--radius) - 6px);
+  padding:16px;
+}
+
+/* =========================
+   SECTION TITLES / CARDS
+   ========================= */
+.section-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:-.015em;
+  margin:0 0 12px;
+}
+.section-title::before{
+  content:"";
+  width:6px;
+  height:28px;
+  border-radius:999px;
+  background: linear-gradient(180deg, var(--accent), var(--accent2), var(--accent3));
+}
+
+.card{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.90);
+  border-radius: var(--radius);
+  padding:18px 18px;
+  box-shadow: 0 16px 48px var(--shadow);
+}
+.card h2{ margin:0 0 10px; font-size:18px; letter-spacing:-.01em; }
+.card p{ margin:10px 0; color:var(--text); }
+.small{font-size:13px; color:var(--muted2)}
+.muted{color:var(--muted)}
+.rule{height:1px; background:var(--border); margin:14px 0}
+
+/* Keep lists from leaking into nav by scoping them */
+.card ul, .full ul, .hero-meta ul, .toc-card ul, .persona-card ul, .prose ul{
+  margin:10px 0 0 18px;
+  padding:0;
+}
+.card li, .full li, .hero-meta li, .toc-card li, .persona-card li, .prose li{
+  margin:8px 0;
+  color:var(--text);
+}
+
+/* =========================
+   LAYOUTS (overview + full)
+   ========================= */
+.grid2{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:14px;
+  margin-top:14px;
+}
+@media (max-width: 920px){ .grid2{grid-template-columns:1fr;} }
+
+.full{
+  margin-top:14px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.90);
+  border-radius: var(--radius);
+  padding:18px 18px;
+  box-shadow: 0 16px 48px var(--shadow);
+}
+.full h2{margin:0 0 10px; font-size:18px; letter-spacing:-.01em;}
+
+/* Mini outcome grid (3 across) */
+.miniGrid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:10px;
+  margin-top:10px;
+}
+@media (max-width: 900px){ .miniGrid{grid-template-columns:1fr;} }
+.mini{
+  border:1px solid rgba(226,232,240,0.9);
+  background:rgba(255,255,255,.75);
+  border-radius:14px;
+  padding:12px 12px;
+}
+.mini b{ display:block; font-size:13px; letter-spacing:-.01em; margin-bottom:6px; }
+.mini span{ display:block; font-size:13px; color:var(--muted); line-height:1.45; }
+
+/* =========================
+   DEMO (iframe)
+   ========================= */
+.demo{
+  border:1px solid rgba(226,232,240,0.9);
+  background:rgba(255,255,255,.78);
+  border-radius: var(--radius);
+  overflow:hidden;
+  box-shadow: 0 16px 48px var(--shadow);
+}
+.demoHead{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+  border-bottom:1px solid rgba(226,232,240,0.9);
+}
+.demoHead .label{
+  display:inline-flex; align-items:center; gap:8px;
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+.demoHead .label .dot{
+  width:10px;height:10px;border-radius:999px;background:var(--accent);
+  box-shadow:0 0 0 3px rgba(79,70,229,.12);
+}
+.demoHead a{ font-size:13px; font-weight:900; color:var(--accent); }
+.demoFrame{
+  width:100%;
+  height:460px;
+  border:0;
+  display:block;
+  background:#fff;
+}
+@media (max-width: 680px){ .demoFrame{height:520px;} }
+
+/* =========================
+   SITE FOOTER (centered + aligned with wrap)
+   ========================= */
+.site-footer{
+  margin-top:28px;
+  padding:18px 0 28px;
+  border-top:1px solid var(--border);
+  background: rgba(255,255,255,.55);
+}
+
+.site-footer__row{
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+  color:var(--muted2);
+  font-size:13px;
+}
+
+/* =========================
+   PLAYBOOK LAYOUT (clean)
+   - Hero CTAs live in hero backRow
+   - Header is a true 2-card row:
+     left = combined meta card (stacked)
+     right = sections TOC
+   ========================= */
+
+/* Header row: 2 cards (left wider) */
 body[data-page="tool-playbook"] .info-layout{
   display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1.35fr 0.85fr;
   gap:14px;
   margin-top:14px;
 }
 @media (max-width: 1100px){
-  body[data-page="tool-playbook"] .info-layout{ grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 720px){
-  body[data-page="tool-playbook"] .info-layout{ grid-template-columns: 1fr; }
-}
-/* Playbook: 2-card header layout */
-body[data-page="tool-playbook"] .info-layout--two{
-  grid-template-columns: 1.4fr 1fr;
-}
-
-@media (max-width: 1100px){
-  body[data-page="tool-playbook"] .info-layout--two{
+  body[data-page="tool-playbook"] .info-layout{
     grid-template-columns: 1fr;
   }
 }
 
-/* Split content inside the combined meta card */
+/* Combined meta card: stack blocks vertically (not side-by-side) */
 body[data-page="tool-playbook"] .hero-meta--split .metaSplit{
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap:14px;
-  align-items:start;
 }
 
-@media (max-width: 720px){
-  body[data-page="tool-playbook"] .hero-meta--split .metaSplit{
-    grid-template-columns: 1fr;
-  }
-}
-/* Ensure CTAs sit at the bottom of the left playbook meta column */
-body[data-page="tool-playbook"] .hero-meta--split .metaBlock{
-  display:flex;
-  flex-direction:column;
+/* Divider feel between the two meta blocks */
+body[data-page="tool-playbook"] .hero-meta--split .metaBlock + .metaBlock{
+  padding-top:14px;
+  border-top:1px solid var(--border);
 }
 
-body[data-page="tool-playbook"] .hero-meta--split .ctaRow{
-  margin-top:auto;
-}
-
+/* Shared card shell for playbook header cards */
 body[data-page="tool-playbook"] .hero-meta,
 body[data-page="tool-playbook"] .toc-card,
 body[data-page="tool-playbook"] .persona-card{
   border:1px solid var(--border);
   background:rgba(255,255,255,.90);
   border-radius: var(--radius);
-  padding:14px 14px;
+  padding:14px;
   box-shadow: 0 16px 48px var(--shadow);
 }
-/* Playbook TOC: numbered but no bullets */
+
+/* TOC list: clean, no bullets */
 body[data-page="tool-playbook"] .tocList{
   list-style:none;
   margin:0;
   padding:0;
 }
-
-body[data-page="tool-playbook"] .tocList li{
-  margin:8px 0;
-  padding-left:0;
-}
-
+body[data-page="tool-playbook"] .tocList li{ margin:8px 0; }
 body[data-page="tool-playbook"] .toc a{
   color:var(--text);
   font-weight:800;
@@ -453,6 +811,7 @@ body[data-page="tool-playbook"] .toc a:hover{
   text-decoration:none;
 }
 
+/* Sticky TOC (desktop only) */
 @media (min-width: 920px){
   body[data-page="tool-playbook"] .toc-card{
     position: sticky;
@@ -463,17 +822,11 @@ body[data-page="tool-playbook"] .toc a:hover{
 
 body[data-page="tool-playbook"] .prose{ max-width: 92ch; }
 
-/* Playbook: split hero back row (back link left, CTAs right) */
+/* Hero actions row: back left, CTAs right */
 body[data-page="tool-playbook"] .backRow--split{
   justify-content: space-between;
   flex-wrap: wrap;
 }
-
-/* Playbook: when CTAs are in hero, remove extra top margin */
 body[data-page="tool-playbook"] .ctaRow--tight{
   margin-top: 0;
 }
-
-
-
-
