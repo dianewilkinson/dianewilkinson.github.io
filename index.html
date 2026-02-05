@@ -191,13 +191,15 @@
 }
 
 /* Optional action row like playbook */
-.hero-actions{
-  margin-top:auto;               /* pushes actions to bottom -> taller feel */
+
+  .hero-actions{
+  margin-top:auto;
   display:flex;
-  flex-wrap:wrap;
+  justify-content:flex-end; /* 👈 RIGHT ALIGN */
   gap:10px;
-  align-items:center;
+  flex-wrap:wrap;
 }
+
 
 .hero-pill{
   display:inline-flex;
@@ -504,19 +506,7 @@
   <main class="wrap">
 
     <section class="hero hero--home" aria-label="Hero">
-  <div class="hero-topline">
-    <span class="hero-name">👋 Diane Wilkinson — AI-Native People Ops &amp; Talent Analytics</span>
 
-    <span class="hero-meta">
-      <span class="dot">·</span><span>People Systems</span>
-      <span class="dot">·</span><span>Talent Intelligence</span>
-      <span class="dot">·</span><span>Human-in-the-loop AI</span>
-      <span class="dot">·</span><span>ATS SME</span>
-      <span class="dot">·</span><span>MBA, Data Analytics (4.0 GPA)</span>
-      <span class="dot">·</span>
-      <a href="credentials/" target="_blank" rel="noopener" style="font-weight:900;">Credentials &amp; Recommendations</a>
-    </span>
-  </div>
 
   <h2 class="hero-headline">We don’t need more <span class="accent">AI vendors</span>.</h2>
 
@@ -531,7 +521,17 @@
   </div>
 </section>
 
-    <section class="card" aria-label="Intro">
+<section class="card hero-width">
+  <div class="identity-block">
+    <h3 class="identity-name">
+      👋 Diane Wilkinson — AI-Native People Ops & Talent Analytics
+    </h3>
+    <p class="identity-subline">
+      People Systems · Talent Intelligence · Human-in-the-loop AI · ATS SME · MBA, Data Analytics (4.0 GPA)
+      · <a href="credentials/" target="_blank">Credentials & Recommendations</a>
+    </p>
+  </div>
+
       <p class="muted" style="margin:0 0 10px;">
         I see the system underneath the work — not just individual tools or metrics, but how decisions are made, where signals are lost, and how data, systems, and humans actually interact.
       </p>
