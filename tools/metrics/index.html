@@ -12,10 +12,313 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dianewilkinson.github.io/tools/metrics/" />
 
-  <link rel="stylesheet" href="/assets/css/site.css?v=1">
+  <style>
+    :root{
+      --bg:#f9fafb;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --muted2:#64748b;
+      --border:#e5e7eb;
+      --shadow:rgba(15,23,42,0.08);
+      --radius:18px;
+
+      /* Metrics palette (no pink) */
+      --accent:#4f46e5;      /* indigo */
+      --accent2:#60a5fa;     /* blue */
+      --accent3:#a78bfa;     /* violet */
+      --grad:linear-gradient(135deg, rgba(79,70,229,.16), rgba(96,165,250,.14), rgba(167,139,250,.14));
+      --pill:rgba(79,70,229,.08);
+      --link:#2563eb;
+      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
+    }
+    .bar{height:4px;background:var(--accent-grad);}
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(79,70,229,.10), transparent 45%),
+        radial-gradient(circle at 90% 10%, rgba(96,165,250,.10), transparent 40%),
+        radial-gradient(circle at 50% 100%, rgba(167,139,250,.10), transparent 45%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+
+    .wrap{max-width:1120px; margin:0 auto; padding:28px 18px 64px}
+
+    /* Top bar */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; margin-bottom:16px;
+    }
+    .crumbs{
+      display:flex; align-items:center; gap:10px;
+      color:var(--muted2); font-size:14px; flex-wrap:wrap;
+    }
+    .crumbs a{color:var(--muted2)}
+    .crumbs .sep{opacity:.5}
+
+    .navlinks{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.78);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      box-shadow: 0 10px 30px var(--shadow);
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .btn:hover{background:#fff; text-decoration:none}
+    .btn.primary{
+      border-color: rgba(79,70,229,.25);
+      background: linear-gradient(135deg, rgba(79,70,229,.16), rgba(96,165,250,.10));
+    }
+
+    /* Hero */
+    .hero{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.84));
+      border-radius: var(--radius);
+      padding:24px 22px 18px;
+      box-shadow: 0 18px 55px var(--shadow);
+      position:relative;
+      overflow:hidden;
+      margin-bottom:14px;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: var(--grad);
+      opacity:.95;
+      pointer-events:none;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.95), rgba(0,0,0,.38), rgba(0,0,0,0));
+    }
+    .hero > *{position:relative}
+
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      font-size:12.5px; color:var(--muted2);
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(79,70,229,.18);
+      padding:6px 10px;
+      border-radius:999px;
+      backdrop-filter:saturate(120%) blur(6px);
+    }
+    .kdot{
+      width:8px; height:8px; border-radius:999px;
+      background:var(--accent);
+      box-shadow:0 0 0 3px rgba(79,70,229,.12);
+    }
+
+    h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      max-width:86ch;
+    }
+    .accent{
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 900;
+}
+    /* Back to tools (secondary CTA) */
+    .backRow{
+      margin:10px 2px 2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .backLink{
+      display:inline-flex; align-items:center; gap:8px;
+      color:var(--muted2);
+      font-weight:700;
+      font-size:14px;
+    }
+    .backLink:hover{color:var(--text); text-decoration:none}
+    .hairline{
+      height:1px;
+      background:rgba(226,232,240,0.9);
+      margin:10px 0 0;
+    }
+
+    /* Cards / sections */
+    .grid2{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width: 920px){
+      .grid2{grid-template-columns:1fr;}
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.90);
+      border-radius: var(--radius);
+      padding:18px 18px;
+      box-shadow: 0 16px 48px var(--shadow);
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size:18px;
+      letter-spacing:-.01em;
+    }
+    /* =========================
+   SECTION TITLE ACCENT
+   ========================= */
+.section-title {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:-.015em;
+  margin:0 0 12px;
+}
+
+.section-title::before {
+  content:"";
+  width:6px;
+  height:28px;
+  border-radius:999px;
+  background: linear-gradient(
+    180deg,
+    var(--accent),
+    var(--accent2),
+    var(--accent3)
+  );
+}
+    .card p{margin:10px 0; color:var(--text)}
+    .small{font-size:13px; color:var(--muted2)}
+    .muted{color:var(--muted)}
+    .rule{height:1px; background:var(--border); margin:14px 0}
+
+    ul{margin:10px 0 0 18px; padding:0}
+    li{margin:8px 0; color:var(--text)}
+
+    /* Purpose outcome pills */
+    .miniGrid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+    @media (max-width: 900px){
+      .miniGrid{grid-template-columns:1fr;}
+    }
+    .mini{
+      border:1px solid rgba(226,232,240,0.9);
+      background:rgba(255,255,255,.75);
+      border-radius:14px;
+      padding:12px 12px;
+    }
+    .mini b{
+      display:block;
+      font-size:13px;
+      letter-spacing:-.01em;
+      margin-bottom:6px;
+    }
+    .mini span{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.45;
+    }
+
+    /* Iframe demo (above the fold) */
+    .demo{
+      border:1px solid rgba(226,232,240,0.9);
+      background:rgba(255,255,255,.78);
+      border-radius: var(--radius);
+      overflow:hidden;
+      box-shadow: 0 16px 48px var(--shadow);
+    }
+    .demoHead{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-bottom:1px solid rgba(226,232,240,0.9);
+    }
+    .demoHead .label{
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:900;
+      letter-spacing:-.01em;
+    }
+    .demoHead .label .dot{
+      width:10px;height:10px;border-radius:999px;background:var(--accent);
+      box-shadow:0 0 0 3px rgba(79,70,229,.12);
+    }
+    .demoHead a{
+      font-size:13px;
+      font-weight:900;
+      color:var(--accent);
+    }
+    .demoFrame{
+      width:100%;
+      height:460px;
+      border:0;
+      display:block;
+      background:#fff;
+    }
+    @media (max-width: 680px){
+      .demoFrame{height:520px;}
+    }
+
+    /* Full width sections */
+    .full{
+      margin-top:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.90);
+      border-radius: var(--radius);
+      padding:18px 18px;
+      box-shadow: 0 16px 48px var(--shadow);
+    }
+    .full h2{margin:0 0 10px; font-size:18px; letter-spacing:-.01em;}
+
+    /* CTA row */
+    .ctaRow{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
+    .btnGhost{
+      display:inline-flex; align-items:center; gap:10px;
+      border:1px solid rgba(79,70,229,.22);
+      background:rgba(79,70,229,.06);
+      color:#1f2a7a;
+      padding:10px 12px;
+      border-radius:12px;
+      font-weight:900;
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .btnGhost:hover{background:rgba(79,70,229,.10); text-decoration:none}
+
+    /* Footer */
+    .footer{
+      margin-top:20px;
+      color:var(--muted2);
+      font-size:13px;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      padding:10px 2px 0;
+    }
+  </style>
 </head>
 
-<body data-page="tool-overview">
+<body data-page="tool-index">
   <div class="bar"></div>
 
   <div class="wrap">
@@ -25,151 +328,144 @@
         <span class="sep">/</span>
         <a href="/tools/">Tools</a>
         <span class="sep">/</span>
-        <span>Pipeline Health</span>
+        <span>Pipeline Health / Overview</span>
       </div>
 
-      <div class="navlinks">
-        <a class="btn" href="/library.html">Library</a>
+      <!-- Hero row (top right cluster) -->
+      <div class="navlinks" aria-label="Hero row links">
         <a class="btn" href="/system/">System</a>
+        <a class="btn" href="/tools/metrics/playbook.html">Playbook</a>
+        <a class="btn" href="/tools/metrics/dictionary.html">Dictionary</a>
+        <a class="btn" href="/use-cases/">Cases</a>
       </div>
     </div>
 
-    <section class="hero hero--tool-strong" aria-label="Tool Hero">
-      <div class="kicker"><span class="kdot"></span> Tool · Hiring &amp; Mobility · Autonomy Tier: 1</div>
-      <h1>Pipeline Health <span class="accent">A[i]gent</span></h1>
+    <section class="hero" aria-label="Pipeline Health Hero">
+      <div class="kicker"><span class="kdot"></span> AI Tool · Hiring &amp; Mobility · Autonomy Tier: 1</div>
+      <h1>Stop debating numbers. Start <span class="accent">fixing bottlenecks</span>.</h1>
       <p class="sub">
-        Stop debating numbers. Start fixing bottlenecks.
-        Pipeline Health turns raw hiring funnel data into decision-ready diagnostics so recruiters know what’s broken,
-        why it’s happening, and what to do next — in real time.
+        <strong>Pipeline Health A[i]gent</strong> is an AI tool that turns raw hiring and funnel data into decision-ready diagnostics so recruiters know what is broken, why, and how to fix it in real time.
       </p>
 
-      <div class="backRow backRow--split">
-        <a class="backLink" href="/tools/">← Back to Tools</a>
-
-        <div class="ctaRow ctaRow--tight">
-          <span class="ctaLabel">Explore →</span>
-
-          <a class="btn primary" href="/tools/metrics/">Overview</a>
-          <a class="btn" href="/tools/metrics/playbook.html">Playbook</a>
-          <a class="btn" href="/tools/metrics/demo.html">Demo</a>
-          <a class="btn" href="/tools/metrics/dictionary.html">Dictionary</a>
-          <a class="btn" href="/use-cases/">Cases</a>
-        </div>
+      <!-- Secondary CTA: Back to Tools (left-aligned, below headline/subline) -->
+      <div class="backRow">
+        <a class="backLink" href="/tools/" aria-label="Back to Tools">← Back to Tools</a>
       </div>
+      <div class="hairline"></div>
     </section>
 
-    <!-- AUTO blocks (owned by generator; safe to leave empty for now) -->
-    <!-- AUTO:QUICKLINKS start -->
-    <!-- AUTO:QUICKLINKS end -->
+    <!-- Above-the-fold: iframe demo -->
+    <section class="demo" aria-label="Pipeline Health Demo">
+      <div class="demoHead">
+        <div class="label"><span class="dot"></span> Live demo preview</div>
+        <a href="/tools/metrics/demo.html">Open full demo →</a>
+      </div>
+      <iframe class="demoFrame" src="/tools/metrics/demo.html" title="Pipeline Health Demo (embedded)"></iframe>
+    </section>
 
-    <!-- AUTO:RELATIONS start -->
-    <!-- AUTO:RELATIONS end -->
-
-    <section class="grid2" aria-label="Overview content">
-      <!-- LEFT -->
-      <section class="card" aria-label="What it is">
-        <h2 class="section-title">What this tool is</h2>
+    <!-- Purpose + Outcomes cards -->
+    <section class="grid2" aria-label="Purpose and outcomes">
+      <div class="card">
+        <h2 class="section-title">Purpose</h2>
         <p class="muted">
-          Pipeline Health is the diagnostics layer for recruiting execution. It reads funnel counts and stage movement
-          (from ATS + agent-emitted events), flags abnormal patterns, and turns them into operator-facing actions —
-          not dashboard noise.
+          Hiring decisions fail when teams don’t trust or understand the numbers. Pipeline Health exists to remove ambiguity and make funnel performance explainable — not debatable.
+        </p>
+
+        <div class="miniGrid" aria-label="Outcome pillars">
+          <div class="mini">
+            <b>Faster execution</b>
+            <span>Turn debate into action by making bottlenecks obvious and time-bound.</span>
+          </div>
+          <div class="mini">
+            <b>Cleaner decisions</b>
+            <span>Receipts-backed metrics so leaders can act without arguing about truth.</span>
+          </div>
+          <div class="mini">
+            <b>Safe autonomy</b>
+            <span>Tier-1 actions can run automatically when thresholds stay within guardrails.</span>
+          </div>
+        </div>
+
+        <div class="ctaRow">
+          <a class="btnGhost" href="/tools/metrics/playbook.html">View guardrails &amp; operating model →</a>
+          <a class="btnGhost" href="/tools/metrics/dictionary.html">See metric definitions →</a>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h2 class="section-title">Quick links</h2>
+        <p class="small">This tool is part of <strong>Hiring &amp; Mobility</strong> and feeds downstream planning and governance.</p>
+        <div class="rule"></div>
+
+        <p><a href="/tools/metrics/playbook.html"><strong>Metrics Playbook</strong></a><br />
+          <span class="small">Governance, definitions, thresholds, and how autonomy stays safe.</span>
+        </p>
+
+        <p><a href="/tools/metrics/dictionary.html"><strong>Metrics Dictionary</strong></a><br />
+          <span class="small">Standardized KPI definitions so “truth” stays consistent.</span>
+        </p>
+
+        <p><a href="/system/"><strong>System Architecture</strong></a><br />
+          <span class="small">Where metrics fits across the AI-native operating model.</span>
         </p>
 
         <div class="rule"></div>
 
-        <h2 class="section-title">What breaks without it</h2>
-        <ul>
-          <li>Funnel performance is debated instead of understood.</li>
-          <li>“Actionable” dashboards create noise, not decisions.</li>
-          <li>Bottlenecks are discovered late, after damage is done.</li>
-          <li>KPI truth gets hidden in performative actions instead of operational reality.</li>
-          <li>Metrics lose credibility and trust erodes — which slows execution everywhere.</li>
-        </ul>
-
-        <div class="rule"></div>
-
-        <h2 class="section-title">What it does</h2>
-        <ul>
-          <li>Diagnoses pass-through drop-offs by stage and flags abnormal patterns.</li>
-          <li>Detects constraints (capacity, volume, timing mismatches) before teams feel them.</li>
-          <li>Surfaces likely causes and recommended next actions (operator-facing, not analytics-speak).</li>
-          <li>Executes Tier-1 actions automatically when pre-approved (alerts, nudges, agenda updates).</li>
-        </ul>
-
-        <div class="callout">
-          <strong>Outcome:</strong> Faster execution. Cleaner decisions. Fewer stalled roles.
-        </div>
-      </section>
-
-      <!-- RIGHT -->
-      <aside class="card" aria-label="Where it fits">
-        <h2 class="section-title">Where it fits</h2>
-        <p class="muted">
-          Pipeline Health sits between raw execution data and governed action. It makes drift visible early and gives
-          Chief consistent thresholds for autonomy and escalation.
+        <h2 style="margin-top:0">Status</h2>
+        <p class="small">
+          <strong>Index:</strong> Live<br />
+          <strong>Demo:</strong> Live<br />
+          <strong>Playbook:</strong> Live<br />
+          <strong>Dictionary:</strong> Live
         </p>
-
-        <div class="miniGrid" aria-label="Outcomes">
-          <div class="mini">
-            <b>Signal</b>
-            <span>Stage counts, time-in-stage, pass-through, SLAs, capacity</span>
-          </div>
-          <div class="mini">
-            <b>Diagnosis</b>
-            <span>Explainable bottlenecks and alerts with likely drivers</span>
-          </div>
-          <div class="mini">
-            <b>Action</b>
-            <span>Tier-1 nudges + escalations to Chief when thresholds trip</span>
-          </div>
-        </div>
-
-        <div class="rule"></div>
-
-        <h2 class="section-title">How to use it</h2>
-        <ol class="muted" style="margin:0 0 0 18px;">
-          <li>Open the demo to see how stage inputs generate diagnoses.</li>
-          <li>Use the playbook to standardize definitions and dashboards.</li>
-          <li>Wire tool events into Chief for governance + escalation.</li>
-        </ol>
-
-        <div class="rule"></div>
-
-        <h2 class="section-title">Proof artifacts</h2>
-        <div class="navlinks" style="justify-content:flex-start;">
-          <a class="btn" href="/tools/metrics/playbook.html">Playbook</a>
-          <a class="btn" href="/tools/metrics/demo.html">Interactive Demo</a>
-          <a class="btn" href="/tools/metrics/dictionary.html">Metrics Dictionary</a>
-        </div>
       </aside>
     </section>
 
-    <section class="full" aria-label="Demo embed">
-      <h2 class="section-title">Interactive demo</h2>
-      <p class="muted" style="margin-top:-6px;">
-        This is a lightweight snapshot. In production, counts and timestamps come from ATS/HRIS + agent-emitted events.
-      </p>
+    <!-- What breaks -->
+    <section class="full" aria-label="What breaks without Pipeline Health">
+      <h2 class="section-title">What breaks without this</h2>
+      <ul>
+        <li>Funnel performance is debated instead of understood.</li>
+        <li>“Actionable” dashboards create noise, not decisions.</li>
+        <li>Bottlenecks are discovered late, after damage is done.</li>
+        <li>KPI truth gets hidden in performative actions instead of operational reality.</li>
+        <li>Metrics lose credibility and trust erodes — which slows execution everywhere.</li>
+      </ul>
+    </section>
 
-      <div class="demo" role="region" aria-label="Demo frame">
-        <div class="demoHead">
-          <div class="label"><span class="dot"></span> Pipeline Health Demo</div>
-          <a href="/tools/metrics/demo.html">Open full demo →</a>
-        </div>
-        <iframe class="demoFrame" src="/tools/metrics/demo.html" title="Pipeline Health Demo"></iframe>
+    <!-- What it does -->
+    <section class="full" aria-label="What Pipeline Health does">
+      <h2 class="section-title">What it does</h2>
+      <ul>
+        <li><strong>Diagnoses</strong> pass-through drop-offs by stage (and flags abnormal patterns).</li>
+        <li><strong>Detects constraints</strong> (capacity, volume, timing mismatches) before teams feel them.</li>
+        <li><strong>Surfaces likely causes</strong> and recommended next actions (operator-facing, not “analytics speak”).</li>
+        <li><strong>Executes Tier-1 actions</strong> automatically when pre-approved (agenda updates, alerts, nudges).</li>
+      </ul>
+      <p class="small" style="margin-top:12px;">
+        Note: Pipeline Health is not “the guardrail layer.” It enforces honesty across the system — guardrails live in the playbooks.
+      </p>
+    </section>
+
+    <!-- Where it fits -->
+    <section class="full" aria-label="Where Pipeline Health fits">
+      <h2 class="section-title">Where it fits</h2>
+      <ul>
+        <li><strong>Downstream of Hiring &amp; Mobility signals:</strong> interviews, offers, time-in-stage, pass-through, SLAs.</li>
+        <li><strong>Upstream of Planning, Innovation, and Governance:</strong> makes drift and decay visible early.</li>
+        <li><strong>Feeds Chief A[i]gent:</strong> thresholds for autonomy and escalation signals.</li>
+      </ul>
+
+      <div class="ctaRow">
+        <a class="btn primary" href="/tools/metrics/playbook.html" style="text-decoration:none;">Open the Playbook →</a>
+        <a class="btn" href="/tools/metrics/demo.html" style="text-decoration:none;">Open demo →</a>
       </div>
     </section>
 
-  </div>
-
-  <footer class="site-footer">
-    <div class="site-footer__row">
-      <div>Based in the San Francisco Bay Area</div>
-      <div>
-        <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a>
-        ·
-        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
+    <div class="footer">
+      <div>© Diane Wilkinson</div>
+      <div><a href="/credentials/">Credentials</a> · <a href="/tools/">Tools</a> · <a href="/system/">System</a></div>
     </div>
-  </footer>
+  </div>
 </body>
 </html>
