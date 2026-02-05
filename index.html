@@ -468,97 +468,110 @@
       </p>
     </section>
 
-    <script>
-      // Cache-bust so you don't get stuck on an old tools.json after edits
-      const TOOLS_URL = new URL('tools/tools.json', window.location.href);
-      TOOLS_URL.searchParams.set('v', Date.now());
+<script>
+  const TOOLS_URL = new URL('tools/tools-landing.json', window.location.href);
+  TOOLS_URL.searchParams.set('v', Date.now());
 
-      function absHref(href){
-        // keep your JSON relative; resolve against current page
-        return new URL(href, window.location.href).toString();
+  function absHref(href){
+    return new URL(href, window.location.href).toString();
+  }
+
+  function normalizeTool(tool){
+    // Support BOTH schemas:
+    // Old: { name, links: { index/demo/playbook } }
+    // New: { title, href }
+    const name = tool.name || tool.title || tool.label || tool.id || 'Untitled';
+    const links = tool.links || {};
+
+    // If a tool only has href, treat that as its "index" link
+    if (!links.index && tool.href) links.index = tool.href;
+
+    // Normalize paths (ensure leading slash for internal paths)
+    for (const k of Object.keys(links)){
+      if (typeof links[k] === 'string' && links[k].startsWith('tools/')) {
+        links[k] = '/' + links[k];
       }
+    }
 
-      function renderToolCard(tool){
-        const emoji = tool.emoji || '';
-        const name = tool.name || 'Untitled';
-        const desc = tool.description || '';
-        const pill = tool.pill || tool.type || 'Tool';
-        const links = tool.links || {};
-        // Choose a sensible primary path for “what should I click”
-        const primary =
-          links.demo ? {label:'Demo', href: links.demo} :
-          links.index ? {label:'Open', href: links.index} :
-          links.playbook ? {label:'Playbook', href: links.playbook} :
-          null;
+    const emoji = tool.emoji || '';
+    const desc = tool.description || '';
+    const pill = tool.pill || tool.type || 'Tool';
 
-        const actions = [];
-        if (links.demo) actions.push({label:'Demo', href: links.demo});
-        if (links.playbook) actions.push({label:'Playbook', href: links.playbook});
-        if (links.index) actions.push({label:'Overview', href: links.index});
-        if (links.pdf) actions.push({label:'PDF', href: links.pdf});
-        if (links.external) actions.push({label:'External', href: links.external});
+    return { emoji, name, desc, pill, links };
+  }
 
-        // If you only want ONE action on landing, keep primary only:
-        const actionHtml = primary
-          ? `<div class="tool-actions">
-               <a href="${absHref(primary.href)}">${primary.label} →</a>
-             </div>`
-          : `<div class="tool-actions">
-               <a href="${absHref('tools/')}">Browse →</a>
-             </div>`;
+  function renderToolCard(raw){
+    const tool = normalizeTool(raw);
+    const { emoji, name, desc, pill, links } = tool;
 
-        return `
-          <div class="tool-card">
-            <div class="tool-top">
-              <div style="min-width:0;">
-                <h3>${emoji} ${name}</h3>
-                <p>${desc}</p>
-              </div>
-              <span class="badge">${pill}</span>
-            </div>
-            ${actionHtml}
+    const primary =
+      links.demo ? {label:'Demo', href: links.demo} :
+      links.index ? {label:'Open', href: links.index} :
+      links.playbook ? {label:'Playbook', href: links.playbook} :
+      null;
+
+    const actionHtml = primary
+      ? `<div class="tool-actions">
+           <a href="${absHref(primary.href)}">${primary.label} →</a>
+         </div>`
+      : `<div class="tool-actions">
+           <a href="${absHref('tools/')}">Browse →</a>
+         </div>`;
+
+    return `
+      <div class="tool-card">
+        <div class="tool-top">
+          <div style="min-width:0;">
+            <h3>${emoji} ${name}</h3>
+            <p>${desc}</p>
           </div>
-        `;
-      }
+          <span class="badge">${pill}</span>
+        </div>
+        ${actionHtml}
+      </div>
+    `;
+  }
 
-      fetch(TOOLS_URL.toString())
-        .then(res => {
-          if (!res.ok) throw new Error('Fetch failed: ' + res.status);
-          return res.json();
-        })
-        .then(tools => {
-          const grid = document.getElementById('tools-grid');
-          grid.innerHTML = '';
-          if (!Array.isArray(tools)) throw new Error('tools.json must be an array');
-          tools.forEach(tool => {
-            const wrap = document.createElement('div');
-            wrap.innerHTML = renderToolCard(tool);
-            grid.appendChild(wrap.firstElementChild);
-          });
-        })
-        .catch(err => {
-          console.error('TOOLS LOAD ERROR:', err);
-          const grid = document.getElementById('tools-grid');
-          grid.innerHTML = `
-            <div class="tool-card">
-              <div class="tool-top">
-                <div>
-                  <h3>⚠️ Tools failed to load</h3>
-                  <p>
-                    Most common causes:
-                    <br>• <code>tools/tools.json</code> is not valid JSON (trailing commas)
-                    <br>• The file isn't published at <code>/tools/tools.json</code>
-                  </p>
-                </div>
-                <span class="badge">Error</span>
-              </div>
-              <div class="tool-actions">
-                <a href="tools/">Browse tools →</a>
-              </div>
+  fetch(TOOLS_URL.toString())
+    .then(res => {
+      if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+      return res.json();
+    })
+    .then(tools => {
+      const grid = document.getElementById('tools-grid');
+      grid.innerHTML = '';
+      if (!Array.isArray(tools)) throw new Error('tools.json must be an array');
+      tools.forEach(tool => {
+        const wrap = document.createElement('div');
+        wrap.innerHTML = renderToolCard(tool);
+        grid.appendChild(wrap.firstElementChild);
+      });
+    })
+    .catch(err => {
+      console.error('TOOLS LOAD ERROR:', err);
+      const grid = document.getElementById('tools-grid');
+      grid.innerHTML = `
+        <div class="tool-card">
+          <div class="tool-top">
+            <div>
+              <h3>⚠️ Tools failed to load</h3>
+              <p>
+                Common causes:
+                <br>• <code>tools/tools.json</code> isn’t valid JSON (trailing commas)
+                <br>• It isn’t an array <code>[...]</code>
+                <br>• It’s not actually published at <code>/tools/tools.json</code>
+              </p>
             </div>
-          `;
-        });
-    </script>
+            <span class="badge">Error</span>
+          </div>
+          <div class="tool-actions">
+            <a href="tools/">Browse tools →</a>
+          </div>
+        </div>
+      `;
+    });
+</script>
+
 
     <details aria-label="System Deep Dive">
       <summary>
