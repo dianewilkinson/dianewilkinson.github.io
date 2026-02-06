@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Sourcing A[i]gent – Market Mapping & Boolean Builder (Demo)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Demo sourcing engine: role intake → Boolean patterns, market map tiers, and readiness signals for tech recruiting."
+  />
+
+  <style>
+    :root{
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+      line-height:1.5;
+      color:#111827;
+      background-color:#f3f4f6;
+    }
+    body{
+      margin:0;
+      padding:0;
+      background:radial-gradient(circle at top left,#e5e7eb,#f9fafb);
+      min-height:100vh;
+    }
+    .page{max-width:960px;margin:2.5rem auto;padding:1.5rem;}
+    .card{
+      background:white;border-radius:1.25rem;box-shadow:0 18px 45px rgba(15,23,42,.12);
+      padding:2rem;border:1px solid #e5e7eb;
+    }
+
+    .eyebrow{
+      font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;
+      color:#6b7280;margin-bottom:.5rem;
+    }
+    .title-row{
+      display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+      gap:.75rem;margin-bottom:.75rem;
+    }
+    h1{font-size:clamp(1.9rem,3vw,2.4rem);margin:0;letter-spacing:-.03em;}
+    .subtitle-inline{font-size:1.3rem;font-weight:500;color:#4b5563;opacity:.98;white-space:nowrap;}
+    @media (max-width:640px){.subtitle-inline{white-space:normal;}}
+
+    .tabs-row{
+      position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:.75rem;
+      margin-bottom:1.25rem;flex-wrap:wrap;border-bottom:1px solid #e5e7eb;padding-bottom:0;
+    }
+    .tabs-row::after{
+      content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:999px;
+      background:linear-gradient(90deg,#f97316,#ec4899,#6366f1);
+    }
+    .tabs-label{font-size:.78rem;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;}
+    .tabs{display:flex;flex-wrap:wrap;gap:.2rem;}
+    .tab{
+      border:1px solid transparent;border-bottom:none;border-radius:10px 10px 0 0;background:transparent;
+      font-size:.82rem;padding:.45rem 1.1rem;cursor:pointer;color:#6b7280;margin-bottom:-1px;
+      transition:background .15s ease,color .15s ease,border-color .15s ease,box-shadow .15s ease;
+    }
+    .tab:hover{background:#f3f4f6;border-color:#e5e7eb;border-bottom-color:transparent;color:#374151;}
+    .tab.active{
+      background:#fff;color:#111827;font-weight:600;border-color:#d1d5db;border-bottom-color:#fff;
+      box-shadow:0 -1px 4px rgba(15,23,42,.06);
+    }
+
+    .section-title{font-size:.9rem;font-weight:600;color:#374151;margin-bottom:.4rem;text-align:left;}
+
+    table{width:100%;border-collapse:collapse;font-size:.85rem;}
+    th,td{padding:.45rem .4rem;border-bottom:1px solid #e5e7eb;background:#fff;vertical-align:top;}
+    tr:last-child td{border-bottom:none;}
+    th{
+      font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;
+      background:#f9fafb;text-align:left;
+    }
+
+    .grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;
+    }
+    @media (max-width:860px){.grid{grid-template-columns:1fr;}}
+
+    .subcard{
+      background:#ffffff;border-radius:1.1rem;border:1px solid #e5e7eb;
+      box-shadow:0 10px 30px rgba(15,23,42,.06);padding:1.2rem 1.4rem 1.3rem;
+    }
+    .subcard-title{font-size:.9rem;font-weight:600;color:#111827;margin-bottom:.15rem;}
+    .subcard-help{font-size:.78rem;color:#6b7280;margin-bottom:.7rem;}
+
+    .pill{
+      display:inline-flex;align-items:center;gap:.35rem;padding:.18rem .7rem;border-radius:999px;
+      border:1px solid #e5e7eb;background:#f3f4f6;font-size:.76rem;color:#374151;white-space:nowrap;
+    }
+    .dot{width:.45rem;height:.45rem;border-radius:999px;background:#9ca3af;}
+    .pill.good{color:#065f46;border-color:#a7f3d0;background:#ecfdf5;}
+    .pill.good .dot{background:#22c55e;}
+    .pill.warn{color:#9a3412;border-color:#fed7aa;background:#fff7ed;}
+    .pill.warn .dot{background:#f97316;}
+    .pill.risk{color:#7f1d1d;border-color:#fecaca;background:#fef2f2;}
+    .pill.risk .dot{background:#ef4444;}
+    .pill.info{color:#3730a3;border-color:#c7d2fe;background:#eef2ff;}
+    .pill.info .dot{background:#6366f1;}
+
+    input[type="text"], input[type="number"]{
+      width:100%;padding:.35rem .55rem;border-radius:.55rem;border:1px solid #d1d5db;
+      font-size:.82rem;background:#fff;
+    }
+    input[type="text"]:focus, input[type="number"]:focus{
+      outline:none;border-color:#6366f1;box-shadow:0 0 0 1px #6366f1;
+    }
+    .mini{width:6.5rem;}
+    .row2{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;}
+    .row2 > *{flex:1 1 140px;}
+
+    pre{
+      margin:0;background:#0b1220;color:#e5e7eb;border-radius:.9rem;padding:.9rem 1rem;
+      overflow:auto;font-size:.78rem;line-height:1.45;border:1px solid rgba(148,163,184,.18);
+    }
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;}
+
+    .btn-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.8rem;align-items:center;}
+    button{
+      border-radius:999px;border:none;font-size:.83rem;cursor:pointer;padding:.4rem .9rem;
+      display:inline-flex;align-items:center;gap:.35rem;
+    }
+    .btn-primary{background:#111827;color:white;}
+    .btn-secondary{background:#e5e7eb;color:#111827;}
+    button span.icon{font-size:1rem;line-height:1;}
+
+    .root-card{
+      margin-top:1.4rem;background:#f9fafb;border-radius:.9rem;border:1px solid #e5e7eb;
+      padding:.9rem .9rem 1rem;font-size:.8rem;color:#4b5563;
+    }
+    .root-header{text-align:center;}
+    .root-header h3{
+      margin:0;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:#374151;
+    }
+    .root-subtitle{margin-top:.25rem;font-size:.78rem;color:#6b7280;}
+    .root-columns-header{
+      margin:.65rem .35rem .25rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;
+      font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;text-align:left;
+    }
+    .root-gradient{
+      height:2px;border-radius:999px;background:linear-gradient(90deg,#f97316,#ec4899,#6366f1);
+      margin:.35rem .35rem .8rem;
+    }
+    .root-empty{font-size:.78rem;color:#6b7280;text-align:center;padding:.7rem .3rem;}
+
+    .root-issues{display:flex;flex-direction:column;gap:.85rem;}
+    .root-issue-card{
+      background:#fff;border-radius:.85rem;border:1px solid #e5e7eb;padding:.85rem .95rem .95rem;
+      box-shadow:0 1px 3px rgba(15,23,42,.04);
+    }
+    .issue-top{
+      display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;margin-bottom:.55rem;
+    }
+    .issue-left{display:inline-flex;align-items:center;gap:.55rem;flex-wrap:wrap;}
+    .issue-stage{font-size:.9rem;font-weight:650;color:#111827;letter-spacing:-.01em;}
+    .issue-metrics{
+      font-size:.78rem;color:#6b7280;display:inline-flex;gap:.6rem;flex-wrap:wrap;
+    }
+    .issue-metrics span{
+      display:inline-flex;align-items:center;gap:.25rem;padding:.12rem .5rem;border-radius:999px;
+      border:1px solid #e5e7eb;background:#f9fafb;color:#374151;
+    }
+
+    .diag-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;align-items:start;}
+    .diag-col{
+      border:1px solid #e5e7eb;border-radius:.75rem;background:#fbfdff;padding:.7rem .75rem;min-height:120px;
+    }
+    .diag-col h4{
+      margin:0 0 .35rem;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;
+    }
+    .diag-list{margin:0;padding-left:1.05rem;color:#374151;font-size:.8rem;line-height:1.45;}
+    .diag-list li{margin:.22rem 0;}
+    .diag-conclusion{margin:0;color:#111827;font-size:.82rem;line-height:1.5;}
+
+    @media (max-width:780px){
+      .root-columns-header{display:none;}
+      .diag-grid{grid-template-columns:1fr;}
+      .issue-metrics span{font-size:.75rem;}
+    }
+
+    .footer-note{margin-top:1.5rem;font-size:.75rem;color:#9ca3af;text-align:right;}
+    .badge{
+      display:inline-flex;align-items:center;gap:.25rem;font-size:.7rem;padding:.25rem .6rem;border-radius:999px;
+      background:#eef2ff;color:#3730a3;margin-left:.25rem;
+    }
+
+    .note{margin-top:.45rem;font-size:.75rem;color:#9ca3af;}
+    .list-tight{margin:.2rem 0 0;padding-left:1.1rem;color:#374151;font-size:.82rem;}
+    .list-tight li{margin:.18rem 0;}
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <section class="card">
+      <div class="eyebrow">A[i]gents Portfolio · Demo</div>
+
+      <div class="title-row">
+        <h1>Sourcing A[i]gent</h1>
+        <span class="subtitle-inline">Market Map + Boolean Patterns</span>
+      </div>
+
+      <div class="tabs-row">
+        <span class="tabs-label">Active requisitions</span>
+        <div class="tabs">
+          <button class="tab" data-req="be">Backend Eng (Python)</button>
+          <button class="tab" data-req="ml">Staff ML (LLMs)</button>
+          <button class="tab" data-req="de">Data Eng (Analytics)</button>
+        </div>
+      </div>
+
+      <div class="section-title">Role intake snapshot (demo)</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:28%;">Input</th>
+            <th>Value</th>
+            <th style="width:20%;">Signal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Role title</b></td>
+            <td><input type="text" id="in_title" value="Senior Backend Engineer" /></td>
+            <td><span class="pill info"><span class="dot"></span><span id="sig_title">Template-ready</span></span></td>
+          </tr>
+          <tr>
+            <td><b>Primary stack</b></td>
+            <td><input type="text" id="in_stack" value="Python, Go, Microservices" /></td>
+            <td><span class="pill info"><span class="dot"></span><span id="sig_stack">Synonyms expanded</span></span></td>
+          </tr>
+          <tr>
+            <td><b>Seniority</b></td>
+            <td>
+              <div class="row2">
+                <input type="text" id="in_level" value="Senior / Staff" />
+                <input type="text" id="in_scope" value="IC" />
+              </div>
+            </td>
+            <td><span class="pill info"><span class="dot"></span><span id="sig_level">Mapped to titles</span></span></td>
+          </tr>
+          <tr>
+            <td><b>Location / Remote</b></td>
+            <td>
+              <div class="row2">
+                <input type="text" id="in_loc" value="Bay Area" />
+                <input type="text" id="in_remote" value="Hybrid ok" />
+              </div>
+            </td>
+            <td><span class="pill info"><span class="dot"></span><span id="sig_loc">Radius applied</span></span></td>
+          </tr>
+          <tr>
+            <td><b>Must-haves</b></td>
+            <td><input type="text" id="in_must" value="Distributed systems, APIs, Production ownership" /></td>
+            <td><span class="pill warn"><span class="dot"></span><span id="sig_must">Tightens pool</span></span></td>
+          </tr>
+          <tr>
+            <td><b>Avoid list</b></td>
+            <td><input type="text" id="in_avoid" value="Intern, Student, Bootcamp" /></td>
+            <td><span class="pill info"><span class="dot"></span><span id="sig_avoid">Negatives added</span></span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="btn-row">
+        <button class="btn-primary" id="build-btn" type="button">
+          <span class="icon">🧩</span><span>Build market map + patterns</span>
+        </button>
+        <button class="btn-secondary" id="reset-btn" type="button">
+          <span class="icon">↺</span><span>Reset requisition</span>
+        </button>
+      </div>
+
+      <div class="note">In production, these inputs are pulled from the intake form + ATS requisition fields.</div>
+
+      <div class="grid">
+        <div class="subcard">
+          <div class="subcard-title">Generated search patterns</div>
+          <div class="subcard-help">Transparent, editable strings (starting point, not a black box).</div>
+
+          <div class="section-title" style="margin-top:.2rem;">LinkedIn Boolean</div>
+          <pre><code id="out_linkedin"></code></pre>
+
+          <div class="section-title" style="margin-top:.8rem;">GitHub pattern</div>
+          <pre><code id="out_github"></code></pre>
+
+          <div class="section-title" style="margin-top:.8rem;">Google X-ray (LinkedIn)</div>
+          <pre><code id="out_xray"></code></pre>
+        </div>
+
+        <div class="subcard">
+          <div class="subcard-title">Market map + readiness</div>
+          <div class="subcard-help">Company tiers, channel mix, and “what’s likely to work first.”</div>
+
+          <div class="section-title" style="margin-top:.2rem;">Target companies (tiers)</div>
+          <div id="out_companies"></div>
+
+          <div class="section-title" style="margin-top:.9rem;">Recommended channel mix</div>
+          <ul class="list-tight" id="out_channels"></ul>
+
+          <div class="section-title" style="margin-top:.9rem;">Readiness signals</div>
+          <div class="row2" style="margin-top:.35rem;">
+            <span class="pill" id="pill_pool"><span class="dot"></span><span id="txt_pool">Pool: —</span></span>
+            <span class="pill" id="pill_comp"><span class="dot"></span><span id="txt_comp">Competition: —</span></span>
+            <span class="pill" id="pill_speed"><span class="dot"></span><span id="txt_speed">Speed risk: —</span></span>
+          </div>
+
+          <div class="note" id="out_note"></div>
+        </div>
+      </div>
+
+      <div class="root-card">
+        <div class="root-header">
+          <h3>Sourcing Summary</h3>
+          <div class="root-subtitle">Analysis (what was built) → Findings (insight) → Conclusion (feeds Chief)</div>
+          <div class="root-columns-header">
+            <div>Analysis</div>
+            <div>Findings</div>
+            <div>Conclusion</div>
+          </div>
+        </div>
+        <div class="root-gradient"></div>
+
+        <div id="root-table-container">
+          <div class="root-empty">
+            Choose a requisition and click “Build market map + patterns” to generate a sourcing plan.
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        <span>Agent type</span>
+        <span class="badge">Sourcing A[i]gent · Market Mapping</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // -------- Demo reqs --------
+    const REQS = {
+      be: {
+        name: "Backend Eng (Python)",
+        intake: {
+          title: "Senior Backend Engineer",
+          stack: "Python, Go, Microservices",
+          level: "Senior / Staff",
+          scope: "IC",
+          loc: "Bay Area",
+          remote: "Hybrid ok",
+          must: "Distributed systems, APIs, Production ownership",
+          avoid: "Intern, Student, Bootcamp",
+        },
+        titles: ["backend engineer","back-end engineer","software engineer","platform engineer","distributed systems engineer"],
+        skills: ["Python","Go","Golang","microservices","APIs","distributed systems","scalability","high throughput"],
+        negatives: ["intern","student","bootcamp"],
+        companies: {
+          t1: ["Stripe","Cloudflare","Datadog","MongoDB","Twilio"],
+          t2: ["Snyk","PagerDuty","Elastic","Confluent","HashiCorp"],
+          t3: ["Series B–D devtools","infra teams in fintech","OSS-heavy platform startups"]
+        },
+        channels: [
+          "LinkedIn Recruiter (titles + stack) — sprint first",
+          "GitHub (language + keywords + stars) — for signal-rich profiles",
+          "Referral + team network — fastest for niche infra",
+          "Meetups/communities (K8s/devtools) — for passive talent"
+        ],
+        seed: "be|v1"
+      },
+      ml: {
+        name: "Staff ML (LLMs)",
+        intake: {
+          title: "Staff Machine Learning Engineer",
+          stack: "Python, PyTorch/JAX, LLMs",
+          level: "Staff / Principal",
+          scope: "IC",
+          loc: "Bay Area / Remote",
+          remote: "US time zones",
+          must: "LLM training/serving, production ML, GPU optimization",
+          avoid: "Intern, Student, Bootcamp",
+        },
+        titles: ["staff ml engineer","machine learning engineer","applied scientist","research engineer","ml ops engineer"],
+        skills: ["LLM","large language model","transformer","RLHF","PyTorch","JAX","TensorFlow","inference","serving","CUDA","MLOps"],
+        negatives: ["intern","student","bootcamp"],
+        companies: {
+          t1: ["Anthropic","OpenAI","Google DeepMind","Cohere","xAI"],
+          t2: ["Databricks","Hugging Face","Scale AI","Snowflake","Weights & Biases"],
+          t3: ["Series B–D applied AI","GPU infra startups","OSS LLM tooling teams"]
+        },
+        channels: [
+          "Targeted outbound to Tier 2 infra (highest overlap)",
+          "GitHub + arXiv signal scanning (papers, repos, contributions)",
+          "Specialist communities (ML Slack, conferences) — pipeline depth",
+          "Inbound tuning (JD clarity + comp band) — reduce unqualified noise"
+        ],
+        seed: "ml|v1"
+      },
+      de: {
+        name: "Data Eng (Analytics)",
+        intake: {
+          title: "Senior Data Engineer",
+          stack: "SQL, dbt, Airflow, Warehouse",
+          level: "Senior",
+          scope: "IC",
+          loc: "Remote",
+          remote: "US only",
+          must: "dbt, pipelines, stakeholder-facing analytics",
+          avoid: "Intern, Student, Bootcamp",
+        },
+        titles: ["data engineer","analytics engineer","platform data engineer","data platform engineer"],
+        skills: ["SQL","dbt","Airflow","ETL","ELT","Snowflake","BigQuery","Redshift","Spark"],
+        negatives: ["intern","student","bootcamp"],
+        companies: {
+          t1: ["Snowflake","Databricks","Airbnb","DoorDash","Block"],
+          t2: ["Segment","Hightouch","Fivetran","Mode","Amplitude"],
+          t3: ["PLG SaaS analytics teams","fintech data platforms","late-stage marketplaces"]
+        },
+        channels: [
+          "LinkedIn (analytics eng + dbt) — broad but strong fit",
+          "dbt + data communities (Slack, meetups) — higher intent",
+          "Referral + hiring manager network — strongest close velocity",
+          "Portfolio-driven inbound (case studies) — reduces screening load"
+        ],
+        seed: "de|v1"
+      }
+    };
+
+    let currentReqKey = "be";
+
+    // -------- deterministic helpers (demo-only) --------
+    function clamp(n, lo, hi){ return Math.max(lo, Math.min(hi, n)); }
+    function hashSeed(str){
+      let h = 0;
+      for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
+      return h;
+    }
+    function demoPct(seed, base, spread){
+      const r = (seed % 1000) / 1000;
+      return clamp(base + (r - 0.5) * spread, 0, 100);
+    }
+
+    function setPill(el, kind){
+      el.classList.remove("good","warn","risk","info");
+      el.classList.add(kind);
+      el.querySelector(".dot").style.background =
+        kind === "good" ? "#22c55e" :
+        kind === "warn" ? "#f97316" :
+        kind === "risk" ? "#ef4444" : "#6366f1";
+    }
+
+    function buildLinkedIn(req){
+      const titles = `(${req.titles.map(t => `"${t}"`).join(" OR ")})`;
+      const skills = `(${req.skills.map(s => `"${s}"`).join(" OR ")})`;
+      const negs = `NOT (${req.negatives.map(n => `"${n}"`).join(" OR ")})`;
+      return `${titles}\nAND ${skills}\n${negs}`;
+    }
+
+    function buildGitHub(req){
+      // simple heuristic: prefer Python for ML + backend; SQL for data
+      const title = req.name.toLowerCase();
+      if (title.includes("ml")) {
+        return `("LLM" OR "transformer" OR "RLHF")\n("PyTorch" OR "JAX" OR "TensorFlow")\nlanguage:Python\nstars:>10`;
+      }
+      if (title.includes("data")) {
+        return `("dbt" OR "ETL" OR "ELT")\n("Snowflake" OR "BigQuery" OR "Redshift")\nlanguage:SQL\nstars:>5`;
+      }
+      return `("microservices" OR "distributed systems" OR "scalability")\n("Python" OR "Go" OR "Golang")\nlanguage:Go\nstars:>10`;
+    }
+
+    function buildXray(req, loc){
+      const titleCluster = req.titles.slice(0,3).map(t => `"${t}"`).join(" OR ");
+      const skillCluster = req.skills.slice(0,4).map(s => `"${s}"`).join(" OR ");
+      const city = (loc || "Bay Area");
+      const neg = req.negatives.map(n => `-"${n}"`).join(" ");
+      return `site:linkedin.com/in\n(${titleCluster})\n(${skillCluster})\n("${city}" OR "Remote")\n${neg}`;
+    }
+
+    function renderCompanies(comp){
+      return `
+        <ul class="list-tight">
+          <li><b>Tier 1</b>: ${comp.t1.join(", ")}</li>
+          <li><b>Tier 2</b>: ${comp.t2.join(", ")}</li>
+          <li><b>Tier 3</b>: ${comp.t3.join(", ")}</li>
+        </ul>
+      `;
+    }
+
+    function renderChannels(items){
+      return items.map(x => `<li>${x}</li>`).join("");
+    }
+
+    function buildSummary(req){
+      const seed = hashSeed(req.seed + "|" + currentReqKey);
+
+      // demo signals
+      const pool = demoPct(seed + 11, 62, 42);        // higher => larger pool
+      const competition = demoPct(seed + 37, 58, 36); // higher => more competition
+      const speedRisk = demoPct(seed + 91, 34, 46);   // higher => process speed matters more
+
+      // classify
+      const poolKind = pool > 65 ? "good" : pool > 45 ? "warn" : "risk";
+      const compKind = competition < 45 ? "good" : competition < 65 ? "warn" : "risk";
+      const speedKind = speedRisk < 40 ? "good" : speedRisk < 65 ? "warn" : "risk";
+
+      // text labels
+      const poolLabel = pool > 65 ? "Large" : pool > 45 ? "Medium" : "Small";
+      const compLabel = competition < 45 ? "Moderate" : competition < 65 ? "High" : "Severe";
+      const speedLabel = speedRisk < 40 ? "Low" : speedRisk < 65 ? "Medium" : "High";
+
+      // narrative
+      const analysis = [
+        "Converted intake into a structured role template (titles, stack synonyms, negatives).",
+        "Generated editable search patterns for LinkedIn, GitHub, and X-ray.",
+        "Produced a 3-tier market map (competitors → adjacent infra → hidden gems).",
+        "Suggested initial channel mix based on role family + signal density."
+      ];
+
+      const findings = [
+        `Pool sizing signal (demo): <b>${poolLabel}</b> (${pool.toFixed(0)}th percentile proxy).`,
+        `Competition pressure (demo): <b>${compLabel}</b> (${competition.toFixed(0)} proxy) — affects response + close.`,
+        `Speed sensitivity (demo): <b>${speedLabel}</b> (${speedRisk.toFixed(0)} proxy) — process latency impacts conversion.`,
+        "Best first sprint: run LinkedIn pattern + Tier 2 targets, then validate with 10–15 sample profiles and HM calibration."
+      ];
+
+      let conclusion =
+        "Conclusion: start with Tier 2 + signal-rich channels to maximize qualified conversations fast, then broaden to Tier 3 as patterns stabilize. Save winning patterns as reusable templates and hand structured outputs to Screening + Metrics.";
+
+      if (poolKind === "risk") {
+        conclusion =
+          "Conclusion: talent pool looks tight. Prioritize precision: tighten title/stack, lean on Tier 2 adjacencies, and use referrals/communities early. Validate comp band + seniority expectations before scaling outreach.";
+      }
+      if (compKind === "risk") {
+        conclusion =
+          "Conclusion: competition is severe. Optimize for speed + clarity: reduce cycles, pre-align comp band, and use high-signal sourcing (Tier 2 + GitHub/community). Track warm response rate by pattern weekly and iterate.";
+      }
+
+      return {
+        pool, competition, speedRisk,
+        poolKind, compKind, speedKind,
+        poolLabel, compLabel, speedLabel,
+        analysis, findings, conclusion
+      };
+    }
+
+    function renderRoot(summary){
+      const container = document.getElementById("root-table-container");
+
+      const metrics = [
+        `<span title="Pool sizing"><strong>Pool</strong> ${summary.poolLabel}</span>`,
+        `<span title="Competition pressure"><strong>Comp</strong> ${summary.compLabel}</span>`,
+        `<span title="Speed sensitivity"><strong>Speed</strong> ${summary.speedLabel}</span>`
+      ].join("");
+
+      container.innerHTML = `
+        <div class="root-issues">
+          <div class="root-issue-card">
+            <div class="issue-top">
+              <div class="issue-left">
+                <span class="pill info"><span class="dot"></span><span>Plan</span></span>
+                <span class="issue-stage">Sourcing plan generated</span>
+              </div>
+              <div class="issue-metrics">${metrics}</div>
+            </div>
+
+            <div class="diag-grid">
+              <div class="diag-col">
+                <h4>Analysis</h4>
+                <ul class="diag-list">${summary.analysis.map(x => `<li>${x}</li>`).join("")}</ul>
+              </div>
+              <div class="diag-col">
+                <h4>Findings</h4>
+                <ul class="diag-list">${summary.findings.map(x => `<li>${x}</li>`).join("")}</ul>
+              </div>
+              <div class="diag-col">
+                <h4>Conclusion</h4>
+                <p class="diag-conclusion">${summary.conclusion}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // -------- UI wiring --------
+    function applyReq(key){
+      const req = REQS[key];
+      if (!req) return;
+      currentReqKey = key;
+
+      // inputs
+      document.getElementById("in_title").value = req.intake.title;
+      document.getElementById("in_stack").value = req.intake.stack;
+      document.getElementById("in_level").value = req.intake.level;
+      document.getElementById("in_scope").value = req.intake.scope;
+      document.getElementById("in_loc").value = req.intake.loc;
+      document.getElementById("in_remote").value = req.intake.remote;
+      document.getElementById("in_must").value = req.intake.must;
+      document.getElementById("in_avoid").value = req.intake.avoid;
+
+      // tabs
+      document.querySelectorAll(".tab").forEach(btn => btn.classList.toggle("active", btn.dataset.req === key));
+
+      // clear outputs
+      document.getElementById("out_linkedin").textContent = "";
+      document.getElementById("out_github").textContent = "";
+      document.getElementById("out_xray").textContent = "";
+      document.getElementById("out_companies").innerHTML = "";
+      document.getElementById("out_channels").innerHTML = "";
+      document.getElementById("out_note").textContent = "";
+
+      document.getElementById("txt_pool").textContent = "Pool: —";
+      document.getElementById("txt_comp").textContent = "Competition: —";
+      document.getElementById("txt_speed").textContent = "Speed risk: —";
+      setPill(document.getElementById("pill_pool"), "info");
+      setPill(document.getElementById("pill_comp"), "info");
+      setPill(document.getElementById("pill_speed"), "info");
+
+      document.getElementById("root-table-container").innerHTML =
+        '<div class="root-empty">Choose a requisition and click “Build market map + patterns” to generate a sourcing plan.</div>';
+    }
+
+    function build(){
+      const req = REQS[currentReqKey];
+
+      // allow slight edits to influence x-ray location + negatives
+      const loc = (document.getElementById("in_loc").value || "").trim();
+      const avoid = (document.getElementById("in_avoid").value || "").trim();
+
+      // update negatives from field (comma-separated)
+      if (avoid) req.negatives = avoid.split(",").map(x => x.trim().replace(/^"+|"+$/g,"")).filter(Boolean);
+
+      // outputs
+      document.getElementById("out_linkedin").textContent = buildLinkedIn(req);
+      document.getElementById("out_github").textContent = buildGitHub(req);
+      document.getElementById("out_xray").textContent = buildXray(req, loc);
+
+      document.getElementById("out_companies").innerHTML = renderCompanies(req.companies);
+      document.getElementById("out_channels").innerHTML = renderChannels(req.channels);
+
+      const summary = buildSummary(req);
+
+      // pills
+      document.getElementById("txt_pool").textContent = `Pool: ${summary.poolLabel}`;
+      document.getElementById("txt_comp").textContent = `Competition: ${summary.compLabel}`;
+      document.getElementById("txt_speed").textContent = `Speed risk: ${summary.speedLabel}`;
+
+      setPill(document.getElementById("pill_pool"), summary.poolKind);
+      setPill(document.getElementById("pill_comp"), summary.compKind);
+      setPill(document.getElementById("pill_speed"), summary.speedKind);
+
+      document.getElementById("out_note").textContent =
+        "Next: validate with 10–15 sample profiles, align with the HM on must-haves, then save this pattern as a reusable template.";
+
+      renderRoot(summary);
+    }
+
+    document.getElementById("build-btn").addEventListener("click", build);
+    document.getElementById("reset-btn").addEventListener("click", () => applyReq(currentReqKey));
+    document.querySelectorAll(".tab").forEach(btn => btn.addEventListener("click", () => applyReq(btn.dataset.req)));
+
+    // init
+    applyReq("be");
+  </script>
+</body>
+</html>
