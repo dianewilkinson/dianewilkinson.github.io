@@ -3,595 +3,204 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>A[i]gent Suite – People Systems Agents Overview</title>
+  <title>Tools I Built — Diane Wilkinson</title>
+  <meta name="description" content="Scan a grid of workflow-first People Ops tools. Open any tool for a decision-ready overview." />
+  <meta property="og:title" content="Tools I Built — Diane Wilkinson" />
+  <meta property="og:description" content="Workflow-first tools embedded in real People Ops environments. Scan fast. Dive deeper when needed." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dianewilkinson.github.io/tools/" />
 
-  <meta property="og:title" content="A[i]gent Suite – People Systems Agents Overview">
-  <meta property="og:description" content="AI-native agents for People Ops & Talent Analytics — organized by function, with governance + infrastructure layers and auditability built in.">
-  <meta property="og:type" content="website">
-
-  <style>
-    :root{
-      --bg:#f9fafb;
-      --card:#ffffff;
-      --text:#111827;
-      --muted:#4b5563;
-      --border:#e5e7eb;
-      --link:#2563eb;
-      --link-soft:#4f46e5;
-      --shadow:rgba(15,23,42,0.08);
-      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
-      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.09),rgba(168,85,247,.09),rgba(99,102,241,.09));
-    }
-    *{box-sizing:border-box;}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    }
-    a{color:var(--link);text-decoration:none;}
-    a:hover{text-decoration:underline;}
-    .bar{height:4px;background:var(--accent-grad);}
-
-    header{
-      padding:24px 16px 10px;
-      text-align:center;
-    }
-    header h1{
-      margin:0;
-      font-size:24px;
-      font-weight:800;
-      letter-spacing:.01em;
-    }
-    header p{
-      margin:8px 0 0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-    }
-
-    .wrap{
-      max-width:1120px;
-      margin:0 auto;
-      padding:0 20px 32px;
-    }
-
-    /* Hero */
-    .hero{
-      margin:16px 0 16px;
-      border-radius:20px;
-      background:linear-gradient(120deg,#fde7ef,#f3e8ff,#e0ecff);
-      box-shadow:0 8px 24px var(--shadow);
-      padding:18px 18px 14px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:16px;
-      align-items:stretch;
-    }
-    .hero-main{
-      flex:1 1 520px;
-      min-width:0;
-    }
-    .hero-title{
-      margin:0 0 8px;
-      font-size:22px;
-      line-height:1.35;
-      font-weight:900;
-      letter-spacing:.01em;
-    }
-    .hero-title span{color:var(--link-soft);}
-    .hero-main p{
-      margin:0;
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.7;
-    }
-
-    .hero-actions{
-      margin-top:10px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .back-pill, .pill-link{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:7px 12px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:700;
-      color:#4f46e5;
-      background:rgba(255,255,255,0.92);
-      border:1px solid rgba(148,163,184,0.8);
-      text-decoration:none;
-      white-space:nowrap;
-    }
-    .back-pill:hover, .pill-link:hover{
-      background:rgba(255,255,255,1);
-      text-decoration:none;
-      color:#4338ca;
-    }
-
-    .hero-meta{
-      flex:0 0 340px;
-      min-width:260px;
-      background:rgba(255,255,255,.92);
-      border-radius:16px;
-      border:1px solid rgba(229,231,235,.95);
-      padding:12px 14px 10px;
-      box-shadow:0 6px 18px rgba(15,23,42,.07);
-    }
-    .callout{
-      margin-top:2px;
-      padding:10px 12px;
-      border-radius:12px;
-      background:rgba(239,246,255,.85);
-      border:1px solid #bfdbfe;
-      font-size:13px;
-      color:#1f2937;
-      line-height:1.55;
-    }
-    .quick-links{
-      margin-top:10px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-    .quick-links a{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid #e5e7eb;
-      background:#fff;
-      font-size:12px;
-      font-weight:700;
-      color:#374151;
-      text-decoration:none;
-      white-space:nowrap;
-    }
-    .quick-links a:hover{
-      border-color:#cbd5e1;
-      text-decoration:none;
-      color:#111827;
-    }
-
-    @media (max-width:860px){
-      .hero{padding:16px 14px 12px;}
-      .hero-title{font-size:20px;}
-      .hero-meta{flex:1 1 280px;}
-    }
-
-    /* Sections layout */
-    .sections{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:14px;
-      margin-top:10px;
-      align-items:start;
-    }
-
-    .section-card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:18px;
-      box-shadow:0 1px 3px var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .section-card::before{
-      content:"";
-      position:absolute;
-      top:0;left:0;right:0;
-      height:56px;
-      background:var(--accent-soft);
-      opacity:.55;
-      pointer-events:none;
-    }
-    .section-inner{
-      position:relative;
-      z-index:1;
-      padding:12px 12px 10px;
-    }
-
-    .section-head{
-      display:flex;
-      align-items:baseline;
-      justify-content:space-between;
-      gap:10px;
-      padding-bottom:10px;
-      border-bottom:1px solid #eef2f7;
-      margin-bottom:10px;
-    }
-    .section-title{
-      margin:0;
-      font-size:19px;
-      font-weight:900;
-      letter-spacing:.01em;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color:var(--link-soft);
-    }
-    .section-sub{
-      margin:0;
-      color:#6b7280;
-      font-size:12.5px;
-      line-height:1.45;
-    }
-
-    .agents-grid{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(240px, 1fr));
-      gap:10px;
-      align-items:start;
-    }
-    @media (max-width:1100px){
-      .agents-grid{grid-template-columns:repeat(2, minmax(240px, 1fr));}
-    }
-    @media (max-width:640px){
-      .agents-grid{grid-template-columns:1fr;}
-    }
-
-    .agent-card{
-      border:1px solid #eef2f7;
-      border-radius:14px;
-      padding:10px 10px 9px;
-      background:#fff;
-      box-shadow:0 1px 2px rgba(15,23,42,.04);
-    }
-    .agent-name{
-      font-size:13px;
-      margin:0;
-      font-weight:800;
-      line-height:1.25;
-      color:#111827;
-    }
-    .agent-role{
-      margin:6px 0 0;
-      font-size:12.75px;
-      color:#6b7280;
-      line-height:1.55;
-    }
-    .agent-meta{
-      margin-top:8px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      align-items:flex-start;
-      justify-content:space-between;
-    }
-    .pillset{
-      display:flex;
-      flex-wrap:wrap;
-      gap:6px;
-    }
-    .pill{
-      display:inline-flex;
-      padding:3px 8px;
-      border-radius:999px;
-      border:1px solid #e5e7eb;
-      background:#f9fafb;
-      font-size:11px;
-      color:#6b7280;
-      white-space:nowrap;
-    }
-    .links{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      font-size:12px;
-      color:#6b7280;
-    }
-    .links a{font-weight:800;}
-
-    /* Infrastructure styling (subtle) */
-    .infra .section-card::before{
-      background:linear-gradient(135deg,rgba(148,163,184,.12),rgba(99,102,241,.10));
-      opacity:.8;
-    }
-    .infra .agent-card{
-      background:linear-gradient(180deg,#ffffff, #fbfdff);
-      border-color:#e8edf5;
-    }
-
-    footer{
-      text-align:center;
-      margin:18px 0 20px;
-      color:var(--muted);
-      font-size:12px;
-    }
-  </style>
+  <!-- your single source of truth -->
+  <link rel="stylesheet" href="/assets/css/site.css?v=1">
 </head>
 
-<body>
+<body data-page="tools-grid">
   <div class="bar"></div>
 
-  <header>
-    <h1>A[i]gent Suite – People Systems Overview</h1>
-    <p>Workflow-first people ops agents, organized by function — with explicit governance + infrastructure behind the scenes.</p>
-  </header>
-
   <div class="wrap">
-
-    <section class="hero">
-      <div class="hero-main">
-        <h2 class="hero-title"><span>AI agents</span> that remove bias, latency, and wasted time — so work moves.</h2>
-        <p>Each agent is intentionally scoped: it owns a specific decision or loop, then hands off cleanly to the next step.</p>
-
-        <div class="hero-actions">
-          <a href="../" class="back-pill">← Back to Portfolio</a>
-          <a href="../system/" class="pill-link">Explore the system →</a>
-          <a href="../library.html" class="pill-link">Open artifact library →</a>
-        </div>
+    <div class="topbar">
+      <div class="crumbs">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <span>Tools</span>
       </div>
 
-      <aside class="hero-meta">
-        <div class="callout">
-          Browse by function below. Open a demo or playbook when available.
+      <div class="navlinks">
+        <a class="btn" href="/system/">System</a>
+        <a class="btn" href="/library/">Library</a>
+        <a class="btn primary" href="/book/" target="_blank" rel="noopener">Book 15 min</a>
+      </div>
+    </div>
+
+    <section class="hero hero--tool" aria-label="Tools hero">
+      <div class="kicker"><span class="kdot"></span> Tools I Built · scan-first</div>
+      <h1>Workflow-first tools that <span class="accent">speed decisions</span>.</h1>
+      <p class="sub">
+        These are intentionally scoped tools—meant to plug into existing HR/TA environments, not replace them.
+        Open any tool for a concise overview and optional deep dives (demo / playbook) when available.
+      </p>
+
+      <div class="backRow">
+        <a class="backLink" href="/">← Back to Home</a>
+
+        <div class="ctaRow">
+          <span class="ctaLabel">Explore →</span>
+          <a class="btn" href="/system/">System</a>
+          <a class="btn" href="/library/">Artifacts</a>
         </div>
-        <div class="quick-links" aria-label="Quick Links">
-          <a href="./innovation/">Innovation overview</a>
-          <a href="./innovation/playbook.html">Innovation playbook</a>
-          <a href="./screening/">Screening demo</a>
-          <a href="./metrics/">Metrics demo</a>
-        </div>
-      </aside>
+      </div>
     </section>
 
-    <section class="sections" aria-label="A[i]gent Suite Sections">
+    <!-- Hiring & Mobility -->
+    <section class="panel panel--cool" aria-label="Hiring & Mobility">
+      <div class="panelInner">
+        <h2 class="section-title">Hiring &amp; Mobility</h2>
+        <p class="sub" style="font-size:14px;margin-top:-4px;">
+          Pipeline health, screening signal, and execution rhythm across the hiring funnel.
+        </p>
 
-      <!-- Hiring & Mobility -->
-      <div class="section-card">
-        <div class="section-inner">
-          <div class="section-head">
-            <div>
-              <h3 class="section-title">🎯 Hiring &amp; Mobility</h3>
-              <p class="section-sub">From kickoff → screening → sourcing/matching → outreach → interviews → offers, with bias control and clean updates.</p>
-            </div>
-          </div>
-
-          <div class="agents-grid">
-            <div class="agent-card">
-              <h4 class="agent-name">Kickoff A[i]gent</h4>
-              <p class="agent-role">Turns intake + JD + stakeholder input into must-haves, a rubric, and reusable scorecard criteria the suite can enforce end-to-end.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">must-haves</span><span class="pill">rubrics</span><span class="pill">alignment</span></div>
-                <div class="links"></div>
+        <div class="appGrid" aria-label="Hiring & Mobility tools">
+          <article class="appCard">
+            <div class="appTop">
+              <div class="appMain">
+                <h3>🦾 Talent Pipeline Health</h3>
+                <p>Decision-ready funnel diagnostics: bottlenecks, throughput, and what to test next.</p>
               </div>
+              <span class="appBadge">AI Tool</span>
             </div>
+            <div class="appActions">
+              <a class="appLink" href="/tools/metrics/">Explore tool →</a>
+            </div>
+          </article>
 
-            <div class="agent-card">
-              <h4 class="agent-name">Screening A[i]gent</h4>
-              <p class="agent-role">Application triage with receipts + recruiter controls — raises signal without turning hiring into a black box.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">hybrid scoring</span><span class="pill">receipts</span><span class="pill">override</span></div>
-                <div class="links">
-                  <a href="./screening/" target="_blank" rel="noopener">Demo</a>
-                  <a href="./screening/playbook.html" target="_blank" rel="noopener">Playbook</a>
-                </div>
+          <article class="appCard">
+            <div class="appTop">
+              <div class="appMain">
+                <h3>🦾 Screening</h3>
+                <p>Evidence-first screening support with recruiter controls—without black-box evaluation.</p>
               </div>
+              <span class="appBadge">AI Tool</span>
             </div>
+            <div class="appActions">
+              <a class="appLink" href="/tools/screening/">Explore tool →</a>
+            </div>
+          </article>
 
-            <div class="agent-card">
-              <h4 class="agent-name">Sourcing A[i]gent</h4>
-              <p class="agent-role">Builds concrete sourcing plans from vague requests — market maps, target lists, and reusable search patterns for repeatable pipelines.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">market maps</span><span class="pill">search patterns</span><span class="pill">repeatable</span></div>
-                <div class="links">
-                  <a href="./sourcing/playbook.html" target="_blank" rel="noopener">Playbook</a>
-                </div>
+          <article class="appCard">
+            <div class="appTop">
+              <div class="appMain">
+                <h3>🧮 Sourcing Quality</h3>
+                <p>Signal standards + quality checks so inbound/outbound/referrals are evaluated consistently.</p>
               </div>
+              <span class="appBadge">Playbook</span>
             </div>
-
-            <div class="agent-card">
-              <h4 class="agent-name">Match &amp; Mobility A[i]gent</h4>
-              <p class="agent-role">Finds cross-fit candidates across reqs and surfaces internal opportunities without forcing politics or manager-mediated friction.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">cross-fit</span><span class="pill">rediscovery</span><span class="pill">internal mobility</span></div>
-                <div class="links"></div>
-              </div>
+            <div class="appActions">
+              <a class="appLink" href="/tools/sourcing/">Explore tool →</a>
             </div>
-
-            <div class="agent-card">
-              <h4 class="agent-name">Outreach A[i]gent</h4>
-              <p class="agent-role">Adapts cadence, channel, and message framing based on engagement signals — and stays on-brand while logging cleanly.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">engagement signals</span><span class="pill">channel</span><span class="pill">cadence</span></div>
-                <div class="links"></div>
-              </div>
-            </div>
-
-            <div class="agent-card">
-              <h4 class="agent-name">Interview (Scorecard) A[i]gent</h4>
-              <p class="agent-role">Captures structured notes, normalizes scoring, reduces mood drift, and produces auditable feedback.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">structured notes</span><span class="pill">bias control</span><span class="pill">audit trail</span></div>
-                <div class="links"></div>
-              </div>
-            </div>
-
-            <div class="agent-card">
-              <h4 class="agent-name">Nurture A[i]gent</h4>
-              <p class="agent-role">Keeps silver medalists warm with relevant touchpoints over time — aligned to demand, timing, and trust.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">talent community</span><span class="pill">timing</span><span class="pill">experience</span></div>
-                <div class="links"></div>
-              </div>
-            </div>
-
-            <div class="agent-card">
-              <h4 class="agent-name">Offer A[i]gent</h4>
-              <p class="agent-role">Surfaces the right context at the right time to build offers faster — without losing narrative, approvals, or readiness checks.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">readiness</span><span class="pill">approvals</span><span class="pill">close speed</span></div>
-                <div class="links"></div>
-              </div>
-            </div>
-          </div>
+          </article>
         </div>
       </div>
+    </section>
 
-      <!-- Listening & Insights -->
-      <div class="section-card">
-        <div class="section-inner">
-          <div class="section-head">
-            <div>
-              <h3 class="section-title">👂 Listening &amp; Insights</h3>
-              <p class="section-sub">Internal truth + external narrative signals — captured continuously and turned into usable, low-noise insight.</p>
-            </div>
-          </div>
+    <!-- Listening & Insights -->
+    <section class="panel panel--cool" style="margin-top:14px;" aria-label="Listening & Insights">
+      <div class="panelInner">
+        <h2 class="section-title">Listening &amp; Insights</h2>
+        <p class="sub" style="font-size:14px;margin-top:-4px;">
+          Continuous feedback → usable themes, with governance and low noise.
+        </p>
 
-          <div class="agents-grid">
-            <div class="agent-card">
-              <h4 class="agent-name">Listening A[i]gent</h4>
-              <p class="agent-role">Replaces surveys with continuous, low-friction check-ins that detect patterns and surface actionable, anonymous themes.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">low-friction</span><span class="pill">themes</span><span class="pill">early warnings</span></div>
-                <div class="links">
-                  <a href="./listening/playbook.html" target="_blank" rel="noopener">Playbook</a>
-                </div>
+        <div class="appGrid" aria-label="Listening & Insights tools">
+          <article class="appCard">
+            <div class="appTop">
+              <div class="appMain">
+                <h3>🦾 Employee Listening</h3>
+                <p>Turns messy feedback into decision-ready themes with auditability.</p>
               </div>
+              <span class="appBadge">AI Tool</span>
             </div>
-
-            <div class="agent-card">
-              <h4 class="agent-name">Sentiment A[i]gent</h4>
-              <p class="agent-role">Tracks narrative drift that impacts attraction and trust — flags what’s moving and why it matters.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">reputation</span><span class="pill">narratives</span><span class="pill">trust</span></div>
-                <div class="links"></div>
-              </div>
+            <div class="appActions">
+              <a class="appLink" href="/tools/listening/">Explore tool →</a>
             </div>
-          </div>
+          </article>
         </div>
       </div>
+    </section>
 
-      <!-- Improvement & Strategy -->
-      <div class="section-card">
-        <div class="section-inner">
-          <div class="section-head">
-            <div>
-              <h3 class="section-title">📈 Improvement &amp; Strategy</h3>
-              <p class="section-sub">Turns signals into prioritized actions, capacity-aware plans, and compounding operational improvements.</p>
-            </div>
-          </div>
+    <!-- Improvement & Strategy -->
+    <section class="panel panel--cool" style="margin-top:14px;" aria-label="Improvement & Strategy">
+      <div class="panelInner">
+        <h2 class="section-title">Improvement &amp; Strategy</h2>
+        <p class="sub" style="font-size:14px;margin-top:-4px;">
+          Turns signals into prioritized action, capacity-aware plans, and compounding improvements.
+        </p>
 
-          <div class="agents-grid">
-            <div class="agent-card">
-              <h4 class="agent-name">Innovation A[i]gent</h4>
-              <p class="agent-role">Prevents good ideas from dying between insight and action — checks memory, routes net-new ideas, and ensures closure.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">closure</span><span class="pill">routing</span><span class="pill">memory</span></div>
-                <div class="links">
-                  <a href="./innovation/" target="_blank" rel="noopener">Overview</a>
-                  <a href="./innovation/playbook.html" target="_blank" rel="noopener">Playbook</a>
-                </div>
+        <div class="appGrid" aria-label="Improvement & Strategy tools">
+          <article class="appCard">
+            <div class="appTop">
+              <div class="appMain">
+                <h3>🦾 Innovation</h3>
+                <p>Routes ideas into action by checking memory, structuring experiments, and ensuring closure.</p>
               </div>
+              <span class="appBadge">AI Tool</span>
             </div>
-
-            <div class="agent-card">
-              <h4 class="agent-name">Planning A[i]gent</h4>
-              <p class="agent-role">Capacity-aware planning — adjusts actions and expectations, generates agendas, and warns when drift appears.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">forecasting</span><span class="pill">capacity</span><span class="pill">plan vs actual</span></div>
-                <div class="links"></div>
-              </div>
+            <div class="appActions">
+              <a class="appLink" href="/tools/innovation/">Explore tool →</a>
             </div>
-
-            <div class="agent-card">
-              <h4 class="agent-name">Skills A[i]gent</h4>
-              <p class="agent-role">Maps skills we have vs. skills we need — enabling workforce planning, upskilling focus, and succession signals.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">skills gaps</span><span class="pill">succession</span><span class="pill">strategy</span></div>
-                <div class="links"></div>
-              </div>
-            </div>
-
-            <div class="agent-card">
-              <h4 class="agent-name">Metrics A[i]gent</h4>
-              <p class="agent-role">Turns raw funnel/ops data into decision-ready diagnostics: bottlenecks, throughput, and what to test next.</p>
-              <div class="agent-meta">
-                <div class="pillset"><span class="pill">diagnostics</span><span class="pill">bottlenecks</span><span class="pill">decision-ready</span></div>
-                <div class="links">
-                  <a href="./metrics/" target="_blank" rel="noopener">Demo</a>
-                  <a href="./metrics/playbook.html" target="_blank" rel="noopener">Playbook</a>
-                </div>
-              </div>
-            </div>
-
-          </div>
+          </article>
         </div>
       </div>
+    </section>
 
-      <!-- Governance & Infrastructure -->
-      <div class="infra">
-        <div class="section-card">
-          <div class="section-inner">
-            <div class="section-head">
-              <div>
-                <h3 class="section-title">🧩 Governance &amp; Infrastructure</h3>
-                <p class="section-sub">Not “agents” — the layers that make autonomy safe: orchestration, memory, measurement, and execution plumbing.</p>
+    <!-- Governance & Infrastructure -->
+    <section class="panel panel--cool" style="margin-top:14px;" aria-label="Governance & Infrastructure">
+      <div class="panelInner">
+        <h2 class="section-title">Governance &amp; Infrastructure</h2>
+        <p class="sub" style="font-size:14px;margin-top:-4px;">
+          The layers that make autonomy safe: routing, guardrails, audit trails, and operating model.
+        </p>
+
+        <div class="appGrid" aria-label="Governance & Infrastructure tools">
+          <article class="appCard">
+            <div class="appTop">
+              <div class="appMain">
+                <h3>🧠 Chief</h3>
+                <p>Orchestration layer: routes work, enforces guardrails, and keeps humans in the loop.</p>
               </div>
+              <span class="appBadge">System</span>
             </div>
-
-            <div class="agents-grid">
-              <div class="agent-card">
-                <h4 class="agent-name">Chief A[i]gent</h4>
-                <p class="agent-role">Control plane for autonomy tiers and escalation — routes work, enforces guardrails, and keeps humans in the loop.</p>
-                <div class="agent-meta">
-                  <div class="pillset"><span class="pill">guardrails</span><span class="pill">tiers</span><span class="pill">escalation</span></div>
-                  <div class="links">
-                    <a href="./chief/" target="_blank" rel="noopener">Demo</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="agent-card">
-                <h4 class="agent-name">InfoHub</h4>
-                <p class="agent-role">Institutional memory layer — source of truth for SOPs, decisions, and versioned documents referenced by the suite.</p>
-                <div class="agent-meta">
-                  <div class="pillset"><span class="pill">knowledge</span><span class="pill">versioning</span><span class="pill">retrieval</span></div>
-                  <div class="links"></div>
-                </div>
-              </div>
-
-              <div class="agent-card">
-                <h4 class="agent-name">Metrics Layer</h4>
-                <p class="agent-role">Measurement + definitions layer: shared KPI dictionary, plan vs actual, SLAs, capacity, and reliable reporting inputs.</p>
-                <div class="agent-meta">
-                  <div class="pillset"><span class="pill">dictionary</span><span class="pill">plan vs actual</span><span class="pill">SLAs</span></div>
-                  <div class="links">
-                    <a href="./metrics/" target="_blank" rel="noopener">Demo</a>
-                    <a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link" target="_blank" rel="noopener">Dictionary</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="agent-card">
-                <h4 class="agent-name">Execution Layer</h4>
-                <p class="agent-role">ATS/HRIS + automations that carry out approved actions (logging, updates, notifications) reliably and audibly.</p>
-                <div class="agent-meta">
-                  <div class="pillset"><span class="pill">automation</span><span class="pill">logging</span><span class="pill">audit trail</span></div>
-                  <div class="links"></div>
-                </div>
-              </div>
+            <div class="appActions">
+              <a class="appLink" href="/tools/chief/">Explore tool →</a>
             </div>
+          </article>
 
-          </div>
+          <article class="appCard">
+            <div class="appTop">
+              <div class="appMain">
+                <h3>🧭 Workflow-First Operating Model</h3>
+                <p>Routing, SLAs, escalation paths, and automation—how the system runs.</p>
+              </div>
+              <span class="appBadge">Doc</span>
+            </div>
+            <div class="appActions">
+              <a class="appLink" href="/tools/workflow/">Explore tool →</a>
+            </div>
+          </article>
         </div>
       </div>
-
     </section>
 
   </div>
 
-  <footer>
-    Let’s talk people systems &amp; internal A[i]gents –
-    <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
-    <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+  <footer class="site-footer">
+    <div class="site-footer__row">
+      <div>Based in the San Francisco Bay Area</div>
+      <div>
+        <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a>
+        ·
+        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
   </footer>
 </body>
 </html>
