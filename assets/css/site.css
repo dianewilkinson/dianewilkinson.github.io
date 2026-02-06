@@ -550,3 +550,82 @@ body[data-page="tool-playbook"] .ctaRow--tight{
   text-decoration:none;
 }
 .pillLink:hover{background:#fff; text-decoration:none; color:var(--accent);}
+/* =========================
+   APP GRID (Tools library)
+   Additive only — does not modify existing components
+   ========================= */
+.appGrid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap:12px;
+}
+@media (max-width: 1100px){ .appGrid{ grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (max-width: 900px){ .appGrid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 620px){ .appGrid{ grid-template-columns: 1fr; } }
+
+.appCard{
+  border:1px solid rgba(226,232,240,0.95);
+  background: rgba(255,255,255,.90);
+  border-radius:14px;
+  padding:12px;
+  box-shadow: 0 10px 30px rgba(15,23,42,.06);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-width:0;
+}
+
+.appTop{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap; /* prevents badge crushing text */
+}
+
+.appMain{
+  flex: 1 1 190px;
+  min-width:190px;
+}
+
+.appCard h3{
+  margin:0 0 6px;
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+
+.appCard p{
+  margin:0;
+  color:var(--muted);
+  font-size:12.75px;
+  line-height:1.45;
+  word-break:normal;
+  overflow-wrap:normal;
+}
+
+.appBadge{
+  font-size:11px;
+  font-weight:900;
+  color:var(--muted2);
+  border:1px solid rgba(226,232,240,0.95);
+  border-radius:999px;
+  padding:4px 8px;
+  background:rgba(255,255,255,.78);
+  white-space:nowrap;
+}
+
+.appActions{
+  margin-top:auto;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.appLink{
+  font-size:12.5px;
+  font-weight:900;
+  color:var(--accent);
+  text-decoration:none;
+}
+.appLink:hover{ color:#3730a3; text-decoration:none; }
+
