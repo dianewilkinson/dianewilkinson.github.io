@@ -363,6 +363,34 @@
     }
     .tier-item b{display:block; font-size:13px; margin-bottom:6px; letter-spacing:-.01em;}
     .tier-item span{display:block; font-size:13px; color:var(--muted); line-height:1.45;}
+
+    /* ===== FIX: tool grid text “vertical stacking” ===== */
+.tool-top{
+  flex-wrap:wrap;              /* lets badge drop below instead of crushing text */
+  align-items:flex-start;
+}
+
+.tool-top > div{
+  flex: 1 1 180px;             /* keep a minimum readable column for title/desc */
+  min-width: 180px;
+}
+
+.badge{
+  flex: 0 1 auto;
+  max-width: 100%;
+  white-space: normal;         /* allow wrap */
+}
+
+.tool-card p{
+  overflow-wrap: normal;       /* stop breaking words into letters */
+  word-break: normal;
+}
+
+.tool-actions{
+  gap:10px;                    /* spacing between Open + Playbook */
+  flex-wrap:wrap;
+}
+
 /* =========================
    SYSTEM DROPDOWN (details)
    ========================= */
