@@ -3,331 +3,80 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sourcing A[i]gent – Tech Talent Market Mapping & Boolean Playbook</title>
+  <title>Sourcing Tool Playbook — Tech Market Mapping & Boolean Patterns</title>
 
-  <meta property="og:title" content="Sourcing A[i]gent – Tech Talent Market Mapping & Boolean Playbook">
-  <meta property="og:description" content="Tech recruiting sourcing engine for structured market mapping, Boolean patterns, and company targeting across engineering, data, and AI roles.">
+  <meta property="og:title" content="Sourcing Tool Playbook — Tech Market Mapping & Boolean Patterns">
+  <meta property="og:description" content="Structured market mapping, Boolean patterns, and company targeting across engineering, data, and AI roles.">
   <meta property="og:type" content="article">
 
-  <style>
-    :root{
-      --bg:#f9fafb;
-      --card:#ffffff;
-      --text:#111827;
-      --muted:#4b5563;
-      --border:#e5e7eb;
-      --link:#2563eb;
-      --link-soft:#4f46e5;
-      --shadow:rgba(15,23,42,0.08);
-      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
-      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.09),rgba(168,85,247,.09),rgba(99,102,241,.09));
-    }
-    *{box-sizing:border-box;}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    }
-    a{color:var(--link);text-decoration:none;}
-    a:hover{text-decoration:underline;}
-    .bar{height:4px;background:var(--accent-grad);}
-
-    header{
-      padding:24px 16px 10px;
-      text-align:center;
-    }
-    header h1{
-      margin:0;
-      font-size:24px;
-      font-weight:700;
-    }
-    header p{
-      margin:8px 0 0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-    }
-
-    .wrap{
-      max-width:1120px;
-      margin:0 auto;
-      padding:0 20px 32px;
-    }
-
-    /* Hero card */
-    .hero{
-      margin:16px 0 24px;
-      border-radius:20px;
-      background:linear-gradient(120deg,#fde7ef,#f3e8ff,#e0ecff);
-      box-shadow:0 8px 24px var(--shadow);
-      padding:22px 22px 18px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:18px;
-    }
-    .hero-main{
-      flex:1 1 260px;
-      min-width:0;
-    }
-    .hero-title{
-      margin:0 0 8px;
-      font-size:22px;
-      line-height:1.35;
-    }
-    .hero-title span{
-      color:var(--link-soft);
-    }
-    .hero-main p{
-      margin:0;
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.7;
-    }
-    .hero-actions{
-      margin-top:10px;
-      display:flex;
-      flex-direction:row;
-      align-items:center;
-      gap:8px;
-      font-size:13px;
-      flex-wrap:nowrap;
-    }
-    .hero-actions a{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:7px 12px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,.8);
-      background:rgba(255,255,255,.9);
-      font-weight:500;
-      text-decoration:none;
-      white-space:nowrap;
-    }
-    .back-pill{
-      color:#4f46e5;
-    }
-    .back-pill:hover{
-      background:rgba(255,255,255,1);
-      color:#4338ca;
-      text-decoration:none;
-    }
-
-    @media (max-width:800px){
-      .hero{padding:18px 16px 14px;}
-      .hero-title{font-size:20px;}
-    }
-
-    /* Info row under hero – 3 cards */
-    .info-layout{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:18px;
-      margin-bottom:24px;
-    }
-    @media (max-width:1100px){
-      .info-layout{
-        grid-template-columns:1fr 1fr;
-      }
-    }
-    @media (max-width:700px){
-      .info-layout{
-        grid-template-columns:1fr;
-      }
-    }
-
-    .hero-meta,
-    .toc-card,
-    .persona-card{
-      background:var(--card);
-      border-radius:14px;
-      border:1px solid var(--border);
-      padding:12px 12px 10px;
-      box-shadow:0 1px 3px var(--shadow);
-      font-size:13px;
-    }
-    .hero-meta h3,
-    .toc-card h3,
-    .persona-card h3{
-      margin:0 0 6px;
-      font-size:13px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:#6b7280;
-    }
-    .hero-meta ul,
-    .toc-card ul{
-      list-style:none;
-      margin:0;
-      padding:0;
-    }
-    .hero-meta li,
-    .toc-card li{
-      margin:3px 0;
-    }
-
-    .toc-card a{
-      color:#374151;
-      text-decoration:none;
-    }
-    .toc-card a:hover{
-      text-decoration:underline;
-      color:var(--link-soft);
-    }
-
-    .persona-pill{
-      display:inline-flex;
-      align-items:center;
-      padding:4px 10px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:500;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      background:#e0ebff;
-      color:#1d4ed8;
-      margin-bottom:6px;
-    }
-
-    article{
-      background:var(--card);
-      border-radius:16px;
-      border:1px solid var(--border);
-      box-shadow:0 1px 3px var(--shadow);
-      padding:18px 20px 18px;
-      font-size:14px;
-      line-height:1.7;
-      color:#111827;
-    }
-    article h2{
-      font-size:18px;
-      margin:18px 0 6px;
-    }
-    article h3{
-      font-size:15px;
-      margin:14px 0 4px;
-    }
-    article h2:first-of-type{
-      margin-top:0;
-    }
-    article p{
-      margin:2px 0 8px;
-    }
-    article ul{
-      margin:4px 0 10px 18px;
-      padding:0;
-    }
-    article li{
-      margin-bottom:3px;
-    }
-    .pill-note{
-      display:inline-block;
-      padding:3px 8px;
-      border-radius:999px;
-      background:rgba(219,234,254,.7);
-      color:#1d4ed8;
-      font-size:11px;
-      font-weight:500;
-      text-transform:uppercase;
-      letter-spacing:.06em;
-    }
-    .callout{
-      margin:10px 0 12px;
-      padding:10px 12px;
-      border-radius:12px;
-      background:rgba(239,246,255,.8);
-      border:1px solid #bfdbfe;
-      font-size:13px;
-    }
-    .table-wrap{
-      margin:6px 0 10px;
-      overflow-x:auto;
-    }
-    table{
-      width:100%;
-      border-collapse:collapse;
-      font-size:13px;
-    }
-    th, td{
-      border:1px solid #e5e7eb;
-      padding:4px 6px;
-      text-align:left;
-    }
-    th{
-      background:#f3f4f6;
-      font-weight:600;
-    }
-
-    footer{
-      text-align:center;
-      margin:18px 0 20px;
-      color:var(--muted);
-      font-size:12px;
-    }
-  </style>
+  <!-- Single source of truth -->
+  <link rel="stylesheet" href="/assets/css/site.css?v=1">
 </head>
 
-<body>
+<body data-page="tool-playbook">
   <div class="bar"></div>
-
-  <header>
-    <h1>Sourcing A[i]gent – Tech Talent Market Mapping &amp; Boolean Playbook</h1>
-    <p>
-      Tech Talent Sourcing &amp; Market Intelligence Engine · by Diane Wilkinson
-    </p>
-  </header>
 
   <div class="wrap">
 
+    <!-- Top bar / crumbs -->
+    <div class="topbar">
+      <div class="crumbs">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <a href="/tools/">Tools</a>
+        <span class="sep">/</span>
+        <a href="/tools/sourcing/">Sourcing</a>
+        <span class="sep">/</span>
+        <span>Playbook</span>
+      </div>
+    </div>
+
     <!-- HERO -->
-    <section class="hero">
-      <div class="hero-main">
-        <h2 class="hero-title">
-          Turn fuzzy headcount goals into a <span>concrete, tech-ready sourcing plan</span>.
-        </h2>
-        <p>
-          Sourcing A[i]gent converts vague “we need more engineers” requests into structured, repeatable sourcing
-          strategies for engineering, data, and AI roles — complete with Boolean patterns, target companies, and
-          market signals.
-        </p>
-        <p>
-          This playbook defines how the agent maps markets, generates search logic, and hands clean inputs into
-          Screening, Workflow, and Metrics A[i]gents — so TA teams can recruit tech talent with less guesswork and more signal.
-        </p>
-        <div class="hero-actions">
-          <a href="../index.html">
-            🔎 View to Sourcing A[i]gent demo
-          </a>
-          <a href="/agents/suite/">
-            🧩 View full A[i]gent Suite
-          </a>
-          <a href="/" class="back-pill">
-            🏠 Back to Portfolio Home
-          </a>
+    <section class="hero hero--tool-strong" aria-label="Playbook Hero">
+      <div class="kicker"><span class="kdot"></span> Playbook · Hiring &amp; Mobility · Autonomy Tier: 1</div>
+
+      <h1>Turn fuzzy headcount goals into a <span class="accent">concrete, tech-ready sourcing plan</span>.</h1>
+
+      <p class="sub">
+        This playbook defines how Sourcing turns a vague “we need more engineers” request into structured, repeatable
+        sourcing strategy for engineering, data, and AI roles — including Boolean patterns, target companies, and
+        market signals — while keeping recruiters in control.
+      </p>
+
+      <div class="heroNav">
+        <a class="backLink" href="/tools/sourcing/">← Back to Overview</a>
+
+        <div class="heroNav__tabs" aria-label="Explore">
+          <span class="heroNav__label">Explore →</span>
+          <a class="btn" href="/tools/sourcing/">Overview</a>
+          <a class="btn primary" href="/tools/sourcing/playbook.html">Playbook</a>
+          <a class="btn" href="/tools/sourcing/demo.html">Demo</a>
+          <a class="btn" href="/library/">Artifacts</a>
+          <a class="btn" href="/use-cases/">Cases</a>
         </div>
       </div>
     </section>
 
-    <!-- INFO ROW UNDER HERO -->
-    <div class="info-layout">
-      <!-- Left: What this playbook covers -->
-      <aside class="hero-meta">
-        <h3>What this playbook covers</h3>
-        <ul>
+    <!-- Header row -->
+    <section class="info-layout" aria-label="Playbook header row">
+
+      <!-- What this covers -->
+      <aside class="hero-meta" aria-label="What this playbook covers">
+        <h2 class="section-title">What this playbook covers</h2>
+        <ul class="muted" style="margin:0; padding-left:18px;">
           <li>Problem, mission, and outcomes for tech-native sourcing</li>
           <li>Scope, guardrails, and design principles</li>
           <li>Inputs, signals, and role templates</li>
-          <li>Boolean &amp; X-ray patterns (LinkedIn, GitHub, web)</li>
+          <li>Boolean &amp; X-ray patterns (LinkedIn, GitHub, open web)</li>
           <li>Company &amp; market mapping for tech ecosystems</li>
-          <li>Calibration, governance, and Metrics A[i]gent outputs</li>
+          <li>Calibration, governance, and Metrics outputs</li>
         </ul>
       </aside>
 
-      <!-- Middle: Sections -->
-      <nav class="toc-card">
-        <h3>Sections</h3>
-        <ul>
+      <!-- Sections -->
+      <nav class="toc-card toc" aria-label="Sections">
+        <h2 class="section-title">Sections</h2>
+        <ul class="tocList">
           <li><a href="#problem">1. Problem &amp; Mission</a></li>
           <li><a href="#scope">2. Scope &amp; Design Principles</a></li>
           <li><a href="#roles">3. Roles &amp; Responsibilities</a></li>
@@ -337,674 +86,389 @@
           <li><a href="#mapping">7. Company &amp; Market Mapping</a></li>
           <li><a href="#calibration">8. Calibration &amp; Governance</a></li>
           <li><a href="#integration">9. Integration &amp; Handoffs</a></li>
-          <li><a href="#metrics">10. Metrics &amp; Metrics A[i]gent</a></li>
-          <li><a href="#appendix-roles">Appendix A – Example Tech Role Profiles</a></li>
-          <li><a href="#appendix-boolean">Appendix B – Example Boolean &amp; X-Ray Strings</a></li>
+          <li><a href="#metrics">10. Metrics &amp; Measurement</a></li>
+          <li><a href="#appendix-roles">Appendix A — Example Role Profiles</a></li>
+          <li><a href="#appendix-boolean">Appendix B — Boolean &amp; X-ray Strings</a></li>
         </ul>
       </nav>
 
-      <!-- Right: Who this is for -->
-      <aside class="persona-card">
+      <!-- Who this is for -->
+      <aside class="persona-card" aria-label="Who this is for">
         <span class="persona-pill">Who this is for</span>
-        <p>
+        <p class="muted" style="margin:0;">
           TA leaders, recruiting ops, and tech recruiters who need structured sourcing patterns for engineering,
           data, and AI roles — without turning the process into a black box.
         </p>
       </aside>
-    </div>
+
+    </section>
 
     <!-- MAIN CONTENT -->
-    <article>
+    <section class="full" aria-label="Playbook Content">
+      <div class="card">
 
-      <!-- 1. Problem & Mission -->
-      <section id="problem">
-        <h2>1. Problem &amp; Mission</h2>
+        <section id="problem">
+          <h2 class="section-title">1. Problem &amp; Mission</h2>
 
-        <h3>1.1 The Problem</h3>
-        <p>
-          Most tech sourcing starts with a vague request and a blank search bar:
-        </p>
-        <ul>
-          <li>Hiring managers say “we need great engineers” without a clear market view.</li>
-          <li>Recruiters start from scratch on every role, rebuilding Boolean and target lists.</li>
-          <li>Sourcing quality depends on personal intuition and bookmarks, not shared patterns.</li>
-          <li>Company mapping lives in scattered spreadsheets and individual memory.</li>
-          <li>Sourcing effort is hard to measure, and even harder to debug when pipelines dry up.</li>
-        </ul>
-        <p>
-          The result: inconsistent coverage of tech talent, hidden pockets of candidates, and a recruiting team that’s
-          always “busy sourcing” but can’t clearly show what’s working.
-        </p>
+          <h3>1.1 The problem</h3>
+          <p class="muted">Most tech sourcing starts with a vague request and a blank search bar:</p>
+          <ul class="muted">
+            <li>Hiring managers say “we need great engineers” without a clear market view.</li>
+            <li>Recruiters rebuild Boolean and target lists from scratch every time.</li>
+            <li>Sourcing quality depends on personal bookmarks, not shared patterns.</li>
+            <li>Company mapping lives in scattered sheets and memory.</li>
+            <li>Effort is hard to measure and harder to debug when pipelines dry up.</li>
+          </ul>
 
-        <h3>1.2 Mission</h3>
-        <p>
-          Sourcing A[i]gent exists to give every tech search a structured starting point — market map, target companies,
-          and Boolean patterns — in minutes instead of days, while keeping recruiters in control of who to approach and how.
-        </p>
+          <h3>1.2 Mission</h3>
+          <p class="muted">
+            Provide a structured starting point — market map, target companies, and Boolean patterns — in minutes instead of days,
+            while keeping recruiter judgement in the loop.
+          </p>
 
-        <h3>1.3 Outcomes We’re Aiming For</h3>
-        <ul>
-          <li>Standard, reusable sourcing blueprints for common tech roles.</li>
-          <li>Faster time-to-first-outreach when a new role opens.</li>
-          <li>Clear visibility into which markets and companies we’re targeting — and why.</li>
-          <li>Structured sourcing data that feeds Screening, Workflow, and Metrics A[i]gents.</li>
-        </ul>
-      </section>
+          <h3>1.3 Outcomes</h3>
+          <ul class="muted">
+            <li>Reusable sourcing blueprints for common tech roles.</li>
+            <li>Faster time-to-first-outreach when a role opens.</li>
+            <li>Visibility into which markets and companies are targeted — and why.</li>
+            <li>Structured sourcing outputs that feed downstream tools and measurement.</li>
+          </ul>
+        </section>
 
-      <!-- 2. Scope & Design Principles -->
-      <section id="scope">
-        <h2>2. Scope &amp; Design Principles</h2>
+        <section id="scope" style="margin-top:18px;">
+          <h2 class="section-title">2. Scope &amp; Design Principles</h2>
 
-        <h3>2.1 In-Scope</h3>
-        <ul>
-          <li>Engineering, data, ML / AI, DevOps, and security roles (v1 focus).</li>
-          <li>Translation of JDs and hiring briefs into sourcing-ready role profiles.</li>
-          <li>Generation of Boolean and X-ray patterns for LinkedIn, GitHub, and open web search.</li>
-          <li>Company mapping: competitors, adjacencies, and “hidden gem” sources.</li>
-          <li>High-level market sizing &amp; pipeline readiness estimates (small / medium / large talent pools).</li>
-          <li>Structured outputs that plug into Screening and Metrics A[i]gents.</li>
-        </ul>
+          <h3>2.1 In-scope</h3>
+          <ul class="muted">
+            <li>Engineering, data, ML/AI, DevOps, and security roles (v1 focus).</li>
+            <li>JD + brief → structured role profile.</li>
+            <li>Boolean + X-ray patterns for LinkedIn, GitHub, and open web search.</li>
+            <li>Company mapping: competitors, adjacencies, “hidden gem” sources.</li>
+            <li>Market sizing estimate (small / medium / large pool).</li>
+            <li>Structured outputs that plug into screening + measurement.</li>
+          </ul>
 
-        <h3>2.2 Out-of-Scope (v1)</h3>
-        <ul>
-          <li>Automated outreach, nurture, or sequencing (handled by future Campaign or CRM A[i]gents).</li>
-          <li>Replacing recruiter judgement on which candidates to contact.</li>
-          <li>Real-time scraping or user-level tracking of candidate behavior.</li>
-          <li>Predicting candidate response rates or close likelihood (beyond simple assumptions).</li>
-        </ul>
+          <h3>2.2 Out-of-scope (v1)</h3>
+          <ul class="muted">
+            <li>Automated outreach, nurture, or sequencing.</li>
+            <li>Replacing recruiter judgement on who to contact.</li>
+            <li>Real-time scraping or user-level behavioral tracking.</li>
+            <li>Predicting response rates beyond simple assumptions.</li>
+          </ul>
 
-        <h3>2.3 Design Principles</h3>
-        <ul>
-          <li><strong>Pattern-first, tools-second.</strong> Sourcing logic should survive tool changes.</li>
-          <li><strong>Explainable search logic.</strong> Every pattern can be read, edited, and taught to humans.</li>
-          <li><strong>Tech-ecosystem aware.</strong> Roles are defined in context of real stacks and company types.</li>
-          <li><strong>Human-in-the-loop.</strong> Recruiters approve, refine, and save reusable patterns.</li>
-          <li><strong>Non-creepy by default.</strong> Focus on public professional data and market-level insights.</li>
-        </ul>
+          <h3>2.3 Principles</h3>
+          <ul class="muted">
+            <li><b>Pattern-first, tools-second.</b> Logic should survive tool changes.</li>
+            <li><b>Explainable search logic.</b> Every pattern is readable and editable.</li>
+            <li><b>Tech-ecosystem aware.</b> Roles are defined in real stacks and company types.</li>
+            <li><b>Human-in-the-loop.</b> Recruiters approve, refine, and save patterns.</li>
+            <li><b>Non-creepy by default.</b> Public professional signals + market insights.</li>
+          </ul>
 
-        <h3>2.4 Global Rules</h3>
-        <ul>
-          <li>No automated candidate outreach without recruiter review and explicit consent from stakeholders.</li>
-          <li>No inference or storage of protected characteristics.</li>
-          <li>Company mapping can be shared with hiring managers; individual candidate data stays controlled.</li>
-          <li>All role templates and patterns are versioned and discoverable for TA teams.</li>
-        </ul>
-      </section>
+          <h3>2.4 Global rules</h3>
+          <ul class="muted">
+            <li>No automated candidate outreach without recruiter review.</li>
+            <li>No inference or storage of protected characteristics.</li>
+            <li>Company mapping can be shared; candidate data stays controlled.</li>
+            <li>Templates and patterns are versioned and discoverable.</li>
+          </ul>
+        </section>
 
-      <!-- 3. Roles & Responsibilities -->
-      <section id="roles">
-        <h2>3. Roles &amp; Responsibilities</h2>
+        <section id="roles" style="margin-top:18px;">
+          <h2 class="section-title">3. Roles &amp; Responsibilities</h2>
 
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Role</th>
-                <th>Responsibilities</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Tech Recruiter / Sourcer</td>
-                <td>
-                  Provides hiring brief inputs, reviews and edits generated search patterns, runs sourcing sprints,
-                  and saves effective patterns as templates.
-                </td>
-              </tr>
-              <tr>
-                <td>Hiring Manager</td>
-                <td>
-                  Aligns on target profiles, companies, and stacks; reviews market maps and signs off on sourcing
-                  strategy before large-scale outreach.
-                </td>
-              </tr>
-              <tr>
-                <td>TA Ops / Recruiting Ops</td>
-                <td>
-                  Owns role templates, company index taxonomies, and integration with ATS/CRM; drives consistency
-                  across recruiters and teams.
-                </td>
-              </tr>
-              <tr>
-                <td>People Analytics / Metrics A[i]gent Owner</td>
-                <td>
-                  Uses sourcing outputs to analyze top-of-funnel health, market coverage, and ROI of sourcing channels.
-                </td>
-              </tr>
-              <tr>
-                <td>Owner</td>
-                <td>
-                  Diane Wilkinson – design, sourcing logic, tech-ecosystem mapping, and continuous improvement of
-                  Sourcing A[i]gent.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Responsibilities</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tech Recruiter / Sourcer</td>
+                  <td>Inputs hiring brief, edits patterns, runs sprints, saves winning templates.</td>
+                </tr>
+                <tr>
+                  <td>Hiring Manager</td>
+                  <td>Aligns on profiles, targets, and stacks; reviews market map and signs off.</td>
+                </tr>
+                <tr>
+                  <td>Recruiting Ops</td>
+                  <td>Owns templates, taxonomies, and integrations; drives consistency.</td>
+                </tr>
+                <tr>
+                  <td>People Analytics</td>
+                  <td>Analyzes top-of-funnel health, market coverage, and sourcing ROI.</td>
+                </tr>
+                <tr>
+                  <td>Owner</td>
+                  <td>Diane Wilkinson — sourcing logic, ecosystem mapping, continuous improvement.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout">
+            <b>Key idea:</b> Sourcing does the heavy thinking on where/how to search; humans decide who to approach and how to tell the story.
+          </div>
+        </section>
+
+        <section id="overview" style="margin-top:18px;">
+          <h2 class="section-title">4. System Overview</h2>
+          <ul class="muted">
+            <li><b>1. Inputs:</b> JD, brief, stack, location, seniority, must-haves vs nice-to-haves.</li>
+            <li><b>2. Role profile:</b> Convert requirements into a structured tech role template.</li>
+            <li><b>3. Market mapping:</b> Target companies + adjacent pools.</li>
+            <li><b>4. Search strategy:</b> Boolean + X-ray strings (LinkedIn, GitHub, web).</li>
+            <li><b>5. Readiness:</b> Rough pool sizing + recommended channel mix.</li>
+            <li><b>6. Output:</b> Save profile + patterns + company list as reusable artifacts.</li>
+          </ul>
+
+          <h3>4.1 Technical architecture</h3>
+          <ul class="muted">
+            <li>Parsing layer (LLM + rules) to extract attributes from JD/brief.</li>
+            <li>Role template library (backend, ML, data, DevOps, security).</li>
+            <li>Pattern engine to assemble Boolean / X-ray / GitHub searches.</li>
+            <li>Optional company index (CSV/DB) for tiering and mapping.</li>
+            <li>Light integrations to ATS/CRM fields or internal sheets.</li>
+          </ul>
+        </section>
+
+        <section id="inputs" style="margin-top:18px;">
+          <h2 class="section-title">5. Inputs &amp; Signal Library</h2>
+
+          <h3>5.1 Core inputs</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Field</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>role_title</td><td>Internal label (e.g., “Staff ML Engineer”).</td></tr>
+                <tr><td>role_family</td><td>Engineering, Data, ML/AI, DevOps, Security.</td></tr>
+                <tr><td>seniority_level</td><td>IC / Senior / Staff / Principal / Manager.</td></tr>
+                <tr><td>primary_stack</td><td>Languages/frameworks (Python, Go, React, K8s, PyTorch).</td></tr>
+                <tr><td>must_have_skills</td><td>Non-negotiables.</td></tr>
+                <tr><td>nice_to_have_skills</td><td>Preferences that expand pool.</td></tr>
+                <tr><td>target_locations</td><td>Regions / remote constraints.</td></tr>
+                <tr><td>company_archetypes</td><td>Ideal employer types/verticals.</td></tr>
+                <tr><td>avoid_list</td><td>No-go companies/types.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>5.2 Signals used in patterns</h3>
+          <ul class="muted">
+            <li><b>Title synonyms:</b> “ML Engineer”, “Applied Scientist”, etc.</li>
+            <li><b>Stack synonyms:</b> “MLOps” variants, “LLM” variants.</li>
+            <li><b>Location logic:</b> city/metro/time-zone remote.</li>
+            <li><b>Company tiers:</b> competitors, adjacent infra, hidden gems.</li>
+            <li><b>Channel fit:</b> LinkedIn vs GitHub vs niche communities.</li>
+          </ul>
+
+          <div class="callout">
+            <b>Note:</b> This is about “where to look and what to look for” — not guessing culture fit.
+          </div>
+        </section>
+
+        <section id="search" style="margin-top:18px;">
+          <h2 class="section-title">6. Search Strategy &amp; Boolean Patterns</h2>
+
+          <h3>6.1 LinkedIn Boolean — overview</h3>
+          <ul class="muted">
+            <li>Title cluster</li>
+            <li>Skill/stack cluster</li>
+            <li>Domain keywords</li>
+            <li>Negative filters</li>
+          </ul>
+
+          <h3>6.2 Example — Senior Backend Engineer (Python, distributed systems)</h3>
+          <div class="callout">
+            <code>
+              ("backend engineer" OR "back-end engineer" OR "software engineer")<br>
+              AND ("Python" OR "Go" OR "Golang")<br>
+              AND ("distributed systems" OR "microservices" OR "high scale" OR "high-throughput")<br>
+              NOT ("intern" OR "student" OR "bootcamp")
+            </code>
+          </div>
+
+          <h3>6.3 GitHub search — overview</h3>
+          <ul class="muted">
+            <li>Language filters</li>
+            <li>Repo keywords</li>
+            <li>Engagement signals (stars, forks, contributions)</li>
+          </ul>
+
+          <h3>6.4 Example — ML Engineer (LLMs)</h3>
+          <div class="callout">
+            <code>
+              ("LLM" OR "large language model" OR "transformers")<br>
+              ("PyTorch" OR "TensorFlow" OR "JAX")<br>
+              language:Python<br>
+              stars:&gt;10
+            </code>
+          </div>
+
+          <h3>6.5 Google X-ray (LinkedIn)</h3>
+          <div class="callout">
+            <code>
+              site:linkedin.com/in<br>
+              ("Senior Machine Learning Engineer" OR "Applied Scientist" OR "ML Engineer")<br>
+              ("LLM" OR "large language model" OR "RLHF" OR "transformer")<br>
+              ("San Francisco" OR "Bay Area" OR "San Jose" OR "Oakland")<br>
+              -"student" -"intern"
+            </code>
+          </div>
+        </section>
+
+        <section id="mapping" style="margin-top:18px;">
+          <h2 class="section-title">7. Company &amp; Market Mapping</h2>
+
+          <h3>7.1 Company tiers</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Tier</th><th>Description</th><th>Examples (AI/ML)</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tier 1 — Direct competitors</td>
+                  <td>Core labs and direct problem competitors.</td>
+                  <td>Anthropic, OpenAI, Google DeepMind, Cohere, xAI</td>
+                </tr>
+                <tr>
+                  <td>Tier 2 — Adjacent &amp; infra</td>
+                  <td>Applied AI, infra, tooling with overlapping skills.</td>
+                  <td>Scale AI, Databricks, Snowflake, Hugging Face, W&amp;B</td>
+                </tr>
+                <tr>
+                  <td>Tier 3 — Hidden gems</td>
+                  <td>Mid-stage startups, OSS-heavy teams, niche verticals.</td>
+                  <td>Series B–D AI startups; OSS-heavy fintech/health/devtools</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>7.2 Company index fields</h3>
+          <ul class="muted">
+            <li>company_name, parent_company, group</li>
+            <li>tier (1/2/3), vertical, stack_tags</li>
+          </ul>
+        </section>
+
+        <section id="calibration" style="margin-top:18px;">
+          <h2 class="section-title">8. Calibration &amp; Governance</h2>
+          <ul class="muted">
+            <li>Run patterns in shadow mode alongside manual patterns.</li>
+            <li>Track which patterns produce qualified responses and screens.</li>
+            <li>Promote winners into a shared template library.</li>
+            <li>Version templates; restrict core taxonomy edits to Ops.</li>
+          </ul>
+        </section>
+
+        <section id="integration" style="margin-top:18px;">
+          <h2 class="section-title">9. Integration &amp; Handoffs</h2>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Artifact / Field</th><th>Used by</th><th>Purpose</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>role_profile_id</td><td>All tools</td><td>Connects sourcing → screening → interview workflow.</td></tr>
+                <tr><td>sourcing_boolean_linkedin</td><td>Recruiters</td><td>Primary LinkedIn pattern for sprints.</td></tr>
+                <tr><td>sourcing_boolean_xray</td><td>Recruiters</td><td>Google X-ray pattern for public profiles.</td></tr>
+                <tr><td>sourcing_pattern_github</td><td>Recruiters</td><td>GitHub pattern for engineering roles.</td></tr>
+                <tr><td>target_companies_tier1_3</td><td>Recruiters &amp; HMs</td><td>Shared company focus list with rationale.</td></tr>
+                <tr><td>estimated_pool_size</td><td>Measurement</td><td>Pipeline planning and expectations.</td></tr>
+                <tr><td>sourcing_channel_mix</td><td>Measurement</td><td>Planned vs actual channel mix.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="metrics" style="margin-top:18px;">
+          <h2 class="section-title">10. Metrics &amp; Measurement</h2>
+
+          <h3>10.1 Key sourcing metrics</h3>
+          <ul class="muted">
+            <li>Prospects contacted per week (by role, recruiter, channel).</li>
+            <li>Warm response rate (reply/interest) by channel and pattern.</li>
+            <li>Prospect → screened conversion by role template.</li>
+            <li>Screened → onsite/offer conversion by sourcing pattern.</li>
+            <li>Hires by company tier and sourcing channel.</li>
+          </ul>
+
+          <div class="callout">
+            Over time, you can say: “For Staff ML roles, our best hires came from Tier 2 infra using Pattern B — not Tier 1 labs using Pattern A.”
+          </div>
+        </section>
+
+        <section id="appendix-roles" style="margin-top:18px;">
+          <h2 class="section-title">Appendix A — Example Tech Role Profiles</h2>
+
+          <h3>A.1 Senior Backend (Python / distributed systems)</h3>
+          <ul class="muted">
+            <li><b>Titles:</b> Senior Software Engineer, Senior Backend Engineer</li>
+            <li><b>Stack:</b> Python/Go, microservices, cloud, distributed systems</li>
+            <li><b>Companies:</b> SaaS, infra tooling, devtools, high-scale apps</li>
+            <li><b>Channels:</b> LinkedIn, GitHub, engineering communities</li>
+          </ul>
+
+          <h3>A.2 Staff ML (LLMs)</h3>
+          <ul class="muted">
+            <li><b>Titles:</b> Staff ML Engineer, Applied Scientist, Research Engineer</li>
+            <li><b>Stack:</b> Python, PyTorch/JAX, LLMs, MLOps, GPU optimization</li>
+            <li><b>Companies:</b> labs, applied AI, infra/tooling, OSS-heavy teams</li>
+            <li><b>Channels:</b> LinkedIn, GitHub, ML communities</li>
+          </ul>
+        </section>
+
+        <section id="appendix-boolean" style="margin-top:18px;">
+          <h2 class="section-title">Appendix B — Example Boolean &amp; X-ray Strings</h2>
+
+          <h3>B.1 Staff ML — LinkedIn Boolean</h3>
+          <div class="callout">
+            <code>
+              ("staff machine learning engineer" OR "staff ml engineer" OR "applied scientist" OR "research engineer")<br>
+              AND ("LLM" OR "large language model" OR "generative AI" OR "transformer")<br>
+              AND ("Python" OR "PyTorch" OR "TensorFlow")<br>
+              AND ("deployment" OR "production" OR "serving" OR "MLOps")<br>
+              NOT ("intern" OR "student" OR "bootcamp")
+            </code>
+          </div>
+
+          <h3>B.2 Backend — X-ray</h3>
+          <div class="callout">
+            <code>
+              site:linkedin.com/in<br>
+              ("Senior Backend Engineer" OR "Senior Software Engineer")<br>
+              ("Python" OR "Go" OR "Golang")<br>
+              ("microservices" OR "distributed systems")<br>
+              ("San Francisco" OR "Bay Area" OR "Remote")<br>
+              -"student" -"intern"
+            </code>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="site-footer__row">
+        <div>Part of the tools + playbooks library</div>
+        <div>
+          <a href="/tools/">Tools</a> ·
+          <a href="/library/">Library</a> ·
+          <a href="mailto:dianewilkinson510@gmail.com">Email</a> ·
+          <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
         </div>
+      </div>
+    </footer>
 
-        <div class="callout">
-          <strong>Key idea:</strong> Sourcing A[i]gent does the heavy thinking on where and how to search;
-          humans still decide which candidates to approach and how to tell the story.
-        </div>
-      </section>
-
-      <!-- 4. System Overview -->
-      <section id="overview">
-        <h2>4. System Overview</h2>
-
-        <p>At a high level, Sourcing A[i]gent runs the following loop for each role:</p>
-
-        <ul>
-          <li><strong>1. Inputs:</strong> JD, hiring brief, tech stack, locations, seniority, must-have vs nice-to-have.</li>
-          <li><strong>2. Role profile assembly:</strong> Convert requirements into a structured tech role template.</li>
-          <li><strong>3. Market mapping:</strong> Identify target companies and adjacent talent pools.</li>
-          <li><strong>4. Search strategy:</strong> Generate Boolean and X-ray strings for LinkedIn, GitHub, and web.</li>
-          <li><strong>5. Pipeline readiness:</strong> Rough sizing of talent pool and recommended sourcing channels.</li>
-          <li><strong>6. Output:</strong> Write role profile, search patterns, and company lists into a structured
-              record that Screening and Metrics A[i]gents can use.</li>
-        </ul>
-
-        <h3>4.1 Technical Architecture</h3>
-        <p>
-          Under the hood, Sourcing A[i]gent uses:
-        </p>
-        <ul>
-          <li>A <strong>parsing layer</strong> (LLM + rules) to extract role attributes from JDs and hiring briefs.</li>
-          <li>A <strong>role template library</strong> for common tech roles (backend, ML, data, DevOps, security).</li>
-          <li>A <strong>pattern engine</strong> to assemble Boolean, X-ray, and GitHub search filters.</li>
-          <li>An optional <strong>company index</strong> (CSV / DB) for structured competitor and group mapping.</li>
-          <li>Simple integrations with ATS/CRM fields or internal sheets for saving and reusing patterns.</li>
-        </ul>
-        <p>
-          The same playbook can be implemented via Python notebooks, lightweight internal tools, or as a back-end
-          service behind a simple recruiter-facing UI.
-        </p>
-      </section>
-
-      <!-- 5. Inputs & Signal Library -->
-      <section id="inputs">
-        <h2>5. Inputs &amp; Signal Library</h2>
-
-        <p>
-          Before we generate any search patterns, the agent needs a structured view of the role. Inputs are deliberately
-          lightweight so they fit into a live intake with a hiring manager.
-        </p>
-
-        <h3>5.1 Core Inputs</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Field</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>role_title</td>
-                <td>Label used internally (e.g., “Senior Backend Engineer,” “Staff ML Engineer”).</td>
-              </tr>
-              <tr>
-                <td>role_family</td>
-                <td>Engineering, Data, ML/AI, DevOps, Security, Product, etc.</td>
-              </tr>
-              <tr>
-                <td>seniority_level</td>
-                <td>IC / Senior / Staff / Principal / Manager / Director.</td>
-              </tr>
-              <tr>
-                <td>primary_stack</td>
-                <td>Languages and frameworks (e.g., Python, Go, React, PyTorch, Kubernetes).</td>
-              </tr>
-              <tr>
-                <td>must_have_skills</td>
-                <td>Non-negotiable skills or experiences.</td>
-              </tr>
-              <tr>
-                <td>nice_to_have_skills</td>
-                <td>Preferences that expand but don’t restrict the pool.</td>
-              </tr>
-              <tr>
-                <td>target_locations</td>
-                <td>Cities / regions; remote constraints (time zones, countries).</td>
-              </tr>
-              <tr>
-                <td>company_archetypes</td>
-                <td>Ideal and acceptable employer types and verticals.</td>
-              </tr>
-              <tr>
-                <td>avoid_list</td>
-                <td>Companies or types to avoid (e.g., conflicts, non-competes).</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>5.2 Key Signals Used in Sourcing Patterns</h3>
-        <ul>
-          <li><strong>Title synonyms:</strong> “ML Engineer”, “Applied Scientist”, “Research Engineer”, etc.</li>
-          <li><strong>Stack synonyms:</strong> “ML Ops” vs “MLOps”, “LLM” vs “large language model”.</li>
-          <li><strong>Location radius:</strong> city vs metro vs time zone-based remote.</li>
-          <li><strong>Company tiers:</strong> direct competitors, adjacent companies, infra providers, and “hidden gem” startups.</li>
-          <li><strong>Channel fit:</strong> LinkedIn vs GitHub vs niche communities.</li>
-        </ul>
-
-        <div class="callout">
-          <strong>Note:</strong> Sourcing A[i]gent is not trying to guess culture fit; it’s creating a clear, shared
-          “where to look and what to look for” starting point for humans.
-        </div>
-      </section>
-
-      <!-- 6. Search Strategy & Boolean Patterns -->
-      <section id="search">
-        <h2>6. Search Strategy &amp; Boolean Patterns</h2>
-
-        <p>
-          The agent generates search patterns for the channels recruiters use most often today, starting with LinkedIn,
-          GitHub, and Google X-ray of public profiles.
-        </p>
-
-        <h3>6.1 LinkedIn Boolean – Overview</h3>
-        <p>
-          For LinkedIn, patterns combine:
-        </p>
-        <ul>
-          <li>Title cluster (current and past titles).</li>
-          <li>Skill cluster (languages, frameworks, tools).</li>
-          <li>Domain keywords (e.g., LLMs, distributed systems, observability).</li>
-          <li>Negative filters (e.g., “intern”, “student”, “bootcamp”).</li>
-        </ul>
-
-        <h3>6.2 Example – Senior Backend Engineer (Python, Distributed Systems)</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Component</th>
-                <th>Example Snippet</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Titles</td>
-                <td>("backend engineer" OR "back-end engineer" OR "software engineer" OR "backend developer")</td>
-              </tr>
-              <tr>
-                <td>Languages</td>
-                <td>("Python" OR "Go" OR "Golang")</td>
-              </tr>
-              <tr>
-                <td>Domain</td>
-                <td>("distributed systems" OR "microservices" OR "scalability" OR "high-throughput")</td>
-              </tr>
-              <tr>
-                <td>Negatives</td>
-                <td>NOT ("intern" OR "student" OR "bootcamp")</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p>Combined Boolean example:</p>
-        <div class="callout">
-          <code>
-            ("backend engineer" OR "back-end engineer" OR "software engineer")<br>
-            AND ("Python" OR "Go" OR "Golang")<br>
-            AND ("distributed systems" OR "microservices" OR "high scale" OR "high-throughput")<br>
-            NOT ("intern" OR "student" OR "bootcamp")
-          </code>
-        </div>
-
-        <h3>6.3 GitHub Search – Overview</h3>
-        <p>
-          For GitHub, patterns focus on repos and profiles that show evidence of relevant skills:
-        </p>
-        <ul>
-          <li>Languages and frameworks (e.g., <code>language:Python</code>).</li>
-          <li>Keywords in README / code (e.g., “LLM”, “Kubernetes”, “PyTorch”).</li>
-          <li>Signals of engagement (e.g., stars, forks, contributions).</li>
-        </ul>
-
-        <h3>6.4 Example – ML Engineer (LLMs)</h3>
-        <div class="callout">
-          <code>
-            ("LLM" OR "large language model" OR "transformers")<br>
-            ("PyTorch" OR "TensorFlow" OR "JAX")<br>
-            language:Python<br>
-            stars:&gt;10
-          </code>
-        </div>
-
-        <h3>6.5 Google X-Ray of LinkedIn Profiles</h3>
-        <p>For open web search, patterns typically look like:</p>
-        <div class="callout">
-          <code>
-            site:linkedin.com/in<br>
-            ("Senior Machine Learning Engineer" OR "Applied Scientist" OR "ML Engineer")<br>
-            ("LLM" OR "large language model" OR "RLHF" OR "transformer")<br>
-            ("San Francisco" OR "Bay Area" OR "San Jose" OR "Oakland")<br>
-            -"student" -"intern"
-          </code>
-        </div>
-
-        <p>
-          All patterns are meant to be starting points. Recruiters are encouraged to tweak and save variants that perform
-          well as templates in the sourcing library.
-        </p>
-      </section>
-
-      <!-- 7. Company & Market Mapping -->
-      <section id="mapping">
-        <h2>7. Company &amp; Market Mapping</h2>
-
-        <p>
-          Strong tech sourcing is not just about individuals; it’s about understanding the ecosystems where they work.
-          Sourcing A[i]gent uses a simple, structured model for company mapping.
-        </p>
-
-        <h3>7.1 Company Tiers</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Tier</th>
-                <th>Description</th>
-                <th>Examples (for AI / ML Roles)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Tier 1 – Direct Competitors</td>
-                <td>Core AI labs and companies solving similar problems for similar users.</td>
-                <td>Anthropic, OpenAI, Google DeepMind, Cohere, xAI</td>
-              </tr>
-              <tr>
-                <td>Tier 2 – Adjacent &amp; Infra</td>
-                <td>Applied AI, infra, and tooling companies with overlapping skills and domains.</td>
-                <td>Scale AI, Databricks, Snowflake, Hugging Face, W&amp;B</td>
-              </tr>
-              <tr>
-                <td>Tier 3 – Hidden Gems</td>
-                <td>Mid-stage startups, open-source teams, and niche verticals with relevant tech.</td>
-                <td>Series B–D AI startups, strong OSS-heavy teams in fintech / healthtech / devtools</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>7.2 Company Index Structure</h3>
-        <p>A simple company index can be stored in a sheet or database with fields like:</p>
-        <ul>
-          <li>company_name</li>
-          <li>parent_company</li>
-          <li>group / holding company</li>
-          <li>tier (1 / 2 / 3)</li>
-          <li>primary_vertical (ads, infra, fintech, games, etc.)</li>
-          <li>stack_tags (Python, Rust, Kubernetes, etc.)</li>
-        </ul>
-
-        <h3>7.3 Using the Company Map with HMs</h3>
-        <ul>
-          <li>Review Tier 1–3 lists in intake to confirm “on-target”, “stretch”, and “no-go” companies.</li>
-          <li>Align on how aggressive to be with direct competitors.</li>
-          <li>Identify at least one “backup market” (e.g., devtools infra if core AI labs are saturated).</li>
-        </ul>
-      </section>
-
-      <!-- 8. Calibration & Governance -->
-      <section id="calibration">
-        <h2>8. Calibration &amp; Governance</h2>
-
-        <p>
-          Like the screening rubric, sourcing patterns and market maps should evolve as the team learns what works.
-        </p>
-
-        <h3>8.1 Shadow Mode &amp; A/B Patterns</h3>
-        <ul>
-          <li>Run Sourcing A[i]gent patterns alongside existing “manual” patterns for several roles.</li>
-          <li>Track which patterns produce more qualified responses and screens.</li>
-          <li>Promote high-performing patterns into the shared template library.</li>
-        </ul>
-
-        <h3>8.2 HM Feedback Loops</h3>
-        <ul>
-          <li>Use early candidate examples to validate the role template and target companies.</li>
-          <li>Update must-have / nice-to-have lists based on real conversations, not just the initial JD.</li>
-          <li>Document pattern updates after each intake / recalibration meeting.</li>
-        </ul>
-
-        <h3>8.3 Governance &amp; Access</h3>
-        <ul>
-          <li>Store role templates and company index in a shared, version-controlled location.</li>
-          <li>Limit edit rights for core taxonomies (tiers, verticals) to TA Ops.</li>
-          <li>Encourage recruiters to propose new patterns via pull requests or simple change requests.</li>
-        </ul>
-      </section>
-
-      <!-- 9. Integration & Handoffs -->
-      <section id="integration">
-        <h2>9. Integration &amp; Handoffs</h2>
-
-        <p>
-          Sourcing A[i]gent is most powerful when it feeds directly into Screening, Workflow, and Metrics A[i]gents.
-        </p>
-
-        <h3>9.1 Example Fields / Artifacts</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Artifact / Field</th>
-                <th>Used By</th>
-                <th>Purpose</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>role_profile_id</td>
-                <td>All A[i]gents</td>
-                <td>Connects sourcing, screening, and interview workflows for the same role.</td>
-              </tr>
-              <tr>
-                <td>sourcing_boolean_linkedin</td>
-                <td>Recruiters</td>
-                <td>Primary LinkedIn search pattern used in sourcing sprints.</td>
-              </tr>
-              <tr>
-                <td>sourcing_boolean_xray</td>
-                <td>Recruiters</td>
-                <td>Google X-ray pattern for public profiles.</td>
-              </tr>
-              <tr>
-                <td>sourcing_pattern_github</td>
-                <td>Recruiters</td>
-                <td>GitHub code / repo search pattern for engineering roles.</td>
-              </tr>
-              <tr>
-                <td>target_companies_tier1_3</td>
-                <td>Recruiters &amp; HMs</td>
-                <td>Shared list of Tier 1–3 companies to focus on.</td>
-              </tr>
-              <tr>
-                <td>estimated_pool_size</td>
-                <td>Metrics A[i]gent</td>
-                <td>Rough sizing (small / medium / large) for pipeline planning.</td>
-              </tr>
-              <tr>
-                <td>sourcing_channel_mix</td>
-                <td>Metrics A[i]gent</td>
-                <td>Planned vs actual mix of LinkedIn, referrals, events, and other channels.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>9.2 Handoff to Screening A[i]gent</h3>
-        <ul>
-          <li>Role templates inform Screening rubrics (what “relevant experience” and “stack match” look like).</li>
-          <li>Company index tiers inform Employer Fit scoring and talent mapping.</li>
-          <li>Shared IDs help track candidates from first touch through offers.</li>
-        </ul>
-      </section>
-
-      <!-- 10. Metrics & Metrics A[i]gent -->
-      <section id="metrics">
-        <h2>10. Metrics &amp; Metrics A[i]gent</h2>
-
-        <p>
-          Sourcing A[i]gent provides structured inputs that Metrics A[i]gent can use to analyze top-of-funnel health and
-          sourcing effectiveness.
-        </p>
-
-        <h3>10.1 Key Sourcing Metrics</h3>
-        <ul>
-          <li>Prospects contacted per week (by role, recruiter, and channel).</li>
-          <li>Warm response rate (reply / interest) by channel and pattern.</li>
-          <li>Prospect → Screened candidate conversion by role template.</li>
-          <li>Screened → Onsite / Offer conversion for each sourcing pattern.</li>
-          <li>Distribution of hires by company tier and sourcing channel.</li>
-        </ul>
-
-        <h3>10.2 Event Mapping Examples</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Sourcing Event</th>
-                <th>Metrics Field</th>
-                <th>Used For</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>sourcing_pattern_id</td>
-                <td>sourcing_pattern_id</td>
-                <td>Attribution of candidates and hires to specific patterns.</td>
-              </tr>
-              <tr>
-                <td>prospects_contacted</td>
-                <td>prospects_contacted</td>
-                <td>Volume and activity tracking per role / recruiter.</td>
-              </tr>
-              <tr>
-                <td>prospects_interested</td>
-                <td>prospects_interested</td>
-                <td>Warm response rate and channel effectiveness.</td>
-              </tr>
-              <tr>
-                <td>source_channel</td>
-                <td>source_channel</td>
-                <td>Channel mix (LinkedIn, referral, events, inbound, etc.).</td>
-              </tr>
-              <tr>
-                <td>hire_source_pattern</td>
-                <td>hire_source_pattern</td>
-                <td>Which patterns and markets actually generate hires.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p>
-          Over time, this allows TA leaders to say, “For Staff ML roles, our best hires came from Tier 2 infra companies
-          using Pattern B, not from Tier 1 AI labs using Pattern A” — and adjust sourcing strategy accordingly.
-        </p>
-      </section>
-
-      <!-- Appendix A -->
-      <section id="appendix-roles">
-        <h2>Appendix A – Example Tech Role Profiles</h2>
-
-        <p>
-          These examples show how Sourcing A[i]gent might frame different tech roles at a high level.
-        </p>
-
-        <h3>A.1 Senior Backend Engineer (Python / Distributed Systems)</h3>
-        <ul>
-          <li><strong>Titles:</strong> Senior Software Engineer, Senior Backend Engineer.</li>
-          <li><strong>Stack:</strong> Python, Go, microservices, distributed systems, cloud (AWS/GCP).</li>
-          <li><strong>Companies:</strong> Product-led SaaS, infra tooling, devtools, high-scale consumer apps.</li>
-          <li><strong>Channels:</strong> LinkedIn, GitHub, engineering meetups / communities.</li>
-        </ul>
-
-        <h3>A.2 Staff ML Engineer (LLMs)</h3>
-        <ul>
-          <li><strong>Titles:</strong> Staff ML Engineer, Applied Scientist, Senior Research Engineer.</li>
-          <li><strong>Stack:</strong> Python, PyTorch / JAX, LLMs, MLOps, GPU optimization.</li>
-          <li><strong>Companies:</strong> AI labs, applied AI, infra / tooling providers, OSS-heavy teams.</li>
-          <li><strong>Channels:</strong> LinkedIn, GitHub, arXiv, ML communities / conferences.</li>
-        </ul>
-
-        <h3>A.3 Data Engineer (Analytics &amp; Pipelines)</h3>
-        <ul>
-          <li><strong>Titles:</strong> Data Engineer, Analytics Engineer, Platform Data Engineer.</li>
-          <li><strong>Stack:</strong> SQL, dbt, Airflow, Spark, warehouses (Snowflake, BigQuery).</li>
-          <li><strong>Companies:</strong> Product analytics-heavy SaaS, marketplaces, fintech, infra.</li>
-          <li><strong>Channels:</strong> LinkedIn, dbt community, data Slack groups.</li>
-        </ul>
-
-        <h3>A.4 DevOps / Platform Engineer</h3>
-        <ul>
-          <li><strong>Titles:</strong> DevOps Engineer, Site Reliability Engineer, Platform Engineer.</li>
-          <li><strong>Stack:</strong> Kubernetes, Terraform, CI/CD, observability (Prometheus, Grafana).</li>
-          <li><strong>Companies:</strong> Infra-heavy SaaS, devtools, platform teams inside product companies.</li>
-          <li><strong>Channels:</strong> LinkedIn, GitHub, DevOps communities, CNCF ecosystem events.</li>
-        </ul>
-      </section>
-
-      <!-- Appendix B -->
-      <section id="appendix-boolean">
-        <h2>Appendix B – Example Boolean &amp; X-Ray Strings</h2>
-
-        <p>
-          These examples can be used as templates and tuned per role and market.
-        </p>
-
-        <h3>B.1 Staff ML Engineer – LinkedIn Boolean (Bay Area)</h3>
-        <div class="callout">
-          <code>
-            ("staff machine learning engineer" OR "staff ml engineer" OR "applied scientist" OR "research engineer")<br>
-            AND ("LLM" OR "large language model" OR "generative AI" OR "transformer")<br>
-            AND ("Python" OR "PyTorch" OR "TensorFlow")<br>
-            AND ("deployment" OR "production" OR "serving" OR "MLOps")<br>
-            NOT ("intern" OR "student" OR "bootcamp")
-          </code>
-        </div>
-
-        <h3>B.2 Backend Engineer – X-Ray of LinkedIn</h3>
-        <div class="callout">
-          <code>
-            site:linkedin.com/in<br>
-            ("Senior Backend Engineer" OR "Senior Software Engineer")<br>
-            ("Python" OR "Go" OR "Golang")<br>
-            ("microservices" OR "distributed systems")<br>
-            ("San Francisco" OR "Bay Area" OR "San Jose" OR "Remote")<br>
-            -"student" -"intern"
-          </code>
-        </div>
-
-        <h3>B.3 Data Engineer – GitHub Pattern</h3>
-        <div class="callout">
-          <code>
-            ("dbt" OR "data build tool" OR "ETL" OR "ELT")<br>
-            ("Snowflake" OR "BigQuery" OR "Redshift")<br>
-            language:SQL<br>
-            stars:&gt;5
-          </code>
-        </div>
-
-        <p>
-          These are intentionally transparent, human-readable patterns — built to be explained to hiring managers,
-          reused by recruiters, and tuned over time as real data comes in.
-        </p>
-      </section>
-
-    </article>
   </div>
-
-  <footer>
-    Part of the A[i]gents suite – Sourcing A[i]gent (markets &amp; patterns), Screening A[i]gent (applications),
-    Workflow A[i]gent (interviews), and Metrics A[i]gent (analytics).
-  </footer>
 </body>
 </html>
