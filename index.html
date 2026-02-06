@@ -580,102 +580,99 @@
           Working tools embedded in real People Ops environments. Each tool is designed for human-in-the-loop operation and measurable outcomes.
         </p>
 
-        <div id="tools-grid" class="tools-grid" aria-label="Tools grid"></div>
+      <div class="tools-grid" aria-label="Tools grid">
 
-        <p style="margin:14px 0 0;">
-          <a href="tools/" style="font-weight:900;">View all tools →</a>
-        </p>
+  <!-- Metrics -->
+  <div class="tool-card">
+    <div class="tool-top">
+      <div style="min-width:0;">
+        <h3>🦾 AI Tool: Talent Pipeline Health</h3>
+        <p>Troubleshooting bottlenecks in real time.</p>
       </div>
-    </section>
+      <span class="badge">Hiring &amp; Mobility</span>
+    </div>
+    <div class="tool-actions">
+      <a href="/tools/metrics/">Open →</a>
+      <a href="/tools/metrics/playbook.html">Playbook →</a>
+    </div>
+  </div>
 
-    <script>
-      const TOOLS_URL = new URL('tools/tools-landing.json', window.location.href);
-      TOOLS_URL.searchParams.set('v', Date.now());
+  <!-- Screening -->
+  <div class="tool-card">
+    <div class="tool-top">
+      <div style="min-width:0;">
+        <h3>🦾 AI Tool: Screening A[i]gent</h3>
+        <p>Taming top funnel chaos &amp; rescuing hidden talent, in half the time.</p>
+      </div>
+      <span class="badge">Hiring &amp; Mobility</span>
+    </div>
+    <div class="tool-actions">
+      <a href="/tools/screening/">Open →</a>
+      <a href="/tools/screening/playbook.html">Playbook →</a>
+    </div>
+  </div>
 
-      function absHref(href){
-        return new URL(href, window.location.href).toString();
-      }
+  <!-- Listening -->
+  <div class="tool-card">
+    <div class="tool-top">
+      <div style="min-width:0;">
+        <h3>🦾 AI Tool: Employee Listening</h3>
+        <p>Turn messy feedback into decision-ready themes with governance.</p>
+      </div>
+      <span class="badge">Listening &amp; Insights</span>
+    </div>
+    <div class="tool-actions">
+      <a href="/tools/listening/">Open →</a>
+      <a href="/tools/listening/playbook.html">Playbook →</a>
+    </div>
+  </div>
 
-      function normalizeTool(tool){
-        const name = tool.name || tool.title || tool.label || tool.id || 'Untitled';
-        const links = tool.links || {};
-        if (!links.index && tool.href) links.index = tool.href;
+  <!-- Chief -->
+  <div class="tool-card">
+    <div class="tool-top">
+      <div style="min-width:0;">
+        <h3>🧠 AI Orchestration: Chief</h3>
+        <p>Routing, reasoning, audit trails, delegation — with autonomy guardrails.</p>
+      </div>
+      <span class="badge">Governance &amp; Infrastructure</span>
+    </div>
+    <div class="tool-actions">
+      <a href="/tools/chief/">Open →</a>
+    </div>
+  </div>
 
-        for (const k of Object.keys(links)){
-          if (typeof links[k] === 'string' && links[k].startsWith('tools/')) {
-            links[k] = '/' + links[k];
-          }
-        }
-        const emoji = tool.emoji || '';
-        const desc = tool.description || '';
-        const pill = tool.pill || tool.type || 'Tool';
-        return { emoji, name, desc, pill, links };
-      }
+  <!-- Innovation -->
+  <div class="tool-card">
+    <div class="tool-top">
+      <div style="min-width:0;">
+        <h3>🦾 AI Tool: Innovation A[i]gent</h3>
+        <p>Driving innovative inspiration where it lives — with closure, not chaos.</p>
+      </div>
+      <span class="badge">Improvement &amp; Strategy</span>
+    </div>
+    <div class="tool-actions">
+      <a href="/tools/innovation/">Open →</a>
+      <a href="/tools/innovation/playbook.html">Playbook →</a>
+    </div>
+  </div>
 
-      function renderToolCard(raw){
-        const tool = normalizeTool(raw);
-        const { emoji, name, desc, pill, links } = tool;
+  <!-- Workflow -->
+  <div class="tool-card">
+    <div class="tool-top">
+      <div style="min-width:0;">
+        <h3>🧭 Supporting Doc: Workflow-First Operating Model</h3>
+        <p>Routing, SLAs, escalation paths, and automation — how the system runs.</p>
+      </div>
+      <span class="badge">Governance &amp; Infrastructure</span>
+    </div>
+    <div class="tool-actions">
+      <a href="/tools/workflow/">Open →</a>
+    </div>
+  </div>
 
-        const primary =
-          links.demo ? {label:'Demo', href: links.demo} :
-          links.index ? {label:'Open', href: links.index} :
-          links.playbook ? {label:'Playbook', href: links.playbook} :
-          null;
-
-        const actionHtml = primary
-          ? `<div class="tool-actions"><a href="${absHref(primary.href)}">${primary.label} →</a></div>`
-          : `<div class="tool-actions"><a href="${absHref('tools/')}">Browse →</a></div>`;
-
-        return `
-          <div class="tool-card">
-            <div class="tool-top">
-              <div style="min-width:0;">
-                <h4>${emoji} ${name}</h4>
-                <p>${desc}</p>
-              </div>
-              <span class="badge">${pill}</span>
-            </div>
-            ${actionHtml}
-          </div>
-        `;
-      }
-
-      fetch(TOOLS_URL.toString())
-        .then(res => {
-          if (!res.ok) throw new Error('Fetch failed: ' + res.status);
-          return res.json();
-        })
-        .then(tools => {
-          const grid = document.getElementById('tools-grid');
-          grid.innerHTML = '';
-          if (!Array.isArray(tools)) throw new Error('tools-landing.json must be an array');
-          tools.forEach(tool => {
-            const wrap = document.createElement('div');
-            wrap.innerHTML = renderToolCard(tool);
-            grid.appendChild(wrap.firstElementChild);
-          });
-        })
-        .catch(err => {
-          console.error('TOOLS LOAD ERROR:', err);
-          document.getElementById('tools-grid').innerHTML = `
-            <div class="tool-card">
-              <div class="tool-top">
-                <div>
-                  <h4>⚠️ Tools failed to load</h4>
-                  <p>
-                    Common causes:
-                    <br>• <code>tools/tools-landing.json</code> isn’t valid JSON (trailing commas)
-                    <br>• It isn’t an array <code>[...]</code>
-                    <br>• It’s not published at <code>/tools/tools-landing.json</code>
-                  </p>
-                </div>
-                <span class="badge">Error</span>
-              </div>
-              <div class="tool-actions"><a href="tools/">Browse tools →</a></div>
-            </div>
-          `;
-        });
-    </script>
+</div>
+  
+      
 <details class="sys-details" aria-label="System Deep Dive">
   <summary>
     <div class="sys-sum">
