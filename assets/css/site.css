@@ -554,6 +554,26 @@ body[data-page="home"] .hero-pill:hover{
   background: rgba(255,255,255,.85);
   border-color: rgba(148,163,184,.45);
 }
+.depth-list{
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.depth-list li{
+  margin: 4px 0;
+  font-size: 12.75px;
+}
+
+.depth-list a{
+  font-weight: 800;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.depth-list a:hover{
+  text-decoration: underline;
+}
 
 /* =========================
    SYSTEM DROPDOWN (details)
