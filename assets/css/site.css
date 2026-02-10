@@ -440,6 +440,33 @@ body[data-page="home"] .hero-pill:hover{
 .mini span{ display:block; font-size:13px; color:var(--muted); line-height:1.45; }
 
 /* =========================
+   LAYOUTS (extra)
+   ========================= */
+
+/* 3-up grid (System: Layers | Diagram | Operating loop) */
+.grid3{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:14px;
+  margin-top:14px;
+}
+@media (max-width: 1100px){
+  .grid3{ grid-template-columns: 1fr; }
+}
+
+/* Architecture row (Signals / Decision Logic / Execution) */
+.arch-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:14px;
+  margin-top:14px;
+}
+@media (max-width: 900px){
+  .arch-grid{ grid-template-columns: 1fr; }
+}
+
+
+/* =========================
    TOOLS GRID (landing + anywhere)
    ========================= */
 .tools-grid{
