@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Core — Nuts &amp; Bolts</title>
-  <meta name="description" content="The Core defines shared signals, logic, thresholds, ownership, and change control across the People Operating System." />
+  <title>The Core — Shared Definitions & Decision Rules</title>
+  <meta name="description" content="The Core is the contract: shared definitions, decision logic, thresholds, ownership, and change control that keep every dashboard and A[i]gent consistent." />
   <link rel="stylesheet" href="/assets/css/site.css?v=1">
 </head>
 
@@ -27,51 +27,63 @@
       </div>
 
       <h1>The Core</h1>
+
       <p class="sub">
-        The shared definitions and decision rules that make every dashboard and A[i]gent consistent —
-        so teams stop debating “what the number means” and start acting.
+        Every People Ops team hits the same wall: dashboards disagree, tools drift, and the org ends up debating
+        <em>what a number means</em> instead of acting. The Core is how you stop that.
       </p>
 
-      <div class="backRow backRow--split">
-        <a class="backLink" href="/system/">← Back to System</a>
+      <div class="callout" style="margin-top:12px;">
+        <b>Core premise:</b> definitions are infrastructure. If the meaning changes by tool, team, or month, you don’t have analytics —
+        you have metric folklore.
+      </div>
 
-        <div class="ctaRow">
-          <a class="btn primary" href="/tools/metrics/">Open Metrics Tool</a>
-          <a class="btn" href="/tools/">Browse Tools</a>
-        </div>
+      <div class="hairline"></div>
+
+      <div class="ctaRow ctaRow--left" style="margin-top:12px;">
+        <a class="btn primary" href="/tools/metrics/">Open Metrics Tool</a>
+        <a class="btn" href="/tools/">Browse Tools</a>
+        <a class="btn" href="/use-cases/">See Use Cases</a>
       </div>
     </header>
 
     <section class="card" aria-label="What lives here">
       <h2>What lives here</h2>
+
       <p class="muted" style="margin:0 0 12px;">
         The Core is the contract across the whole portfolio. Tools reference it — they don’t redefine it.
-        This is how you get repeatability, auditability, and trusted decision-making across teams.
+        That’s how you get repeatability, auditability, and decision-making people actually trust.
       </p>
 
       <div class="miniGrid miniGrid--4" aria-label="Core pillars">
         <div class="mini">
           <b>Definitions</b>
-          <span>Shared meanings for terms like “pipeline health,” “capacity,” “quality,” and “signal.”</span>
+          <span>Shared meanings for terms like “pipeline health,” “capacity,” “quality,” and “signal” — so teams stop arguing semantics.</span>
         </div>
         <div class="mini">
           <b>Logic</b>
-          <span>How a signal is calculated + how it should be interpreted in context.</span>
+          <span>How a signal is calculated and how it should be interpreted in context (not as a vanity metric).</span>
         </div>
         <div class="mini">
           <b>Thresholds</b>
-          <span>What triggers a flag, a recommendation, or an escalation path.</span>
+          <span>What triggers a flag, a recommendation, or an escalation path — with explicit severity and ownership.</span>
         </div>
         <div class="mini">
           <b>Ownership</b>
-          <span>Who can change a definition, why, and how changes roll out safely.</span>
+          <span>Who can change what, why, and how updates roll out safely without breaking every dashboard downstream.</span>
         </div>
       </div>
 
       <div class="rule"></div>
 
+      <h3 style="margin:0 0 8px;">Why this matters</h3>
+      <p class="muted" style="margin:0 0 10px;">
+        Without a Core, “AI” turns into disconnected features and dashboards become polite storytelling.
+        With a Core, you can run automation with guardrails — because the inputs, meaning, and escalation paths are consistent.
+      </p>
+
       <p class="small" style="margin:0;">
-        Tools reference The Core so dashboards stay consistent even as your team, process, and tooling evolve.
+        <b>North star:</b> decisions compress from weeks to minutes — without becoming a black box.
       </p>
     </section>
 
@@ -80,6 +92,7 @@
         <div class="panelInner">
           <h3 class="section-title">Explore next</h3>
           <p class="section-sub">Jump into the tool layer or return to the system overview.</p>
+
           <div class="exploreNext__actions">
             <a class="btn primary" href="/tools/metrics/">Metrics Tool</a>
             <a class="btn" href="/system/">System Overview</a>
