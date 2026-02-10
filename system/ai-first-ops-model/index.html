@@ -3,297 +3,73 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AI-First Operating Model – Playbook</title>
+  <title>AI-First Operating Model — System Playbook</title>
 
-  <meta property="og:title" content="AI-First Operating Model – Playbook">
+  <meta property="og:title" content="AI-First Operating Model — System Playbook">
   <meta property="og:description" content="A practical operating model for using AI to reduce managerial busywork, expand autonomy, and keep humans on high-leverage work.">
   <meta property="og:type" content="article">
+  <meta property="og:url" content="https://dianewilkinson.github.io/system/ai-first-ops-model/">
 
-  <style>
-    :root{
-      --bg:#f9fafb;
-      --card:#ffffff;
-      --text:#111827;
-      --muted:#4b5563;
-      --border:#e5e7eb;
-      --link:#2563eb;
-      --link-soft:#4f46e5;
-      --shadow:rgba(15,23,42,0.08);
-      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
-      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.09),rgba(168,85,247,.09),rgba(99,102,241,.09));
-    }
-    *{box-sizing:border-box;}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    }
-    a{color:var(--link);text-decoration:none;}
-    a:hover{text-decoration:underline;}
-    .bar{height:4px;background:var(--accent-grad);}
-
-    header{
-      padding:24px 16px 10px;
-      text-align:center;
-    }
-    header h1{
-      margin:0;
-      font-size:24px;
-      font-weight:700;
-    }
-    header p{
-      margin:8px 0 0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-    }
-
-    .wrap{
-      max-width:1120px;
-      margin:0 auto;
-      padding:0 20px 32px;
-    }
-
-    /* Hero card */
-    .hero{
-      margin:16px 0 24px;
-      border-radius:20px;
-      background:linear-gradient(120deg,#fde7ef,#f3e8ff,#e0ecff);
-      box-shadow:0 8px 24px var(--shadow);
-      padding:22px 22px 18px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:18px;
-    }
-    .hero-main{
-      flex:1 1 260px;
-      min-width:0;
-    }
-    .hero-title{
-      margin:0 0 8px;
-      font-size:22px;
-      line-height:1.35;
-    }
-    .hero-title span{
-      color:var(--link-soft);
-    }
-    .hero-main p{
-      margin:0;
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.7;
-    }
-    .hero-actions{
-      margin-top:10px;
-      display:flex;
-      flex-direction:row;
-      align-items:center;
-      gap:8px;
-      font-size:13px;
-      flex-wrap:nowrap;
-    }
-    .hero-actions a{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:7px 12px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,.8);
-      background:rgba(255,255,255,.9);
-      font-weight:500;
-      text-decoration:none;
-      white-space:nowrap;
-    }
-    .back-pill{
-      color:#4f46e5;
-    }
-    .back-pill:hover{
-      background:rgba(255,255,255,1);
-      color:#4338ca;
-      text-decoration:none;
-    }
-
-    @media (max-width:800px){
-      .hero{padding:18px 16px 14px;}
-      .hero-title{font-size:20px;}
-    }
-
-    /* Info row under hero – 3 cards */
-    .info-layout{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:18px;
-      margin-bottom:24px;
-    }
-    @media (max-width:1100px){
-      .info-layout{
-        grid-template-columns:1fr 1fr;
-      }
-    }
-    @media (max-width:700px){
-      .info-layout{
-        grid-template-columns:1fr;
-      }
-    }
-
-    .hero-meta,
-    .toc-card,
-    .persona-card{
-      background:var(--card);
-      border-radius:14px;
-      border:1px solid var(--border);
-      padding:12px 12px 10px;
-      box-shadow:0 1px 3px var(--shadow);
-      font-size:13px;
-    }
-    .hero-meta h3,
-    .toc-card h3,
-    .persona-card h3{
-      margin:0 0 6px;
-      font-size:13px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:#6b7280;
-    }
-    .hero-meta ul,
-    .toc-card ul{
-      list-style:none;
-      margin:0;
-      padding:0;
-    }
-    .hero-meta li,
-    .toc-card li{
-      margin:3px 0;
-    }
-
-    .toc-card a{
-      color:#374151;
-      text-decoration:none;
-    }
-    .toc-card a:hover{
-      text-decoration:underline;
-      color:var(--link-soft);
-    }
-
-    .persona-pill{
-      display:inline-flex;
-      align-items:center;
-      padding:4px 10px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:500;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      background:#e0ebff;
-      color:#1d4ed8;
-      margin-bottom:6px;
-    }
-
-    /* Article */
-    article{
-      background:var(--card);
-      border-radius:16px;
-      border:1px solid var(--border);
-      box-shadow:0 1px 3px var(--shadow);
-      padding:18px 20px 18px;
-      font-size:14px;
-      line-height:1.7;
-      color:#111827;
-    }
-    article h2{
-      font-size:18px;
-      margin:18px 0 6px;
-    }
-    article h3{
-      font-size:15px;
-      margin:14px 0 4px;
-    }
-    article h2:first-of-type{
-      margin-top:0;
-    }
-    article p{
-      margin:2px 0 8px;
-    }
-    article ul{
-      margin:4px 0 10px 18px;
-      padding:0;
-    }
-    article li{
-      margin-bottom:3px;
-    }
-    .pill-note{
-      display:inline-block;
-      padding:3px 8px;
-      border-radius:999px;
-      background:rgba(219,234,254,.7);
-      color:#1d4ed8;
-      font-size:11px;
-      font-weight:500;
-      text-transform:uppercase;
-      letter-spacing:.06em;
-    }
-    .callout{
-      margin:10px 0 12px;
-      padding:10px 12px;
-      border-radius:12px;
-      background:rgba(239,246,255,.8);
-      border:1px solid #bfdbfe;
-      font-size:13px;
-    }
-
-    footer{
-      text-align:center;
-      margin:18px 0 20px;
-      color:var(--muted);
-      font-size:12px;
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/css/site.css?v=1">
 </head>
 
-<body>
+<body data-page="tool-playbook">
   <div class="bar"></div>
 
-  <header>
-    <h1>AI-First Operating Model</h1>
-    <p>
-      A practical framework for reducing managerial busywork, expanding autonomy, and keeping humans on high-leverage work.
-      <br>
-      By Diane Wilkinson – Recruiting Operations &amp; AI-Native TA Systems
-    </p>
-  </header>
+  <main class="wrap">
 
-  <div class="wrap">
+    <!-- Top crumbs + quick nav (optional but consistent with the rest of the system pages) -->
+    <div class="topbar" aria-label="Top navigation">
+      <div class="crumbs">
+        <a href="/">Home</a><span class="sep">/</span>
+        <a href="/system/">System</a><span class="sep">/</span>
+        <span>AI-First Operating Model</span>
+      </div>
+
+      <div class="navlinks">
+        <a class="btn" href="/tools/">Tools</a>
+        <a class="btn" href="/tools/">Library</a>
+        <a class="btn primary" href="/book/" target="_blank" rel="noopener">Book 15 min</a>
+      </div>
+    </div>
 
     <!-- HERO -->
-    <section class="hero">
-      <div class="hero-main">
-        <h2 class="hero-title">
-          AI should remove <span>managerial sludge</span>, not add another layer of oversight.
-        </h2>
-        <p>
-          This playbook lays out an AI-first operating model that reduces the need for a
-          traditional middle-management layer by moving repetitive oversight, approvals, and
-          reporting into clear workflows, automation, and agents — while keeping humans on
-          judgement, ethics, and accountability.
-        </p>
-        <p>
-          It’s written from the perspective of Talent Acquisition and People Ops, but the same
-          structure applies across most knowledge-work teams.
-        </p>
-        <div class="hero-actions">
-          <a href="/" class="back-pill">
-            ← Back to Portfolio Home
-          </a>
+    <section class="hero hero--tool" aria-label="Hero">
+      <span class="kicker"><span class="kdot"></span>System Playbook</span>
+
+      <h1 style="margin-bottom:6px;">
+        AI should remove <span class="accent">managerial sludge</span>, not add another layer of oversight.
+      </h1>
+
+      <p class="sub">
+        A practical framework for reducing managerial busywork, expanding autonomy, and keeping humans on high-leverage work.
+        <br />
+        <span class="small">By Diane Wilkinson — Recruiting Operations &amp; AI-Native TA Systems</span>
+      </p>
+
+      <div class="backRow backRow--split" style="margin-top:12px;">
+        <a class="backLink" href="/system/">← Back to System</a>
+        <div class="ctaRow ctaRow--tight">
+          <a class="btn" href="#implementation">Implementation</a>
+          <a class="btn primary" href="/book/" target="_blank" rel="noopener">Book 15 minutes</a>
         </div>
       </div>
+
+      <div class="hairline"></div>
     </section>
 
-    <!-- INFO ROW UNDER HERO -->
-    <div class="info-layout">
-      <!-- Left: What this covers -->
+    <!-- SECTION TITLE (matches Tools I Built style) -->
+    <h3 class="section-title" style="margin-top:10px;">AI-First Operating Model</h3>
+    <p class="section-sub">
+      This model reduces the need for a traditional middle-management layer by moving repetitive oversight, approvals, and reporting into workflows, automation, and agents — while keeping humans on judgement, ethics, and accountability.
+    </p>
+
+    <!-- INFO ROW -->
+    <div class="info-layout" aria-label="Overview and TOC">
       <aside class="hero-meta">
-        <h3>What this covers</h3>
+        <h3 style="margin:0 0 8px; font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted2);">
+          What this covers
+        </h3>
         <ul>
           <li>Symptoms of “managerial sludge” in modern orgs</li>
           <li>Principles for an AI-first, autonomy-heavy model</li>
@@ -304,35 +80,33 @@
         </ul>
       </aside>
 
-      <!-- Middle: Sections -->
-      <nav class="toc-card">
-        <h3>Sections</h3>
-        <ul>
-          <li><a href="#context">1. Context &amp; Problem</a></li>
-          <li><a href="#principles">2. Principles of an AI-First Model</a></li>
-          <li><a href="#stance">3. Operating Stance: What AI Does vs Humans</a></li>
-          <li><a href="#structure">4. Structure Without a Heavy Middle Layer</a></li>
-          <li><a href="#zones">5. AI Zones: Human, Co-Pilot, Autonomy</a></li>
-          <li><a href="#guardrails">6. Guardrails, Decision Rights &amp; Risk Triggers</a></li>
-          <li><a href="#implementation">7. Implementation Path (TA &amp; People)</a></li>
+      <nav class="toc-card" aria-label="Sections">
+        <h3 style="margin:0 0 8px; font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted2);">
+          Sections
+        </h3>
+        <ul class="tocList">
+          <li class="toc"><a href="#context">1. Context &amp; Problem</a></li>
+          <li class="toc"><a href="#principles">2. Principles of an AI-First Model</a></li>
+          <li class="toc"><a href="#stance">3. Operating Stance: What AI Does vs Humans</a></li>
+          <li class="toc"><a href="#structure">4. Structure Without a Heavy Middle Layer</a></li>
+          <li class="toc"><a href="#zones">5. AI Zones: Human, Co-Pilot, Autonomy</a></li>
+          <li class="toc"><a href="#guardrails">6. Guardrails, Decision Rights &amp; Risk Triggers</a></li>
+          <li class="toc"><a href="#implementation">7. Implementation Path (TA &amp; People)</a></li>
         </ul>
       </nav>
 
-      <!-- Right: Who this is for -->
       <aside class="persona-card">
-        <span class="persona-pill">Who this is for</span>
-        <p>
-          Leaders and operators designing AI-native teams, headcount plans, and operating
-          rhythms where AI makes work better — instead of just adding more dashboards and
-          status meetings.
+        <h3 style="margin:0 0 8px; font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted2);">
+          Who this is for
+        </h3>
+        <p class="muted" style="margin:0;">
+          Leaders and operators designing AI-native teams, headcount plans, and operating rhythms where AI makes work better — instead of just adding more dashboards and status meetings.
         </p>
       </aside>
     </div>
 
     <!-- MAIN CONTENT -->
-    <article>
-
-      <!-- 1. Context -->
+    <section class="full prose" aria-label="Playbook content">
       <section id="context">
         <h2>1. Context &amp; Problem</h2>
 
@@ -345,9 +119,8 @@
           <li>Managers as translators between systems, teams, and priorities.</li>
           <li>Managers as the only people with a full view of workload and risk.</li>
         </ul>
-        <p>
-          AI and modern systems change that equation — if we let them.
-        </p>
+
+        <p>AI and modern systems change that equation — if we let them.</p>
 
         <p>Warning signs that your org is over-managing and under-enabling:</p>
         <ul>
@@ -357,16 +130,13 @@
           <li>High performers bypassing official channels to get anything done.</li>
         </ul>
 
-        <p>
-          An AI-first operating model recognizes that <strong>oversight, routing, and monitoring</strong>
-          are <strong>system problems</strong>, not reasons to add more humans between humans.
-        </p>
+        <div class="callout">
+          <strong>Core idea:</strong> Oversight, routing, and monitoring are <strong>system problems</strong>, not reasons to add more humans between humans.
+        </div>
       </section>
 
-      <!-- 2. Principles -->
       <section id="principles">
         <h2>2. Principles of an AI-First Operating Model</h2>
-
         <p>This model is built around a few simple but non-negotiable principles:</p>
 
         <h3>2.1 Reduce managerial busywork</h3>
@@ -387,7 +157,7 @@
         <ul>
           <li>Humans handle judgement, nuance, ethics, and trade-offs.</li>
           <li>AI prepares <strong>context, options, and evidence</strong> — it doesn’t replace accountability.</li>
-          <li>If AI is increasing cognitive load instead of freeing it, the design is wrong.</li>
+          <li>If AI increases cognitive load instead of freeing it, the design is wrong.</li>
         </ul>
 
         <h3>2.4 Evidence over hierarchy</h3>
@@ -398,10 +168,8 @@
         </ul>
       </section>
 
-      <!-- 3. Operating Stance -->
       <section id="stance">
         <h2>3. Operating Stance: What AI Does vs Humans</h2>
-
         <p>
           An AI-first model doesn’t mean “AI makes all the decisions.” It means we are
           <strong>deliberate</strong> about what gets automated, augmented, or reserved for humans.
@@ -410,7 +178,7 @@
         <h3>3.1 AI’s job</h3>
         <ul>
           <li>Ingest data from systems (ATS/HRIS, tickets, docs, comms).</li>
-          <li>Highlight patterns: bottlenecks, outliers, risks, and opportunities.</li>
+          <li>Highlight patterns: bottlenecks, outliers, risks, opportunities.</li>
           <li>Generate first-draft options, summaries, and playbook-aligned suggestions.</li>
           <li>Log decisions, outcomes, and exceptions for future learning.</li>
         </ul>
@@ -420,22 +188,17 @@
           <li>Set goals, constraints, and ethical boundaries.</li>
           <li>Make final decisions on people-impacting outcomes.</li>
           <li>Intervene on edge cases and nuance AI can’t see.</li>
-          <li>Continuously adjust the playbooks and guardrails.</li>
+          <li>Continuously adjust playbooks and guardrails.</li>
         </ul>
 
         <div class="callout">
-          <strong>Key stance:</strong> AI runs the <strong>rails and dashboards</strong>; humans drive
-          <strong>direction and accountability</strong>.
+          <strong>Key stance:</strong> AI runs the <strong>rails and dashboards</strong>; humans drive <strong>direction and accountability</strong>.
         </div>
       </section>
 
-      <!-- 4. Structure -->
       <section id="structure">
         <h2>4. Structure Without a Heavy Middle Layer</h2>
-
-        <p>
-          Instead of layering managers between every IC and leader, this model assumes:
-        </p>
+        <p>Instead of layering managers between every IC and leader, this model assumes:</p>
         <ul>
           <li>Strong <strong>individual contributors</strong> with clear ownership.</li>
           <li>A small number of <strong>player-coaches / leads</strong> who own craft and standards.</li>
@@ -444,10 +207,10 @@
 
         <h3>4.1 Example structure for TA &amp; People</h3>
         <ul>
-          <li><strong>Executives / Heads (CPO, VP TA, etc.)</strong> – own strategy, budgets, and risk.</li>
-          <li><strong>Ops &amp; Architecture (like you)</strong> – design workflows, agents, metrics, and guardrails.</li>
-          <li><strong>Leads / Player-coaches</strong> – handle craft leadership, coaching, and complex escalations.</li>
-          <li><strong>IC Pods</strong> – recruiters, coordinators, HRBPs, specialists working in autonomous pods.</li>
+          <li><strong>Executives / Heads (CPO, VP TA, etc.)</strong> — own strategy, budgets, and risk.</li>
+          <li><strong>Ops &amp; Architecture</strong> — design workflows, agents, metrics, and guardrails.</li>
+          <li><strong>Leads / Player-coaches</strong> — craft leadership, coaching, complex escalations.</li>
+          <li><strong>IC Pods</strong> — recruiters, coordinators, HRBPs, specialists working in autonomous pods.</li>
         </ul>
 
         <p>
@@ -457,13 +220,9 @@
         </p>
       </section>
 
-      <!-- 5. AI Zones -->
       <section id="zones">
         <h2>5. AI Zones: Human, Co-Pilot, Autonomy</h2>
-
-        <p>
-          To avoid AI chaos, classify work into three zones before you build anything:
-        </p>
+        <p>To avoid AI chaos, classify work into three zones before you build anything:</p>
 
         <h3>5.1 Human-Only Zone</h3>
         <ul>
@@ -486,23 +245,19 @@
           <li>Reminder nudges (scorecards, SLAs, overdue tasks).</li>
           <li>Routing repeat, low-risk approvals under fixed thresholds.</li>
           <li>Generating dashboards and roll-ups from system data.</li>
-          <li>Standard follow-ups and updates (e.g., “we’re still interviewing”).</li>
+          <li>Standard follow-ups and updates.</li>
         </ul>
 
         <div class="callout">
           Autonomy should live where <strong>risk is low and reversibility is high</strong>;
           Co-Pilot where <strong>judgement is needed but AI can prep the work</strong>;
-          Human-only where <strong>impact on people is material and irreversible</strong>.
+          Human-only where <strong>impact is material and irreversible</strong>.
         </div>
       </section>
 
-      <!-- 6. Guardrails -->
       <section id="guardrails">
         <h2>6. Guardrails, Decision Rights &amp; Risk Triggers</h2>
-
-        <p>
-          An AI-first operating model is only as strong as its <strong>guardrails</strong>. You need:
-        </p>
+        <p>An AI-first operating model is only as strong as its <strong>guardrails</strong>. You need:</p>
 
         <h3>6.1 Decision Rights Map (RACI)</h3>
         <ul>
@@ -526,53 +281,54 @@
         </ul>
 
         <p>
-          When triggers fire, you pause automation in that zone, revert to human-only,
-          investigate, and adjust the model or guardrails before resuming.
+          When triggers fire: pause automation in that zone, revert to human-only, investigate, and adjust guardrails before resuming.
         </p>
       </section>
 
-      <!-- 7. Implementation -->
       <section id="implementation">
         <h2>7. Implementation Path (TA &amp; People Teams)</h2>
-
-        <p>
-          You don’t need a giant reorg to start. The AI-First Operating Model can be phased in
-          as part of normal TA &amp; People projects.
-        </p>
+        <p>You don’t need a giant reorg to start. Phase it in through normal projects.</p>
 
         <h3>7.1 Start With One Domain</h3>
         <ul>
-          <li>Choose a contained area (e.g., recruiting interviews, candidate comms).</li>
-          <li>Map current workflows, decision points, and pain points.</li>
+          <li>Choose a contained area (e.g., interviews, candidate comms).</li>
+          <li>Map workflows, decision points, and pain points.</li>
           <li>Classify work into Human / Co-Pilot / Autonomy zones.</li>
         </ul>
 
         <h3>7.2 Design Workflows + Agents Together</h3>
         <ul>
           <li>Fix the workflow first (clear stages, owners, inputs, outputs).</li>
-          <li>Then layer AI where it removes friction instead of adding it.</li>
-          <li>Ensure every automation has a clear owner and a way to pause it.</li>
+          <li>Layer AI where it removes friction instead of adding it.</li>
+          <li>Ensure every automation has an owner and a pause path.</li>
         </ul>
 
         <h3>7.3 Measure, Don’t Guess</h3>
         <ul>
-          <li>Use metrics like time-to-decision, SLA adherence, no-show rates, and escalations.</li>
-          <li>Track where AI created more work, not less, and adjust quickly.</li>
-          <li>Share results with teams so they understand the “why,” not just the tooling.</li>
+          <li>Track time-to-decision, SLA adherence, no-show rates, escalations.</li>
+          <li>Track where AI created more work, not less — and adjust quickly.</li>
+          <li>Share results so teams understand the “why,” not just the tooling.</li>
         </ul>
 
         <p>
-          Over time, the AI-First model becomes the default way you design new processes:
-          start with <strong>how the work should flow</strong>, then ask <strong>where AI can remove friction</strong> —
-          not the other way around.
+          Over time, this becomes the default design method:
+          start with <strong>how the work should flow</strong>, then ask <strong>where AI can remove friction</strong>.
         </p>
       </section>
+    </section>
 
-    </article>
-  </div>
+  </main>
 
-  <footer>
-    This framework underpins the A[i]gent Suite – internal, workflow-first AI for recruiting and people systems.
+  <footer class="site-footer">
+    <div class="site-footer__row">
+      <div>This framework underpins the A[i]gent Suite — internal, workflow-first AI for recruiting and people systems.</div>
+      <div>
+        <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a>
+        ·
+        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
   </footer>
+
 </body>
 </html>
