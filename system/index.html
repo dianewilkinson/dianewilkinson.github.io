@@ -57,243 +57,252 @@
 
     <!-- SHARED ARCHITECTURE -->
     <section class="chapter" aria-label="Shared Architecture">
-      <h2>Shared Architecture</h2>
-      <p class="muted">
-        <b>Tools are the interface. The system is the operating model.</b>
-        One set of signals, decision logic, and auditability runs end-to-end — so insights turn into action, decisions stay consistent, and automation stays safe and reviewable.
-      </p>
+      <div class="chapter__inner">
+        <h2>Shared Architecture</h2>
+        <p class="muted">
+          <b>Tools are the interface. The system is the operating model.</b>
+          One set of signals, decision logic, and auditability runs end-to-end — so insights turn into action, decisions stay consistent, and automation stays safe and reviewable.
+        </p>
 
-      <div class="arch-grid" aria-label="Architecture blocks" style="margin-top:14px;">
-        <div class="arch card">
-          <h3>Signals</h3>
-          <p class="muted">Named inputs that are comparable across workflows — so you can detect drift and measure impact.</p>
-          <ul>
-            <li>Throughput, pass-through, and SLAs</li>
-            <li>Open-text themes + reasons</li>
-            <li>Capacity constraints (HM / recruiter / interview loops)</li>
-            <li>Risk indicators + drift detection</li>
-          </ul>
-        </div>
+        <div class="arch-grid" aria-label="Architecture blocks">
+          <div class="card">
+            <h3>Signals</h3>
+            <p class="muted">Named inputs that are comparable across workflows — so you can detect drift and measure impact.</p>
+            <ul>
+              <li>Throughput, pass-through, and SLAs</li>
+              <li>Open-text themes + reasons</li>
+              <li>Capacity constraints (HM / recruiter / interview loops)</li>
+              <li>Risk indicators + drift detection</li>
+            </ul>
+          </div>
 
-        <div class="arch card">
-          <h3>Decision Logic</h3>
-          <p class="muted">Turn signals into “what should happen next” — with thresholds, tradeoffs, and escalation rules.</p>
-          <ul>
-            <li>Expected ranges + alert thresholds</li>
-            <li>Root-cause prompts (“why this surfaced”)</li>
-            <li>Recommended actions + impact tradeoffs</li>
-            <li>Escalation rules as stakes increase</li>
-          </ul>
-        </div>
+          <div class="card">
+            <h3>Decision Logic</h3>
+            <p class="muted">Turn signals into “what should happen next” — with thresholds, tradeoffs, and escalation rules.</p>
+            <ul>
+              <li>Expected ranges + alert thresholds</li>
+              <li>Root-cause prompts (“why this surfaced”)</li>
+              <li>Recommended actions + impact tradeoffs</li>
+              <li>Escalation rules as stakes increase</li>
+            </ul>
+          </div>
 
-        <div class="arch card">
-          <h3>Execution + Auditability</h3>
-          <p class="muted">Execution happens inside the tools — and every action is reviewable.</p>
-          <ul>
-            <li>Receipts attached to recommendations</li>
-            <li>Approvals where needed (autonomy tiers)</li>
-            <li>Action logs + change history</li>
-            <li>“Why it did this” is visible, not implied</li>
-          </ul>
+          <div class="card">
+            <h3>Execution + Auditability</h3>
+            <p class="muted">Execution happens inside the tools — and every action is reviewable.</p>
+            <ul>
+              <li>Receipts attached to recommendations</li>
+              <li>Approvals where needed (autonomy tiers)</li>
+              <li>Action logs + change history</li>
+              <li>“Why it did this” is visible, not implied</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- HOW IT WORKS: 3-CARD GRID (LAYERS / DIAGRAM / LOOP) -->
+    <!-- HOW IT WORKS -->
     <section class="chapter" aria-label="How the system works">
-      <h2>How the system works</h2>
-      <p class="muted">
-        One operating model, viewed three ways: responsibilities, structure, and runtime behavior.
-      </p>
+      <div class="chapter__inner">
+        <h2>How the system works</h2>
+        <p class="muted">
+          One operating model, viewed three ways: responsibilities, structure, and runtime behavior.
+        </p>
 
-      <div class="grid3" style="margin-top:14px;">
+        <div class="grid3" aria-label="How it works blocks">
+          <div class="card">
+            <h3>The layers</h3>
+            <p class="muted">Separation of concerns so the org can scale without losing trust.</p>
+            <ul>
+              <li><b>Systems environment</b> — ATS, HRIS, CRM, warehouse, comms.</li>
+              <li><b>Signals</b> — normalized metrics + narrative inputs.</li>
+              <li><b>Orchestration</b> — routing, SLAs, escalation, audit trails.</li>
+              <li><b>Execution</b> — bounded actions + logged outcomes.</li>
+              <li><b>Human judgment</b> — ethics, accountability, overrides.</li>
+              <li><b>Core</b> — definitions, logic, thresholds, ownership.</li>
+            </ul>
+          </div>
 
-        <!-- LEFT: LAYERS -->
-        <div class="card">
-          <h3>The layers</h3>
-          <p class="muted">
-            Separation of concerns so the org can scale without losing trust.
-          </p>
-          <ul>
-            <li><b>Systems environment</b> — ATS, HRIS, CRM, warehouse, comms.</li>
-            <li><b>Signals</b> — normalized metrics + narrative inputs.</li>
-            <li><b>Orchestration</b> — routing, SLAs, escalation, audit trails.</li>
-            <li><b>Execution</b> — bounded actions + logged outcomes.</li>
-            <li><b>Human judgment</b> — ethics, accountability, overrides.</li>
-            <li><b>Core</b> — definitions, logic, thresholds, ownership.</li>
-          </ul>
+          <div class="card">
+            <h3>System architecture</h3>
+            <img
+              src="/assets/diagrams/system.png"
+              alt="AI-Native People Ops system diagram"
+              style="width:100%; height:auto; border-radius:12px; border:1px solid var(--border); background:#fff;"
+            />
+            <p class="small" style="margin-top:10px;">
+              Human judgment stays at the top. Orchestration routes work.
+              Signals and execution are distinct layers tied together by shared logic.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>The operating loop</h3>
+            <p class="muted">The minimum loop required for AI-native operations to work in production.</p>
+            <ul>
+              <li><b>Signal</b> — collect events and outcomes.</li>
+              <li><b>Interpret</b> — apply shared logic and thresholds.</li>
+              <li><b>Route</b> — assign work or auto-execute at low risk.</li>
+              <li><b>Act</b> — perform the action and log it.</li>
+              <li><b>Learn</b> — feed outcomes back into the Core.</li>
+            </ul>
+            <p class="small" style="margin-top:10px;">Most AI pilots fail because they stop at <em>signal</em>.</p>
+          </div>
         </div>
-
-        <!-- CENTER: DIAGRAM -->
-        <div class="card">
-          <h3>System architecture</h3>
-          <img
-            src="/assets/diagrams/system.png"
-            alt="AI-Native People Ops system diagram"
-            style="width:100%; height:auto; border-radius:12px; border:1px solid var(--border); background:#fff;"
-          />
-          <p class="small" style="margin-top:10px;">
-            Human judgment stays at the top. Orchestration routes work.
-            Signals and execution are distinct layers tied together by shared logic.
-          </p>
-        </div>
-
-        <!-- RIGHT: OPERATING LOOP -->
-        <div class="card">
-          <h3>The operating loop</h3>
-          <p class="muted">
-            The minimum loop required for AI-native operations to work in production.
-          </p>
-          <ul>
-            <li><b>Signal</b> — collect events and outcomes.</li>
-            <li><b>Interpret</b> — apply shared logic and thresholds.</li>
-            <li><b>Route</b> — assign work or auto-execute at low risk.</li>
-            <li><b>Act</b> — perform the action and log it.</li>
-            <li><b>Learn</b> — feed outcomes back into the Core.</li>
-          </ul>
-          <p class="small" style="margin-top:10px;">
-            Most AI pilots fail because they stop at <em>signal</em>.
-          </p>
-        </div>
-
       </div>
     </section>
 
     <!-- WHAT IT REPLACES -->
-    <section class="full" aria-label="What it replaces">
-      <h2 class="section-title">What it replaces</h2>
-      <p class="muted">
-        Most teams don’t have a system — they have dashboards, spreadsheets, and one-off automations.
-        That creates three predictable failures:
-      </p>
-      <ul>
-        <li><strong>Truth drift:</strong> definitions change silently and metrics stop matching across tools.</li>
-        <li><strong>Decision drift:</strong> rules are implicit (“it depends”), so outcomes vary by person and mood.</li>
-        <li><strong>Execution drift:</strong> actions aren’t routed, tracked, or closed — so work repeats and trust erodes.</li>
-      </ul>
+    <section class="chapter" aria-label="What it replaces">
+      <div class="chapter__inner">
+        <h2>What it replaces</h2>
+        <p class="muted">
+          Most teams don’t have a system — they have dashboards, spreadsheets, and one-off automations.
+          That creates three predictable failures:
+        </p>
+        <ul>
+          <li><strong>Truth drift:</strong> definitions change silently and metrics stop matching across tools.</li>
+          <li><strong>Decision drift:</strong> rules are implicit (“it depends”), so outcomes vary by person and mood.</li>
+          <li><strong>Execution drift:</strong> actions aren’t routed, tracked, or closed — so work repeats and trust erodes.</li>
+        </ul>
 
-      <div class="callout" style="margin-top:12px;">
-        The goal isn’t more analytics. It’s a governed path from signal → decision → action → learning.
+        <div class="callout" style="margin-top:12px;">
+          The goal isn’t more analytics. It’s a governed path from signal → decision → action → learning.
+        </div>
       </div>
     </section>
 
     <!-- DESIGN PRINCIPLES -->
-    <section class="full" aria-label="Design principles">
-      <h2 class="section-title">Design principles</h2>
-      <ul>
-        <li><strong>AI is infrastructure</strong> — embedded where teams already work.</li>
-        <li><strong>Humans remain accountable</strong> — escalation paths and auditability are built in.</li>
-        <li><strong>Governance is continuous</strong> — rules evolve with the business, not quarterly deck cycles.</li>
-        <li><strong>The system is operable</strong> — designed to run under real-world constraints.</li>
-      </ul>
+    <section class="chapter" aria-label="Design principles">
+      <div class="chapter__inner">
+        <h2>Design principles</h2>
+        <ul>
+          <li><strong>AI is infrastructure</strong> — embedded where teams already work.</li>
+          <li><strong>Humans remain accountable</strong> — escalation paths and auditability are built in.</li>
+          <li><strong>Governance is continuous</strong> — rules evolve with the business, not quarterly deck cycles.</li>
+          <li><strong>The system is operable</strong> — designed to run under real-world constraints.</li>
+        </ul>
 
-      <div class="ctaRow ctaRow--left" style="margin-top:12px;">
-        <a class="btnGhost" href="/use-cases/">View use cases →</a>
-        <a class="btnGhost" href="/tools/">Browse tools →</a>
+        <div class="ctaRow ctaRow--left" style="margin-top:12px;">
+          <a class="btnGhost" href="/use-cases/">View use cases →</a>
+          <a class="btnGhost" href="/tools/">Browse tools →</a>
+        </div>
       </div>
     </section>
 
-    <!-- GOVERNANCE (AUTONOMY TIERS) -->
-    <section class="full" aria-label="Governance and autonomy">
-      <h2 class="section-title">Governance and autonomy</h2>
-      <p class="muted">
-        Autonomy is not a feature — it’s a policy decision. The system makes those decisions explicit:
-        what can run, what requires approval, and what must always escalate.
-      </p>
+    <!-- GOVERNANCE & SAFETY (4-card grid) -->
+    <section class="chapter" aria-label="Governance and safety">
+      <div class="chapter__inner">
+        <h2>Governance &amp; Safety</h2>
+        <p class="muted">
+          Autonomy is not assumed. It’s explicitly tiered — so low-risk actions can move fast, and high-stakes actions always route to humans.
+        </p>
 
-      <div class="miniGrid" aria-label="Autonomy tiers">
-        <div class="mini">
-          <b>Tier 0 — Monitor</b>
-          <span>Baseline + drift detection. Observe, measure, and surface issues without taking action.</span>
-        </div>
-        <div class="mini">
-          <b>Tier 1 — Auto-execute (low risk)</b>
-          <span>Pre-approved actions: nudges, reminders, routing, refreshes. Everything is logged.</span>
-        </div>
-        <div class="mini">
-          <b>Tier 2 — Recommend (approval required)</b>
-          <span>People-impacting actions require a human decision: suggested steps, not automatic execution.</span>
-        </div>
-        <div class="mini">
-          <b>Tier 3 — Escalate (high risk)</b>
-          <span>Employment-impacting decisions never auto-run. Strong governance and documentation apply.</span>
-        </div>
-      </div>
+        <div class="rule"></div>
 
-      <div class="callout">
-        “Safe” systems aren’t cautious by vibe — they’re cautious by explicit thresholds and escalation rules.
+        <h3 style="margin:0 0 6px;">Guardrails on AI Autonomy</h3>
+        <p class="muted" style="margin:0 0 10px;">
+          What can safely auto-execute, what requires approval, and what must always escalate.
+        </p>
+
+        <!-- Use your existing miniGrid, but force 4 columns on desktop -->
+        <div class="miniGrid" aria-label="Autonomy tiers" style="grid-template-columns:repeat(4, minmax(0, 1fr));">
+          <div class="mini">
+            <b>Tier 0 — Monitor</b>
+            <span>Measure, detect drift, and surface risks. No action.</span>
+          </div>
+          <div class="mini">
+            <b>Tier 1 — Auto-execute (low risk)</b>
+            <span>Reminders, routing, nudges, updates, and hygiene tasks. Logged and visible.</span>
+          </div>
+          <div class="mini">
+            <b>Tier 2 — Recommend (approval required)</b>
+            <span>Actions that affect outcomes require explicit human approval.</span>
+          </div>
+          <div class="mini">
+            <b>Tier 3 — Escalate (high stakes)</b>
+            <span>Employment-impacting decisions are never automated; governance applies.</span>
+          </div>
+        </div>
+
+        <div class="ctaRow ctaRow--left" style="margin-top:12px;">
+          <a class="btnGhost" href="/system/core/">Read: AI-First Ops Model →</a>
+        </div>
       </div>
     </section>
 
     <!-- CORE + CHANGE CONTROL -->
-    <section class="full" aria-label="Core and change control">
-      <h2 class="section-title">Core and change control</h2>
-      <p class="muted">
-        The Core exists so meaning stays stable as teams, tools, and incentives change. It is the spec layer that
-        prevents silent redefinition and “metric theater.”
-      </p>
+    <section class="chapter" aria-label="Core and change control">
+      <div class="chapter__inner">
+        <h2>Core and change control</h2>
+        <p class="muted">
+          The Core exists so meaning stays stable as teams, tools, and incentives change. It is the spec layer that prevents silent redefinition and “metric theater.”
+        </p>
 
-      <div class="miniGrid" aria-label="Core scope">
-        <div class="mini">
-          <b>Definitions</b>
-          <span>What a metric or signal means, including grain, filters, and edge cases.</span>
+        <div class="miniGrid" aria-label="Core scope">
+          <div class="mini">
+            <b>Definitions</b>
+            <span>What a metric or signal means, including grain, filters, and edge cases.</span>
+          </div>
+          <div class="mini">
+            <b>Logic</b>
+            <span>Calculation + interpretation rules so two people don’t reach two answers.</span>
+          </div>
+          <div class="mini">
+            <b>Thresholds</b>
+            <span>What triggers alerts, actions, escalation, or a required human review.</span>
+          </div>
+          <div class="mini">
+            <b>Ownership</b>
+            <span>Who can change what, when, and why — with simple change control.</span>
+          </div>
         </div>
-        <div class="mini">
-          <b>Logic</b>
-          <span>Calculation + interpretation rules so two people don’t reach two answers.</span>
-        </div>
-        <div class="mini">
-          <b>Thresholds</b>
-          <span>What triggers alerts, actions, escalation, or a required human review.</span>
-        </div>
-        <div class="mini">
-          <b>Ownership</b>
-          <span>Who can change what, when, and why — with a simple change log.</span>
-        </div>
-      </div>
 
-      <div class="ctaRow ctaRow--left" style="margin-top:12px;">
-        <a class="btn primary" href="/system/core/">Open the Core (spec) →</a>
-        <a class="btn" href="/tools/">See tools that reference it →</a>
+        <div class="ctaRow ctaRow--left" style="margin-top:12px;">
+          <a class="btn primary" href="/system/core/">Open the Core (spec) →</a>
+          <a class="btn" href="/tools/">See tools that reference it →</a>
+        </div>
       </div>
     </section>
 
     <!-- WHAT LIVES WHERE -->
-    <section class="full" aria-label="What lives where">
-      <h2 class="section-title">What lives where</h2>
+    <section class="chapter" aria-label="What lives where">
+      <div class="chapter__inner">
+        <h2>What lives where</h2>
 
-      <div class="miniGrid" aria-label="System boundaries">
-        <div class="mini">
-          <b>System</b>
-          <span>Operating model: how signals become decisions and actions, with guardrails and escalation.</span>
+        <div class="miniGrid" aria-label="System boundaries">
+          <div class="mini">
+            <b>System</b>
+            <span>Operating model: how signals become decisions and actions, with guardrails and escalation.</span>
+          </div>
+          <div class="mini">
+            <b>Core</b>
+            <span>Source of truth: definitions, logic, thresholds, and ownership/change control.</span>
+          </div>
+          <div class="mini">
+            <b>Tools</b>
+            <span>Interfaces + execution: workflows that use the Core and operate within the System.</span>
+          </div>
         </div>
-        <div class="mini">
-          <b>Core</b>
-          <span>Source of truth: definitions, logic, thresholds, and ownership/change control.</span>
-        </div>
-        <div class="mini">
-          <b>Tools</b>
-          <span>Interfaces + execution: workflows that use the Core and operate within the System.</span>
-        </div>
-      </div>
 
-      <div class="callout">
-        Tools reference the Core. They don’t redefine it. The System keeps autonomy safe by making rules explicit and auditable.
+        <div class="callout">
+          Tools reference the Core. They don’t redefine it. The System keeps autonomy safe by making rules explicit and auditable.
+        </div>
       </div>
     </section>
 
-    <!-- EXPLORE (MINIMAL) -->
-    <section class="full" aria-label="Explore">
-      <h2 class="section-title">Explore</h2>
-      <p class="muted">
-        The system is the model. The Core is the spec. The tools are where it runs.
-      </p>
+    <!-- EXPLORE -->
+    <section class="chapter" aria-label="Explore">
+      <div class="chapter__inner">
+        <h2>Explore</h2>
+        <p class="muted">The system is the model. The Core is the spec. The tools are where it runs.</p>
 
-      <div class="ctaRow ctaRow--left" style="margin-top:10px;">
-        <a class="btn" href="/tools/">All tools →</a>
-        <a class="btn" href="/use-cases/">Use cases →</a>
-        <a class="btn" href="/articles/">Articles →</a>
-        <a class="btn primary" href="/system/core/">Core (definitions) →</a>
+        <div class="ctaRow ctaRow--left" style="margin-top:10px;">
+          <a class="btn" href="/tools/">All tools →</a>
+          <a class="btn" href="/use-cases/">Use cases →</a>
+          <a class="btn" href="/articles/">Articles →</a>
+          <a class="btn primary" href="/system/core/">Core (definitions) →</a>
+        </div>
       </div>
     </section>
 
