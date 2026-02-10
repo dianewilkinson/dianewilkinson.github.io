@@ -324,43 +324,11 @@ body[data-page="home"] .hero-pill:hover{
   padding:16px;
 }
 
-/* =========================
-   EXPLORE NEXT (global terminal section)
-   Use on EVERY page as the final section
-   ========================= */
-.exploreNext{
-  margin-top:14px;
-}
-.exploreNext .panel{
-  background: var(--cool-grad);
-}
-.exploreNext .panelInner{
-  background: rgba(255,255,255,.94);
-  padding:16px;
-}
-.exploreNext__title{
-  margin:0 0 10px;
-}
-.exploreNext__actions{
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:10px;
-}
 
-/* Make Explore Next buttons feel like “pills” */
-.exploreNext .btn{
-  border-radius:999px;
-  padding:9px 12px;
-  font-size:13.5px;
-}
-.exploreNext .btn.primary{
-  border-color: rgba(79,70,229,.25);
-}
 /* =========================
    EXPLORE NEXT (terminal)
+   - Use on EVERY page as the final section
+   - No white inner surface (gradient is exposed)
    ========================= */
 .exploreNext{
   margin-top:14px;
@@ -391,7 +359,13 @@ body[data-page="home"] .hero-pill:hover{
 .exploreNext .btn{
   background: rgba(255,255,255,.88);
   border-radius:999px;
+  box-shadow:none;
 }
+.exploreNext .btn:hover{
+  background:#fff;
+  text-decoration:none;
+}
+
 
 /* =========================
    SECTION TITLES / CARDS
