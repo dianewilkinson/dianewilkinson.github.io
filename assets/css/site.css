@@ -192,6 +192,8 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   align-items:center;
   gap:10px;
 }
+.backRow--split{ justify-content:space-between; flex-wrap:wrap; }
+
 .ctaRow{
   display:flex;
   align-items:center;
