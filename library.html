@@ -17,304 +17,224 @@
   <meta name="twitter:description" content="AI tools, tools, playbooks, PDFs, and evidence — organized for fast review.">
   <meta name="twitter:image" content="https://dianewilkinson.github.io/assets/og-upwork.png">
 
+  <link rel="stylesheet" href="/assets/css/site.css?v=1">
+
   <style>
-    :root{
-      --bg:#f9fafb;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#64748b;
-      --border:#e5e7eb;
-      --link:#2563eb;
-      --link-soft:#4f46e5;
-      --shadow:rgba(15,23,42,0.08);
-
-      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
-      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.12),rgba(168,85,247,.12),rgba(99,102,241,.12));
-    }
-    *{box-sizing:border-box;}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    }
-    a{color:var(--link);text-decoration:none;}
-    a:hover{text-decoration:underline;}
-    .bar{height:4px;background:var(--accent-grad);}
-
-    header{
+    /* =========================
+       LIBRARY PAGE (scoped)
+       ========================= */
+    body[data-page="library"] header{
       text-align:center;
-      padding:30px 16px 8px;
+      padding: 18px 0 4px;
     }
-    header h1{
+    body[data-page="library"] header h1{
       margin:0;
-      font-size:24px;
-      font-weight:800;
-      letter-spacing:-0.02em;
+      font-size:20px;
+      font-weight:900;
+      letter-spacing:-.02em;
     }
-    header p{
-      margin:10px 0 0;
+    body[data-page="library"] header p{
+      margin:6px 0 0;
+      color:var(--muted2);
       font-size:13px;
-      font-weight:600;
-      color:#475569;
+      font-weight:700;
       line-height:1.55;
     }
 
-    .wrap{
-      max-width:1200px;
-      margin:0 auto;
-      padding:12px 20px 34px;
+    /* Hero */
+    body[data-page="library"] .libHero{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.86));
+      box-shadow: 0 18px 55px var(--shadow);
+      overflow:hidden;
+      position:relative;
+      padding:18px 18px 14px;
+      margin-top:10px;
     }
+    body[data-page="library"] .libHero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: var(--cool-grad);
+      opacity:.9;
+      pointer-events:none;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.92), rgba(0,0,0,.30), rgba(0,0,0,0));
+    }
+    body[data-page="library"] .libHero > *{ position:relative; }
 
-    /* Hero (soft) */
-    .hero{
-      margin:10px 0 14px;
-      border-radius:20px;
-      background:var(--accent-soft);
-      box-shadow:0 8px 24px var(--shadow);
-      padding:18px 18px 16px;
-      text-align:left;
-    }
-    .hero h2{
+    body[data-page="library"] .libHero h2{
       margin:0 0 6px;
       font-size:22px;
-      line-height:1.2;
       font-weight:900;
-      letter-spacing:-0.02em;
+      letter-spacing:-.02em;
+      line-height:1.2;
     }
-    .hero h2 span{color:var(--link-soft);}
-    .hero p{
+    body[data-page="library"] .libHero p{
       margin:0;
-      font-size:14.5px;
-      color:#475569;
-      line-height:1.7;
-      max-width:980px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+      max-width: 95ch;
     }
-    .hero-actions{
+    body[data-page="library"] .libHeroActions{
       margin-top:12px;
       display:flex;
-      flex-wrap:wrap;
       gap:10px;
+      flex-wrap:wrap;
       align-items:center;
     }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 13px;
+    body[data-page="library"] .libHeroActions .btn{
       border-radius:999px;
-      font-size:13px;
-      font-weight:800;
-      border:1px solid rgba(148,163,184,0.75);
-      background:rgba(255,255,255,0.92);
-      color:#4338ca;
-      text-decoration:none;
-      white-space:nowrap;
+      padding:9px 13px;
+      font-weight:900;
+      box-shadow: 0 10px 30px rgba(15,23,42,.06);
     }
-    .btn:hover{background:#fff; text-decoration:none; color:#3730a3;}
-    .btn.primary{
-      border:none;
+    body[data-page="library"] .libHeroActions .btn.primary{
       background:#4f46e5;
+      border:none;
       color:#fff;
     }
-    .btn.primary:hover{background:#4338ca; color:#fff;}
+    body[data-page="library"] .libHeroActions .btn.primary:hover{
+      background:#4338ca;
+      color:#fff;
+    }
 
-    /* Grid controls */
-    .controls{
-      margin:10px 0 14px;
+    /* Controls row */
+    body[data-page="library"] .controls{
+      margin-top:12px;
       display:flex;
       gap:12px;
       flex-wrap:wrap;
       align-items:center;
       justify-content:space-between;
     }
-    .search{
+    body[data-page="library"] .search{
       flex:1 1 420px;
       min-width:260px;
       display:flex;
       align-items:center;
       gap:10px;
       padding:10px 12px;
-      background:#fff;
       border:1px solid var(--border);
       border-radius:14px;
-      box-shadow:0 1px 3px var(--shadow);
+      background:rgba(255,255,255,.90);
+      box-shadow: 0 10px 30px rgba(15,23,42,.06);
     }
-    .search .dot{
-      width:10px;height:10px;border-radius:999px;
-      background:linear-gradient(135deg,#c7d2fe,#fbcfe8);
+    body[data-page="library"] .search .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, rgba(96,165,250,1), rgba(167,139,250,1));
+      box-shadow:0 0 0 3px rgba(79,70,229,.10);
       flex:0 0 auto;
     }
-    .search input{
+    body[data-page="library"] .search input{
       width:100%;
       border:none;
       outline:none;
-      font-size:14px;
-      color:#0f172a;
       background:transparent;
+      color:var(--text);
+      font-size:14px;
     }
-    .filters{
+    body[data-page="library"] .filters{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
       justify-content:flex-end;
     }
-    .pill{
+    body[data-page="library"] .pill{
       display:inline-flex;
       align-items:center;
       gap:8px;
       padding:7px 10px;
       border-radius:999px;
-      border:1px solid rgba(148,163,184,0.55);
-      background:rgba(255,255,255,0.92);
+      border:1px solid rgba(148,163,184,.55);
+      background:rgba(255,255,255,.90);
       color:#334155;
       font-size:12px;
-      font-weight:800;
+      font-weight:900;
       cursor:pointer;
       user-select:none;
+      box-shadow: 0 10px 30px rgba(15,23,42,.04);
     }
-    .pill:hover{background:#fff;}
-    .pill.active{
-      border-color:rgba(79,70,229,0.55);
-      background:rgba(79,70,229,0.08);
+    body[data-page="library"] .pill:hover{ background:#fff; }
+    body[data-page="library"] .pill.active{
+      border-color:rgba(79,70,229,.55);
+      background:rgba(79,70,229,.08);
       color:#312e81;
     }
 
-    /* 4-across cards grid */
-    .grid{
-      display:grid;
-      gap:14px;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      align-items:stretch;
-    }
-    @media (max-width:1100px){
-      .grid{grid-template-columns:repeat(2, minmax(0,1fr));}
-    }
-    @media (max-width:640px){
-      .grid{grid-template-columns:1fr;}
-    }
-
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:12px 12px 11px;
-      box-shadow:0 1px 3px var(--shadow);
-      display:flex;
-      flex-direction:column;
-      min-height:168px;
-    }
-
-    .toprow{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:8px;
-    }
-    .prefix{
+    /* Card internals */
+    body[data-page="library"] .prefix{
       display:inline-flex;
       align-items:center;
       gap:8px;
       padding:4px 9px;
       border-radius:999px;
-      border:1px solid rgba(148,163,184,0.55);
-      background:#f8fafc;
+      border:1px solid rgba(148,163,184,.55);
+      background:rgba(248,250,252,.92);
       font-size:11px;
       font-weight:900;
       color:#334155;
       letter-spacing:.06em;
       text-transform:uppercase;
+      white-space:nowrap;
     }
-    .prefix .dot{
+    body[data-page="library"] .prefix .dot{
       width:7px;height:7px;border-radius:999px;
-      background:linear-gradient(135deg,#fb7185,#a855f7,#6366f1);
+      background: linear-gradient(135deg,#fb7185,#a855f7,#6366f1);
     }
-    .small{
+    body[data-page="library"] .kickerSmall{
       font-size:11.5px;
-      color:#64748b;
-      font-weight:800;
-    }
-
-    .card h3{
-      margin:0 0 6px;
-      font-size:15px;
+      color:var(--muted2);
       font-weight:900;
-      letter-spacing:-0.01em;
-    }
-    .card p{
-      margin:0 0 10px;
-      color:#334155;
-      font-size:13.5px;
-      line-height:1.55;
+      white-space:nowrap;
     }
 
-    .tags{
+    body[data-page="library"] .tags{
       display:flex;
       flex-wrap:wrap;
       gap:6px;
-      margin:0 0 10px;
+      margin-top:2px;
     }
-    .tag{
+    body[data-page="library"] .tag{
       font-size:11px;
       padding:4px 8px;
       border-radius:999px;
-      border:1px solid #e5e7eb;
-      background:#f9fafb;
-      color:#475569;
-      font-weight:800;
-    }
-
-    .meta{
-      margin-top:auto;
-      display:flex;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      font-size:12px;
-      color:#64748b;
-    }
-    .links{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .links a{
-      font-weight:900;
-      color:#4338ca;
-      text-decoration:none;
-    }
-    .links a:hover{text-decoration:underline; color:#3730a3;}
-
-    footer{
-      text-align:center;
-      margin:18px 0 20px;
+      border:1px solid rgba(226,232,240,0.95);
+      background:rgba(248,250,252,.92);
       color:var(--muted);
-      font-size:13px;
+      font-weight:900;
+    }
+
+    /* Make actions look like your site links */
+    body[data-page="library"] .appActions{
+      justify-content:space-between;
+      align-items:center;
+    }
+    body[data-page="library"] .appLink{
+      font-weight:900;
     }
   </style>
 </head>
 
-<body>
+<body data-page="library">
   <div class="bar"></div>
 
-  <header>
-    <h1>📚 Artifact Library</h1>
-    <p>AI tools, tools, playbooks, PDFs, and evidence — organized for fast review.</p>
-  </header>
+  <main class="wrap">
 
-  <div class="wrap">
+    <header>
+      <h1>📚 Artifact Library</h1>
+      <p>AI tools, tools, playbooks, PDFs, and evidence — organized for fast review.</p>
+    </header>
 
-    <section class="hero" aria-label="Library hero">
-      <h2>A single grid you can <span>scan fast</span>.</h2>
+    <section class="libHero" aria-label="Library hero">
+      <h2>A single grid you can <span class="accent">scan fast</span>.</h2>
       <p>
         Everything here is referenced across the AI-native people system: demos, playbooks, tools, and proof — without clutter.
       </p>
-      <div class="hero-actions">
-        <a class="btn" href="system/">Explore the system →</a>
-        <a class="btn" href="agents/" target="_blank" rel="noopener">Browse agents →</a>
-        <a class="btn primary" href="https://dianewilkinson.github.io/book/" target="_blank" rel="noopener">📅 Book 15 minutes</a>
+      <div class="libHeroActions">
+        <a class="btn" href="/system/">Explore the system →</a>
+        <a class="btn" href="/agents/">Browse agents →</a>
+        <a class="btn primary" href="/book/" target="_blank" rel="noopener">📅 Book 15 minutes</a>
       </div>
     </section>
 
@@ -335,219 +255,254 @@
       </div>
     </div>
 
-    <div class="grid" aria-label="Artifact cards">
+    <!-- Uses site.css app grid -->
+    <section class="appGrid" aria-label="Artifact cards" style="margin-top:12px;">
 
       <!-- AI Tools -->
-      <article class="card" data-kind="ai-tool" data-tags="ai tool workflow automation follow-ups slas coordination demo playbook">
-        <div class="toprow">
+      <article class="appCard card" data-kind="ai-tool" data-tags="ai tool workflow automation follow-ups slas coordination demo playbook">
+        <div class="appTop">
           <span class="prefix"><span class="dot"></span>AI Tool</span>
-          <span class="small">Agent demo</span>
+          <span class="kickerSmall">Agent demo</span>
         </div>
-        <h3>Workflow</h3>
-        <p>Workflow automation inside existing tools so teams stop losing time to manual coordination and follow-ups.</p>
-        <div class="tags"><span class="tag">Automation</span><span class="tag">Audit trail</span><span class="tag">Routing</span></div>
-        <div class="meta">
-          <div class="links">
-            <a href="agents/workflow/" target="_blank" rel="noopener">Demo</a>
-            <a href="agents/workflow/playbook.html" target="_blank" rel="noopener">Playbook</a>
+        <div class="appMain">
+          <h3>Workflow</h3>
+          <p>Workflow automation inside existing tools so teams stop losing time to manual coordination and follow-ups.</p>
+          <div class="tags">
+            <span class="tag">Automation</span><span class="tag">Audit trail</span><span class="tag">Routing</span>
           </div>
-          <span class="small">Human-in-loop</span>
+        </div>
+        <div class="appActions">
+          <div>
+            <a class="appLink" href="/agents/workflow/" target="_blank" rel="noopener">Demo</a>
+            &nbsp;&nbsp;
+            <a class="appLink" href="/agents/workflow/playbook.html" target="_blank" rel="noopener">Playbook</a>
+          </div>
+          <span class="kickerSmall">Human-in-loop</span>
         </div>
       </article>
 
-      <article class="card" data-kind="ai-tool" data-tags="ai tool screening evidence receipts risk guardrails signal quality demo playbook">
-        <div class="toprow">
+      <article class="appCard card" data-kind="ai-tool" data-tags="ai tool screening evidence receipts risk guardrails signal quality demo playbook">
+        <div class="appTop">
           <span class="prefix"><span class="dot"></span>AI Tool</span>
-          <span class="small">Agent demo</span>
+          <span class="kickerSmall">Agent demo</span>
         </div>
-        <h3>Screening</h3>
-        <p>Decision support that surfaces evidence + risks and improves signal quality without turning screening into a black box.</p>
-        <div class="tags"><span class="tag">Evidence-first</span><span class="tag">Receipts</span><span class="tag">Override</span></div>
-        <div class="meta">
-          <div class="links">
-            <a href="agents/screening/" target="_blank" rel="noopener">Demo</a>
-            <a href="agents/screening/playbook.html" target="_blank" rel="noopener">Playbook</a>
+        <div class="appMain">
+          <h3>Screening</h3>
+          <p>Decision support that surfaces evidence + risks and improves signal quality without turning screening into a black box.</p>
+          <div class="tags">
+            <span class="tag">Evidence-first</span><span class="tag">Receipts</span><span class="tag">Override</span>
           </div>
-          <span class="small">Transparent</span>
+        </div>
+        <div class="appActions">
+          <div>
+            <a class="appLink" href="/agents/screening/" target="_blank" rel="noopener">Demo</a>
+            &nbsp;&nbsp;
+            <a class="appLink" href="/agents/screening/playbook.html" target="_blank" rel="noopener">Playbook</a>
+          </div>
+          <span class="kickerSmall">Transparent</span>
         </div>
       </article>
 
-      <article class="card" data-kind="ai-tool" data-tags="ai tool metrics diagnostics bottlenecks throughput pass-through demo playbook">
-        <div class="toprow">
+      <article class="appCard card" data-kind="ai-tool" data-tags="ai tool metrics diagnostics bottlenecks throughput pass-through demo playbook">
+        <div class="appTop">
           <span class="prefix"><span class="dot"></span>AI Tool</span>
-          <span class="small">Agent demo</span>
+          <span class="kickerSmall">Agent demo</span>
         </div>
-        <h3>Metrics Diagnostics</h3>
-        <p>Throughput + bottleneck diagnostics that help teams see what’s stalling and what to test next.</p>
-        <div class="tags"><span class="tag">Bottlenecks</span><span class="tag">Throughput</span><span class="tag">Decision-ready</span></div>
-        <div class="meta">
-          <div class="links">
-            <a href="agents/metrics/" target="_blank" rel="noopener">Demo</a>
-            <a href="agents/metrics/playbook.html" target="_blank" rel="noopener">Playbook</a>
+        <div class="appMain">
+          <h3>Metrics Diagnostics</h3>
+          <p>Throughput + bottleneck diagnostics that help teams see what’s stalling and what to test next.</p>
+          <div class="tags">
+            <span class="tag">Bottlenecks</span><span class="tag">Throughput</span><span class="tag">Decision-ready</span>
           </div>
-          <span class="small">Root cause</span>
+        </div>
+        <div class="appActions">
+          <div>
+            <a class="appLink" href="/agents/metrics/" target="_blank" rel="noopener">Demo</a>
+            &nbsp;&nbsp;
+            <a class="appLink" href="/agents/metrics/playbook.html" target="_blank" rel="noopener">Playbook</a>
+          </div>
+          <span class="kickerSmall">Root cause</span>
         </div>
       </article>
 
-      <article class="card" data-kind="ai-tool" data-tags="ai tool innovation experiments improvement governance playbook">
-        <div class="toprow">
+      <article class="appCard card" data-kind="ai-tool" data-tags="ai tool innovation experiments improvement governance playbook">
+        <div class="appTop">
           <span class="prefix"><span class="dot"></span>AI Tool</span>
-          <span class="small">Agent concept</span>
+          <span class="kickerSmall">Agent concept</span>
         </div>
-        <h3>Innovation</h3>
-        <p>Routes ideas, checks institutional memory, turns insights into experiments, and ensures closure.</p>
-        <div class="tags"><span class="tag">Governed change</span><span class="tag">Experiment loop</span><span class="tag">Closure</span></div>
-        <div class="meta">
-          <div class="links">
-            <a href="agents/innovation/playbook.html" target="_blank" rel="noopener">Playbook</a>
+        <div class="appMain">
+          <h3>Innovation</h3>
+          <p>Routes ideas, checks institutional memory, turns insights into experiments, and ensures closure.</p>
+          <div class="tags">
+            <span class="tag">Governed change</span><span class="tag">Experiment loop</span><span class="tag">Closure</span>
           </div>
-          <span class="small">Strategy</span>
+        </div>
+        <div class="appActions">
+          <div>
+            <a class="appLink" href="/agents/innovation/playbook.html" target="_blank" rel="noopener">Playbook</a>
+          </div>
+          <span class="kickerSmall">Strategy</span>
         </div>
       </article>
 
       <!-- Tools -->
-      <article class="card" data-kind="tool" data-tags="tool spreadsheet funnel calculator capacity planning timing">
-        <div class="toprow">
+      <article class="appCard card" data-kind="tool" data-tags="tool spreadsheet funnel calculator capacity planning timing">
+        <div class="appTop">
           <span class="prefix"><span class="dot"></span>Tool</span>
-          <span class="small">Google Sheet</span>
+          <span class="kickerSmall">Google Sheet</span>
         </div>
-        <h3>Recruiting Pipeline Calculator</h3>
-        <p>Interactive funnel calculator to plan realistic targets by stage (capacity + pass-through + timing).</p>
-        <div class="tags"><span class="tag">Capacity</span><span class="tag">Forecasting</span><span class="tag">Targets</span></div>
-        <div class="meta">
-          <div class="links">
-            <a href="https://docs.google.com/spreadsheets/d/1EYf9S4L6QljiCZ0-mUVpmb7DIvw74j1XUJOt8p42qsw/edit?usp=sharing" target="_blank" rel="noopener">Open</a>
-          </div>
-          <span class="small">Planning</span>
+        <div class="appMain">
+          <h3>Recruiting Pipeline Calculator</h3>
+          <p>Interactive funnel calculator to plan realistic targets by stage (capacity + pass-through + timing).</p>
+          <div class="tags"><span class="tag">Capacity</span><span class="tag">Forecasting</span><span class="tag">Targets</span></div>
+        </div>
+        <div class="appActions">
+          <div><a class="appLink" href="https://docs.google.com/spreadsheets/d/1EYf9S4L6QljiCZ0-mUVpmb7DIvw74j1XUJOt8p42qsw/edit?usp=sharing" target="_blank" rel="noopener">Open</a></div>
+          <span class="kickerSmall">Planning</span>
         </div>
       </article>
 
-      <article class="card" data-kind="tool" data-tags="tool metrics dictionary kpi definitions governance">
-        <div class="toprow">
+      <article class="appCard card" data-kind="tool" data-tags="tool metrics dictionary kpi definitions governance">
+        <div class="appTop">
           <span class="prefix"><span class="dot"></span>Tool</span>
-          <span class="small">Google Sheet</span>
+          <span class="kickerSmall">Google Sheet</span>
         </div>
-        <h3>Metrics Dictionary</h3>
-        <p>Standard KPI definitions so teams stop debating what’s “correct” and start making decisions.</p>
-        <div class="tags"><span class="tag">Definitions</span><span class="tag">Governance</span><span class="tag">Consistency</span></div>
-        <div class="meta">
-          <div class="links">
-            <a href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link" target="_blank" rel="noopener">Open</a>
-          </div>
-          <span class="small">Single source</span>
+        <div class="appMain">
+          <h3>Metrics Dictionary</h3>
+          <p>Standard KPI definitions so teams stop debating what’s “correct” and start making decisions.</p>
+          <div class="tags"><span class="tag">Definitions</span><span class="tag">Governance</span><span class="tag">Consistency</span></div>
+        </div>
+        <div class="appActions">
+          <div><a class="appLink" href="https://docs.google.com/spreadsheets/d/17zrLVzJMUByI_8htZWuPcX7s70pn6QXl/edit?usp=drive_link" target="_blank" rel="noopener">Open</a></div>
+          <span class="kickerSmall">Single source</span>
         </div>
       </article>
 
       <!-- Playbooks -->
-      <article class="card" data-kind="playbook" data-tags="playbook candidate journey communications touchpoints slas pdf">
-        <div class="toprow">
+      <article class="appCard card" data-kind="playbook" data-tags="playbook candidate journey communications touchpoints slas pdf">
+        <div class="appTop">
           <span class="prefix"><span class="dot"></span>Playbook</span>
-          <span class="small">Process</span>
+          <span class="kickerSmall">Process</span>
         </div>
-        <h3>Candidate Journey</h3>
-        <p>End-to-end journey mapping with touchpoints, expectations, and communications tied to workflow automation.</p>
-        <div class="tags"><span class="tag">Journey map</span><span class="tag">Comms</span><span class="tag">SLAs</span></div>
-        <div class="meta">
-          <div class="links">
-            <a href="playbooks/candidate-journey.html" target="_blank" rel="noopener">Open</a>
-            <a href="playbooks/playbook-candidate-journey.pdf" target="_blank" rel="noopener">PDF</a>
+        <div class="appMain">
+          <h3>Candidate Journey</h3>
+          <p>End-to-end journey mapping with touchpoints, expectations, and communications tied to workflow automation.</p>
+          <div class="tags"><span class="tag">Journey map</span><span class="tag">Comms</span><span class="tag">SLAs</span></div>
+        </div>
+        <div class="appActions">
+          <div>
+            <a class="appLink" href="/playbooks/candidate-journey.html" target="_blank" rel="noopener">Open</a>
+            &nbsp;&nbsp;
+            <a class="appLink" href="/playbooks/playbook-candidate-journey.pdf" target="_blank" rel="noopener">PDF</a>
           </div>
-          <span class="small">Ops-ready</span>
+          <span class="kickerSmall">Ops-ready</span>
         </div>
       </article>
 
-      <article class="card" data-kind="playbook" data-tags="playbook sourcing quality inbound outbound referrals signal">
-        <div class="toprow">
+      <article class="appCard card" data-kind="playbook" data-tags="playbook sourcing quality inbound outbound referrals signal">
+        <div class="appTop">
           <span class="prefix"><span class="dot"></span>Playbook</span>
-          <span class="small">Quality</span>
+          <span class="kickerSmall">Quality</span>
         </div>
-        <h3>Candidate Source Quality</h3>
-        <p>How inbound/outbound/referrals actually perform — and how to rebalance effort toward high-signal sources.</p>
-        <div class="tags"><span class="tag">Signal</span><span class="tag">Sourcing</span><span class="tag">Efficiency</span></div>
-        <div class="meta">
-          <div class="links">
-            <a href="playbooks/sourcing-quality.html" target="_blank" rel="noopener">Open</a>
-          </div>
-          <span class="small">Spend discipline</span>
+        <div class="appMain">
+          <h3>Candidate Source Quality</h3>
+          <p>How inbound/outbound/referrals actually perform — and how to rebalance effort toward high-signal sources.</p>
+          <div class="tags"><span class="tag">Signal</span><span class="tag">Sourcing</span><span class="tag">Efficiency</span></div>
+        </div>
+        <div class="appActions">
+          <div><a class="appLink" href="/playbooks/sourcing-quality.html" target="_blank" rel="noopener">Open</a></div>
+          <span class="kickerSmall">Spend discipline</span>
         </div>
       </article>
 
-      <article class="card" data-kind="playbook" data-tags="playbook ai-first ops model guardrails autonomy tiers governance">
-        <div class="toprow">
+      <article class="appCard card" data-kind="playbook" data-tags="playbook ai-first ops model guardrails autonomy tiers governance">
+        <div class="appTop">
           <span class="prefix"><span class="dot"></span>Playbook</span>
-          <span class="small">Guardrails</span>
+          <span class="kickerSmall">Guardrails</span>
         </div>
-        <h3>AI-First Ops Model</h3>
-        <p>Defines autonomy tiers, decision rights, and guardrails for safe internal AI in people workflows.</p>
-        <div class="tags"><span class="tag">Autonomy tiers</span><span class="tag">Decision rights</span><span class="tag">Auditability</span></div>
-        <div class="meta">
-          <div class="links">
-            <a href="playbooks/ai-first-ops-model.html" target="_blank" rel="noopener">Open</a>
-          </div>
-          <span class="small">Trust</span>
+        <div class="appMain">
+          <h3>AI-First Ops Model</h3>
+          <p>Defines autonomy tiers, decision rights, and guardrails for safe internal AI in people workflows.</p>
+          <div class="tags"><span class="tag">Autonomy tiers</span><span class="tag">Decision rights</span><span class="tag">Auditability</span></div>
+        </div>
+        <div class="appActions">
+          <div><a class="appLink" href="/playbooks/ai-first-ops-model.html" target="_blank" rel="noopener">Open</a></div>
+          <span class="kickerSmall">Trust</span>
         </div>
       </article>
 
-      <!-- Article (single; no duplicate) -->
-      <article class="card" data-kind="article" data-tags="article ai pilots fail adoption trust workflow data quality">
-        <div class="toprow">
+      <!-- Article -->
+      <article class="appCard card" data-kind="article" data-tags="article ai pilots fail adoption trust workflow data quality">
+        <div class="appTop">
           <span class="prefix"><span class="dot"></span>Article</span>
-          <span class="small">Thought leadership</span>
+          <span class="kickerSmall">Thought leadership</span>
         </div>
-        <h3>Why 95% of AI Pilots Fail</h3>
-        <p>Why pilots stall (workflow + trust + data) and what successful teams do differently.</p>
-        <div class="tags"><span class="tag">Adoption</span><span class="tag">Workflow-first</span><span class="tag">Trust</span></div>
-        <div class="meta">
-          <div class="links">
-            <a href="why-ai-pilots-fail.html" target="_blank" rel="noopener">Open</a>
-            <a href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">External</a>
+        <div class="appMain">
+          <h3>Why 95% of AI Pilots Fail</h3>
+          <p>Why pilots stall (workflow + trust + data) and what successful teams do differently.</p>
+          <div class="tags"><span class="tag">Adoption</span><span class="tag">Workflow-first</span><span class="tag">Trust</span></div>
+        </div>
+        <div class="appActions">
+          <div>
+            <a class="appLink" href="/why-ai-pilots-fail.html" target="_blank" rel="noopener">Open</a>
+            &nbsp;&nbsp;
+            <a class="appLink" href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">External</a>
           </div>
-          <span class="small">Published</span>
+          <span class="kickerSmall">Published</span>
         </div>
       </article>
 
       <!-- PDFs -->
-      <article class="card" data-kind="pdf" data-tags="pdf recommendations proof evidence">
-        <div class="toprow">
+      <article class="appCard card" data-kind="pdf" data-tags="pdf recommendations proof evidence">
+        <div class="appTop">
           <span class="prefix"><span class="dot"></span>PDF</span>
-          <span class="small">Evidence</span>
+          <span class="kickerSmall">Evidence</span>
         </div>
-        <h3>Recommendations (Short PDF)</h3>
-        <p>Curated third-party feedback excerpts used as neutral proof.</p>
-        <div class="tags"><span class="tag">Proof</span><span class="tag">Trust</span><span class="tag">Reputation</span></div>
-        <div class="meta">
-          <div class="links">
-            <a href="credentials/DW_Recommendations_Short.pdf" target="_blank" rel="noopener">Open PDF</a>
-            <a href="credentials/" target="_blank" rel="noopener">Proof hub</a>
+        <div class="appMain">
+          <h3>Recommendations (Short PDF)</h3>
+          <p>Curated third-party feedback excerpts used as neutral proof.</p>
+          <div class="tags"><span class="tag">Proof</span><span class="tag">Trust</span><span class="tag">Reputation</span></div>
+        </div>
+        <div class="appActions">
+          <div>
+            <a class="appLink" href="/credentials/DW_Recommendations_Short.pdf" target="_blank" rel="noopener">Open PDF</a>
+            &nbsp;&nbsp;
+            <a class="appLink" href="/credentials/" target="_blank" rel="noopener">Proof hub</a>
           </div>
-          <span class="small">Neutral signal</span>
+          <span class="kickerSmall">Neutral signal</span>
         </div>
       </article>
 
       <!-- Evidence -->
-      <article class="card" data-kind="evidence" data-tags="evidence credentials mba honors certifications recommendations">
-        <div class="toprow">
+      <article class="appCard card" data-kind="evidence" data-tags="evidence credentials mba honors certifications recommendations">
+        <div class="appTop">
           <span class="prefix"><span class="dot"></span>Evidence</span>
-          <span class="small">Proof</span>
+          <span class="kickerSmall">Proof</span>
         </div>
-        <h3>Credentials &amp; Recommendations</h3>
-        <p>Academic honors, certifications, and third-party feedback — compiled as a proof hub.</p>
-        <div class="tags"><span class="tag">MBA (4.0)</span><span class="tag">Honors</span><span class="tag">Recommendations</span></div>
-        <div class="meta">
-          <div class="links">
-            <a href="credentials/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <span class="small">Fast scan</span>
+        <div class="appMain">
+          <h3>Credentials &amp; Recommendations</h3>
+          <p>Academic honors, certifications, and third-party feedback — compiled as a proof hub.</p>
+          <div class="tags"><span class="tag">MBA (4.0)</span><span class="tag">Honors</span><span class="tag">Recommendations</span></div>
+        </div>
+        <div class="appActions">
+          <div><a class="appLink" href="/credentials/" target="_blank" rel="noopener">Open</a></div>
+          <span class="kickerSmall">Fast scan</span>
         </div>
       </article>
 
-    </div>
-  </div>
+    </section>
 
-  <footer>
-    Based in the San Francisco Bay Area ·
-    <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
-    <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__row">
+      <div>Based in the San Francisco Bay Area</div>
+      <div>
+        <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a>
+        ·
+        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
   </footer>
 
   <script>
