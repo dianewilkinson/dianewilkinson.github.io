@@ -325,6 +325,42 @@ body[data-page="home"] .hero-pill:hover{
 }
 
 /* =========================
+   EXPLORE NEXT (global terminal section)
+   Use on EVERY page as the final section
+   ========================= */
+.exploreNext{
+  margin-top:14px;
+}
+.exploreNext .panel{
+  background: var(--cool-grad);
+}
+.exploreNext .panelInner{
+  background: rgba(255,255,255,.94);
+  padding:16px;
+}
+.exploreNext__title{
+  margin:0 0 10px;
+}
+.exploreNext__actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+/* Make Explore Next buttons feel like “pills” */
+.exploreNext .btn{
+  border-radius:999px;
+  padding:9px 12px;
+  font-size:13.5px;
+}
+.exploreNext .btn.primary{
+  border-color: rgba(79,70,229,.25);
+}
+
+/* =========================
    SECTION TITLES / CARDS
    ========================= */
 .section-title{
@@ -448,7 +484,6 @@ body[data-page="home"] .hero-pill:hover{
 .miniGrid--4{
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
-
 /* Responsive: 2-up on medium, 1-up on small */
 @media (max-width: 1100px){
   .miniGrid--4{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
