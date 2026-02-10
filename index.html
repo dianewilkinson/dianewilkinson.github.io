@@ -11,727 +11,158 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dianewilkinson.github.io">
 
-  <style>
-    /* =========================
-       CONTRACT — lifted from site.css
-       Keep these aligned with /site.css
-       ========================= */
-    :root{
-      --bg:#f9fafb;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#475569;
-      --muted2:#64748b;
-      --border:#e5e7eb;
-      --shadow:rgba(15,23,42,0.08);
-      --radius:18px;
-      --link:#2563eb;
-
-      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
-
-      --cool-grad:linear-gradient(
-        135deg,
-        rgba(59,130,246,.16),
-        rgba(167,139,250,.16),
-        rgba(99,102,241,.12)
-      );
-
-      --pink-grad:linear-gradient(
-        135deg,
-        rgba(249,115,115,.18),
-        rgba(251,113,133,.16),
-        rgba(168,85,247,.14),
-        rgba(99,102,241,.10)
-      );
-
-      --page-bg:
-        radial-gradient(circle at 10% 0%, rgba(59,130,246,.06), transparent 42%),
-        radial-gradient(circle at 90% 10%, rgba(167,139,250,.06), transparent 38%),
-        radial-gradient(circle at 50% 100%, rgba(99,102,241,.05), transparent 45%),
-        var(--bg);
-
-      --accent:#4f46e5;
-      --accent2:#60a5fa;
-      --accent3:#a78bfa;
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
-      background: var(--page-bg);
-      color:var(--text);
-      line-height:1.55;
-    }
-    a{color:var(--link); text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .bar{height:4px;background:var(--accent-grad);}
-    .wrap{max-width:1120px; margin:0 auto; padding:28px 18px 64px}
-
-    /* ===== Landing header (simple) ===== */
-    header{
-      text-align:center;
-      padding:22px 12px 10px;
-    }
-    header h1{
-      margin:0;
-      font-size:22px;
-      font-weight:800;
-      letter-spacing:-0.02em;
-    }
-    header .subline{
-      margin-top:10px;
-      font-size:13px;
-      font-weight:700;
-      color:var(--muted2);
-      line-height:1.55;
-    }
-
-    /* =========================
-       HERO — shared shell + landing variant
-       ========================= */
-    .hero{
-      border:1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.84));
-      border-radius: var(--radius);
-      padding:24px 22px 18px;
-      box-shadow: 0 18px 55px var(--shadow);
-      position:relative;
-      overflow:hidden;
-      margin-bottom:14px;
-    }
-    .hero::before{
-      content:"";
-      position:absolute; inset:-2px;
-      opacity:.95;
-      pointer-events:none;
-      mask-image: linear-gradient(180deg, rgba(0,0,0,.95), rgba(0,0,0,.38), rgba(0,0,0,0));
-    }
-    .hero > *{position:relative}
-    .hero--home::before{ background: var(--pink-grad); }
-
-    .hero h2{
-      margin:12px 0 8px;
-      font-size:34px;
-      letter-spacing:-.02em;
-      font-weight:900;
-      color:var(--text);
-    }
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      font-size:16px;
-      max-width:86ch;
-    }
-    .accent{
-      background: linear-gradient(90deg, var(--accent), var(--accent3));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      font-weight:900;
-    }
-    /* Landing hero: match playbook rhythm + height */
-.hero--home{
-  padding:22px 22px 18px;
-  min-height: 220px;            /* makes it feel like the playbook hero */
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-/* Top line inside hero (name + microcopy) */
-.hero-topline{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:10px 12px;
-  color:var(--muted2);
-  font-size:13px;
-  font-weight:800;
-  line-height:1.4;
-}
-
-.hero-name{
-  color:var(--text);
-  font-weight:900;
-  letter-spacing:-0.02em;
-}
-
-.hero-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-}
-
-.hero-meta span{
-  white-space:nowrap;
-}
-
-.hero-meta .dot{
-  opacity:.6;
-}
-
-/* Give breathing room between topline and headline */
-.hero-headline{
-  margin: 8px 0 0;              /* space from name line */
-  font-size:34px;
-  font-weight:900;
-  letter-spacing:-0.02em;
-  line-height:1.15;
-}
-
-.hero-subtitle{
-  margin: 0;
-  color: var(--muted);
-  font-size:15.5px;
-  line-height:1.6;
-  max-width: 90ch;
-}
-
-/* Optional action row like playbook */
-
-  .hero-actions{
-  margin-top:auto;
-  display:flex;
-  justify-content:flex-end; /* 👈 RIGHT ALIGN */
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-
-.hero-pill{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:7px 12px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:900;
-  color:#334155;
-  border:1px solid rgba(226,232,240,.95);
-  background: rgba(255,255,255,.80);
-  text-decoration:none;
-}
-.hero-pill:hover{ background: rgba(255,255,255,.92); text-decoration:none; }
-
-@media (max-width:720px){
-  .hero--home{ min-height: 0; }
-  .hero-headline{ font-size:26px; }
-}
-
-    /* =========================
-       PANELS / CARDS — contract surface
-       ========================= */
-    .card{
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.90);
-      border-radius: var(--radius);
-      padding:18px 18px;
-      box-shadow: 0 16px 48px var(--shadow);
-    }
-    .card h3{ margin:0 0 10px; font-size:18px; letter-spacing:-.01em; }
-    .muted{color:var(--muted)}
-    .note{
-      font-size:13px;
-      color:var(--muted2);
-      margin:10px 0 18px;
-      text-align:center;
-    }
-
-    /* “Tools I Built” panel matches playbook feel */
-    .panel{
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      padding:14px;
-      box-shadow: 0 16px 48px var(--shadow);
-      background: var(--cool-grad);
-      margin-top:14px;
-    }
-    .panelInner{
-      background: rgba(255,255,255,.92);
-      border:1px solid rgba(255,255,255,.55);
-      border-radius: calc(var(--radius) - 6px);
-      padding:16px;
-    }
-    .section-title{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-size:20px;
-      font-weight:900;
-      letter-spacing:-.015em;
-      margin:0 0 10px;
-    }
-    .section-title::before{
-      content:"";
-      width:6px;
-      height:28px;
-      border-radius:999px;
-      background: linear-gradient(180deg, var(--accent), var(--accent2), var(--accent3));
-    }
-    .section-sub{
-      margin:0 0 14px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.55;
-    }
-
-    /* =========================
-       TOOLS GRID — landing-only
-       ========================= */
-    .tools-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-      gap:12px;
-      margin-top:12px;
-    }
-
-    /* Gray-ish surface like tool pages (NOT pure white) */
-    .tool-card{
-      border:1px solid rgba(226,232,240,0.9);
-      background: rgba(255,255,255,.90);
-      border-radius:14px;
-      padding:12px 12px;
-      box-shadow: 0 10px 30px rgba(15,23,42,.06);
-      min-width:0;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .tool-top{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      min-width:0;
-    }
-    .tool-card h4{
-      margin:0 0 6px;
-      font-size:14px;
-      font-weight:900;
-      letter-spacing:-.01em;
-    }
-    .tool-card p{
-      margin:0;
-      color:var(--muted);
-      font-size:12.75px;
-      line-height:1.45;
-      overflow-wrap:anywhere;
-    }
-    .badge{
-      font-size:11px;
-      font-weight:900;
-      color:var(--muted2);
-      border:1px solid rgba(226,232,240,0.95);
-      border-radius:999px;
-      padding:4px 8px;
-      background:rgba(255,255,255,.78);
-      white-space:nowrap;
-      flex:0 0 auto;
-    }
-    .tool-actions{
-      margin-top:auto;
-      display:flex;
-      justify-content:flex-start;
-    }
-    .tool-actions a{
-      font-size:12.5px;
-      font-weight:900;
-      color:var(--accent);
-      text-decoration:none;
-    }
-    .tool-actions a:hover{color:#3730a3}
-
-    /* ===== Guardrails grid (no clipping) ===== */
-    .tier{
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap:12px;
-      margin-top:12px;
-      align-items:stretch;
-    }
-    @media (max-width:1100px){ .tier{grid-template-columns:repeat(2, minmax(0,1fr));} }
-    @media (max-width:640px){ .tier{grid-template-columns:1fr;} }
-
-    .tier-item{
-      border:1px solid rgba(226,232,240,0.9);
-      background:rgba(255,255,255,.75);
-      border-radius:14px;
-      padding:12px 12px;
-    }
-    .tier-item b{display:block; font-size:13px; margin-bottom:6px; letter-spacing:-.01em;}
-    .tier-item span{display:block; font-size:13px; color:var(--muted); line-height:1.45;}
-
-    /* ===== FIX: tool grid text “vertical stacking” ===== */
-.tool-top{
-  flex-wrap:wrap;              /* lets badge drop below instead of crushing text */
-  align-items:flex-start;
-}
-
-.tool-top > div{
-  flex: 1 1 180px;             /* keep a minimum readable column for title/desc */
-  min-width: 180px;
-}
-
-.badge{
-  flex: 0 1 auto;
-  max-width: 100%;
-  white-space: normal;         /* allow wrap */
-}
-
-.tool-card p{
-  overflow-wrap: normal;       /* stop breaking words into letters */
-  word-break: normal;
-}
-
-.tool-actions{
-  gap:10px;                    /* spacing between Open + Playbook */
-  flex-wrap:wrap;
-}
-
-/* =========================
-   SYSTEM DROPDOWN (details)
-   ========================= */
-.sys-details{
-  margin-top:14px;
-  border:1px solid var(--border);
-  border-radius: var(--radius);
-  background: rgba(255,255,255,.90);
-  box-shadow: 0 16px 48px var(--shadow);
-  overflow:hidden;
-}
-
-.sys-details summary{
-  list-style:none;
-  cursor:pointer;
-  padding:14px 16px;
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:14px;
-  position:relative;
-}
-
-.sys-details summary::-webkit-details-marker{display:none;}
-
-.sys-sum h3{
-  margin:0 0 6px;
-  font-size:18px;
-  font-weight:900;
-  letter-spacing:-.01em;
-}
-
-.sys-sum p{
-  margin:0;
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.55;
-  max-width:90ch;
-}
-
-.sys-chev{
-  font-weight:900;
-  color:var(--accent);
-  font-size:18px;
-  line-height:1;
-  user-select:none;
-  margin-top:2px;
-  transform:rotate(0deg);
-  transition:transform .15s ease;
-}
-.sys-details[open] .sys-chev{ transform:rotate(90deg); }
-
-.sys-body{
-  padding:0 16px 16px;
-  border-top:1px solid rgba(226,232,240,.9);
-}
-
-.sys-layout{
-  display:grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap:14px;
-  align-items:start;
-  margin-top:14px;
-}
-@media (max-width:900px){
-  .sys-layout{ grid-template-columns:1fr; }
-}
-
-.sys-diagram{
-  border:1px solid rgba(226,232,240,.9);
-  background: rgba(255,255,255,.75);
-  border-radius:14px;
-  padding:12px;
-  box-shadow: 0 10px 30px rgba(15,23,42,.06);
-}
-.sys-diagram img{
-  width:100%;
-  height:auto;
-  max-height:420px;
-  object-fit:contain;
-  border-radius:12px;
-  display:block;
-}
-
-.sys-bullets{
-  border:1px solid rgba(226,232,240,.9);
-  background: rgba(255,255,255,.75);
-  border-radius:14px;
-  padding:12px;
-  box-shadow: 0 10px 30px rgba(15,23,42,.06);
-}
-.sys-bullets ul{ margin:0; padding-left:18px; }
-.sys-bullets li{ margin:8px 0; color:var(--muted); font-size:14px; line-height:1.55; }
-.sys-bullets b{ color:var(--text); }
-
-.sys-cta{
-  margin-top:10px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.sys-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:9px 13px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:900;
-  border:1px solid rgba(148,163,184,0.75);
-  background:rgba(255,255,255,0.92);
-  color:#4338ca;
-  text-decoration:none;
-  white-space:nowrap;
-}
-.sys-btn:hover{ background:#fff; text-decoration:none; color:#3730a3; }
-.sys-btn.primary{
-  border:none;
-  background:#4f46e5;
-  color:#fff;
-}
-.sys-btn.primary:hover{ background:#4338ca; color:#fff; }
-
-    /* Footer */
-    footer{
-      margin-top:26px;
-      padding:22px 0 28px;
-      border-top:1px solid var(--border);
-      background: rgba(255,255,255,.55);
-      text-align:center;
-      color:var(--muted2);
-      font-size:13px;
-    }
-    footer a{color:var(--accent)}
-    .identity-block{
-  margin-bottom:14px;
-}
-
-.identity-name{
-  margin:0 0 4px;
-  font-size:15px;
-  font-weight:900;
-  letter-spacing:-0.01em;
-  color:var(--text);
-}
-
-.identity-subline{
-  margin:0;
-  font-size:12.75px;
-  font-weight:600;
-  color:var(--muted);
-  line-height:1.5;
-}
-.identity-subline a{
-  font-weight:800;
-}
-.tool-card.is-route{
-  background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.86));
-  border-color: rgba(79,70,229,.18);
-}
-.tool-card.is-route .badge{
-  border-color: rgba(79,70,229,.18);
-  background: rgba(79,70,229,.06);
-  color:#4b5563;
-}
-.tool-card .small{
-  font-size:12.5px;
-  color:var(--muted2);
-  line-height:1.5;
-  margin:0;
-}
-    /* Make tool-card headings consistent (some cards use h3, some h4) */
-.tool-card h3,
-.tool-card h4{
-  margin:0 0 6px;
-  font-size:14px;
-  font-weight:900;
-  letter-spacing:-.01em;
-}
-/* Variant: big CTA card */
-.tool-card.is-route--cool{
-  background: var(--cool-grad);
-  border-color: rgba(99,102,241,.22);
-}
-
-.tool-card.is-route--cool .badge{
-  background: rgba(255,255,255,.82);
-  border-color: rgba(255,255,255,.65);
-}
-
-
-  </style>
+  <link rel="stylesheet" href="/assets/css/site.css?v=1">
 </head>
 
-<body>
+<body data-page="home">
   <div class="bar"></div>
 
   <main class="wrap">
 
     <section class="hero hero--home" aria-label="Hero">
+      <h2 class="hero-headline">
+        Drowning in data &amp; tools. <span class="accent">Far from Action</span>.
+      </h2>
 
+      <p class="hero-subtitle">
+        I build AI-native solutions quietly embedded in everyday workflows, operating in the layer between metrics and action
+        where People Ops systems break down and Franken-systems disappoint.
+      </p>
 
-  <h2 class="hero-headline">Drowning in data & tools. <span class="accent">Far from Action</span>.</h2>
+      <div class="hero-actions">
+        <a class="hero-pill" href="/tools/">Browse tools →</a>
+        <a class="hero-pill" href="/system/">Explore the system →</a>
+        <a class="hero-pill" href="/book/" target="_blank" rel="noopener">📅 Book 15 minutes</a>
+      </div>
+    </section>
 
-  <p class="hero-subtitle">
-    I build AI-native solutions quietly embedded in everyday workflows, operating in the layer between metrics and action where People Ops systems break down and Franken-systems disappoint.
-  </p>
-
-  <div class="hero-actions">
-    <a class="hero-pill" href="tools/">Browse tools →</a>
-    <a class="hero-pill" href="system/">Explore the system →</a>
-    <a class="hero-pill" href="book/" target="_blank" rel="noopener">📅 Book 15 minutes</a>
-  </div>
-</section>
-
-<section class="card hero-width">
-  <div class="identity-block">
-    <h3 class="identity-name">
-      👋 Diane Wilkinson — AI-Native People Ops & Talent Analytics
-    </h3>
-    <p class="identity-subline">
-      People Systems · Talent Intelligence · Human-in-the-loop AI · ATS SME · MBA, Data Analytics (4.0 GPA)
-      · <a href="contact/credentials/" target="_blank">Credentials & Recommendations</a>
-    </p>
-  </div>
+    <section class="card" aria-label="Identity">
+      <h2 style="margin:0 0 6px; font-size:15px; font-weight:900; letter-spacing:-.01em;">
+        👋 Diane Wilkinson — AI-Native People Ops &amp; Talent Analytics
+      </h2>
+      <p class="small" style="margin:0 0 12px;">
+        People Systems · Talent Intelligence · Human-in-the-loop AI · ATS SME · MBA, Data Analytics (4.0 GPA)
+        · <a href="/contact/credentials/" target="_blank" rel="noopener"><strong>Credentials &amp; Recommendations</strong></a>
+      </p>
 
       <p class="muted" style="margin:0 0 10px;">
-        I see the system underneath the work — not just individual tools or metrics, but how decisions are made, where signals are lost, and how data, systems, and humans actually interact.
+        I see the system underneath the work — not just individual tools or metrics, but how decisions are made, where signals are lost,
+        and how data, systems, and humans actually interact.
       </p>
       <p class="muted" style="margin:0 0 10px;">
-        I help People Ops and Talent teams build workflow-first tools connected through shared logic, so signals turn into action in seconds — not just labeled “actionable” on dashboards.
+        I help People Ops and Talent teams build workflow-first tools connected through shared logic, so signals turn into action in seconds —
+        not just labeled “actionable” on dashboards.
       </p>
       <p class="muted" style="margin:0;">
         Built for adoption. Measured by execution. Governed with care.
       </p>
     </section>
 
-    <p class="note">
+    <p class="small" style="text-align:center; margin:10px 0 18px;">
       📄 Read my article:
       <a href="https://www.drivehumancapital.com/post/why-ai-pilots-fail" target="_blank" rel="noopener">
-        Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently
+        <strong>Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently</strong>
       </a>
     </p>
 
-    <section class="panel" aria-label="Tools I Built">
+    <section class="panel panel--cool" aria-label="Tools I Built">
       <div class="panelInner">
         <h3 class="section-title">Tools I Built</h3>
         <p class="section-sub">
           Working tools embedded in real People Ops environments. Each tool is designed for human-in-the-loop operation and measurable outcomes.
         </p>
 
-      <div class="tools-grid" aria-label="Tools grid">
+        <div class="tools-grid" aria-label="Tools grid">
 
-  <!-- Metrics -->
-  <div class="tool-card">
-    <div class="tool-top">
-      <div style="min-width:0;">
-        <h3>🦾 AI Tool: Talent Pipeline Health</h3>
-        <p>Troubleshoot bottlenecks in real time with immediate data-driven insights when actions matter.</p>
-      </div>
-      <span class="badge">Hiring &amp; Mobility</span>
-    </div>
-    <div class="tool-actions">
-      <a href="/tools/metrics/">Explore →</a>
-    </div>
-  </div>
+          <!-- Metrics -->
+          <div class="tool-card">
+            <div class="tool-top">
+              <div>
+                <h3>🦾 AI Tool: Talent Pipeline Health</h3>
+                <p>Troubleshoot bottlenecks in real time with immediate data-driven insights when actions matter.</p>
+              </div>
+              <span class="badge">Hiring &amp; Mobility</span>
+            </div>
+            <div class="tool-actions">
+              <a href="/tools/metrics/">Explore →</a>
+            </div>
+          </div>
 
-  <!-- Screening -->
-  <div class="tool-card">
-    <div class="tool-top">
-      <div style="min-width:0;">
-        <h3>🦾 AI Tool: Screening A[i]gent</h3>
-        <p>Taming top funnel chaos &amp; rescuing hidden talent, in half the time.</p>
-      </div>
-      <span class="badge">Hiring &amp; Mobility</span>
-    </div>
-    <div class="tool-actions">
-      <a href="/tools/screening/">Explore →</a>
-    </div>
-  </div>
+          <!-- Screening -->
+          <div class="tool-card">
+            <div class="tool-top">
+              <div>
+                <h3>🦾 AI Tool: Screening A[i]gent</h3>
+                <p>Taming top funnel chaos &amp; rescuing hidden talent, in half the time.</p>
+              </div>
+              <span class="badge">Hiring &amp; Mobility</span>
+            </div>
+            <div class="tool-actions">
+              <a href="/tools/screening/">Explore →</a>
+            </div>
+          </div>
 
-  <!-- Listening -->
-  <div class="tool-card">
-    <div class="tool-top">
-      <div style="min-width:0;">
-        <h3>🦾 AI Tool: Employee Listening</h3>
-        <p>Finally, honest feedback without surveys, bias, or performative politics. We thought you'd never ask.</p>
-      </div>
-      <span class="badge">Listening &amp; Insights</span>
-    </div>
-    <div class="tool-actions">
-      <a href="/tools/listening/playbook/">Explore →</a>
-    </div>
-  </div>
+          <!-- Listening -->
+          <div class="tool-card">
+            <div class="tool-top">
+              <div>
+                <h3>🦾 AI Tool: Employee Listening</h3>
+                <p>Finally, honest feedback without surveys, bias, or performative politics. We thought you'd never ask.</p>
+              </div>
+              <span class="badge">Listening &amp; Insights</span>
+            </div>
+            <div class="tool-actions">
+              <a href="/tools/listening/playbook/">Explore →</a>
+            </div>
+          </div>
 
-  <!-- Chief -->
-  <div class="tool-card">
-    <div class="tool-top">
-      <div style="min-width:0;">
-        <h3>🧠 AI Orchestration: Chief</h3>
-        <p>Because everyone deserves a personal Chief of Staff. Chief reasons, routes, consults, & deploys other A[i]gents. Literally. Always. On. 🔥</p>
-      </div>
-      <span class="badge">Governance &amp; Infrastructure</span>
-    </div>
-    <div class="tool-actions">
-      <a href="/tools/chief/">Explore →</a>
-    </div>
-  </div>
+          <!-- Chief -->
+          <div class="tool-card">
+            <div class="tool-top">
+              <div>
+                <h3>🧠 AI Orchestration: Chief</h3>
+                <p>Because everyone deserves a personal Chief of Staff. Chief reasons, routes, consults, &amp; deploys other A[i]gents. Literally. Always. On. 🔥</p>
+              </div>
+              <span class="badge">Governance &amp; Infrastructure</span>
+            </div>
+            <div class="tool-actions">
+              <a href="/tools/chief/">Explore →</a>
+            </div>
+          </div>
 
-  <!-- Innovation -->
-  <div class="tool-card">
-    <div class="tool-top">
-      <div style="min-width:0;">
-        <h3>🦾 AI Tool: Innovation A[i]gent</h3>
-        <p>Competitive advantage, employee engagement: keep the true spark of innovation alive without hack days, suggestion boxes, or politics. Meeting insight in the moment.</p>
-      </div>
-      <span class="badge">Improvement &amp; Strategy</span>
-    </div>
-    <div class="tool-actions">
-      <a href="/tools/innovation/">Explore →</a>
-    </div>
-  </div>
+          <!-- Innovation -->
+          <div class="tool-card">
+            <div class="tool-top">
+              <div>
+                <h3>🦾 AI Tool: Innovation A[i]gent</h3>
+                <p>Competitive advantage, employee engagement: keep the true spark of innovation alive without hack days, suggestion boxes, or politics. Meeting insight in the moment.</p>
+              </div>
+              <span class="badge">Improvement &amp; Strategy</span>
+            </div>
+            <div class="tool-actions">
+              <a href="/tools/innovation/">Explore →</a>
+            </div>
+          </div>
 
-  <!-- Sourcing -->
-  <div class="tool-card">
-    <div class="tool-top">
-      <div style="min-width:0;">
-        <h3>🦾 AI Tool: Sourcing A[i]gent</h3>
-        <p>Automate Candidate Sourcing & Ease Your Messy Recruiting Funnel Tops.</p>
-      </div>
-      <span class="badge">Governance &amp; Infrastructure</span>
-    </div>
-    <div class="tool-actions">
-      <a href="/tools/sourcing/">Explore →</a>
-    </div>
-  </div>
-<!-- NEW CARD 1: View more tools -->
+          <!-- Sourcing -->
+          <div class="tool-card">
+            <div class="tool-top">
+              <div>
+                <h3>🦾 AI Tool: Sourcing A[i]gent</h3>
+                <p>Automate Candidate Sourcing &amp; Ease Your Messy Recruiting Funnel Tops.</p>
+              </div>
+              <span class="badge">Governance &amp; Infrastructure</span>
+            </div>
+            <div class="tool-actions">
+              <a href="/tools/sourcing/">Explore →</a>
+            </div>
+          </div>
+
+          <!-- Route card 1 -->
           <div class="tool-card is-route is-route--cool" aria-label="View more tools">
             <div class="tool-top">
               <div>
-                <h4>↗ View more tools</h4>
+                <h3>↗ View more tools</h3>
                 <p>See the full library (25+ tools, playbooks, demos) — organized by area and outcome.</p>
               </div>
               <span class="badge">Tools library</span>
@@ -741,86 +172,93 @@
             </div>
           </div>
 
-          <!-- NEW CARD 2: Depth links (cases/system/core/etc.) -->
+          <!-- Route card 2 -->
           <div class="tool-card is-route" aria-label="Explore cases, system, and docs">
             <div class="tool-top">
               <div>
-                <h4>🧭 Explore the depth</h4>
-                <p class="small">
-                  Supporting artifacts that show how the system runs in practice:
-                </p>
+                <h3>🧭 Explore the depth</h3>
+                <p class="small">Supporting artifacts that show how the system runs in practice:</p>
               </div>
               <span class="badge">Cases + system</span>
             </div>
-            <p class="small" style="margin-top:-6px;">
+
+            <p class="small" style="margin:0;">
               • <a href="/use-cases/"><strong>Case studies</strong></a> (what shipped + outcomes)<br />
               • <a href="/system/"><strong>System</strong></a> (operating model + diagram)<br />
               • <a href="/system/core/"><strong>Core</strong></a> (definitions + thresholds)<br />
               • <a href="/articles/"><strong>Articles</strong></a> (thinking + frameworks)
             </p>
-
           </div>
-</div>
-  
-      
-<details class="sys-details" aria-label="System Deep Dive">
-  <summary>
-    <div class="sys-sum">
-      <h3>The System Underneath</h3>
-      <p>Tools are the interface. The system is the operating model: shared signals, decision logic, guardrails, and escalation paths.</p>
-    </div>
-    <div class="sys-chev">›</div>
-  </summary>
 
-  <div class="sys-body">
-    <div class="sys-layout">
-      <div class="sys-diagram">
-        <img
-          src="/assets/diagrams/system.png"
-          alt="AI-native people operations system showing human judgment, orchestration, signals, execution, and systems environment"
-          loading="lazy"
-        />
-      </div>
-
-      <div>
-        <div class="sys-bullets">
-          <ul>
-            <li><b>AI is infrastructure</b> — embedded inside the platforms teams already use.</li>
-            <li><b>Humans remain accountable</b> — escalation paths and auditability are built in.</li>
-            <li><b>Governance is continuous</b> — signals and workflows co-evolve with the business.</li>
-            <li><b>The system is operable, not fragile</b> — designed to run in real constraints.</li>
-          </ul>
         </div>
 
-        <div class="sys-cta">
-          <a class="sys-btn primary" href="system/">Explore the system →</a>
-          <a class="sys-btn" href="tools/">Browse tools →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</details>
+        <details class="sys-details" aria-label="System Deep Dive">
+          <summary>
+            <div class="sys-sum">
+              <h3>The System Underneath</h3>
+              <p>Tools are the interface. The system is the operating model: shared signals, decision logic, guardrails, and escalation paths.</p>
+            </div>
+            <div class="sys-chev">›</div>
+          </summary>
 
-    <section class="card" style="margin-top:14px;" aria-label="Let's Connect">
-      <h3>Let’s Connect</h3>
-      <p class="muted" style="margin:0;">
-        Open to roles in People Analytics, Talent Intelligence, People Ops, and Recruiting Operations — especially teams building internal AI capabilities.
-      </p>
-      <p style="margin:12px 0 0;">
-        <a href="book/" target="_blank" rel="noopener" style="font-weight:900;">📅 Book 15 minutes</a>
-        &nbsp;·&nbsp;
-        <a href="mailto:dianewilkinson510@gmail.com" style="font-weight:900;">Email</a>
-        &nbsp;·&nbsp;
-        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener" style="font-weight:900;">LinkedIn</a>
-      </p>
+          <div class="sys-body">
+            <div class="sys-layout">
+              <div class="sys-diagram">
+                <img
+                  src="/assets/diagrams/system.png"
+                  alt="AI-native people operations system showing human judgment, orchestration, signals, execution, and systems environment"
+                  loading="lazy"
+                />
+              </div>
+
+              <div>
+                <div class="sys-bullets">
+                  <ul>
+                    <li><b>AI is infrastructure</b> — embedded inside the platforms teams already use.</li>
+                    <li><b>Humans remain accountable</b> — escalation paths and auditability are built in.</li>
+                    <li><b>Governance is continuous</b> — signals and workflows co-evolve with the business.</li>
+                    <li><b>The system is operable, not fragile</b> — designed to run in real constraints.</li>
+                  </ul>
+                </div>
+
+                <div class="sys-cta">
+                  <a class="sys-btn primary" href="/system/">Explore the system →</a>
+                  <a class="sys-btn" href="/tools/">Browse tools →</a>
+                  <a class="sys-btn" href="/system/core/">Open the Core →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <section class="card" style="margin-top:14px;" aria-label="Let's Connect">
+          <h2 style="margin:0 0 10px; font-size:18px; letter-spacing:-.01em;">Let’s Connect</h2>
+          <p class="muted" style="margin:0;">
+            Open to roles in People Analytics, Talent Intelligence, People Ops, and Recruiting Operations — especially teams building internal AI capabilities.
+          </p>
+          <p style="margin:12px 0 0;">
+            <a href="/book/" target="_blank" rel="noopener" style="font-weight:900;">📅 Book 15 minutes</a>
+            &nbsp;·&nbsp;
+            <a href="mailto:dianewilkinson510@gmail.com" style="font-weight:900;">Email</a>
+            &nbsp;·&nbsp;
+            <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener" style="font-weight:900;">LinkedIn</a>
+          </p>
+        </section>
+
+      </div>
     </section>
 
   </main>
 
-  <footer>
-    Based in the San Francisco Bay Area ·
-    <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a> ·
-    <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+  <footer class="site-footer">
+    <div class="site-footer__row">
+      <div>Based in the San Francisco Bay Area</div>
+      <div>
+        <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a>
+        ·
+        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
   </footer>
 </body>
 </html>
