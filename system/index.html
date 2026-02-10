@@ -47,11 +47,12 @@
           <a class="btn primary" href="/system/">System</a>
           <a class="btn" href="/system/core/">Core</a>
           <a class="btn" href="/use-cases/">Cases</a>
-          <a class="btn" href="/tools/metrics/">Open Metrics</a>
+          <a class="btn" href="/tools/">Tools</a>
         </div>
       </div>
     </section>
 
+    <!-- SYSTEM OVERVIEW (dense, no "where to start") -->
     <section class="grid2" aria-label="System overview">
       <div class="card">
         <h2 class="section-title">What this is</h2>
@@ -64,7 +65,7 @@
         <div class="miniGrid" aria-label="System pillars">
           <div class="mini">
             <b>Shared signals</b>
-            <span>Metrics and narrative inputs are normalized so teams aren’t arguing about what’s true.</span>
+            <span>Normalize metrics + narrative inputs so teams aren’t arguing about what’s true.</span>
           </div>
           <div class="mini">
             <b>Decision logic</b>
@@ -83,41 +84,38 @@
       </div>
 
       <aside class="card">
-        <h2 class="section-title">Where to start</h2>
-        <p class="small">
-          
+        <h2 class="section-title">What it replaces</h2>
+        <p class="muted">
+          Most teams don’t have a system — they have dashboards, spreadsheets, and one-off automations.
+          That creates three predictable failures:
         </p>
+        <ul>
+          <li><strong>Truth drift:</strong> definitions change silently and metrics stop matching across tools.</li>
+          <li><strong>Decision drift:</strong> rules are implicit (“it depends”), so outcomes vary by person and mood.</li>
+          <li><strong>Execution drift:</strong> actions aren’t routed, tracked, or closed — so work repeats and trust erodes.</li>
+        </ul>
 
-        <p style="margin:10px 0 0;">
-          <a href="/tools/metrics/"><strong>Pipeline Health (overview)</strong></a><br />
-          <span class="small">Overview → Playbook → Demo → Dictionary, all wired to a shared model.</span>
-        </p>
-
-        <div class="rule"></div>
-
-        <p class="small" style="margin:0;">
-          System pages:
-          <br />• <a href="/system/">System overview</a>
-          <br />• <a href="/system/core/">Core (definitions + thresholds)</a>
-        </p>
+        <div class="callout" style="margin-top:12px;">
+          The goal isn’t more analytics. It’s a governed path from signal → decision → action → learning.
+        </div>
       </aside>
     </section>
 
-    <!-- Diagram + bullets (mirrors landing, but expanded) -->
-    <section class="full" aria-label="System diagram">
+    <!-- DIAGRAM + PRINCIPLES -->
+    <section class="full" aria-label="How it works">
       <h2 class="section-title">How it works (at a glance)</h2>
 
       <div class="grid2" style="margin-top:10px;">
         <div class="card" style="margin:0;">
-          <!-- Replace src with your real asset path (same one used on landing, if it’s an <img>). -->
+          <!-- Update src to match your working landing image path if needed -->
           <img
-            src="/assets/diagrams/system.png"
+            src="/assets/system-underneath.png"
             alt="System Underneath diagram showing Human Judgment, Orchestration, Signals, Execution, and Systems Environment."
             style="width:100%; height:auto; display:block; border-radius:14px; border:1px solid var(--border); background:#fff;"
-            onerror="this.style.display='none';"
           />
           <p class="small" style="margin:10px 0 0;">
-         
+            Human judgment stays at the top. Orchestration routes work. Signals and execution are distinct layers,
+            tied together by shared logic and thresholds.
           </p>
         </div>
 
@@ -126,7 +124,7 @@
           <ul>
             <li><strong>AI is infrastructure</strong> — embedded where teams already work.</li>
             <li><strong>Humans remain accountable</strong> — escalation paths and auditability are built in.</li>
-            <li><strong>Governance is continuous</strong> — signals and workflows evolve as the business changes.</li>
+            <li><strong>Governance is continuous</strong> — rules evolve with the business, not quarterly deck cycles.</li>
             <li><strong>The system is operable</strong> — designed to run under real-world constraints.</li>
           </ul>
 
@@ -138,10 +136,136 @@
       </div>
     </section>
 
+    <!-- LAYERS (dense explanation) -->
+    <section class="full" aria-label="System layers">
+      <h2 class="section-title">The layers</h2>
+      <p class="muted">
+        This system separates concerns so the org can scale without losing trust:
+        definitions don’t live in dashboards, and automation doesn’t invent policy.
+      </p>
+
+      <div class="miniGrid" aria-label="Layer definitions">
+        <div class="mini">
+          <b>Systems environment</b>
+          <span>ATS, HRIS, CRM, warehouse, comms — the places work originates and is recorded.</span>
+        </div>
+        <div class="mini">
+          <b>Signals</b>
+          <span>Metrics + narrative inputs (events, outcomes, qualitative feedback) normalized into shared meaning.</span>
+        </div>
+        <div class="mini">
+          <b>Orchestration</b>
+          <span>Routing, prioritization, SLAs, escalation, audit trails — the “how work moves” layer.</span>
+        </div>
+        <div class="mini">
+          <b>Execution</b>
+          <span>Automations and workflows that perform bounded actions and log what happened.</span>
+        </div>
+        <div class="mini">
+          <b>Human judgment</b>
+          <span>Accountability, ethics, context — the layer that approves, overrides, and sets policy.</span>
+        </div>
+        <div class="mini">
+          <b>Core (source of truth)</b>
+          <span>Definitions, logic, thresholds, ownership — the spec that keeps meaning stable over time.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        Tools are interfaces into these layers. The system prevents “tool sprawl” from becoming “truth sprawl.”
+      </div>
+    </section>
+
+    <!-- FLOW (signal → decision → action → learning) -->
+    <section class="full" aria-label="Operating loop">
+      <h2 class="section-title">The operating loop</h2>
+      <p class="muted">
+        This is the minimum loop required for AI-native operations to stay trustworthy in production.
+      </p>
+
+      <ul>
+        <li><strong>Signal</strong> — collect events and outcomes (and narrative where it matters).</li>
+        <li><strong>Interpret</strong> — apply shared logic and thresholds to determine what the signal means.</li>
+        <li><strong>Route</strong> — send the right work to the right owner with an SLA (or execute automatically at low risk).</li>
+        <li><strong>Act</strong> — perform the action (update, nudge, schedule, investigate, escalate) and log it.</li>
+        <li><strong>Learn</strong> — feed outcomes back into thresholds, definitions, and playbooks via change control.</li>
+      </ul>
+
+      <p class="small" style="margin-top:12px;">
+        Most “AI pilots” fail because they stop at <em>signal</em>. This system is built to complete the loop.
+      </p>
+    </section>
+
+    <!-- GOVERNANCE (dense, but clean) -->
+    <section class="full" aria-label="Governance and autonomy">
+      <h2 class="section-title">Governance and autonomy</h2>
+      <p class="muted">
+        Autonomy is not a feature — it’s a policy decision. The system makes those decisions explicit:
+        what can run, what requires approval, and what must always escalate.
+      </p>
+
+      <div class="miniGrid" aria-label="Autonomy tiers">
+        <div class="mini">
+          <b>Tier 0 — Monitor</b>
+          <span>Baseline + drift detection. Observe, measure, and surface issues without taking action.</span>
+        </div>
+        <div class="mini">
+          <b>Tier 1 — Auto-execute (low risk)</b>
+          <span>Pre-approved actions: nudges, reminders, routing, refreshes. Everything is logged.</span>
+        </div>
+        <div class="mini">
+          <b>Tier 2 — Recommend (approval required)</b>
+          <span>People-impacting actions require a human decision: suggested steps, not automatic execution.</span>
+        </div>
+        <div class="mini">
+          <b>Tier 3 — Escalate (high risk)</b>
+          <span>Employment-impacting decisions never auto-run. Strong governance and documentation apply.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        “Safe” systems aren’t cautious by vibe — they’re cautious by explicit thresholds and escalation rules.
+      </div>
+    </section>
+
+    <!-- CHANGE CONTROL + OWNERSHIP -->
+    <section class="full" aria-label="Core and change control">
+      <h2 class="section-title">Core and change control</h2>
+      <p class="muted">
+        The Core exists so meaning stays stable as teams, tools, and incentives change. It is the spec layer that
+        prevents silent redefinition and “metric theater.”
+      </p>
+
+      <div class="miniGrid" aria-label="Core scope">
+        <div class="mini">
+          <b>Definitions</b>
+          <span>What a metric or signal means, including grain, filters, and edge cases.</span>
+        </div>
+        <div class="mini">
+          <b>Logic</b>
+          <span>Calculation + interpretation rules so two people don’t reach two answers.</span>
+        </div>
+        <div class="mini">
+          <b>Thresholds</b>
+          <span>What triggers alerts, actions, escalation, or a required human review.</span>
+        </div>
+        <div class="mini">
+          <b>Ownership</b>
+          <span>Who can change what, when, and why — with a simple change log.</span>
+        </div>
+      </div>
+
+      <div class="ctaRow ctaRow--left" style="margin-top:12px;">
+        <a class="btn primary" href="/system/core/">Open the Core (spec) →</a>
+        <a class="btn" href="/tools/">See tools that reference it →</a>
+      </div>
+    </section>
+
+    <!-- WHAT LIVES WHERE (tight, no duplication) -->
     <section class="full" aria-label="What lives where">
       <h2 class="section-title">What lives where</h2>
 
-      <div class="miniGrid" aria-label="System layers">
+      <div class="miniGrid" aria-label="System boundaries">
         <div class="mini">
           <b>System</b>
           <span>Operating model: how signals become decisions and actions, with guardrails and escalation.</span>
@@ -152,7 +276,7 @@
         </div>
         <div class="mini">
           <b>Tools</b>
-          <span>Interfaces + execution: operator-facing workflows that use the Core and operate within the System.</span>
+          <span>Interfaces + execution: workflows that use the Core and operate within the System.</span>
         </div>
       </div>
 
@@ -161,10 +285,11 @@
       </div>
     </section>
 
+    <!-- ROUTING (minimal) -->
     <section class="full" aria-label="Explore">
       <h2 class="section-title">Explore</h2>
       <p class="muted">
-        Use these as the “routing” destinations from the landing page so it’s obvious there’s depth beyond the tool cards.
+        The system is the model. The Core is the spec. The tools are where it runs.
       </p>
 
       <div class="ctaRow ctaRow--left" style="margin-top:10px;">
