@@ -150,6 +150,32 @@
               <p class="small" style="margin-top:10px;">Most AI pilots fail because they stop at <em>signal</em>.</p>
             </div>
           </div>
+          <div class="rule"></div>
+
+<h3 style="margin:0 0 6px;">What lives where</h3>
+<p class="muted" style="margin:0 0 10px;">
+  A quick map so you know what’s stable (Core), what’s operational (System), and what’s executed (Tools).
+</p>
+
+<div class="miniGrid" aria-label="System boundaries">
+  <div class="mini">
+    <b>System</b>
+    <span>Operating model: how signals become decisions and actions, with guardrails and escalation.</span>
+  </div>
+  <div class="mini">
+    <b>Core</b>
+    <span>Source of truth: definitions, logic, thresholds, and ownership/change control.</span>
+  </div>
+  <div class="mini">
+    <b>Tools</b>
+    <span>Interfaces + execution: workflows that use the Core and operate within the System.</span>
+  </div>
+</div>
+
+<div class="callout">
+  Tools reference the Core. They don’t redefine it. The System keeps autonomy safe by making rules explicit and auditable.
+</div>
+
         </div>
       </div>
     </section>
@@ -243,11 +269,12 @@
     <section class="chapter" aria-label="Core and change control">
       <div class="panel panel--cool">
         <div class="chapter__inner">
-          <h2 class="section-title">Core and change control</h2>
+          <h2 class="section-title">The Core: the source of truth</h2>
           <p class="muted">
-            The Core exists so meaning stays stable as teams, tools, and incentives change.
-            It is the spec layer that prevents silent redefinition and “metric theater.”
-          </p>
+            <p class="muted">
+  <b>The Core prevents metric theater.</b> It’s the spec layer that makes meaning stable as tools, teams, and incentives change —
+  so two people don’t get two answers, and “the numbers” don’t shift silently.
+</p>
 
           <div class="miniGrid miniGrid--4" aria-label="Core scope">
 
@@ -271,54 +298,25 @@
 
           <div class="ctaRow ctaRow--left">
             <a class="btn primary" href="/system/core/">Open the Core (spec) →</a>
-            <a class="btn" href="/tools/">See tools that reference it →</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- WHAT LIVES WHERE -->
-    <section class="chapter" aria-label="What lives where">
-      <div class="panel panel--cool">
-        <div class="chapter__inner">
-          <h2 class="section-title">What lives where</h2>
-
-          <div class="miniGrid" aria-label="System boundaries">
-            <div class="mini">
-              <b>System</b>
-              <span>Operating model: how signals become decisions and actions, with guardrails and escalation.</span>
-            </div>
-            <div class="mini">
-              <b>Core</b>
-              <span>Source of truth: definitions, logic, thresholds, and ownership/change control.</span>
-            </div>
-            <div class="mini">
-              <b>Tools</b>
-              <span>Interfaces + execution: workflows that use the Core and operate within the System.</span>
-            </div>
-          </div>
-
-          <div class="callout">
-            Tools reference the Core. They don’t redefine it. The System keeps autonomy safe by making rules explicit and auditable.
-          </div>
-        </div>
-      </div>
-    </section>
-
+    
     <!-- EXPLORE -->
-<section class="chapter" aria-label="Explore">
+<section class="exploreNext" aria-label="Explore Next">
   <div class="panel panel--cool">
     <div class="panelInner">
-      <h2 class="section-title">Explore the system</h2>
-      <p class="muted">
-        The system is the model. The Core is the spec. The tools are where it runs.
-      </p>
+      <h2 class="section-title exploreNext__title">Explore Next</h2>
 
-      <div class="ctaRow ctaRow--left" style="margin-top:14px;">
-        <a class="btn" href="/tools/">All tools →</a>
-        <a class="btn" href="/use-cases/">Use cases →</a>
-        <a class="btn" href="/articles/">Articles →</a>
-        <a class="btn primary" href="/system/core/">Open the Core →</a>
+      <div class="exploreNext__actions">
+        <a class="btn" href="/system/">System</a>
+        <a class="btn" href="/tools/">Tools</a>
+        <a class="btn" href="/use-cases/">Use Cases</a>
+        <a class="btn primary" href="/system/core/">Core - Rules</a>
+        <a class="btn" href="/articles/">Articles</a>
+        <a class="btn" href="mailto:dianewilkinson510@gmail.com">Contact</a>
       </div>
     </div>
   </div>
