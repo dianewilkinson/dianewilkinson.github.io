@@ -359,6 +359,39 @@ body[data-page="home"] .hero-pill:hover{
 .exploreNext .btn.primary{
   border-color: rgba(79,70,229,.25);
 }
+/* =========================
+   EXPLORE NEXT (terminal)
+   ========================= */
+.exploreNext{
+  margin-top:14px;
+}
+
+/* Keep gradient panel, but REMOVE white inner surface */
+.exploreNext .panel{
+  background: var(--cool-grad);
+  padding:16px;
+}
+
+.exploreNext .panelInner{
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* Buttons float directly on gradient */
+.exploreNext__actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+/* Slightly stronger pill contrast on gradient */
+.exploreNext .btn{
+  background: rgba(255,255,255,.88);
+  border-radius:999px;
+}
 
 /* =========================
    SECTION TITLES / CARDS
