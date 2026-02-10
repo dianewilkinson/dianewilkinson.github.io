@@ -301,7 +301,15 @@ body[data-page="home"] .hero-pill:hover{
   background: rgba(255,255,255,.70);
 }
 .panel--cool{ background: var(--cool-grad); }
-/* NOTE: no panel--pink to prevent pink leaking outside landing */
+
+/* Landing-only panel tint (pink is allowed ONLY on home) */
+body[data-page="home"] .panel--pink{
+  background: var(--pink-grad);
+  border-color: rgba(99,102,241,.18);
+}
+body[data-page="home"] .panel--pink .panelInner{
+  background: rgba(255,255,255,.92);
+}
 
 .panelInner{
   background: rgba(255,255,255,.92);
@@ -323,7 +331,6 @@ body[data-page="home"] .hero-pill:hover{
   border-radius: calc(var(--radius) - 6px);
   padding:16px;
 }
-
 
 /* =========================
    EXPLORE NEXT (terminal)
@@ -365,7 +372,6 @@ body[data-page="home"] .hero-pill:hover{
   background:#fff;
   text-decoration:none;
 }
-
 
 /* =========================
    SECTION TITLES / CARDS
@@ -970,6 +976,7 @@ body[data-page="tool-playbook"] .ctaRow--tight{
   text-decoration:none;
 }
 .appLink:hover{ color:#3730a3; text-decoration:none; }
+
 /* Explore Next active state by page */
 body[data-page="system-index"] .exploreNext a[href="/system/"],
 body[data-page="system-index"] .exploreNext a[href="/system"],
