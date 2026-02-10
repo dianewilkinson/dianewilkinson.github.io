@@ -562,6 +562,25 @@
   line-height:1.5;
   margin:0;
 }
+    /* Make tool-card headings consistent (some cards use h3, some h4) */
+.tool-card h3,
+.tool-card h4{
+  margin:0 0 6px;
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+/* Variant: big CTA card */
+.tool-card.is-route--cool{
+  background: var(--cool-grad);
+  border-color: rgba(99,102,241,.22);
+}
+
+.tool-card.is-route--cool .badge{
+  background: rgba(255,255,255,.82);
+  border-color: rgba(255,255,255,.65);
+}
+
 
   </style>
 </head>
@@ -709,7 +728,7 @@
     </div>
   </div>
 <!-- NEW CARD 1: View more tools -->
-          <div class="tool-card is-route" aria-label="View more tools">
+          <div class="tool-card is-route is-route--cool" aria-label="View more tools">
             <div class="tool-top">
               <div>
                 <h4>↗ View more tools</h4>
@@ -719,7 +738,6 @@
             </div>
             <div class="tool-actions">
               <a href="/tools/">Browse all tools →</a>
-              <a href="/library.html">Open library view →</a>
             </div>
           </div>
 
@@ -741,11 +759,6 @@
               • <a href="/articles/"><strong>Articles</strong></a> (thinking + frameworks)
             </p>
 
-            <div class="tool-actions">
-              <a href="/use-cases/">View cases →</a>
-              <a href="/system/">Open system →</a>
-              <a href="/system/core/">Open core →</a>
-            </div>
           </div>
 </div>
   
@@ -763,7 +776,7 @@
     <div class="sys-layout">
       <div class="sys-diagram">
         <img
-          src="assets/diagrams/system.png"
+          src="/assets/diagrams/system.png"
           alt="AI-native people operations system showing human judgment, orchestration, signals, execution, and systems environment"
           loading="lazy"
         />
