@@ -149,10 +149,10 @@ a:hover{text-decoration:underline}
 /* Landing hero: pink overlay ONLY here */
 .hero--home::before{ background: var(--pink-grad); }
 
-/* Tools + playbooks: cool overlay */
+/* Tools + system + playbooks: cool overlay */
 .hero--tool::before{ background: var(--cool-grad); }
 
-/* Tools hero: darker */
+/* Optional darker tools hero gradient (explicit opt-in) */
 .hero--tool-strong::before{ background: var(--tool-hero-grad); }
 
 /* Hero typography helpers */
@@ -213,7 +213,6 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   margin:10px 0 0;
 }
 .hero .btn{ border-radius:999px; }
-
 .ctaRow--left{ justify-content:flex-start; }
 
 .btnGhost{
@@ -300,7 +299,7 @@ body[data-page="home"] .hero-pill:hover{
   background: rgba(255,255,255,.70);
 }
 .panel--cool{ background: var(--cool-grad); }
-.panel--pink{ background: var(--pink-grad); }
+/* NOTE: no panel--pink to prevent pink leaking outside landing */
 
 .panelInner{
   background: rgba(255,255,255,.92);
@@ -384,7 +383,6 @@ body[data-page="home"] .hero-pill:hover{
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
-
 .table-wrap table{
   width: 100%;
   border-collapse: collapse;
@@ -464,7 +462,6 @@ body[data-page="home"] .hero-pill:hover{
 @media (max-width: 900px){
   .arch-grid{ grid-template-columns: 1fr; }
 }
-
 
 /* =========================
    TOOLS GRID (landing + anywhere)
@@ -568,6 +565,7 @@ body[data-page="home"] .hero-pill:hover{
   border-color: rgba(255,255,255,.65);
   color: var(--muted2);
 }
+
 /* Route card: soft neutral tint (distinct from tools + from cool-grad) */
 .tool-card.is-route--soft{
   background: linear-gradient(
@@ -581,23 +579,21 @@ body[data-page="home"] .hero-pill:hover{
   background: rgba(255,255,255,.85);
   border-color: rgba(148,163,184,.45);
 }
+
 .depth-list{
   margin: 4px 0 0;
   padding: 0;
   list-style: none;
 }
-
 .depth-list li{
   margin: 4px 0;
   font-size: 12.75px;
 }
-
 .depth-list a{
   font-weight: 800;
   color: var(--accent);
   text-decoration: none;
 }
-
 .depth-list a:hover{
   text-decoration: underline;
 }
@@ -664,6 +660,7 @@ body[data-page="home"] .hero-pill:hover{
 @media (max-width:900px){
   .sys-layout{ grid-template-columns:1fr; }
 }
+
 .sys-diagram{
   border:1px solid rgba(226,232,240,.9);
   background: rgba(255,255,255,.75);
@@ -679,6 +676,7 @@ body[data-page="home"] .hero-pill:hover{
   border-radius:12px;
   display:block;
 }
+
 .sys-bullets{
   border:1px solid rgba(226,232,240,.9);
   background: rgba(255,255,255,.75);
