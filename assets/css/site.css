@@ -972,10 +972,19 @@ body[data-page="tool-playbook"] .ctaRow--tight{
 .appLink:hover{ color:#3730a3; text-decoration:none; }
 /* Explore Next active state by page */
 body[data-page="system-index"] .exploreNext a[href="/system/"],
+body[data-page="system-index"] .exploreNext a[href="/system"],
+
 body[data-page="tools-index"] .exploreNext a[href="/tools/"],
+body[data-page="tools-index"] .exploreNext a[href="/tools"],
+
 body[data-page="use-cases"] .exploreNext a[href="/use-cases/"],
+body[data-page="use-cases"] .exploreNext a[href="/use-cases"],
+
 body[data-page="system-core"] .exploreNext a[href="/system/core/"],
-body[data-page="articles"] .exploreNext a[href="/articles/"]{
+body[data-page="system-core"] .exploreNext a[href="/system/core"],
+
+body[data-page="articles"] .exploreNext a[href="/articles/"],
+body[data-page="articles"] .exploreNext a[href="/articles"]{
   border-color: rgba(79,70,229,.35);
   background: linear-gradient(
     135deg,
