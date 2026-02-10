@@ -24,7 +24,7 @@
   --link:#2563eb;
 
   --grad:linear-gradient(135deg, rgba(79,70,229,.16), rgba(96,165,250,.14), rgba(167,139,250,.14));
-   
+
   /* Signature top rule (pink is allowed here on all pages) */
   --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
 
@@ -45,14 +45,13 @@
     rgba(99,102,241,.10)
   );
 
-/* Darker tools hero gradient (explicit opt-in) */
---tool-hero-grad: linear-gradient(
-  135deg,
-  rgba(79,70,229,.22),
-  rgba(96,165,250,.18),
-  rgba(167,139,250,.18)
-);
-
+  /* Darker tools hero gradient (explicit opt-in) */
+  --tool-hero-grad: linear-gradient(
+    135deg,
+    rgba(79,70,229,.22),
+    rgba(96,165,250,.18),
+    rgba(167,139,250,.18)
+  );
 
   /* Page background (same for EVERY page) */
   --page-bg:
@@ -143,7 +142,6 @@ a:hover{text-decoration:underline}
   position:absolute; inset:-2px;
   opacity:.95;
   pointer-events:none;
-  /* masked “ink” overlay; actual gradient set by variant */
   mask-image: linear-gradient(180deg, rgba(0,0,0,.95), rgba(0,0,0,.38), rgba(0,0,0,0));
 }
 .hero > *{position:relative}
@@ -154,10 +152,8 @@ a:hover{text-decoration:underline}
 /* Tools + playbooks: cool overlay */
 .hero--tool::before{ background: var(--cool-grad); }
 
-/* Tools hero: darker, matches "Tools I Built" intent */
-.hero--tool-strong::before{
-  background: var(--tool-hero-grad);
-}
+/* Tools hero: darker */
+.hero--tool-strong::before{ background: var(--tool-hero-grad); }
 
 /* Hero typography helpers */
 .kicker{
@@ -196,14 +192,13 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   align-items:center;
   gap:10px;
 }
-/* Hero right-side pill cluster */
 .ctaRow{
   display:flex;
   align-items:center;
   gap:10px;
   flex-wrap:wrap;
   justify-content:flex-end;
-  margin-left:auto; 
+  margin-left:auto;
 }
 .backLink{
   display:inline-flex; align-items:center; gap:8px;
@@ -219,28 +214,80 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
 }
 .hero .btn{ border-radius:999px; }
 
-    /* CTA row */    
-.ctaRow{
-   margin-top:12px; 
-   display:flex; gap:10px; 
-   flex-wrap:wrap}    
-.btnGhost{      
-   display:inline-flex; 
-   align-items:center; gap:10px;      
-   border:1px solid rgba(79,70,229,.22);      
-   background:rgba(79,70,229,.06);     
-   color:#1f2a7a;      
-   padding:10px 12px;      
-   border-radius:12px;      
-   font-weight:900;      
-   font-size:14px;      
-   white-space:nowrap;    
+.ctaRow--left{ justify-content:flex-start; }
+
+.btnGhost{
+  display:inline-flex;
+  align-items:center; gap:10px;
+  border:1px solid rgba(79,70,229,.22);
+  background:rgba(79,70,229,.06);
+  color:#1f2a7a;
+  padding:10px 12px;
+  border-radius:12px;
+  font-weight:900;
+  font-size:14px;
+  white-space:nowrap;
 }
-.ctaRow--left{
-  justify-content: flex-start;
+.btnGhost:hover{background:rgba(79,70,229,.10); text-decoration:none}
+
+/* =========================
+   HOME / LANDING PAGE
+   (scoped so it never leaks)
+   ========================= */
+body[data-page="home"] .hero--home{
+  padding:22px 22px 18px;
+  min-height:220px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
-.btnGhost:hover{background:rgba(79,70,229,.10); text-decoration:none}
+body[data-page="home"] .hero-headline{
+  margin: 8px 0 0;
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:-0.02em;
+  line-height:1.15;
+}
+
+body[data-page="home"] .hero-subtitle{
+  margin:0;
+  color:var(--muted);
+  font-size:15.5px;
+  line-height:1.6;
+  max-width:90ch;
+}
+
+body[data-page="home"] .hero-actions{
+  margin-top:auto;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+body[data-page="home"] .hero-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  color:#334155;
+  border:1px solid rgba(226,232,240,.95);
+  background: rgba(255,255,255,.80);
+  text-decoration:none;
+}
+body[data-page="home"] .hero-pill:hover{
+  background: rgba(255,255,255,.92);
+  text-decoration:none;
+}
+
+@media (max-width:720px){
+  body[data-page="home"] .hero--home{ min-height:0; }
+  body[data-page="home"] .hero-headline{ font-size:26px; }
+}
 
 /* =========================
    PANELS (your “Tools I Built” block style)
@@ -261,7 +308,7 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   border-radius: calc(var(--radius) - 6px);
   padding:14px;
 }
-/* Chapter = document-level panel */
+
 .chapter{
   border:1px solid var(--border);
   border-radius: var(--radius);
@@ -269,7 +316,6 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   box-shadow: 0 16px 48px var(--shadow);
   background: var(--cool-soft, var(--cool-grad));
 }
-
 .chapter__inner{
   background: rgba(255,255,255,.92);
   border:1px solid rgba(255,255,255,.55);
@@ -295,6 +341,13 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   height:28px;
   border-radius:999px;
   background: linear-gradient(180deg, var(--accent), var(--accent2), var(--accent3));
+}
+
+.section-sub{
+  margin:0 0 14px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
 }
 
 .card{
@@ -335,10 +388,10 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
 .table-wrap table{
   width: 100%;
   border-collapse: collapse;
-  min-width: 640px; /* prevents column squish on narrow screens */
+  min-width: 640px;
 }
 
-/* Keep lists from leaking into nav by scoping them */
+/* Keep lists from leaking */
 .card ul, .full ul, .hero-meta ul, .toc-card ul, .persona-card ul, .prose ul{
   margin:10px 0 0 18px;
   padding:0;
@@ -387,6 +440,225 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
 .mini span{ display:block; font-size:13px; color:var(--muted); line-height:1.45; }
 
 /* =========================
+   TOOLS GRID (landing + anywhere)
+   ========================= */
+.tools-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:12px;
+  margin-top:12px;
+}
+
+.tool-card{
+  border:1px solid rgba(226,232,240,0.9);
+  background: rgba(255,255,255,.90);
+  border-radius:14px;
+  padding:12px;
+  box-shadow: 0 10px 30px rgba(15,23,42,.06);
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.tool-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  min-width:0;
+  flex-wrap:wrap;
+}
+
+.tool-top > div{
+  flex: 1 1 180px;
+  min-width:180px;
+  min-width:0;
+}
+
+.tool-card h3,
+.tool-card h4{
+  margin:0 0 6px;
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+
+.tool-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:12.75px;
+  line-height:1.45;
+  word-break:normal;
+  overflow-wrap:normal;
+}
+
+.badge{
+  font-size:11px;
+  font-weight:900;
+  color:var(--muted2);
+  border:1px solid rgba(226,232,240,0.95);
+  border-radius:999px;
+  padding:4px 8px;
+  background:rgba(255,255,255,.78);
+  white-space:nowrap;
+  flex:0 1 auto;
+  max-width:100%;
+}
+
+.tool-actions{
+  margin-top:auto;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.tool-actions a{
+  font-size:12.5px;
+  font-weight:900;
+  color:var(--accent);
+  text-decoration:none;
+}
+.tool-actions a:hover{ color:#3730a3; text-decoration:none; }
+
+/* Route-card variants (landing) */
+.tool-card.is-route{
+  background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.86));
+  border-color: rgba(79,70,229,.18);
+}
+.tool-card.is-route .badge{
+  border-color: rgba(79,70,229,.18);
+  background: rgba(79,70,229,.06);
+  color:#4b5563;
+}
+
+.tool-card.is-route--cool{
+  background: var(--cool-grad);
+  border-color: rgba(99,102,241,.22);
+}
+.tool-card.is-route--cool .badge{
+  background: rgba(255,255,255,.82);
+  border-color: rgba(255,255,255,.65);
+  color: var(--muted2);
+}
+
+/* =========================
+   SYSTEM DROPDOWN (details)
+   ========================= */
+.sys-details{
+  margin-top:14px;
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.90);
+  box-shadow: 0 16px 48px var(--shadow);
+  overflow:hidden;
+}
+.sys-details summary{
+  list-style:none;
+  cursor:pointer;
+  padding:14px 16px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  position:relative;
+}
+.sys-details summary::-webkit-details-marker{display:none;}
+
+.sys-sum h3{
+  margin:0 0 6px;
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+.sys-sum p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
+  max-width:90ch;
+}
+.sys-chev{
+  font-weight:900;
+  color:var(--accent);
+  font-size:18px;
+  line-height:1;
+  user-select:none;
+  margin-top:2px;
+  transform:rotate(0deg);
+  transition:transform .15s ease;
+}
+.sys-details[open] .sys-chev{ transform:rotate(90deg); }
+
+.sys-body{
+  padding:0 16px 16px;
+  border-top:1px solid rgba(226,232,240,.9);
+}
+.sys-layout{
+  display:grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap:14px;
+  align-items:start;
+  margin-top:14px;
+}
+@media (max-width:900px){
+  .sys-layout{ grid-template-columns:1fr; }
+}
+.sys-diagram{
+  border:1px solid rgba(226,232,240,.9);
+  background: rgba(255,255,255,.75);
+  border-radius:14px;
+  padding:12px;
+  box-shadow: 0 10px 30px rgba(15,23,42,.06);
+}
+.sys-diagram img{
+  width:100%;
+  height:auto;
+  max-height:420px;
+  object-fit:contain;
+  border-radius:12px;
+  display:block;
+}
+.sys-bullets{
+  border:1px solid rgba(226,232,240,.9);
+  background: rgba(255,255,255,.75);
+  border-radius:14px;
+  padding:12px;
+  box-shadow: 0 10px 30px rgba(15,23,42,.06);
+}
+.sys-bullets ul{ margin:0; padding-left:18px; }
+.sys-bullets li{ margin:8px 0; color:var(--muted); font-size:14px; line-height:1.55; }
+.sys-bullets b{ color:var(--text); }
+
+.sys-cta{
+  margin-top:10px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.sys-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 13px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:900;
+  border:1px solid rgba(148,163,184,0.75);
+  background:rgba(255,255,255,0.92);
+  color:#4338ca;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.sys-btn:hover{ background:#fff; text-decoration:none; color:#3730a3; }
+.sys-btn.primary{
+  border:none;
+  background:#4f46e5;
+  color:#fff;
+}
+.sys-btn.primary:hover{ background:#4338ca; color:#fff; }
+
+/* =========================
    DEMO (iframe)
    ========================= */
 .demo{
@@ -430,7 +702,6 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   border-top:1px solid var(--border);
   background: rgba(255,255,255,.55);
 }
-
 .site-footer__row{
   max-width:1120px;
   margin:0 auto;
@@ -447,13 +718,7 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
 
 /* =========================
    PLAYBOOK LAYOUT (clean)
-   - Hero CTAs live in hero backRow
-   - Header is a true 2-card row:
-     left = combined meta card (stacked)
-     right = sections TOC
    ========================= */
-
-/* Header row: 2 cards (left wider) */
 body[data-page="tool-playbook"] .info-layout{
   display:grid;
   grid-template-columns: 1.35fr 0.85fr;
@@ -461,25 +726,18 @@ body[data-page="tool-playbook"] .info-layout{
   margin-top:14px;
 }
 @media (max-width: 1100px){
-  body[data-page="tool-playbook"] .info-layout{
-    grid-template-columns: 1fr;
-  }
+  body[data-page="tool-playbook"] .info-layout{ grid-template-columns: 1fr; }
 }
 
-/* Combined meta card: stack blocks vertically (not side-by-side) */
 body[data-page="tool-playbook"] .hero-meta--split .metaSplit{
   display:grid;
   grid-template-columns: 1fr;
   gap:14px;
 }
-
-/* Divider feel between the two meta blocks */
 body[data-page="tool-playbook"] .hero-meta--split .metaBlock + .metaBlock{
   padding-top:14px;
   border-top:1px solid var(--border);
 }
-
-/* Shared card shell for playbook header cards */
 body[data-page="tool-playbook"] .hero-meta,
 body[data-page="tool-playbook"] .toc-card,
 body[data-page="tool-playbook"] .persona-card{
@@ -489,8 +747,6 @@ body[data-page="tool-playbook"] .persona-card{
   padding:14px;
   box-shadow: 0 16px 48px var(--shadow);
 }
-
-/* TOC list: clean, no bullets */
 body[data-page="tool-playbook"] .tocList{
   list-style:none;
   margin:0;
@@ -506,8 +762,6 @@ body[data-page="tool-playbook"] .toc a:hover{
   color:var(--accent);
   text-decoration:none;
 }
-
-/* Sticky TOC (desktop only) */
 @media (min-width: 920px){
   body[data-page="tool-playbook"] .toc-card{
     position: sticky;
@@ -515,10 +769,8 @@ body[data-page="tool-playbook"] .toc a:hover{
     align-self: start;
   }
 }
-
 body[data-page="tool-playbook"] .prose{ max-width: 92ch; }
 
-/* Hero actions row: back left, CTAs right */
 body[data-page="tool-playbook"] .backRow--split{
   justify-content: space-between;
   flex-wrap: wrap;
@@ -526,33 +778,9 @@ body[data-page="tool-playbook"] .backRow--split{
 body[data-page="tool-playbook"] .ctaRow--tight{
   margin-top: 0;
 }
-.autoCard{
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.90);
-  border-radius: var(--radius);
-  padding:14px;
-  box-shadow: 0 16px 48px var(--shadow);
-  margin-top:14px;
-}
-.autoTitle{font-weight:900; letter-spacing:-.01em; margin-bottom:10px;}
-.autoGroup{margin:10px 0;}
-.autoLabel{font-size:12px; font-weight:900; color:var(--muted2); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;}
-.autoPills{display:flex; flex-wrap:wrap; gap:8px;}
-.pillLink{
-  display:inline-flex; align-items:center; gap:8px;
-  padding:8px 10px;
-  border-radius:999px;
-  border:1px solid rgba(148,163,184,.65);
-  background:rgba(255,255,255,.85);
-  color:var(--text);
-  font-weight:800;
-  font-size:13px;
-  text-decoration:none;
-}
-.pillLink:hover{background:#fff; text-decoration:none; color:var(--accent);}
+
 /* =========================
    APP GRID (Tools library)
-   Additive only — does not modify existing components
    ========================= */
 .appGrid{
   display:grid;
@@ -574,27 +802,23 @@ body[data-page="tool-playbook"] .ctaRow--tight{
   gap:10px;
   min-width:0;
 }
-
 .appTop{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
   gap:10px;
-  flex-wrap:wrap; /* prevents badge crushing text */
+  flex-wrap:wrap;
 }
-
 .appMain{
   flex: 1 1 190px;
   min-width:190px;
 }
-
 .appCard h3{
   margin:0 0 6px;
   font-size:14px;
   font-weight:900;
   letter-spacing:-.01em;
 }
-
 .appCard p{
   margin:0;
   color:var(--muted);
@@ -603,7 +827,6 @@ body[data-page="tool-playbook"] .ctaRow--tight{
   word-break:normal;
   overflow-wrap:normal;
 }
-
 .appBadge{
   font-size:11px;
   font-weight:900;
@@ -614,7 +837,6 @@ body[data-page="tool-playbook"] .ctaRow--tight{
   background:rgba(255,255,255,.78);
   white-space:nowrap;
 }
-
 .appActions{
   margin-top:auto;
   display:flex;
@@ -628,4 +850,3 @@ body[data-page="tool-playbook"] .ctaRow--tight{
   text-decoration:none;
 }
 .appLink:hover{ color:#3730a3; text-decoration:none; }
-
