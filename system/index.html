@@ -51,6 +51,8 @@
 
       </div>
     </section>
+
+
  <!-- ARCHITECTURE -->
     <section class="chapter" aria-label="Shared Architecture">
 <h2>Shared Architecture</h2>
@@ -59,25 +61,41 @@
   One set of signals, decision logic, and auditability runs end-to-end — so insights turn into action, decisions stay consistent, and automation stays safe and reviewable.
 </p>
     </section>
-
-      <aside class="card">
-        <h2 class="section-title">What it replaces</h2>
-        <p class="muted">
-          Most teams don’t have a system — they have dashboards, spreadsheets, and one-off automations.
-          That creates three predictable failures:
-        </p>
-        <ul>
-          <li><strong>Truth drift:</strong> definitions change silently and metrics stop matching across tools.</li>
-          <li><strong>Decision drift:</strong> rules are implicit (“it depends”), so outcomes vary by person and mood.</li>
-          <li><strong>Execution drift:</strong> actions aren’t routed, tracked, or closed — so work repeats and trust erodes.</li>
+<div class="arch-grid" aria-label="Architecture blocks">
+      <div class="arch">
+        <h3>Signals</h3>
+        <p>Named inputs that are comparable across workflows — so you can detect drift and measure impact.</p>
+        <ul class="mini-list">
+          <li>Throughput, pass-through, and SLAs</li>
+          <li>Open-text themes + reasons</li>
+          <li>Capacity constraints (HM / recruiter / interview loops)</li>
+          <li>Risk indicators + drift detection</li>
         </ul>
+      </div>
 
-        <div class="callout" style="margin-top:12px;">
-          The goal isn’t more analytics. It’s a governed path from signal → decision → action → learning.
-        </div>
-      </aside>
-    </section>
+      <div class="arch">
+        <h3>Decision Logic</h3>
+        <p>Turn signals into “what should happen next” — with thresholds, tradeoffs, and escalation rules.</p>
+        <ul class="mini-list">
+          <li>Expected ranges + alert thresholds</li>
+          <li>Root-cause prompts (“why this surfaced”)</li>
+          <li>Recommended actions + impact tradeoffs</li>
+          <li>Escalation rules as stakes increase</li>
+        </ul>
+      </div>
 
+      <div class="arch">
+        <h3>Execution + Auditability</h3>
+        <p>Execution happens inside agents (not as a standalone “workflow agent”) — and every action is reviewable.</p>
+        <ul class="mini-list">
+          <li>Receipts attached to recommendations</li>
+          <li>Approvals where needed (autonomy tiers)</li>
+          <li>Action logs + change history</li>
+          <li>“Why it did this” is visible, not implied</li>
+        </ul>
+      </div>
+    </div>
+    
     <!-- DIAGRAM + PRINCIPLES -->
     <section class="full" aria-label="How it works">
       <h2 class="section-title">How it works (at a glance)</h2>
@@ -172,7 +190,23 @@
         Most “AI pilots” fail because they stop at <em>signal</em>. This system is built to complete the loop.
       </p>
     </section>
+      
+        <h2 class="section-title">What it replaces</h2>
+        <p class="muted">
+          Most teams don’t have a system — they have dashboards, spreadsheets, and one-off automations.
+          That creates three predictable failures:
+        </p>
+        <ul>
+          <li><strong>Truth drift:</strong> definitions change silently and metrics stop matching across tools.</li>
+          <li><strong>Decision drift:</strong> rules are implicit (“it depends”), so outcomes vary by person and mood.</li>
+          <li><strong>Execution drift:</strong> actions aren’t routed, tracked, or closed — so work repeats and trust erodes.</li>
+        </ul>
 
+        <div class="callout" style="margin-top:12px;">
+          The goal isn’t more analytics. It’s a governed path from signal → decision → action → learning.
+        </div>
+      </aside>
+    </section>
     <!-- GOVERNANCE (dense, but clean) -->
     <section class="full" aria-label="Governance and autonomy">
       <h2 class="section-title">Governance and autonomy</h2>
