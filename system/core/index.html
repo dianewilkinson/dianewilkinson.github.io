@@ -3,36 +3,146 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Core — Nuts & Bolts</title>
-  <meta name="description" content="The Core defines shared signals, logic, thresholds, ownership, and change control across the People Operating System." />
-  <link rel="stylesheet" href="/site.css" />
+  <title>The Core — Nuts &amp; Bolts</title>
+  <meta name="description" content="The Core defines shared signals, logic, thresholds, ownership, and change control across the AI-Native People Operating System." />
+  <link rel="stylesheet" href="/assets/css/site.css?v=1" />
 </head>
-<body>
+
+<body data-page="system-core">
   <div class="bar"></div>
 
-  <div class="wrap">
-    <header class="hero hero--tool">
-      <div class="crumbs"><a href="/system/">System</a><span class="sep">/</span><span>The Core</span></div>
-      <h1>The Core</h1>
-      <p class="sub">Nuts &amp; Bolts of the People Operating System</p>
+  <main class="wrap">
 
-      <div class="ctaRow">
-        <a class="btn" href="./metrics.html">Open Metrics</a>
-        <a class="btn btn--ghost" href="/tools/metrics/">Go to Metrics Tool</a>
+    <header class="hero hero--tool" aria-label="Core hero">
+      <div class="crumbs">
+        <a href="/system/">System</a><span class="sep">/</span><span>The Core</span>
       </div>
+
+      <h1>The Core</h1>
+      <p class="sub">
+        The shared definitions and decision rules that make every dashboard and A[i]gent consistent —
+        so teams stop debating “what the number means” and start acting.
+      </p>
+
+      <div class="backRow backRow--split">
+        <div class="ctaLabel">Start here if you want the system to scale.</div>
+        <div class="ctaRow">
+          <a class="btn primary" href="/tools/metrics/">Open Metrics Tool</a>
+          <a class="btn" href="/system/">Back to System</a>
+        </div>
+      </div>
+
+      <div class="hairline"></div>
     </header>
 
-    <section class="card">
+    <section class="card" aria-label="Core overview">
       <h2>What lives here</h2>
-      <ul>
-        <li>Definitions (shared meanings)</li>
-        <li>Logic (calculation + interpretation rules)</li>
-        <li>Thresholds (what triggers a flag or action)</li>
-        <li>Ownership + change control (who can update what, and why)</li>
-      </ul>
-      <p class="note">Tools reference The Core. They don’t redefine it.</p>
+      <p class="muted" style="margin-top:0;">
+        The Core is the contract across the whole portfolio. Tools reference it — they don’t redefine it.
+        This is how you get repeatability, auditability, and trusted decision-making across teams.
+      </p>
+
+      <div class="miniGrid miniGrid--4" aria-label="Core modules">
+        <div class="mini">
+          <b>Definitions</b>
+          <span>Shared meanings for terms like “pipeline health,” “capacity,” “quality,” and “signal.”</span>
+        </div>
+        <div class="mini">
+          <b>Logic</b>
+          <span>How a signal is calculated + how it should be interpreted in context.</span>
+        </div>
+        <div class="mini">
+          <b>Thresholds</b>
+          <span>What triggers a flag, a recommendation, or an escalation path.</span>
+        </div>
+        <div class="mini">
+          <b>Ownership</b>
+          <span>Who can change a definition, why, and how changes roll out safely.</span>
+        </div>
+      </div>
     </section>
-  </div>
+
+    <section class="grid2" aria-label="How it works">
+      <section class="full">
+        <h2>How the Core works in practice</h2>
+        <p class="muted" style="margin-top:0;">
+          Tools sit on top of shared signals. When the Core is stable, teams can move fast without breaking trust.
+        </p>
+
+        <div class="callout">
+          <b>Rule of thumb:</b> If two people can look at the same metric and tell two different stories,
+          you don’t have a metrics problem — you have a Core problem.
+        </div>
+
+        <h3>Core → Tool → Action</h3>
+        <ul>
+          <li><b>Core defines the signal</b> (what it is, how it’s computed, when it matters).</li>
+          <li><b>Tools operationalize it</b> (dashboards, A[i]gent flows, recommendations).</li>
+          <li><b>Action is governed</b> (safe Tier-1 autonomy, escalation, audit trail).</li>
+        </ul>
+
+        <h3>What you’ll see as this fills in</h3>
+        <ul>
+          <li>A clear dictionary of shared signals (with formulas + interpretation notes)</li>
+          <li>Decision thresholds tied to recommended actions</li>
+          <li>Change control so updates don’t silently break downstream tools</li>
+        </ul>
+      </section>
+
+      <aside class="card" aria-label="Core quick links">
+        <h2>Quick links</h2>
+        <p class="small" style="margin-top:0;">
+          Starting points while Core pages are being expanded.
+        </p>
+
+        <div class="rule"></div>
+
+        <p style="margin:0 0 8px;"><b>Signals &amp; execution</b></p>
+        <ul style="margin-top:0;">
+          <li><a href="/tools/metrics/"><b>Metrics Tool</b></a> — pipeline health, bottlenecks, actions</li>
+          <li><a href="/system/"><b>System</b></a> — the operating model and how tools connect</li>
+        </ul>
+
+        <div class="rule"></div>
+
+        <p style="margin:0 0 8px;"><b>Contact</b></p>
+        <p class="small" style="margin:0;">
+          Want a walkthrough of how Core governance prevents “Franken-systems”?
+          <a href="/contact/scheduler.html"><b>Book 15 minutes</b></a>.
+        </p>
+      </aside>
+    </section>
+
+    <section class="exploreNext" aria-label="Explore Next">
+      <div class="panel">
+        <div class="panelInner">
+          <h3 class="section-title">Explore Next</h3>
+          <p class="section-sub">
+            Follow the thread from definitions → tools → shipped outcomes.
+          </p>
+
+          <div class="exploreNext__actions">
+            <a class="btn" href="/system/">System</a>
+            <a class="btn" href="/tools/">Tools</a>
+            <a class="btn" href="/use-cases/">Use cases</a>
+            <a class="btn" href="/articles/">Articles</a>
+            <a class="btn" href="/contact/scheduler.html">Book 15 minutes</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__row">
+      <div>Based in the San Francisco Bay Area</div>
+      <div>
+        <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a>
+        ·
+        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
-
