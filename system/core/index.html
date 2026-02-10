@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>The Core — Nuts &amp; Bolts</title>
-  <meta name="description" content="The Core defines shared signals, logic, thresholds, ownership, and change control across the AI-Native People Operating System." />
-  <link rel="stylesheet" href="/assets/css/site.css?v=1" />
+  <meta name="description" content="The Core defines shared signals, logic, thresholds, ownership, and change control across the People Operating System." />
+  <link rel="stylesheet" href="/assets/css/site.css?v=1">
 </head>
 
 <body data-page="system-core">
@@ -13,9 +13,17 @@
 
   <main class="wrap">
 
-    <header class="hero hero--tool" aria-label="Core hero">
-      <div class="crumbs">
-        <a href="/system/">System</a><span class="sep">/</span><span>The Core</span>
+    <header class="hero hero--tool" aria-label="The Core hero">
+      <div class="topbar">
+        <div class="crumbs">
+          <a href="/">Home</a><span class="sep">/</span>
+          <a href="/system/">System</a><span class="sep">/</span>
+          <span>The Core</span>
+        </div>
+
+        <div class="navlinks">
+          <a class="btn" href="/system/">Back to System</a>
+        </div>
       </div>
 
       <h1>The Core</h1>
@@ -25,24 +33,23 @@
       </p>
 
       <div class="backRow backRow--split">
-        <div class="ctaLabel">Start here if you want the system to scale.</div>
+        <a class="backLink" href="/system/">← Back to System</a>
+
         <div class="ctaRow">
           <a class="btn primary" href="/tools/metrics/">Open Metrics Tool</a>
-          <a class="btn" href="/system/">Back to System</a>
+          <a class="btn" href="/tools/">Browse Tools</a>
         </div>
       </div>
-
-      <div class="hairline"></div>
     </header>
 
-    <section class="card" aria-label="Core overview">
+    <section class="card" aria-label="What lives here">
       <h2>What lives here</h2>
-      <p class="muted" style="margin-top:0;">
+      <p class="muted" style="margin:0 0 12px;">
         The Core is the contract across the whole portfolio. Tools reference it — they don’t redefine it.
         This is how you get repeatability, auditability, and trusted decision-making across teams.
       </p>
 
-      <div class="miniGrid miniGrid--4" aria-label="Core modules">
+      <div class="miniGrid miniGrid--4" aria-label="Core pillars">
         <div class="mini">
           <b>Definitions</b>
           <span>Shared meanings for terms like “pipeline health,” “capacity,” “quality,” and “signal.”</span>
@@ -60,73 +67,23 @@
           <span>Who can change a definition, why, and how changes roll out safely.</span>
         </div>
       </div>
+
+      <div class="rule"></div>
+
+      <p class="small" style="margin:0;">
+        Tools reference The Core so dashboards stay consistent even as your team, process, and tooling evolve.
+      </p>
     </section>
 
-    <section class="grid2" aria-label="How it works">
-      <section class="full">
-        <h2>How the Core works in practice</h2>
-        <p class="muted" style="margin-top:0;">
-          Tools sit on top of shared signals. When the Core is stable, teams can move fast without breaking trust.
-        </p>
-
-        <div class="callout">
-          <b>Rule of thumb:</b> If two people can look at the same metric and tell two different stories,
-          you don’t have a metrics problem — you have a Core problem.
-        </div>
-
-        <h3>Core → Tool → Action</h3>
-        <ul>
-          <li><b>Core defines the signal</b> (what it is, how it’s computed, when it matters).</li>
-          <li><b>Tools operationalize it</b> (dashboards, A[i]gent flows, recommendations).</li>
-          <li><b>Action is governed</b> (safe Tier-1 autonomy, escalation, audit trail).</li>
-        </ul>
-
-        <h3>What you’ll see as this fills in</h3>
-        <ul>
-          <li>A clear dictionary of shared signals (with formulas + interpretation notes)</li>
-          <li>Decision thresholds tied to recommended actions</li>
-          <li>Change control so updates don’t silently break downstream tools</li>
-        </ul>
-      </section>
-
-      <aside class="card" aria-label="Core quick links">
-        <h2>Quick links</h2>
-        <p class="small" style="margin-top:0;">
-          Starting points while Core pages are being expanded.
-        </p>
-
-        <div class="rule"></div>
-
-        <p style="margin:0 0 8px;"><b>Signals &amp; execution</b></p>
-        <ul style="margin-top:0;">
-          <li><a href="/tools/metrics/"><b>Metrics Tool</b></a> — pipeline health, bottlenecks, actions</li>
-          <li><a href="/system/"><b>System</b></a> — the operating model and how tools connect</li>
-        </ul>
-
-        <div class="rule"></div>
-
-        <p style="margin:0 0 8px;"><b>Contact</b></p>
-        <p class="small" style="margin:0;">
-          Want a walkthrough of how Core governance prevents “Franken-systems”?
-          <a href="/contact/scheduler.html"><b>Book 15 minutes</b></a>.
-        </p>
-      </aside>
-    </section>
-
-    <section class="exploreNext" aria-label="Explore Next">
+    <section class="exploreNext" aria-label="Explore next">
       <div class="panel">
         <div class="panelInner">
-          <h3 class="section-title">Explore Next</h3>
-          <p class="section-sub">
-            Follow the thread from definitions → tools → shipped outcomes.
-          </p>
-
+          <h3 class="section-title">Explore next</h3>
+          <p class="section-sub">Jump into the tool layer or return to the system overview.</p>
           <div class="exploreNext__actions">
-            <a class="btn" href="/system/">System</a>
-            <a class="btn" href="/tools/">Tools</a>
-            <a class="btn" href="/use-cases/">Use cases</a>
-            <a class="btn" href="/articles/">Articles</a>
-            <a class="btn" href="/contact/scheduler.html">Book 15 minutes</a>
+            <a class="btn primary" href="/tools/metrics/">Metrics Tool</a>
+            <a class="btn" href="/system/">System Overview</a>
+            <a class="btn" href="/tools/">Tools Library</a>
           </div>
         </div>
       </div>
