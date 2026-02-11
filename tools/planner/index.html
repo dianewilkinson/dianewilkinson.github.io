@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MyPlanner – AI-Native Daily Task Planning from a Task Tracker</title>
+  <meta name="description" content="MyPlanner turns a simple task tracker + today’s calendar into a tight daily plan written into Google Docs—prioritized, time-blocked, and ready to execute." />
+  <link rel="stylesheet" href="/assets/css/site.css?v=1">
+</head>
+
+<body data-page="tool-index">
+  <div class="bar"></div>
+
+  <main class="wrap">
+
+    <!-- HERO -->
+    <header class="hero hero--tool">
+      <div class="topbar">
+        <div class="crumbs">
+          <a href="/">Home</a>
+          <span class="sep">/</span>
+          <a href="/tools/">Tools</a>
+          <span class="sep">/</span>
+          <span>MyPlanner / Overview</span>
+        </div>
+      </div>
+
+      <h1>Turn a task tracker into a <span class="accent">daily plan</span> you actually follow.</h1>
+      <p class="sub">
+        <strong>MyPlanner</strong> is a Google Apps Script tool that reads a lightweight tracker sheet + today’s calendar,
+        then writes a structured plan into Google Docs — prioritized, time-blocked, and resilient to “day drift.”
+      </p>
+
+      <div class="backRow backRow--split">
+        <!-- LEFT -->
+        <a class="backLink" href="/tools/">← Back</a>
+
+        <!-- RIGHT -->
+        <div class="ctaRow">
+          <a class="btn" href="/tools/" style="font-size:12px;padding:7px 12px;font-weight:900;">
+            Browse tools →
+          </a>
+          <a class="btn" href="/system/" style="font-size:12px;padding:7px 12px;font-weight:900;">
+            Explore the system →
+          </a>
+          <a class="btn"
+             href="/contact/scheduler.html"
+             target="_blank"
+             rel="noopener"
+             style="font-size:12px;padding:7px 12px;font-weight:900;">
+            📅 Book 15 minutes
+          </a>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- =========================
+         PAGE CONTENT START
+         ========================= -->
+
+    <!-- Purpose + Outcomes cards -->
+    <section class="grid2" aria-label="Purpose and outcomes">
+      <div class="card">
+        <h2 class="section-title">Purpose</h2>
+        <p class="muted">
+          Most task trackers fail at the moment of execution: the day starts, meetings happen, energy shifts —
+          and the list becomes noise. MyPlanner exists to convert a tracker into a <strong>decision-ready morning plan</strong>:
+          what matters today, when it happens, and what to say when you need to move work forward.
+        </p>
+
+        <div class="miniGrid" aria-label="Outcome pillars">
+          <div class="mini">
+            <b>Less drift</b>
+            <span>A tight “Today’s Focus” prevents reactive work from eating the day.</span>
+          </div>
+          <div class="mini">
+            <b>Fewer open loops</b>
+            <span>Draft messages + targets reduce the friction of follow-ups and handoffs.</span>
+          </div>
+          <div class="mini">
+            <b>Execution-ready</b>
+            <span>Time blocks with buffers assume real life (20% overrun) so plans survive contact.</span>
+          </div>
+        </div>
+
+        <div class="ctaRow ctaRow--left">
+          <a class="btnGhost" href="/tools/planner/playbook.html">View operating model &amp; guardrails →</a>
+          <a class="btnGhost" href="/use-cases/">See where it’s used →</a>
+        </div>
+
+        <div class="callout">
+          <strong>Generic by design:</strong> swap “application tracker” for any <em>task tracker</em> sheet.
+          MyPlanner detects common columns (status, priority, next step, last touch, notes, links) and works with what it finds.
+        </div>
+      </div>
+
+      <aside class="card">
+        <h2 class="section-title">Quick links</h2>
+        <p class="small">
+          This tool is part of the workflow layer: it turns “work to do” into a daily operating plan and can feed
+          downstream execution and governance.
+        </p>
+        <div class="rule"></div>
+
+        <p>
+          <a href="/tools/planner/playbook.html"><strong>Planner Playbook</strong></a><br />
+          <span class="small">Setup, data model, prompt design, and safe defaults.</span>
+        </p>
+
+        <p>
+          <a href="/system/"><strong>System Architecture</strong></a><br />
+          <span class="small">How planning connects to signals, decision logic, and execution.</span>
+        </p>
+
+        <p>
+          <a href="/tools/"><strong>Tool Library</strong></a><br />
+          <span class="small">See the other A[i]gents this can coordinate with.</span>
+        </p>
+
+        <div class="rule"></div>
+
+        <h2 style="margin-top:0">Status</h2>
+        <p class="small">
+          <strong>Overview:</strong> Live<br />
+          <strong>Playbook:</strong> Draft<br />
+          <strong>Demo:</strong> Optional (script-based)<br />
+          <strong>Deploy:</strong> Google Apps Script + Sheets + Docs
+        </p>
+      </aside>
+    </section>
+
+    <!-- What breaks -->
+    <section class="full" aria-label="What breaks without MyPlanner">
+      <h2 class="section-title">What breaks without this</h2>
+      <ul>
+        <li>Task lists grow, but priorities stay implicit — everything feels “urgent.”</li>
+        <li>Follow-ups happen late because the “next step” isn’t surfaced at the start of the day.</li>
+        <li>Calendar reality and task reality are disconnected (meetings steal the execution window).</li>
+        <li>You spend peak-energy time deciding what to do instead of doing it.</li>
+        <li>Plans don’t compound because the system never captures “Where we left off.”</li>
+      </ul>
+    </section>
+
+    <!-- What it does -->
+    <section class="full" aria-label="What MyPlanner does">
+      <h2 class="section-title">What it does</h2>
+      <ul>
+        <li><strong>Reads</strong> a tracker sheet (first tab) and keeps active/recent items (e.g., active statuses or recent touches).</li>
+        <li><strong>Reads</strong> today’s calendar and turns it into a realistic block schedule.</li>
+        <li><strong>Generates</strong> a structured plan with consistent headers (Focus → Top 5 → Schedule → Draft messages → Targets).</li>
+        <li><strong>Writes</strong> the day’s plan into a running Google Doc (upsert by date so re-runs replace today cleanly).</li>
+        <li><strong>Normalizes</strong> formatting (H2/H3 + base font) so the doc stays readable over time.</li>
+      </ul>
+
+      <p class="small" style="margin-top:12px;">
+        If an OpenAI key isn’t present, MyPlanner still produces a deterministic fallback plan — so the workflow never blocks.
+      </p>
+    </section>
+
+    <!-- How it works (brief architecture) -->
+    <section class="full" aria-label="How it works">
+      <h2 class="section-title">How it works</h2>
+      <ul>
+        <li><strong>Inputs:</strong> Google Sheet (task tracker), Google Calendar (today), Script Properties (optional OPENAI_KEY).</li>
+        <li><strong>Planner engine:</strong> prompt builder + robust section parser (so headers don’t drift).</li>
+        <li><strong>Output:</strong> Google Doc “My Planner — Control Panel” with one H2 section per day.</li>
+        <li><strong>Controls:</strong> custom Sheets menu (“Run Daily Plan now”, “Reset doc &amp; write today”).</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Privacy-first default:</strong> the tool runs in your Google environment.
+        If you enable the LLM call, only the summarized tracker bullets + today’s calendar bullets are sent to the model.
+      </div>
+    </section>
+
+    <!-- Where it fits -->
+    <section class="full" aria-label="Where MyPlanner fits">
+      <h2 class="section-title">Where it fits</h2>
+      <ul>
+        <li><strong>Downstream of work signals:</strong> tasks, priorities, last-touch dates, and calendar commitments.</li>
+        <li><strong>Upstream of execution:</strong> outreach, writing, building, follow-ups, and closing loops.</li>
+        <li><strong>Feeds other agents:</strong> planning output can become inputs for routing, audits, or portfolio ops.</li>
+      </ul>
+    </section>
+
+    <!-- =========================
+         PAGE CONTENT END
+         ========================= -->
+
+    <!-- EXPLORE NEXT (LOCKED) -->
+    <section class="exploreNext" aria-label="Explore Next">
+      <div class="panel panel--cool">
+        <h2 class="section-title exploreNext__title">Explore Next</h2>
+
+        <div class="exploreNext__actions">
+          <a class="btn" href="/system/">System</a>
+          <a class="btn" href="/tools/">Tools</a>
+          <a class="btn" href="/use-cases/">Use Cases</a>
+          <a class="btn" href="/system/core/">Core</a>
+          <a class="btn" href="/articles/">Articles</a>
+          <a class="btn" href="mailto:dianewilkinson510@gmail.com">Contact</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (LOCKED) -->
+  <footer class="site-footer">
+    <div class="site-footer__row">
+      <div>Based in the San Francisco Bay Area</div>
+      <div>
+        <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a>
+        ·
+        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
