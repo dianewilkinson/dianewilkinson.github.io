@@ -10,24 +10,25 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dianewilkinson.github.io/tools/" />
 
-  <!-- your single source of truth -->
   <link rel="stylesheet" href="/assets/css/site.css?v=1">
 </head>
 
 <body data-page="tools-index">
   <div class="bar"></div>
 
-  <div class="wrap">
+  <main class="wrap">
+
+    <!-- crumbs only (no top-right buttons) -->
     <div class="topbar">
       <div class="crumbs">
         <a href="/">Home</a>
         <span class="sep">/</span>
         <span>Tools</span>
       </div>
-
     </div>
 
-    <section class="hero hero--tool" aria-label="Tools hero">
+    <!-- HERO -->
+    <header class="hero hero--tool" aria-label="Tools hero">
       <div class="kicker"><span class="kdot"></span> Tools I Built · scan-first</div>
       <h1>Workflow-first tools that <span class="accent">speed decisions</span>.</h1>
       <p class="sub">
@@ -35,47 +36,50 @@
         Open any tool for a concise overview and optional deep dives (demo / playbook) when available.
       </p>
 
-      <div class="backRow">
+      <div class="backRow backRow--split">
+        <!-- LEFT -->
         <a class="backLink" href="/">← Back to Home</a>
 
-    <div class="ctaRow">
-      <span class="ctaLabel">Explore →</span>
-      <a class="btn primary" href="/tools/">Tools</a>
-      <a class="btn" href="/system/">System</a>
-      <a class="btn" href="/contact/scheduler.html" target="_blank" rel="noopener">Book 15 min</a>
-    </div>
+        <!-- RIGHT -->
+        <div class="ctaRow">
+          <span class="ctaLabel">Explore →</span>
+          <a class="btn primary" href="/tools/">Tools</a>
+          <a class="btn" href="/system/">System</a>
+          <a class="btn" href="/contact/scheduler.html" target="_blank" rel="noopener">Book 15 min</a>
+        </div>
       </div>
-    </section>
+    </header>
 
-  <section class="panel panel--cool" aria-label="Tools I Built">
-  <div class="panelInner">
-    <h2 class="section-title">Tools I Built</h2>
-    <p class="sub" style="margin:0 0 14px;">
-      Scan fast. Open any tool for a decision-ready overview.
-    </p>
+    <!-- TOOLS GRID -->
+    <section class="panel panel--cool" aria-label="Tools I Built">
+      <div class="panelInner">
+        <h2 class="section-title">Tools I Built</h2>
+        <p class="sub" style="margin:0 0 14px;">
+          Scan fast. Open any tool for a decision-ready overview.
+        </p>
 
-    <div class="appGrid" aria-label="Tools grid">
+        <div class="appGrid" aria-label="Tools grid">
 
-      <article class="appCard">
-        <div class="appTop">
-          <div class="appMain">
-            <h3>🦾 AI Tool: Talent Pipeline Health</h3>
-            <p>Troubleshoot bottlenecks in real time with immediate data-driven insights when actions matter.</p>
-          </div>
-          <span class="appBadge">Hiring &amp; Mobility</span>
-        </div>
-        <div class="appActions">
-          <a class="appLink" href="/tools/metrics/">Explore tool →</a>
-        </div>
-      </article>
+          <article class="appCard">
+            <div class="appTop">
+              <div class="appMain">
+                <h3>🦾 AI Tool: Talent Pipeline Health</h3>
+                <p>Troubleshoot bottlenecks in real time with immediate data-driven insights when actions matter.</p>
+              </div>
+              <span class="appBadge">Hiring &amp; Mobility</span>
+            </div>
+            <div class="appActions">
+              <a class="appLink" href="/tools/metrics/">Explore tool →</a>
+            </div>
+          </article>
 
-      <article class="appCard">
+          <article class="appCard">
             <div class="appTop">
               <div class="appMain">
                 <h3>🦾 AI Tool: Screening A[i]gent</h3>
                 <p>Deep-dive every last application in seconds. Uncover hidden talent. Better Decisions. Less Manual Work.</p>
               </div>
-              <span class="appBadge">Hiring & Mobility</span>
+              <span class="appBadge">Hiring &amp; Mobility</span>
             </div>
             <div class="appActions">
               <a class="appLink" href="/tools/screening/">Explore tool →</a>
@@ -88,10 +92,10 @@
                 <h3>📚 Case: Not All Sourcing Was Created Equal</h3>
                 <p>Once we understand the juice is not always worth the squeeze we learn to focus resources on the highest returns. Data-backed. Undeniable.</p>
               </div>
-              <span class="appBadge">Improvement & Strategy</span>
+              <span class="appBadge">Improvement &amp; Strategy</span>
             </div>
             <div class="appActions">
-              <a class="appLink" href="/use-cases/sourcing-quality/">Explore tool →</a>
+              <a class="appLink" href="/use-cases/sourcing-quality/">Explore →</a>
             </div>
           </article>
 
@@ -101,20 +105,20 @@
                 <h3>🦾 AI Tool: Employee Listening A[i]gent</h3>
                 <p>Finally, honest feedback without surveys, bias, or performative politics. We thought you'd never ask.</p>
               </div>
-              <span class="appBadge">Listening & Insights</span>
+              <span class="appBadge">Listening &amp; Insights</span>
             </div>
             <div class="appActions">
               <a class="appLink" href="/tools/listening/playbook/">Explore tool →</a>
             </div>
           </article>
-      
+
           <article class="appCard">
             <div class="appTop">
               <div class="appMain">
                 <h3>⚙️ Tool: Forecasting Calculator</h3>
                 <p>Precision People Planning.</p>
               </div>
-              <span class="appBadge">Improvement & Strategy</span>
+              <span class="appBadge">Improvement &amp; Strategy</span>
             </div>
             <div class="appActions">
               <a class="appLink" href="/tools/calculator/">Explore tool →</a>
@@ -127,7 +131,7 @@
                 <h3>🦾 AI Tool: Innovation A[i]gent</h3>
                 <p>Competitive advantage, employee engagement: keep the true spark of innovation alive without hack days, suggestion boxes, or politics. Meeting insight in the moment.</p>
               </div>
-              <span class="appBadge">Improvement & Strategy</span>
+              <span class="appBadge">Improvement &amp; Strategy</span>
             </div>
             <div class="appActions">
               <a class="appLink" href="/tools/innovation/">Explore tool →</a>
@@ -138,9 +142,9 @@
             <div class="appTop">
               <div class="appMain">
                 <h3>🦾 AI Tool: Sourcing A[i]gent</h3>
-                <p>Automate Candidate Sourcing & Ease Your Messy Recruiting Funnel Tops.</p>
+                <p>Automate Candidate Sourcing &amp; Ease Your Messy Recruiting Funnel Tops.</p>
               </div>
-              <span class="appBadge">Improvement & Strategy</span>
+              <span class="appBadge">Improvement &amp; Strategy</span>
             </div>
             <div class="appActions">
               <a class="appLink" href="/tools/sourcing/">Explore tool →</a>
@@ -151,7 +155,7 @@
             <div class="appTop">
               <div class="appMain">
                 <h3>🧠 AI Orchestration A[i]gent: Chief</h3>
-                <p>Because everyone deserves a personal Chief of Staff. Chief reasons, routes, consults, & deploys other A[i]gents. Literally. Always. On. 🔥</p>
+                <p>Because everyone deserves a personal Chief of Staff. Chief reasons, routes, consults, &amp; deploys other A[i]gents. Literally. Always. On. 🔥</p>
               </div>
               <span class="appBadge">Governance</span>
             </div>
@@ -166,10 +170,10 @@
                 <h3>📚 Playbook: Candidate Journey</h3>
                 <p>Communications, automations, and workflows across the candidate journey</p>
               </div>
-              <span class="appBadge">Improvement & Strategy</span>
+              <span class="appBadge">Improvement &amp; Strategy</span>
             </div>
             <div class="appActions">
-              <a class="appLink" href="/tools/candidate-journey/">Explore tool →</a>
+              <a class="appLink" href="/tools/candidate-journey/">Explore →</a>
             </div>
           </article>
 
@@ -177,21 +181,35 @@
             <div class="appTop">
               <div class="appMain">
                 <h3>📰 Article: Why 95% of AI Pilots Fail</h3>
-                <p>& What the Successful 5% Do Differently</p>
+                <p>&amp; What the Successful 5% Do Differently</p>
               </div>
-              <span class="appBadge">Improvement & Strategy</span>
+              <span class="appBadge">Improvement &amp; Strategy</span>
             </div>
             <div class="appActions">
               <a class="appLink" href="/articles/why-ai-pilots-fail/">Read more →</a>
             </div>
           </article>
+
         </div>
       </div>
     </section>
-    
 
-          
-  </div>
+    <!-- EXPLORE NEXT (LOCKED: no white inner) -->
+    <section class="exploreNext" aria-label="Explore Next">
+      <div class="panel panel--cool">
+        <h2 class="section-title exploreNext__title">Explore Next</h2>
+        <div class="exploreNext__actions">
+          <a class="btn" href="/system/">System</a>
+          <a class="btn" href="/tools/">Tools</a>
+          <a class="btn" href="/use-cases/">Use Cases</a>
+          <a class="btn" href="/system/core/">Core</a>
+          <a class="btn" href="/articles/">Articles</a>
+          <a class="btn" href="mailto:dianewilkinson510@gmail.com">Contact</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <footer class="site-footer">
     <div class="site-footer__row">
