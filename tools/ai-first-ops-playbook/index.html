@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI-First Operating Model — System Playbook</title>
+
+  <meta property="og:title" content="AI-First Operating Model — System Playbook">
+  <meta property="og:description" content="A practical operating model for using AI to reduce managerial busywork, expand autonomy, and keep humans on high-leverage work.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://dianewilkinson.github.io/system/ai-first-ops-model/">
+
+  <link rel="stylesheet" href="/assets/css/site.css?v=1">
+</head>
+
+<body data-page="tool-playbook">
+  <div class="bar"></div>
+
+  <main class="wrap">
+
+    <!-- Top crumbs + quick nav (optional but consistent with the rest of the system pages) -->
+    <div class="topbar" aria-label="Top navigation">
+      <div class="crumbs">
+        <a href="/">Home</a><span class="sep">/</span>
+        <a href="/system/">System</a><span class="sep">/</span>
+        <span>AI-First Operating Model</span>
+      </div>
+
+      <div class="navlinks">
+        <a class="btn" href="/tools/">Tools</a>
+        <a class="btn" href="/tools/">Library</a>
+        <a class="btn primary" href="/book/" target="_blank" rel="noopener">Book 15 min</a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero hero--tool" aria-label="Hero">
+      <span class="kicker"><span class="kdot"></span>System Playbook</span>
+
+      <h1 style="margin-bottom:6px;">
+        AI should remove <span class="accent">managerial sludge</span>, not add another layer of oversight.
+      </h1>
+
+      <p class="sub">
+        A practical framework for reducing managerial busywork, expanding autonomy, and keeping humans on high-leverage work.
+        <br />
+        <span class="small">By Diane Wilkinson — Recruiting Operations &amp; AI-Native TA Systems</span>
+      </p>
+
+      <div class="backRow backRow--split" style="margin-top:12px;">
+        <a class="backLink" href="/system/">← Back to System</a>
+        <div class="ctaRow ctaRow--tight">
+          <a class="btn" href="#implementation">Implementation</a>
+          <a class="btn primary" href="/book/" target="_blank" rel="noopener">Book 15 minutes</a>
+        </div>
+      </div>
+
+      <div class="hairline"></div>
+    </section>
+
+    <!-- SECTION TITLE (matches Tools I Built style) -->
+    <h3 class="section-title" style="margin-top:10px;">AI-First Operating Model</h3>
+    <p class="section-sub">
+      This model reduces the need for a traditional middle-management layer by moving repetitive oversight, approvals, and reporting into workflows, automation, and agents — while keeping humans on judgement, ethics, and accountability.
+    </p>
+
+    <!-- INFO ROW -->
+    <div class="info-layout" aria-label="Overview and TOC">
+      <aside class="hero-meta">
+        <h3 style="margin:0 0 8px; font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted2);">
+          What this covers
+        </h3>
+        <ul>
+          <li>Symptoms of “managerial sludge” in modern orgs</li>
+          <li>Principles for an AI-first, autonomy-heavy model</li>
+          <li>Operating stance: what AI does vs what humans own</li>
+          <li>Org structure without a heavy middle-management layer</li>
+          <li>Decision rights, guardrails, and risk triggers</li>
+          <li>Implementation path for TA &amp; adjacent teams</li>
+        </ul>
+      </aside>
+
+      <nav class="toc-card" aria-label="Sections">
+        <h3 style="margin:0 0 8px; font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted2);">
+          Sections
+        </h3>
+        <ul class="tocList">
+          <li class="toc"><a href="#context">1. Context &amp; Problem</a></li>
+          <li class="toc"><a href="#principles">2. Principles of an AI-First Model</a></li>
+          <li class="toc"><a href="#stance">3. Operating Stance: What AI Does vs Humans</a></li>
+          <li class="toc"><a href="#structure">4. Structure Without a Heavy Middle Layer</a></li>
+          <li class="toc"><a href="#zones">5. AI Zones: Human, Co-Pilot, Autonomy</a></li>
+          <li class="toc"><a href="#guardrails">6. Guardrails, Decision Rights &amp; Risk Triggers</a></li>
+          <li class="toc"><a href="#implementation">7. Implementation Path (TA &amp; People)</a></li>
+        </ul>
+      </nav>
+
+      <aside class="persona-card">
+        <h3 style="margin:0 0 8px; font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted2);">
+          Who this is for
+        </h3>
+        <p class="muted" style="margin:0;">
+          Leaders and operators designing AI-native teams, headcount plans, and operating rhythms where AI makes work better — instead of just adding more dashboards and status meetings.
+        </p>
+      </aside>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <section class="full prose" aria-label="Playbook content">
+      <section id="context">
+        <h2>1. Context &amp; Problem</h2>
+
+        <p>
+          Most organizations adopted layers of managers to compensate for <strong>information gaps</strong>
+          and <strong>coordination friction</strong>:
+        </p>
+        <ul>
+          <li>Managers as routers for updates, approvals, and escalations.</li>
+          <li>Managers as translators between systems, teams, and priorities.</li>
+          <li>Managers as the only people with a full view of workload and risk.</li>
+        </ul>
+
+        <p>AI and modern systems change that equation — if we let them.</p>
+
+        <p>Warning signs that your org is over-managing and under-enabling:</p>
+        <ul>
+          <li>Spike in <strong>grievances, burnout, or “quiet quitting”</strong>.</li>
+          <li>Teams stuck in <strong>status meetings, syncs, and check-ins</strong> just to stay aligned.</li>
+          <li>Managers spending most of their week on <strong>approvals, routing, and reporting</strong>.</li>
+          <li>High performers bypassing official channels to get anything done.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Core idea:</strong> Oversight, routing, and monitoring are <strong>system problems</strong>, not reasons to add more humans between humans.
+        </div>
+      </section>
+
+      <section id="principles">
+        <h2>2. Principles of an AI-First Operating Model</h2>
+        <p>This model is built around a few simple but non-negotiable principles:</p>
+
+        <h3>2.1 Reduce managerial busywork</h3>
+        <ul>
+          <li>Shift repetitive monitoring, triage, and standard approvals into workflows and agents.</li>
+          <li>Instrument processes so issues surface automatically instead of via status meetings.</li>
+          <li>Use AI for <strong>pattern detection</strong>; use humans for <strong>value judgements</strong>.</li>
+        </ul>
+
+        <h3>2.2 Expand autonomy at the edges</h3>
+        <ul>
+          <li>Give ICs clear guardrails, budgets, and playbooks — then let them run.</li>
+          <li>Make escalations <strong>easy and safe</strong>, so people don’t hoard decisions out of fear.</li>
+          <li>Expect teams to own outcomes, not just tasks.</li>
+        </ul>
+
+        <h3>2.3 Keep humans on high-leverage work</h3>
+        <ul>
+          <li>Humans handle judgement, nuance, ethics, and trade-offs.</li>
+          <li>AI prepares <strong>context, options, and evidence</strong> — it doesn’t replace accountability.</li>
+          <li>If AI increases cognitive load instead of freeing it, the design is wrong.</li>
+        </ul>
+
+        <h3>2.4 Evidence over hierarchy</h3>
+        <ul>
+          <li>Decisions should be traceable to <strong>inputs and rationale</strong>, not job titles.</li>
+          <li>AI can help surface comparable cases and impact, but <strong>humans sign off</strong>.</li>
+          <li>Leadership reviews patterns and outcomes, not individual micro-transactions.</li>
+        </ul>
+      </section>
+
+      <section id="stance">
+        <h2>3. Operating Stance: What AI Does vs Humans</h2>
+        <p>
+          An AI-first model doesn’t mean “AI makes all the decisions.” It means we are
+          <strong>deliberate</strong> about what gets automated, augmented, or reserved for humans.
+        </p>
+
+        <h3>3.1 AI’s job</h3>
+        <ul>
+          <li>Ingest data from systems (ATS/HRIS, tickets, docs, comms).</li>
+          <li>Highlight patterns: bottlenecks, outliers, risks, opportunities.</li>
+          <li>Generate first-draft options, summaries, and playbook-aligned suggestions.</li>
+          <li>Log decisions, outcomes, and exceptions for future learning.</li>
+        </ul>
+
+        <h3>3.2 Humans’ job</h3>
+        <ul>
+          <li>Set goals, constraints, and ethical boundaries.</li>
+          <li>Make final decisions on people-impacting outcomes.</li>
+          <li>Intervene on edge cases and nuance AI can’t see.</li>
+          <li>Continuously adjust playbooks and guardrails.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Key stance:</strong> AI runs the <strong>rails and dashboards</strong>; humans drive <strong>direction and accountability</strong>.
+        </div>
+      </section>
+
+      <section id="structure">
+        <h2>4. Structure Without a Heavy Middle Layer</h2>
+        <p>Instead of layering managers between every IC and leader, this model assumes:</p>
+        <ul>
+          <li>Strong <strong>individual contributors</strong> with clear ownership.</li>
+          <li>A small number of <strong>player-coaches / leads</strong> who own craft and standards.</li>
+          <li>AI + systems providing visibility that used to require “managers of managers.”</li>
+        </ul>
+
+        <h3>4.1 Example structure for TA &amp; People</h3>
+        <ul>
+          <li><strong>Executives / Heads (CPO, VP TA, etc.)</strong> — own strategy, budgets, and risk.</li>
+          <li><strong>Ops &amp; Architecture</strong> — design workflows, agents, metrics, and guardrails.</li>
+          <li><strong>Leads / Player-coaches</strong> — craft leadership, coaching, complex escalations.</li>
+          <li><strong>IC Pods</strong> — recruiters, coordinators, HRBPs, specialists working in autonomous pods.</li>
+        </ul>
+
+        <p>
+          What’s missing by design is a large band of middle managers whose primary job is
+          information routing, status collection, and lightweight approvals — because those
+          jobs are better handled by <strong>systems + agents + transparent metrics</strong>.
+        </p>
+      </section>
+
+      <section id="zones">
+        <h2>5. AI Zones: Human, Co-Pilot, Autonomy</h2>
+        <p>To avoid AI chaos, classify work into three zones before you build anything:</p>
+
+        <h3>5.1 Human-Only Zone</h3>
+        <ul>
+          <li>Final hiring and firing decisions.</li>
+          <li>Compensation, promotion, and performance ratings.</li>
+          <li>Sensitive employee relations and investigations.</li>
+          <li>Any decision with material legal or ethical risk.</li>
+        </ul>
+
+        <h3>5.2 Co-Pilot Zone</h3>
+        <ul>
+          <li>Drafting comms, summaries, and options with human review.</li>
+          <li>Screening assistance that still requires recruiter judgement.</li>
+          <li>Interview support (question suggestions, note scaffolds).</li>
+          <li>Scenario modeling and “what-if” simulations.</li>
+        </ul>
+
+        <h3>5.3 Autonomy Zone</h3>
+        <ul>
+          <li>Reminder nudges (scorecards, SLAs, overdue tasks).</li>
+          <li>Routing repeat, low-risk approvals under fixed thresholds.</li>
+          <li>Generating dashboards and roll-ups from system data.</li>
+          <li>Standard follow-ups and updates.</li>
+        </ul>
+
+        <div class="callout">
+          Autonomy should live where <strong>risk is low and reversibility is high</strong>;
+          Co-Pilot where <strong>judgement is needed but AI can prep the work</strong>;
+          Human-only where <strong>impact is material and irreversible</strong>.
+        </div>
+      </section>
+
+      <section id="guardrails">
+        <h2>6. Guardrails, Decision Rights &amp; Risk Triggers</h2>
+        <p>An AI-first operating model is only as strong as its <strong>guardrails</strong>. You need:</p>
+
+        <h3>6.1 Decision Rights Map (RACI)</h3>
+        <ul>
+          <li>Who is Responsible, Accountable, Consulted, and Informed for key decisions?</li>
+          <li>Where can AI recommend vs act vs only observe?</li>
+          <li>Where do escalations go when something feels off?</li>
+        </ul>
+
+        <h3>6.2 Policy Boundaries for AI</h3>
+        <ul>
+          <li>What data AI may access (and what’s explicitly off-limits).</li>
+          <li>How long data is retained and how it can be used.</li>
+          <li>Prohibited uses (e.g., direct hiring decisions, protected attributes).</li>
+        </ul>
+
+        <h3>6.3 Risk Triggers &amp; Kill Switches</h3>
+        <ul>
+          <li>Spike in grievances, adverse impact, or bias indicators.</li>
+          <li>Unexpected drift between AI suggestions and human decisions.</li>
+          <li>System errors that mis-route or mis-communicate critical decisions.</li>
+        </ul>
+
+        <p>
+          When triggers fire: pause automation in that zone, revert to human-only, investigate, and adjust guardrails before resuming.
+        </p>
+      </section>
+
+      <section id="implementation">
+        <h2>7. Implementation Path (TA &amp; People Teams)</h2>
+        <p>You don’t need a giant reorg to start. Phase it in through normal projects.</p>
+
+        <h3>7.1 Start With One Domain</h3>
+        <ul>
+          <li>Choose a contained area (e.g., interviews, candidate comms).</li>
+          <li>Map workflows, decision points, and pain points.</li>
+          <li>Classify work into Human / Co-Pilot / Autonomy zones.</li>
+        </ul>
+
+        <h3>7.2 Design Workflows + Agents Together</h3>
+        <ul>
+          <li>Fix the workflow first (clear stages, owners, inputs, outputs).</li>
+          <li>Layer AI where it removes friction instead of adding it.</li>
+          <li>Ensure every automation has an owner and a pause path.</li>
+        </ul>
+
+        <h3>7.3 Measure, Don’t Guess</h3>
+        <ul>
+          <li>Track time-to-decision, SLA adherence, no-show rates, escalations.</li>
+          <li>Track where AI created more work, not less — and adjust quickly.</li>
+          <li>Share results so teams understand the “why,” not just the tooling.</li>
+        </ul>
+
+        <p>
+          Over time, this becomes the default design method:
+          start with <strong>how the work should flow</strong>, then ask <strong>where AI can remove friction</strong>.
+        </p>
+      </section>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__row">
+      <div>This framework underpins the A[i]gent Suite — internal, workflow-first AI for recruiting and people systems.</div>
+      <div>
+        <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a>
+        ·
+        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
