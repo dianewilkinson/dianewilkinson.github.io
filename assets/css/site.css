@@ -89,17 +89,16 @@ a:hover{text-decoration:underline}
    PAGE MODES — DO NOT RENAME LIGHTLY
    Templates must use one of these.
    ========================= */
-body[data-page="home"]{}          /* already used */
-body[data-page="tools"]{}    /* tools library grid page */ 
-body[data-page="tool-index"]{}    /* individual tool overview pages */
-body[data-page="tool-playbook"]{} /* already used */
-body[data-page="tool-demo"]{}
-body[data-page="tool-demo-embed"]{}    /* demo embed pages */
-body[data-page="system"]{}
-body[data-page="case"]{}
-body[data-page="use-case"]{}
-body[data-page="article"]{}
-
+body[data-page="home"]{}             /* landing */
+body[data-page="tools"]{}            /* tools library grid page */
+body[data-page="tool-index"]{}       /* individual tool overview pages */
+body[data-page="tool-playbook"]{}    /* playbook pages */
+body[data-page="tool-demo"]{}        /* demo pages */
+body[data-page="tool-demo-embed"]{}  /* optional: embed-only demo preview pages */
+body[data-page="system"]{}           /* system pages */
+body[data-page="case"]{}             /* case study pages */
+body[data-page="use-case"]{}         /* use-case pages */
+body[data-page="article"]{}          /* article pages */
 
 /* =========================
    TOPBAR / NAV
@@ -582,7 +581,6 @@ body[data-page="home"] .panel--pink .panelInner{
 
 .tool-top > div{
   flex: 1 1 180px;
-  min-width:180px;
   min-width:0;
 }
 
@@ -607,7 +605,7 @@ body[data-page="home"] .panel--pink .panelInner{
   font-size:11px;
   font-weight:900;
   color:var(--muted2);
-  border:1px solid rgba(226,232,240,0.95);
+  border:1px solid rgba(226,232,240,.95);
   border-radius:999px;
   padding:4px 8px;
   background:rgba(255,255,255,.78);
@@ -863,16 +861,19 @@ body[data-page="home"] .panel--pink .panelInner{
 /* =========================
    PLAYBOOK LAYOUT (clean)
    ========================= */
-body[data-page="tool-playbook"] .info-layout{
+body[data-page="tool-playbook"] .info-layout,
+body[data-page="tool-playbook"] .info-layout-two{
   display:grid;
   grid-template-columns: 1.35fr 0.85fr;
   gap:14px;
   margin-top:14px;
 }
 @media (max-width: 1100px){
-  body[data-page="tool-playbook"] .info-layout{ grid-template-columns: 1fr; }
+  body[data-page="tool-playbook"] .info-layout,
+  body[data-page="tool-playbook"] .info-layout-two{ grid-template-columns: 1fr; }
 }
 
+/* If you use a split meta block in the hero, this keeps it consistent */
 body[data-page="tool-playbook"] .hero-meta--split .metaSplit{
   display:grid;
   grid-template-columns: 1fr;
@@ -882,6 +883,7 @@ body[data-page="tool-playbook"] .hero-meta--split .metaBlock + .metaBlock{
   padding-top:14px;
   border-top:1px solid var(--border);
 }
+
 body[data-page="tool-playbook"] .hero-meta,
 body[data-page="tool-playbook"] .toc-card,
 body[data-page="tool-playbook"] .persona-card{
@@ -995,7 +997,9 @@ body[data-page="tool-playbook"] .ctaRow--tight{
 }
 .appLink:hover{ color:#3730a3; text-decoration:none; }
 
-/* Explore Next active state by page (aligned to contracted page modes) */
+/* =========================
+   EXPLORE NEXT active state (section highlighting)
+   ========================= */
 body[data-page="system"] .exploreNext a[href="/system/"],
 body[data-page="system"] .exploreNext a[href="/system"],
 
@@ -1006,7 +1010,10 @@ body[data-page="use-case"] .exploreNext a[href="/use-cases/"],
 body[data-page="use-case"] .exploreNext a[href="/use-cases"],
 
 body[data-page="article"] .exploreNext a[href="/articles/"],
-body[data-page="article"] .exploreNext a[href="/articles"]{
+body[data-page="article"] .exploreNext a[href="/articles"],
+
+body[data-page="case"] .exploreNext a[href="/use-cases/"],
+body[data-page="case"] .exploreNext a[href="/use-cases"]{
   border-color: rgba(79,70,229,.35);
   background: linear-gradient(
     135deg,
