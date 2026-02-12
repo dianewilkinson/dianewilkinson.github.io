@@ -1022,3 +1022,20 @@ body[data-page="case"] .exploreNext a[href="/use-cases"]{
   );
   font-weight:900;
 }
+/* Explore Next – make Contact visually distinct */
+.exploreNext__actions a[href^="mailto:"]{
+  border-color: rgba(79,70,229,.35);
+  background: linear-gradient(
+    135deg,
+    rgba(79,70,229,.18),
+    rgba(96,165,250,.12)
+  );
+  font-weight:900;
+}
+.exploreNext__actions a[href^="mailto:"]:hover{
+  background: linear-gradient(
+    135deg,
+    rgba(79,70,229,.28),
+    rgba(96,165,250,.18)
+  );
+}
