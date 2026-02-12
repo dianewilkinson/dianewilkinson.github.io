@@ -86,6 +86,22 @@ a:hover{text-decoration:underline}
 .wrap{max-width:1120px; margin:0 auto; padding:28px 18px 64px}
 
 /* =========================
+   PAGE MODES — DO NOT RENAME LIGHTLY
+   Templates must use one of these.
+   ========================= */
+body[data-page="home"]{}          /* already used */
+body[data-page="tools"]{}
+body[data-page="tool-index"]{}    /* overview + tools index pages */
+body[data-page="tool-playbook"]{} /* already used */
+body[data-page="tool-demo"]{}
+body[data-page="tool-demo-embed"]{}    /* demo embed pages */
+body[data-page="system"]{}
+body[data-page="case"]{}
+body[data-page="use-case"]{}
+body[data-page="article"]{}
+
+
+/* =========================
    TOPBAR / NAV
    ========================= */
 .topbar{
