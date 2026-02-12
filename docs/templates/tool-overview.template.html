@@ -3,10 +3,8 @@
   Rules: site.css, page-shell contract, no new classes
 -->
 
-
 <!doctype html>
 <html lang="en">
-<!-- Head -->
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -19,13 +17,14 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dianewilkinson.github.io/tools/{{TOOL_ID}}/" />
 
-    <link rel="stylesheet" href="/assets/css/site.css?v=1">
+  <link rel="stylesheet" href="/assets/css/site.css?v=1">
 </head>
-<!-- Body -->
+
 <body data-page="tool-index">
   <div class="bar"></div>
-<!-- Top Nav -->
-  <div class="wrap">
+
+  <!-- Top Nav -->
+  <main class="wrap">
     <div class="topbar">
       <div class="crumbs">
         <a href="/">Home</a>
@@ -35,32 +34,32 @@
         <span>{{TOOL_NAME}} / Overview</span>
       </div>
     </div>
-<!-- Hero --> 
+
+    <!-- Hero -->
     <section class="hero hero--tool-strong" aria-label="{{TOOL_NAME}} Hero">
       <div class="kicker"><span class="kdot"></span> {{TOOL_TYPE}} · {{TOOL_AREA}} · Autonomy Tier: {{AUTO_TIER}}</div>
-      
-<h1>{{HERO_H1}} <span class="accent">{{HERO_H1_ACCENT}}</span>.</h1>
-      
-<p class="sub">
-        	{{HERO_DESC}}
-      	</p>
 
-     <div class="backRow backRow--split">
-  <a class="backLink" href="/tools/" aria-label="Back to Tools">← Back to Tools</a>
-      
-  <div class="ctaRow ctaRow--tight">
-    <span class="ctaLabel">Explore →</span>
-    <span class="btn primary">Overview</span>
-    <a class="btn" href="/tools/{{TOOL_ID}}/playbook.html">Playbook</a>
-    <a class="btn" href="/tools/{{TOOL_ID}}/demo.html">Demo</a>
-    <a class="btn" href="/system/core/metrics.html">Dictionary</a>
-    <a class="btn" href="/use-cases/">Cases</a>
-  </div>
-</div>
-  
+      <h1>{{HERO_H1}} <span class="accent">{{HERO_H1_ACCENT}}</span>.</h1>
+
+      <p class="sub">
+        {{HERO_DESC}}
+      </p>
+
+      <div class="backRow backRow--split">
+        <a class="backLink" href="/tools/" aria-label="Back to Tools">← Back to Tools</a>
+
+        <div class="ctaRow ctaRow--tight">
+          <span class="ctaLabel">Explore →</span>
+          <span class="btn primary">Overview</span>
+          <a class="btn" href="/tools/{{TOOL_ID}}/playbook.html">Playbook</a>
+          <a class="btn" href="/tools/{{TOOL_ID}}/demo.html">Demo</a>
+          <a class="btn" href="/system/core/metrics.html">Dictionary</a>
+          <a class="btn" href="/use-cases/">Cases</a>
+        </div>
+      </div>
     </section>
-<!-- Demo Preview --> 
-    <!-- Above-the-fold: iframe demo -->
+
+    <!-- Demo Preview -->
     <section class="demo" aria-label="{{TOOL_NAME}} Demo">
       <div class="demoHead">
         <div class="label"><span class="dot"></span> Demo Preview</div>
@@ -68,12 +67,13 @@
       </div>
       <iframe class="demoFrame" src="/tools/{{TOOL_ID}}/demo.html" title="{{TOOL_NAME}} Demo (embedded)"></iframe>
     </section>
-<!-- Purpose --> 
+
+    <!-- Purpose -->
     <section class="grid2" aria-label="Purpose and outcomes">
       <div class="card">
         <h2 class="section-title">Purpose</h2>
         <p class="muted">
-          {{TOOL_PURPOSE}} 
+          {{TOOL_PURPOSE}}
         </p>
 
         <div class="miniGrid" aria-label="Outcome pillars">
@@ -90,30 +90,32 @@
             <span>{{TOOL_OUTCOME3_DESC}}.</span>
           </div>
         </div>
-
       </div>
-<!-- Quick Links --> 
+
+      <!-- Quick Links -->
       <aside class="card">
         <h2 class="section-title">Quick links</h2>
         <p class="small">This tool is part of <strong>{{TOOL_AREA}}</strong> and feeds {{TOOL_FEEDS}}.</p>
         <div class="rule"></div>
 
-        <p><a href="/tools/{{TOOL_ID}}/playbook.html"><strong>{{TOOL_NAME}} Detailed Playbook</strong></a><br />
+        <p>
+          <a href="/tools/{{TOOL_ID}}/playbook.html"><strong>{{TOOL_NAME}} Detailed Playbook</strong></a><br />
           <span class="small">Governance, definitions, thresholds, and how autonomy stays safe.</span>
         </p>
 
-        <p><a href="/system/"><strong>System Architecture</strong></a><br />
+        <p>
+          <a href="/system/"><strong>System Architecture</strong></a><br />
           <span class="small">Where {{TOOL_NAME}} fits across the AI-native operating model.</span>
         </p>
 
-        <p><a href="/use-cases/"><strong>Use Cases</strong></a><br />
+        <p>
+          <a href="/use-cases/"><strong>Use Cases</strong></a><br />
           <span class="small">How {{TOOL_NAME}} makes life easier in the real world</span>
         </p>
-
       </aside>
     </section>
-<!-- What Breaks -->
 
+    <!-- What Breaks -->
     <section class="full" aria-label="What breaks without {{TOOL_NAME}}">
       <h2 class="section-title">What breaks without this</h2>
       <ul>
@@ -125,7 +127,7 @@
       </ul>
     </section>
 
-<!-- What it does -->
+    <!-- What it does -->
     <section class="full" aria-label="What {{TOOL_NAME}} does">
       <h2 class="section-title">What it does</h2>
       <ul>
@@ -137,7 +139,7 @@
       <p class="small">Note: {{CALLOUT}}</p>
     </section>
 
-<!-- Where it fits -->
+    <!-- Where it fits -->
     <section class="full" aria-label="Where {{TOOL_NAME}} fits">
       <h2 class="section-title">Where it fits</h2>
       <ul>
@@ -147,32 +149,32 @@
       </ul>
     </section>
 
-<!-- Explore Next -->
-<section class="exploreNext" aria-label="Explore Next">
-  <div class="panel panel--cool">
-    <h2 class="section-title exploreNext__title">Explore Next</h2>
+    <!-- Explore Next -->
+    <section class="exploreNext" aria-label="Explore Next">
+      <div class="panel panel--cool">
+        <h2 class="section-title exploreNext__title">Explore Next</h2>
 
-    <div class="exploreNext__actions">
-      <a class="btn" href="/system/">System</a>
-      <a class="btn" href="/tools/">Tools</a>
-      <a class="btn" href="/use-cases/">Use Cases</a>
-      <a class="btn" href="/system/core/">Core (Rules)</a>
-      <a class="btn" href="/articles/">Articles</a>
-      <a class="btn" href="mailto:dianewilkinson510@gmail.com">Contact</a>
-    </div>
-  </div>
-</section>
-</div>
+        <div class="exploreNext__actions">
+          <a class="btn" href="/system/">System</a>
+          <a class="btn" href="/tools/">Tools</a>
+          <a class="btn" href="/use-cases/">Use Cases</a>
+          <a class="btn" href="/system/core/">Core (Rules)</a>
+          <a class="btn" href="/articles/">Articles</a>
+          <a class="btn" href="mailto:dianewilkinson510@gmail.com">Contact</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer class="site-footer">
-  <div class="site-footer__row">
-    <div>Based in the San Francisco Bay Area</div>
-    <div>
-      <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a>
-      ·
-      <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+    <div class="site-footer__row">
+      <div>Based in the San Francisco Bay Area</div>
+      <div>
+        <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a>
+        ·
+        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
     </div>
-  </div>
-</footer>
-
+  </footer>
 </body>
 </html>
