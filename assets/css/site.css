@@ -90,7 +90,7 @@ a:hover{text-decoration:underline}
    Templates must use one of these.
    ========================= */
 body[data-page="home"]{}          /* already used */
-body[data-page="tools"]{}    /* overview + tools index pages */ 
+body[data-page="tools"]{}    /* tools library grid page */ 
 body[data-page="tool-index"]{}    /* individual tool overview pages */
 body[data-page="tool-playbook"]{} /* already used */
 body[data-page="tool-demo"]{}
