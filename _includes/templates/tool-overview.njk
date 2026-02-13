@@ -1,0 +1,99 @@
+{% extends "layouts/base.njk" %}
+
+{% block crumbs %}
+<a href="/">Home</a> <span class="sep">/</span>
+<a href="/tools/">Tools</a> <span class="sep">/</span>
+<span>{{ toolName }}</span>
+{% endblock %}
+
+{% block heroTitle %}
+{{ heroTitle | safe }}
+{% endblock %}
+
+{% block ctas %}
+<span class="ctaLabel">Explore →</span>
+<a class="btn primary" href="/tools/{{ toolSlug }}/">Overview</a>
+<a class="btn" href="/tools/{{ toolSlug }}/playbook/">Playbook</a>
+<a class="btn" href="/tools/{{ toolSlug }}/demo/">Demo</a>
+<a class="btn" href="/use-cases/">Cases</a>
+{% endblock %}
+
+{% block content %}
+
+{# Above-the-fold: iframe demo #}
+<section class="demo" aria-label="{{ toolName }} Demo">
+  <div class="demoHead">
+    <div class="label"><span class="dot"></span> Demo Preview</div>
+    <a href="/tools/{{ toolSlug }}/demo/">Open full demo →</a>
+  </div>
+  <iframe
+    class="demoFrame"
+    src="/tools/{{ toolSlug }}/demo/"
+    title="{{ toolName }} Demo (embedded)"></iframe>
+</section>
+
+{# Purpose + Outcomes + Quick links #}
+<section class="grid2" aria-label="Purpose and outcomes">
+  <div class="card">
+    <h2 class="section-title">Purpose</h2>
+    <p class="muted">{{ purpose }}</p>
+
+    <div class="miniGrid" aria-label="Outcome pillars">
+      {% for o in outcomes %}
+      <div class="mini">
+        <b>{{ o.title }}</b>
+        <span>{{ o.desc }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <aside class="card">
+    <h2 class="section-title">Quick links</h2>
+    <p class="small">{{ quickIntro | safe }}</p>
+    <div class="rule"></div>
+
+    {% for link in quickLinks %}
+    <p>
+      <a href="{{ link.href }}"><strong>{{ link.label }}</strong></a><br />
+      <span class="small">{{ link.desc }}</span>
+    </p>
+    {% endfor %}
+  </aside>
+</section>
+
+{# What breaks #}
+<section class="full" aria-label="What breaks without {{ toolName }}">
+  <h2 class="section-title">What breaks without this</h2>
+  <ul>
+    {% for item in breaks %}
+    <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+{# What it does #}
+<section class="full" aria-label="What {{ toolName }} does">
+  <h2 class="section-title">What it does</h2>
+  <ul>
+    {% for item in does %}
+    <li>{{ item | safe }}</li>
+    {% endfor %}
+  </ul>
+
+  {% if note %}
+  <p class="small" style="margin-top:12px;">Note: {{ note }}</p>
+  {% endif %}
+</section>
+
+{# Where it fits #}
+<section class="full" aria-label="Where {{ toolName }} fits">
+  <h2 class="section-title">Where it fits</h2>
+  <ul>
+    {% for item in fits %}
+    <li>{{ item | safe }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% endblock %}
