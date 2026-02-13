@@ -1,10 +1,6 @@
 name: Build pages from tools.json
 on:
-  push:
-    paths:
-      - "tools/tools.json"
-      - "scripts/build-pages.mjs"
-      - "tools/**"
+  workflow_dispatch:
 
 jobs:
   build:
