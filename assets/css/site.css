@@ -96,15 +96,15 @@ a:hover{text-decoration:underline}
    PAGE MODES — DO NOT RENAME LIGHTLY
    Templates must use one of these.
    ========================= */
-body[data-page="home"]{}             /* landing */
-body[data-page="tools"]{}            /* tools library grid page */
-body[data-page="tool-index"]{}       /* individual tool overview pages */
-body[data-page="tool-playbook"]{}    /* playbook pages */
-body[data-page="tool-demo"]{}        /* demo pages */
-body[data-page="tool-demo-embed"]{}  /* optional: embed-only demo preview pages */
-body[data-page="system"]{}           /* system pages */
-body[data-page="use-case"]{}         /* use-case pages */
-body[data-page="article"]{}          /* article pages */
+body[data-page="home"]
+body[data-page="tools"]
+body[data-page="tool-index"]
+body[data-page="tool-playbook"]
+body[data-page="tool-demo"]
+body[data-page="tool-demo-embed"]
+body[data-page="system"]
+body[data-page="use-case"]
+body[data-page="article"]
 
 /* =========================
    TOPBAR / NAV
