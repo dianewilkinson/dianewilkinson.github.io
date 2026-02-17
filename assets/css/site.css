@@ -95,16 +95,18 @@ a:hover{text-decoration:underline}
 /* =========================
    PAGE MODES — DO NOT RENAME LIGHTLY
    Templates must use one of these.
+   Allowed pageId values:
+   - home
+   - tools
+   - tool-index
+   - tool-playbook
+   - tool-demo
+   - tool-demo-embed
+   - system
+   - use-case
+   - article
    ========================= */
-body[data-page="home"]
-body[data-page="tools"]
-body[data-page="tool-index"]
-body[data-page="tool-playbook"]
-body[data-page="tool-demo"]
-body[data-page="tool-demo-embed"]
-body[data-page="system"]
-body[data-page="use-case"]
-body[data-page="article"]
+
 
 /* =========================
    TOPBAR / NAV
