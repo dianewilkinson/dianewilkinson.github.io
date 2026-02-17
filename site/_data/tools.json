@@ -4,7 +4,6 @@
     "card": {
       "type": "ai_tool",
       "area": "Hiring & Mobility",
-      "emoji": "🤖",
       "title": "AI Tool: Talent Pipeline Health",
       "summary": "Troubleshoot bottlenecks in real time with immediate data-driven insights when actions matter.",
       "href": "/tools/metrics/",
@@ -64,7 +63,6 @@
     "card": {
       "type": "ai_tool",
       "area": "Hiring & Mobility",
-      "emoji": "🤖",
       "title": "AI Tool: Screening A[i]gent",
       "summary": "Deep-dive every last application in seconds. Uncover hidden talent. Better decisions. Less manual work.",
       "href": "/tools/screening/",
@@ -80,7 +78,6 @@
     "card": {
       "type": "ai_tool",
       "area": "Governance",
-      "emoji": "🧠",
       "title": "AI Tool: Chief Orchestration A[i]gent",
       "summary": "The orchestration layer that governs autonomy, routes decisions, enforces guardrails, and keeps humans in the loop.",
       "href": "/tools/chief/",
@@ -96,7 +93,6 @@
     "card": {
       "type": "ai_tool",
       "area": "Listening & Insights",
-      "emoji": "🤖",
       "title": "AI Tool: Employee Listening A[i]gent",
       "summary": "Finally, honest feedback without surveys, bias, or performative politics. The thought you’d never ask.",
       "href": "/tools/listening/",
