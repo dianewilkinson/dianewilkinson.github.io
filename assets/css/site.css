@@ -987,13 +987,29 @@ body[data-page="article"] .prose blockquote{
   color:var(--text);
   border-left:4px solid var(--accent);
   padding-left:16px;
-  margin:24px 0;
+  margin:22px 0;
+  padding:6px 0 6px 16px;
+  border-left:2px solid #7c3aed; /* thinner */
 }
 
-/* Lists slightly roomier */
+body[data-page="article"] .prose blockquote p{
+  margin:0;
+  font-size:22px;    /* bigger quote */
+  line-height:1.45;
+}
+
+body[data-page="article"] .prose blockquote b{
+  font-weight:900;
+}
+
+/* Articles: tighter lists */
 body[data-page="article"] .prose ul,
 body[data-page="article"] .prose ol{
-  margin:16px 0 16px 22px;
+  margin:10px 0 14px 18px;
+}
+
+body[data-page="article"] .prose li{
+  margin:3px 0; /* tighter */
 }
 
 /* =========================
@@ -1062,6 +1078,12 @@ body[data-page="article"] .callout{
   font-weight:800;
   text-align:center;
   padding:14px 16px;
+}
+
+/* Articles: all links purple */
+body[data-page="article"] .prose a,
+body[data-page="article"] .prose a:visited{
+  color:#7c3aed;
 }
 
 
