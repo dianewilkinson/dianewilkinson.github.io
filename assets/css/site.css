@@ -1023,9 +1023,7 @@ body[data-page="use-case"] .exploreNext a[href="/use-cases/"],
 body[data-page="use-case"] .exploreNext a[href="/use-cases"],
 
 body[data-page="article"] .exploreNext a[href="/articles/"],
-body[data-page="article"] .exploreNext a[href="/articles"],
-
-
+body[data-page="article"] .exploreNext a[href="/articles"]{
   border-color: rgba(79,70,229,.35);
   background: linear-gradient(
     135deg,
@@ -1034,6 +1032,7 @@ body[data-page="article"] .exploreNext a[href="/articles"],
   );
   font-weight:900;
 }
+
 /* Explore Next – make Contact visually distinct */
 .exploreNext__actions a[href^="mailto:"]{
   border-color: rgba(79,70,229,.35);
