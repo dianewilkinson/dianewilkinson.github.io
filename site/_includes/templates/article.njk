@@ -3,10 +3,6 @@
    Uses ONLY existing site.css classes
    ========================= #}
 
-{# Make articles standalone by default:
-   - keeps bar + wrap from base
-   - removes topbar/hero/exploreNext/footer
-#}
 {% set minimalShell = true %}
 
 {% extends "layouts/base.njk" %}
@@ -21,7 +17,6 @@
       </div>
     {% endif %}
 
-    {# Kicker row (use existing “kicker” styling) #}
     {% if kicker %}
       <div class="kicker">
         <span class="kdot"></span>
@@ -29,14 +24,12 @@
       </div>
     {% endif %}
 
-    {# Title uses standard h1 styling from site.css #}
     <h1>{{ title | safe }}</h1>
 
     {% if sub %}
       <p class="sub">{{ sub | safe }}</p>
     {% endif %}
 
-    {# Meta line (author/date/read time/etc.) #}
     {% if authorLine or readTime %}
       <p class="small muted">
         {% if authorLine %}{{ authorLine | safe }}{% endif %}
@@ -47,12 +40,10 @@
 
     <div class="rule"></div>
 
-    {# Optional “mini hero” callout line (use existing callout) #}
     {% if crumbTitle %}
       <div class="callout">{{ crumbTitle | safe }}</div>
     {% endif %}
 
-    {# Main article body comes from the page content #}
     {{ content | safe }}
 
     {% if tags %}
@@ -73,11 +64,13 @@
       {% endif %}
 
       {% if ctaBody %}
-        <p>{{ ctaBody | safe }}</p>
+        <p class="section-sub">{{ ctaBody | safe }}</p>
       {% endif %}
 
       {% if ctaNote %}
-        <p class="small muted">{{ ctaNote | safe }}</p>
+        <div class="navlinks" aria-label="CTA links">
+          {{ ctaNote | safe }}
+        </div>
       {% endif %}
     {% endif %}
 
