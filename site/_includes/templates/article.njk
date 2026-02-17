@@ -1,0 +1,82 @@
+{# =========================
+   TEMPLATE — Article (Standalone)
+   Uses ONLY existing site.css classes
+   ========================= #}
+
+{# Make articles standalone by default:
+   - keeps bar + wrap from base
+   - removes topbar/hero/exploreNext/footer
+#}
+{% set minimalShell = true %}
+
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+
+  <article class="full prose" aria-label="Article">
+
+    {# Kicker row (use existing “kicker” styling) #}
+    {% if kicker %}
+      <div class="kicker">
+        <span class="kdot"></span>
+        {{ kicker | safe }}
+      </div>
+    {% endif %}
+
+    {# Title uses standard h1 styling from site.css #}
+    <h1>{{ title | safe }}</h1>
+
+    {# Meta line (author/date/read time/etc.) #}
+    {% if authorLine or readTime %}
+      <p class="small muted">
+        {% if authorLine %}{{ authorLine | safe }}{% endif %}
+        {% if authorLine and readTime %} · {% endif %}
+        {% if readTime %}{{ readTime | safe }}{% endif %}
+      </p>
+    {% endif %}
+
+    <div class="rule"></div>
+
+    {# Optional “mini hero” callout line (use existing callout) #}
+    {% if crumbTitle %}
+      <div class="callout">{{ crumbTitle | safe }}</div>
+    {% endif %}
+
+    {# Main article body comes from the page content #}
+    {{ content | safe }}
+
+    {% if tags %}
+      <div class="rule"></div>
+      <h2 class="section-title">Tags</h2>
+      <div class="tool-actions" aria-label="Tags list">
+        {% for t in tags %}
+          <span class="badge">{{ t }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if ctaTitle or ctaBody or ctaNote or backHref %}
+      <div class="rule"></div>
+
+      {% if ctaTitle %}
+        <h2 class="section-title">{{ ctaTitle | safe }}</h2>
+      {% endif %}
+
+      {% if ctaBody %}
+        <p>{{ ctaBody | safe }}</p>
+      {% endif %}
+
+      {% if ctaNote %}
+        <p class="small muted">{{ ctaNote | safe }}</p>
+      {% endif %}
+
+      {% if backHref %}
+        <div class="backRow">
+          <a class="backLink" href="{{ backHref }}">← {{ backLabel or "Back" }}</a>
+        </div>
+      {% endif %}
+    {% endif %}
+
+  </article>
+
+{% endblock %}

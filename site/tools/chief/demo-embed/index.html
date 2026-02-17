@@ -1,0 +1,1294 @@
+<!-- SOURCE: site/tools/chief/demo-embed/index.html -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chief — Orchestrated People Ops (Demo)</title>
+
+  <meta property="og:title" content="Chief — Orchestrated People Ops (Demo)">
+  <meta property="og:description" content="Dashboard + ask: Chief surfaces what matters, routes work to A[i]gents, and keeps humans at decision boundaries.">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root{
+      --bg:#f9fafb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#4b5563;
+      --border:#e5e7eb;
+      --shadow:rgba(15,23,42,0.08);
+
+      --purple:#4f46e5;
+      --purple-2:#4338ca;
+
+      --accent-grad:linear-gradient(135deg,#f97373,#fb7185,#a855f7,#6366f1);
+      --accent-soft:linear-gradient(135deg,rgba(249,115,129,.10),rgba(168,85,247,.10),rgba(99,102,241,.10));
+
+      --good:#16a34a;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+      --info:#2563eb;
+
+      --pillbg:#f3f4f6;
+      --pillbd:rgba(148,163,184,.45);
+    }
+
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    .bar{height:4px;background:var(--accent-grad);}
+
+    .wrap{
+      max-width:1120px;
+      margin:0 auto;
+      padding:10px 16px 22px;
+      overflow:visible;
+    }
+
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      overflow:visible;
+    }
+
+    .appicons{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      overflow:visible;
+    }
+
+    button{ -webkit-appearance:none; appearance:none; }
+
+    .appbtn{
+      position:relative;
+      width:34px;height:34px;
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      box-shadow:0 1px 2px var(--shadow);
+      padding:6px;
+      overflow:visible;
+      line-height:0;
+    }
+    .appbtn:hover{background:#fbfbff;border-color:rgba(99,102,241,.45);}
+
+    .appimg{
+      width:22px;
+      height:22px;
+      display:block;
+      object-fit:contain;
+      border-radius:6px;
+    }
+
+    .appfallback{
+      font-size:12px;
+      font-weight:950;
+      color:#374151;
+      user-select:none;
+      line-height:1;
+    }
+
+    .badge{
+      position:absolute;
+      top:-9px;
+      right:-9px;
+      min-width:18px;
+      height:18px;
+      padding:0 5px;
+      border-radius:999px;
+      background:#111827;
+      color:#fff;
+      font-size:11px;
+      font-weight:950;
+      line-height:18px;
+      border:2px solid #fff;
+      box-shadow:0 10px 18px rgba(0,0,0,.20);
+      transform:translate(2px,-2px);
+      pointer-events:none;
+      z-index:5;
+    }
+    .badge.hide{display:none;}
+
+    .topright{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      overflow:visible;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
+      font-size:12px;
+      font-weight:800;
+      color:#374151;
+      white-space:nowrap;
+    }
+    .iconbtn{
+      width:34px;height:34px;
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      box-shadow:0 1px 2px var(--shadow);
+    }
+    .iconbtn:hover{background:#fbfbff;border-color:rgba(99,102,241,.45);}
+
+    .panel{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:0 1px 3px var(--shadow);
+      overflow:hidden;
+    }
+    .panelhead{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      background:var(--accent-soft);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .paneltitle{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      letter-spacing:-0.01em;
+    }
+    .panelmeta{
+      font-size:12px;
+      font-weight:800;
+      color:#6b7280;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .smallbtn{
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      font-weight:950;
+      cursor:pointer;
+      color:#374151;
+    }
+    .smallbtn:hover{border-color:rgba(99,102,241,.45); color:var(--purple);}
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      padding:14px;
+    }
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr;}
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:14px;
+      box-shadow:0 1px 2px var(--shadow);
+      overflow:hidden;
+    }
+    .cardhead{
+      padding:10px 12px;
+      border-bottom:1px solid #eef2f7;
+      background:linear-gradient(180deg,rgba(79,70,229,.06), rgba(255,255,255,0));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .cardhead h3{
+      margin:0;
+      font-size:13px;
+      font-weight:950;
+      color:var(--purple);
+      letter-spacing:-0.01em;
+    }
+    .headmeta{
+      font-size:12px;
+      font-weight:900;
+      color:#374151;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      white-space:nowrap;
+    }
+
+    .cardbody{padding:10px 12px;}
+
+    .list{display:flex; flex-direction:column; gap:8px;}
+    .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:9px 10px;
+      border:1px solid #eef2f7;
+      background:#fbfdff;
+      border-radius:12px;
+      cursor:pointer;
+    }
+    .row:hover{background:#fff;border-color:rgba(99,102,241,.25);}
+    .row:active{transform:translateY(0.5px);}
+
+    .rowleft{min-width:0;}
+    .rowtitle{
+      font-size:13px;
+      font-weight:900;
+      color:#111827;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .rowsub{
+      margin-top:2px;
+      font-size:12px;
+      color:#6b7280;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .statuspill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:92px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--pillbd);
+      background:var(--pillbg);
+      font-size:12px;
+      font-weight:950;
+      letter-spacing:-0.01em;
+      user-select:none;
+    }
+    .sp-good{color:var(--good);}
+    .sp-warn{color:var(--warn);}
+    .sp-bad{color:var(--bad);}
+    .sp-info{color:var(--info);}
+    .sp-neutral{color:#374151;}
+    .sp-purple{color:var(--purple);}
+
+    .newswrap{
+      padding:0 14px 14px;
+      display:none;
+    }
+    .newsgrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width:980px){
+      .newsgrid{grid-template-columns:1fr;}
+    }
+
+    .help{
+      margin-top:14px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:0 1px 3px var(--shadow);
+      overflow:hidden;
+      background:#fff;
+    }
+    .helphead{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      background:var(--accent-soft);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .helptitle{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:950;
+      letter-spacing:-0.01em;
+      color:var(--purple);
+    }
+    .chiefmark{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:#374151;
+      font-weight:900;
+      font-size:12px;
+    }
+    .helpbody{
+      padding:12px 14px;
+      display:grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width:980px){
+      .helpbody{grid-template-columns:1fr;}
+    }
+    .helpbox{
+      border:1px solid #eef2f7;
+      border-radius:14px;
+      background:#fbfdff;
+      padding:10px 10px 12px;
+    }
+    .label{
+      font-size:11px;
+      color:#6b7280;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-weight:900;
+      margin-bottom:6px;
+    }
+    .mini{
+      font-size:12px;
+      color:#6b7280;
+      margin-top:6px;
+      line-height:1.4;
+    }
+    .select, .notes{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px;
+      font-size:13px;
+      outline:none;
+      background:#fff;
+    }
+    .slider{width:100%; accent-color: var(--purple);}
+
+    .chatbar{
+      border-top:1px solid var(--border);
+      padding:10px 12px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      background:#fff;
+    }
+    .chaticon{
+      width:34px;height:34px;
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#6b7280;
+      user-select:none;
+    }
+    .input{
+      flex:1;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:11px 12px;
+      font-size:13px;
+      outline:none;
+      background:#fbfdff;
+    }
+    .btn{
+      border:1px solid rgba(99,102,241,.45);
+      background:var(--purple);
+      color:#fff;
+      border-radius:12px;
+      padding:11px 14px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btn:hover{background:var(--purple-2);}
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      background:#111827;
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .18s ease, transform .18s ease;
+      z-index:999;
+    }
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(-2px);}
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(17,24,39,.48);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:1000;
+    }
+    .modal.show{display:flex;}
+    .sheet{
+      width:min(980px, 100%);
+      height:min(640px, 92vh);
+      background:#fff;
+      border:1px solid rgba(148,163,184,.45);
+      border-radius:18px;
+      box-shadow:0 30px 80px rgba(0,0,0,.20);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .sheethead{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      background:var(--accent-soft);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .sheettitle{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:950;
+      color:#111827;
+      letter-spacing:-0.01em;
+    }
+    .sheettitle .sub{
+      font-size:12px;
+      font-weight:900;
+      color:#6b7280;
+    }
+    .close{
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
+      border-radius:12px;
+      padding:8px 10px;
+      font-size:12px;
+      font-weight:950;
+      cursor:pointer;
+    }
+    .close:hover{border-color:rgba(99,102,241,.45);}
+
+    .sheetbody{
+      flex:1;
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      min-height:0;
+    }
+    @media (max-width:860px){
+      .sheetbody{grid-template-columns:1fr;}
+    }
+
+    .sidebar{
+      border-right:1px solid #eef2f7;
+      padding:10px;
+      background:#fbfdff;
+      min-height:0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .tabs{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .tab{
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      font-weight:950;
+      cursor:pointer;
+      color:#374151;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .tab.active{
+      border-color:rgba(99,102,241,.55);
+      color:var(--purple);
+      background:rgba(79,70,229,.06);
+    }
+    .inboxlist{
+      overflow:auto;
+      border:1px solid #eef2f7;
+      border-radius:14px;
+      background:#fff;
+      min-height:0;
+    }
+    .item{
+      padding:10px 10px;
+      border-bottom:1px solid #eef2f7;
+      cursor:pointer;
+    }
+    .item:hover{background:#fbfdff;}
+    .item.active{background:rgba(79,70,229,.06);}
+    .item .t{
+      font-size:13px;
+      font-weight:950;
+      color:#111827;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .item .s{
+      margin-top:2px;
+      font-size:12px;
+      color:#6b7280;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .content{
+      padding:12px 12px 14px;
+      min-height:0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .preview{
+      border:1px solid #eef2f7;
+      border-radius:14px;
+      background:#fff;
+      padding:12px;
+      min-height:0;
+      overflow:auto;
+    }
+    .preview h4{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:950;
+      color:#111827;
+    }
+    .preview .meta{
+      font-size:12px;
+      color:#6b7280;
+      margin-bottom:10px;
+    }
+    .preview .body{
+      font-size:13px;
+      color:#374151;
+      line-height:1.6;
+      white-space:pre-wrap;
+    }
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .act{
+      border:1px solid rgba(148,163,184,.55);
+      background:#fff;
+      border-radius:12px;
+      padding:9px 10px;
+      font-size:12px;
+      font-weight:950;
+      cursor:pointer;
+      color:#374151;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .act:hover{border-color:rgba(99,102,241,.45); color:var(--purple);}
+    .act.primary{
+      background:var(--purple);
+      border-color:var(--purple);
+      color:#fff;
+    }
+    .act.primary:hover{background:var(--purple-2);border-color:var(--purple-2);color:#fff;}
+    .agentlog{
+      border:1px solid #eef2f7;
+      border-radius:14px;
+      background:#fbfdff;
+      padding:10px;
+      font-size:12px;
+      color:#6b7280;
+      line-height:1.5;
+    }
+    .agentlog strong{color:#374151;}
+  </style>
+</head>
+
+<body>
+  <div class="bar"></div>
+
+  <div class="wrap">
+    <div class="top">
+      <div class="appicons">
+        <button class="appbtn" id="appSlack" title="Slack (click to open)">
+          <img class="appimg" src="/assets/logos/slack.png" alt="Slack"
+            onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
+          <span class="appfallback" style="display:none;">S</span>
+          <span class="badge" id="badgeSlack">7</span>
+        </button>
+
+        <button class="appbtn" id="appGmail" title="Gmail (click to open)">
+          <img class="appimg" src="/assets/logos/gmail.png" alt="Gmail"
+            onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
+          <span class="appfallback" style="display:none;">G</span>
+          <span class="badge" id="badgeGmail">12</span>
+        </button>
+
+        <button class="appbtn" id="appInmail" title="LinkedIn InMail (click to open)">
+          <img class="appimg" src="/assets/logos/inmail.png" alt="InMail"
+            onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
+          <span class="appfallback" style="display:none;">in</span>
+          <span class="badge" id="badgeInmail">3</span>
+        </button>
+
+        <button class="appbtn" id="appWhatsapp" title="WhatsApp (click to open)">
+          <img class="appimg" src="/assets/logos/whatsapp.png" alt="WhatsApp"
+            onerror="this.remove(); this.parentNode.querySelector('.appfallback').style.display='block';">
+          <span class="appfallback" style="display:none;">W</span>
+          <span class="badge" id="badgeWhatsapp">2</span>
+        </button>
+      </div>
+
+      <div class="topright">
+        <span class="pill" id="datePill">📅 Thu, Jan 29</span>
+        <span class="pill" id="timePill">🕒 03:10 PM</span>
+        <span class="pill" id="weatherPill">☀️ 58°F · San Francisco</span>
+        <button class="iconbtn" id="settingsBtn" title="Settings (stub)">⚙️</button>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <section class="panel" aria-label="Overview">
+      <div class="panelhead">
+        <div class="paneltitle">📌 Overview</div>
+        <div class="panelmeta">
+          <span>Select Cards for Details</span>
+          <button class="smallbtn" id="toggleNewsBtn" type="button">Show News</button>
+        </div>
+      </div>
+
+      <div class="grid" id="overviewGrid">
+        <div class="card" data-card="interviews">
+          <div class="cardhead">
+            <h3>Today's Interviews</h3>
+            <span class="headmeta">⚠️ <span style="color:#374151;font-weight:900;">Prep:</span> 2</span>
+          </div>
+          <div class="cardbody">
+            <div class="list">
+              <div class="row" data-interview="i1">
+                <div class="rowleft">
+                  <div class="rowtitle">10:30 — Alex Morgan</div>
+                  <div class="rowsub">HM Screen · J. Rivera</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-warn">⚠️ Prep</span></div>
+              </div>
+              <div class="row" data-interview="i2">
+                <div class="rowleft">
+                  <div class="rowtitle">12:00 — Priya Shah</div>
+                  <div class="rowsub">Tech Screen · S. Kim</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-good">✅ Ready</span></div>
+              </div>
+              <div class="row" data-interview="i3">
+                <div class="rowleft">
+                  <div class="rowtitle">3:00 — Diego Ruiz</div>
+                  <div class="rowsub">Panel · Panel (3)</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-warn">⚠️ Prep</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Open Reqs -->
+        <div class="card" data-card="reqs">
+          <div class="cardhead">
+            <h3>Open Requisitions</h3>
+            <span class="headmeta">📌 <span style="color:#374151;font-weight:900;">3 open</span></span>
+          </div>
+          <div class="cardbody">
+            <div class="list">
+              <div class="row" data-req="r1" data-metrics-tab="enterprise-sales-director">
+                <div class="rowleft">
+                  <div class="rowtitle">Enterprise Sales Director</div>
+                  <div class="rowsub">Active search · Metrics demo</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-warn">Watch</span></div>
+              </div>
+
+              <div class="row" data-req="r2" data-metrics-tab="software-engineer">
+                <div class="rowleft">
+                  <div class="rowtitle">Software Engineer</div>
+                  <div class="rowsub">Active search · Metrics demo</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-bad">Bottleneck</span></div>
+              </div>
+
+              <div class="row" data-req="r3" data-metrics-tab="senior-data-analyst">
+                <div class="rowleft">
+                  <div class="rowtitle">Senior Data Analyst</div>
+                  <div class="rowsub">Active search · Metrics demo</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-bad">Bottleneck</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="card" data-card="projects">
+          <div class="cardhead">
+            <h3>Projects & Deadlines</h3>
+            <span class="headmeta">🗂️ <span style="color:#374151;font-weight:900;">2 active</span></span>
+          </div>
+          <div class="cardbody">
+            <div class="list">
+              <div class="row" data-project="p1">
+                <div class="rowleft">
+                  <div class="rowtitle">Market map — ML Eng</div>
+                  <div class="rowsub">Due: Fri · Needs attention</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Review</span></div>
+              </div>
+              <div class="row" data-project="p2">
+                <div class="rowleft">
+                  <div class="rowtitle">Hiring kickoff prep</div>
+                  <div class="rowsub">Due: Tomorrow · In progress</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Review</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Employer Brand -->
+        <div class="card" data-card="socials">
+          <div class="cardhead">
+            <h3>Employer Brand / Socials</h3>
+            <span class="headmeta">💬 <span style="color:#374151;font-weight:900;">2 items</span></span>
+          </div>
+          <div class="cardbody">
+            <div class="list">
+              <div class="row" data-social="s1">
+                <div class="rowleft">
+                  <div class="rowtitle">Glassdoor: Response needed (3★)</div>
+                  <div class="rowsub">Draft available (approval required to post)</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Review</span></div>
+              </div>
+              <div class="row" data-social="s2">
+                <div class="rowleft">
+                  <div class="rowtitle">LinkedIn: Post — Hiring update</div>
+                  <div class="rowsub">Scheduled · time set (Tier 1 scheduling)</div>
+                </div>
+                <div class="rowright"><span class="statuspill sp-purple">Review</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Optional News -->
+      <div class="newswrap" id="newsWrap">
+        <div class="newsgrid">
+          <div class="card" data-card="news">
+            <div class="cardhead">
+              <h3>Company & Industry News</h3>
+              <span class="headmeta">📰 <span style="color:#374151;font-weight:900;">Today</span></span>
+            </div>
+            <div class="cardbody">
+              <div class="list">
+                <div class="row" data-news="n1">
+                  <div class="rowleft">
+                    <div class="rowtitle">Comp bands updated</div>
+                    <div class="rowsub">New leveling guidance effective next pay cycle</div>
+                  </div>
+                  <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+                </div>
+                <div class="row" data-news="n2">
+                  <div class="rowleft">
+                    <div class="rowtitle">Interviewer training refreshed</div>
+                    <div class="rowsub">New rubrics + calibration guide published</div>
+                  </div>
+                  <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+                </div>
+                <div class="row" data-news="n3">
+                  <div class="rowleft">
+                    <div class="rowtitle">Hiring market pulse</div>
+                    <div class="rowsub">Senior-loop cycle time increasing across tech this month</div>
+                  </div>
+                  <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+                </div>
+                <div class="row" data-news="n4">
+                  <div class="rowleft">
+                    <div class="rowtitle">Quarterly industry report released</div>
+                    <div class="rowsub">New report: roles, pay, demand shifts</div>
+                  </div>
+                  <div class="rowright"><span class="statuspill sp-purple">Read</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" aria-hidden="true">
+            <div class="cardhead">
+              <h3 style="color:#6b7280;">Notes</h3>
+              <span class="headmeta">🧠</span>
+            </div>
+            <div class="cardbody">
+              <div style="font-size:13px;color:#6b7280;line-height:1.6;">
+                Keep this area light. If News feels busy again, delete the <code>#newsWrap</code> block and the “Show News” button.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Help -->
+    <section class="help" aria-label="How can I help">
+      <div class="helphead">
+        <div>
+          <div class="helptitle">How can I help?</div>
+          <div class="chiefmark">🧠 Chief</div>
+        </div>
+      </div>
+
+      <div class="helpbody">
+        <div class="helpbox">
+          <div class="label">Bandwidth</div>
+          <div style="font-size:13px;font-weight:900;color:#374151;margin-bottom:6px;" id="bwLabel">Medium</div>
+          <input class="slider" id="bwSlider" type="range" min="1" max="5" value="3" />
+          <div class="mini">Controls how proactive Chief should be.</div>
+        </div>
+
+        <div class="helpbox">
+          <div class="label">Focus Preference</div>
+          <select class="select" id="focusSel">
+            <option>Normal</option>
+            <option>Interviews</option>
+            <option>Requisitions</option>
+            <option>Projects</option>
+            <option>Employer Brand</option>
+            <option>Inbox Zero</option>
+          </select>
+          <div class="mini">Affects which cards Chief prioritizes.</div>
+        </div>
+
+        <div class="helpbox">
+          <div class="label">Additional Notes</div>
+          <textarea class="notes" id="notes" rows="3" placeholder="Anything Chief should know?"></textarea>
+          <div class="mini">Used only per your Settings.</div>
+        </div>
+      </div>
+
+      <div class="chatbar">
+        <div class="chaticon">💬</div>
+        <input class="input" id="chatInput" placeholder="Type a request… (e.g., “Prep my 10:30” or “Show req risks”)">
+        <button class="btn" id="sendBtn">Send</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- INBOX MODAL -->
+  <div class="modal" id="modal">
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="In-browser inbox">
+      <div class="sheethead">
+        <div class="sheettitle">
+          <span id="sheetIcon">💬</span>
+          <span id="sheetName">Messaging</span>
+          <span class="sub" id="sheetSub">In-browser preview (demo)</span>
+        </div>
+        <button class="close" id="closeModal">Close</button>
+      </div>
+
+      <div class="sheetbody">
+        <div class="sidebar">
+          <div class="tabs" id="tabs">
+            <button class="tab active" data-tab="slack">💬 Slack</button>
+            <button class="tab" data-tab="email">✉️ Email</button>
+            <button class="tab" data-tab="inmail">🔗 InMail</button>
+            <button class="tab" data-tab="whatsapp">📱 WhatsApp</button>
+          </div>
+
+          <div class="inboxlist" id="inboxList"></div>
+        </div>
+
+        <div class="content">
+          <div class="preview" id="preview"></div>
+
+          <div class="actions" id="actions">
+            <button class="act" data-act="summarize">✨ Summarize</button>
+            <button class="act" data-act="draft">✍️ Draft reply</button>
+            <button class="act primary" data-act="route">🧩 Route to A[i]gent</button>
+            <button class="act" data-act="closeLoop">✅ Close loop</button>
+          </div>
+
+          <div class="agentlog" id="agentLog">
+            <strong>Agent demo:</strong> actions here simulate Chief routing work to specialized A[i]gents (reply drafting, tone checks, policy validation, logging).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ METRICS MODAL (MOVED OUTSIDE inbox modal; not nested) -->
+  <div class="modal" id="metricsModal">
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="Metrics A[i]gent">
+      <div class="sheethead">
+        <div class="sheettitle">
+          <span>📊</span>
+          <span>Metrics A[i]gent</span>
+          <span class="sub" id="metricsSub">Pipeline Health Diagnostics</span>
+        </div>
+        <button class="close" id="closeMetrics">Close</button>
+      </div>
+
+      <div style="flex:1; min-height:0;">
+        <iframe id="metricsFrame" title="Metrics A[i]gent"
+          style="width:100%; height:100%; border:0;" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Saved.</div>
+
+  <script>
+    // ---------- Demo data ----------
+    const DATA = {
+      counts: { slack: 7, email: 12, inmail: 3, whatsapp: 2 },
+      inbox: {
+        slack: [
+          { id:"s1", from:"#eng-hiring", subject:"HM wants a tighter bar for Backend Eng", snippet:"Can we calibrate on seniority expectations…", when:"12m ago",
+            body:"Thread in #eng-hiring\\n\\nHM: We need a tighter bar for Backend Eng.\\nRecruiter: Agree—can we align on seniority expectations?\\nHM: Yes. Also prioritize ownership examples.\\n\\nChief suggestion: run a quick calibration prompt + update screening rubric (Tier 2)."
+          },
+          { id:"s2", from:"@J.Rivera", subject:"Alex Morgan screen notes", snippet:"Alex has strong ownership, needs depth on…", when:"32m ago",
+            body:"DM from J. Rivera\\n\\nAlex Morgan:\\n- Strong ownership signals\\n- Needs deeper systems design examples\\n- Recommend: proceed to tech screen\\n\\nChief suggestion: generate candidate summary card + prep questions for 10:30."
+          },
+          { id:"s3", from:"#recruiting-ops", subject:"New rubric template posted", snippet:"Updated scorecard sections for consistency…", when:"1h ago",
+            body:"Announcement in #recruiting-ops\\n\\nNew rubric template posted.\\n- Standardized competencies\\n- Updated leveling language\\n\\nChief suggestion: apply template to open reqs (Tier 1)."
+          }
+        ],
+        email: [
+          { id:"e1", from:"Finance", subject:"Offer approval needed — BE (US)", snippet:"Please confirm comp band alignment…", when:"18m ago",
+            body:"From: Finance\\nSubject: Offer approval needed — Backend Engineer (US)\\n\\nPlease confirm comp band alignment and provide leveling rationale.\\n\\nChief suggestion: generate a 3-bullet justification + attach comp band policy excerpt."
+          },
+          { id:"e2", from:"HRBP", subject:"Hiring plan notes for Q1", snippet:"Sharing headcount assumptions + changes…", when:"2h ago",
+            body:"From: HRBP\\nSubject: Hiring plan notes for Q1\\n\\nSharing headcount assumptions and changes.\\n\\nChief suggestion: flag impacted reqs and update pipeline plan (Tier 2)."
+          },
+          { id:"e3", from:"Candidate", subject:"Re: Product Designer — scheduling", snippet:"Thanks—can we do later this week?", when:"3h ago",
+            body:"From: Candidate\\n\\nThanks—can we do later this week?\\n\\nChief suggestion: propose 3 times within constraints (Tier 1)."
+          }
+        ],
+        inmail: [
+          { id:"l1", from:"Senior Designer", subject:"Role scope + leveling question", snippet:"Is this IC6 or IC5? Comp band range…", when:"41m ago",
+            body:"LinkedIn InMail\\n\\nIs this IC6 or IC5? What’s the comp band range?\\n\\nChief suggestion: draft response that preserves policy + routes to HM for scope confirmation (Tier 3)."
+          },
+          { id:"l2", from:"Backend Eng", subject:"Interested — remote policy?", snippet:"I’m in NYC—does the role allow remote…", when:"4h ago",
+            body:"LinkedIn InMail\\n\\nI’m in NYC—does the role allow remote?\\n\\nChief suggestion: reply with approved policy wording + alternatives (Tier 1)."
+          }
+        ],
+        whatsapp: [
+          { id:"w1", from:"Hiring Manager", subject:"Quick question before panel", snippet:"Can we swap one interviewer?…", when:"9m ago",
+            body:"WhatsApp\\n\\nCan we swap one interviewer? Conflicting meeting.\\n\\nChief suggestion: propose replacement from panel pool + update calendar (Tier 2)."
+          },
+          { id:"w2", from:"Coordinator", subject:"Candidate is running 5 min late", snippet:"FYI — they’re in traffic…", when:"27m ago",
+            body:"WhatsApp\\n\\nFYI candidate running 5 min late.\\n\\nChief suggestion: notify panel + adjust start time within SLA (Tier 1)."
+          }
+        ]
+      }
+    };
+
+    // ---------- Toast ----------
+    const toast = document.getElementById("toast");
+    function showToast(text){
+      toast.textContent = text;
+      toast.classList.add("show");
+      clearTimeout(window.__toastT);
+      window.__toastT = setTimeout(()=>toast.classList.remove("show"), 1200);
+    }
+
+    // ---------- Badge rendering ----------
+    function setBadge(id, n){
+      const el = document.getElementById(id);
+      if(!el) return;
+      const v = Number(n || 0);
+      el.textContent = String(v);
+      el.classList.toggle("hide", v <= 0);
+    }
+    setBadge("badgeSlack", DATA.counts.slack);
+    setBadge("badgeGmail", DATA.counts.email);
+    setBadge("badgeInmail", DATA.counts.inmail);
+    setBadge("badgeWhatsapp", DATA.counts.whatsapp);
+
+    // ---------- Bandwidth label ----------
+    const bwSlider = document.getElementById("bwSlider");
+    const bwLabel = document.getElementById("bwLabel");
+    const bwMap = {1:"Low",2:"Low-Med",3:"Medium",4:"High",5:"Max"};
+    bwSlider.addEventListener("input", ()=> bwLabel.textContent = bwMap[bwSlider.value] || "Medium");
+
+    // ---------- Inbox modal wiring ----------
+    const modal = document.getElementById("modal");
+    const closeModal = document.getElementById("closeModal");
+    const inboxList = document.getElementById("inboxList");
+    const preview = document.getElementById("preview");
+    const tabs = document.getElementById("tabs");
+    const sheetIcon = document.getElementById("sheetIcon");
+    const sheetName = document.getElementById("sheetName");
+    const sheetSub = document.getElementById("sheetSub");
+    const agentLog = document.getElementById("agentLog");
+
+    let activeTab = "slack";
+    let activeItemId = null;
+
+    function openModal(tab){
+      modal.classList.add("show");
+      setActiveTab(tab || "slack");
+    }
+    function hideModal(){
+      modal.classList.remove("show");
+    }
+    closeModal.addEventListener("click", hideModal);
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) hideModal(); });
+
+    // ---------- Metrics modal wiring ----------
+    const metricsModal = document.getElementById("metricsModal");
+    const metricsFrame = document.getElementById("metricsFrame");
+    const closeMetrics = document.getElementById("closeMetrics");
+
+    function openMetrics(slug){
+      metricsModal.classList.add("show");
+      metricsFrame.src = `/agents/metrics/?req=${encodeURIComponent(slug || "")}`;
+      showToast("Opening Metrics…");
+    }
+    function hideMetrics(){
+      metricsModal.classList.remove("show");
+      metricsFrame.src = "";
+    }
+    closeMetrics.addEventListener("click", hideMetrics);
+    metricsModal.addEventListener("click", (e)=>{ if(e.target === metricsModal) hideMetrics(); });
+
+    // ✅ One Escape handler closes both
+    window.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape"){
+        hideModal();
+        hideMetrics();
+      }
+    });
+
+    function setActiveTab(tab){
+      activeTab = tab;
+      activeItemId = null;
+
+      [...tabs.querySelectorAll(".tab")].forEach(t=>{
+        t.classList.toggle("active", t.getAttribute("data-tab") === tab);
+      });
+
+      const head = {
+        slack:{icon:"💬", name:"Slack", sub:"In-browser Slack view (demo)"},
+        email:{icon:"✉️", name:"Email", sub:"In-browser inbox view (demo)"},
+        inmail:{icon:"🔗", name:"LinkedIn InMail", sub:"In-browser InMail view (demo)"},
+        whatsapp:{icon:"📱", name:"WhatsApp", sub:"In-browser WhatsApp view (demo)"}
+      }[tab];
+
+      sheetIcon.textContent = head.icon;
+      sheetName.textContent = head.name;
+      sheetSub.textContent = head.sub;
+
+      renderInboxList();
+      const arr = DATA.inbox[tab] || [];
+      if(arr[0]) selectItem(arr[0].id);
+      else renderPreviewEmpty();
+    }
+
+    tabs.addEventListener("click", (e)=>{
+      const btn = e.target.closest(".tab");
+      if(!btn) return;
+      setActiveTab(btn.getAttribute("data-tab"));
+    });
+
+    function renderInboxList(){
+      const arr = DATA.inbox[activeTab] || [];
+      inboxList.innerHTML = arr.map(m => `
+        <div class="item ${m.id===activeItemId ? "active":""}" data-item="${m.id}">
+          <div class="t">${escapeHtml(m.from)} · ${escapeHtml(m.subject)}</div>
+          <div class="s">${escapeHtml(m.snippet)} · ${escapeHtml(m.when)}</div>
+        </div>
+      `).join("") || `<div class="item"><div class="t">No items</div><div class="s">You're caught up.</div></div>`;
+
+      inboxList.querySelectorAll("[data-item]").forEach(el=>{
+        el.addEventListener("click", ()=> selectItem(el.getAttribute("data-item")));
+      });
+    }
+
+    function selectItem(id){
+      activeItemId = id;
+      renderInboxList();
+      const arr = DATA.inbox[activeTab] || [];
+      const msg = arr.find(x=>x.id===id);
+      if(!msg) return renderPreviewEmpty();
+      preview.innerHTML = `
+        <h4>${escapeHtml(msg.subject)}</h4>
+        <div class="meta">${escapeHtml(msg.from)} · ${escapeHtml(msg.when)}</div>
+        <div class="body">${escapeHtml(msg.body)}</div>
+      `;
+      agentLog.innerHTML = `<strong>Agent demo:</strong> select an action to show how Chief routes this item (logging + guardrails).`;
+    }
+
+    function renderPreviewEmpty(){
+      preview.innerHTML = `
+        <h4>Nothing selected</h4>
+        <div class="meta">Choose an item on the left.</div>
+        <div class="body">Chief will route work to an A[i]gent once you choose an action.</div>
+      `;
+    }
+
+    // Actions demo
+    document.getElementById("actions").addEventListener("click", (e)=>{
+      const btn = e.target.closest("[data-act]");
+      if(!btn) return;
+      const act = btn.getAttribute("data-act");
+      const label = {
+        summarize:"Summarize",
+        draft:"Draft reply",
+        route:"Route to A[i]gent",
+        closeLoop:"Close loop"
+      }[act] || "Action";
+
+      if(!activeItemId){
+        showToast("Select a message first.");
+        return;
+      }
+
+      const policyLine = (act==="route" || act==="draft")
+        ? "Guardrails: policy-checked · tone-safe · audit logged"
+        : "Guardrails: read-only · audit logged";
+
+      agentLog.innerHTML = `
+        <strong>Chief → Agent routing</strong><br>
+        Item: <code>${activeTab}:${activeItemId}</code><br>
+        Action: <strong>${label}</strong><br>
+        ${policyLine}<br><br>
+        <strong>Result (demo):</strong> Generated output ready for review in this panel.
+      `;
+      showToast(`${label} (demo)`);
+    });
+
+    // Top icon clicks open inbox modal
+    document.getElementById("appSlack")?.addEventListener("click", ()=>openModal("slack"));
+    document.getElementById("appGmail")?.addEventListener("click", ()=>openModal("email"));
+    document.getElementById("appInmail")?.addEventListener("click", ()=>openModal("inmail"));
+    document.getElementById("appWhatsapp")?.addEventListener("click", ()=>openModal("whatsapp"));
+
+    // Stub navigation
+    function navStub(kind, id){
+      showToast(`Would open ${kind} details (${id}) (demo).`);
+    }
+    document.querySelectorAll("[data-interview]").forEach(r=>r.addEventListener("click", ()=>navStub("interview", r.getAttribute("data-interview"))));
+
+    // ✅ CLEAN REQ CLICK WIRING (single handler, no nesting)
+    document.querySelectorAll("[data-req]").forEach(r=>{
+      r.addEventListener("click", ()=>{
+        const tab = r.getAttribute("data-metrics-tab");
+        if(tab){
+          openMetrics(tab);
+          return;
+        }
+        navStub("requisition", r.getAttribute("data-req"));
+      });
+    });
+
+    document.querySelectorAll("[data-project]").forEach(r=>r.addEventListener("click", ()=>navStub("project", r.getAttribute("data-project"))));
+    document.querySelectorAll("[data-social]").forEach(r=>r.addEventListener("click", ()=>navStub("employer brand item", r.getAttribute("data-social"))));
+    document.querySelectorAll("[data-news]").forEach(r=>r.addEventListener("click", ()=>navStub("news item", r.getAttribute("data-news"))));
+
+    // Chat send
+    const chatInput = document.getElementById("chatInput");
+    document.getElementById("sendBtn").addEventListener("click", ()=>{
+      const t = (chatInput.value || "").trim();
+      if(!t) return;
+      const lower = t.toLowerCase();
+
+      if(lower.includes("slack")) openModal("slack");
+      else if(lower.includes("email") || lower.includes("gmail")) openModal("email");
+      else if(lower.includes("inmail") || lower.includes("linkedin")) openModal("inmail");
+      else if(lower.includes("whatsapp")) openModal("whatsapp");
+      else if(lower.includes("prep")) showToast("Would generate prep pack (demo).");
+      else if(lower.includes("req")) showToast("Would open req risk view (demo).");
+      else showToast("Routed to Chief (demo).");
+
+      chatInput.value = "";
+    });
+
+    // News toggle
+    const newsWrap = document.getElementById("newsWrap");
+    const toggleNewsBtn = document.getElementById("toggleNewsBtn");
+    let newsShown = false;
+    toggleNewsBtn.addEventListener("click", ()=>{
+      newsShown = !newsShown;
+      newsWrap.style.display = newsShown ? "block" : "none";
+      toggleNewsBtn.textContent = newsShown ? "Hide News" : "Show News";
+      showToast(newsShown ? "News shown" : "News hidden");
+    });
+
+    // Utility
+    function escapeHtml(s){
+      return String(s ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+    }
+
+    // Settings (stub)
+    document.getElementById("settingsBtn").addEventListener("click", ()=>showToast("Settings (demo stub)."));
+
+    // Update time
+    function tick(){
+      const d = new Date();
+      const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+      const mons = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      const hh = d.getHours();
+      const mm = String(d.getMinutes()).padStart(2,"0");
+      const ampm = hh >= 12 ? "PM" : "AM";
+      const hh12 = ((hh + 11) % 12) + 1;
+      document.getElementById("timePill").textContent = `🕒 ${String(hh12).padStart(2,"0")}:${mm} ${ampm}`;
+      document.getElementById("datePill").textContent = `📅 ${days[d.getDay()]}, ${mons[d.getMonth()]} ${d.getDate()}`;
+    }
+    tick(); setInterval(tick, 15000);
+  </script>
+</body>
+</html>

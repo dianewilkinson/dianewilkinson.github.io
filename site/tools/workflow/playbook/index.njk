@@ -1,0 +1,431 @@
+---
+layout: templates/tool-playbook.njk
+permalink: "/tools/workflow/playbook/"
+
+title: "Workflow A[i]gent — Playbook"
+description: "Interview stage automation & orchestration engine for scheduling flows, scorecard SLAs, escalations, and candidate experience — ATS-agnostic and human-in-the-loop."
+pageId: "tool-playbook"
+heroClass: "hero--tool-strong"
+
+kicker: "Playbook · Hiring & Mobility · Autonomy Tier: 1"
+backHref: "/tools/workflow/"
+backLabel: "Back to Overview"
+
+toolName: "Workflow"
+toolSlug: "workflow"
+
+heroTitle: 'Make interviews <span class="accent">flow on their own</span> — without losing the human touch.'
+sub: "Workflow A[i]gent is the execution layer for recruiting ops: interview scheduling flows, scorecard SLAs, escalation paths, and stage-based comms — designed to reduce no-shows, prevent stalled candidates, and keep humans in control."
+
+playbookWhat: "Where interview workflows leak (and how to stop it) · scope, design principles, and guardrails · role & ownership model across TA and hiring managers · system overview and ATS configuration notes · stage-by-stage workflow library (Screen → Offer) · SLAs, escalations, and measurement · Metrics Dictionary alignment"
+playbookWho: "Recruiting Ops, TA leaders, coordinators, and recruiters who want reliable, low-drama interviews — and who are tired of manually chasing people for feedback."
+playbookSolves: "No-shows & drop-off after scheduling | Late scorecards | Stalled candidates & unclear next steps | Inconsistent stage comms | Manual chasing and operational drag"
+
+toc:
+  - { id: "problem", label: "1. Problem & Outcomes" }
+  - { id: "scope", label: "2. Scope & Design Principles" }
+  - { id: "roles", label: "3. Roles & Responsibilities" }
+  - { id: "overview", label: "4. System Overview" }
+  - { id: "library", label: "5. Workflow Library" }
+  - { id: "implementation", label: "6. Configuration & Implementation" }
+  - { id: "metrics", label: "7. Metrics & Reporting" }
+  - { id: "future", label: "8. Future Enhancements" }
+  - { id: "suite", label: "9. Fit in the A[i]gents Suite" }
+  - { id: "risks", label: "10. Risks & Mitigations" }
+  - { id: "appendix", label: "Appendix A — Template Legend" }
+---
+
+<section class="chapter" id="problem">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">1. Problem &amp; Outcomes</h2>
+
+      <h3>1.1 The problem</h3>
+      <p class="muted">Most interview processes silently leak:</p>
+      <ul class="muted">
+        <li>Candidates no-show or drop after scheduling.</li>
+        <li>Interviewers don’t submit scorecards on time.</li>
+        <li>Hiring managers forget to deliver feedback.</li>
+        <li>Candidates get inconsistent instructions across stages.</li>
+        <li>Recruiters manually chase everyone, all the time.</li>
+      </ul>
+      <p class="muted">
+        This creates longer time-to-fill, slower decisions, inconsistent experience, and constant operational drag.
+      </p>
+
+      <h3>1.2 Outcomes we’re aiming for</h3>
+      <ul class="muted">
+        <li>Clean, predictable interview flows from screen → offer.</li>
+        <li>Scorecards submitted within agreed-upon SLAs.</li>
+        <li>Fewer no-shows and fewer “I never heard back” complaints.</li>
+        <li>Standard, role-appropriate candidate communications.</li>
+        <li>Recruiters focusing on real conversations instead of inbox herding.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="scope">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">2. Scope &amp; Design Principles</h2>
+
+      <h3>2.1 In-scope</h3>
+      <ul class="muted">
+        <li>Phone screen → HM/Tech → Panel → Final → Offer → Pre-start.</li>
+        <li>Candidate, interviewer, and hiring manager communications.</li>
+        <li>Time-based triggers and SLA logic.</li>
+        <li>Email and calendar template library.</li>
+        <li>ATS-native automation rules and lightweight orchestration.</li>
+      </ul>
+
+      <h3>2.2 Out-of-scope (v1)</h3>
+      <ul class="muted">
+        <li>Automated note-taking or transcription.</li>
+        <li>LLM-generated feedback summaries.</li>
+        <li>Candidate sourcing or nurture campaigns.</li>
+        <li>Post-hire onboarding workflows.</li>
+      </ul>
+
+      <h3>2.3 Design principles</h3>
+      <ul class="muted">
+        <li><b>Candidate-first.</b> Clear expectations, no surprises.</li>
+        <li><b>Low lift.</b> Built on native ATS features wherever possible.</li>
+        <li><b>Observable.</b> Every automation leaves a trail in the ATS timeline.</li>
+        <li><b>Configurable.</b> Stages and templates can vary by role and region.</li>
+        <li><b>Fail-safe.</b> Humans can always override or pause automations.</li>
+      </ul>
+
+      <h3>2.4 Global rules</h3>
+      <ul class="muted">
+        <li>Use the candidate’s local time in scheduling messages; show both candidate and host time zones where possible.</li>
+        <li>Always include self-serve reschedule/cancel options when supported.</li>
+        <li>Ask about accommodations in every invite and include a phone backup.</li>
+        <li>Do not include sensitive data in calendar bodies; link to secure docs instead.</li>
+        <li>Standardize subject formats: <code>[Company] · [Role] · [Stage]</code>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="roles">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">3. Roles &amp; Responsibilities</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Responsibilities</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Recruiter</td>
+              <td>Owns candidate comms, monitors automation logs, manually intervenes for exceptions.</td>
+            </tr>
+            <tr>
+              <td>Coordinator</td>
+              <td>Manages calendar logistics, reschedules, and scheduling exceptions.</td>
+            </tr>
+            <tr>
+              <td>Hiring Manager</td>
+              <td>Submits decisions &amp; scorecards within SLA; participates in escalations.</td>
+            </tr>
+            <tr>
+              <td>Interviewers</td>
+              <td>Conduct interviews and submit structured feedback promptly.</td>
+            </tr>
+            <tr>
+              <td>Recruiting Ops / ATS Admin</td>
+              <td>Maintains templates, manages automation rules, owns SLA dashboards.</td>
+            </tr>
+            <tr>
+              <td>Owner</td>
+              <td>Diane Wilkinson — design, implementation, and continuous improvement of Workflow A[i]gent.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <b>Key idea:</b> Automations carry the routine follow-ups; humans own tone, judgment, and exceptions.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="overview">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">4. System Overview</h2>
+
+      <p class="muted">Workflow A[i]gent delivers four major capability areas:</p>
+      <ul class="muted">
+        <li><b>Scheduling workflows:</b> availability capture, reminders if candidates don’t respond, alerts when threads stall.</li>
+        <li><b>Stage-based workflows:</b> confirmations, reminders, and follow-ups for each interview stage.</li>
+        <li><b>SLAs &amp; escalations:</b> scorecard due dates, automatic nudges, escalation paths when people are late.</li>
+        <li><b>Status &amp; delay updates:</b> structured check-ins when internal timelines slip.</li>
+      </ul>
+
+      <h3>4.1 ATS implementation (conceptual)</h3>
+      <p class="muted">Assumes a modern ATS (Greenhouse/Lever/etc.) with:</p>
+      <ul class="muted">
+        <li>Triggers on stage change and event booking.</li>
+        <li>Time-based rules (X hours after interview end; Y days in stage).</li>
+        <li>Reusable template library with tokens.</li>
+        <li>Audit trail (emails/tasks logged on the candidate timeline).</li>
+      </ul>
+      <p class="muted">
+        Where native automation falls short, use a thin orchestration layer (Zapier/Make/internal service) via webhooks/APIs.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="library">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">5. Workflow Library</h2>
+
+      <p class="muted">Each workflow is a reusable pattern: trigger → recipient → template → logging.</p>
+
+      <h3>5.1 Trigger glossary</h3>
+      <ul class="muted">
+        <li><b>Stage change</b> — triggered whenever a candidate moves into a new stage.</li>
+        <li><b>Event booked</b> — triggered when an interview calendar event is created.</li>
+        <li><b>Time-based</b> — triggered relative to interview start/end or time in stage.</li>
+        <li><b>Manual override</b> — recruiter-triggered for exceptional or sensitive situations.</li>
+      </ul>
+
+      <h3>5.2 Scheduling &amp; availability</h3>
+      <p class="muted"><b>Goal:</b> reduce drop-off between “stage change” and “interview booked.”</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Trigger</th>
+              <th>Recipient</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>S1</td>
+              <td>Stage → Initial Screen</td>
+              <td>Candidate</td>
+              <td>Availability request with expectations and scheduling link.</td>
+            </tr>
+            <tr>
+              <td>S2</td>
+              <td>No reply after 48h</td>
+              <td>Candidate</td>
+              <td>Polite follow-up reminding them to book.</td>
+            </tr>
+            <tr>
+              <td>S3</td>
+              <td>No reply after 96h</td>
+              <td>Recruiter</td>
+              <td>Alert to review candidate and decide whether to nudge or close out.</td>
+            </tr>
+            <tr>
+              <td>S4</td>
+              <td>Stage → HM/Tech/Final</td>
+              <td>Candidate</td>
+              <td>Role-specific availability request and prep guidance.</td>
+            </tr>
+            <tr>
+              <td>S5</td>
+              <td>Event booked (any stage)</td>
+              <td>Candidate</td>
+              <td>Confirmation with calendar details and expectations.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5.3 Stage workflow pattern</h3>
+      <ul class="muted">
+        <li><b>Confirm</b> — send immediately when the interview is booked.</li>
+        <li><b>Remind</b> — send roughly 24 hours before.</li>
+        <li><b>Reinforce</b> — optional same-day reminder, especially for panels.</li>
+        <li><b>Follow-up</b> — send 2–4 hours after to thank and set expectations.</li>
+        <li><b>Scorecard nudges</b> — to interviewers until feedback is in.</li>
+      </ul>
+
+      <h3>5.4 Scorecard &amp; SLA automation</h3>
+      <ul class="muted">
+        <li><b>+2h after interview</b> — first reminder to submit scorecard.</li>
+        <li><b>+24h after</b> — second reminder plus ping to hiring manager.</li>
+        <li><b>+48h after</b> — escalation to recruiting lead and HM’s manager.</li>
+        <li><b>Optional:</b> block progression to the next stage until required scorecards are complete.</li>
+      </ul>
+
+      <h3>5.5 Status &amp; delay updates</h3>
+      <ul class="muted">
+        <li>Structured “we’re still actively interviewing” notes when panels or debriefs take longer than expected.</li>
+        <li>Templates for roles on hold, hiring manager travel, or shifting priorities.</li>
+        <li>Optional “what’s happening behind the scenes” messages for late-stage or executive candidates.</li>
+      </ul>
+
+      <h3>5.6 Offer &amp; pre-start workflows</h3>
+      <ul class="muted">
+        <li>Offer scheduling link or direct coordination from the recruiter.</li>
+        <li>Offer call confirmation with agenda.</li>
+        <li>Post-acceptance email covering paperwork, IT, and first-day expectations.</li>
+        <li>Reminder 1–2 weeks before start with logistics and prep materials.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="implementation">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">6. Configuration &amp; Implementation</h2>
+
+      <p class="muted">Typical implementation steps:</p>
+      <ul class="muted">
+        <li>Map current stages → Screen, HM/Tech, Panel, Final, Offer.</li>
+        <li>Define SLAs for each stage (scorecards, response times, etc.).</li>
+        <li>Create a template library (confirmation, reminder, follow-up, delay, regret).</li>
+        <li>Wire triggers using ATS automation features: on stage change, on event booked, on time since interview.</li>
+        <li>Pilot on 1–2 roles before expanding.</li>
+        <li>Train recruiters, coordinators, and hiring managers on what’s automated vs manual.</li>
+        <li>Monitor and tune: no-show rate, SLA adherence, average days per stage.</li>
+      </ul>
+
+      <h3>6.1 Role-based customization</h3>
+      <ul class="muted">
+        <li><b>Sales</b> — heavier prep, expectation setting, panel logistics.</li>
+        <li><b>Engineering</b> — linkage to assessments, code samples, portfolio reviews.</li>
+        <li><b>G&amp;A</b> — fewer stages and faster response expectations.</li>
+        <li><b>Leadership</b> — more stakeholders, tailored messaging, longer cycles.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="metrics">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">7. Metrics &amp; Reporting</h2>
+
+      <p class="muted">Suggested metrics:</p>
+      <ul class="muted">
+        <li>No-show rate by stage.</li>
+        <li>Average days in each stage.</li>
+        <li>Percentage of scorecards submitted within SLA.</li>
+        <li>Candidate satisfaction (CSAT / NPS) where collected.</li>
+        <li>Template usage rate versus ad-hoc emails.</li>
+        <li>Volume of delay updates sent and roles covered.</li>
+      </ul>
+
+      <h3>7.1 Metrics Dictionary alignment</h3>
+      <p class="muted">
+        Workflow emits standardized timestamps and event objects that map to the shared Metrics Dictionary fields,
+        enabling time-in-stage, time-to-offer, SLA adherence, and pass-through reporting.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Workflow Event</th>
+              <th>Metrics Dictionary Field</th>
+              <th>Used For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>stage_entered_at</td><td>stage_start_time</td><td>Time-in-stage calculations</td></tr>
+            <tr><td>interview_scheduled_at</td><td>interview_scheduled_time</td><td>SLA tracking, throughput</td></tr>
+            <tr><td>interview_start_at</td><td>interview_start_time</td><td>Wait time and friction analysis</td></tr>
+            <tr><td>interview_end_at</td><td>interview_end_time</td><td>Feedback freshness calculations</td></tr>
+            <tr><td>scorecard_submitted_at</td><td>scorecard_submitted_time</td><td>SLA compliance</td></tr>
+            <tr><td>offer_extended_at</td><td>offer_extended_time</td><td>Time-to-offer</td></tr>
+            <tr><td>delay_update_sent_at</td><td>delay_update_sent_time</td><td>Delay coverage &amp; CX metrics</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="future">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">8. Future Enhancements</h2>
+      <ul class="muted">
+        <li>LLM-assisted delay updates from structured prompts and guardrails.</li>
+        <li>Automatically summarize interviews (future Interview A[i]gent) and attach structured notes to scorecards.</li>
+        <li>Dynamically choose templates based on candidate risk (e.g., critical hires, late-stage executive candidates).</li>
+        <li>Proactive SLA risk alerts in Slack / Teams when interviews or scorecards are trending late.</li>
+        <li>Interview quality analytics across interviewers and stages to inform training and calibration.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="suite">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">9. Fit in the A[i]gents Suite</h2>
+      <ul class="muted">
+        <li><b>Upstream:</b> Screening A[i]gent decides who should move into interviews.</li>
+        <li><b>Core:</b> Workflow A[i]gent orchestrates interview-stage comms, SLAs, and status updates.</li>
+        <li><b>Downstream:</b> Metrics A[i]gent ingests clean events and timestamps to compute time-to-fill, pass-through, and SLA performance.</li>
+      </ul>
+      <p class="muted">Together they form an AI-ready, automation-first recruiting operating system.</p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="risks">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">10. Risks &amp; Mitigations</h2>
+      <ul class="muted">
+        <li><b>Risk:</b> Over-automation makes the process feel cold.<br><b>Mitigation:</b> reserve key moments for human outreach; keep templates warm; allow pause/override.</li>
+        <li><b>Risk:</b> Incorrect triggers send the wrong communication.<br><b>Mitigation:</b> test with dummy candidates; phased rollout; log every automation.</li>
+        <li><b>Risk:</b> Hiring managers ignore SLAs.<br><b>Mitigation:</b> add escalation paths, publish SLA reports, and make compliance visible.</li>
+        <li><b>Risk:</b> Workflows become stale as the business changes.<br><b>Mitigation:</b> review metrics quarterly; adjust templates/SLAs; keep a lightweight change-log.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="appendix">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">Appendix A — Template Legend</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Prefix</th>
+              <th>Category</th>
+              <th>Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>SCHED_*</td><td>Scheduling</td><td>Availability requests, follow-ups if no response.</td></tr>
+            <tr><td>CONF_*</td><td>Confirmations</td><td>Screen, HM/Tech, Panel, Final confirmations.</td></tr>
+            <tr><td>REM_*</td><td>Reminders</td><td>24h reminders, scorecard reminders.</td></tr>
+            <tr><td>COMMS_*</td><td>Status / general comms</td><td>Delay updates, hold messages.</td></tr>
+            <tr><td>REJ_*</td><td>Regrets</td><td>Stage-specific rejection templates.</td></tr>
+            <tr><td>OFFER_*, ONB_*</td><td>Offer &amp; pre-start</td><td>Offer extension, pre-start introductions.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="muted" style="margin-top:10px;">
+        Token placeholders (candidate name, role title, location, interview date) keep templates reusable across roles and offices.
+      </p>
+    </div>
+  </div>
+</section>

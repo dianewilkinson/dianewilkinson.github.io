@@ -1,0 +1,90 @@
+{# =========================
+   BASE LAYOUT — CONTRACTED SHELL
+   ========================= #}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ title or "Diane Wilkinson" }}</title>
+  <meta name="description" content="{{ description or "" }}" />
+  <link rel="stylesheet" href="/assets/css/site.css?v=1">
+</head>
+
+<body data-page="{{ pageId or 'home' }}">
+  <div class="bar"></div>
+
+  <main class="wrap">
+
+    {% if not minimalShell %}
+      <div class="topbar">
+        <div class="crumbs">
+          {% block crumbs %}{% endblock %}
+        </div>
+      </div>
+
+      <header class="hero {{ heroClass or 'hero--tool' }}">
+        {% if kicker %}
+          <div class="kicker">
+            <span class="kdot"></span>
+            {{ kicker }}
+          </div>
+        {% endif %}
+
+        <h1>{% block heroTitle %}{{ h1 or title or "Page" }}{% endblock %}</h1>
+
+        {% if sub %}
+          <p class="sub">{{ sub | safe }}</p>
+        {% endif %}
+
+        {# OPTIONAL HERO CALLOUT (text-only) #}
+        {% if callout %}
+          <div class="callout">{{ callout | safe }}</div>
+        {% endif %}
+
+        <div class="backRow backRow--split">
+          <a class="backLink" href="{{ backHref or '/' }}">← {{ backLabel or 'Back' }}</a>
+          <div class="ctaRow">
+            {% block ctas %}{% endblock %}
+          </div>
+        </div>
+      </header>
+    {% endif %}
+
+    {% block content %}
+      {{ content | safe }}
+    {% endblock %}
+
+    {% if not minimalShell %}
+      <section class="exploreNext" aria-label="Explore Next">
+        <div class="panel panel--cool">
+          <h2 class="section-title exploreNext__title">Explore Next</h2>
+
+          <div class="exploreNext__actions">
+            <a class="btn" href="/system/">🔗 System</a>
+            <a class="btn" href="/tools/">🛠️ Tools</a>
+            <a class="btn" href="/use-cases/">📚 Use Cases</a>
+            <a class="btn" href="/system/core/">🔩 Core</a>
+            <a class="btn" href="/articles/">📰 Articles</a>
+            <a class="btn is-contact" href="mailto:dianewilkinson510@gmail.com">📩 Contact</a>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+  </main>
+
+  {% if not minimalShell %}
+    <footer class="site-footer">
+      <div class="site-footer__row">
+        <div>Based in the San Francisco Bay Area</div>
+        <div>
+          <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a>
+          ·
+          <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+  {% endif %}
+</body>
+</html>
