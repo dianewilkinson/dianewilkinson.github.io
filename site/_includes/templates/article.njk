@@ -13,7 +13,13 @@
 
 {% block content %}
 
-  <article class="full prose" aria-label="Article">
+  <article class="full prose narrow" aria-label="Article">
+
+    {% if backHref %}
+      <div class="backRow">
+        <a class="backLink" href="{{ backHref }}">← {{ backLabel or "Back" }}</a>
+      </div>
+    {% endif %}
 
     {# Kicker row (use existing “kicker” styling) #}
     {% if kicker %}
@@ -25,6 +31,10 @@
 
     {# Title uses standard h1 styling from site.css #}
     <h1>{{ title | safe }}</h1>
+
+    {% if sub %}
+      <p class="sub">{{ sub | safe }}</p>
+    {% endif %}
 
     {# Meta line (author/date/read time/etc.) #}
     {% if authorLine or readTime %}
@@ -55,7 +65,7 @@
       </div>
     {% endif %}
 
-    {% if ctaTitle or ctaBody or ctaNote or backHref %}
+    {% if ctaTitle or ctaBody or ctaNote %}
       <div class="rule"></div>
 
       {% if ctaTitle %}
@@ -68,12 +78,6 @@
 
       {% if ctaNote %}
         <p class="small muted">{{ ctaNote | safe }}</p>
-      {% endif %}
-
-      {% if backHref %}
-        <div class="backRow">
-          <a class="backLink" href="{{ backHref }}">← {{ backLabel or "Back" }}</a>
-        </div>
       {% endif %}
     {% endif %}
 

@@ -1,356 +1,313 @@
 ---
-layout: layouts/base.njk
+layout: templates/article.njk
 permalink: "/articles/why-ai-pilots-fail/"
+
 title: "Why 95% of AI Pilots Fail & What the Successful 5% Do Differently"
 description: "Why 95% of AI pilots fail in recruiting and what the successful 5% do differently — workflow-first, data-ready, AI-native recruiting operations."
 pageId: "article"
-minimalShell: true
+
+kicker: "Articles · AI in Recruiting · Automation &amp; Workflows"
+sub: "AI isn’t failing because the technology is bad. It’s failing because the workflow around it is broken — especially in recruiting."
+authorLine: "By Diane Wilkinson · Nov 22 · AI-Native Recruiter &amp; Recruiting Ops Architect"
+readTime: "4 min read"
+crumbTitle: "🤖 <b>MIT says 95% of AI pilots are crashing.</b>"
+
+backHref: "/articles/"
+backLabel: "Back to Articles"
+
+tags:
+  - "AI"
+  - "AI Adoption"
+  - "Recruiting Ops"
+  - "Automation"
+  - "AI Workflows"
+  - "Talent Acquisition"
+  - "ATS Optimization"
+
+ctaTitle: "Let’s build AI workflows your team will actually adopt."
+ctaBody: "I design AI-native recruiting systems — from screening agents to interview workflows and ATS automation."
+ctaNote: "<a class='btn' href='mailto:dianewilkinson510@gmail.com'>Email</a> <a class='btn' href='/'>Portfolio</a> <a class='btn' href='https://linkedin.com/in/dianewilkinson' target='_blank' rel='noopener'>LinkedIn</a>"
 ---
 
-{# =========================
-   ARTICLE — Eleventy content (no inline styles, no new classes)
-   Uses ONLY existing site.css classes
-   ========================= #}
+<p>
+  If you’ve been anywhere near an executive meeting this year, you’ve probably heard a
+  version of the same painful story:
+</p>
 
-<section class="hero hero--tool-strong" aria-label="Article hero">
-  <div class="kicker">
-    <span class="kdot"></span>
-    Articles · AI in Recruiting · Automation &amp; Workflows
-  </div>
+<blockquote>
+  <p><b>“We launched an AI pilot… and it didn’t work.”</b></p>
+</blockquote>
 
-  <div class="narrow">
-    <h1>Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently</h1>
+<p>
+  It’s not a coincidence and it’s not a lack of talent.
+  <a href="https://sloanreview.mit.edu" target="_blank" rel="noopener">According to MIT, 95% of AI pilots fail</a>
+  before they ever reach real adoption or scale.
+</p>
 
-    <p class="sub">
-      AI isn’t failing because the technology is bad. It’s failing because the workflow
-      around it is broken — especially in recruiting.
-    </p>
+<p>
+  Companies invest in AI tools, only to end up with abandoned dashboards, inconsistent
+  usage, frustrated recruiters, and workflows that are somehow <em>slower</em> than
+  before.
+</p>
 
-    <div class="hairline"></div>
+<p>
+  And MIT isn’t alone. Research from
+  <a href="https://www.mckinsey.com" target="_blank" rel="noopener">McKinsey</a>,
+  <a href="https://www.gartner.com" target="_blank" rel="noopener">Gartner</a> and
+  <a href="https://hbr.org" target="_blank" rel="noopener">HBR</a>
+  all show the same pattern:
+</p>
 
-    <div class="backRow backRow--split">
-      <a class="backLink" href="/articles/">← Back to Articles</a>
-
-      <div class="ctaRow ctaRow--tight">
-        <span class="small">By Diane Wilkinson · Nov 22 · 4 min read · AI-Native Recruiter &amp; Recruiting Ops Architect</span>
-      </div>
-    </div>
-
-    <div class="callout">
-      🤖 <b>MIT says 95% of AI pilots are crashing.</b>
-    </div>
-  </div>
-</section>
-
-<div class="full">
-  <article class="prose" aria-label="Why AI pilots fail">
-    <p>
-      If you’ve been anywhere near an executive meeting this year, you’ve probably heard a
-      version of the same painful story:
-    </p>
-
-    <blockquote>
-      <p><b>“We launched an AI pilot… and it didn’t work.”</b></p>
-    </blockquote>
-
-    <p>
-      It’s not a coincidence and it’s not a lack of talent.
-      <a href="https://sloanreview.mit.edu" target="_blank" rel="noopener">According to MIT, 95% of AI pilots fail</a>
-      before they ever reach real adoption or scale.
-    </p>
-
-    <p>
-      Companies invest in AI tools, only to end up with abandoned dashboards, inconsistent
-      usage, frustrated recruiters, and workflows that are somehow <em>slower</em> than
-      before.
-    </p>
-
-    <p>
-      And MIT isn’t alone. Research from
-      <a href="https://www.mckinsey.com" target="_blank" rel="noopener">McKinsey</a>,
-      <a href="https://www.gartner.com" target="_blank" rel="noopener">Gartner</a> and
-      <a href="https://hbr.org" target="_blank" rel="noopener">HBR</a>
-      all show the same pattern:
-    </p>
-
-    <blockquote>
-      <p>
-        <b>AI isn’t failing because the technology is bad. It’s failing because the workflow around it is broken.</b>
-      </p>
-    </blockquote>
-
-    <p>
-      Below are the seven universal reasons AI pilots fail in recruiting — and what the
-      successful 5% do differently.
-    </p>
-
-    <h2>#1 AI Is Added to a Broken Workflow</h2>
-
-    <p>Most failed pilots follow the same pattern:</p>
-    <ul>
-      <li>Processes are inconsistent</li>
-      <li>Scorecards are unreliable</li>
-      <li>Data is missing or unstructured</li>
-      <li>Hiring managers operate differently</li>
-      <li>Recruiters tag things their own way</li>
-    </ul>
-
-    <p><em>“Let’s buy an AI screening tool.”</em></p>
-
-    <blockquote>
-      <p><b>But AI doesn’t fix chaos — it magnifies it.</b></p>
-    </blockquote>
-
-    <p class="small"><b>The 5% solution</b></p>
-
-    <ul>
-      <li>intake</li>
-      <li>job scorecards</li>
-      <li>funnel stages</li>
-      <li>pass-through rules</li>
-      <li>outcome definitions</li>
-      <li>naming conventions</li>
-      <li>KPI structure</li>
-    </ul>
-
-    <blockquote>
-      <p><b>Only after the workflow is clean do they add AI inside it.</b></p>
-    </blockquote>
-
-    <h2>#2 Poor Data Quality Makes AI Useless</h2>
-
-    <p>AI can only act on the signals it’s given.</p>
-
-    <p>If your data is:</p>
-    <ul>
-      <li>inconsistent</li>
-      <li>incomplete</li>
-      <li>redundant</li>
-      <li>missing outcomes</li>
-      <li>not tied to decisions</li>
-      <li>scattered across tools</li>
-    </ul>
-
-    <p class="small"><b>The 5% solution</b></p>
-
-    <ul>
-      <li>scorecards</li>
-      <li>funnel logic</li>
-      <li>pass-through rates</li>
-      <li>candidate outcomes</li>
-      <li>role criteria</li>
-      <li>decision points</li>
-    </ul>
-
-    <blockquote>
-      <p><b>Reliable data creates the foundation AI needs to actually work.</b></p>
-    </blockquote>
-
-    <h2>#3 AI Pilots Run Outside the Recruiting Funnel</h2>
-
-    <p>One of the most common failure modes is simple:</p>
-    <p><b>AI is piloted as a standalone tool.</b></p>
-
-    <p>Examples:</p>
-    <ul>
-      <li>a chatbot that doesn’t talk to the ATS</li>
-      <li>a screening tool recruiters don’t trust</li>
-      <li>an AI scheduler nobody activates</li>
-      <li>a sourcing tool that doesn’t pull performance data</li>
-    </ul>
-
-    <p class="small"><b>The 5% solution</b></p>
-    <ul>
-      <li>intake</li>
-      <li>sourcing</li>
-      <li>screening</li>
-      <li>scheduling</li>
-      <li>scoring</li>
-      <li>calibration</li>
-    </ul>
-
-    <blockquote>
-      <p><b>AI becomes part of the workflow’s fabric, not an extra button.</b></p>
-    </blockquote>
-
-    <h2>#4 No Domain Expert Is Driving the AI Work</h2>
-
-    <p>Failed AI pilots are typically owned by:</p>
-    <ul>
-      <li>procurement</li>
-      <li>a generalist product manager</li>
-      <li>a vendor</li>
-      <li>a data scientist who’s never recruited</li>
-      <li>a People Ops generalist</li>
-    </ul>
-
-    <p class="small"><b>The 5% solution</b></p>
-    <ul>
-      <li>recruiting domain knowledge</li>
-      <li>systems design</li>
-      <li>automation strategy</li>
-      <li>AI workflow design</li>
-      <li>hiring-manager behavior</li>
-    </ul>
-
-    <blockquote>
-      <p>
-        <b>
-          This is why companies increasingly need AI-Native Recruiters — hybrid operators who can
-          build and optimize internal tools.
-        </b>
-      </p>
-    </blockquote>
-
-    <h2>#5 Mistrust and Change Fatigue Kill AI Adoption</h2>
-
-    <p>AI fails when people don’t use it — and people don’t use it when:</p>
-    <ul>
-      <li>it’s a black box</li>
-      <li>it contradicts their judgment</li>
-      <li>it duplicates work</li>
-      <li>it’s unclear how decisions are made</li>
-      <li>it feels like a threat</li>
-    </ul>
-
-    <blockquote>
-      <p><b>This is not a technical problem — it’s a trust &amp; workflow problem.</b></p>
-    </blockquote>
-
-    <p class="small"><b>The 5% solution</b></p>
-    <ul>
-      <li>make decisions visible</li>
-      <li>give recruiters the final say</li>
-      <li>reduce busywork</li>
-      <li>show quantifiable time saved</li>
-      <li>design workflows that amplify the role</li>
-    </ul>
-
-    <blockquote>
-      <p><b>Humans remain in the loop — but AI removes the grunt work.</b></p>
-    </blockquote>
-
-    <h2>#6 AI Is Layered On Top of Work Instead of Replacing It</h2>
-
-    <p>A hidden failure pattern: AI introduces <b>more</b> work.</p>
-    <ul>
-      <li>“Review these AI scores.”</li>
-      <li>“Review this auto-screen.”</li>
-      <li>“Review this shortlist.”</li>
-    </ul>
-
-    <p class="small"><b>Common pattern</b></p>
-    <p>“AI suggests candidates to check.”</p>
-
-    <p class="small"><b>The 5% solution</b></p>
-    <p>“AI screens inbound and delivers only qualified applicants.”</p>
-
-    <p class="small"><b>Common pattern</b></p>
-    <p>“AI flags scheduling conflicts.”</p>
-
-    <p class="small"><b>The 5% solution</b></p>
-    <p>“AI books interviews with guardrails.”</p>
-
-    <blockquote>
-      <p><b>The difference is everything.</b></p>
-    </blockquote>
-
-    <h2>#7 AI Pilots Never Scale Beyond the “Cool Demo”</h2>
-
-    <p>Pilots often die because:</p>
-    <ol>
-      <li>someone bought a tool</li>
-      <li>the demo was compelling</li>
-      <li>the team tried it for 30 days</li>
-      <li>nobody integrated it</li>
-      <li>nobody owned it</li>
-      <li>the pilot ended</li>
-      <li>the vendor blamed the client</li>
-    </ol>
-
-    <p class="small"><b>The 5% solution</b></p>
-    <ul>
-      <li>workflow diagrams</li>
-      <li>KPI standards</li>
-      <li>transparency guardrails</li>
-      <li>multi-agent workflows</li>
-      <li>ownership roles</li>
-      <li>rollout plans</li>
-      <li>feedback loops</li>
-    </ul>
-
-    <blockquote>
-      <p><b>AI becomes part of the operating rhythm — not an experiment.</b></p>
-    </blockquote>
-
-    <h2>What the 5% Know That the 95% Don’t</h2>
-    <p>
-      Successful orgs treat AI as an operating model — not a project — and they see
-      real earnings uplift as a result.
-    </p>
-
-    <h3>AI only works when you build workflows first — tools second.</h3>
-    <ul>
-      <li>You don’t need 15 tools — you need one integrated system.</li>
-      <li>You don’t need another “pilot” — you need AI-ready ops architecture.</li>
-      <li>You don’t need vendor sprawl — you need internal AI teammates.</li>
-    </ul>
-
-    <h2>The Future Belongs to the AI-Native Recruiter</h2>
-
-    <p>Companies are waking up to a new reality:</p>
-    <ul>
-      <li>AI won’t replace recruiters.</li>
-      <li><b>But recruiters who can build AI will replace those who can’t.</b></li>
-    </ul>
-
-    <blockquote>
-      <p>
-        <b>
-          The next generation of recruiting teams won’t just use AI tools — they’ll
-          build internal AI workflows tailored to their processes, guardrails, and culture.
-        </b>
-      </p>
-    </blockquote>
-
-    <p>The 5% are already doing it.</p>
-
-    <h2>Want your team to join the 5%?</h2>
-    <p>I help companies:</p>
-    <ul>
-      <li>audit their recruiting workflows</li>
-      <li>eliminate vendor sprawl</li>
-      <li>design AI-ready funnel architecture</li>
-      <li>build internal AI agents</li>
-      <li>create automations that actually get adopted</li>
-    </ul>
-
-    <p>If you’re exploring AI adoption — or your pilot is stuck — I’d love to help.</p>
-  </article>
-</div>
-
-<div class="full" aria-label="Tags">
-  <h2 class="section-title">Tags</h2>
-  <div class="navlinks" aria-label="Article tags">
-    <span class="badge">AI</span>
-    <span class="badge">AI Adoption</span>
-    <span class="badge">Recruiting Ops</span>
-    <span class="badge">Automation</span>
-    <span class="badge">AI Workflows</span>
-    <span class="badge">Talent Acquisition</span>
-    <span class="badge">ATS Optimization</span>
-  </div>
-</div>
-
-<div class="full" aria-label="Call to action">
-  <h2 class="section-title">Let’s build AI workflows your team will actually adopt.</h2>
-  <p class="section-sub">
-    I design AI-native recruiting systems — from screening agents to interview workflows and ATS automation.
+<blockquote>
+  <p>
+    <b>AI isn’t failing because the technology is bad. It’s failing because the workflow around it is broken.</b>
   </p>
+</blockquote>
 
-  <div class="navlinks" aria-label="CTA links">
-    <a class="btn" href="mailto:dianewilkinson510@gmail.com">Email</a>
-    <a class="btn" href="/">Portfolio</a>
-    <a class="btn" href="https://linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
-  </div>
-</div>
+<p>
+  Below are the seven universal reasons AI pilots fail in recruiting — and what the
+  successful 5% do differently.
+</p>
+
+<h2>#1 AI Is Added to a Broken Workflow</h2>
+
+<p>Most failed pilots follow the same pattern:</p>
+<ul>
+  <li>Processes are inconsistent</li>
+  <li>Scorecards are unreliable</li>
+  <li>Data is missing or unstructured</li>
+  <li>Hiring managers operate differently</li>
+  <li>Recruiters tag things their own way</li>
+</ul>
+
+<p><em>“Let’s buy an AI screening tool.”</em></p>
+
+<blockquote>
+  <p><b>But AI doesn’t fix chaos — it magnifies it.</b></p>
+</blockquote>
+
+<p class="small"><b>The 5% solution</b></p>
+
+<ul>
+  <li>intake</li>
+  <li>job scorecards</li>
+  <li>funnel stages</li>
+  <li>pass-through rules</li>
+  <li>outcome definitions</li>
+  <li>naming conventions</li>
+  <li>KPI structure</li>
+</ul>
+
+<blockquote>
+  <p><b>Only after the workflow is clean do they add AI inside it.</b></p>
+</blockquote>
+
+<h2>#2 Poor Data Quality Makes AI Useless</h2>
+
+<p>AI can only act on the signals it’s given.</p>
+
+<p>If your data is:</p>
+<ul>
+  <li>inconsistent</li>
+  <li>incomplete</li>
+  <li>redundant</li>
+  <li>missing outcomes</li>
+  <li>not tied to decisions</li>
+  <li>scattered across tools</li>
+</ul>
+
+<p class="small"><b>The 5% solution</b></p>
+
+<ul>
+  <li>scorecards</li>
+  <li>funnel logic</li>
+  <li>pass-through rates</li>
+  <li>candidate outcomes</li>
+  <li>role criteria</li>
+  <li>decision points</li>
+</ul>
+
+<blockquote>
+  <p><b>Reliable data creates the foundation AI needs to actually work.</b></p>
+</blockquote>
+
+<h2>#3 AI Pilots Run Outside the Recruiting Funnel</h2>
+
+<p>One of the most common failure modes is simple:</p>
+<p><b>AI is piloted as a standalone tool.</b></p>
+
+<p>Examples:</p>
+<ul>
+  <li>a chatbot that doesn’t talk to the ATS</li>
+  <li>a screening tool recruiters don’t trust</li>
+  <li>an AI scheduler nobody activates</li>
+  <li>a sourcing tool that doesn’t pull performance data</li>
+</ul>
+
+<p class="small"><b>The 5% solution</b></p>
+<ul>
+  <li>intake</li>
+  <li>sourcing</li>
+  <li>screening</li>
+  <li>scheduling</li>
+  <li>scoring</li>
+  <li>calibration</li>
+</ul>
+
+<blockquote>
+  <p><b>AI becomes part of the workflow’s fabric, not an extra button.</b></p>
+</blockquote>
+
+<h2>#4 No Domain Expert Is Driving the AI Work</h2>
+
+<p>Failed AI pilots are typically owned by:</p>
+<ul>
+  <li>procurement</li>
+  <li>a generalist product manager</li>
+  <li>a vendor</li>
+  <li>a data scientist who’s never recruited</li>
+  <li>a People Ops generalist</li>
+</ul>
+
+<p class="small"><b>The 5% solution</b></p>
+<ul>
+  <li>recruiting domain knowledge</li>
+  <li>systems design</li>
+  <li>automation strategy</li>
+  <li>AI workflow design</li>
+  <li>hiring-manager behavior</li>
+</ul>
+
+<blockquote>
+  <p>
+    <b>
+      This is why companies increasingly need AI-Native Recruiters — hybrid operators who can
+      build and optimize internal tools.
+    </b>
+  </p>
+</blockquote>
+
+<h2>#5 Mistrust and Change Fatigue Kill AI Adoption</h2>
+
+<p>AI fails when people don’t use it — and people don’t use it when:</p>
+<ul>
+  <li>it’s a black box</li>
+  <li>it contradicts their judgment</li>
+  <li>it duplicates work</li>
+  <li>it’s unclear how decisions are made</li>
+  <li>it feels like a threat</li>
+</ul>
+
+<blockquote>
+  <p><b>This is not a technical problem — it’s a trust &amp; workflow problem.</b></p>
+</blockquote>
+
+<p class="small"><b>The 5% solution</b></p>
+<ul>
+  <li>make decisions visible</li>
+  <li>give recruiters the final say</li>
+  <li>reduce busywork</li>
+  <li>show quantifiable time saved</li>
+  <li>design workflows that amplify the role</li>
+</ul>
+
+<blockquote>
+  <p><b>Humans remain in the loop — but AI removes the grunt work.</b></p>
+</blockquote>
+
+<h2>#6 AI Is Layered On Top of Work Instead of Replacing It</h2>
+
+<p>A hidden failure pattern: AI introduces <b>more</b> work.</p>
+<ul>
+  <li>“Review these AI scores.”</li>
+  <li>“Review this auto-screen.”</li>
+  <li>“Review this shortlist.”</li>
+</ul>
+
+<p class="small"><b>Common pattern</b></p>
+<p>“AI suggests candidates to check.”</p>
+
+<p class="small"><b>The 5% solution</b></p>
+<p>“AI screens inbound and delivers only qualified applicants.”</p>
+
+<p class="small"><b>Common pattern</b></p>
+<p>“AI flags scheduling conflicts.”</p>
+
+<p class="small"><b>The 5% solution</b></p>
+<p>“AI books interviews with guardrails.”</p>
+
+<blockquote>
+  <p><b>The difference is everything.</b></p>
+</blockquote>
+
+<h2>#7 AI Pilots Never Scale Beyond the “Cool Demo”</h2>
+
+<p>Pilots often die because:</p>
+<ol>
+  <li>someone bought a tool</li>
+  <li>the demo was compelling</li>
+  <li>the team tried it for 30 days</li>
+  <li>nobody integrated it</li>
+  <li>nobody owned it</li>
+  <li>the pilot ended</li>
+  <li>the vendor blamed the client</li>
+</ol>
+
+<p class="small"><b>The 5% solution</b></p>
+<ul>
+  <li>workflow diagrams</li>
+  <li>KPI standards</li>
+  <li>transparency guardrails</li>
+  <li>multi-agent workflows</li>
+  <li>ownership roles</li>
+  <li>rollout plans</li>
+  <li>feedback loops</li>
+</ul>
+
+<blockquote>
+  <p><b>AI becomes part of the operating rhythm — not an experiment.</b></p>
+</blockquote>
+
+<h2>What the 5% Know That the 95% Don’t</h2>
+<p>
+  Successful orgs treat AI as an operating model — not a project — and they see
+  real earnings uplift as a result.
+</p>
+
+<h3>AI only works when you build workflows first — tools second.</h3>
+<ul>
+  <li>You don’t need 15 tools — you need one integrated system.</li>
+  <li>You don’t need another “pilot” — you need AI-ready ops architecture.</li>
+  <li>You don’t need vendor sprawl — you need internal AI teammates.</li>
+</ul>
+
+<h2>The Future Belongs to the AI-Native Recruiter</h2>
+
+<p>Companies are waking up to a new reality:</p>
+<ul>
+  <li>AI won’t replace recruiters.</li>
+  <li><b>But recruiters who can build AI will replace those who can’t.</b></li>
+</ul>
+
+<blockquote>
+  <p>
+    <b>
+      The next generation of recruiting teams won’t just use AI tools — they’ll
+      build internal AI workflows tailored to their processes, guardrails, and culture.
+    </b>
+  </p>
+</blockquote>
+
+<p>The 5% are already doing it.</p>
+
+<h2>Want your team to join the 5%?</h2>
+<p>I help companies:</p>
+<ul>
+  <li>audit their recruiting workflows</li>
+  <li>eliminate vendor sprawl</li>
+  <li>design AI-ready funnel architecture</li>
+  <li>build internal AI agents</li>
+  <li>create automations that actually get adopted</li>
+</ul>
+
+<p>If you’re exploring AI adoption — or your pilot is stuck — I’d love to help.</p>
