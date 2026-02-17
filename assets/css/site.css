@@ -945,8 +945,8 @@ body[data-page="tool-playbook"] .ctaRow--tight{
    ========================= */
 
 body[data-page="article"] .prose{
-  font-size:17px;
-  line-height:1.5;
+  font-size:18px;
+  line-height:1.78;
 }
 
 body[data-page="article"] .prose p{
@@ -954,7 +954,7 @@ body[data-page="article"] .prose p{
   margin:18px 0;
 }
 
-/* Links: all purple (like right screenshot) */
+/* Links: all purple */
 body[data-page="article"] .prose a,
 body[data-page="article"] .prose a:visited{
   color:#7c3aed;
@@ -966,140 +966,68 @@ body[data-page="article"] .prose a:hover{
 /* The “big MIT line” (full sentence link) */
 body[data-page="article"] .prose p > a{
   font-size:20px;
-  font-weight:700;
+  font-weight:800;
   text-decoration:underline;
 }
 
 /* Headings */
 body[data-page="article"] .prose h1{
-  font-size:40px;
-  line-height:1.2;
+  font-size:44px;
+  line-height:1.15;
   letter-spacing:-.02em;
-  margin:16px 0 12px;
+  margin:18px 0 12px;
 }
 
-/* IMPORTANT:
-   Keep heading text normal.
-   Only the number token will be purple (but requires markup tweak, below).
-*/
 body[data-page="article"] .prose h2{
-  font-size:30px;
-  line-height:1.25;
-  margin:34px 0 12px;
+  font-size:34px;
+  line-height:1.18;
   letter-spacing:-.015em;
+  margin:38px 0 12px;
   color:var(--text);
 }
 
-/* Make only the number token purple (requires <b>#1</b> in the heading) */
+/* Accent ONLY the number token (your markup uses <b>#1</b>) */
 body[data-page="article"] .prose h2 b{
-  color:#7c3aed;
+  margin-right:8px;
   font-weight:900;
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
 
 /* Blockquotes: bigger, thin purple rule */
 body[data-page="article"] .prose blockquote{
-  margin:24px 0;
+  margin:26px 0;
   padding:6px 0 6px 18px;
   border-left:3px solid #7c3aed;
+  color:var(--text);
 }
 body[data-page="article"] .prose blockquote p{
   margin:0;
-  font-size:24px;
-  line-height:1.5;
-}
-body[data-page="article"] .prose blockquote b{
-  font-weight:900;
+  font-size:28px;
+  line-height:1.45;
+  font-weight:650;
 }
 
 /* Lists: tighter */
 body[data-page="article"] .prose ul,
 body[data-page="article"] .prose ol{
   margin:10px 0 14px 20px;
+  padding:0;
 }
 body[data-page="article"] .prose li{
-  margin:4px 0;
+  margin:2px 0;
 }
 
-/* Callout (gradient-ish box): larger + centered */
+/* Callout: larger + centered */
 body[data-page="article"] .callout{
-  font-size:20px;
-  font-weight:700;
+  font-size:22px;
+  font-weight:800;
   text-align:center;
-  padding:14px 16px;
+  padding:16px 16px;
 }
 
-/* 1 + 3) Numbered section headings (#1, #2...) much larger + purple
-   Your content uses <h2>#1 ...</h2> so we style h2.
-*/
-body[data-page="article"] .prose h2{
-  font-size:30px;
-  line-height:1.25;
-  margin:34px 0 12px;
-  letter-spacing:-.015em;
-  color:#7c3aed;
-}
-
-/* Optional: make the "#1" itself heavier if it's inside the text */
-body[data-page="article"] .prose h2 strong{
-  font-weight:900;
-}
-
-/* 2) Blockquotes: bigger + purple vertical rule before first letter */
-body[data-page="article"] .prose blockquote{
-  margin:24px 0;
-  padding:6px 0 6px 18px;
-  border-left:4px solid #7c3aed;
-  color:var(--text);
-}
-body[data-page="article"] .prose blockquote p{
-  margin:0;
-  font-size:24px;
-  line-height:1.5;
-}
-body[data-page="article"] .prose blockquote b{
-  font-weight:900;
-}
-
-/* 4) Bullet spacing tighter */
-body[data-page="article"] .prose ul,
-body[data-page="article"] .prose ol{
-  margin:10px 0 14px 20px;
-}
-body[data-page="article"] .prose li{
-  margin:4px 0;
-}
-
-/* 5) Gradient callout block (your crumbTitle -> .callout)
-   Make it larger font and centered.
-*/
-body[data-page="article"] .callout{
-  font-size:24px;
-  font-weight:600;
-  text-align:center;
-  padding:14px 16px;
-}
-
-/* Articles: all links purple */
-body[data-page="article"] .prose a,
-body[data-page="article"] .prose a:visited{
-  color:#7c3aed;
-}
-
-
-/* Articles: only the #1/#2 token purple, not the whole heading */
-body[data-page="article"] .prose h2{
-  font-size:30px;
-  line-height:1.25;
-  margin:34px 0 12px;
-  letter-spacing:-.015em;
-  color:var(--text); /* keep heading text normal */
-}
-
-body[data-page="article"] .prose h2 b{
-  color:#7c3aed;     /* violet for #1 only */
-  font-weight:900;
-  margin-right:6px;
-}
 
 
 /* =========================
