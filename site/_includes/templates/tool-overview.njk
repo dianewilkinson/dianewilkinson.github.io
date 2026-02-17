@@ -23,6 +23,8 @@
 
 {% block content %}
 
+{{ content | safe }}
+
 {# Above-the-fold: iframe demo #}
 <section class="demo" aria-label="{{ toolName }} Demo">
   <div class="demoHead">
