@@ -1,5 +1,5 @@
 {# =========================
-   TEMPLATE — Article (Standalone)
+   TEMPLATE — Article
    Uses ONLY existing site.css classes
    ========================= #}
 
@@ -9,13 +9,8 @@
 
 {% block content %}
 
-  <article class="full prose narrow" aria-label="Article">
-
-    {% if backHref %}
-      <div class="backRow">
-        <a class="backLink" href="{{ backHref }}">← {{ backLabel or "Back" }}</a>
-      </div>
-    {% endif %}
+  {# HERO (matches site shell) #}
+  <section class="hero hero--tool" aria-label="Article hero">
 
     {% if kicker %}
       <div class="kicker">
@@ -30,33 +25,54 @@
       <p class="sub">{{ sub | safe }}</p>
     {% endif %}
 
-    {% if authorLine or readTime %}
-      <p class="small muted">
-        {% if authorLine %}{{ authorLine | safe }}{% endif %}
-        {% if authorLine and readTime %} · {% endif %}
-        {% if readTime %}{{ readTime | safe }}{% endif %}
-      </p>
+    {% if authorLine or readTime or backHref %}
+      <div class="backRow backRow--split">
+        <div>
+          {% if backHref %}
+            <a class="backLink" href="{{ backHref }}">← {{ backLabel or "Back" }}</a>
+          {% endif %}
+
+          {% if authorLine or readTime %}
+            <div class="small muted" style="margin-top:6px;">
+              {% if authorLine %}{{ authorLine | safe }}{% endif %}
+              {% if authorLine and readTime %} · {% endif %}
+              {% if readTime %}{{ readTime | safe }}{% endif %}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if ctaNote %}
+          <div class="ctaRow ctaRow--tight">
+            {{ ctaNote | safe }}
+          </div>
+        {% endif %}
+      </div>
     {% endif %}
 
-    <div class="rule"></div>
+    <div class="hairline"></div>
 
     {% if crumbTitle %}
       <div class="callout">{{ crumbTitle | safe }}</div>
     {% endif %}
+
+  </section>
+
+  {# ARTICLE BODY SURFACE #}
+  <article class="full prose" aria-label="Article">
 
     {{ content | safe }}
 
     {% if tags %}
       <div class="rule"></div>
       <h2 class="section-title">Tags</h2>
-      <div class="tool-actions" aria-label="Tags list">
+      <div aria-label="Tags list">
         {% for t in tags %}
           <span class="badge">{{ t }}</span>
         {% endfor %}
       </div>
     {% endif %}
 
-    {% if ctaTitle or ctaBody or ctaNote %}
+    {% if ctaTitle or ctaBody %}
       <div class="rule"></div>
 
       {% if ctaTitle %}
@@ -65,12 +81,6 @@
 
       {% if ctaBody %}
         <p class="section-sub">{{ ctaBody | safe }}</p>
-      {% endif %}
-
-      {% if ctaNote %}
-        <div class="navlinks" aria-label="CTA links">
-          {{ ctaNote | safe }}
-        </div>
       {% endif %}
     {% endif %}
 
