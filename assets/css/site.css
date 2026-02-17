@@ -981,10 +981,10 @@ body[data-page="article"] .prose h1{
 body[data-page="article"] .prose h2{
   font-size:30px;
   line-height:1.18;
-  letter-spacing:-.015em;
+  letter-spacing:-.012em;
   margin:34px 0 12px;
   color:var(--text);
-  font-weight:600;  /* instead of default 900 inheritance */
+  font-weight:520;  /* instead of default 900 inheritance */
 }
 
 /* Accent ONLY the number token (your markup uses <b>#1</b>) */
@@ -1008,7 +1008,7 @@ body[data-page="article"] .prose blockquote p{
   margin:0;
   font-size:28px;
   line-height:1.45;
-  font-weight:650;
+  font-weight:500;
 }
 
 /* Lists: tighter */
@@ -1024,7 +1024,7 @@ body[data-page="article"] .prose li{
 /* Callout: larger + centered */
 body[data-page="article"] .callout{
   font-size:22px;
-  font-weight:800;
+  font-weight:600;
   text-align:center;
   padding:16px 16px;
 }
