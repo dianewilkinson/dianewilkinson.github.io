@@ -941,13 +941,12 @@ body[data-page="tool-playbook"] .ctaRow--tight{
 }
 
 /* =========================
-   ARTICLE TYPOGRAPHY TUNING
-   (scoped only to article pages)
+   ARTICLE — Editorial mode (single source)
    ========================= */
 
 body[data-page="article"] .prose{
   font-size:17px;
-  line-height:1.75;
+  line-height:1.5;
 }
 
 body[data-page="article"] .prose p{
@@ -955,6 +954,23 @@ body[data-page="article"] .prose p{
   margin:18px 0;
 }
 
+/* Links: all purple (like right screenshot) */
+body[data-page="article"] .prose a,
+body[data-page="article"] .prose a:visited{
+  color:#7c3aed;
+}
+body[data-page="article"] .prose a:hover{
+  text-decoration:underline;
+}
+
+/* The “big MIT line” (full sentence link) */
+body[data-page="article"] .prose p > a{
+  font-size:20px;
+  font-weight:700;
+  text-decoration:underline;
+}
+
+/* Headings */
 body[data-page="article"] .prose h1{
   font-size:40px;
   line-height:1.2;
@@ -962,71 +978,54 @@ body[data-page="article"] .prose h1{
   margin:16px 0 12px;
 }
 
+/* IMPORTANT:
+   Keep heading text normal.
+   Only the number token will be purple (but requires markup tweak, below).
+*/
 body[data-page="article"] .prose h2{
-  font-size:26px;
-  margin-top:34px;
-  margin-bottom:10px;
-  letter-spacing:-.01em;
-}
-
-body[data-page="article"] .prose h3{
-  font-size:20px;
-  margin-top:24px;
-  margin-bottom:8px;
-}
-
-/* Make numbered headings purple (like right screenshot) */
-body[data-page="article"] .prose h2{
-  color:var(--accent);
-}
-
-/* Blockquotes slightly larger + stronger */
-body[data-page="article"] .prose blockquote{
-  font-size:19px;
-  font-weight:600;
+  font-size:30px;
+  line-height:1.25;
+  margin:34px 0 12px;
+  letter-spacing:-.015em;
   color:var(--text);
-  border-left:4px solid var(--accent);
-  padding-left:16px;
-  margin:22px 0;
-  padding:6px 0 6px 16px;
-  border-left:2px solid #7c3aed; /* thinner */
 }
 
+/* Make only the number token purple (requires <b>#1</b> in the heading) */
+body[data-page="article"] .prose h2 b{
+  color:#7c3aed;
+  font-weight:900;
+}
+
+/* Blockquotes: bigger, thin purple rule */
+body[data-page="article"] .prose blockquote{
+  margin:24px 0;
+  padding:6px 0 6px 18px;
+  border-left:3px solid #7c3aed;
+}
 body[data-page="article"] .prose blockquote p{
   margin:0;
-  font-size:22px;    /* bigger quote */
-  line-height:1.45;
+  font-size:24px;
+  line-height:1.5;
 }
-
 body[data-page="article"] .prose blockquote b{
   font-weight:900;
 }
 
-/* Articles: tighter lists */
+/* Lists: tighter */
 body[data-page="article"] .prose ul,
 body[data-page="article"] .prose ol{
-  margin:10px 0 14px 18px;
+  margin:10px 0 14px 20px;
 }
-
 body[data-page="article"] .prose li{
-  margin:3px 0; /* tighter */
+  margin:4px 0;
 }
 
-/* =========================
-   ARTICLE — Editorial tuning (scoped)
-   ========================= */
-
-body[data-page="article"] .prose{
-  font-size:17px;
-  line-height:1.75;
-}
-
-/* 6) Links: force all links to one purple */
-body[data-page="article"] .prose a{
-  color:#7c3aed; /* violet */
-}
-body[data-page="article"] .prose a:hover{
-  text-decoration:underline;
+/* Callout (gradient-ish box): larger + centered */
+body[data-page="article"] .callout{
+  font-size:20px;
+  font-weight:700;
+  text-align:center;
+  padding:14px 16px;
 }
 
 /* 1 + 3) Numbered section headings (#1, #2...) much larger + purple
