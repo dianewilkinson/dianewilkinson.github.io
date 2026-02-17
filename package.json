@@ -1,0 +1,28 @@
+{
+  "name": "dianewilkinson.github.io",
+  "version": "1.0.0",
+  "description": "_People Systems Architect • Workflow Automation • Internal AI & Analytics • Greenhouse SME_   _MBA, Data Analytics (4.0 GPA)_",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+"scripts": {
+  "start": "eleventy --serve",
+  "build": "eleventy"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dianewilkinson/dianewilkinson.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dianewilkinson/dianewilkinson.github.io/issues"
+  },
+  "homepage": "https://github.com/dianewilkinson/dianewilkinson.github.io#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  }
+}

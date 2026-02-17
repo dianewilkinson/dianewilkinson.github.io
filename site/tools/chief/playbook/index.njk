@@ -1,0 +1,308 @@
+---
+layout: templates/tool-playbook.njk
+title: "Chief — Playbook"
+description: "Orchestrated People Ops: Chief surfaces what matters, routes work to specialized A[i]gents, and keeps humans at decision boundaries."
+pageId: "tool-playbook"
+
+toolName: "Chief"
+toolSlug: "chief"
+
+heroClass: "hero--tool-strong"
+kicker: "Playbook · Orchestration · Autonomy Tier: 1–2"
+backHref: "/tools/chief/"
+backLabel: "Back to Overview"
+
+heroTitle: 'Chief <span class="accent">Playbook</span>: Orchestrated People Ops'
+sub: 'Chief is the orchestration layer: it consolidates signals (inbox, interviews, reqs, projects), turns them into a prioritized queue, and routes work to specialized A[i]gents with guardrails and auditability.'
+
+playbookWhat: "Defines what Chief is, how it routes work, decision boundaries by autonomy tier, and the operating model for running TA/People work through an orchestration layer."
+playbookWho: "Recruiting Ops, TA leaders, People Ops leaders, and teams implementing AI-native operating rhythms without creating more dashboards and status meetings."
+playbookSolves: "Signal overload | Context switching | Missed SLAs | Unowned work | Inconsistent routing | Hidden bottlenecks | Lack of auditability"
+
+toc:
+  - { id: "problem", label: "1. Problem &amp; Purpose" }
+  - { id: "capabilities", label: "2. Core Capabilities" }
+  - { id: "inputs", label: "3. Inputs &amp; Signal Layer" }
+  - { id: "routing", label: "4. Routing Model &amp; Autonomy Tiers" }
+  - { id: "guardrails", label: "5. Guardrails, Auditability &amp; Human Boundaries" }
+  - { id: "workflows", label: "6. Example Workflows" }
+  - { id: "implementation", label: "7. Implementation &amp; Stack" }
+  - { id: "metrics", label: "8. Metrics &amp; Governance" }
+  - { id: "appendix", label: "Appendix — Demo Mapping" }
+---
+
+<section class="chapter" id="problem">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">1. Problem &amp; Purpose</h2>
+
+      <h3>1.1 The Problem</h3>
+      <p>People Ops work breaks when the system is fragmented:</p>
+      <ul>
+        <li>Work is scattered across inboxes, ATS tasks, calendars, docs, Slack threads, and ad-hoc lists.</li>
+        <li>Signals arrive constantly, but prioritization is inconsistent and context is missing.</li>
+        <li>“Routing” is handled by humans in meetings (triage, approvals, updates) instead of systems.</li>
+        <li>Specialists (Recruiting Ops, Coordinators, sourcers, HRBPs) lose time to context switching.</li>
+      </ul>
+
+      <h3>1.2 Purpose of Chief</h3>
+      <p>Chief is the orchestration layer for AI-native People Ops:</p>
+      <ul>
+        <li>Consolidates signals into a single prioritized queue.</li>
+        <li>Turns requests into structured work items (with context + next actions).</li>
+        <li>Routes work to specialized A[i]gents (drafting, policy checks, scheduling, diagnostics).</li>
+        <li>Keeps humans at decision boundaries with review + audit logging.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Core idea:</strong> Don’t add more status meetings. Build a system that surfaces what matters and routes work to the right handler — with guardrails.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="capabilities">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">2. Core Capabilities</h2>
+
+      <h3>2.1 Single “work surface” for People Ops</h3>
+      <ul>
+        <li>Daily overview: interviews, open reqs, projects, employer brand, inbox items.</li>
+        <li>Priority cues: what’s urgent vs important vs safe to batch.</li>
+        <li>“What changed?” deltas to avoid re-reading entire threads.</li>
+      </ul>
+
+      <h3>2.2 Routing engine</h3>
+      <ul>
+        <li>Classifies request type (candidate comms, scheduling, approvals, diagnostics, policy).</li>
+        <li>Assigns the right handler: human, agent, or co-pilot flow.</li>
+        <li>Bundles context so the next step is executable without hunting for info.</li>
+      </ul>
+
+      <h3>2.3 Human-in-the-loop boundaries</h3>
+      <ul>
+        <li>Drafts and recommendations are reviewed when stakes are high.</li>
+        <li>Low-risk actions can run autonomously (nudges, reminders, status updates) with audit logs.</li>
+        <li>Escalates edge cases to the appropriate owner.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="inputs">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">3. Inputs &amp; Signal Layer</h2>
+
+      <p>Chief becomes useful when it has a reliable signal layer.</p>
+
+      <h3>3.1 Common input sources</h3>
+      <ul>
+        <li><strong>Comms:</strong> Slack, email, LinkedIn InMail, messaging apps (read-only or integrated).</li>
+        <li><strong>ATS:</strong> req state, stage events, scorecard status, candidate timeline events.</li>
+        <li><strong>Calendar:</strong> interviews scheduled, conflicts, prep tasks, travel time buffers.</li>
+        <li><strong>Projects:</strong> deadlines, deliverables, dependencies.</li>
+        <li><strong>Brand:</strong> reviews requiring response, social posts, approvals.</li>
+      </ul>
+
+      <h3>3.2 Normalize into “work items”</h3>
+      <ul>
+        <li>Each item has: type, owner, SLA, risk level, required inputs, next step.</li>
+        <li>Each item links back to its source thread/event for traceability.</li>
+        <li>State transitions are explicit (new → in progress → review → done).</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Design rule:</strong> if Chief can’t explain <em>why</em> an item is prioritized, it shouldn’t prioritize it.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="routing">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">4. Routing Model &amp; Autonomy Tiers</h2>
+
+      <h3>4.1 Tier mapping</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Mode</th>
+              <th>Examples</th>
+              <th>Human Boundary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tier 0</td>
+              <td>Human-only</td>
+              <td>Final hiring decisions, sensitive ER, investigations</td>
+              <td>AI may summarize only</td>
+            </tr>
+            <tr>
+              <td>Tier 1</td>
+              <td>Autonomy (low risk)</td>
+              <td>Nudges, reminders, status updates, scheduling options</td>
+              <td>Audit log + easy rollback</td>
+            </tr>
+            <tr>
+              <td>Tier 2</td>
+              <td>Co-pilot</td>
+              <td>Draft replies, prep packs, rubric suggestions, escalations</td>
+              <td>Human review required</td>
+            </tr>
+            <tr>
+              <td>Tier 3</td>
+              <td>Decision support</td>
+              <td>Policy interpretation, approvals, offer justifications</td>
+              <td>Human sign-off required</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4.2 Routing outcomes</h3>
+      <ul>
+        <li><strong>Summarize:</strong> compress a thread into context + key decisions + next steps.</li>
+        <li><strong>Draft:</strong> propose a response aligned to tone + policy.</li>
+        <li><strong>Route to A[i]gent:</strong> hand off to specialist (Metrics, Interview, Screening, Workflow).</li>
+        <li><strong>Close loop:</strong> confirm completion, log outcome, and update stakeholders.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="guardrails">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">5. Guardrails, Auditability &amp; Human Boundaries</h2>
+
+      <h3>5.1 Guardrails</h3>
+      <ul>
+        <li><strong>Policy-aware outputs:</strong> templates and guidance must follow approved policy language.</li>
+        <li><strong>Data boundaries:</strong> only approved sources; sensitive fields excluded by default.</li>
+        <li><strong>Action boundaries:</strong> “recommend” vs “act” is explicit per tier.</li>
+        <li><strong>Escalation rules:</strong> risk triggers route to the correct owner immediately.</li>
+      </ul>
+
+      <h3>5.2 Audit log</h3>
+      <ul>
+        <li>Every action records: input source, decision rationale, handler, timestamp, outcome.</li>
+        <li>Every automated message is visible in the system timeline.</li>
+        <li>Overrides are tracked (human disagreed, why, and what changed).</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Non-negotiable:</strong> Chief must be explainable. If the system can’t show the chain of reasoning, it doesn’t ship.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="workflows">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">6. Example Workflows</h2>
+
+      <h3>6.1 Interview prep</h3>
+      <ul>
+        <li>Signal: “Prep needed” flag for same-day interview.</li>
+        <li>Chief: generates a prep pack (role context, rubric, candidate highlights).</li>
+        <li>Route: Interview A[i]gent for question set + note scaffolding.</li>
+      </ul>
+
+      <h3>6.2 Requisition risk → diagnostics</h3>
+      <ul>
+        <li>Signal: bottleneck status on req card.</li>
+        <li>Chief: routes to Metrics A[i]gent for funnel health view.</li>
+        <li>Output: “why it’s stuck” + recommended actions (capacity, stage pacing, sourcing mix).</li>
+      </ul>
+
+      <h3>6.3 Candidate update during delay</h3>
+      <ul>
+        <li>Signal: time-in-stage exceeds threshold.</li>
+        <li>Chief: drafts “we’re still reviewing” update (Tier 2 review) or sends standard delay note (Tier 1).</li>
+        <li>Logs comm coverage for candidate journey metrics.</li>
+      </ul>
+
+      <h3>6.4 Offer approval support</h3>
+      <ul>
+        <li>Signal: “approval needed” email from Finance.</li>
+        <li>Chief: drafts 3-bullet justification aligned to comp policy.</li>
+        <li>Human review and sign-off (Tier 3), then routed to send.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="implementation">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">7. Implementation &amp; Stack</h2>
+
+      <h3>7.1 Minimal viable architecture</h3>
+      <ul>
+        <li><strong>Signal ingestion:</strong> connectors / APIs for comms, ATS, calendar.</li>
+        <li><strong>Work item schema:</strong> normalized objects with state + ownership.</li>
+        <li><strong>Policy layer:</strong> approved templates, boundaries, decision rules.</li>
+        <li><strong>Agent router:</strong> selects the right specialist agent + context.</li>
+        <li><strong>UI surface:</strong> daily overview and drill-down panels.</li>
+      </ul>
+
+      <h3>7.2 Start small</h3>
+      <ul>
+        <li>Pick one domain (interview prep, candidate updates, approvals).</li>
+        <li>Define the tier and boundaries before building automation.</li>
+        <li>Measure outcomes and drift (recommendation vs human action).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="metrics">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">8. Metrics &amp; Governance</h2>
+
+      <h3>8.1 Core metrics</h3>
+      <ul>
+        <li>Time saved (hours/week) via routing + reduced context switching.</li>
+        <li>SLA adherence (scorecards, candidate updates, approvals).</li>
+        <li>Backlog health (age of items, stuck states).</li>
+        <li>Override rate (human disagrees with recommendation) + reasons.</li>
+        <li>Comms coverage and candidate journey consistency.</li>
+      </ul>
+
+      <h3>8.2 Governance</h3>
+      <ul>
+        <li>Define owners for: routing rules, templates, policy layer, and audit review.</li>
+        <li>Maintain a change log for tier adjustments and workflow updates.</li>
+        <li>Run periodic reviews of drift, risk triggers, and exceptions.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="appendix">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">Appendix — Demo Mapping</h2>
+
+      <p>This playbook maps to the demo UI concepts:</p>
+      <ul>
+        <li><strong>Overview cards:</strong> interviews, reqs, projects, brand items.</li>
+        <li><strong>Inbox modal:</strong> summarize, draft, route, close loop actions.</li>
+        <li><strong>Req click-through:</strong> opens Metrics diagnostics for funnel health.</li>
+        <li><strong>Bandwidth slider:</strong> controls proactivity (more nudges vs more human prompts).</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Reminder:</strong> the demo is illustrative. The real value is the operating model: signal → prioritize → route → audit → learn.
+      </div>
+    </div>
+  </div>
+</section>

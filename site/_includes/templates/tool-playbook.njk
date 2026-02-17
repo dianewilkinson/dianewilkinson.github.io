@@ -1,0 +1,79 @@
+{# =========================================
+   TOOL PLAYBOOK — HYBRID TEMPLATE (LOCKED)
+   - Owns: crumbs, hero title, CTA row, header meta + TOC
+   - Page owns: chapter HTML (rendered via {{ content }})
+   ========================================= #}
+
+{% extends "layouts/base.njk" %}
+
+{% block crumbs %}
+  <a href="/">Home</a>
+  <span class="sep">/</span>
+  <a href="/tools/">Tools</a>
+  <span class="sep">/</span>
+  <a href="/tools/{{ toolSlug }}/">{{ toolName }}</a>
+  <span class="sep">/</span>
+  <span>Playbook</span>
+{% endblock %}
+
+{% block heroTitle %}
+  {% if heroTitle %}
+    {{ heroTitle | safe }}
+  {% else %}
+    A[i]gent Tool <span class="accent">Playbook</span>: {{ toolName }}
+  {% endif %}
+{% endblock %}
+
+{% block ctas %}
+  <span class="ctaLabel">Explore →</span>
+  <a class="btn" href="/tools/{{ toolSlug }}/">Overview</a>
+  <span class="btn primary">Playbook</span>
+  <a class="btn" href="/tools/{{ toolSlug }}/demo/">Demo</a>
+  <a class="btn" href="/use-cases/">Cases</a>
+{% endblock %}
+
+{% block content %}
+
+  {# TWO-CARD HEADER ROW (LOCKED) #}
+  <section class="info-layout" aria-label="Playbook structure">
+
+    {# LEFT: Meta card (LOCKED headings) #}
+    <section class="hero-meta hero-meta--split" aria-label="Playbook meta">
+      <div class="metaSplit">
+
+        <div class="metaBlock">
+          <h2 class="section-title">What this playbook is</h2>
+          <p class="muted">{{ playbookWhat }}</p>
+        </div>
+
+        <div class="metaBlock">
+          <h2 class="section-title">Who this playbook is for</h2>
+          <p class="muted">{{ playbookWho }}</p>
+        </div>
+
+        <div class="metaBlock">
+          <h2 class="section-title">What this tool solves</h2>
+          <p class="muted">{{ playbookSolves | safe }}</p>
+        </div>
+
+      </div>
+    </section>
+
+    {# RIGHT: TOC (LOCKED) #}
+    <nav class="toc-card toc" aria-label="Sections">
+      <h2 class="section-title">Sections</h2>
+      <ul class="tocList">
+        {% for item in toc %}
+          <li><a href="#{{ item.id }}">{{ item.label }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+  </section>
+
+  {# MAIN CONTENT (PAGE-OWNED) #}
+  <section class="full" aria-label="Playbook Content">
+    {{ content | safe }}
+  </section>
+
+{% endblock %}

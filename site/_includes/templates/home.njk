@@ -1,0 +1,65 @@
+{# =========================
+   HOME TEMPLATE — Eleventy layout
+   Uses ONLY existing site.css classes
+   ========================= #}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ title or "Diane Wilkinson" }}</title>
+  <meta name="description" content="{{ description or "" }}" />
+  <link rel="stylesheet" href="/assets/css/site.css?v=1">
+</head>
+
+<body data-page="{{ pageId or 'home' }}">
+  <div class="bar"></div>
+
+  <main class="wrap">
+
+    <section class="hero hero--home" aria-label="Hero">
+      <h2 class="hero-headline">{{ heroHeadline | safe }}</h2>
+
+      {% if heroSubtitle %}
+        <p class="hero-subtitle">{{ heroSubtitle }}</p>
+      {% endif %}
+
+      {% if heroActions %}
+        <div class="hero-actions">
+          {{ heroActions | safe }}
+        </div>
+      {% endif %}
+    </section>
+
+    {{ content | safe }}
+
+    <section class="exploreNext" aria-label="Explore Next">
+      <div class="panel panel--cool">
+        <h2 class="section-title exploreNext__title">Explore Next</h2>
+
+        <div class="exploreNext__actions">
+          <a class="btn" href="/system/">🔗 System</a>
+          <a class="btn" href="/tools/">🛠️ Tools</a>
+          <a class="btn" href="/use-cases/">📚 Use Cases</a>
+          <a class="btn" href="/system/core/">🔩 Core</a>
+          <a class="btn" href="/articles/">📰 Articles</a>
+          <a class="btn is-contact" href="mailto:dianewilkinson510@gmail.com">📩 Contact</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__row">
+      <div>Based in the San Francisco Bay Area</div>
+      <div>
+        <a href="mailto:dianewilkinson510@gmail.com">dianewilkinson510@gmail.com</a>
+        ·
+        <a href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

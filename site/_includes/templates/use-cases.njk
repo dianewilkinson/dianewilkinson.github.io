@@ -1,0 +1,31 @@
+{# =========================
+   USE CASES TEMPLATE — Eleventy layout
+   Uses ONLY existing site.css classes
+   ========================= #}
+
+{% extends "layouts/base.njk" %}
+
+{% block crumbs %}
+  <a href="/">Home</a>
+  <span class="sep">/</span>
+  <span>Use Cases</span>
+{% endblock %}
+
+{% block heroTitle %}
+  {% if heroTitle %}
+    {{ heroTitle | safe }}
+  {% else %}
+    {{ h1 or title or "Use Cases" | safe }}
+  {% endif %}
+{% endblock %}
+
+{% block ctas %}
+  <span class="ctaLabel">Explore →</span>
+  <a class="btn" href="/tools/">Tools</a>
+  <a class="btn" href="/system/">System</a>
+  <a class="btn primary" href="/contact/scheduler.html" target="_blank" rel="noopener">📅 Book 15 minutes</a>
+{% endblock %}
+
+{% block content %}
+  {{ content | safe }}
+{% endblock %}

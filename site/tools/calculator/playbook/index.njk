@@ -1,0 +1,370 @@
+---
+layout: templates/tool-playbook.njk
+title: "Recruiting Funnel Calculator — Playbook"
+description: "How to use the Recruiting Funnel Calculator to forecast weekly throughput from conversion rates, lead times, and admin time — and turn hiring goals into an executable plan."
+pageId: "tool-playbook"
+
+toolName: "Recruiting Funnel Calculator"
+toolSlug: "calculator"
+
+heroClass: "hero--tool-strong"
+kicker: "Playbook · Forecasting & Planning · TA Ops · Autonomy Tier: 1"
+backHref: "/tools/calculator/"
+backLabel: "Back to Overview"
+
+heroTitle: 'Recruiting Funnel Calculator <span class="accent">Playbook</span>: Weekly Capacity Forecasting'
+sub: 'Stop hand-waving capacity. Start <span>planning weekly</span>. This playbook shows how to translate hiring goals into stage-by-stage weekly volume, identify the real constraint, and adjust the plan before the quarter breaks.'
+
+playbookWhat: "A practical playbook for using the funnel calculator: required weekly volume by stage, time-to-fill estimates, scenario testing, and how to diagnose bottlenecks (especially HM capacity)."
+playbookWho: "Recruiting Ops, TA leaders, and recruiters who need a decision-ready plan — not a spreadsheet full of assumptions nobody can defend."
+playbookSolves: "Turns hiring goals into weekly volume math | Exposes the constraint (screens, HM interviews, finals, offer cycle) | Makes time-to-fill defendable | Aligns leaders on what’s possible | Prevents impossible targets and mis-blame"
+
+toc:
+  - { id: "problem", label: "1. Problem &amp; Purpose" }
+  - { id: "model", label: "2. Inputs &amp; Data Model" }
+  - { id: "howto", label: "3. How to Run the Calculator" }
+  - { id: "interpret", label: "4. How to Interpret Outputs" }
+  - { id: "constraints", label: "5. Constraint Debugging (HM Capacity)" }
+  - { id: "scenarios", label: "6. Scenario Planning &amp; What-Ifs" }
+  - { id: "integration", label: "7. How It Pairs With Pipeline Health" }
+  - { id: "governance", label: "8. Governance, Assumptions &amp; Change Control" }
+  - { id: "appendix-example", label: "Appendix A – Example Walkthrough" }
+  - { id: "appendix-fields", label: "Appendix B – Field Definitions" }
+---
+
+<section class="chapter" id="problem">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">1. Problem &amp; Purpose</h2>
+
+      <h3>1.1 The Problem</h3>
+      <p>
+        Recruiting plans fail when teams plan the outcome (hires) but don’t plan the math (weekly throughput,
+        conversion rates, and lead time). The result is predictable:
+      </p>
+      <ul>
+        <li>Targets are set without understanding stage capacity (especially HM interviews).</li>
+        <li>Recruiters get blamed for outcomes that were mathematically impossible.</li>
+        <li>Time-to-fill becomes a hope, not a plan.</li>
+        <li>Process “improvements” are random because the constraint isn’t isolated.</li>
+      </ul>
+
+      <h3>1.2 Purpose</h3>
+      <p>
+        The Recruiting Funnel Calculator converts your hiring goal into an executable weekly plan:
+        required applications, screens, HM interviews, finals, offers, and hires — by week.
+      </p>
+
+      <div class="callout">
+        <strong>Operating stance:</strong> Use this tool to align leadership on what’s possible <em>before</em> asking recruiters to “source more.”
+        When the plan doesn’t work, debug the constraint instead of increasing noise.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="model">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">2. Inputs &amp; Data Model</h2>
+
+      <h3>2.1 Inputs</h3>
+      <ul>
+        <li><strong>Hiring goal:</strong> number of hires needed in a period.</li>
+        <li><strong>Start date:</strong> when the plan begins.</li>
+        <li><strong>Stage conversion rates (CVR):</strong> Apply → Screen → HM → Final → Offer → Hire.</li>
+        <li><strong>Stage lead times:</strong> average time spent in each stage (calendar or working days — choose one and keep it consistent).</li>
+        <li><strong>Admin time / recruiter capacity:</strong> time per candidate, time per screen, time per loop, etc.</li>
+        <li><strong>Interview capacity (optional but powerful):</strong> HM and panel throughput per week.</li>
+      </ul>
+
+      <h3>2.2 Core Model</h3>
+      <p>
+        The calculator is a stage-based throughput model. At each stage, required upstream volume is derived from the next stage’s requirement
+        divided by the stage conversion rate.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Concept</th>
+              <th>Meaning</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Target hires</td>
+              <td>Hires required in the window</td>
+              <td>10 hires</td>
+            </tr>
+            <tr>
+              <td>Offer accept rate</td>
+              <td>% offers accepted</td>
+              <td>80%</td>
+            </tr>
+            <tr>
+              <td>Required offers</td>
+              <td>Offers needed to reach hires</td>
+              <td>10 / 0.80 = 12.5 → 13 offers</td>
+            </tr>
+            <tr>
+              <td>Stage CVR</td>
+              <td>% that pass between stages</td>
+              <td>HM → Final = 50%</td>
+            </tr>
+            <tr>
+              <td>Required upstream volume</td>
+              <td>Required candidates entering a stage</td>
+              <td>13 finals / 0.50 = 26 HM interviews</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Rule:</strong> If your CVRs are guesses, call them guesses. The calculator is still useful because it makes the assumptions explicit and testable.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="howto">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">3. How to Run the Calculator</h2>
+
+      <h3>3.1 Step-by-step</h3>
+      <ol>
+        <li><strong>Set the window:</strong> start date + period (weeks).</li>
+        <li><strong>Enter target hires:</strong> what leadership expects.</li>
+        <li><strong>Enter CVRs:</strong> use historical ATS data if available; otherwise start with estimates and label them.</li>
+        <li><strong>Enter lead times:</strong> average days in each stage (choose calendar vs working days and stay consistent).</li>
+        <li><strong>Enter capacity assumptions:</strong> recruiter time and (if used) HM/panel interview limits.</li>
+        <li><strong>Review outputs:</strong> weekly volume by stage + time-to-fill estimate + constraint flags.</li>
+      </ol>
+
+      <h3>3.2 What to do if you don’t have good data yet</h3>
+      <ul>
+        <li>Use last quarter’s funnel CVRs as a baseline (even if imperfect).</li>
+        <li>If CVRs vary by role family, build separate scenarios per family.</li>
+        <li>Start with a single “default funnel” and add role-specific funnels over time.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Tip:</strong> The first win is not precision — it’s alignment. This tool reduces arguments by moving debates into explicit inputs.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="interpret">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">4. How to Interpret Outputs</h2>
+
+      <h3>4.1 Primary outputs</h3>
+      <ul>
+        <li><strong>Weekly volume by stage:</strong> how many candidates must enter each stage per week.</li>
+        <li><strong>Time-to-fill estimate:</strong> based on lead times + conversion assumptions.</li>
+        <li><strong>Workload view:</strong> implied recruiter/admin load from the plan (if modeled).</li>
+        <li><strong>Constraint signals:</strong> where the plan breaks first (capacity or timeline).</li>
+      </ul>
+
+      <h3>4.2 How to use the weekly plan</h3>
+      <ul>
+        <li>Translate “hire 10” into “we need ~X screens/week and ~Y HM interviews/week.”</li>
+        <li>Set weekly operating rhythm around the constraint (e.g., HM interview blocks).</li>
+        <li>Use the weekly stage volumes to drive sourcing expectations (not vibes).</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Interpretation rule:</strong> If your weekly plan implies more HM interviews than HMs can realistically run, sourcing more candidates will not fix the problem.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="constraints">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">5. Constraint Debugging (HM Capacity)</h2>
+
+      <h3>5.1 Why HM capacity is usually the bottleneck</h3>
+      <ul>
+        <li>Recruiters can increase top-of-funnel faster than interviewers can increase time.</li>
+        <li>Interview scheduling and scorecards create hidden “stage time” even with strong candidates.</li>
+        <li>Teams often underestimate the total interviews per hire.</li>
+      </ul>
+
+      <h3>5.2 Debug checklist</h3>
+      <ul>
+        <li><strong>Is the plan asking for more HM interviews/week than possible?</strong> If yes, adjust capacity or scope.</li>
+        <li><strong>Are lead times inflated by scheduling delays?</strong> Fix interview blocks, interviewer pools, and SLAs.</li>
+        <li><strong>Are CVRs low because the role is mis-scoped?</strong> Fix leveling/requirements before pushing volume.</li>
+        <li><strong>Are we losing candidates at offer?</strong> Fix close process and compensation alignment.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Decision pattern:</strong> When capacity is the constraint, the correct response is almost never “double sourcing.”
+        It’s “increase throughput in the constrained stage or lower the target.”
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="scenarios">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">6. Scenario Planning &amp; What-Ifs</h2>
+
+      <h3>6.1 Common scenarios</h3>
+      <ul>
+        <li><strong>Improve screening quality:</strong> raise Apply → Screen or Screen → HM CVR by tightening rubric and reducing noise.</li>
+        <li><strong>Increase HM capacity:</strong> add interviewer pools, interview blocks, or reduce loop size.</li>
+        <li><strong>Speed up lead time:</strong> enforce scorecard SLAs and reduce scheduling delay.</li>
+        <li><strong>Offer acceptance changes:</strong> model downside if market tightens or comp bands drift.</li>
+      </ul>
+
+      <h3>6.2 How to present scenarios to leadership</h3>
+      <ul>
+        <li>Show <strong>Base / Upside / Downside</strong> in one view.</li>
+        <li>For each scenario, identify the <strong>one lever</strong> that changed and the <strong>operational cost</strong> (time, headcount, process).</li>
+        <li>End with a decision: change target, change capacity, or change process.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Best practice:</strong> Scenario planning is how you prevent “hero recruiting.” It turns hiring into an operating system.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="integration">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">7. How It Pairs With Pipeline Health</h2>
+
+      <p>
+        The calculator creates the plan. Pipeline Health validates execution and diagnoses drift.
+      </p>
+
+      <ul>
+        <li><strong>Calculator:</strong> “Given our CVRs and lead times, what weekly volume is required?”</li>
+        <li><strong>Pipeline Health:</strong> “Where are we drifting, and why (stage time, pass-through, SLA breaks, capacity)?”</li>
+      </ul>
+
+      <p class="muted">
+        Pattern: Forecast → Execute → Measure → Debug constraint → Update assumptions → Forecast again.
+      </p>
+
+      <div class="callout">
+        <strong>System loop:</strong> When outcomes differ from plan, update the assumptions using measured data — don’t guess.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="governance">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">8. Governance, Assumptions &amp; Change Control</h2>
+
+      <h3>8.1 Assumption hygiene</h3>
+      <ul>
+        <li>Label CVRs as <strong>measured</strong> vs <strong>estimated</strong>.</li>
+        <li>Define whether lead times are <strong>calendar days</strong> or <strong>working days</strong>.</li>
+        <li>Keep a simple change log when assumptions change (what changed, why, impact).</li>
+      </ul>
+
+      <h3>8.2 Ownership</h3>
+      <ul>
+        <li><strong>Recruiting Ops:</strong> owns model definitions and default assumptions.</li>
+        <li><strong>TA Leaders:</strong> owns targets and the resourcing decisions implied by the plan.</li>
+        <li><strong>Recruiters:</strong> owns execution inputs (pipeline quality, stage hygiene) and feedback when assumptions don’t match reality.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Non-negotiable:</strong> Don’t let teams change the assumptions mid-quarter without documenting it. Otherwise you can’t learn.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="appendix-example">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">Appendix A – Example Walkthrough</h2>
+
+      <ol>
+        <li>Leadership requests <strong>N hires</strong> in <strong>W weeks</strong>.</li>
+        <li>You input baseline CVRs and lead times.</li>
+        <li>The model returns required weekly HM interviews that exceed realistic capacity.</li>
+        <li>You present three options:
+          <ul>
+            <li>Increase HM capacity (blocks, more interviewers, smaller loop)</li>
+            <li>Reduce target (or extend timeline)</li>
+            <li>Improve upstream CVR (rubric + screening quality)</li>
+          </ul>
+        </li>
+        <li>You align on the decision and publish the weekly plan.</li>
+      </ol>
+
+      <div class="callout">
+        <strong>Outcome:</strong> This is the “stop blaming recruiting for math” conversation — using a plan everyone can see.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="appendix-fields">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">Appendix B – Field Definitions</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Definition</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Target Hires</td>
+              <td>Hires needed in the planning window</td>
+              <td>Input from leadership / headcount plan</td>
+            </tr>
+            <tr>
+              <td>CVR (Stage)</td>
+              <td>% passing from one stage to the next</td>
+              <td>Prefer measured, otherwise estimate + label</td>
+            </tr>
+            <tr>
+              <td>Lead Time (Stage)</td>
+              <td>Average time spent in a stage</td>
+              <td>Keep calendar vs working days consistent</td>
+            </tr>
+            <tr>
+              <td>Weekly Volume</td>
+              <td>Required candidates entering each stage per week</td>
+              <td>Primary operating output</td>
+            </tr>
+            <tr>
+              <td>Constraint</td>
+              <td>The first stage where capacity/timing breaks the plan</td>
+              <td>Usually HM interviews or scheduling</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="muted">
+        If you want deeper definitions and formulas, route them to the tool’s Dictionary page.
+      </p>
+    </div>
+  </div>
+</section>

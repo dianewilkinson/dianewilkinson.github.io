@@ -1,0 +1,237 @@
+---
+layout: templates/system.njk
+permalink: "/system/core/metrics/"
+
+title: "Core — Metrics Dictionary"
+description: "A governed metrics dictionary: consistent definitions, formulas, grain, filters, and ownership—so teams stop debating numbers and start fixing bottlenecks."
+pageId: "system"
+heroClass: "hero--tool-strong"
+
+kicker: "Core · Metrics Dictionary"
+backHref: "/system/core/"
+backLabel: "Back to Core"
+
+heroTitle: "Core: <span class='accent'>Metrics Dictionary</span>"
+sub: "A single source of truth for metric names, definitions, formulas, grain, filters, and ownership — so dashboards stay consistent, analyses are auditable, and decisions are repeatable."
+---
+
+{# PAGE CONTENT ONLY — template handles head, bar, wrap, crumbs, hero, footer, exploreNext #}
+
+<section class="grid2" aria-label="Overview and links">
+  <div class="card">
+    <h2 class="section-title">Why a dictionary is “core”</h2>
+    <p class="muted">
+      Most reporting failures aren’t “dashboard problems” — they’re <strong>definition drift</strong>:
+      different teams calculate the “same” metric differently (filters, grain, time rules, data source fields),
+      and the organization loses trust in the numbers.
+    </p>
+
+    <div class="miniGrid" aria-label="Principles">
+      <div class="mini">
+        <b>Consistency</b>
+        <span>One metric name → one definition → one formula. No local interpretations.</span>
+      </div>
+      <div class="mini">
+        <b>Auditability</b>
+        <span>Every metric documents grain, filters, data source fields, and refresh cadence.</span>
+      </div>
+      <div class="mini">
+        <b>Actionability</b>
+        <span>Each metric includes interpretation notes to connect signals to decisions.</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Design intent:</strong> the dictionary is tool-agnostic.
+      It can power dashboards, scorecards, weekly business reviews, and A[i]gent decision logic.
+    </div>
+  </div>
+
+  <aside class="card">
+    <h2 class="section-title">Related</h2>
+    <p class="small">
+      The dictionary is the contract between data, analytics, and operators. Tools can render and apply it,
+      but the dictionary itself is the governance layer.
+    </p>
+
+    <div class="rule"></div>
+
+    <p>
+      <a href="/tools/metrics/"><strong>Pipeline Health (Metrics Tool)</strong></a><br />
+      <span class="small">Decision-ready recruiting funnel analytics built on shared metric definitions.</span>
+    </p>
+
+    <p>
+      <a href="/tools/metrics/playbook/"><strong>Metrics Playbook</strong></a><br />
+      <span class="small">How to implement: data model, thresholds, dashboards, and operating loop.</span>
+    </p>
+
+    <div class="rule"></div>
+
+    <p class="small">
+      <strong>Current dictionary coverage:</strong> 203 metrics across HR / Talent / Workforce domains.<br />
+      <strong>Format:</strong> ID, group, definition, formula, numerator/denominator, grain, filters, data fields, owner.
+    </p>
+  </aside>
+</section>
+
+<section class="full" aria-label="What’s inside">
+  <h2 class="section-title">What’s inside the Metrics Dictionary</h2>
+  <ul>
+    <li><strong>Metric ID + Group:</strong> stable identifier and domain grouping for navigation and change control.</li>
+    <li><strong>Definition + Interpretation:</strong> what it means and what movement usually implies.</li>
+    <li><strong>Formula + inputs:</strong> explicit numerator/denominator and calculation logic.</li>
+    <li><strong>Grain + filters:</strong> what level the metric is valid at (candidate, req, employee, day/week) and which filters apply.</li>
+    <li><strong>Data mapping:</strong> where the metric lives (object/field) and which system is the source of truth.</li>
+    <li><strong>Governance:</strong> owner, refresh cadence, and target (when applicable).</li>
+  </ul>
+</section>
+
+<section class="full" aria-label="Coverage by domain group">
+  <h2 class="section-title">Coverage by domain group</h2>
+
+  <div class="table-wrap" role="region" aria-label="Metrics groups table">
+    <table>
+      <thead>
+        <tr>
+          <th>Group</th>
+          <th># Metrics</th>
+          <th>What it typically supports</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Recruiting</td>
+          <td>14</td>
+          <td>Funnel conversion, cycle time, interviewer + HM behaviors</td>
+        </tr>
+        <tr>
+          <td>Staffing Effectiveness</td>
+          <td>20</td>
+          <td>Quality, cost, throughput, and forecasting readiness</td>
+        </tr>
+        <tr>
+          <td>Turnover / Retention</td>
+          <td>15</td>
+          <td>Attrition drivers, cohort risk, interventions</td>
+        </tr>
+        <tr>
+          <td>Workforce</td>
+          <td>19</td>
+          <td>Headcount, composition, growth and planning</td>
+        </tr>
+        <tr>
+          <td>Compensation</td>
+          <td>20</td>
+          <td>Pay equity, compression, competitiveness</td>
+        </tr>
+        <tr>
+          <td>HR Service Delivery</td>
+          <td>20</td>
+          <td>Case volume, resolution time, service quality</td>
+        </tr>
+        <tr>
+          <td>Training</td>
+          <td>12</td>
+          <td>Enablement, adoption, effectiveness, ROI</td>
+        </tr>
+        <tr>
+          <td>Performance Management</td>
+          <td>11</td>
+          <td>Goal quality, rating integrity, review cycles</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="small">
+    The full dictionary includes additional groups (e.g., internal movement, leadership, organizational effectiveness,
+    benefits, health &amp; safety, attendance). This page highlights the recruiting-ops spine.
+  </p>
+</section>
+
+<section class="full" aria-label="Featured metrics for recruiting operations">
+  <h2 class="section-title">Featured: Recruiting operations metrics</h2>
+  <p class="muted">
+    A small set of “spine” metrics that tend to explain most funnel health outcomes: conversion, cycle time,
+    decision latency, and execution hygiene (e.g., scorecard timeliness).
+  </p>
+
+  <div class="table-wrap" role="region" aria-label="Featured metrics table">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Metric</th>
+          <th>Definition</th>
+          <th>Formula (short)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>14.15</td>
+          <td>Pass-through %: App → Screen</td>
+          <td>Share of applications that progress to recruiter screen.</td>
+          <td>moved_to_screen / applications</td>
+        </tr>
+        <tr>
+          <td>14.16</td>
+          <td>Pass-through %: Final → Offer</td>
+          <td>Share of final loops that result in an offer.</td>
+          <td>offers.sent / final_loops</td>
+        </tr>
+        <tr>
+          <td>14.18</td>
+          <td>Pass-through %: Offer → Hire</td>
+          <td>Share of offers that result in a hire.</td>
+          <td>hires / offers.sent</td>
+        </tr>
+        <tr>
+          <td>14.20</td>
+          <td>Time-to-Hire (days, median)</td>
+          <td>Median days from start of process to hire.</td>
+          <td>median(hire_dt − start_dt)</td>
+        </tr>
+        <tr>
+          <td>14.21</td>
+          <td>Time-to-Schedule (hours, median)</td>
+          <td>Hours from interview request to first scheduled slot.</td>
+          <td>median(interview_start − request_dt)</td>
+        </tr>
+        <tr>
+          <td>14.09</td>
+          <td>Decision Latency (days, median)</td>
+          <td>Days from decision request created to decision recorded.</td>
+          <td>median(decision_dt − request_dt)</td>
+        </tr>
+        <tr>
+          <td>14.14</td>
+          <td>On-time Scorecards % (≤24h)</td>
+          <td>Share of submitted scorecards received within 24 hours.</td>
+          <td>scorecards_≤24h / scorecards</td>
+        </tr>
+        <tr>
+          <td>14.08</td>
+          <td>Candidate NPS</td>
+          <td>Net Promoter Score from post-process candidate survey.</td>
+          <td>(promoters − detractors) / total * 100</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>Why these matter:</strong> they connect directly to root causes (capacity, responsiveness, decision hygiene,
+    calibration) — not vanity volume.
+  </div>
+</section>
+
+<section class="full" aria-label="Governance and change control">
+  <h2 class="section-title">Governance and change control</h2>
+  <ul>
+    <li><strong>Definition changes are versioned:</strong> a metric’s meaning should not change silently.</li>
+    <li><strong>Owners are named:</strong> every metric has a steward responsible for correctness and fit-for-use.</li>
+    <li><strong>Time rules are explicit:</strong> reporting timezone, source timezone, and local time entity are documented.</li>
+    <li><strong>Dashboards reference IDs:</strong> charts point to metric IDs to reduce drift across teams.</li>
+  </ul>
+</section>

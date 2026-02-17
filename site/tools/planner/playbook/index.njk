@@ -1,0 +1,377 @@
+---
+layout: templates/tool-playbook.njk
+permalink: "/tools/planner/playbook/"
+
+title: "MyPlanner — Playbook"
+description: "Setup, data model, prompt design, and safe defaults for generating an execution-ready daily plan from a task tracker + today’s calendar."
+pageId: "tool-playbook"
+heroClass: "hero--tool"
+
+kicker: "Playbook · Planning & Execution · Autonomy Tier: 1"
+backHref: "/tools/planner/"
+backLabel: "Back to Overview"
+
+toolName: "MyPlanner"
+toolSlug: "planner"
+
+heroTitle: 'Turn a task tracker into a <span class="accent">daily plan</span> you actually follow.'
+sub: 'MyPlanner is a Google Apps Script tool that reads a lightweight tracker sheet + today’s calendar, then writes a structured plan into Google Docs — prioritized, time-blocked, and resilient to “day drift.”'
+
+playbookWhat: "Operating model + guardrails for converting a tracker + calendar into a consistent daily plan (Focus → Top 5 → Schedule → Draft messages → Targets)."
+playbookWho: "Operators, builders, and recruiting/people ops workflows that need a repeatable day plan that survives meetings, drift, and context switching."
+playbookSolves: "Priorities stay implicit | Follow-ups slip | Calendar steals execution | Decision fatigue | Plans don’t compound"
+
+toc:
+  - { id: "purpose", label: "1. Purpose & Outcomes" }
+  - { id: "breaks", label: "2. What Breaks Without This" }
+  - { id: "does", label: "3. What It Does" }
+  - { id: "how", label: "4. How It Works" }
+  - { id: "data", label: "5. Data Model (Tracker)" }
+  - { id: "plan", label: "6. Plan Format (Doc Output)" }
+  - { id: "guardrails", label: "7. Guardrails & Safe Defaults" }
+  - { id: "privacy", label: "8. Privacy & Data Minimization" }
+  - { id: "ops", label: "9. Operating Cadence" }
+  - { id: "fit", label: "10. Where It Fits" }
+  - { id: "appendix", label: "Appendix — Suggested Columns" }
+---
+
+<section class="chapter" id="purpose">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">1. Purpose &amp; Outcomes</h2>
+
+      <p class="muted">
+        Most task trackers fail at the moment of execution: the day starts, meetings happen, energy shifts —
+        and the list becomes noise. MyPlanner exists to convert a tracker into a <strong>decision-ready morning plan</strong>:
+        what matters today, when it happens, and what to say when you need to move work forward.
+      </p>
+
+      <div class="miniGrid" aria-label="Outcome pillars">
+        <div class="mini">
+          <b>Less drift</b>
+          <span>A tight “Today’s Focus” prevents reactive work from eating the day.</span>
+        </div>
+        <div class="mini">
+          <b>Fewer open loops</b>
+          <span>Draft messages + targets reduce the friction of follow-ups and handoffs.</span>
+        </div>
+        <div class="mini">
+          <b>Execution-ready</b>
+          <span>Time blocks with buffers assume real life (20% overrun) so plans survive contact.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Generic by design:</strong> swap “application tracker” for any <em>task tracker</em> sheet.
+        MyPlanner detects common columns (status, priority, next step, last touch, notes, links) and works with what it finds.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="breaks">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">2. What Breaks Without This</h2>
+      <ul>
+        <li>Task lists grow, but priorities stay implicit — everything feels “urgent.”</li>
+        <li>Follow-ups happen late because the “next step” isn’t surfaced at the start of the day.</li>
+        <li>Calendar reality and task reality are disconnected (meetings steal the execution window).</li>
+        <li>You spend peak-energy time deciding what to do instead of doing it.</li>
+        <li>Plans don’t compound because the system never captures “Where we left off.”</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="does">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">3. What It Does</h2>
+      <ul>
+        <li><strong>Reads</strong> a tracker sheet (first tab) and keeps active/recent items (e.g., active statuses or recent touches).</li>
+        <li><strong>Reads</strong> today’s calendar and turns it into a realistic block schedule.</li>
+        <li><strong>Generates</strong> a structured plan with consistent headers (Focus → Top 5 → Schedule → Draft messages → Targets).</li>
+        <li><strong>Writes</strong> the day’s plan into a running Google Doc (upsert by date so re-runs replace today cleanly).</li>
+        <li><strong>Normalizes</strong> formatting (H2/H3 + base font) so the doc stays readable over time.</li>
+      </ul>
+
+      <p class="small" style="margin-top:12px;">
+        If an OpenAI key isn’t present, MyPlanner still produces a deterministic fallback plan — so the workflow never blocks.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="how">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">4. How It Works</h2>
+      <ul>
+        <li><strong>Inputs:</strong> Google Sheet (task tracker), Google Calendar (today), Script Properties (optional <code>OPENAI_KEY</code>).</li>
+        <li><strong>Planner engine:</strong> prompt builder + robust section parser (so headers don’t drift).</li>
+        <li><strong>Output:</strong> Google Doc “My Planner — Control Panel” with one H2 section per day.</li>
+        <li><strong>Controls:</strong> custom Sheets menu (“Run Daily Plan now”, “Reset doc &amp; write today”).</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Privacy-first default:</strong> the tool runs in your Google environment.
+        If you enable the LLM call, only the summarized tracker bullets + today’s calendar bullets are sent to the model.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="data">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">5. Data Model (Tracker)</h2>
+
+      <p class="muted">
+        The tracker is intentionally lightweight. MyPlanner looks for common fields and gracefully degrades when some columns
+        don’t exist. The goal is: <strong>enough structure to plan</strong>, not a rigid schema that breaks adoption.
+      </p>
+
+      <h3>5.1 What the planner needs (minimum viable)</h3>
+      <ul>
+        <li><strong>Task / Item</strong> (a short title)</li>
+        <li><strong>Status</strong> (to determine active vs parked vs done)</li>
+        <li><strong>Priority</strong> (or equivalent signal: “P0/P1”, “High/Med/Low”, etc.)</li>
+        <li><strong>Next step</strong> (so execution can start immediately)</li>
+      </ul>
+
+      <h3>5.2 Helpful (improves plan quality)</h3>
+      <ul>
+        <li><strong>Last touch</strong> (date) to surface stale follow-ups</li>
+        <li><strong>Owner / stakeholder</strong> (who needs a nudge)</li>
+        <li><strong>Link</strong> (doc, ticket, email thread)</li>
+        <li><strong>Notes</strong> (context crumbs)</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Selection logic (default):</strong> keep active items, plus recently touched items, plus anything marked urgent/priority —
+        then cap output so the plan stays executable.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="plan">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">6. Plan Format (Doc Output)</h2>
+
+      <p class="muted">
+        Consistency is the feature. MyPlanner writes the same structure every day so your brain doesn’t re-learn the doc.
+        The plan is written into a single Google Doc as an H2 section per date (upsert by date).
+      </p>
+
+      <h3>6.1 Standard sections</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Section</th>
+              <th>Purpose</th>
+              <th>Typical Contents</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Today’s Focus</strong></td>
+              <td>One sentence that prevents drift</td>
+              <td>Theme / outcome for the day</td>
+            </tr>
+            <tr>
+              <td><strong>Top 5</strong></td>
+              <td>The executable list</td>
+              <td>5 tasks with next steps</td>
+            </tr>
+            <tr>
+              <td><strong>Schedule</strong></td>
+              <td>Reality-based blocks</td>
+              <td>Calendar + work blocks + buffers</td>
+            </tr>
+            <tr>
+              <td><strong>Draft Messages</strong></td>
+              <td>Close open loops fast</td>
+              <td>Follow-ups, handoffs, asks</td>
+            </tr>
+            <tr>
+              <td><strong>Targets</strong></td>
+              <td>Measurable completion</td>
+              <td>“Ship X”, “Send Y”, “Close Z”</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Header guardrail:</strong> MyPlanner parses by known headers and rewrites in a controlled format to prevent “section drift”
+        over time (especially when an LLM is enabled).
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="guardrails">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">7. Guardrails &amp; Safe Defaults</h2>
+
+      <h3>7.1 Planning guardrails</h3>
+      <ul>
+        <li><strong>Cap the plan</strong> (avoid 20-item “plans” that aren’t plans).</li>
+        <li><strong>Assume overrun</strong> (buffer time so the plan survives meetings and context switches).</li>
+        <li><strong>Prefer next steps</strong> over vague goals (every item should have an action verb).</li>
+        <li><strong>Surface stale items</strong> (last-touch logic so follow-ups don’t decay invisibly).</li>
+      </ul>
+
+      <h3>7.2 Runtime guardrails</h3>
+      <ul>
+        <li><strong>Deterministic fallback</strong> when no LLM key exists (never block the workflow).</li>
+        <li><strong>Upsert by date</strong> (re-runs replace today cleanly; no duplicate sections).</li>
+        <li><strong>Safe parsing</strong> (ignore unknown sections; keep output stable).</li>
+        <li><strong>Read-only posture</strong> to your systems: it reads Sheets/Calendar and writes only to the designated Doc.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Principle:</strong> the plan should reduce decisions, not add a new tool to manage.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="privacy">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">8. Privacy &amp; Data Minimization</h2>
+
+      <p class="muted">
+        The default mode keeps everything inside Google (Sheets + Calendar + Docs).
+        If you enable the LLM call, MyPlanner minimizes what it sends: summarized bullets, not raw sheets or full event bodies.
+      </p>
+
+      <h3>8.1 Recommended defaults</h3>
+      <ul>
+        <li>Send only: task titles + next steps + priority + last touch (as short bullets)</li>
+        <li>Send only: calendar blocks (start/end + short label)</li>
+        <li>Exclude: personal notes, sensitive content, or long free-text fields unless explicitly enabled</li>
+        <li>Keep an audit line in the output noting whether LLM mode was enabled</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Reminder:</strong> if your tracker contains sensitive information, keep LLM mode off — the deterministic planner still works.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ops">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">9. Operating Cadence</h2>
+
+      <h3>9.1 Daily</h3>
+      <ul>
+        <li><strong>Morning run:</strong> generate plan before the first meeting block.</li>
+        <li><strong>Midday re-run (optional):</strong> if meetings changed, re-run to re-time-block.</li>
+        <li><strong>End-of-day:</strong> mark outcomes and capture “where we left off” in notes (feeds tomorrow).</li>
+      </ul>
+
+      <h3>9.2 Weekly</h3>
+      <ul>
+        <li>Review stale items and close/park anything that’s not real.</li>
+        <li>Adjust status vocabulary so “active” means active (not “maybe someday”).</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Day drift rule:</strong> if the plan is not re-runnable, it will break. Re-runs are a feature, not a failure.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="fit">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">10. Where It Fits</h2>
+      <ul>
+        <li><strong>Downstream of work signals:</strong> tasks, priorities, last-touch dates, and calendar commitments.</li>
+        <li><strong>Upstream of execution:</strong> outreach, writing, building, follow-ups, and closing loops.</li>
+        <li><strong>Feeds other agents:</strong> planning output can become inputs for routing, audits, or portfolio ops.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="appendix">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">Appendix — Suggested Columns</h2>
+
+      <p class="muted">
+        Use what you already have. These columns are suggestions — not requirements.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Column</th>
+              <th>Purpose</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Task</td>
+              <td>What the item is</td>
+              <td>“Finish LinkedIn application draft”</td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td>Selection + workflow state</td>
+              <td>Active / Waiting / Parked / Done</td>
+            </tr>
+            <tr>
+              <td>Priority</td>
+              <td>Rank what matters</td>
+              <td>P0 / P1 / P2</td>
+            </tr>
+            <tr>
+              <td>Next Step</td>
+              <td>Execution starter</td>
+              <td>“Send HM message”</td>
+            </tr>
+            <tr>
+              <td>Last Touch</td>
+              <td>Decay detection</td>
+              <td>2026-02-13</td>
+            </tr>
+            <tr>
+              <td>Owner / Stakeholder</td>
+              <td>Who is involved</td>
+              <td>“Recruiting Ops”</td>
+            </tr>
+            <tr>
+              <td>Link</td>
+              <td>Jump back in</td>
+              <td>Doc / ticket / email thread</td>
+            </tr>
+            <tr>
+              <td>Notes</td>
+              <td>Context crumbs</td>
+              <td>“Waiting on data export”</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Minimum viable tracker:</strong> Task + Status + Priority + Next Step.
+        Everything else is optional.
+      </div>
+    </div>
+  </div>
+</section>

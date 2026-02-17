@@ -1,0 +1,418 @@
+---
+layout: templates/tool-playbook.njk
+permalink: "/tools/listening/playbook/"
+
+title: "Listening A[i]gent — Playbook"
+description: "Turning qualitative noise into structured insight — without surveys nobody trusts. Human-in-the-loop, auditable feedback signals across People systems."
+pageId: "tool-playbook"
+heroClass: "hero--tool-strong"
+
+kicker: "Playbook · Improve · Autonomy Tier: 1"
+backHref: "/tools/listening/"
+backLabel: "Back to Overview"
+
+toolName: "Listening"
+toolSlug: "listening"
+
+heroTitle: 'Capture real signals <span class="accent">without surveys nobody trusts</span>.'
+sub: 'Listening A[i]gent structures feedback already present in everyday people workflows — interviews, 1:1s, retros, notes, and handoffs — into a consistent signal layer with attribution and context preserved. Non-invasive and human-in-the-loop: no black-box sentiment, no anonymous dashboards disconnected from action.'
+
+playbookWhat: "A practical operating model for organizational listening: scope, guardrails, taxonomy, capture patterns, triage, and closed-loop reporting."
+playbookWho: "People Ops, HRBPs, TA Ops, and People Analytics teams who want early warning signals and decision-ready insight — without turning listening into performative surveys or anonymous scoreboards."
+playbookSolves: "Low-trust surveys | Anonymous noise | No ownership | Signal loss | Leadership blind spots | No closed loop"
+
+toc:
+  - { id: "problem", label: "1. Problem &amp; Purpose" }
+  - { id: "scope", label: "2. Scope &amp; Design Principles" }
+  - { id: "roles", label: "3. Roles &amp; Responsibilities" }
+  - { id: "overview", label: "4. System Overview" }
+  - { id: "taxonomy", label: "5. Signal Taxonomy" }
+  - { id: "workflows", label: "6. Capture &amp; Workflow Patterns" }
+  - { id: "implementation", label: "7. Implementation Notes" }
+  - { id: "metrics", label: "8. Metrics &amp; Reporting" }
+  - { id: "suite", label: "9. Fit in the A[i]gents Suite" }
+  - { id: "risks", label: "10. Risks &amp; Mitigations" }
+  - { id: "appendix", label: "Appendix A — Signal Tags" }
+---
+
+<section class="chapter" id="problem">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">1. Problem &amp; Purpose</h2>
+
+      <h3>1.1 The Problem</h3>
+      <p>Most organizations believe they are “listening,” but rely on:</p>
+      <ul>
+        <li>Low-response engagement surveys</li>
+        <li>Anonymous comments with no ownership</li>
+        <li>One-off feedback that never loops back</li>
+        <li>Sentiment dashboards divorced from decisions</li>
+      </ul>
+      <p>The result is signal loss, trust erosion, and leadership blind spots.</p>
+
+      <h3>1.2 Purpose</h3>
+      <p>
+        Listening A[i]gent creates a structured signal layer from inputs already present in day-to-day work —
+        preserving attribution and context so teams can act.
+      </p>
+
+      <div class="callout">
+        <strong>Principle:</strong> Listening only “counts” when feedback becomes action, and action becomes visible.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="scope">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">2. Scope &amp; Design Principles</h2>
+
+      <h3>2.1 In-Scope</h3>
+      <ul>
+        <li>Structured capture of qualitative feedback from existing workflows</li>
+        <li>Themes, risks, friction points, and “what changed” timelines</li>
+        <li>Decision-ready summaries for Ops/HR leadership</li>
+        <li>Closed-loop tracking: <em>captured → triaged → actioned → communicated</em></li>
+      </ul>
+
+      <h3>2.2 Out-of-Scope (v1)</h3>
+      <ul>
+        <li>Fully automated sentiment scoring without context</li>
+        <li>Anonymous leaderboards or performance management scoring</li>
+        <li>Open-ended surveillance (e.g., always-on chat monitoring)</li>
+      </ul>
+
+      <h3>2.3 Design Principles</h3>
+      <ul>
+        <li><strong>Non-invasive.</strong> Use existing artifacts; avoid “extra asks” that drive fatigue.</li>
+        <li><strong>Human-in-the-loop.</strong> Humans confirm meaning; AI helps structure and summarize.</li>
+        <li><strong>Attribution preserved.</strong> Anonymous inputs only when necessary and explicitly justified.</li>
+        <li><strong>Action linkage.</strong> Every insight must map to an owner, a decision, or a next step.</li>
+        <li><strong>Auditable.</strong> Preserve sources, dates, and decision notes.</li>
+      </ul>
+
+      <h3>2.4 Guardrails</h3>
+      <ul>
+        <li>Clear separation between <strong>signal</strong>, <strong>hypothesis</strong>, and <strong>conclusion</strong>.</li>
+        <li>No “AI scoring” used for employee performance decisions.</li>
+        <li>Minimum aggregation thresholds before org-level trend reporting.</li>
+        <li>Access controls: sensitive signals visible only to appropriate roles.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="roles">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">3. Roles &amp; Responsibilities</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Responsibilities</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>People Ops / HRBP</td>
+              <td>Owns signal triage, assigns follow-up owners, ensures closed-loop communication.</td>
+            </tr>
+            <tr>
+              <td>People Analytics</td>
+              <td>Maintains taxonomy, validates trends, builds reporting for leadership (with guardrails).</td>
+            </tr>
+            <tr>
+              <td>Managers</td>
+              <td>Participate in follow-ups, clarify context, implement local fixes, communicate actions.</td>
+            </tr>
+            <tr>
+              <td>Employees</td>
+              <td>Provide feedback through normal workflows (1:1s, retros, notes). No extra burden required.</td>
+            </tr>
+            <tr>
+              <td>System Admin (HRIS/Tools)</td>
+              <td>Sets up capture points, permissions, retention rules, and logging.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Owner:</strong> Diane Wilkinson — signal design, guardrails, and operationalization patterns.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="overview">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">4. System Overview</h2>
+
+      <p>Listening A[i]gent has four core capability areas:</p>
+      <ul>
+        <li><strong>Capture</strong> — collect signals from existing artifacts (notes, comments, scorecards, retros).</li>
+        <li><strong>Structure</strong> — normalize into a taxonomy (theme, risk, severity, confidence, owner).</li>
+        <li><strong>Triage</strong> — route to the right owner with suggested next steps.</li>
+        <li><strong>Close the loop</strong> — track actions and communicate “what changed.”</li>
+      </ul>
+
+      <h3>4.1 Inputs (Examples)</h3>
+      <ul>
+        <li>Interview feedback + scorecard comments</li>
+        <li>Recruiter / HRBP notes</li>
+        <li>Manager 1:1 summaries</li>
+        <li>Exit and transition summaries</li>
+        <li>Operational retrospectives</li>
+      </ul>
+
+      <h3>4.2 Outputs</h3>
+      <ul>
+        <li>Thematic summaries tied to specific workflows</li>
+        <li>Early-warning indicators (friction, burnout, confusion)</li>
+        <li>Decision-ready insight for Ops and leadership</li>
+        <li>Documented feedback loops showing “what changed”</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="taxonomy">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">5. Signal Taxonomy</h2>
+
+      <p>Signals should be structured consistently so teams can compare apples to apples.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+              <th>Example Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>theme</code></td>
+              <td>High-level topic area</td>
+              <td>Role clarity, workload, tools, manager quality, process friction</td>
+            </tr>
+            <tr>
+              <td><code>signal_type</code></td>
+              <td>What kind of feedback this is</td>
+              <td>Friction, risk, suggestion, praise, confusion, policy gap</td>
+            </tr>
+            <tr>
+              <td><code>severity</code></td>
+              <td>Potential impact if true</td>
+              <td>Low / Medium / High</td>
+            </tr>
+            <tr>
+              <td><code>confidence</code></td>
+              <td>How certain we are</td>
+              <td>Low / Medium / High (based on corroboration)</td>
+            </tr>
+            <tr>
+              <td><code>source</code></td>
+              <td>Where it came from</td>
+              <td>1:1 note, interview feedback, retro doc, exit summary</td>
+            </tr>
+            <tr>
+              <td><code>attribution</code></td>
+              <td>How identity is handled</td>
+              <td>Named / role-level / anonymized</td>
+            </tr>
+            <tr>
+              <td><code>owner</code></td>
+              <td>Who must respond</td>
+              <td>HRBP, manager, Ops, IT, leadership</td>
+            </tr>
+            <tr>
+              <td><code>status</code></td>
+              <td>Closed-loop stage</td>
+              <td>Captured → Triaged → In progress → Resolved → Communicated</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Rule:</strong> A signal without an owner is just noise.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="workflows">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">6. Capture &amp; Workflow Patterns</h2>
+
+      <h3>6.1 Lightweight Capture (Best Default)</h3>
+      <ul>
+        <li>Add a simple “Signal tags” section to existing docs/templates (retro notes, 1:1 prompts).</li>
+        <li>Allow quick tagging: theme + severity + suggested owner.</li>
+        <li>Weekly triage by People Ops/HRBP.</li>
+      </ul>
+
+      <h3>6.2 Structured Capture Points</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Capture Point</th>
+              <th>Trigger</th>
+              <th>Output</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>L1</td>
+              <td>Exit / transition summary</td>
+              <td>Exit initiated</td>
+              <td>Top 3 themes + actionable owners</td>
+            </tr>
+            <tr>
+              <td>L2</td>
+              <td>Manager 1:1 summary</td>
+              <td>Weekly/biweekly cadence</td>
+              <td>Friction + risk flags for triage</td>
+            </tr>
+            <tr>
+              <td>L3</td>
+              <td>Retro notes</td>
+              <td>Project milestone</td>
+              <td>Process / tooling issues with timestamps</td>
+            </tr>
+            <tr>
+              <td>L4</td>
+              <td>Interview feedback (candidate experience)</td>
+              <td>Interview completed</td>
+              <td>CX friction themes + ownership</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>6.3 Triage Loop</h3>
+      <ul>
+        <li><strong>Weekly:</strong> HRBP/Ops reviews new signals and assigns owners.</li>
+        <li><strong>Biweekly:</strong> validate repeat signals (raise confidence if corroborated).</li>
+        <li><strong>Monthly:</strong> leadership summary of top themes + actions shipped.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="implementation">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">7. Implementation Notes</h2>
+
+      <h3>7.1 Where It Lives</h3>
+      <ul>
+        <li><strong>Docs-first:</strong> simplest — tags inside existing notes and templates.</li>
+        <li><strong>System-first:</strong> structured form fields in HRIS/ATS (where appropriate).</li>
+        <li><strong>Hybrid:</strong> tags in docs + periodic structured rollup.</li>
+      </ul>
+
+      <h3>7.2 Access &amp; Retention</h3>
+      <ul>
+        <li>Define a retention policy for raw notes vs. aggregated insights.</li>
+        <li>Restrict access to named attribution; share trends at aggregate level.</li>
+        <li>Log who viewed or exported sensitive summaries.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Default recommendation:</strong> Start docs-first for 30–45 days, prove value, then add structure.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="metrics">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">8. Metrics &amp; Reporting</h2>
+
+      <p>Measure whether listening becomes action:</p>
+      <ul>
+        <li>Time from signal captured → owner assigned</li>
+        <li>Time from owner assigned → action shipped</li>
+        <li>% of signals with closed-loop communication</li>
+        <li>Repeat-signal rate by theme (is the system improving?)</li>
+        <li>Top friction themes by org / role family (with thresholds)</li>
+      </ul>
+
+      <h3>8.1 Integration with Metrics A[i]gent</h3>
+      <p>
+        Listening signals can be mapped to a shared metrics layer as event objects:
+        <code>signal_captured</code>, <code>signal_triaged</code>, <code>action_shipped</code>, <code>loop_closed</code>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="suite">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">9. Fit in the A[i]gents Suite</h2>
+      <ul>
+        <li><strong>Upstream:</strong> Workflow A[i]gent and other systems generate operational artifacts where signals live.</li>
+        <li><strong>Core:</strong> Listening A[i]gent structures feedback into a consistent taxonomy and triage loop.</li>
+        <li><strong>Downstream:</strong> Innovation A[i]gent picks up systemic issues as experiment candidates; Metrics A[i]gent reports progress.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="risks">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">10. Risks &amp; Mitigations</h2>
+      <ul>
+        <li><strong>Risk:</strong> “Listening” becomes surveillance.<br><strong>Mitigation:</strong> non-invasive inputs, clear boundaries, access controls.</li>
+        <li><strong>Risk:</strong> Anonymous dumping ground with no action.<br><strong>Mitigation:</strong> ownership required, closed-loop metrics.</li>
+        <li><strong>Risk:</strong> Misinterpretation without context.<br><strong>Mitigation:</strong> human review, preserve sources, avoid black-box scoring.</li>
+        <li><strong>Risk:</strong> Leaders use signals for performance scoring.<br><strong>Mitigation:</strong> policy guardrails + audit trail + restricted outputs.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="appendix">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">Appendix A — Signal Tags (Starter Set)</h2>
+
+      <p><span class="pill">Themes</span></p>
+      <ul>
+        <li>Role clarity</li>
+        <li>Workload &amp; burnout risk</li>
+        <li>Tooling &amp; access</li>
+        <li>Process friction</li>
+        <li>Manager quality</li>
+        <li>Career growth &amp; mobility</li>
+        <li>Compensation &amp; leveling</li>
+        <li>Hiring process friction</li>
+      </ul>
+
+      <p><span class="pill">Signal Types</span></p>
+      <ul>
+        <li>Friction</li>
+        <li>Risk</li>
+        <li>Confusion</li>
+        <li>Suggestion</li>
+        <li>Praise / strength</li>
+        <li>Policy gap</li>
+      </ul>
+    </div>
+  </div>
+</section>

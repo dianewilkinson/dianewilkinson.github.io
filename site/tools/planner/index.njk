@@ -1,0 +1,65 @@
+---
+layout: templates/tool-overview.njk
+permalink: "/tools/planner/"
+
+title: "MyPlanner – AI-Native Daily Task Planning from a Task Tracker"
+description: "MyPlanner turns a simple task tracker + today’s calendar into a tight daily plan written into Google Docs—prioritized, time-blocked, and ready to execute."
+pageId: "tool-index"
+heroClass: "hero--tool"
+
+kicker: "AI Tool · Planning & Execution · Autonomy Tier: 1"
+backHref: "/tools/"
+backLabel: "Back to Tools"
+
+toolName: "MyPlanner"
+toolSlug: "planner"
+
+heroTitle: "Turn a task tracker into a <span class='accent'>daily plan</span> you actually follow."
+sub: "<strong>MyPlanner</strong> is a Google Apps Script tool that reads a lightweight tracker sheet + today’s calendar, then writes a structured plan into Google Docs — prioritized, time-blocked, and resilient to “day drift.”"
+
+purpose: "Most task trackers fail at the moment of execution: the day starts, meetings happen, energy shifts — and the list becomes noise. MyPlanner converts a tracker into a decision-ready morning plan: what matters today, when it happens, and what to say when you need to move work forward."
+
+outcomes:
+  - title: "Less drift"
+    desc: "A tight “Today’s Focus” prevents reactive work from eating the day."
+  - title: "Fewer open loops"
+    desc: "Draft messages + targets reduce the friction of follow-ups and handoffs."
+  - title: "Execution-ready"
+    desc: "Time blocks with buffers assume real life (20% overrun) so plans survive contact."
+
+quickIntro: |
+  This tool is part of the workflow layer: it turns “work to do” into a daily operating plan and can feed downstream execution and governance.
+  <br /><br />
+  <strong>Status</strong><br />
+  <strong>Overview:</strong> Live<br />
+  <strong>Playbook:</strong> Draft<br />
+  <strong>Demo:</strong> Optional (script-based)<br />
+  <strong>Deploy:</strong> Google Apps Script + Sheets + Docs
+
+quickLinks:
+  - href: "/contact/scheduler.html"
+    label: "Book 15 minutes"
+    desc: "Walk through the workflow, deployment model, and safe defaults."
+
+breaks:
+  - "Task lists grow, but priorities stay implicit — everything feels “urgent.”"
+  - "Follow-ups happen late because the “next step” isn’t surfaced at the start of the day."
+  - "Calendar reality and task reality are disconnected (meetings steal the execution window)."
+  - "You spend peak-energy time deciding what to do instead of doing it."
+  - "Plans don’t compound because the system never captures “Where we left off.”"
+
+does:
+  - "<strong>Reads</strong> a tracker sheet (first tab) and keeps active/recent items (e.g., active statuses or recent touches)."
+  - "<strong>Reads</strong> today’s calendar and turns it into a realistic block schedule."
+  - "<strong>Generates</strong> a structured plan with consistent headers (Focus → Top 5 → Schedule → Draft messages → Targets)."
+  - "<strong>Writes</strong> the day’s plan into a running Google Doc (upsert by date so re-runs replace today cleanly)."
+  - "<strong>Normalizes</strong> formatting (H2/H3 + base font) so the doc stays readable over time."
+  - "<strong>Generic by design:</strong> swap “application tracker” for any <em>task tracker</em> sheet. MyPlanner detects common columns (status, priority, next step, last touch, notes, links) and works with what it finds."
+
+note: "If an OpenAI key isn’t present, MyPlanner still produces a deterministic fallback plan — so the workflow never blocks."
+
+fits:
+  - "<strong>Downstream of work signals:</strong> tasks, priorities, last-touch dates, and calendar commitments."
+  - "<strong>Upstream of execution:</strong> outreach, writing, building, follow-ups, and closing loops."
+  - "<strong>Feeds other agents:</strong> planning output can become inputs for routing, audits, or portfolio ops."
+---
