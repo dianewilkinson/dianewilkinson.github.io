@@ -2,105 +2,177 @@
   {
     "id": "metrics",
     "card": {
-      "type": "ai_tool",
-      "area": "Hiring & Mobility",
-      "title": "AI Tool: Talent Pipeline Health",
-      "summary": "Troubleshoot bottlenecks in real time with immediate data-driven insights when actions matter.",
+      "type": "tool",
+      "function": "Hiring & Mobility",
+      "title": "Recruiting Pipeline Health",
+      "summary": "Troubleshoot bottlenecks in real time with immediate data-driven insights & action.",
       "href": "/tools/metrics/",
-      "hasPlaybook": true,
-      "hasDemo": true,
       "featured": true
-    },
-    "automation": {
-      "pages": {
-        "index": "/tools/metrics/",
-        "playbook": "/tools/metrics/playbook/",
-        "demo": "/tools/metrics/demo/",
-        "dictionary": "/system/core/metrics/"
-      },
-      "relations": {
-        "fedBy": ["screening", "interviews", "outreach", "offer"],
-        "triggers": ["sourcing", "outreach"],
-        "informs": ["chief", "skills", "listening", "planning"],
-        "dependsOn": ["ats", "hris", "crm", "data", "messaging"]
-      },
-      "hero": {
-        "headline": "Stop debating numbers. Start fixing bottlenecks.",
-        "subline": "Pipeline Health A[i]gent is an AI tool that turns raw hiring funnel data into decision-ready diagnostics so recruiters know what is broken, why, and how to fix it in real time."
-      },
-      "purpose": "Hiring decisions fail when teams don’t trust or understand the numbers. Pipeline Health exists to remove ambiguity and make funnel performance explainable — not debatable.",
-      "whatBreaks": [
-        "Funnel performance is debated instead of understood.",
-        "Actionable dashboards create noise, not decisions.",
-        "Bottlenecks are discovered late, after damage is done.",
-        "KPI truth gets hidden in performative actions instead of operational reality.",
-        "Metrics lose credibility and trust erodes — which slows execution everywhere."
-      ],
-      "whatItDoes": [
-        "Diagnoses pass-through drop-offs by stage and flags abnormal patterns.",
-        "Detects constraints such as capacity, volume, and timing mismatches.",
-        "Surfaces likely causes and recommended next actions in operator-facing language.",
-        "Executes Tier-1 actions automatically when pre-approved."
-      ],
-      "outcomes": "Faster execution. Cleaner decisions. Fewer stalled roles.",
-      "whereItFits": [
-        "Downstream of Hiring & Mobility signals such as interviews, offers, time-in-stage, pass-through, and SLAs.",
-        "Upstream of Planning, Innovation, and Governance, making drift and decay visible early.",
-        "Feeds Chief A[i]gent with thresholds for autonomy and escalation signals."
-      ],
-      "guardrails": {
-        "tier": 1,
-        "label": "Tier-1 Autonomy"
-      },
-      "crossLinks": [
-        { "label": "Pipeline Health Playbook", "href": "/tools/metrics/playbook/" },
-        { "label": "Hiring & Mobility", "href": "/system/" }
-      ]
     }
   },
   {
     "id": "screening",
     "card": {
-      "type": "ai_tool",
-      "area": "Hiring & Mobility",
-      "title": "AI Tool: Screening A[i]gent",
-      "summary": "Deep-dive every last application in seconds. Uncover hidden talent. Better decisions. Less manual work.",
+      "type": "tool",
+      "function": "Hiring & Mobility",
+      "title": "High-Volume Applicant Screening",
+      "summary": "Structured candidate evaluation with evidence capture & capacity-aware scoring. Improve consistency. Reduce decision variance.",
       "href": "/tools/screening/",
-      "hasPlaybook": true,
-      "hasDemo": true
-    },
-    "automation": {
-      "pages": { "index": "/tools/screening/" }
+      "featured": true
+    }
+  },
+  {
+    "id": "calculator",
+    "card": {
+      "type": "tool",
+      "function": "Improvement & Strategy",
+      "title": "Hiring Forecast Calculator",
+      "summary": "Precision People Planning.",
+      "href": "/tools/calculator/",
+      "featured": true
+    }
+  },
+  {
+    "id": "innovation",
+    "card": {
+      "type": "tool",
+      "function": "Improvement & Strategy",
+      "title": "Innovation Signaling & Routing",
+      "summary": "Nurture organizational innovation, inspiration & employee engagement.",
+      "href": "/tools/innovation/",
+      "featured": true
+    }
+  },
+  {
+    "id": "sourcing",
+    "card": {
+      "type": "tool",
+      "function": "Hiring & Mobility",
+      "title": "Candidate Sourcing",
+      "summary": "Automated Talent Sourcing",
+      "href": "/tools/sourcing/",
+      "featured": true
+    }
+  },
+  {
+    "id": "planner",
+    "card": {
+      "type": "tool",
+      "function": "Improvement & Strategy",
+      "title": "Automated Daily Planner",
+      "summary": "prioritized, time-sensitve, automated planning for increased efficiency",
+      "href": "/tools/planner/",
+      "featured": true
     }
   },
   {
     "id": "chief",
     "card": {
-      "type": "ai_tool",
-      "area": "Governance",
-      "title": "AI Tool: Chief Orchestration A[i]gent",
-      "summary": "The orchestration layer that governs autonomy, routes decisions, enforces guardrails, and keeps humans in the loop.",
+      "type": "tool",
+      "function": "Governance & Infrastructure",
+      "title": "Chief Orchestration",
+      "summary": "The orchestration layer that governs autonomy, routes decisions, enforces guardrails, & keeps humans in the loop.",
       "href": "/tools/chief/",
-      "hasPlaybook": true,
-      "hasDemo": true
-    },
-    "automation": {
-      "pages": { "index": "/tools/chief/" }
+      "featured": true
     }
   },
   {
     "id": "listening",
     "card": {
-      "type": "ai_tool",
-      "area": "Listening & Insights",
-      "title": "AI Tool: Employee Listening A[i]gent",
-      "summary": "Finally, honest feedback without surveys, bias, or performative politics. The thought you’d never ask.",
+      "type": "tool",
+      "function": "Listening & Engagement",
+      "title": "Employee Listening",
+      "summary": "Bias-free feedback without surveys, suggestion boxes, or performative politics.",
       "href": "/tools/listening/",
-      "hasPlaybook": true,
-      "hasDemo": true
-    },
-    "automation": {
-      "pages": { "index": "/tools/listening/" }
+      "featured": true
+    }
+  },
+  {
+    "id": "candidate",
+    "card": {
+      "type": "playbook",
+      "function": "Hiring & Mobility",
+      "title": "Candidate Journey Playbook",
+      "summary": "Workflows and best practices to keep CSATs up and pipelines flowing.",
+      "href": "/tools/candidate-journey/playbook/",
+      "featured": true
+    }
+  },
+  {
+    "id": "ai-first-ops",
+    "card": {
+      "type": "playbook",
+      "function": "Governance & Infrastucture",
+      "title": "AI-First Operating Model Framework",
+      "summary": "Systems structures and best practices for a technology forward organization.",
+      "href": "/tools/ai-first-ops/playbook/",
+      "featured": true
+    }
+  },
+  {
+    "id": "core",
+    "card": {
+      "type": "system",
+      "function": "Governance & Infrastucture",
+      "title": "The Core",
+      "summary": "Shared systems overview, metrics, definitions, used by multi-agent tools and workflows.",
+      "href": "/system/core/",
+      "featured": true
+    }
+  },
+  {
+    "id": "metrics-dictionary",
+    "card": {
+      "type": "system",
+      "function": "Governance & Infrastucture",
+      "title": "Metrics Dictionary",
+      "summary": "A single source of truth for metric names, definitions, formulas, grain, filters, and ownership.",
+      "href": "/system/core/metrics/",
+      "featured": true
+    }
+  },
+  {
+    "id": "why-ai-pilots-fail",
+    "card": {
+      "type": "article",
+      "function": "Governance & Infrastucture",
+      "title": "Why 95% of AI Pilots Fail",
+      "summary": "... & What the Successful 5% Do Differently",
+      "href": "/article/why-ai-pilots-fail/",
+      "featured": true
+    }
+  },
+    {
+    "id": "system",
+    "card": {
+      "type": "system",
+      "function": "Governance & Infrastucture",
+      "title": "AI Native People Operating System",
+      "summary": "A complete end-to-end system for harnessing technology to get the most from your people systems.",
+      "href": "/system/",
+      "featured": true
+    }
+  },
+      {
+    "id": "workflow",
+    "card": {
+      "type": "system",
+      "function": "Improvement & Strategy",
+      "title": "Automated Workflows for Recriting & Hiring",
+      "summary": "Recruiting workflows to increase efficiency, engagement, branding, & CSAT scores.",
+      "href": "/tools/workflow/",
+      "featured": true
+    }
+  },
+  {
+    "id": "source-quality",
+    "card": {
+      "type": "use-case",
+      "function": "Improvement & Strategy",
+      "title": "Recruitment Source Quality Tracking",
+      "summary": "Analysis & insights for focusing on highest ROI.",
+      "href": "/use-cases/sourcing-quality/",
+      "featured": true
     }
   }
 ]

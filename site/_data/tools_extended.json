@@ -1,0 +1,104 @@
+[
+  {
+    "id": "metrics",
+    "card": {
+      "type": "tool",
+      "function": "Hiring & Mobility",
+      "title": "Recruiting Pipeline Health",
+      "summary": "Troubleshoot bottlenecks in real time with immediate data-driven insights & action.",
+      "href": "/tools/metrics/",
+      "featured": true
+    },
+    "automation": {
+      "pages": {
+        "index": "/tools/metrics/",
+        "playbook": "/tools/metrics/playbook/",
+        "demo": "/tools/metrics/demo/",
+        "dictionary": "/system/core/metrics/"
+      },
+      "relations": {
+        "fedBy": ["screening", "interviews", "outreach", "offer"],
+        "triggers": ["sourcing", "outreach"],
+        "informs": ["chief", "skills", "listening", "planning"],
+        "dependsOn": ["ats", "hris", "crm", "data", "messaging"]
+      },
+      "hero": {
+        "headline": "Stop debating numbers. Start fixing bottlenecks.",
+        "subline": "Pipeline Health A[i]gent is an AI tool that turns raw hiring funnel data into decision-ready diagnostics so recruiters know what is broken, why, and how to fix it in real time."
+      },
+      "purpose": "Hiring decisions fail when teams don’t trust or understand the numbers. Pipeline Health exists to remove ambiguity and make funnel performance explainable — not debatable.",
+      "whatBreaks": [
+        "Funnel performance is debated instead of understood.",
+        "Actionable dashboards create noise, not decisions.",
+        "Bottlenecks are discovered late, after damage is done.",
+        "KPI truth gets hidden in performative actions instead of operational reality.",
+        "Metrics lose credibility and trust erodes — which slows execution everywhere."
+      ],
+      "whatItDoes": [
+        "Diagnoses pass-through drop-offs by stage and flags abnormal patterns.",
+        "Detects constraints such as capacity, volume, and timing mismatches.",
+        "Surfaces likely causes and recommended next actions in operator-facing language.",
+        "Executes Tier-1 actions automatically when pre-approved."
+      ],
+      "outcomes": "Faster execution. Cleaner decisions. Fewer stalled roles.",
+      "whereItFits": [
+        "Downstream of Hiring & Mobility signals such as interviews, offers, time-in-stage, pass-through, and SLAs.",
+        "Upstream of Planning, Innovation, and Governance, making drift and decay visible early.",
+        "Feeds Chief A[i]gent with thresholds for autonomy and escalation signals."
+      ],
+      "guardrails": {
+        "tier": 1,
+        "label": "Tier-1 Autonomy"
+      },
+      "crossLinks": [
+        { "label": "Pipeline Health Playbook", "href": "/tools/metrics/playbook/" },
+        { "label": "Hiring & Mobility", "href": "/system/" }
+      ]
+    }
+  },
+  {
+    "id": "screening",
+    "card": {
+      "type": "ai_tool",
+      "area": "Hiring & Mobility",
+      "title": "AI Tool: Screening A[i]gent",
+      "summary": "Deep-dive every last application in seconds. Uncover hidden talent. Better decisions. Less manual work.",
+      "href": "/tools/screening/",
+      "hasPlaybook": true,
+      "hasDemo": true
+    },
+    "automation": {
+      "pages": { "index": "/tools/screening/" }
+    }
+  },
+  {
+    "id": "chief",
+    "card": {
+      "type": "ai_tool",
+      "area": "Governance",
+      "title": "AI Tool: Chief Orchestration A[i]gent",
+      "summary": "The orchestration layer that governs autonomy, routes decisions, enforces guardrails, and keeps humans in the loop.",
+      "href": "/tools/chief/",
+      "hasPlaybook": true,
+      "hasDemo": true
+    },
+    "automation": {
+      "pages": { "index": "/tools/chief/" }
+    }
+  },
+  {
+    "id": "listening",
+    "card": {
+      "type": "ai_tool",
+      "area": "Listening & Insights",
+      "title": "AI Tool: Employee Listening A[i]gent",
+      "summary": "Finally, honest feedback without surveys, bias, or performative politics. The thought you’d never ask.",
+      "href": "/tools/listening/",
+      "hasPlaybook": true,
+      "hasDemo": true
+    },
+    "automation": {
+      "pages": { "index": "/tools/listening/" }
+    }
+  }
+]
