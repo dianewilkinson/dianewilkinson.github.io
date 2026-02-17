@@ -979,17 +979,18 @@ body[data-page="article"] .prose h1{
 }
 
 body[data-page="article"] .prose h2{
-  font-size:34px;
+  font-size:30px;
   line-height:1.18;
   letter-spacing:-.015em;
-  margin:38px 0 12px;
+  margin:34px 0 12px;
   color:var(--text);
+  font-weight:600;  /* instead of default 900 inheritance */
 }
 
 /* Accent ONLY the number token (your markup uses <b>#1</b>) */
 body[data-page="article"] .prose h2 b{
   margin-right:8px;
-  font-weight:900;
+  font-weight:600;
   background: linear-gradient(90deg, var(--accent), var(--accent3));
   -webkit-background-clip:text;
   background-clip:text;
