@@ -941,6 +941,62 @@ body[data-page="tool-playbook"] .ctaRow--tight{
 }
 
 /* =========================
+   ARTICLE TYPOGRAPHY TUNING
+   (scoped only to article pages)
+   ========================= */
+
+body[data-page="article"] .prose{
+  font-size:17px;
+  line-height:1.75;
+}
+
+body[data-page="article"] .prose p{
+  color:rgba(15,23,42,.88);
+  margin:18px 0;
+}
+
+body[data-page="article"] .prose h1{
+  font-size:40px;
+  line-height:1.2;
+  letter-spacing:-.02em;
+  margin:16px 0 12px;
+}
+
+body[data-page="article"] .prose h2{
+  font-size:26px;
+  margin-top:34px;
+  margin-bottom:10px;
+  letter-spacing:-.01em;
+}
+
+body[data-page="article"] .prose h3{
+  font-size:20px;
+  margin-top:24px;
+  margin-bottom:8px;
+}
+
+/* Make numbered headings purple (like right screenshot) */
+body[data-page="article"] .prose h2{
+  color:var(--accent);
+}
+
+/* Blockquotes slightly larger + stronger */
+body[data-page="article"] .prose blockquote{
+  font-size:19px;
+  font-weight:600;
+  color:var(--text);
+  border-left:4px solid var(--accent);
+  padding-left:16px;
+  margin:24px 0;
+}
+
+/* Lists slightly roomier */
+body[data-page="article"] .prose ul,
+body[data-page="article"] .prose ol{
+  margin:16px 0 16px 22px;
+}
+
+/* =========================
    APP GRID (Tools library)
    ========================= */
 .appGrid{
