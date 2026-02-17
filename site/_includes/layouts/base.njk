@@ -56,12 +56,17 @@
       {{ content | safe }}
     {% endblock %}
 
-    {% if (not minimalShell) and (pageId not in ["home","tool-demo-embed","article"]) %}
-      <section class="exploreNext" aria-label="Explore Next">
+    {# Terminal connect block (canonical, used site-wide) #}
+    {% if (not minimalShell) and (pageId not in ["tool-demo-embed","article"]) %}
+
+      <section class="exploreNext" aria-label="Connect">
         <div class="panel panel--cool">
           <h2 class="section-title">Let's Connect</h2>
+          <p class="section-sub">
+            Open to roles in People Analytics, Talent Intelligence, People Ops, and Recruiting Operations — especially teams building internal AI capabilities.
+          </p>
 
-          <div class="exploreNext__actions">
+          <div class="exploreNext__actions centerRow">
             <a class="btn" href="mailto:dianewilkinson510@gmail.com">📩 Email Diane</a>
             <a class="btn" href="https://www.linkedin.com/in/dianewilkinson" target="_blank" rel="noopener">🔗 Connect on LinkedIn</a>
             <a class="btn" href="/contact/scheduler/">📅 Schedule 15 min Intro</a>
@@ -69,12 +74,13 @@
         </div>
       </section>
     {% endif %}
+
   </main>
 
   {% if not minimalShell %}
     <footer class="site-footer">
       <div class="site-footer__row">
-        <div>Based in the San Francisco Bay Area</div>
+        <div>Based in the San Francisco Bay Area · div>dianewilkinson510@gmail.com</div>
       </div>
     </footer>
   {% endif %}
