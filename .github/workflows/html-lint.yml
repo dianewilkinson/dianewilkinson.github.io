@@ -21,5 +21,5 @@ jobs:
         run: npm install -g htmlhint
 
       - name: Run HTMLHint
-        run: htmlhint "site/**/*.html"
+        run: htmlhint "_site/**/*.html"
 
