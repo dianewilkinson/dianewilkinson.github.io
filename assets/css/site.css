@@ -997,6 +997,91 @@ body[data-page="article"] .prose ol{
 }
 
 /* =========================
+   ARTICLE — Editorial tuning (scoped)
+   ========================= */
+
+body[data-page="article"] .prose{
+  font-size:17px;
+  line-height:1.75;
+}
+
+/* 6) Links: force all links to one purple */
+body[data-page="article"] .prose a{
+  color:#7c3aed; /* violet */
+}
+body[data-page="article"] .prose a:hover{
+  text-decoration:underline;
+}
+
+/* 1 + 3) Numbered section headings (#1, #2...) much larger + purple
+   Your content uses <h2>#1 ...</h2> so we style h2.
+*/
+body[data-page="article"] .prose h2{
+  font-size:30px;
+  line-height:1.25;
+  margin:34px 0 12px;
+  letter-spacing:-.015em;
+  color:#7c3aed;
+}
+
+/* Optional: make the "#1" itself heavier if it's inside the text */
+body[data-page="article"] .prose h2 strong{
+  font-weight:900;
+}
+
+/* 2) Blockquotes: bigger + purple vertical rule before first letter */
+body[data-page="article"] .prose blockquote{
+  margin:22px 0;
+  padding:6px 0 6px 18px;
+  border-left:4px solid #7c3aed;
+  color:var(--text);
+}
+body[data-page="article"] .prose blockquote p{
+  margin:0;
+  font-size:20px;
+  line-height:1.5;
+}
+body[data-page="article"] .prose blockquote b{
+  font-weight:900;
+}
+
+/* 4) Bullet spacing tighter */
+body[data-page="article"] .prose ul,
+body[data-page="article"] .prose ol{
+  margin:10px 0 14px 20px;
+}
+body[data-page="article"] .prose li{
+  margin:4px 0;
+}
+
+/* 5) Gradient callout block (your crumbTitle -> .callout)
+   Make it larger font and centered.
+*/
+body[data-page="article"] .callout{
+  font-size:16px;
+  font-weight:800;
+  text-align:center;
+  padding:14px 16px;
+}
+
+
+/* Articles: only the #1/#2 token purple, not the whole heading */
+body[data-page="article"] .prose h2{
+  font-size:30px;
+  line-height:1.25;
+  margin:34px 0 12px;
+  letter-spacing:-.015em;
+  color:var(--text); /* keep heading text normal */
+}
+
+body[data-page="article"] .prose h2 b{
+  color:#7c3aed;     /* violet for #1 only */
+  font-weight:900;
+  margin-right:6px;
+}
+
+
+/* =========================
    APP GRID (Tools library)
    ========================= */
 .appGrid{
