@@ -9,6 +9,8 @@ For any site-surfaced page (tool overview/playbook/system/etc.), you may ONLY ou
 
 \*\*Exception:\*\* demo \+ demo-embed pages are standalone artifacts and may use inline \`\<style\>\` (see §8).
 
+“Architecture authority lives in internal/contracts/ARCHITECTURE_AND_GOVERNANCE.md. See ARCHITECTURE_AND_GOVERNANCE.md for canonical rules.
+
 ### **Template Registry (Authoritative)**
 
 Only the following templates may be used for tool surfaces:
@@ -16,7 +18,7 @@ Only the following templates may be used for tool surfaces:
 * `templates/tool-overview.njk`  extends base
 * `templates/tool-playbook.njk`  extends base
 * `templates/home.njk`  = standalone layout (does not extend base)
-* `templates/system-index.njk`  
+* `templates/system.njk`  
 * `layouts/base.njk` (read-only wrapper)
 
 Pages use layout:

@@ -103,7 +103,6 @@ body[data-page="tool-playbook"]{}    /* playbook pages */
 body[data-page="tool-demo"]{}        /* demo pages */
 body[data-page="tool-demo-embed"]{}  /* optional: embed-only demo preview pages */
 body[data-page="system"]{}           /* system pages */
-body[data-page="case"]{}             /* case study pages */
 body[data-page="use-case"]{}         /* use-case pages */
 body[data-page="article"]{}          /* article pages */
 
@@ -1026,8 +1025,7 @@ body[data-page="use-case"] .exploreNext a[href="/use-cases"],
 body[data-page="article"] .exploreNext a[href="/articles/"],
 body[data-page="article"] .exploreNext a[href="/articles"],
 
-body[data-page="case"] .exploreNext a[href="/use-cases/"],
-body[data-page="case"] .exploreNext a[href="/use-cases"]{
+
   border-color: rgba(79,70,229,.35);
   background: linear-gradient(
     135deg,
