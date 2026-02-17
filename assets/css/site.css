@@ -277,10 +277,6 @@ body[data-page="home"] .hero-headline{
 }
 
 body[data-page="home"] .hero-subtitle{
-  margin:0;
-  color:var(--muted);
-  font-size:15.5px;
-  line-height:1.6;
   max-width:90ch;
 }
 
@@ -966,7 +962,7 @@ body[data-page="article"] .prose a:hover{
 /* The “big MIT line” (full sentence link) */
 body[data-page="article"] .prose p > a{
   font-size:20px;
-  font-weight:800;
+  font-weight:600;
   text-decoration:underline;
 }
 
