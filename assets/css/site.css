@@ -1047,14 +1047,14 @@ body[data-page="article"] .prose h2 strong{
 
 /* 2) Blockquotes: bigger + purple vertical rule before first letter */
 body[data-page="article"] .prose blockquote{
-  margin:22px 0;
+  margin:24px 0;
   padding:6px 0 6px 18px;
   border-left:4px solid #7c3aed;
   color:var(--text);
 }
 body[data-page="article"] .prose blockquote p{
   margin:0;
-  font-size:20px;
+  font-size:24px;
   line-height:1.5;
 }
 body[data-page="article"] .prose blockquote b{
@@ -1074,8 +1074,8 @@ body[data-page="article"] .prose li{
    Make it larger font and centered.
 */
 body[data-page="article"] .callout{
-  font-size:16px;
-  font-weight:800;
+  font-size:24px;
+  font-weight:600;
   text-align:center;
   padding:14px 16px;
 }
