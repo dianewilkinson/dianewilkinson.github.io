@@ -23,35 +23,47 @@
 
   {{ content | safe }}
 
-    {# OPTIONAL: Featured tools grid powered by site/_data/tools.json #}
+  {# OPTIONAL: Featured tools grid powered by site/_data/tools.json #}
   {% if showFeaturedTools %}
     {% set limit = featuredToolsLimit or 8 %}
-    {% set featured = tools | selectattr("card.featured", "equalto", true) | list %}
+    {% set shown = 0 %}
 
     <section class="panel" aria-label="Featured tools">
       <div class="panelInner">
-        <h3 class="section-title">{{ featuredToolsTitle or "Featured Systems" }}</h3>
+        <h3 class="section-title">{{ featuredToolsTitle or "Selected Work" }}</h3>
         {% if featuredToolsSub %}
           <p class="section-sub">{{ featuredToolsSub }}</p>
         {% endif %}
 
         <div class="tools-grid" aria-label="Featured tools grid">
-          {% for item in featured | slice(0, limit) %}
-            <div class="tool-card">
-              <div class="tool-top">
-                <div>
-                  <p class="small muted">{{ item.card.type | replace("-", " ") | title }}</p>
-                  <h3>{{ item.card.title }}</h3>
-                  <p>{{ item.card.summary }}</p>
+
+          {# Robust featured loop (no selectattr/list dependency) #}
+          {% for item in tools %}
+            {% if item.card and item.card.featured and shown < limit %}
+              <div class="tool-card">
+                <div class="tool-top">
+                  <div>
+                    {# TYPE as a pill #}
+                    <span class="badge">{{ item.card.type | replace("-", " ") | title }}</span>
+
+                    <h3>{{ item.card.title }}</h3>
+                    <p>{{ item.card.summary }}</p>
+                  </div>
                 </div>
-                {% if item.card.function %}
-                  <span class="badge">{{ item.card.function }}</span>
-                {% endif %}
+
+                {# Bottom row: function left, explore right (requires 2 children) #}
+                <div class="tool-actions">
+                  {% if item.card.function %}
+                    <span class="small muted">{{ item.card.function }}</span>
+                  {% else %}
+                    <span class="small muted"></span>
+                  {% endif %}
+                  <a href="{{ item.card.href }}">Explore →</a>
+                </div>
               </div>
-              <div class="tool-actions">
-                <a href="{{ item.card.href }}">Explore →</a>
-              </div>
-            </div>
+
+              {% set shown = shown + 1 %}
+            {% endif %}
           {% endfor %}
 
           {# Route card: full library #}
@@ -64,6 +76,7 @@
               <span class="badge">Full library</span>
             </div>
             <div class="tool-actions">
+              <span class="small muted"></span>
               <a href="/tools/">Open tools index →</a>
             </div>
           </div>
