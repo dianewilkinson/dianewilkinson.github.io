@@ -640,15 +640,15 @@ body[data-page="home"] .panel--pink .panelInner{
 }
 
 .badge[data-kind="system"]{
-  border-color: rgba(167,139,250,.26);
-  background: rgba(167,139,250,.10);
-  color: rgba(91,33,182,.92);
+  border-color: rgba(34,197,94,.28);
+  background: rgba(34,197,94,.10);
+  color: rgba(21,128,61,.95);
 }
 
 .badge[data-kind="article"]{
-  border-color: rgba(251,113,133,.26);
-  background: rgba(251,113,133,.10);
-  color: rgba(190,24,93,.92);
+  border-color: rgba(234,179,8,.32);
+  background: rgba(234,179,8,.12);
+  color: rgba(133,77,14,.95);
 }
 
 .badge[data-kind="use-case"]{
