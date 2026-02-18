@@ -40,7 +40,7 @@
       "title": "Innovation Signaling & Routing",
       "summary": "Nurture organizational innovation, inspiration & employee engagement.",
       "href": "/tools/innovation/",
-      "featured": true
+      "featured": false
     }
   },
   {
@@ -147,8 +147,8 @@
     "card": {
       "type": "system",
       "function": "Governance & Infrastructure",
-      "title": "AI Native People Operating System",
-      "summary": "A complete end-to-end system for harnessing technology to get the most from your people systems.",
+      "title": "Integrated People Operating System",
+      "summary": "Eend-to-end system gets the most from your people operations.",
       "href": "/system/",
       "featured": true
     }

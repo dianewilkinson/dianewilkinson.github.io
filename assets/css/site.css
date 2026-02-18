@@ -597,7 +597,7 @@ body[data-page="home"] .panel--pink .panelInner{
 
 .tool-card h3,
 .tool-card h4{
-  margin:0 0 6px;
+  margin:8 0 6px;
   font-size:14px;
   font-weight:900;
   letter-spacing:-.01em;
@@ -625,13 +625,6 @@ body[data-page="home"] .panel--pink .panelInner{
   max-width:100%;
 }
 
-.tool-actions{
-  margin-top:auto;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
 .tool-actions a{
   font-size:12.5px;
   font-weight:900;
@@ -640,10 +633,13 @@ body[data-page="home"] .panel--pink .panelInner{
 }
 .tool-actions a:hover{ color:#3730a3; text-decoration:none; }
 
-.tool-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+.tool-actions{
+  margin-top:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
 }
 
 /* Route-card variants (landing) */
