@@ -5,7 +5,7 @@
       "type": "tool",
       "function": "Hiring & Mobility",
       "title": "Recruiting Pipeline Health",
-      "summary": "Troubleshoot bottlenecks in real time with immediate data-driven insights & action.",
+      "summary": "Troubleshoot bottlenecks in real time with data-driven insights & action.",
       "href": "/tools/metrics/",
       "featured": true
     }
@@ -16,7 +16,7 @@
       "type": "tool",
       "function": "Hiring & Mobility",
       "title": "High-Volume Applicant Screening",
-      "summary": "Structured candidate evaluation with evidence capture & capacity-aware scoring. Improve consistency. Reduce decision variance.",
+      "summary": "Structured, evidence-backed research, evaluations, & action items.",
       "href": "/tools/screening/",
       "featured": true
     }
@@ -48,7 +48,7 @@
     "card": {
       "type": "tool",
       "function": "Hiring & Mobility",
-      "title": "Strategic Candidate Sourcing",
+      "title": "Strategic Candidate Sourcing & Matching",
       "summary": "Automated Talent Sourcing",
       "href": "/tools/sourcing/",
       "featured": false
@@ -70,8 +70,8 @@
     "card": {
       "type": "tool",
       "function": "Governance & Infrastructure",
-      "title": "Chief Orchestration",
-      "summary": "The orchestration layer that governs autonomy, routes decisions, enforces guardrails, & keeps humans in the loop.",
+      "title": "Chief Orchestration Layer",
+      "summary": "Governing autonomy, routing decisions, & enforcing guardrails.",
       "href": "/tools/chief/",
       "featured": false
     }
@@ -82,7 +82,7 @@
       "type": "tool",
       "function": "Listening & Engagement",
       "title": "Employee Listening",
-      "summary": "Bias-free feedback without surveys, suggestion boxes, or performative politics.",
+      "summary": "Bias-free feedback without surveys, suggestion boxes, or politics.",
       "href": "/tools/listening/",
       "featured": true
     }
@@ -93,7 +93,7 @@
       "type": "playbook",
       "function": "Hiring & Mobility",
       "title": "Candidate Journey Playbook",
-      "summary": "Workflows and best practices to keep CSATs up and pipelines flowing.",
+      "summary": "Workflows & best practices to keep CSATs up and pipelines flowing.",
       "href": "/tools/candidate-journey/playbook/",
       "featured": false
     }
@@ -115,7 +115,7 @@
       "type": "system",
       "function": "Governance & Infrastructure",
       "title": "Shared Systems Core",
-      "summary": "Shared systems overview, metrics, definitions, used by multi-agent tools and workflows.",
+      "summary": "Shared systems overview, metrics, definitions, used by multi-agent tools & workflows.",
       "href": "/system/core/",
       "featured": false
     }
@@ -126,7 +126,7 @@
       "type": "system",
       "function": "Governance & Infrastructure",
       "title": "Metrics Dictionary",
-      "summary": "A single source of truth for metric names, definitions, formulas, grain, filters, and ownership.",
+      "summary": "A single source of truth for metric names, definitions, formulas, grain, filters, & ownership.",
       "href": "/system/core/metrics/",
       "featured": false
     }
