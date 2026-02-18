@@ -27,7 +27,6 @@ permalink: "/tools/"
   <a class="btn" href="/system/">System</a>
   <a class="btn" href="/use-cases/">Use Cases</a>
   <a class="btn" href="/articles/">Articles</a>
-
 {% endblock %}
 
 {% block content %}
@@ -39,187 +38,27 @@ permalink: "/tools/"
 
       <div class="appGrid" aria-label="Tools grid">
 
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>🦾 AI Tool: Talent Pipeline Health</h3>
-              <p>Troubleshoot bottlenecks in real time with immediate data-driven insights when actions matter.</p>
-            </div>
-            <span class="appBadge">Hiring &amp; Mobility</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/tools/metrics/">Explore tool →</a>
-          </div>
-        </article>
+        {% for item in tools %}
+          {% if item.card %}
+            <article class="appCard">
+              <div class="appTop">
+                <div class="appMain">
+                  <p class="small muted">{{ item.card.type | replace("-", " ") | title }}</p>
+                  <h3>{{ item.card.title }}</h3>
+                  <p>{{ item.card.summary }}</p>
+                </div>
 
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>🦾 AI Tool: Screening A[i]gent</h3>
-              <p>Deep-dive every last application in seconds. Uncover hidden talent. Better Decisions. Less Manual Work.</p>
-            </div>
-            <span class="appBadge">Hiring &amp; Mobility</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/tools/screening/">Explore tool →</a>
-          </div>
-        </article>
+                {% if item.card.function %}
+                  <span class="appBadge">{{ item.card.function }}</span>
+                {% endif %}
+              </div>
 
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>📚 Use Case: Not All Sourcing Was Created Equal</h3>
-              <p>Once we understand the juice is not always worth the squeeze we learn to focus resources on the highest returns. Data-backed. Undeniable.</p>
-            </div>
-            <span class="appBadge">Improvement &amp; Strategy</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/use-cases/sourcing-quality/">Explore →</a>
-          </div>
-        </article>
-
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>🦾 AI Tool: Employee Listening A[i]gent</h3>
-              <p>Finally, honest feedback without surveys, bias, or performative politics. We thought you'd never ask.</p>
-            </div>
-            <span class="appBadge">Listening &amp; Insights</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/tools/listening/">Explore tool →</a>
-          </div>
-        </article>
-
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>⚙️ Tool: Forecasting Calculator</h3>
-              <p>Precision People Planning.</p>
-            </div>
-            <span class="appBadge">Improvement &amp; Strategy</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/tools/calculator/">Explore tool →</a>
-          </div>
-        </article>
-
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>🦾 AI Tool: Innovation A[i]gent</h3>
-              <p>Competitive advantage, employee engagement: keep the true spark of innovation alive without hack days, suggestion boxes, or politics. Meeting insight in the moment.</p>
-            </div>
-            <span class="appBadge">Improvement &amp; Strategy</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/tools/innovation/">Explore tool →</a>
-          </div>
-        </article>
-
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>🦾 AI Tool: Sourcing A[i]gent</h3>
-              <p>Automate Candidate Sourcing &amp; Ease Your Messy Recruiting Funnel Tops.</p>
-            </div>
-            <span class="appBadge">Improvement &amp; Strategy</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/tools/sourcing/">Explore tool →</a>
-          </div>
-        </article>
-
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>🦾 AI Tool: Chief Orchestration A[i]gent</h3>
-              <p>Because everyone deserves a personal Chief of Staff. Chief reasons, routes, consults, &amp; deploys other A[i]gents. Literally. Always. On. 🔥</p>
-            </div>
-            <span class="appBadge">Governance</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/tools/chief/">Explore tool →</a>
-          </div>
-        </article>
-
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>📚 Playbook: Candidate Journey</h3>
-              <p>Communications, automations, and workflows across the candidate journey</p>
-            </div>
-            <span class="appBadge">Improvement &amp; Strategy</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/tools/candidate-journey/">Explore →</a>
-          </div>
-        </article>
-
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>🦾 AI Tool: Daily Planner</h3>
-              <p>A Google Apps Script tool that reads a tasks + calendar, then writes a structured plan — prioritized, time-blocked, and resilient to “day drift.”</p>
-            </div>
-            <span class="appBadge">Improvement &amp; Strategy</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/tools/planner/">Explore tool →</a>
-          </div>
-        </article>
-
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>📚 Playbook: AI-First Ops Model</h3>
-              <p>A practical framework for reducing managerial busywork, expanding autonomy, and keeping humans on high-leverage work</p>
-            </div>
-            <span class="appBadge">Improvement &amp; Strategy</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/tools/ai-first-ops/">Explore →</a>
-          </div>
-        </article>
-
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>🔩 Core: Nuts &amp; Bolts</h3>
-              <p>The shared contract that every tool, metric, and A[i]gent references.</p>
-            </div>
-            <span class="appBadge">Improvement &amp; Strategy</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/system/core/">Explore →</a>
-          </div>
-        </article>
-
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>🔩 Core: Metrics Dictionary</h3>
-              <p>A single source of truth for metric names, definitions, formulas, grain, filters, and ownership.</p>
-            </div>
-            <span class="appBadge">Improvement &amp; Strategy</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/system/core/metrics.html">Explore →</a>
-          </div>
-        </article>
-
-        <article class="appCard">
-          <div class="appTop">
-            <div class="appMain">
-              <h3>📰 Article: Why 95% of AI Pilots Fail</h3>
-              <p>&amp; What the Successful 5% Do Differently</p>
-            </div>
-            <span class="appBadge">Improvement &amp; Strategy</span>
-          </div>
-          <div class="appActions">
-            <a class="appLink" href="/articles/why-ai-pilots-fail/">Read more →</a>
-          </div>
-        </article>
+              <div class="appActions">
+                <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
 
       </div>
     </div>
