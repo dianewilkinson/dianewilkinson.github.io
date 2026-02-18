@@ -43,17 +43,23 @@ permalink: "/tools/"
             <article class="appCard">
               <div class="appTop">
                 <div class="appMain">
-                  <p class="small muted">{{ item.card.type | replace("-", " ") | title }}</p>
+                  {# TYPE pill (top) #}
+                  {% if item.card.type %}
+                    <span class="appBadge">{{ item.card.type | replace("-", " ") | title }}</span>
+                  {% endif %}
+
                   <h3>{{ item.card.title }}</h3>
                   <p>{{ item.card.summary }}</p>
                 </div>
-
-                {% if item.card.function %}
-                  <span class="appBadge">{{ item.card.function }}</span>
-                {% endif %}
               </div>
 
+              {# Bottom row: function left (subtle), explore right #}
               <div class="appActions">
+                {% if item.card.function %}
+                  <span class="small muted">{{ item.card.function }}</span>
+                {% else %}
+                  <span class="small muted"></span>
+                {% endif %}
                 <a class="appLink" href="{{ item.card.href }}">Explore →</a>
               </div>
             </article>
