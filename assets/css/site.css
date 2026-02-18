@@ -624,6 +624,36 @@ body[data-page="home"] .panel--pink .panelInner{
   flex:0 1 auto;
   max-width:100%;
 }
+/* Type-coded badges (attribute selectors, no new classes) */
+.badge[data-kind="tool"]{
+  border-color: rgba(79,70,229,.22);
+  background: rgba(79,70,229,.08);
+  color: rgba(55,48,163,.95);
+}
+
+.badge[data-kind="playbook"]{
+  border-color: rgba(96,165,250,.26);
+  background: rgba(96,165,250,.10);
+  color: rgba(29,78,216,.92);
+}
+
+.badge[data-kind="system"]{
+  border-color: rgba(167,139,250,.26);
+  background: rgba(167,139,250,.10);
+  color: rgba(91,33,182,.92);
+}
+
+.badge[data-kind="article"]{
+  border-color: rgba(251,113,133,.26);
+  background: rgba(251,113,133,.10);
+  color: rgba(190,24,93,.92);
+}
+
+.badge[data-kind="use-case"]{
+  border-color: rgba(148,163,184,.45);
+  background: rgba(148,163,184,.12);
+  color: rgba(71,85,105,.98);
+}
 
 .tool-actions a{
   font-size:12.5px;
