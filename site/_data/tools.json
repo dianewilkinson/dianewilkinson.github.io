@@ -148,7 +148,7 @@
       "type": "system",
       "function": "Governance & Infrastructure",
       "title": "Integrated People Operating System",
-      "summary": "Eend-to-end system gets the most from your people operations.",
+      "summary": "End-to-end system gets the most from your people operations.",
       "href": "/system/",
       "featured": true
     }
@@ -158,7 +158,7 @@
     "card": {
       "type": "system",
       "function": "Improvement & Strategy",
-      "title": "Automated Workflows for Recriting & Hiring",
+      "title": "Automated Workflows for Recruiting & Hiring",
       "summary": "Recruiting workflows to increase efficiency, engagement, branding, & CSAT scores.",
       "href": "/tools/workflow/",
       "featured": false
