@@ -52,19 +52,21 @@ heroActions: |
       {# Featured items from site/_data/tools.json #}
       {% for item in tools %}
         {% if item.card and item.card.featured %}
-          <div class="tool-card">
-            <div class="tool-top">
-              <div>
-                <p class="small muted">{{ item.card.type | replace("-", " ") | title }}</p>
-                <h3>{{ item.card.title }}</h3>
-                <p>{{ item.card.summary }}</p>
-              </div>
-              <span class="badge">{{ item.card.function }}</span>
-            </div>
-            <div class="tool-actions">
-              <a href="{{ item.card.href }}">Explore →</a>
-            </div>
-          </div>
+      <div class="tool-card">
+        <div class="tool-top">
+         <div>
+          <span class="badge">{{ item.card.type | title }}</span>
+          <h3>{{ item.card.title }}</h3>
+          <p>{{ item.card.summary }}</p>
+         </div>
+        </div>
+
+       <div class="tool-actions">
+          <span class="small muted">{{ item.card.function }}</span>
+          <a href="{{ item.card.href }}">Explore →</a>
+     </div>
+  </div>
+
         {% endif %}
       {% endfor %}
 
