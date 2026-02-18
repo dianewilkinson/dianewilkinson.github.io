@@ -41,7 +41,7 @@
           <div class="tool-card">
             <div class="tool-top">
               <div>
-                <p class="small muted">{{ item.card.type | replace("-", " ") | title }}</p>
+                <span class="badge" data-kind="{{ item.card.type }}">{{ item.card.type | replace("-", " ") | title }}</span>
                 <h3>{{ item.card.title }}</h3>
                 <p>{{ item.card.summary }}</p>
               </div>

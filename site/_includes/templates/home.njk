@@ -44,7 +44,7 @@
                 <div class="tool-top">
                   <div>
                     {# TYPE as a pill #}
-                    <span class="badge">{{ item.card.type | replace("-", " ") | title }}</span>
+                    <span class="badge" data-kind="{{ item.card.type }}">{{ item.card.type | replace("-", " ") | title }}</span>
 
                     <h3>{{ item.card.title }}</h3>
                     <p>{{ item.card.summary }}</p>
