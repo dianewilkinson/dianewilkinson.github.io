@@ -1,0 +1,62 @@
+{# =========================
+   TOOLS INDEX TEMPLATE — Eleventy layout
+   Flat grid powered by site/_data/tools.json
+   Uses ONLY existing site.css classes
+   ========================= #}
+
+{% extends "layouts/base.njk" %}
+
+{% block crumbs %}
+  <a href="/">Home</a>
+  <span class="sep">/</span>
+  <span>Tools</span>
+{% endblock %}
+
+{% block heroTitle %}
+  {% if heroTitle %}
+    {{ heroTitle | safe }}
+  {% else %}
+    {{ h1 or title or "Tools" | safe }}
+  {% endif %}
+{% endblock %}
+
+{% block ctas %}
+  <span class="ctaLabel">Explore →</span>
+  <a class="btn" href="/system/">System</a>
+  <a class="btn" href="/use-cases/">Cases</a>
+  <a class="btn primary" href="/system/core/">Core</a>
+{% endblock %}
+
+{% block content %}
+
+  <section class="panel" aria-label="Tools library">
+    <div class="panelInner">
+      <h2 class="section-title">Library</h2>
+      {% if librarySub %}
+        <p class="section-sub">{{ librarySub }}</p>
+      {% endif %}
+
+      <div class="tools-grid" aria-label="Tools grid">
+        {% for item in tools %}
+          <div class="tool-card">
+            <div class="tool-top">
+              <div>
+                <p class="small muted">{{ item.card.type | replace("-", " ") | title }}</p>
+                <h3>{{ item.card.title }}</h3>
+                <p>{{ item.card.summary }}</p>
+              </div>
+              {% if item.card.function %}
+                <span class="badge">{{ item.card.function }}</span>
+              {% endif %}
+            </div>
+            <div class="tool-actions">
+              <a href="{{ item.card.href }}">Explore →</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+
+{% endblock %}

@@ -15,14 +15,12 @@ heroActions: |
 ---
 
 <section class="card" aria-label="Identity">
-  <h2 align="center">👋 Diane Wilkinson — Talent Acquisition Operations & Workforce Analytics</h2>
-
-
+  <h2 align="center">👋 Diane Wilkinson — Talent Acquisition Operations &amp; Workforce Analytics</h2>
 
   <p class="small" align="center"><strong>Recruiting Operations · Governed Automation · MBA, Data Analytics</strong></p>
-  
+
   <p class="small" align="center">
-    <a href="/contact/credentials/" target="_blank" rel="noopener"><strong>Credentials &amp; Recommendations</strong></a>
+    <a href="/contact/credentials/" rel="noopener"><strong>Credentials &amp; Recommendations</strong></a>
   </p>
 
   <p class="muted">
@@ -36,107 +34,46 @@ heroActions: |
   <p class="muted" align="center">
     Built for adoption. Measured by execution. Governed with care.
   </p>
-</section>
 
-<p align="center">
-  📄 Read my article:
-  <a href="/articles/why-ai-pilots-fail/" target="_blank" rel="noopener">
-    <strong>Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently</strong>
-  </a>
-</p>
+  <p class="small" align="center">
+    <strong>Featured Article:</strong>
+    <a href="/articles/why-ai-pilots-fail/">Why 95% of AI Pilots Fail &amp; What the Successful 5% Do Differently</a>
+  </p>
+</section>
 
 <section class="panel panel--cool" aria-label="Tools I Built">
   <div class="panelInner">
     <h3 class="section-title">Tools I Built</h3>
     <p class="section-sub">
-      Working tools embedded in real People Ops environments. Each tool is designed for human-in-the-loop operation and measurable outcomes.
+      A curated set of flagship assets. Full depth lives in playbooks and system docs.
     </p>
 
     <div class="tools-grid" aria-label="Tools grid">
 
-      <div class="tool-card">
-        <div class="tool-top">
-          <div>
-            <h3>🦾 AI Tool: Talent Pipeline Health</h3>
-            <p>Troubleshoot bottlenecks in real time with immediate data-driven insights when actions matter.</p>
-          </div>
-          <span class="badge">Hiring &amp; Mobility</span>
-        </div>
-        <div class="tool-actions">
-          <a href="/tools/metrics/">Explore →</a>
-        </div>
-      </div>
+      {# Featured items from site/_data/tools.json #}
+      {% set featured = tools | selectattr("card.featured", "equalto", true) | list %}
 
-      <div class="tool-card">
-        <div class="tool-top">
-          <div>
-            <h3>🦾 AI Tool: Screening A[i]gent</h3>
-            <p>Taming top funnel chaos &amp; rescuing hidden talent, in half the time.</p>
+      {% for item in featured %}
+        <div class="tool-card">
+          <div class="tool-top">
+            <div>
+              <p class="small muted">{{ item.card.type | replace("-", " ") | title }}</p>
+              <h3>{{ item.card.title }}</h3>
+              <p>{{ item.card.summary }}</p>
+            </div>
+            <span class="badge">{{ item.card.function }}</span>
           </div>
-          <span class="badge">Hiring &amp; Mobility</span>
-        </div>
-        <div class="tool-actions">
-          <a href="/tools/screening/">Explore →</a>
-        </div>
-      </div>
-
-      <div class="tool-card">
-        <div class="tool-top">
-          <div>
-            <h3>🦾 AI Tool: Employee Listening</h3>
-            <p>Finally, honest feedback without surveys, bias, or performative politics. We thought you'd never ask.</p>
+          <div class="tool-actions">
+            <a href="{{ item.card.href }}">Explore →</a>
           </div>
-          <span class="badge">Listening &amp; Insights</span>
         </div>
-        <div class="tool-actions">
-          <a href="/tools/listening/playbook/">Explore →</a>
-        </div>
-      </div>
-
-      <div class="tool-card">
-        <div class="tool-top">
-          <div>
-            <h3>🧠 AI Orchestration: Chief</h3>
-            <p>Because everyone deserves a personal Chief of Staff. Chief reasons, routes, consults, &amp; deploys other A[i]gents. Literally. Always. On. 🔥</p>
-          </div>
-          <span class="badge">Governance &amp; Infrastructure</span>
-        </div>
-        <div class="tool-actions">
-          <a href="/tools/chief/">Explore →</a>
-        </div>
-      </div>
-
-      <div class="tool-card">
-        <div class="tool-top">
-          <div>
-            <h3>🦾 AI Tool: Innovation A[i]gent</h3>
-            <p>Competitive advantage, employee engagement: keep the true spark of innovation alive without hack days, suggestion boxes, or politics. Meeting insight in the moment.</p>
-          </div>
-          <span class="badge">Improvement &amp; Strategy</span>
-        </div>
-        <div class="tool-actions">
-          <a href="/tools/innovation/">Explore →</a>
-        </div>
-      </div>
-
-      <div class="tool-card">
-        <div class="tool-top">
-          <div>
-            <h3>🦾 AI Tool: Sourcing A[i]gent</h3>
-            <p>Automate Candidate Sourcing &amp; Ease Your Messy Recruiting Funnel Tops.</p>
-          </div>
-          <span class="badge">Governance &amp; Infrastructure</span>
-        </div>
-        <div class="tool-actions">
-          <a href="/tools/sourcing/">Explore →</a>
-        </div>
-      </div>
+      {% endfor %}
 
       <div class="tool-card is-route is-route--cool" aria-label="View more tools">
         <div class="tool-top">
           <div>
             <h3>↗ More Tools</h3>
-            <p>See the full library (25+ tools, playbooks, demos) — organized by area and outcome.</p>
+            <p>See the full library — tools, playbooks, system docs, and articles — organized by domain and outcome.</p>
           </div>
           <span class="badge">Tools library</span>
         </div>
@@ -148,8 +85,8 @@ heroActions: |
       <div class="tool-card is-route is-route--soft" aria-label="Explore cases, system, and docs">
         <div class="tool-top">
           <div>
-            <h3>🧭 Explore the depth</h3>
-            <p class="small">How the tools connect: operating model, core definitions, and shipped outcomes.</p>
+            <h3>Explore the depth</h3>
+            <p class="small">How the assets connect: operating model, core definitions, and shipped outcomes.</p>
           </div>
         </div>
 

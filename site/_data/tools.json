@@ -48,10 +48,10 @@
     "card": {
       "type": "tool",
       "function": "Hiring & Mobility",
-      "title": "Candidate Sourcing",
+      "title": "Strategic Candidate Sourcing",
       "summary": "Automated Talent Sourcing",
       "href": "/tools/sourcing/",
-      "featured": true
+      "featured": false
     }
   },
   {
@@ -59,10 +59,10 @@
     "card": {
       "type": "tool",
       "function": "Improvement & Strategy",
-      "title": "Automated Daily Planner",
+      "title": "Daily Workflow Orchestration",
       "summary": "prioritized, time-sensitve, automated planning for increased efficiency",
       "href": "/tools/planner/",
-      "featured": true
+      "featured": false
     }
   },
   {
@@ -73,7 +73,7 @@
       "title": "Chief Orchestration",
       "summary": "The orchestration layer that governs autonomy, routes decisions, enforces guardrails, & keeps humans in the loop.",
       "href": "/tools/chief/",
-      "featured": true
+      "featured": false
     }
   },
   {
@@ -95,47 +95,47 @@
       "title": "Candidate Journey Playbook",
       "summary": "Workflows and best practices to keep CSATs up and pipelines flowing.",
       "href": "/tools/candidate-journey/playbook/",
-      "featured": true
+      "featured": false
     }
   },
   {
     "id": "ai-first-ops",
     "card": {
       "type": "playbook",
-      "function": "Governance & Infrastucture",
-      "title": "AI-First Operating Model Framework",
+      "function": "Governance & Infrastructure",
+      "title": "AI-Integrated Operating Model Framework",
       "summary": "Systems structures and best practices for a technology forward organization.",
       "href": "/tools/ai-first-ops/playbook/",
-      "featured": true
+      "featured": false
     }
   },
   {
     "id": "core",
     "card": {
       "type": "system",
-      "function": "Governance & Infrastucture",
-      "title": "The Core",
+      "function": "Governance & Infrastructure",
+      "title": "Shared Systems Core",
       "summary": "Shared systems overview, metrics, definitions, used by multi-agent tools and workflows.",
       "href": "/system/core/",
-      "featured": true
+      "featured": false
     }
   },
   {
     "id": "metrics-dictionary",
     "card": {
       "type": "system",
-      "function": "Governance & Infrastucture",
+      "function": "Governance & Infrastructure",
       "title": "Metrics Dictionary",
       "summary": "A single source of truth for metric names, definitions, formulas, grain, filters, and ownership.",
       "href": "/system/core/metrics/",
-      "featured": true
+      "featured": false
     }
   },
   {
     "id": "why-ai-pilots-fail",
     "card": {
       "type": "article",
-      "function": "Governance & Infrastucture",
+      "function": "Governance & Infrastructure",
       "title": "Why 95% of AI Pilots Fail",
       "summary": "... & What the Successful 5% Do Differently",
       "href": "/article/why-ai-pilots-fail/",
@@ -146,7 +146,7 @@
     "id": "system",
     "card": {
       "type": "system",
-      "function": "Governance & Infrastucture",
+      "function": "Governance & Infrastructure",
       "title": "AI Native People Operating System",
       "summary": "A complete end-to-end system for harnessing technology to get the most from your people systems.",
       "href": "/system/",
@@ -161,7 +161,7 @@
       "title": "Automated Workflows for Recriting & Hiring",
       "summary": "Recruiting workflows to increase efficiency, engagement, branding, & CSAT scores.",
       "href": "/tools/workflow/",
-      "featured": true
+      "featured": false
     }
   },
   {
