@@ -352,6 +352,8 @@ body[data-page="home"] .panel--pink .panelInner{
   border-radius: calc(var(--radius) - 6px);
   padding:16px;
 }
+.chapter__inner h3{ margin:0 0 6px; }
+.chapter__inner h3 + p{ margin:0 0 10px; }
 
 /* =========================
    EXPLORE NEXT (terminal)
@@ -1048,6 +1050,9 @@ body[data-page="article"] .prose ol{
 body[data-page="article"] .prose li{
   margin:2px 0;
 }
+
+/* Author/read-time meta below backLink */
+body[data-page="article"] .backRow .small{ margin-top:6px; }
 
 /* Callout: larger + centered */
 body[data-page="article"] .callout{

@@ -33,7 +33,7 @@
           {% endif %}
 
           {% if authorLine or readTime %}
-            <div class="small muted" style="margin-top:6px;">
+            <div class="small muted">
               {% if authorLine %}{{ authorLine | safe }}{% endif %}
               {% if authorLine and readTime %} · {% endif %}
               {% if readTime %}{{ readTime | safe }}{% endif %}
