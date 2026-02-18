@@ -51,22 +51,22 @@ heroActions: |
     <div class="tools-grid" aria-label="Tools grid">
 
       {# Featured items from site/_data/tools.json #}
-      {% set featured = tools | selectattr("card.featured", "equalto", true) | list %}
-
-      {% for item in featured %}
-        <div class="tool-card">
-          <div class="tool-top">
-            <div>
-              <p class="small muted">{{ item.card.type | replace("-", " ") | title }}</p>
-              <h3>{{ item.card.title }}</h3>
-              <p>{{ item.card.summary }}</p>
+      {% for item in tools %}
+        {% if item.card and item.card.featured %}
+          <div class="tool-card">
+            <div class="tool-top">
+              <div>
+                <p class="small muted">{{ item.card.type | replace("-", " ") | title }}</p>
+                <h3>{{ item.card.title }}</h3>
+                <p>{{ item.card.summary }}</p>
+              </div>
+              <span class="badge">{{ item.card.function }}</span>
             </div>
-            <span class="badge">{{ item.card.function }}</span>
+            <div class="tool-actions">
+              <a href="{{ item.card.href }}">Explore →</a>
+            </div>
           </div>
-          <div class="tool-actions">
-            <a href="{{ item.card.href }}">Explore →</a>
-          </div>
-        </div>
+        {% endif %}
       {% endfor %}
 
       <div class="tool-card is-route is-route--cool" aria-label="View more tools">
