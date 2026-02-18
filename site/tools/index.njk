@@ -45,7 +45,7 @@ permalink: "/tools/"
                 <div class="appMain">
                   {# TYPE pill (top) #}
                   {% if item.card.type %}
-                    <span class="appBadge">{{ item.card.type | replace("-", " ") | title }}</span>
+                    <span class="badge" data-kind="{{ item.card.type }}">{{ item.card.type | replace("-", " ") | title }}</span>
                   {% endif %}
 
                   <h3>{{ item.card.title }}</h3>

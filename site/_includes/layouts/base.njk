@@ -32,7 +32,7 @@
           </div>
         {% endif %}
 
-        <h1>{% block heroTitle %}{{ h1 or title or "Page" }}{% endblock %}</h1>
+        <h1>{% block heroTitle %}{{ (h1 or title or "Page") | safe }}{% endblock %}</h1>
 
         {% if sub %}
           <p class="sub">{{ sub | safe }}</p>

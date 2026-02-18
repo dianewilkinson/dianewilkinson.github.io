@@ -14,7 +14,7 @@ heroActions: |
 ---
 
 <section class="card" aria-label="Identity">
-  <h2 align="center">👋 Diane Wilkinson — Talent Acquisition Operations &amp; Workforce Analytics</h2>
+  <h2 align="center">👋 Diane Wilkinson — Talent Acquisition Operations</h2>
 
   <p class="small" align="center"><strong>Recruiting Operations · Governed Automation · MBA, Data Analytics</strong></p>
 
@@ -30,7 +30,7 @@ heroActions: |
     Today, I design structured talent operations systems that hold up under real-world constraints — aligning data, workflows, and human judgment.
   </p>
 
-  <p class="muted" align="center">
+  <p class="muted">
     Built for adoption. Measured by execution. Governed with care.
   </p>
 
@@ -55,7 +55,7 @@ heroActions: |
       <div class="tool-card">
         <div class="tool-top">
          <div>
-          <span class="badge">{{ item.card.type | title }}</span>
+          <span class="badge" data-kind="{{ item.card.type }}">{{ item.card.type | replace("-", " ") | title }}</span>
           <h3>{{ item.card.title }}</h3>
           <p>{{ item.card.summary }}</p>
          </div>
