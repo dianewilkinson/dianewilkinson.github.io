@@ -1,24 +1,129 @@
-CASE 03 — Throughput Modeling & KPI Realignment
+---
+layout: templates/use-cases.njk
+permalink: "/use-cases/throughput-modeling/"
 
-Context
-At the start of a quarter, leadership asked for hiring forecasts and KPI commitments. Sourcing expectations were aggressive — 100+ InMails per week — despite heavy inbound volume and limited hiring manager interview capacity.
+title: "Throughput Modeling & KPI Realignment"
+description: "How modeling hiring manager interview capacity prevented 500 stalled candidates per quarter and reset recruiter KPIs around system constraints."
+pageId: "use-case"
+heroClass: "hero--tool-strong"
 
-One hiring manager could conduct only three interviews per week, yet sourcing pressure continued to increase.
+kicker: "Case Study · Talent Operations · KPI Design"
 
-The Problem
-Targets were not anchored to operational constraints. Recruiter KPIs assumed volume productivity rather than throughput reality. Increasing sourcing would not increase hires — it would increase backlog and candidate frustration.
+heroTitle: "<span class='accent'>Preventing 39 Stalled Candidates per Week with Throughput Modeling.</span>"
+sub: "How a throughput model prevented 500 stalled candidates per quarter by anchoring recruiter KPIs to interview capacity rather than activity volume."
 
-Design & Approach
-I built a funnel model based on historical conversion rates and hiring manager interview capacity. Starting from interview availability (three per week), I reverse-engineered required recruiter screens and application volume using observed conversion rates.
+backHref: "/use-cases/"
+backLabel: "Back to Use Cases"
+---
 
-Inbound application conversion averaged approximately 10%. InMail response rates averaged 20%. I calculated the necessary sourcing volume required to maintain throughput without exceeding capacity or allowing more than 50% inbound candidates in process.
+{# PAGE CONTENT ONLY — template handles head, crumbs, hero, footer, exploreNext #}
 
-I presented the model to leadership and the hiring manager to recalibrate outbound expectations and align KPIs with system capacity.
+<section class="full" aria-label="Case study">
+  <div class="card">
 
-Impact
-Outbound sourcing targets were reduced and aligned with operational reality. Recruiter effort shifted from excessive volume to calibrated throughput. Stakeholder expectations stabilized. Pipeline management improved without increasing candidate backlog.
+    <div class="callout">
+      Prevented a projected backlog of 39 HM interview-ready candidates per week by aligning recruiter KPIs with hiring manager interview capacity.
+    </div>
 
-Why It Matters
-Talent operations is not about activity volume. It is about aligning effort with system constraints so hiring becomes predictable rather than reactive.
+    <div class="rule"></div>
 
+    <section aria-label="Context">
+      <h2 class="section-title">Context</h2>
+      <p class="muted">
+        At the start of the quarter, leadership requested aggressive sourcing commitments — 100+ InMails per week —
+        despite heavy inbound volume and a hiring manager capacity of only three interviews per week.
+        Pressure continued to increase outbound activity without anyone modeling what the system could actually process.
+      </p>
+    </section>
 
+    <div class="rule"></div>
+
+    <section aria-label="The constraint">
+      <h2 class="section-title">The Constraint</h2>
+      <p class="muted">
+        Using historical conversion rates, the proposed activity levels would have produced far more
+        HM-ready candidates than the system could absorb.
+      </p>
+
+      <div class="table-wrap" role="region" aria-label="Projected pipeline demand vs capacity">
+        <table>
+          <thead>
+            <tr>
+              <th>Channel</th>
+              <th>Volume</th>
+              <th>Recruiter Screens</th>
+              <th>HM-Ready / Week</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Outbound</td>
+              <td>100 InMails at 20% response</td>
+              <td>20</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>Inbound</td>
+              <td>750 applications at 10% pass-through</td>
+              <td>75</td>
+              <td>38</td>
+            </tr>
+            <tr>
+              <td><strong>Total demand</strong></td>
+              <td>—</td>
+              <td>95</td>
+              <td><strong>48</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        HM capacity: 9 interviews/week. Projected demand: 48/week. Backlog growth: +39 candidates/week — roughly 500 stalled candidates per quarter.
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section aria-label="What we did">
+      <h2 class="section-title">What We Did</h2>
+      <p class="muted">
+        I built a throughput model anchored to interview capacity. Starting from the actual constraint —
+        three HM interviews per week — I reverse-engineered the required recruiter screens and sourcing volume.
+      </p>
+      <ul class="muted">
+        <li>Balanced inbound/outbound mix to prevent inbound from exceeding 50% of active pipeline</li>
+        <li>Aligned recruiter activity targets with what the system could actually process</li>
+        <li>Converted KPI discussions from volume metrics to throughput metrics</li>
+      </ul>
+      <p class="muted">
+        The model was presented to leadership and the hiring manager to reset expectations
+        around system limits before the quarter began.
+      </p>
+    </section>
+
+    <div class="rule"></div>
+
+    <section aria-label="Impact">
+      <h2 class="section-title">Impact</h2>
+      <ul class="muted">
+        <li>Outbound targets reduced and calibrated to actual throughput</li>
+        <li>Recruiter effort shifted from activity volume to capacity-aligned execution</li>
+        <li>Stakeholder expectations stabilized before congestion could occur</li>
+        <li>~500 stalled candidates per quarter prevented before the backlog formed</li>
+      </ul>
+    </section>
+
+    <div class="rule"></div>
+
+    <section aria-label="Why it matters">
+      <h2 class="section-title">Why It Matters</h2>
+      <p class="muted">
+        Talent operations is not about doing more activity. It is about aligning effort with system constraints
+        so hiring becomes predictable instead of reactive. When KPIs are anchored to throughput rather than volume,
+        recruiters stop generating backlog and start generating hires.
+      </p>
+    </section>
+
+  </div>
+</section>
