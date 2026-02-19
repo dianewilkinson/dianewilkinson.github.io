@@ -5,10 +5,48 @@
 <!doctype html>
 <html lang="en">
 <head>
+  {% set _siteUrl = siteUrl or "https://dianewilkinson.github.io" %}
+  {% set _path = "/" %}
+  {% if canonicalPath %}
+    {% set _path = canonicalPath %}
+  {% elseif page and page.url %}
+    {% set _path = page.url %}
+  {% endif %}
+  {% set _canonical = canonical or (_siteUrl ~ _path) %}
+  {% set _metaTitle = metaTitle or ogTitle or title or "Diane Wilkinson" %}
+  {% set _metaDescription = metaDescription or ogDescription or description or "AI-native people operations systems, tools, and playbooks by Diane Wilkinson." %}
+  {% set _ogType = ogType or "website" %}
+  {% set _twitterSite = twitterSite or "" %}
+  {% set _twitterCreator = twitterCreator or "" %}
+  {% set _robots = robots or ("noindex, nofollow" if noindex else "index, follow") %}
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>{{ title or "Diane Wilkinson" }}</title>
-  <meta name="description" content="{{ description or "" }}" />
+  <title>{{ _metaTitle }}</title>
+  <meta name="description" content="{{ _metaDescription }}" />
+  <meta name="robots" content="{{ _robots }}" />
+  <link rel="canonical" href="{{ _canonical }}" />
+
+  <meta property="og:type" content="{{ _ogType }}" />
+  <meta property="og:title" content="{{ ogTitle or _metaTitle }}" />
+  <meta property="og:description" content="{{ ogDescription or _metaDescription }}" />
+  <meta property="og:url" content="{{ ogUrl or _canonical }}" />
+  <meta property="og:site_name" content="{{ ogSiteName or "Diane Wilkinson" }}" />
+  {% if ogImage %}
+    <meta property="og:image" content="{{ ogImage }}" />
+  {% endif %}
+
+  <meta name="twitter:card" content="{{ "summary_large_image" if ogImage else "summary" }}" />
+  <meta name="twitter:title" content="{{ twitterTitle or ogTitle or _metaTitle }}" />
+  <meta name="twitter:description" content="{{ twitterDescription or ogDescription or _metaDescription }}" />
+  {% if _twitterSite %}
+    <meta name="twitter:site" content="{{ _twitterSite }}" />
+  {% endif %}
+  {% if _twitterCreator %}
+    <meta name="twitter:creator" content="{{ _twitterCreator }}" />
+  {% endif %}
+  {% if ogImage %}
+    <meta name="twitter:image" content="{{ ogImage }}" />
+  {% endif %}
   <link rel="stylesheet" href="/assets/css/site.css?v=2">
 </head>
 
