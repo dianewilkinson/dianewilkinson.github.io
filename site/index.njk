@@ -67,6 +67,25 @@ heroActions: |
         {% endif %}
       {% endfor %}
 
+      {# Featured case studies from site/_data/use-cases.json #}
+      {% for item in useCases %}
+        {% if item.card and item.card.featured %}
+      <div class="tool-card">
+        <div class="tool-top">
+          <div>
+            <span class="badge" data-kind="use-case">Case Study</span>
+            <h3>{{ item.card.title }}</h3>
+            <p>{{ item.card.summary }}</p>
+          </div>
+        </div>
+        <div class="tool-actions">
+          <span class="small muted">{{ item.card.category }}</span>
+          <a href="{{ item.card.href }}">Explore →</a>
+        </div>
+      </div>
+        {% endif %}
+      {% endfor %}
+
       <div class="tool-card is-route is-route--cool" aria-label="View more tools">
         <div class="tool-top">
           <div>

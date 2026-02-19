@@ -1,0 +1,57 @@
+[
+  {
+    "id": "greenhouse-migration",
+    "card": {
+      "type": "use-case",
+      "category": "ATS Implementation · Systems Design",
+      "title": "Designing Scalable Hiring Infrastructure During a Global ATS Migration",
+      "summary": "Consolidated 40–50 inconsistent source tags, enabled 60+ interviewers, and built reliable reporting infrastructure in a two-month rollout.",
+      "href": "/use-cases/greenhouse-migration/",
+      "featured": true
+    }
+  },
+  {
+    "id": "lifecycle-automation",
+    "card": {
+      "type": "use-case",
+      "category": "Candidate Experience · Lifecycle Design",
+      "title": "Increasing Offer Acceptance from 70% to 90% with Candidate Lifecycle Orchestration",
+      "summary": "Eliminating 32 HM interviews and 40–60 hours of recruiter workload per quarter.",
+      "href": "/use-cases/lifecycle-automation/",
+      "featured": true
+    }
+  },
+  {
+    "id": "throughput-modeling",
+    "card": {
+      "type": "use-case",
+      "category": "Talent Operations · KPI Design",
+      "title": "Preventing 39 Stalled Candidates per Week with Throughput Modeling",
+      "summary": "Prevented 500 stalled candidates per quarter by anchoring recruiter KPIs to hiring manager interview capacity rather than activity volume.",
+      "href": "/use-cases/throughput-modeling/",
+      "featured": true
+    }
+  },
+  {
+    "id": "document-management",
+    "card": {
+      "type": "use-case",
+      "category": "Recruiter Enablement · Operational Infrastructure",
+      "title": "Centralizing Recruiting Assets Through a Structured Document Repository",
+      "summary": "Reduced duplicate effort, improved messaging consistency, and made employer branding wins usable in every candidate conversation.",
+      "href": "/use-cases/document-management/",
+      "featured": false
+    }
+  },
+  {
+    "id": "sourcing-quality",
+    "card": {
+      "type": "use-case",
+      "category": "Sourcing · Pipeline Quality",
+      "title": "Sourcing Quality — Not All Pipelines Are Created Equal",
+      "summary": "Source-to-hire conversion analysis across inbound, outbound, and referrals — and what the 12x gap means for where you spend recruiter time and budget.",
+      "href": "/use-cases/sourcing-quality/",
+      "featured": false
+    }
+  }
+]

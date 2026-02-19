@@ -163,49 +163,5 @@
       "href": "/tools/workflow/",
       "featured": false
     }
-  },
-  {
-    "id": "source-quality",
-    "card": {
-      "type": "use-case",
-      "function": "Improvement & Strategy",
-      "title": "Recruitment Source Quality Tracking",
-      "summary": "Analysis & insights for focusing on highest ROI.",
-      "href": "/use-cases/sourcing-quality/",
-      "featured": false
-    }
-  },
-  {
-    "id": "greenhouse-migration",
-    "card": {
-      "type": "use-case",
-      "function": "ATS Implementation · Systems Design",
-      "title": "Designing Scalable Hiring Infrastructure During a Global ATS Migration",
-      "summary": "Consistent tags, 60+ interviewers trained, & built reliable reporting infrastructure in a two-month rollout.",
-      "href": "/use-cases/greenhouse-migration/",
-      "featured": true
-    }
-  },
-  {
-    "id": "lifecycle-automation",
-    "card": {
-      "type": "use-case",
-      "function": "Candidate Experience · Lifecycle Design",
-      "title": "Increasing Offer Acceptance from 70% to 90% with Candidate Lifecycle Orchestration",
-      "summary": "Eliminating 32 HM interviews and 40–60 hours of recruiter workload per quarter.",
-      "href": "/use-cases/lifecycle-automation/",
-      "featured": true
-    }
-  },
-  {
-    "id": "throughput-modeling",
-    "card": {
-      "type": "use-case",
-      "function": "Talent Operations · KPI Design",
-      "title": "Preventing Bottlenecks of 39 Stalled Candidates per Week with Throughput Modeling",
-      "summary": "Eliminated bottleneck of 500 stalled candidates per quarter by anchoring KPIs to capacity modeling.",
-      "href": "/use-cases/throughput-modeling/",
-      "featured": true
-    }
   }
 ]
