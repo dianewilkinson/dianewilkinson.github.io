@@ -1,4 +1,4 @@
-# Diane Wilkinson — AI-Native People Operations & Workforce Analytics
+# Diane Wilkinson — Talent Acquisition Operations
 
 _People Systems Architect • Workflow Automation • Internal AI & Analytics • Greenhouse SME_  
 _MBA, Data Analytics (4.0 GPA)_
@@ -12,20 +12,8 @@ This repository hosts my public portfolio and supporting materials.
 ---
 ## Where to Start
 
-Choose the level of detail most useful:
-
-- **🧰 Tools & Artifacts**  
-  Tools & workflows I’ve built to support hiring operations, analytics, and decision-making.  
-  👉 https://dianewilkinson.github.io/tools/
-
-- **🏗 System Architecture (Deep Dive)**  
-  How these tools fit together as an AI-native people ops system — orchestration, governance, & human-in-the-loop design all within the existing frameworks of an organization.  
-  👉 https://dianewilkinson.github.io/system/
-
-- **🤖 Use Cases (Agents & Demos)**  
-  Interactive demos and examples of agent-based workflows used in specific operational contexts.  
-  👉 https://dianewilkinson.github.io/use-cases/
-
+  👉 https://dianewilkinson.github.io/
+  
 ---
 
 ## What This Site Contains
@@ -42,7 +30,7 @@ Examples are illustrative and redacted. No proprietary data is used.
 
 ## Contact
 
-- 📅 Intro call: https://dianewilkinson.github.io/book/  
+- 📅 Intro call: https://dianewilkinson.github.io/contact/scheduler/
 - 📧 Email: dianewilkinson510@gmail.com  
 - 💼 LinkedIn: https://www.linkedin.com/in/dianewilkinson  
 - 📍 San Francisco Bay Area
