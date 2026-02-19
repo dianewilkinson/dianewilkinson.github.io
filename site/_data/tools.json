@@ -202,7 +202,7 @@
     "card": {
       "type": "use-case",
       "function": "Talent Operations · KPI Design",
-      "title": "Preventing 39 Stalled Candidates per Week with Throughput Modeling",
+      "title": "Preventing Bottlenecks of 39 Stalled Candidates per Week with Throughput Modeling",
       "summary": "Eliminated bottleneck of 500 stalled candidates per quarter by anchoring KPIs to capacity modeling.",
       "href": "/use-cases/throughput-modeling/",
       "featured": true
