@@ -1,0 +1,228 @@
+---
+layout: templates/use-cases.njk
+permalink: "/use-cases/screening-failure/"
+
+title: "Solving Bias, False Negatives & Lost Revenue in High-Volume Recruiting"
+description: "How an internally sourced candidate was rejected, reintroduced by an agency, hired, and cost the organization $25K+ in avoidable placement fees — and what it exposed about screening infrastructure."
+pageId: "use-case"
+heroClass: "hero--tool-strong"
+
+kicker: "Case Study · Screening Design · Decision Infrastructure"
+
+heroTitle: "An Internally Sourced Candidate Was Rejected. <span class='accent'>Then Rehired Through an Agency for $25K+.</span>"
+sub: "How unstructured screening logic created an avoidable capital loss — and the decision infrastructure designed to prevent it from recurring."
+
+backHref: "/use-cases/"
+backLabel: "Back to Use Cases"
+---
+
+{# PAGE CONTENT ONLY — template handles head, crumbs, hero, footer, exploreNext #}
+
+<section class="full" aria-label="Case study">
+  <div class="card">
+
+    <div class="callout">
+      An internally sourced candidate was rejected during screening, reintroduced by an external agency, hired, and resulted in an avoidable ~$25K placement fee. The incident exposed structural gaps in screening logic, rejection auditability, and decision infrastructure.
+    </div>
+
+    <div class="rule"></div>
+
+    <section aria-label="Context">
+      <h2 class="section-title">Context</h2>
+      <p class="muted">
+        The role received high inbound applicant volume. Internal screening relied on recruiter review
+        without formalized rubric criteria, structured rejection reasoning, calibration checks,
+        or audit trail enforcement. Advancement and rejection decisions were largely judgment-based.
+      </p>
+      <p class="muted">
+        In high-volume environments, resume review is often compressed into seconds per application.
+        When the candidate was later submitted by an agency, they were reframed, re-evaluated,
+        advanced, and ultimately hired — resulting in the organization paying a placement fee
+        for talent it had already sourced.
+      </p>
+    </section>
+
+    <div class="rule"></div>
+
+    <section aria-label="The constraint">
+      <h2 class="section-title">The Constraint</h2>
+      <p class="muted">
+        High inbound volume combined with limited screening capacity creates structural compression.
+        Only a fraction of qualified candidates ever reach structured evaluation.
+      </p>
+
+      <div class="table-wrap" role="region" aria-label="Screening funnel compression">
+        <table>
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Volume</th>
+              <th>Capacity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Applications received</td>
+              <td>1,000</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Qualified candidates (~10%)</td>
+              <td>100</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Recruiter screens available</td>
+              <td>—</td>
+              <td>25–50</td>
+            </tr>
+            <tr>
+              <td>HM interviews available</td>
+              <td>—</td>
+              <td>10–15</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="muted">
+        Only 30–40% of qualified candidates may ever reach structured evaluation.
+        Under that compression, screening logic degrades:
+      </p>
+      <ul class="muted">
+        <li>Resume scans become heuristic</li>
+        <li>Criteria interpretation varies by reviewer</li>
+        <li>Rejection logic is undocumented</li>
+        <li>False negatives remain invisible</li>
+      </ul>
+
+      <p class="muted">
+        The issue was not recruiter competence. The issue was infrastructure.
+      </p>
+
+      <p class="muted">
+        Research on heuristic decision-making shows that under time pressure, evaluators rely more heavily
+        on cognitive shortcuts, increasing variance and signal distortion (Tversky &amp; Kahneman, 1974).
+        Structured evaluation methods, by contrast, improve predictive validity and consistency
+        (Schmidt &amp; Hunter, 1998). In this case, screening lacked that structure — specifically:
+      </p>
+      <ul class="muted">
+        <li>Explicit criteria mapping</li>
+        <li>Weighted scoring logic</li>
+        <li>Structured rejection documentation</li>
+        <li>Auditability of decision rationale</li>
+      </ul>
+
+      <div class="callout">
+        Without structured signal capture, the system cannot distinguish true mismatch from under-evaluated potential.
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section aria-label="Design response">
+      <h2 class="section-title">Design Response</h2>
+      <p class="muted">
+        This failure directly informed the design of the
+        <a href="/tools/screening/">Screening A[i]gent</a> — a structured, rubric-driven screening engine built to:
+      </p>
+      <ul class="muted">
+        <li>Enforce criteria-based evaluation</li>
+        <li>Transform job descriptions into weighted rubrics</li>
+        <li>Produce structured pass/reject logic</li>
+        <li>Require justification for overrides</li>
+        <li>Emit clean screening data for audit and analytics</li>
+        <li>Reduce variance across recruiters</li>
+      </ul>
+      <p class="muted">
+        Rather than replacing recruiter judgment, the design introduces decision infrastructure
+        that constrains variance and increases auditability while preserving signal integrity
+        under volume constraints.
+      </p>
+    </section>
+
+    <div class="rule"></div>
+
+    <section aria-label="Impact">
+      <h2 class="section-title">Impact (Projected)</h2>
+      <p class="muted">
+        Unstructured screening decisions introduce hidden capital inefficiency.
+        Even one preventable leakage event materially impacts hiring cost efficiency:
+      </p>
+
+      <div class="table-wrap" role="region" aria-label="Avoidable placement fee model">
+        <table>
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Salary</th>
+              <th>Avoidable Fee (20%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Single incident</td>
+              <td>$125,000</td>
+              <td>$25,000</td>
+            </tr>
+            <tr>
+              <td>Single incident</td>
+              <td>$150,000</td>
+              <td>$30,000</td>
+            </tr>
+            <tr>
+              <td>3 hires/year at $140K avg</td>
+              <td>$420,000</td>
+              <td>$84,000</td>
+            </tr>
+            <tr>
+              <td>5 hires/year at $140K avg</td>
+              <td>$700,000</td>
+              <td>$140,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="muted">Additional projected effects:</p>
+      <ul class="muted">
+        <li>Reduced false negatives increase quality density in the funnel</li>
+        <li>Structured rejection logic improves recruiter calibration</li>
+        <li>Clean screening data improves downstream metrics reliability</li>
+        <li>Modeled time savings of 50–75 recruiter hours per 300 resumes</li>
+        <li>Restoration of trust in internal screening and recruiter credibility</li>
+      </ul>
+    </section>
+
+    <div class="rule"></div>
+
+    <section aria-label="Why it matters">
+      <h2 class="section-title">Why It Matters</h2>
+      <p class="muted">
+        When rejection logic is undocumented and non-reproducible, organizations lose visibility
+        into false negatives. Volume pressure amplifies this risk. Repeated at scale, it becomes
+        structural leakage.
+      </p>
+      <ul class="muted">
+        <li>False negatives are rarely measured</li>
+        <li>Rejected candidates disappear quietly and impact employer brand</li>
+        <li>Agency reintroductions mask internal screening failure</li>
+        <li>Bias and interviewer fatigue compound under volume</li>
+      </ul>
+      <div class="callout">
+        Screening architecture is not about automation. It is about capital discipline and signal integrity.
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section aria-label="References">
+      <h2 class="section-title">References</h2>
+      <ul class="muted small">
+        <li>Schmidt, F. L., &amp; Hunter, J. E. (1998). The validity and utility of selection methods in personnel psychology.</li>
+        <li>Tversky, A., &amp; Kahneman, D. (1974). Judgment under uncertainty: heuristics and biases.</li>
+      </ul>
+    </section>
+
+  </div>
+</section>
