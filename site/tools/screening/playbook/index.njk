@@ -11,9 +11,10 @@ sub: "Give every resume a real deep dive — in seconds, not minutes. A rubric-f
 
 toolName: "Screening A[i]gent"
 toolSlug: "screening"
+playbookLabel: "Blueprint"
 heroTitle: "Screening A[i]gent <span class='accent'>Blueprint</span>: Hybrid Rubric & Candidate Evaluation"
 
-playbookWhat: "This playbook documents the rubric-first operating model for AI-native screening: categories, bands, scoring logic, governance, and the ATS outputs that make recommendations explainable and auditable."
+playbookWhat: "This blueprint documents the rubric-first operating model for AI-native screening: categories, bands, scoring logic, governance, and the ATS outputs that make recommendations explainable and auditable."
 playbookWho: "Recruiting Ops, AI-native recruiters, and hiring managers who want fair, explainable, data-rich screening — without losing human judgement or candidate empathy."
 playbookSolves: "Recovers hidden talent | Standardizes resume evaluation | Makes screening decisions explainable | Produces structured, auditable signals | Reduces \"obvious no\" time | Improves calibration & fairness reviews | Feeds clean data into interview workflows & downstream analytics"
 
@@ -37,33 +38,82 @@ toc:
     <div class="chapter__inner">
       <h2 class="section-title">1. Problem & Mission</h2>
 
-      <h3>1.1 The Problem</h3>
-      <p>At scale, most screening processes quietly optimize for speed over judgement:</p>
-      <ul>
-        <li>Recruiters skim resumes for 6–10 seconds due to workload.</li>
-        <li>Top candidates get buried under noisy ATS scores and keyword stuffing.</li>
-        <li>Different recruiters apply different mental rubrics to the same role.</li>
-        <li>Reasons for rejection are rarely structured or auditable.</li>
-        <li>Funnel data is incomplete, making it hard to debug quality & fairness issues later.</li>
-      </ul>
+      <h3>1.1 Structural Constraint</h3>
       <p>
-        The result is the opposite of candidate excellence: inconsistency, bias, hidden talent going unnoticed,
-        and confusing signals for hiring managers.
+        High-volume recruiting environments operate under structural constraints.
+        A single open role can receive 800–1,000 applications before closing.
+        Even if only 10% meet baseline qualification criteria, that still produces
+        80–100 viable candidates requiring thoughtful evaluation.
       </p>
 
-      <h3>1.2 Mission</h3>
       <p>
-        Screening A[i]gent exists to give every application a consistent deep dive in seconds, not minutes —
-        and to rescue high-potential talent others miss — while keeping recruiters firmly in control of the final decision.
+        Recruiter and hiring manager interview capacity rarely scales at the same rate.
+        Recruiters may be able to screen 25–50 candidates.
+        Hiring managers may have bandwidth for 10–15 interviews.
       </p>
 
-      <h3>1.3 Outcomes We’re Aiming For</h3>
+      <p>
+        When evaluation capacity is constrained, screening decisions compress into seconds per resume.
+        Under these conditions, the bottleneck is not applicant supply —
+        it is structured evaluation capacity.
+      </p>
+
+      <p>
+        In a typical funnel:
+      </p>
+
       <ul>
-        <li>Fair, rubric-driven evaluation for every resume.</li>
-        <li>Clear, explainable recommendations for recruiters & HMs.</li>
-        <li>Structured data that plugs directly into Workflow and Metrics A[i]gents.</li>
-        <li>Less time on “obvious no” reviews; more time on conversation and calibration.</li>
+        <li>~1,000 applications received</li>
+        <li>~100 viable candidates</li>
+        <li>~25–50 recruiter screens</li>
+        <li>~10–15 hiring manager interviews</li>
       </ul>
+
+      <p>
+        This means a significant portion of qualified candidates may never reach
+        structured, consistent review. The system quietly optimizes for speed over judgment.
+      </p>
+
+      <h3>1.2 The Risk</h3>
+      <p>
+        When review time is compressed, evaluation becomes discretionary and inconsistent.
+        Reasons for rejection are rarely structured or auditable.
+        Bias risk increases under time pressure.
+        Funnel data becomes too noisy to diagnose missed talent or fairness drift later.
+      </p>
+
+      <p>
+        The problem is not recruiter intent.
+        It is infrastructure.
+      </p>
+
+      <h3>1.3 Mission</h3>
+      <p>
+        Screening A[i]gent exists to introduce structured, rubric-driven evaluation
+        at the earliest screening stage — before interview bandwidth becomes the bottleneck.
+      </p>
+
+      <p>
+        The objective is not to replace recruiter judgment.
+        It is to standardize and document it.
+      </p>
+
+      <ul>
+        <li>Ensure every inbound application receives structured evaluation.</li>
+        <li>Preserve human decision authority.</li>
+        <li>Create auditable, explainable screening outputs.</li>
+        <li>Improve calibration, fairness, and downstream analytics.</li>
+      </ul>
+     
+      <h3>1.4 Outcomes We’re Aiming For</h3>
+      <ul>
+        <li>Every inbound application receives structured, rubric-driven evaluation.</li>
+        <li>Clear, explainable recommendations for recruiters and hiring managers.</li>
+        <li>Reduced time spent on “obvious no” reviews.</li>
+        <li>Structured data that feeds downstream workflow and analytics.</li>
+        <li>Improved calibration and fairness monitoring over time.</li>
+     </ul>
+
     </div>
   </div>
 </section>
