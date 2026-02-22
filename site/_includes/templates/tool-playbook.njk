@@ -13,21 +13,21 @@
   <span class="sep">/</span>
   <a href="/tools/{{ toolSlug }}/">{{ toolName }}</a>
   <span class="sep">/</span>
-  <span>Playbook</span>
+  <span>{{ playbookLabel or "Playbook" }}</span>
 {% endblock %}
 
 {% block heroTitle %}
   {% if heroTitle %}
     {{ heroTitle | safe }}
   {% else %}
-    A[i]gent Tool <span class="accent">Playbook</span>: {{ toolName }}
+    A[i]gent Tool <span class="accent">{{ playbookLabel or "Playbook" }}</span>: {{ toolName }}
   {% endif %}
 {% endblock %}
 
 {% block ctas %}
   <span class="ctaLabel">Explore →</span>
   <a class="btn" href="/tools/{{ toolSlug }}/">Overview</a>
-  <span class="btn primary">Playbook</span>
+  <span class="btn primary">{{ playbookLabel or "Playbook" }}</span>
   <a class="btn" href="/tools/{{ toolSlug }}/demo/">Demo</a>
   <a class="btn" href="/use-cases/">Cases</a>
 {% endblock %}
