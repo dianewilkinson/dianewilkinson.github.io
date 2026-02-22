@@ -1,0 +1,80 @@
+{# =========================================
+   TOOL DETAIL — DESIGN CASE STUDY TEMPLATE (LOCKED)
+   - Extends base.njk (shell + Explore Next)
+   - Owns: crumbs, hero title, CTA row, header meta + TOC
+   - Page owns: full case-study content (rendered via {{ content }})
+   ========================================= #}
+
+{% extends "layouts/base.njk" %}
+
+{% block crumbs %}
+  <a href="/">Home</a>
+  <span class="sep">/</span>
+  <a href="/tools/">Tools</a>
+  <span class="sep">/</span>
+  <a href="/tools/{{ toolSlug }}/">{{ toolName }}</a>
+  <span class="sep">/</span>
+  <span>Detail</span>
+{% endblock %}
+
+{% block heroTitle %}
+  {% if heroTitle %}
+    {{ heroTitle | safe }}
+  {% else %}
+    Design Case Study <span class="accent">Detail</span>: {{ toolName }}
+  {% endif %}
+{% endblock %}
+
+{% block ctas %}
+  <span class="ctaLabel">Explore →</span>
+  <a class="btn" href="/tools/{{ toolSlug }}/">Overview</a>
+  <span class="btn primary">Detail</span>
+  <a class="btn" href="/tools/{{ toolSlug }}/demo/">Demo</a>
+  <a class="btn" href="/use-cases/">Cases</a>
+{% endblock %}
+
+{% block content %}
+
+  {# TWO-CARD HEADER ROW (LOCKED SPINE) #}
+  <section class="info-layout" aria-label="Detail structure">
+
+    {# LEFT: Meta card (LOCKED headings) #}
+    <section class="hero-meta hero-meta--split" aria-label="Case study meta">
+      <div class="metaSplit">
+
+        <div class="metaBlock">
+          <h2 class="section-title">What this case study is</h2>
+          <p class="muted">{{ detailWhat }}</p>
+        </div>
+
+        <div class="metaBlock">
+          <h2 class="section-title">Who this is for</h2>
+          <p class="muted">{{ detailFor }}</p>
+        </div>
+
+        <div class="metaBlock">
+          <h2 class="section-title">What changed</h2>
+          <p class="muted">{{ detailOutcome | safe }}</p>
+        </div>
+
+      </div>
+    </section>
+
+    {# RIGHT: TOC (LOCKED) #}
+    <nav class="toc-card toc" aria-label="Sections">
+      <h2 class="section-title">Sections</h2>
+      <ul class="tocList">
+        {% for item in toc %}
+          <li><a href="#{{ item.id }}">{{ item.label }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+  </section>
+
+  {# MAIN CONTENT (PAGE-OWNED) #}
+  <section class="full prose" aria-label="Case Study Content">
+    {{ content | safe }}
+  </section>
+
+{% endblock %}
