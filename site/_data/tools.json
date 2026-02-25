@@ -5,7 +5,7 @@
       "type": "tool",
       "function": "Hiring & Mobility",
       "title": "Recruiting Pipeline Health",
-      "summary": "Troubleshoot bottlenecks in real time with data-driven insights & action.",
+      "summary": "Real-time insights that eliminate bottlenecks and improve time-to-hire.",
       "href": "/tools/metrics/",
       "featured": true
     }
@@ -16,7 +16,7 @@
       "type": "tool",
       "function": "Hiring & Mobility",
       "title": "High-Volume Applicant Screening",
-      "summary": "Structured, evidence-backed research, evaluations, & action items.",
+      "summary": "Evidence-backed research, and evaluation frameworks that increase candidate quality and decrease bias and recruiter workload.",
       "href": "/tools/screening/",
       "featured": true
     }
@@ -27,7 +27,7 @@
       "type": "tool",
       "function": "Improvement & Strategy",
       "title": "Hiring Forecast Calculator",
-      "summary": "Precision People Planning.",
+      "summary": "Turns headcount goals into operational reality — bandwidth, conversion rates, and time-to-fill requirements.",
       "href": "/tools/calculator/",
       "featured": true
     }
@@ -49,7 +49,7 @@
       "type": "tool",
       "function": "Hiring & Mobility",
       "title": "Strategic Candidate Sourcing & Matching",
-      "summary": "Automated Talent Sourcing",
+      "summary": "Structured market mapping and outbound strategy grounded in role clarity and signal quality. Improves response rates while reducing wasted outreach.",
       "href": "/tools/sourcing/",
       "featured": false
     }
@@ -71,7 +71,7 @@
       "type": "tool",
       "function": "Governance & Infrastructure",
       "title": "Chief Orchestration Layer",
-      "summary": "Governing autonomy, routing decisions, & enforcing guardrails.",
+      "summary": "Cross-tool coordination layer that aligns sourcing, screening, and forecasting decisions. Ensures hiring systems operate as a connected workflow—not isolated tools.",
       "href": "/tools/chief/",
       "featured": false
     }
@@ -82,7 +82,7 @@
       "type": "tool",
       "function": "Listening & Engagement",
       "title": "Employee Listening",
-      "summary": "Bias-free feedback without surveys, suggestion boxes, or politics.",
+      "summary": "Bias-free feedback capture across teams without surveys, suggestion boxes, or politics. Transforms qualitative signals into measurable workflow insights.",
       "href": "/tools/listening/",
       "featured": false
     }
