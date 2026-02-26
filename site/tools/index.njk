@@ -39,7 +39,7 @@ permalink: "/tools/"
       <div class="appGrid" aria-label="Tools grid">
 
         {% for item in tools %}
-          {% if item.card %}
+          {% if item.card and item.card.listed %}
             <article class="appCard">
               <div class="appTop">
                 <div class="appMain">
