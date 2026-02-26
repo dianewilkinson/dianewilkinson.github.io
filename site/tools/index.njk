@@ -31,29 +31,59 @@ permalink: "/tools/"
 
 {% block content %}
 
-  <section class="panel panel--cool" aria-label="Tools I Built">
+  <section class="panel panel--cool" aria-label="Core Intelligence Tools">
     <div class="panelInner">
-      <h2 class="section-title">Tools I Built</h2>
+      <h2 class="section-title">Core Intelligence Tools</h2>
       <p class="sub">Scan fast. Open any tool for a decision-ready overview.</p>
 
-      <div class="appGrid" aria-label="Tools grid">
+      <div class="appGrid" aria-label="Core tools grid">
 
         {% for item in tools %}
-          {% if item.card and item.card.listed %}
+          {% if item.card and item.card.listed and item.card.section == "core" %}
             <article class="appCard">
               <div class="appTop">
                 <div class="appMain">
-                  {# TYPE pill (top) #}
                   {% if item.card.type %}
                     <span class="badge" data-kind="{{ item.card.type }}">{{ item.card.type | replace("-", " ") | title }}</span>
                   {% endif %}
-
                   <h3>{{ item.card.title }}</h3>
                   <p>{{ item.card.summary }}</p>
                 </div>
               </div>
+              <div class="appActions">
+                {% if item.card.function %}
+                  <span class="small muted">{{ item.card.function }}</span>
+                {% else %}
+                  <span class="small muted"></span>
+                {% endif %}
+                <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
 
-              {# Bottom row: function left (subtle), explore right #}
+      </div>
+    </div>
+  </section>
+
+  <section class="panel panel--cool" aria-label="Workflow Infrastructure Tools">
+    <div class="panelInner">
+      <h2 class="section-title">Workflow Infrastructure</h2>
+
+      <div class="appGrid" aria-label="Workflow tools grid">
+
+        {% for item in tools %}
+          {% if item.card and item.card.listed and item.card.section == "workflow" %}
+            <article class="appCard">
+              <div class="appTop">
+                <div class="appMain">
+                  {% if item.card.type %}
+                    <span class="badge" data-kind="{{ item.card.type }}">{{ item.card.type | replace("-", " ") | title }}</span>
+                  {% endif %}
+                  <h3>{{ item.card.title }}</h3>
+                  <p>{{ item.card.summary }}</p>
+                </div>
+              </div>
               <div class="appActions">
                 {% if item.card.function %}
                   <span class="small muted">{{ item.card.function }}</span>

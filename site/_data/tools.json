@@ -8,7 +8,8 @@
       "summary": "Real-time insights that eliminate bottlenecks and improve time-to-hire.",
       "href": "/tools/metrics/",
       "featured": true,
-      "listed": true
+      "listed": true,
+      "section": "core"
     }
   },
   {
@@ -20,7 +21,8 @@
       "summary": "Evidence-backed research, and evaluation frameworks that increase candidate quality and decrease bias and recruiter workload.",
       "href": "/tools/screening/",
       "featured": true,
-      "listed": true
+      "listed": true,
+      "section": "core"
     }
   },
   {
@@ -32,55 +34,8 @@
       "summary": "Turns headcount goals into operational reality — bandwidth, conversion rates, and time-to-fill requirements.",
       "href": "/tools/calculator/",
       "featured": true,
-      "listed": true
-    }
-  },
-  {
-    "id": "innovation",
-    "card": {
-      "type": "tool",
-      "function": "Improvement & Strategy",
-      "title": "Innovation Signaling & Routing",
-      "summary": "Nurture organizational innovation, inspiration & employee engagement.",
-      "href": "/tools/innovation/",
-      "featured": false,
-      "listed": true
-    }
-  },
-  {
-    "id": "sourcing",
-    "card": {
-      "type": "tool",
-      "function": "Hiring & Mobility",
-      "title": "Strategic Candidate Sourcing & Matching",
-      "summary": "Structured market mapping and outbound strategy grounded in role clarity and signal quality. Improves response rates while reducing wasted outreach.",
-      "href": "/tools/sourcing/",
-      "featured": false,
-      "listed": true
-    }
-  },
-  {
-    "id": "planner",
-    "card": {
-      "type": "tool",
-      "function": "Improvement & Strategy",
-      "title": "Daily Workflow Orchestration",
-      "summary": "prioritized, time-sensitve, automated planning for increased efficiency",
-      "href": "/tools/planner/",
-      "featured": false,
-      "listed": true
-    }
-  },
-  {
-    "id": "chief",
-    "card": {
-      "type": "tool",
-      "function": "Governance & Infrastructure",
-      "title": "Chief Orchestration Layer",
-      "summary": "Cross-tool coordination layer that aligns sourcing, screening, and forecasting decisions. Ensures hiring systems operate as a connected workflow—not isolated tools.",
-      "href": "/tools/chief/",
-      "featured": false,
-      "listed": true
+      "listed": true,
+      "section": "core"
     }
   },
   {
@@ -92,7 +47,60 @@
       "summary": "Bias-free feedback capture across teams without surveys, suggestion boxes, or politics. Transforms qualitative signals into measurable workflow insights.",
       "href": "/tools/listening/",
       "featured": false,
-      "listed": true
+      "listed": false,
+      "section": "core"
+    }
+  },
+  {
+    "id": "innovation",
+    "card": {
+      "type": "tool",
+      "function": "Improvement & Strategy",
+      "title": "Innovation Signaling & Routing",
+      "summary": "Nurture organizational innovation, inspiration & employee engagement.",
+      "href": "/tools/innovation/",
+      "featured": false,
+      "listed": false,
+      "section": "core"
+    }
+  },
+  {
+    "id": "sourcing",
+    "card": {
+      "type": "tool",
+      "function": "Hiring & Mobility",
+      "title": "Strategic Candidate Sourcing & Matching",
+      "summary": "Structured market mapping and outbound strategy grounded in role clarity and signal quality. Improves response rates while reducing wasted outreach.",
+      "href": "/tools/sourcing/",
+      "featured": false,
+      "listed": true,
+      "section": "workflow"
+    }
+  },
+  {
+    "id": "planner",
+    "card": {
+      "type": "tool",
+      "function": "Improvement & Strategy",
+      "title": "Daily Workflow Orchestration",
+      "summary": "prioritized, time-sensitve, automated planning for increased efficiency",
+      "href": "/tools/planner/",
+      "featured": false,
+      "listed": true,
+      "section": "workflow"
+    }
+  },
+  {
+    "id": "chief",
+    "card": {
+      "type": "tool",
+      "function": "Governance & Infrastructure",
+      "title": "Chief Orchestration Layer",
+      "summary": "Cross-tool coordination layer that aligns sourcing, screening, and forecasting decisions. Ensures hiring systems operate as a connected workflow—not isolated tools.",
+      "href": "/tools/chief/",
+      "featured": false,
+      "listed": true,
+      "section": "workflow"
     }
   },
   {
@@ -104,7 +112,8 @@
       "summary": "Workflows & best practices to keep CSATs up and pipelines flowing.",
       "href": "/tools/candidate-journey/playbook/",
       "featured": false,
-      "listed": true
+      "listed": true,
+      "section": "workflow"
     }
   },
   {
@@ -116,7 +125,8 @@
       "summary": "Systems structures and best practices for a technology forward organization.",
       "href": "/tools/ai-first-ops/playbook/",
       "featured": false,
-      "listed": true
+      "listed": false,
+      "section": "workflow"
     }
   },
   {
@@ -128,7 +138,8 @@
       "summary": "Shared systems overview, metrics, definitions, used by multi-agent tools & workflows.",
       "href": "/system/core/",
       "featured": false,
-      "listed": true
+      "listed": false,
+      "section": "workflow"
     }
   },
   {
@@ -140,7 +151,8 @@
       "summary": "A single source of truth for metric names, definitions, formulas, grain, filters, & ownership.",
       "href": "/system/core/metrics/",
       "featured": false,
-      "listed": true
+      "listed": false,
+      "section": "workflow"
     }
   },
   {
@@ -152,7 +164,8 @@
       "summary": "... & What the Successful 5% Do Differently",
       "href": "/articles/why-ai-pilots-fail/",
       "featured": false,
-      "listed": true
+      "listed": false,
+      "section": "workflow"
     }
   },
   {
@@ -164,19 +177,21 @@
       "summary": "End-to-end system gets the most from your people operations.",
       "href": "/system/",
       "featured": false,
-      "listed": true
+      "listed": false,
+      "section": "workflow"
     }
   },
   {
     "id": "workflow",
     "card": {
-      "type": "system",
+      "type": "tool",
       "function": "Improvement & Strategy",
       "title": "Automated Workflows for Recruiting & Hiring",
       "summary": "Recruiting workflows to increase efficiency, engagement, branding, & CSAT scores.",
       "href": "/tools/workflow/",
       "featured": false,
-      "listed": true
+      "listed": true,
+      "section": "workflow"
     }
   }
 ]

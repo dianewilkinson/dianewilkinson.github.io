@@ -37,82 +37,103 @@ heroActions: |
 
 </section>
 
-<section class="panel panel--cool" aria-label="Selected Work">
+<section class="panel panel--cool" aria-label="Core Intelligence Tools">
   <div class="panelInner">
-    <h3 class="section-title">Selected Work</h3>
-    <p class="section-sub">
-      A curated set of flagship assets. Full list lives in the Tools Library.
-    </p>
+    <h3 class="section-title">Core Intelligence Tools</h3>
+    <div class="appGrid--scroll" aria-label="Core tools scroll row">
 
-    <div class="tools-grid" aria-label="Tools grid">
-
-      {# Featured items from site/_data/tools.json #}
       {% for item in tools %}
-        {% if item.card and item.card.featured %}
-      <div class="tool-card">
-        <div class="tool-top">
-         <div>
-          <span class="badge" data-kind="{{ item.card.type }}">{{ item.card.type | replace("-", " ") | title }}</span>
-          <h3>{{ item.card.title }}</h3>
-          <p>{{ item.card.summary }}</p>
-         </div>
-        </div>
-
-       <div class="tool-actions">
-          <span class="small muted">{{ item.card.function }}</span>
-          <a href="{{ item.card.href }}">Explore →</a>
-     </div>
-  </div>
-
+        {% if item.card and item.card.listed and item.card.section == "core" %}
+          <article class="appCard">
+            <div class="appTop">
+              <div class="appMain">
+                {% if item.card.type %}
+                  <span class="badge" data-kind="{{ item.card.type }}">{{ item.card.type | replace("-", " ") | title }}</span>
+                {% endif %}
+                <h3>{{ item.card.title }}</h3>
+                <p>{{ item.card.summary }}</p>
+              </div>
+            </div>
+            <div class="appActions">
+              <span class="small muted">{{ item.card.function }}</span>
+              <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+            </div>
+          </article>
         {% endif %}
       {% endfor %}
-
-      {# Featured case studies from site/_data/use-cases.json #}
-      {% for item in useCases %}
-        {% if item.card and item.card.featured %}
-      <div class="tool-card">
-        <div class="tool-top">
-          <div>
-            <span class="badge" data-kind="use-case">Case Study</span>
-            <h3>{{ item.card.title }}</h3>
-            <p>{{ item.card.summary }}</p>
-          </div>
-        </div>
-        <div class="tool-actions">
-          <span class="small muted">{{ item.card.function }}</span>
-          <a href="{{ item.card.href }}">Explore →</a>
-        </div>
-      </div>
-        {% endif %}
-      {% endfor %}
-
-      <div class="tool-card is-route is-route--cool" aria-label="View more tools">
-        <div class="tool-top">
-          <div>
-            <h3>↗ View More Tools</h3>
-            <p>See the full library — tools, playbooks, system docs, and articles — organized by domain and outcome.</p>
-          </div>
-        </div>
-        <div class="tool-actions">
-          <a href="/tools/">Browse all tools →</a>
-        </div>
-      </div>
-
-      <div class="tool-card is-route is-route--soft" aria-label="View more use cases">
-        <div class="tool-top">
-          <div>
-            <h3>↗ View More Use Cases</h3>
-            <p>See the full case study library — real problems, real constraints, and measurable outcomes across talent operations.</p>
-          </div>
-        </div>
-        <div class="tool-actions">
-          <a href="/use-cases/">Browse all case studies →</a>
-        </div>
-      </div>
 
     </div>
+    <div class="sys-cta" style="margin-top:12px;">
+      <a class="sys-btn" href="/tools/">Browse all tools →</a>
+    </div>
+  </div>
+</section>
 
-    <details class="sys-details" aria-label="System Deep Dive">
+<section class="panel panel--cool" aria-label="Workflow Infrastructure">
+  <div class="panelInner">
+    <h3 class="section-title">Workflow Infrastructure</h3>
+    <div class="appGrid--scroll" aria-label="Workflow tools scroll row">
+
+      {% for item in tools %}
+        {% if item.card and item.card.listed and item.card.section == "workflow" %}
+          <article class="appCard">
+            <div class="appTop">
+              <div class="appMain">
+                {% if item.card.type %}
+                  <span class="badge" data-kind="{{ item.card.type }}">{{ item.card.type | replace("-", " ") | title }}</span>
+                {% endif %}
+                <h3>{{ item.card.title }}</h3>
+                <p>{{ item.card.summary }}</p>
+              </div>
+            </div>
+            <div class="appActions">
+              <span class="small muted">{{ item.card.function }}</span>
+              <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+    <div class="sys-cta" style="margin-top:12px;">
+      <a class="sys-btn" href="/tools/">Browse all tools →</a>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--cool" aria-label="Applied Impact">
+  <div class="panelInner">
+    <h3 class="section-title">Applied Impact</h3>
+    <div class="appGrid--scroll" aria-label="Case studies scroll row">
+
+      {% for item in useCases %}
+        {% if item.card and item.card.listed %}
+          <article class="appCard">
+            <div class="appTop">
+              <div class="appMain">
+                <span class="badge" data-kind="use-case">Case Study</span>
+                <h3>{{ item.card.title }}</h3>
+                <p>{{ item.card.summary }}</p>
+              </div>
+            </div>
+            <div class="appActions">
+              <span class="small muted">{{ item.card.function }}</span>
+              <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+    <div class="sys-cta" style="margin-top:12px;">
+      <a class="sys-btn" href="/use-cases/">Browse all case studies →</a>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--cool" aria-label="System Deep Dive">
+  <div class="panelInner">
+    <details class="sys-details">
       <summary>
         <div class="sys-sum">
           <h3 class="section-title">The System Underneath</h3>
@@ -150,6 +171,5 @@ heroActions: |
         </div>
       </div>
     </details>
-
   </div>
 </section>

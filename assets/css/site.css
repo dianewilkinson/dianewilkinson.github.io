@@ -1086,6 +1086,17 @@ body[data-page="article"] .callout{
 @media (max-width: 900px){ .appGrid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
 @media (max-width: 620px){ .appGrid{ grid-template-columns: 1fr; } }
 
+.appGrid--scroll{
+  display:flex;
+  overflow-x:auto;
+  gap:12px;
+  padding-bottom:8px;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.appGrid--scroll::-webkit-scrollbar{ display:none; }
+.appGrid--scroll .appCard{ flex:0 0 280px; }
+
 .appCard{
   border:1px solid rgba(226,232,240,0.95);
   background: rgba(255,255,255,.90);
