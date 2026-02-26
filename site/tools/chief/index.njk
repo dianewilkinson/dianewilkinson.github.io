@@ -15,7 +15,7 @@ heroTitle: "Stop running People Ops in <span class='accent'>meetings.</span> Rou
 
 sub: "Chief is the orchestration layer: it consolidates signals (inbox, interviews, reqs, projects), turns them into a prioritized queue, and routes work to specialized A[i]gents with guardrails and auditability."
 
-purpose: "People Ops work breaks when the system is fragmented across inboxes, ATS tasks, calendars, docs, and Slack threads. Chief exists to consolidate signals into a single work surface, turn requests into structured work items, and route them to the right handler (human, agent, or co-pilot) with clear autonomy boundaries and audit logs."
+solves: "People Ops work breaks when the system is fragmented across inboxes, ATS tasks, calendars, docs, and Slack threads. Chief exists to consolidate signals into a single work surface, turn requests into structured work items, and route them to the right handler (human, agent, or co-pilot) with clear autonomy boundaries and audit logs."
 
 outcomes:
   - title: "One work surface"
@@ -32,14 +32,14 @@ quickLinks:
     label: "Pipeline Health (Diagnostics Partner)"
     desc: "Chief routes requisition risk and bottlenecks to Metrics for funnel health and constraint diagnosis."
 
-breaks:
+before:
   - "Work is scattered across inboxes, ATS tasks, calendars, docs, Slack threads, and ad-hoc lists."
   - "Signals arrive constantly, but prioritization is inconsistent and context is missing."
   - "Routing is handled in meetings (triage, approvals, updates) instead of systems."
   - "Specialists lose time to context switching and unowned work."
   - "SLAs are missed because the system can’t surface what matters with clear ownership."
 
-does:
+after:
   - "<strong>Consolidates signals</strong> into a single prioritized queue (interviews, reqs, projects, brand items, inbox)."
   - "<strong>Normalizes requests</strong> into work items with type, owner, SLA, risk level, required inputs, and next step."
   - "<strong>Routes work</strong> to the right handler: summarize, draft, route to a specialist A[i]gent, or close loop."
@@ -48,8 +48,16 @@ does:
 
 note: "Core rule: if Chief can’t explain why an item is prioritized, it shouldn’t prioritize it."
 
-fits:
-  - "<strong>Orchestration layer:</strong> sits above comms + ATS + calendar + projects to unify intake and execution."
-  - "<strong>Router to specialist agents:</strong> hands off diagnostics, drafting, scheduling, and prep to the right A[i]gent."
-  - "<strong>Governed autonomy:</strong> enables Tier 1 autonomy (low risk) and Tier 2 co-pilot flows with human review for higher-stakes work."
+signals:
+  - "Stage-to-Stage Conversion Rates"
+  - "Time-in-Stage"
+  - "Time-to-Fill"
+  - "Offer Acceptance Rate"
+  - "Inbound Application Volume"
+  - "Candidate & Source Quality"
+
+caseStudy:
+  href: "/use-cases/pipeline-health/"
+  label: "See a use case for this tool →"
+  desc: "Real examples of diagnostics turning into faster, cleaner recruiting execution."
 ---

@@ -7,7 +7,20 @@
       "title": "Designing Scalable Hiring Infrastructure During a Global ATS Migration",
       "summary": "Consolidated 40–50 inconsistent source tags, enabled 60+ interviewers, and built reliable reporting infrastructure in a two-month rollout.",
       "href": "/use-cases/greenhouse-migration/",
-      "featured": true
+      "featured": true,
+      "listed": true
+    }
+  },
+  {
+    "id": "pipeline-health",
+    "card": {
+      "type": "use-case",
+      "function": "Hiring & Mobility",
+      "title": "Preventing Quarter-End Miss Before It Happens",
+      "summary": "Preventing bottlenecks and saving 8+ recruiter hours per week.",
+      "href": "/use-cases/pipeline-health/",
+      "featured": true,
+      "listed": true
     }
   },
   {
@@ -18,7 +31,8 @@
       "title": "Increasing Offer Acceptance from 70% to 90% with Candidate Lifecycle Orchestration",
       "summary": "Eliminating 32 HM interviews and 40–60 hours of recruiter workload per quarter.",
       "href": "/use-cases/lifecycle-automation/",
-      "featured": true
+      "featured": false,
+      "listed": true
     }
   },
   {
@@ -29,7 +43,8 @@
       "title": "Preventing 39 Stalled Candidates per Week with Throughput Modeling",
       "summary": "Prevented 500 stalled candidates per quarter by anchoring recruiter KPIs to hiring manager interview capacity rather than activity volume.",
       "href": "/use-cases/throughput-modeling/",
-      "featured": true
+      "featured": true,
+      "listed": true
     }
   },
   {
@@ -40,7 +55,8 @@
       "title": "Centralizing Recruiting Assets Through a Structured Document Repository",
       "summary": "Reduced duplicate effort, improved messaging consistency, and made employer branding wins usable in every candidate conversation.",
       "href": "/use-cases/document-management/",
-      "featured": false
+      "featured": false,
+      "listed": true
     }
   },
   {
@@ -51,7 +67,8 @@
       "title": "Internal Screening Failure Cost Org $25K+ in Avoidable Fees",
       "summary": "Solving Bias, False Negatives & Lost Revenue in High Volume Recruiting.",
       "href": "/use-cases/screening-failure/",
-      "featured": false
+      "featured": false,
+      "listed": true
     }
   },
   {
@@ -62,7 +79,8 @@
       "title": "Sourcing Quality — Not All Pipelines Are Created Equal",
       "summary": "Source-to-hire conversion analysis across inbound, outbound, and referrals — and what the 12x gap means for where you spend recruiter time and budget.",
       "href": "/use-cases/sourcing-quality/",
-      "featured": false
+      "featured": false,
+      "listed": true
     }
   }
 ]

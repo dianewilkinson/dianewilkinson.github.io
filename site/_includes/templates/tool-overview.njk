@@ -23,8 +23,6 @@
 
 {% block content %}
 
-{{ content | safe }}
-
 {# Above-the-fold: iframe demo #}
 <section class="demo" aria-label="{{ toolName }} Demo">
   <div class="demoHead">
@@ -37,89 +35,91 @@
     title="{{ toolName }} Demo (embedded)"></iframe>
 </section>
 
-{# Purpose + Outcomes + Quick links #}
-<section class="grid2" aria-label="Purpose and outcomes">
-  <div class="card">
-    <h2 class="section-title">Purpose</h2>
-    <p class="muted">{{ purpose }}</p>
+{# What it solves (directly under iframe) #}
+{% if solves %}
+<section class="full" aria-label="What {{ toolName }} solves">
+  <h2 class="section-title">What the Tool Solves</h2>
+  <p class="muted">{{ solves | safe }}</p>
+</section>
+{% endif %}
 
-    <div class="miniGrid" aria-label="Outcome pillars">
-      {% for o in outcomes %}
-      <div class="mini">
-        <b>{{ o.title }}</b>
-        <span>{{ o.desc }}</span>
-      </div>
+{# Before / After (side-by-side cards) #}
+{% if before or after %}
+<section class="grid2" aria-label="Before and after">
+  <div class="card">
+    <h2 class="section-title"><span class="accent">Without</span> {{ toolName }} Tool</h2>
+    {% if before %}
+    <ul>
+      {% for item in before %}
+      <li>{{ item | safe }}</li>
       {% endfor %}
-    </div>
+    </ul>
+    {% endif %}
   </div>
 
   <aside class="card">
-    <h2 class="section-title">Quick links</h2>
-    <p class="small">{{ quickIntro | safe }}</p>
-    <div class="rule"></div>
-
-    {# Required links (contract) #}
-    <p>
-      <a href="/tools/{{ toolSlug }}/playbook/"><strong>{{ toolName }} Playbook</strong></a><br />
-      <span class="small">Governance, definitions, thresholds, and how autonomy stays safe.</span>
-    </p>
-
-    <p>
-      <a href="/system/"><strong>System Architecture</strong></a><br />
-      <span class="small">Where this tool fits across the AI-native operating model.</span>
-    </p>
-
-    <p>
-      <a href="/use-cases/"><strong>Use Cases</strong></a><br />
-      <span class="small">Examples of this tool in real workflows.</span>
-    </p>
-
-    {# Optional extras from front matter (e.g., Metrics Dictionary) #}
-    {% if quickLinks %}
-      <div class="rule"></div>
-      {% for link in quickLinks %}
-      <p>
-        <a href="{{ link.href }}"><strong>{{ link.label }}</strong></a><br />
-        <span class="small">{{ link.desc }}</span>
-      </p>
+    <h2 class="section-title"><span class="accent">With</span> {{ toolName }} Tool</h2>
+    {% if after %}
+    <ul>
+      {% for item in after %}
+      <li>{{ item | safe }}</li>
       {% endfor %}
+    </ul>
     {% endif %}
   </aside>
-
 </section>
+{% endif %}
 
-{# What breaks #}
-<section class="full" aria-label="What breaks without {{ toolName }}">
-  <h2 class="section-title">What breaks without this</h2>
-  <ul>
-    {% for item in breaks %}
-    <li>{{ item }}</li>
+{# Signals tracked (NOT bullets) #}
+{% if signals %}
+<section class="full" aria-label="Signals Tracked">
+  <h2 class="section-title">Signals tracked</h2>
+
+  <div class="miniGrid" aria-label="Signals tracked">
+    {% for s in signals %}
+    <div class="mini">
+      <span>{{ s | safe }}</span>
+    </div>
     {% endfor %}
-  </ul>
+  </div>
 </section>
+{% endif %}
 
-{# What it does #}
-<section class="full" aria-label="What {{ toolName }} does">
-  <h2 class="section-title">What it does</h2>
-  <ul>
-    {% for item in does %}
-    <li>{{ item | safe }}</li>
+{# Outcomes + case study link inside this card #}
+{% if outcomes %}
+<section class="full" aria-label="{{ toolName }} outcomes">
+  <h2 class="section-title">Outcomes</h2>
+
+  <div class="miniGrid" aria-label="Outcome pillars">
+    {% for o in outcomes %}
+    <div class="mini">
+      <b>{{ o.title }}</b>
+      <span>{{ o.desc }}</span>
+    </div>
     {% endfor %}
-  </ul>
+  </div>
 
-  {% if note %}
-  <p class="small">Note: {{ note }}</p>
-  {% endif %}
-</section>
+{% if caseStudy and caseStudy.href %}
+  <div class="rule"></div>
+  <p class="small">
+    <a href="{{ caseStudy.href }}"><strong>{{ caseStudy.label or "See it in a live workflow →" }}</strong></a>
+    {% if caseStudy.desc %}
+      <br />{{ caseStudy.desc }}
+    {% endif %}
+  </p>
+{% endif %}
 
-{# Where it fits #}
-<section class="full" aria-label="Where {{ toolName }} fits">
-  <h2 class="section-title">Where it fits</h2>
-  <ul>
-    {% for item in fits %}
-    <li>{{ item | safe }}</li>
-    {% endfor %}
-  </ul>
+{% if note %}
+  <div class="rule"></div>
+  <p class="small">
+    {{ note }}
+  </p>
+{% endif %}
+
 </section>
+{% endif %}
+
+{# Page-specific content (must appear exactly once) #}
+{{ content | safe }}
 
 {% endblock %}

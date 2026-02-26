@@ -17,7 +17,7 @@ toolSlug: "workflow"
 heroTitle: 'Make interviews <span class="accent">flow on their own</span> — without losing the human touch.'
 sub: "Workflow A[i]gent is the execution layer for recruiting ops: interview scheduling flows, scorecard SLAs, escalation paths, and stage-based comms — designed to reduce no-shows, prevent stalled candidates, and keep humans in control."
 
-purpose: "Most interview processes silently leak: candidates drop after scheduling, interviewers submit scorecards late, hiring managers delay decisions, and comms drift across stages. Workflow A[i]gent makes the system predictable: standard flows, clear SLAs, and visible escalation paths."
+solves: "Most interview processes silently leak: candidates drop after scheduling, interviewers submit scorecards late, hiring managers delay decisions, and comms drift across stages. Workflow A[i]gent makes the system predictable: standard flows, clear SLAs, and visible escalation paths."
 
 outcomes:
   - title: "Predictable flows"
@@ -30,18 +30,18 @@ outcomes:
 quickIntro: "This tool is the execution layer for <strong>Hiring &amp; Mobility</strong>: it orchestrates scheduling, SLAs, escalations, and stage comms across the interview lifecycle."
 
 quickLinks:
-  - href: "/system/core/metrics.html"
+  - href: "/system/core/metrics/"
     label: "Metrics Dictionary"
     desc: "Standardized fields for time-in-stage, SLA adherence, and pipeline health reporting."
 
-breaks:
+before:
   - "Candidates no-show or drop after scheduling."
   - "Interviewers don’t submit scorecards on time."
   - "Hiring managers forget to deliver feedback."
   - "Candidates get inconsistent instructions across stages."
   - "Recruiters manually chase everyone, all the time."
 
-does:
+after:
   - "<strong>Scheduling workflows:</strong> availability capture, reminders if candidates don’t respond, alerts when threads stall."
   - "<strong>Stage-based workflows:</strong> confirmations, reminders, and follow-ups for each interview stage."
   - "<strong>SLAs &amp; escalations:</strong> scorecard due dates, automatic nudges, escalation paths when people are late."
@@ -49,8 +49,11 @@ does:
 
 note: "Fail-safe by design: automations handle routine follow-ups; humans can always override, pause, or intervene for exceptions."
 
-fits:
-  - "<strong>Upstream:</strong> Screening A[i]gent decides who moves into interviews."
-  - "<strong>Core:</strong> Workflow A[i]gent orchestrates interview-stage comms, SLAs, and status updates."
-  - "<strong>Downstream:</strong> Metrics A[i]gent ingests events/timestamps to compute time-to-fill, pass-through, and SLA performance."
+signals:
+  - "Stage-to-Stage Conversion Rates"
+  - "Time-in-Stage"
+  - "Time-to-Fill"
+  - "Offer Acceptance Rate"
+  - "Inbound Application Volume"
+  - "Candidate & Source Quality"
 ---

@@ -1,0 +1,193 @@
+---
+layout: templates/use-cases.njk
+permalink: "/use-cases/pipeline-health/"
+
+title: "Pipeline Health — Use Case"
+description: "Preventing a quarter-end miss before it happens."
+pageId: "use-case"
+
+kicker: "Use Case · Hiring & Mobility · Pipeline Health"
+heroClass: "hero--tool"
+heroTitle: "Preventing a <span class='accent'>quarter-end miss</span> before it happens"
+sub: "A real operating flow where Pipeline Health A[i]gent flags structural risk early, prepares interventions, and routes decisions through gated approvals — before lagging KPIs move."
+
+backHref: "/use-cases/"
+backLabel: "Back to Use Cases"
+---
+
+{# =========================
+   Use Case Content
+   Uses ONLY existing site.css classes
+   ========================= #}
+
+<section class="grid2" aria-label="Context and flag">
+  <div class="card">
+    <h2 class="section-title">Context</h2>
+    <ul>
+      <li>Mid-quarter</li>
+      <li>18 active roles</li>
+      <li>3 revenue-critical hires</li>
+      <li>Weekly hiring manager sync already on the calendar</li>
+    </ul>
+
+    <p class="muted">
+      Chief’s Monday Brief surfaces one structural risk:
+      <strong>Enterprise Sales — pipeline coverage insufficient to meet offer target within the current time horizon.</strong>
+      No dashboard scrolling. No speculation. Just flagged risk.
+    </p>
+  </div>
+
+  <aside class="card">
+    <h2 class="section-title">Flag</h2>
+
+    <p class="muted">
+      🚩 <strong>Inbound application volume trending below target</strong> over a 4-week window.
+    </p>
+
+    <ul>
+      <li>Stage conversions stable</li>
+      <li>Offer acceptance stable</li>
+      <li>Intake target unchanged</li>
+    </ul>
+
+    <div class="callout">
+      This is not a quality issue. Not a calibration issue. <strong>It’s a supply problem.</strong>
+    </div>
+  </aside>
+</section>
+
+<section class="full" aria-label="What the system did automatically">
+  <h2 class="section-title">What the system did automatically</h2>
+
+  <p class="muted">
+    Before the recruiter opens their laptop, Pipeline Health has:
+  </p>
+
+  <ul>
+    <li>Identified the issue in candidate application volume</li>
+    <li>Estimated impact on hiring (intake shortfall and time horizon risk)</li>
+    <li>Researched and eliminated confounding variables</li>
+    <li>Determined root cause: <strong>supply constraint</strong></li>
+  </ul>
+
+  <div class="callout">
+    Pipeline Health triggers Sourcing Agent and stages interventions.
+    <strong>Nothing is sent automatically.</strong> Everything awaits human approval.
+  </div>
+
+  <div class="miniGrid miniGrid--4" aria-label="Staged interventions">
+    <div class="mini">
+      <b>Database outreach</b>
+      <span>
+        102 candidates identified · 55 newly eligible (no contact in 90 days) · draft message prepared
+      </span>
+    </div>
+
+    <div class="mini">
+      <b>Referral promotion</b>
+      <span>
+        Slack-ready post · role summary + referral bonus reminder · social templates + direct link included
+      </span>
+    </div>
+
+    <div class="mini">
+      <b>LinkedIn InMail campaign</b>
+      <span>
+        106 newly sourced candidates · 6 employee connections identified · suggested intro requests prepared
+      </span>
+    </div>
+
+    <div class="mini">
+      <b>PPC campaign (guarded)</b>
+      <span>
+        Ad copy drafted · targeting defined · spend estimate + CPL forecast · manager approval if above threshold
+      </span>
+    </div>
+  </div>
+</section>
+
+<section class="full" aria-label="Human approval">
+  <h2 class="section-title">Human approval</h2>
+
+  <p class="muted">
+    Recruiter opens Chief’s Brief and sees:
+    <strong>Supply gap detected — projected intake shortfall in 3 weeks.</strong>
+    Review interventions and approve next actions.
+  </p>
+
+<div class="ctaRow centerRow">
+  <a class="btn btn--solid">Approve database outreach</a>
+  <a class="btn btn--solid">Approve referral post</a>
+  <a class="btn btn--solid">Approve InMail campaign</a>
+  <a class="btn btn--solid">Route PPC for approval</a>
+</div>
+  </div>
+
+  <p class="small">
+    Recruiter approves database + referral immediately, requests manager approval for PPC, and defers InMail pending review.
+    All actions are logged in the ATS.
+  </p>
+</section>
+
+<section class="full" aria-label="Monitoring Signals">
+  <h2 class="section-title">Monitoring Signals</h2>
+
+  <p class="muted">Campaigns launch. Chief tracks:</p>
+ {# REPLACE bullets with miniGrid--4 to remove list whitespace #}
+  <div class="miniGrid miniGrid--4" aria-label="Monitoring Signals">
+    <div class="mini">
+      <b>Response rate</b>
+      <span>Replies and positive engagement across channels.</span>
+    </div>
+    <div class="mini">
+      <b>Referral submissions</b>
+      <span>Referral volume and conversion into screened candidates.</span>
+    </div>
+    <div class="mini">
+      <b>Intake velocity</b>
+      <span>New qualified candidates entering the funnel vs target.</span>
+    </div>
+    <div class="mini">
+      <b>Time-to-fill projection</b>
+      <span>Projection recalculated daily based on updated intake + flow.</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Seven days later</strong>: intake velocity returns to the tolerance band. No time-to-fill spike. No emergency escalation.
+    Risk neutralized before becoming visible in lagging metrics.
+  </div>
+</section>
+
+<section class="grid2" aria-label="Additional signal snapshots">
+  <div class="card">
+    <h2 class="section-title">Additional Signal Snapshot: Decision Drift</h2>
+    <p class="muted"><strong>HM → next stage conversion below tolerance band.</strong></p>
+    <ul>
+      <li>Detects scoring variance across interviewers</li>
+      <li>Identifies rubric dimension drift</li>
+      <li>Prepares a Calibration Packet</li>
+      <li>Inserts discussion into the next HM sync agenda (gated approval)</li>
+    </ul>
+    <p class="small">
+      No sourcing triggered. No volume intervention. Root cause: decision inconsistency.
+      Outcome: rubric clarified; conversion returns to baseline.
+    </p>
+  </div>
+
+  <aside class="card">
+    <h2 class="section-title">Additional Signal Snapshot: Offer Acceptance Rate</h2>
+    <p class="muted"><strong>Offer acceptance rate below tolerance band.</strong></p>
+    <ul>
+      <li>Clusters candidate feedback themes</li>
+      <li>Compares comp band vs accepted offers</li>
+      <li>Reviews time-to-offer trend</li>
+      <li>Pulls relevant market comp comparison</li>
+    </ul>
+    <p class="small">
+      Prepares a structured compensation proposal and routes to manager + comp channel upon approval.
+      Outcome: comp adjustment approved before decline trend compounds.
+    </p>
+  </aside>
+</section>
+

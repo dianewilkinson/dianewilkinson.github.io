@@ -20,55 +20,16 @@ sub: "Real problems, real constraints, real outcomes. Each case study shows what
 <section class="full" aria-label="Case study library">
   <div class="grid2" style="grid-template-columns: 1fr 1fr">
 
+    {% for item in useCases %}
+      {% if item.card and item.card.listed %}
     <article class="card">
-      <p class="small muted">Improvement & Strategy</p>
-      <h3>Designing Scalable Hiring Infrastructure During a Global ATS Migration</h3>
-      <p class="muted">
-        Consolidated 40–50 inconsistent source tags, enabled 60+ interviewers, and built reliable
-        reporting infrastructure in a two-month regional Greenhouse rollout.
-      </p>
-      <a href="/use-cases/greenhouse-migration/">Read case study →</a>
+      <p class="small muted">{{ item.card.function }}</p>
+      <h3>{{ item.card.title }}</h3>
+      <p class="muted">{{ item.card.summary }}</p>
+      <a href="{{ item.card.href }}">Read case study →</a>
     </article>
-
-    <article class="card">
-      <p class="small muted">Hiring & Mobility</p>
-      <h3>Increasing Offer Acceptance from 70% to 90% with Candidate Lifecycle Orchestration</h3>
-      <p class="muted">
-        Automated stage triggers, standardized messaging, and interviewer enablement eliminated
-        32 HM interviews and 40–60 hours of recruiter workload per quarter.
-      </p>
-      <a href="/use-cases/lifecycle-automation/">Read case study →</a>
-    </article>
-
-    <article class="card">
-      <p class="small muted">Improvement & Strategy</p>
-      <h3>Preventing 39 Stalled Candidates per Week with Throughput Modeling</h3>
-      <p class="muted">
-        A funnel model anchored to hiring manager interview capacity prevented 500 stalled candidates
-        per quarter and reset recruiter KPIs around throughput rather than activity volume.
-      </p>
-      <a href="/use-cases/throughput-modeling/">Read case study →</a>
-    </article>
-
-    <article class="card">
-      <p class="small muted">Governance & Infrastructure</p>
-      <h3>Centralizing Recruiting Assets Through a Structured Document Repository</h3>
-      <p class="muted">
-        A centralized asset repository reduced duplicate effort, improved messaging consistency,
-        and made employer branding wins usable in every candidate conversation.
-      </p>
-      <a href="/use-cases/document-management/">Read case study →</a>
-    </article>
-
-    <article class="card" style="grid-column: 1 / -1">
-      <p class="small muted">Hiring & Mobility</p>
-      <h3>Sourcing Quality — Not All Pipelines Are Created Equal</h3>
-      <p class="muted">
-        Source-to-hire conversion analysis across inbound, outbound, and referrals — and what the
-        12x gap means for where you spend recruiter time and budget.
-      </p>
-      <a href="/use-cases/sourcing-quality/">Read case study →</a>
-    </article>
+      {% endif %}
+    {% endfor %}
 
   </div>
 </section>

@@ -506,6 +506,16 @@ body[data-page="home"] .panel--pink .panelInner{
 }
 .full h2{margin:0 0 10px; font-size:18px; letter-spacing:-.01em;}
 
+/* Tool overview: equal columns for Before/After */
+body[data-page="tool-index"] .grid2{
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Use case: equal columns for split sections (Context / Flag, etc.) */
+body[data-page="use-case"] .grid2{
+  grid-template-columns: 1fr 1fr;
+}
+
 /* Mini outcome grid (3 across) */
 .miniGrid{
   display:grid;
@@ -1189,4 +1199,21 @@ body[data-page="article"] .exploreNext a[href="/articles"]{
 }
 .btn--solid:hover{
   background:#4338ca;
+}
+
+/* =========================
+   USE CASE DENSITY TUNING
+   ========================= */
+
+body[data-page="use-case"] .full{
+  padding:16px 16px;
+  margin-top:12px;
+}
+
+body[data-page="use-case"] .section-title{
+  margin-bottom:10px;
+}
+
+body[data-page="use-case"] .miniGrid{
+  margin-top:8px;
 }
