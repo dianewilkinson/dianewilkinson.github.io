@@ -555,13 +555,48 @@ body[data-page="tool-demo"] .grid2 {
     }
     return out;
   }
+  function scheduleOffersFromFinals(finalArr, offersTotal, finalsPerOffer = 4){
+  const out = Array.from({ length: finalArr.length }, () => 0);
+  if (!Number.isFinite(offersTotal) || offersTotal <= 0) return out;
+
+  let finalsCum = 0;
+  let offersPlaced = 0;
+
+  for (let i = 0; i < finalArr.length && offersPlaced < offersTotal; i++){
+    finalsCum += (finalArr[i] || 0);
+    const shouldHave = Math.floor(finalsCum / finalsPerOffer);
+    let add = shouldHave - offersPlaced;
+    if (add > 0){
+      if (offersPlaced + add > offersTotal) add = offersTotal - offersPlaced;
+      out[i] = add;
+      offersPlaced += add;
+    }
+  }
+
+  // If we never hit enough finals thresholds, dump remainder into last week that has finals
+  if (offersPlaced < offersTotal){
+    for (let i = out.length - 1; i >= 0; i--){
+      if ((finalArr[i] || 0) > 0){
+        out[i] += (offersTotal - offersPlaced);
+        offersPlaced = offersTotal;
+        break;
+      }
+    }
+  }
+
+  // Still nothing (edge-case): dump remainder at very end
+  if (offersPlaced < offersTotal){
+    out[out.length - 1] += (offersTotal - offersPlaced);
+  }
+
+  return out;
+}
 
   function buildPlanner(inp, ms, totals){
     const riWeeks    = ms.activeInterviewWeeks;
     const appsWeeks  = Math.max(0, riWeeks - 1 + inp.weeksSourcingBeforeInterviews);
     const hmWeeks    = Math.max(0, riWeeks - 1);
     const finalWeeks = Math.max(0, riWeeks - 2);
-    const offerWeeks = Math.max(1, inp.weeksOfferToAccept);
 
     const startW    = ms.reqW;
     const endW      = ms.acceptW;
@@ -593,15 +628,16 @@ body[data-page="tool-demo"] .grid2 {
     place(distribute(totals.ri,     riWeeks),    idxRi,    riArr);
     place(distribute(totals.hm,     hmWeeks),    idxHm,    hmArr);
     place(distribute(totals.finals, finalWeeks), idxFinal, finalArr);
-    if (idxOffer >= 0)
-      place(distribute(totals.offers, offerWeeks), idxOffer, offerArr);
+    const offersFromFinals = scheduleOffersFromFinals(finalArr, totals.offers, 4);
+    for (let i = 0; i < totalRows; i++) offerArr[i] = offersFromFinals[i] || 0;
+
 
     const rates = {
       appsPerWk:   appsWeeks   > 0 ? totals.apps   / appsWeeks   : NaN,
       riPerWk:     riWeeks     > 0 ? totals.ri      / riWeeks     : NaN,
       hmPerWk:     hmWeeks     > 0 ? totals.hm      / hmWeeks     : NaN,
       finalPerWk:  finalWeeks  > 0 ? totals.finals  / finalWeeks  : NaN,
-      offersPerWk: offerWeeks  > 0 ? totals.offers  / offerWeeks  : NaN,
+      offersPerWk: riWeeks > 0 ? totals.offers / riWeeks : NaN,
       hiresPerWk:  riWeeks     > 0 ? totals.hires   / riWeeks     : NaN
     };
 
