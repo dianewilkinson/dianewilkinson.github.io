@@ -667,7 +667,9 @@ body[data-page="tool-demo"] .grid2 {
     $("outActiveInterviewWeeks").textContent = ms.activeInterviewWeeks.toLocaleString();
     $("outTimeToFill").textContent           = ms.ttfWeeks.toLocaleString();
     $("outRatio").textContent                = fmt(totals.apps / inp.hires, 1);
-    $("outOfferStart").textContent           = fmtDate(ms.offerStartW);
+    const firstOfferIdx = plan.series.offerArr.findIndex(v => (v || 0) > 0);
+    const firstOfferDate = firstOfferIdx > 0 ? plan.weeks[firstOfferIdx] : null; // idx 0 is placeholder
+    $("outOfferStart").textContent = fmtDate(firstOfferDate);
     $("outHireBy").textContent               = fmtDate(addDays(inp.newHireStartDate, -7 * inp.weeksAcceptanceToStart));
     $("outHireStart").textContent            = fmtDate(inp.newHireStartDate);
 
