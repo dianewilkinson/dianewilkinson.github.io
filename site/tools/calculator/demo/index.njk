@@ -449,7 +449,7 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
     $("constraintText").textContent = `Constraint signal: ~${fmt(topVal,1)} ${topLabel.toLowerCase()} per week (planned window).`;
   }
 
-  function buildPlanner(milestones, plan) {
+  function buildPlanner(inp, milestones, plan) {
     const tbody = $("plannerBody");
     tbody.innerHTML = "";
 
@@ -563,7 +563,7 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
     const plan = buildPlan(inp, milestones, funnel);
 
     renderHeader(inp, milestones, funnel, plan);
-    buildPlanner(milestones, plan);
+    buildPlanner(inp, milestones, plan);
   }
 
   function onReset() {
