@@ -8,6 +8,12 @@ permalink: "/tools/calculator/demo-embed/"
 
 <section class="panel panel--cool" style="margin-top:16px;">
   <h2>Inputs</h2>
+  <div style="display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 14px;">
+  <button class="btnGhost" type="button" data-scn="base">Base</button>
+  <button class="btnGhost" type="button" data-scn="tight">Capacity constrained</button>
+  <button class="btnGhost" type="button" data-scn="improve">Improve CVRs</button>
+  <span class="muted" id="scenarioNote" style="margin-left:auto;"></span>
+</div>
 
   <div style="display:grid; gap:12px; grid-template-columns: repeat(2, minmax(0, 1fr));">
     <label>
@@ -102,6 +108,37 @@ permalink: "/tools/calculator/demo-embed/"
 
 <script>
   const $ = (id) => document.getElementById(id);
+  const SCENARIOS = {
+  base: {
+    note: "Base: typical conversion rates",
+    hires: 4, weeks: 15,
+    offerAccept: 0.85, finalToOffer: 0.25, hmToFinal: 0.75, riToHm: 0.50, appToRi: 0.10
+  },
+  tight: {
+    note: "Capacity constrained: weaker pass-through",
+    hires: 4, weeks: 15,
+    offerAccept: 0.80, finalToOffer: 0.20, hmToFinal: 0.60, riToHm: 0.40, appToRi: 0.08
+  },
+  improve: {
+    note: "Improve CVRs: better calibration + structured screening",
+    hires: 4, weeks: 15,
+    offerAccept: 0.88, finalToOffer: 0.30, hmToFinal: 0.80, riToHm: 0.55, appToRi: 0.12
+  }
+};
+
+function applyScenario(key) {
+  const s = SCENARIOS[key] || SCENARIOS.base;
+  $("hires").value = s.hires;
+  $("weeks").value = s.weeks;
+  $("offerAccept").value = s.offerAccept;
+  $("finalToOffer").value = s.finalToOffer;
+  $("hmToFinal").value = s.hmToFinal;
+  $("riToHm").value = s.riToHm;
+  $("appToRi").value = s.appToRi;
+  const note = $("scenarioNote");
+  if (note) note.textContent = s.note;
+  onCalculate();
+}
 
   function clamp01(x) {
     if (!Number.isFinite(x)) return NaN;
@@ -212,7 +249,13 @@ permalink: "/tools/calculator/demo-embed/"
       `Constraint signal: the plan demands ~${fmt(topVal,1)} ${topLabel.toLowerCase()} per week. ` +
       `If that capacity isn’t real, the target date will slip unless CVRs improve or hires/weeks change.`;
   }
+  document.querySelectorAll("[data-scn]").forEach(btn => {
+    btn.addEventListener("click", () => applyScenario(btn.dataset.scn));
+  });
 
+  // Start with Base scenario
+  applyScenario("base");
+  
   function onCalculate() {
     $("error").textContent = "";
     const inp = readInputs();
