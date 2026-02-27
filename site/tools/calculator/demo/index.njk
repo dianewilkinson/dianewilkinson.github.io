@@ -419,7 +419,8 @@ body[data-page="tool-demo"] .grid2 {
   function startOfWeek(d){
     const out = new Date(d.getTime());
     const day = out.getDay();
-    const diffToMon = (day === 0 ? -6 : 1) - day;
+    // Sunday (0) snaps forward to next Monday; all other days snap back to their Monday
+    const diffToMon = day === 0 ? 1 : 1 - day;
     out.setDate(out.getDate() + diffToMon);
     out.setHours(0,0,0,0);
     return out;
@@ -562,12 +563,12 @@ body[data-page="tool-demo"] .grid2 {
     const finalWeeks = Math.max(0, riWeeks - 2);
     const offerWeeks = Math.max(1, inp.weeksOfferToAccept);
 
-    const startW    = addDays(ms.reqW, -7);
+    const startW    = ms.reqW;
     const endW      = ms.acceptW;
     const totalRows = Math.max(2, diffWeeks(startW, addDays(endW, 7)));
     const weeks     = Array.from({ length: totalRows }, (_, i) => addDays(startW, i * 7));
 
-    const idxReq   = 1;
+    const idxReq   = 0;
     const idxRi    = idxReq + inp.weeksSourcingBeforeInterviews;
     const idxHm    = idxRi + 1;
     const idxFinal = idxRi + 2;
@@ -631,8 +632,8 @@ body[data-page="tool-demo"] .grid2 {
     $("outTimeToFill").textContent           = ms.ttfWeeks.toLocaleString();
     $("outRatio").textContent                = fmt(totals.apps / inp.hires, 1);
     $("outOfferStart").textContent           = fmtDate(ms.offerStartW);
-    $("outHireBy").textContent               = fmtDate(ms.hireByW);
-    $("outHireStart").textContent            = fmtDate(startOfWeek(inp.newHireStartDate));
+    $("outHireBy").textContent               = fmtDate(addDays(inp.newHireStartDate, -7 * inp.weeksAcceptanceToStart));
+    $("outHireStart").textContent            = fmtDate(inp.newHireStartDate);
 
     // Planner per-week header
     $("wkApps").textContent   = fmt(plan.rates.appsPerWk,   1);
