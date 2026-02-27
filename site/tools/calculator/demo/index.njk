@@ -341,74 +341,63 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
 
   function computeMilestones(inp) {
     const reqW = startOfWeek(inp.reqOpenDate);
-    const startW = startOfWeek(inp.newHireStartDate);
 
-    // Admin chain from start date backwards
-    const acceptW = addDays(startW, -7 * inp.weeksAcceptanceToStart);
-    const offerW_fromDates = addDays(acceptW, -7 * inp.weeksOfferToAccept);
+  / / Apps begin immediately in sourcing week
+   const appsStartW = reqW;
 
-    // Interview chain from req open forward
-    const riStartW = addDays(reqW, 7 * inp.weeksSourcingBeforeInterviews);
-    const hmStartW = addDays(riStartW, 7 * 1);
-    const finalStartW = addDays(riStartW, 7 * 2);
+   // Interview chain (dependency-driven forward)
+   const riStartW = addDays(reqW, 7 * inp.weeksSourcingBeforeInterviews);
+   const hmStartW = addDays(riStartW, 7 * 1);
+   const finalStartW = addDays(hmStartW, 7 * 1);
+   const offerStartW = addDays(finalStartW, 7 * 1);
 
-    // Offers begin the week after finals (dependency rule)
-    const offerW_fromDeps = addDays(finalStartW, 7 * 1);
+    // Admin lags move forward from offer week
+    const acceptW = addDays(offerStartW, 7 * inp.weeksOfferToAccept);
+    const startW = addDays(acceptW, 7 * inp.weeksAcceptanceToStart);
 
-    // Offer start = max(date-driven, dependency-driven)
-    const offerStartW = startOfWeek(
-      offerW_fromDates.getTime() > offerW_fromDeps.getTime() ? offerW_fromDates : offerW_fromDeps
-    );
-
-    return { reqW, riStartW, hmStartW, finalStartW, offerStartW, acceptW: startOfWeek(acceptW), startW };
+    return {
+      reqW,
+      appsStartW,
+      riStartW,
+      hmStartW,
+      finalStartW,
+      offerStartW,
+      acceptW,
+      startW
+    };
   }
 
   function buildPlan(inp, milestones, funnel) {
-    const errors = [];
+  const errors = [];
 
-    // Apps start in sourcing week (req open week)
-    const appsStartW = milestones.reqW;
+  // Active interview weeks: RI start → Offer start (inclusive)
+  const activeInterviewWeeks = Math.max(
+    1,
+    diffWeeks(milestones.riStartW, addDays(milestones.offerStartW, 7))
+  );
 
-    // Active interview window: from RI start to offer start
-    const activeInterviewWeeks = diffWeeks(milestones.riStartW, milestones.offerStartW);
-    if (activeInterviewWeeks < 1) {
-      errors.push("Offer start week must be after interview start week. Increase time between interview start and offers.");
+  // Spread Apps / RI / HM / Final across interview window
+  const appsPerWk = funnel.apps / activeInterviewWeeks;
+  const riPerWk = funnel.ri / activeInterviewWeeks;
+  const hmPerWk = funnel.hm / activeInterviewWeeks;
+  const finalsPerWk = funnel.finals / activeInterviewWeeks;
+
+  // Offers are spread only across Offer→Accept period
+  const offerLagWeeks = Math.max(1, inp.weeksOfferToAccept);
+  const offersPerWk = funnel.offers / offerLagWeeks;
+
+  return {
+    errors,
+    activeInterviewWeeks,
+    offerLagWeeks,
+    rates: {
+      appsPerWk,
+      riPerWk,
+      hmPerWk,
+      finalsPerWk,
+      offersPerWk
     }
-
-    // Ensure offers do not occur after acceptance week
-    if (milestones.offerStartW.getTime() >= milestones.acceptW.getTime()) {
-      errors.push("Offer start week must be before acceptance week. Increase offer→accept weeks or move start date later.");
-    }
-
-    // Offer weeks are the *last half* of interview weeks (approx)
-    const offerWeeks = Math.max(1, Math.ceil(activeInterviewWeeks / 2));
-
-    // Check offer window fits before acceptance
-    const offerEndW = addDays(milestones.offerStartW, 7 * offerWeeks);
-    if (offerEndW.getTime() > milestones.acceptW.getTime()) {
-      errors.push("Offer plan extends past acceptance week. Increase offer→accept time or reduce interview window assumptions.");
-    }
-
-    if (errors.length) {
-      return { errors, appsStartW, activeInterviewWeeks: Math.max(0, activeInterviewWeeks), offerWeeks };
-    }
-
-    // Stage weekly rates:
-    // Apps/RI/HM/Final spread across active interview weeks
-    // Offers spread across last half (offerWeeks)
-    const appsPerWk = funnel.apps / activeInterviewWeeks;
-    const riPerWk = funnel.ri / activeInterviewWeeks;
-    const hmPerWk = funnel.hm / activeInterviewWeeks;
-    const finalsPerWk = funnel.finals / activeInterviewWeeks;
-    const offersPerWk = funnel.offers / offerWeeks;
-
-    return {
-      errors: [],
-      appsStartW,
-      activeInterviewWeeks,
-      offerWeeks,
-      rates: { appsPerWk, riPerWk, hmPerWk, finalsPerWk, offersPerWk }
-    };
+   };
   }
 
   function renderHeader(inp, milestones, funnel, plan) {
