@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 title: "Recruiting Funnel Pipeline Calculator by New Hire Start Date"
-description: "Interactive funnel + weekly time-to-fill planner (sheet-style layout)."
+description: "Interactive funnel + weekly time-to-fill planner."
 pageId: "tool-demo"
 permalink: "/tools/calculator/demo/"
 
@@ -9,188 +9,396 @@ heroClass: "hero--tool-strong"
 kicker: "Recruiting Ops · Demo"
 backHref: "/tools/calculator/"
 backLabel: "Back to Overview"
-sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
+sub: "Enter your target start date and the tool back-calculates every pipeline stage."
 ---
 
 <style>
-/* ===== Spreadsheet sheet styles (scoped to this page) ===== */
-.sht { border-collapse:collapse; width:100%; font-size:12px; background:#fff; }
-.sht td, .sht th { border:1px solid #c4b5fd; padding:4px 8px; vertical-align:middle; white-space:nowrap; }
-.sht-hdr { background:#ede9fe; color:#4f46e5; font-weight:700; text-align:center; font-size:12px; line-height:1.3; }
-.sht-arrow { background:#6366f1; color:#fff; font-size:16px; font-weight:900; text-align:center; width:26px; padding:4px 2px; border-color:#4f46e5 !important; }
-.sht-lbl { text-align:right; color:#374151; font-size:12px; padding-right:10px; }
-.sht-val { text-align:center; font-weight:800; color:#1e1b4b; min-width:40px; }
-.sht-stage { font-size:11px; color:#6b7280; padding-left:6px; }
-.sht-out-lbl { text-align:right; font-size:11px; color:#374151; padding-right:10px; white-space:normal; max-width:130px; }
-.sht-out-val { font-weight:800; color:#1e1b4b; text-align:center; font-size:13px; min-width:90px; }
-.sht-annot { color:#d97706; font-style:italic; font-weight:600; font-size:13px; }
-/* Inputs */
-.inp-date { border:2px dashed #f472b6 !important; background:#fffbeb; padding:2px 4px; font-size:12px; width:110px; color:#1e1b4b; }
-.inp-num  { border:2px solid #60a5fa; background:#eff6ff; padding:2px 4px; font-size:12px; width:44px; text-align:center; color:#1e1b4b; }
-.inp-pct  { border:1px solid #818cf8; background:#f5f3ff; padding:2px 4px; font-size:12px; width:38px; text-align:right; color:#1e1b4b; }
-/* Planner */
-.plan-tbl { border-collapse:collapse; width:100%; font-size:12px; background:#fff; }
-.plan-tbl td, .plan-tbl th { border:1px solid #e5e7eb; padding:3px 8px; text-align:center; }
-.plan-tbl .col-hdr { background:#f3f0ff; color:#4f46e5; font-weight:700; font-size:11px; line-height:1.4; }
-.plan-tbl .totals-row td { font-weight:800; color:#4f46e5; background:#ede9fe; font-size:13px; }
-/* Annotation wrapper */
-.annot-wrap { display:flex; align-items:flex-start; gap:8px; }
-.annot-side { padding-top:38px; flex-shrink:0; min-width:72px; }
-.annot-side.right { text-align:right; min-width:80px; }
+/* ===== tool-demo page-scoped styles ===== */
+
+/* Flip grid so inputs (left) are narrower than the funnel (right) */
+body[data-page="tool-demo"] .grid2 {
+  grid-template-columns: 0.82fr 1.18fr;
+}
+
+/* ---- Field rows (Inputs card) ---- */
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.field-row:last-child { border-bottom: none; }
+.field-label { color: var(--muted); flex: 1; line-height: 1.35; }
+.field-input {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 14px;
+  width: 116px;
+  text-align: right;
+  background: #fff;
+  color: var(--text);
+  flex-shrink: 0;
+}
+.field-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(79,70,229,.10);
+}
+.field-input--date { text-align: left; }
+
+/* ---- Funnel stage rows ---- */
+.f-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.f-stage__bar {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: linear-gradient(90deg, rgba(79,70,229,.13), rgba(167,139,250,.07));
+  border-radius: 10px;
+  pointer-events: none;
+  transition: width 0.35s ease;
+  width: 0%;
+}
+.f-stage__num {
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--accent);
+  min-width: 50px;
+  text-align: right;
+  position: relative;
+  letter-spacing: -.02em;
+}
+.f-stage__name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  flex: 1;
+  position: relative;
+  white-space: nowrap;
+}
+.f-stage__cvr {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  flex-shrink: 0;
+}
+.f-stage__cvr-label {
+  font-size: 12px;
+  color: var(--muted2);
+  white-space: nowrap;
+}
+.f-cvr-input {
+  border: 1px solid rgba(79,70,229,.28);
+  border-radius: 7px;
+  padding: 4px 6px;
+  font-size: 13px;
+  width: 46px;
+  text-align: right;
+  background: rgba(79,70,229,.04);
+  color: var(--text);
+}
+.f-cvr-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(79,70,229,.10);
+}
+.f-pct { font-size: 12px; color: var(--muted2); }
+
+/* Arrow connector between funnel stages */
+.f-connector {
+  text-align: center;
+  color: var(--muted2);
+  font-size: 12px;
+  padding: 1px 0;
+  opacity: 0.5;
+}
+
+/* ---- Hires target row (bottom of funnel, no CVR) ---- */
+.f-stage--hires .f-stage__bar {
+  background: linear-gradient(90deg, rgba(99,102,241,.22), rgba(167,139,250,.14));
+}
+.f-stage--hires .f-stage__num { color: #4338ca; }
+
+/* ---- Output stat boxes ---- */
+.stat-box {
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.78);
+  border-radius: 14px;
+  padding: 13px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.stat-box__label {
+  font-size: 12px;
+  color: var(--muted2);
+  line-height: 1.3;
+}
+.stat-box__value {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -.025em;
+  line-height: 1.1;
+}
+.stat-box--accent .stat-box__value { color: var(--accent); }
+
+/* ---- Planner table ---- */
+.planner-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.planner-table th {
+  background: rgba(79,70,229,.06);
+  border: 1px solid var(--border);
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted2);
+  text-align: center;
+  line-height: 1.35;
+}
+.planner-table td {
+  border: 1px solid var(--border);
+  padding: 5px 10px;
+  text-align: center;
+  color: var(--text);
+}
+.planner-table .totals-row td {
+  font-weight: 800;
+  color: var(--accent);
+  background: rgba(79,70,229,.05);
+  font-size: 14px;
+}
+.planner-table .week-row td { color: var(--muted); }
+.planner-table .week-row td:first-child,
+.planner-table .week-row td:nth-child(2) { color: var(--text); font-weight: 600; }
 </style>
 
-<!-- Scenarios -->
-<div style="margin-bottom:10px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
-  <button class="btnGhost" type="button" data-scn="base">Base</button>
-  <button class="btnGhost" type="button" data-scn="tight">Capacity constrained</button>
-  <button class="btnGhost" type="button" data-scn="improve">Improve CVRs</button>
-  <span class="muted" id="scenarioNote" style="font-size:12px;"></span>
-</div>
 
-<!-- ===== MAIN INPUTS / FUNNEL / OUTPUTS TABLE ===== -->
-<div class="annot-wrap">
-  <div class="annot-side sht-annot">Start Here 👇</div>
-
-  <div style="flex:1; overflow-x:auto;">
-    <table class="sht">
-      <tbody>
-        <!-- Section header row -->
-        <tr>
-          <th colspan="2" class="sht-hdr">Inputs</th>
-          <td class="sht-arrow" rowspan="7">→</td>
-          <th colspan="3" class="sht-hdr">Candidate Interview Stage<br>Conversion Rates (CVR)</th>
-          <th colspan="2" class="sht-hdr">#of Candidates Needed in Each Stage For <span id="hiresHeader">4</span> Hires</th>
-          <td class="sht-arrow" rowspan="7">→</td>
-          <th colspan="2" class="sht-hdr">Outputs</th>
-        </tr>
-
-        <!-- Row 1 -->
-        <tr>
-          <td class="sht-lbl">Enter Requisition Start Date</td>
-          <td><input id="reqOpenDate" type="date" class="inp-date" /></td>
-          <td class="sht-lbl">App &#8594; Interview%</td>
-          <td><input id="appToRi" type="number" min="0" max="100" step="0.1" value="10" class="inp-pct" /></td>
-          <td style="font-size:11px;color:#6b7280;">%</td>
-          <td class="sht-val" id="totApps">—</td>
-          <td class="sht-stage">Application Review Stage</td>
-          <td class="sht-out-lbl">#Active Interview Weeks</td>
-          <td class="sht-out-val" id="outActiveInterviewWeeks">—</td>
-        </tr>
-
-        <!-- Row 2 -->
-        <tr>
-          <td class="sht-lbl">Enter New Hire Start Date</td>
-          <td><input id="newHireStartDate" type="date" class="inp-date" /></td>
-          <td class="sht-lbl">RI &#8594; HMI %</td>
-          <td><input id="riToHm" type="number" min="0" max="100" step="0.1" value="50" class="inp-pct" /></td>
-          <td style="font-size:11px;color:#6b7280;">%</td>
-          <td class="sht-val" id="totRi">—</td>
-          <td class="sht-stage">Recruiter Interview (RI)</td>
-          <td class="sht-out-lbl">Time-to-Fill in Weeks (TTF)</td>
-          <td class="sht-out-val" id="outTimeToFill">—</td>
-        </tr>
-
-        <!-- Row 3 -->
-        <tr>
-          <td class="sht-lbl">Enter # of Weeks Sourcing Before Interviews</td>
-          <td><input id="weeksSourcingBeforeInterviews" type="number" min="0" step="1" value="1" class="inp-num" /></td>
-          <td class="sht-lbl">HMI &#8594; Final%</td>
-          <td><input id="hmToFinal" type="number" min="0" max="100" step="0.1" value="75" class="inp-pct" /></td>
-          <td style="font-size:11px;color:#6b7280;">%</td>
-          <td class="sht-val" id="totHm">—</td>
-          <td class="sht-stage">Hiring Manager Interview (HMI)</td>
-          <td class="sht-out-lbl">Hire-By Date</td>
-          <td class="sht-out-val" id="outHireBy">—</td>
-        </tr>
-
-        <!-- Row 4 -->
-        <tr>
-          <td class="sht-lbl">Enter # of Weeks from Offer-to-Acceptance</td>
-          <td><input id="weeksOfferToAccept" type="number" min="0" step="1" value="1" class="inp-num" /></td>
-          <td class="sht-lbl">Final &#8594; Offer%</td>
-          <td><input id="finalToOffer" type="number" min="0" max="100" step="0.1" value="25" class="inp-pct" /></td>
-          <td style="font-size:11px;color:#6b7280;">%</td>
-          <td class="sht-val" id="totFinal">—</td>
-          <td class="sht-stage">Final Interview Stage</td>
-          <td class="sht-out-lbl">Offer Start Week</td>
-          <td class="sht-out-val" id="outOfferStart">—</td>
-        </tr>
-
-        <!-- Row 5 -->
-        <tr>
-          <td class="sht-lbl">Enter # of Weeks from Acceptance-to-Start</td>
-          <td><input id="weeksAcceptanceToStart" type="number" min="0" step="1" value="3" class="inp-num" /></td>
-          <td class="sht-lbl">Offer Acceptance Rate</td>
-          <td><input id="offerAccept" type="number" min="0" max="100" step="0.1" value="85" class="inp-pct" /></td>
-          <td style="font-size:11px;color:#6b7280;">%</td>
-          <td class="sht-val" id="totOffers">—</td>
-          <td class="sht-stage">Offer Stage</td>
-          <td class="sht-out-lbl">Hire Accepts Start Week</td>
-          <td class="sht-out-val" id="outHireStart">—</td>
-        </tr>
-
-        <!-- Row 6 -->
-        <tr>
-          <td class="sht-annot" colspan="2" style="font-size:11px; text-align:right; padding-right:10px;">Enter Start Dates &amp; Admin Time Periods Here 👇</td>
-          <td class="sht-lbl">Enter # of Hires to Forecast</td>
-          <td><input id="hires" type="number" min="1" step="1" value="4" class="inp-num" /></td>
-          <td></td>
-          <td class="sht-val" id="totHires">—</td>
-          <td class="sht-stage">New Hires</td>
-          <td class="sht-out-lbl">#App-to-1 Hire Ratio</td>
-          <td class="sht-out-val" id="outRatio">—</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div style="text-align:center; margin-top:4px;">
-      <span class="sht-annot">Enter / Adjust Here 👇</span>
+<!-- Scenario switcher -->
+<section class="panel panel--cool" style="margin-bottom:0;">
+  <div class="panelInner">
+    <div class="ctaRow ctaRow--left">
+      <button class="btnGhost" type="button" data-scn="base">Base</button>
+      <button class="btnGhost" type="button" data-scn="tight">Capacity constrained</button>
+      <button class="btnGhost" type="button" data-scn="improve">Improve CVRs</button>
+      <span class="muted" id="scenarioNote" style="font-size:13px;"></span>
     </div>
-    <div style="text-align:center; min-height:16px;">
-      <span id="error" style="color:#ef4444; font-size:12px;"></span>
+  </div>
+</section>
+
+
+<!-- ROW 1: Inputs + Funnel -->
+<section class="grid2">
+
+  <!-- INPUTS -->
+  <div class="card">
+    <h2 class="section-title">Inputs</h2>
+    <p class="section-sub">Set your target start date and the tool calculates the interview window.</p>
+
+    <div class="field-row">
+      <span class="field-label">Requisition open date</span>
+      <input id="reqOpenDate" type="date" class="field-input field-input--date" />
+    </div>
+    <div class="field-row">
+      <span class="field-label">New hire start date</span>
+      <input id="newHireStartDate" type="date" class="field-input field-input--date" />
+    </div>
+    <div class="field-row">
+      <span class="field-label">Weeks sourcing before interviews</span>
+      <input id="weeksSourcingBeforeInterviews" type="number" min="0" step="1" value="1" class="field-input" />
+    </div>
+    <div class="field-row">
+      <span class="field-label">Weeks offer → acceptance</span>
+      <input id="weeksOfferToAccept" type="number" min="0" step="1" value="1" class="field-input" />
+    </div>
+    <div class="field-row">
+      <span class="field-label">Weeks acceptance → start</span>
+      <input id="weeksAcceptanceToStart" type="number" min="0" step="1" value="3" class="field-input" />
+    </div>
+    <div class="field-row">
+      <span class="field-label">Target hires</span>
+      <input id="hires" type="number" min="1" step="1" value="4" class="field-input" />
+    </div>
+
+    <p id="error" style="margin:10px 0 0; font-size:13px; color:#dc2626; min-height:20px;"></p>
+  </div>
+
+
+  <!-- FUNNEL -->
+  <div class="card">
+    <h2 class="section-title">Recruiting Funnel</h2>
+    <p class="section-sub">Edit any conversion rate — volumes update instantly. Bars show relative scale.</p>
+
+    <!-- Applications -->
+    <div class="f-stage">
+      <div class="f-stage__bar" id="barApps"></div>
+      <span class="f-stage__num" id="totApps">—</span>
+      <span class="f-stage__name">Applications</span>
+      <div class="f-stage__cvr">
+        <span class="f-stage__cvr-label">→ RI</span>
+        <input id="appToRi" type="number" min="0" max="100" step="0.1" value="10" class="f-cvr-input" />
+        <span class="f-pct">%</span>
+      </div>
+    </div>
+    <div class="f-connector">↓</div>
+
+    <!-- Recruiter Interview -->
+    <div class="f-stage">
+      <div class="f-stage__bar" id="barRi"></div>
+      <span class="f-stage__num" id="totRi">—</span>
+      <span class="f-stage__name">Recruiter Interview</span>
+      <div class="f-stage__cvr">
+        <span class="f-stage__cvr-label">→ HMI</span>
+        <input id="riToHm" type="number" min="0" max="100" step="0.1" value="50" class="f-cvr-input" />
+        <span class="f-pct">%</span>
+      </div>
+    </div>
+    <div class="f-connector">↓</div>
+
+    <!-- HM Interview -->
+    <div class="f-stage">
+      <div class="f-stage__bar" id="barHm"></div>
+      <span class="f-stage__num" id="totHm">—</span>
+      <span class="f-stage__name">Hiring Manager Interview</span>
+      <div class="f-stage__cvr">
+        <span class="f-stage__cvr-label">→ Final</span>
+        <input id="hmToFinal" type="number" min="0" max="100" step="0.1" value="75" class="f-cvr-input" />
+        <span class="f-pct">%</span>
+      </div>
+    </div>
+    <div class="f-connector">↓</div>
+
+    <!-- Final Interview -->
+    <div class="f-stage">
+      <div class="f-stage__bar" id="barFinal"></div>
+      <span class="f-stage__num" id="totFinal">—</span>
+      <span class="f-stage__name">Final Interview</span>
+      <div class="f-stage__cvr">
+        <span class="f-stage__cvr-label">→ Offer</span>
+        <input id="finalToOffer" type="number" min="0" max="100" step="0.1" value="25" class="f-cvr-input" />
+        <span class="f-pct">%</span>
+      </div>
+    </div>
+    <div class="f-connector">↓</div>
+
+    <!-- Offer -->
+    <div class="f-stage">
+      <div class="f-stage__bar" id="barOffers"></div>
+      <span class="f-stage__num" id="totOffers">—</span>
+      <span class="f-stage__name">Offer</span>
+      <div class="f-stage__cvr">
+        <span class="f-stage__cvr-label">Accept rate</span>
+        <input id="offerAccept" type="number" min="0" max="100" step="0.1" value="85" class="f-cvr-input" />
+        <span class="f-pct">%</span>
+      </div>
+    </div>
+    <div class="f-connector">↓</div>
+
+    <!-- Hires -->
+    <div class="f-stage f-stage--hires">
+      <div class="f-stage__bar" id="barHires"></div>
+      <span class="f-stage__num" id="totHires">—</span>
+      <span class="f-stage__name">Hires</span>
+      <div class="f-stage__cvr">
+        <span class="f-stage__cvr-label" style="color:var(--muted2); font-style:italic;">← target</span>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:14px;">
+      Conversion rate = % of candidates advancing to the next stage. Volumes are back-calculated from your target hire count.
     </div>
   </div>
 
-  <div class="annot-side right sht-annot">Gain Insight Here 👇</div>
-</div>
+</section>
 
-<p style="font-size:11px; color:#6b7280; margin:6px 0 14px;"><em>Conversion Rates (CVR)</em> = % of candidates moving to the next stage</p>
 
-<!-- ===== WEEKLY PLANNER ===== -->
-<div class="annot-wrap" style="margin-top:4px;">
-  <div class="annot-side sht-annot">Plan Here 👇</div>
+<!-- ROW 2: Outputs -->
+<section class="full">
+  <h2 class="section-title">Key Milestones</h2>
+  <p class="section-sub">Derived from your start date — working backwards through the pipeline.</p>
 
-  <div style="flex:1; overflow-x:auto;">
-    <table class="plan-tbl">
+  <div class="miniGrid miniGrid--4" style="grid-template-columns: repeat(3, minmax(0,1fr));">
+    <div class="stat-box stat-box--accent">
+      <div class="stat-box__label">Active interview weeks</div>
+      <div class="stat-box__value" id="outActiveInterviewWeeks">—</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box__label">Time-to-fill (TTF weeks)</div>
+      <div class="stat-box__value" id="outTimeToFill">—</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box__label">App-to-1-hire ratio</div>
+      <div class="stat-box__value" id="outRatio">—</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box__label">Offer start week</div>
+      <div class="stat-box__value" id="outOfferStart">—</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box__label">Hire-by date (all offers accepted)</div>
+      <div class="stat-box__value" id="outHireBy">—</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box__label">New hire start week</div>
+      <div class="stat-box__value" id="outHireStart">—</div>
+    </div>
+  </div>
+
+  <p class="muted" id="constraintNote" style="margin:12px 0 0; font-size:13px;"></p>
+</section>
+
+
+<!-- ROW 3: Weekly Planner -->
+<section class="full">
+  <h2 class="section-title">Weekly Time-to-Fill Planner</h2>
+  <p class="section-sub">
+    Top row = totals. Rows below = weekly distribution.
+    Per-week pace: Apps&nbsp;<b id="wkApps">—</b> · RI&nbsp;<b id="wkRi">—</b> · HMI&nbsp;<b id="wkHm">—</b> · Final&nbsp;<b id="wkFinal">—</b> · Offers&nbsp;<b id="wkOffers">—</b>
+  </p>
+
+  <div class="table-wrap">
+    <table class="planner-table">
       <thead>
         <tr>
-          <th class="col-hdr" style="min-width:60px;">Time-to-Fill (Wks)<br>Week #</th>
-          <th class="col-hdr" style="min-width:90px;">Rec Open Date<br>Week Start Dates</th>
-          <th class="col-hdr"># Applications Needed<br>Per Week = <span id="wkApps">—</span></th>
-          <th class="col-hdr">Recruiter Screens<br>Needed Per Week = <span id="wkRi">—</span></th>
-          <th class="col-hdr">#Hiring Manager Interviews<br>Needed Per Week = <span id="wkHm">—</span></th>
-          <th class="col-hdr">#Final Interviews<br>Needed Per Week = <span id="wkFinal">—</span></th>
-          <th class="col-hdr">#Offers Needed<br>Per Week = <span id="wkOffers">—</span></th>
-          <th class="col-hdr">#Hires Needed<br>Per Week = <span id="wkHires">—</span></th>
+          <th style="width:60px;">Week #</th>
+          <th style="width:90px;">Week of</th>
+          <th>Applications</th>
+          <th>Recruiter<br>Interview</th>
+          <th>HM<br>Interview</th>
+          <th>Final<br>Interview</th>
+          <th>Offers</th>
+          <th>Hires</th>
         </tr>
       </thead>
       <tbody id="plannerBody">
-        <tr><td colspan="8" style="color:#9ca3af; font-size:12px; padding:10px;">Enter values above to generate the plan.</td></tr>
+        <tr><td colspan="8" style="color:var(--muted); padding:14px; text-align:center;">Enter values above to generate the plan.</td></tr>
       </tbody>
     </table>
-    <p class="muted" id="constraintTextPlanner" style="font-size:11px; margin-top:6px;"></p>
   </div>
+</section>
 
-  <div class="annot-side right sht-annot">And Here 👇</div>
-</div>
 
 <script>
   const $ = (id) => document.getElementById(id);
 
   const SCENARIOS = {
-    base:   { note: "Base: typical conversion rates",                              offerAccept: 85, finalToOffer: 25, hmToFinal: 75, riToHm: 50, appToRi: 10 },
-    tight:  { note: "Capacity constrained: weaker pass-through",                   offerAccept: 80, finalToOffer: 20, hmToFinal: 60, riToHm: 40, appToRi: 8  },
-    improve:{ note: "Improve CVRs: better calibration + structured screening",     offerAccept: 88, finalToOffer: 30, hmToFinal: 80, riToHm: 55, appToRi: 12 }
+    base:   { note: "Base: typical conversion rates",                           offerAccept: 85, finalToOffer: 25, hmToFinal: 75, riToHm: 50, appToRi: 10 },
+    tight:  { note: "Capacity constrained: weaker pass-through",                offerAccept: 80, finalToOffer: 20, hmToFinal: 60, riToHm: 40, appToRi: 8  },
+    improve:{ note: "Improve CVRs: better calibration + structured screening",  offerAccept: 88, finalToOffer: 30, hmToFinal: 80, riToHm: 55, appToRi: 12 }
   };
 
   function clamp01(x){ return Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : NaN; }
@@ -208,7 +416,6 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
     return out;
   }
 
-  // Monday-based week start
   function startOfWeek(d){
     const out = new Date(d.getTime());
     const day = out.getDay();
@@ -218,14 +425,12 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
     return out;
   }
 
-  // "Feb-27" short label used in planner rows
   function weekKey(d){
     const m = d.toLocaleDateString(undefined, { month:"short" });
-    const day = d.toLocaleDateString(undefined, { day:"2-digit" });
-    return `${m}-${day}`;
+    const day = String(d.getDate()).padStart(2,"0");
+    return `${m} ${day}`;
   }
 
-  // "3/27/2026" full US date for outputs
   function fmtDate(d){
     if (!d) return "—";
     return `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
@@ -259,31 +464,39 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
   }
 
   function validate(inp){
-    if (!inp.reqOpenDate) return "Requisition Start Date is required.";
-    if (!inp.newHireStartDate) return "New Hire Start Date is required.";
-    if (inp.newHireStartDate.getTime() <= inp.reqOpenDate.getTime()) return "New Hire Start Date must be after Req Start Date.";
+    if (!inp.reqOpenDate)      return "Requisition open date is required.";
+    if (!inp.newHireStartDate) return "New hire start date is required.";
+    if (inp.newHireStartDate.getTime() <= inp.reqOpenDate.getTime())
+      return "New hire start date must be after req open date.";
+
+    // Check the back-calculated offer window leaves room for at least 1 interview week
+    const riStart_v  = addDays(inp.reqOpenDate, 7 * inp.weeksSourcingBeforeInterviews);
+    const offerEnd_v = addDays(inp.newHireStartDate,
+      -7 * inp.weeksAcceptanceToStart - 7 * Math.max(1, inp.weeksOfferToAccept));
+    if (offerEnd_v.getTime() <= riStart_v.getTime())
+      return "Not enough time for interviews — move the start date out or reduce admin weeks.";
 
     const ints = [
-      ["# Weeks Sourcing Before Interviews", inp.weeksSourcingBeforeInterviews],
-      ["# Weeks Offer to Accept",            inp.weeksOfferToAccept],
-      ["# Weeks Acceptance to Start",        inp.weeksAcceptanceToStart],
+      ["Weeks sourcing before interviews", inp.weeksSourcingBeforeInterviews],
+      ["Weeks offer → acceptance",         inp.weeksOfferToAccept],
+      ["Weeks acceptance → start",         inp.weeksAcceptanceToStart],
     ];
     for (const [name, v] of ints){
       if (!Number.isFinite(v) || v < 0) return `${name} must be 0 or more.`;
     }
 
-    if (!Number.isFinite(inp.hires) || inp.hires <= 0) return "Target hires must be >= 1.";
+    if (!Number.isFinite(inp.hires) || inp.hires <= 0) return "Target hires must be ≥ 1.";
 
     const rates = [
-      ["Offer accept rate",           inp.offerAccept],
-      ["Final → Offer",               inp.finalToOffer],
-      ["HMI → Final",                 inp.hmToFinal],
-      ["RI → HMI",                    inp.riToHm],
-      ["App → Interview",             inp.appToRi]
+      ["Offer accept rate",   inp.offerAccept],
+      ["Final → Offer",       inp.finalToOffer],
+      ["HMI → Final",         inp.hmToFinal],
+      ["RI → HMI",            inp.riToHm],
+      ["App → RI",            inp.appToRi]
     ];
     for (const [name, v] of rates){
       if (!Number.isFinite(v) || v <= 0) return `${name} must be > 0.`;
-      if (v > 1)                         return `${name} must be <= 100%.`;
+      if (v > 1)                         return `${name} must be ≤ 100%.`;
     }
     return null;
   }
@@ -305,15 +518,20 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
   }
 
   function computeMilestones(inp){
-    const reqW        = startOfWeek(inp.reqOpenDate);
-    const riStartW    = addDays(reqW,     7 * inp.weeksSourcingBeforeInterviews);
-    const hmStartW    = addDays(riStartW, 7 * 1);
-    const finalStartW = addDays(riStartW, 7 * 2);
-    const offerStartW = addDays(finalStartW, 7 * 1);
-    const acceptW     = addDays(offerStartW, 7 * Math.max(0, inp.weeksOfferToAccept));
-    const hireByW     = acceptW;
-    const ttfWeeks    = Math.max(1, diffWeeks(reqW, hireByW) + 1);
+    const reqW     = startOfWeek(inp.reqOpenDate);
+    const riStartW = addDays(reqW, 7 * inp.weeksSourcingBeforeInterviews);
+
+    // Back-calculate from new hire start date so interview window reflects reality
+    const hireStartW  = startOfWeek(inp.newHireStartDate);
+    const acceptW     = addDays(hireStartW,  -7 * inp.weeksAcceptanceToStart);
+    const offerStartW = addDays(acceptW,     -7 * Math.max(1, inp.weeksOfferToAccept));
+    const finalStartW = addDays(offerStartW, -7);
+    const hmStartW    = addDays(riStartW, 7);
+
+    const hireByW              = acceptW;
+    const ttfWeeks             = Math.max(1, diffWeeks(reqW, hireByW));
     const activeInterviewWeeks = Math.max(1, diffWeeks(riStartW, offerStartW));
+
     return { reqW, riStartW, hmStartW, finalStartW, offerStartW, acceptW, hireByW, ttfWeeks, activeInterviewWeeks };
   }
 
@@ -340,20 +558,22 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
   function buildPlanner(inp, ms, totals){
     const riWeeks    = ms.activeInterviewWeeks;
     const appsWeeks  = Math.max(0, riWeeks - 1 + inp.weeksSourcingBeforeInterviews);
-    const hmWeeks    = Math.max(0, riWeeks);
-    const finalWeeks = Math.max(0, riWeeks);
-    const offerWeeks = Math.max(1, inp.weeksOfferToAccept || 0);
+    const hmWeeks    = Math.max(0, riWeeks - 1);
+    const finalWeeks = Math.max(0, riWeeks - 2);
+    const offerWeeks = Math.max(1, inp.weeksOfferToAccept);
 
-    const startW   = addDays(ms.reqW, -7);
-    const endW     = ms.acceptW;
+    const startW    = addDays(ms.reqW, -7);
+    const endW      = ms.acceptW;
     const totalRows = Math.max(2, diffWeeks(startW, addDays(endW, 7)));
-    const weeks = Array.from({ length: totalRows }, (_, i) => addDays(startW, i * 7));
+    const weeks     = Array.from({ length: totalRows }, (_, i) => addDays(startW, i * 7));
 
     const idxReq   = 1;
     const idxRi    = idxReq + inp.weeksSourcingBeforeInterviews;
     const idxHm    = idxRi + 1;
     const idxFinal = idxRi + 2;
-    const idxOffer = weeks.findIndex(w => startOfWeek(w).getTime() === startOfWeek(ms.offerStartW).getTime());
+    const idxOffer = weeks.findIndex(w =>
+      startOfWeek(w).getTime() === startOfWeek(ms.offerStartW).getTime()
+    );
 
     const appsArr  = Array.from({ length: totalRows }, () => 0);
     const riArr    = Array.from({ length: totalRows }, () => 0);
@@ -361,37 +581,34 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
     const finalArr = Array.from({ length: totalRows }, () => 0);
     const offerArr = Array.from({ length: totalRows }, () => 0);
 
-    const appsDist  = distribute(totals.apps,   appsWeeks);
-    const riDist    = distribute(totals.ri,      riWeeks);
-    const hmDist    = distribute(totals.hm,      hmWeeks);
-    const finalDist = distribute(totals.finals,  finalWeeks);
-    const offerDist = distribute(totals.offers,  offerWeeks);
-
-    for (let i=0;i<appsWeeks;i++){  const idx=idxReq+i;   if (idx>=0&&idx<totalRows) appsArr[idx]=appsDist[i]; }
-    for (let i=0;i<riWeeks;i++){    const idx=idxRi+i;    if (idx>=0&&idx<totalRows) riArr[idx]=riDist[i]; }
-    for (let i=0;i<hmWeeks;i++){    const idx=idxHm+i;    if (idx>=0&&idx<totalRows) hmArr[idx]=hmDist[i]; }
-    for (let i=0;i<finalWeeks;i++){ const idx=idxFinal+i; if (idx>=0&&idx<totalRows) finalArr[idx]=finalDist[i]; }
-    if (idxOffer >= 0){
-      for (let i=0;i<offerWeeks;i++){ const idx=idxOffer+i; if (idx>=0&&idx<totalRows) offerArr[idx]=offerDist[i]; }
-    }
-
-    const rates = {
-      appsPerWk:   appsWeeks>0   ? totals.apps/appsWeeks     : NaN,
-      riPerWk:     riWeeks>0     ? totals.ri/riWeeks         : NaN,
-      hmPerWk:     hmWeeks>0     ? totals.hm/hmWeeks         : NaN,
-      finalPerWk:  finalWeeks>0  ? totals.finals/finalWeeks  : NaN,
-      offersPerWk: offerWeeks>0  ? totals.offers/offerWeeks  : NaN,
-      hiresPerWk:  riWeeks>0     ? totals.hires/riWeeks      : NaN
+    const place = (dist, startIdx, arr) => {
+      dist.forEach((v, i) => {
+        const idx = startIdx + i;
+        if (idx >= 0 && idx < totalRows) arr[idx] = v;
+      });
     };
 
-    return { weeks, series:{appsArr,riArr,hmArr,finalArr,offerArr}, rates };
+    place(distribute(totals.apps,   appsWeeks),  idxReq,   appsArr);
+    place(distribute(totals.ri,     riWeeks),    idxRi,    riArr);
+    place(distribute(totals.hm,     hmWeeks),    idxHm,    hmArr);
+    place(distribute(totals.finals, finalWeeks), idxFinal, finalArr);
+    if (idxOffer >= 0)
+      place(distribute(totals.offers, offerWeeks), idxOffer, offerArr);
+
+    const rates = {
+      appsPerWk:   appsWeeks   > 0 ? totals.apps   / appsWeeks   : NaN,
+      riPerWk:     riWeeks     > 0 ? totals.ri      / riWeeks     : NaN,
+      hmPerWk:     hmWeeks     > 0 ? totals.hm      / hmWeeks     : NaN,
+      finalPerWk:  finalWeeks  > 0 ? totals.finals  / finalWeeks  : NaN,
+      offersPerWk: offerWeeks  > 0 ? totals.offers  / offerWeeks  : NaN,
+      hiresPerWk:  riWeeks     > 0 ? totals.hires   / riWeeks     : NaN
+    };
+
+    return { weeks, series: { appsArr, riArr, hmArr, finalArr, offerArr }, rates };
   }
 
   function render(inp, ms, totals, plan){
-    // Update hires header in main table
-    $("hiresHeader").textContent = totals.hires.toLocaleString();
-
-    // Funnel volumes
+    // Funnel stage volumes
     $("totApps").textContent   = totals.apps.toLocaleString();
     $("totRi").textContent     = totals.ri.toLocaleString();
     $("totHm").textContent     = totals.hm.toLocaleString();
@@ -399,43 +616,52 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
     $("totOffers").textContent = totals.offers.toLocaleString();
     $("totHires").textContent  = totals.hires.toLocaleString();
 
+    // Funnel bar widths (normalised to apps = 100%)
+    const maxVol = totals.apps || 1;
+    const pct = (v) => (Math.max(2, Math.round(v / maxVol * 100))) + "%";
+    $("barApps").style.width   = "100%";
+    $("barRi").style.width     = pct(totals.ri);
+    $("barHm").style.width     = pct(totals.hm);
+    $("barFinal").style.width  = pct(totals.finals);
+    $("barOffers").style.width = pct(totals.offers);
+    $("barHires").style.width  = pct(totals.hires);
+
     // Outputs
     $("outActiveInterviewWeeks").textContent = ms.activeInterviewWeeks.toLocaleString();
     $("outTimeToFill").textContent           = ms.ttfWeeks.toLocaleString();
-    $("outHireBy").textContent               = fmtDate(ms.hireByW);
-    $("outOfferStart").textContent           = fmtDate(ms.offerStartW);
-    $("outHireStart").textContent            = fmtDate(startOfWeek(inp.newHireStartDate));
     $("outRatio").textContent                = fmt(totals.apps / inp.hires, 1);
+    $("outOfferStart").textContent           = fmtDate(ms.offerStartW);
+    $("outHireBy").textContent               = fmtDate(ms.hireByW);
+    $("outHireStart").textContent            = fmtDate(startOfWeek(inp.newHireStartDate));
 
-    // Planner per-week header spans
+    // Planner per-week header
     $("wkApps").textContent   = fmt(plan.rates.appsPerWk,   1);
     $("wkRi").textContent     = fmt(plan.rates.riPerWk,     1);
     $("wkHm").textContent     = fmt(plan.rates.hmPerWk,     1);
     $("wkFinal").textContent  = fmt(plan.rates.finalPerWk,  1);
     $("wkOffers").textContent = fmt(plan.rates.offersPerWk, 1);
-    $("wkHires").textContent  = fmt(plan.rates.hiresPerWk,  1);
 
-    // Constraint text
+    // Constraint callout
     const top = [
-      ["Apps",   plan.rates.appsPerWk],
-      ["RI",     plan.rates.riPerWk],
-      ["HM",     plan.rates.hmPerWk],
-      ["Final",  plan.rates.finalPerWk],
-      ["Offers", plan.rates.offersPerWk],
-    ].filter(x => Number.isFinite(x[1])).sort((a,b)=>b[1]-a[1])[0];
-    $("constraintTextPlanner").textContent = top
-      ? `Constraint signal: ~${fmt(top[1],1)} ${top[0]} per week.`
+      ["Applications", plan.rates.appsPerWk],
+      ["RI",           plan.rates.riPerWk],
+      ["HMI",          plan.rates.hmPerWk],
+      ["Final",        plan.rates.finalPerWk],
+      ["Offers",       plan.rates.offersPerWk],
+    ].filter(x => Number.isFinite(x[1])).sort((a,b) => b[1] - a[1])[0];
+    $("constraintNote").textContent = top
+      ? `Constraint signal: ~${fmt(top[1],1)} ${top[0]} needed per active week.`
       : "";
 
-    // Build planner body
+    // Planner table
     const tbody = $("plannerBody");
     tbody.innerHTML = "";
 
-    // Totals (summary) row
-    const totalsRow = document.createElement("tr");
-    totalsRow.className = "totals-row";
-    totalsRow.innerHTML = `
-      <td>${ms.ttfWeeks}</td>
+    // Totals row
+    const tr0 = document.createElement("tr");
+    tr0.className = "totals-row";
+    tr0.innerHTML = `
+      <td>${ms.ttfWeeks} wks</td>
       <td>${weekKey(ms.reqW)}</td>
       <td>${totals.apps.toLocaleString()}</td>
       <td>${totals.ri.toLocaleString()}</td>
@@ -444,30 +670,26 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
       <td>${totals.offers.toLocaleString()}</td>
       <td>${totals.hires.toLocaleString()}</td>
     `;
-    tbody.appendChild(totalsRow);
+    tbody.appendChild(tr0);
 
     // Weekly rows
-    for (let i=0; i<plan.weeks.length; i++){
-      const wkStart = plan.weeks[i];
+    plan.weeks.forEach((wkStart, i) => {
       const tr = document.createElement("tr");
       tr.className = "week-row";
-      const apps = plan.series.appsArr[i]  ? plan.series.appsArr[i].toLocaleString()  : "";
-      const ri   = plan.series.riArr[i]    ? plan.series.riArr[i].toLocaleString()    : "";
-      const hm   = plan.series.hmArr[i]    ? plan.series.hmArr[i].toLocaleString()    : "";
-      const fin  = plan.series.finalArr[i] ? plan.series.finalArr[i].toLocaleString() : "";
-      const off  = plan.series.offerArr[i] ? plan.series.offerArr[i].toLocaleString() : "";
+      const s = plan.series;
+      const cell = (v) => v ? v.toLocaleString() : "";
       tr.innerHTML = `
         <td>${i}</td>
         <td>${weekKey(wkStart)}</td>
-        <td>${apps}</td>
-        <td>${ri}</td>
-        <td>${hm}</td>
-        <td>${fin}</td>
-        <td>${off}</td>
+        <td>${cell(s.appsArr[i])}</td>
+        <td>${cell(s.riArr[i])}</td>
+        <td>${cell(s.hmArr[i])}</td>
+        <td>${cell(s.finalArr[i])}</td>
+        <td>${cell(s.offerArr[i])}</td>
         <td></td>
       `;
       tbody.appendChild(tr);
-    }
+    });
   }
 
   function applyScenario(key){
@@ -477,14 +699,12 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
     $("hmToFinal").value    = s.hmToFinal;
     $("riToHm").value       = s.riToHm;
     $("appToRi").value      = s.appToRi;
-    const note = $("scenarioNote");
-    if (note) note.textContent = s.note;
+    $("scenarioNote").textContent = s.note;
     onCalculate();
   }
 
   function setDefaultDates(){
-    const today = new Date();
-    today.setHours(0,0,0,0);
+    const today = new Date(); today.setHours(0,0,0,0);
     const req   = startOfWeek(today);
     const start = addDays(req, 7 * 20);
     $("reqOpenDate").value      = req.toISOString().slice(0,10);
@@ -502,9 +722,9 @@ sub: "Recruiting funnel + weekly time-to-fill planner (sheet-style layout)."
     render(inp, ms, totals, plan);
   }
 
-  document.querySelectorAll("[data-scn]").forEach(btn => {
-    btn.addEventListener("click", () => applyScenario(btn.dataset.scn));
-  });
+  document.querySelectorAll("[data-scn]").forEach(btn =>
+    btn.addEventListener("click", () => applyScenario(btn.dataset.scn))
+  );
 
   [
     "reqOpenDate","newHireStartDate",
