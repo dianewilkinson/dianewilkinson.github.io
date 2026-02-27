@@ -6,10 +6,10 @@ pageId: "tool-demo"
 permalink: "/tools/calculator/demo/"
 
 heroClass: "hero--tool-strong"
-kicker: "Demo · Recruiting Ops · Funnel + Weekly Plan"
+kicker: "Recruiting Ops · Demo"
 backHref: "/tools/calculator/"
 backLabel: "Back to Overview"
-sub: "Inputs → Funnel → Outputs across the top, with the weekly time-to-fill planner full-width across the bottom."
+sub: "A sheet-style recruiting funnel + time-to-fill planner by start date."
 ---
 
 <section class="panel panel--cool">
@@ -23,11 +23,11 @@ sub: "Inputs → Funnel → Outputs across the top, with the weekly time-to-fill
   </div>
 </section>
 
-<section class="grid3">
+<section class="grid2">
   <!-- INPUTS -->
   <div class="card">
     <h2 class="section-title">Inputs</h2>
-    <p class="section-sub">Set the dates + timing assumptions, then adjust conversion rates in the funnel card.</p>
+    <p class="section-sub">Start dates + admin timing assumptions.</p>
 
     <label>
       Requisition Open Date
@@ -81,7 +81,7 @@ sub: "Inputs → Funnel → Outputs across the top, with the weekly time-to-fill
   <!-- FUNNEL -->
   <div class="card">
     <h2 class="section-title">Funnel</h2>
-    <p class="section-sub">Stages + conversion rates (0–1). The calculator works backward from target hires.</p>
+    <p class="section-sub">Stage conversions (0–1). Back-solves from hires.</p>
 
     <div class="table-wrap">
       <table>
@@ -123,100 +123,118 @@ sub: "Inputs → Funnel → Outputs across the top, with the weekly time-to-fill
     </div>
 
     <div class="callout">
-      Tip: If weekly load looks impossible, either extend active interview weeks or improve the earliest CVRs.
+      Weekly targets are staggered: Apps → (next week) RI → (next) HM → (next) Final → (next) Offer.
     </div>
 
     <p class="muted" id="constraintText">Enter values and click Calculate.</p>
   </div>
+</section>
 
-  <!-- OUTPUTS -->
-  <div class="card">
-    <h2 class="section-title">Outputs</h2>
-    <p class="section-sub">The “sheet-like” summary: dates + key metrics + top-of-funnel ratio.</p>
+<!-- OUTPUTS FULL WIDTH -->
+<section class="full">
+  <h2 class="section-title">Outputs</h2>
+  <p class="section-sub">Dates + key counts, matching the sheet-style summary.</p>
 
-    <div class="miniGrid miniGrid--4">
-      <div class="mini">
-        <b># Active Interview Weeks</b>
-        <span id="outActiveInterviewWeeks">—</span>
-      </div>
-      <div class="mini">
-        <b>Time to Fill (Wks)</b>
-        <span id="outTimeToFill">—</span>
-      </div>
-      <div class="mini">
-        <b>Hire-by Date</b>
-        <span id="outHireByDate">—</span>
-      </div>
-      <div class="mini">
-        <b>Offer Start Week</b>
-        <span id="outOfferStartWeek">—</span>
-      </div>
+  <div class="miniGrid miniGrid--4">
+    <div class="mini">
+      <b># Active Interview Weeks</b>
+      <span id="outActiveInterviewWeeks">—</span>
     </div>
-
-    <div class="miniGrid miniGrid--4">
-      <div class="mini">
-        <b>Hire Accepts Start Week</b>
-        <span id="outAcceptStartWeek">—</span>
-      </div>
-      <div class="mini">
-        <b># App → 1 Hire Ratio</b>
-        <span id="outRatio">—</span>
-      </div>
-      <div class="mini">
-        <b>Applications Needed</b>
-        <span id="outApps">—</span>
-      </div>
-      <div class="mini">
-        <b>Apps / Week (during interviews)</b>
-        <span id="outAppsPerWk">—</span>
-      </div>
+    <div class="mini">
+      <b>Time-to-Fill (Wks)</b>
+      <span id="outTimeToFill">—</span>
     </div>
-
-    <div class="miniGrid miniGrid--4">
-      <div class="mini">
-        <b>Recruiter Interviews Needed</b>
-        <span id="outRi">—</span>
-      </div>
-      <div class="mini">
-        <b>RI / Week</b>
-        <span id="outRiPerWk">—</span>
-      </div>
-      <div class="mini">
-        <b>HM Interviews Needed</b>
-        <span id="outHm">—</span>
-      </div>
-      <div class="mini">
-        <b>HM / Week</b>
-        <span id="outHmPerWk">—</span>
-      </div>
+    <div class="mini">
+      <b>Hire-by Date</b>
+      <span id="outHireByDate">—</span>
     </div>
+    <div class="mini">
+      <b>Offer Start Week</b>
+      <span id="outOfferStartWeek">—</span>
+    </div>
+  </div>
 
-    <div class="miniGrid miniGrid--4">
-      <div class="mini">
-        <b>Final Interviews Needed</b>
-        <span id="outFinal">—</span>
-      </div>
-      <div class="mini">
-        <b>Finals / Week</b>
-        <span id="outFinalPerWk">—</span>
-      </div>
-      <div class="mini">
-        <b>Offers Needed</b>
-        <span id="outOffers">—</span>
-      </div>
-      <div class="mini">
-        <b>Offers / Week</b>
-        <span id="outOffersPerWk">—</span>
-      </div>
+  <div class="miniGrid miniGrid--4">
+    <div class="mini">
+      <b>Hire Accepts Start Week</b>
+      <span id="outAcceptStartWeek">—</span>
+    </div>
+    <div class="mini">
+      <b>Start Week</b>
+      <span id="outStartWeek">—</span>
+    </div>
+    <div class="mini">
+      <b># App → 1 Hire Ratio</b>
+      <span id="outRatio">—</span>
+    </div>
+    <div class="mini">
+      <b>Notes</b>
+      <span id="outNotes">—</span>
+    </div>
+  </div>
+
+  <div class="miniGrid miniGrid--4">
+    <div class="mini">
+      <b>Applications Needed</b>
+      <span id="outApps">—</span>
+    </div>
+    <div class="mini">
+      <b>Recruiter Interviews Needed</b>
+      <span id="outRi">—</span>
+    </div>
+    <div class="mini">
+      <b>HM Interviews Needed</b>
+      <span id="outHm">—</span>
+    </div>
+    <div class="mini">
+      <b>Final Interviews Needed</b>
+      <span id="outFinal">—</span>
+    </div>
+  </div>
+
+  <div class="miniGrid miniGrid--4">
+    <div class="mini">
+      <b>Offers Needed</b>
+      <span id="outOffers">—</span>
+    </div>
+    <div class="mini">
+      <b>Apps / Week</b>
+      <span id="outAppsPerWk">—</span>
+    </div>
+    <div class="mini">
+      <b>RI / Week</b>
+      <span id="outRiPerWk">—</span>
+    </div>
+    <div class="mini">
+      <b>HM / Week</b>
+      <span id="outHmPerWk">—</span>
+    </div>
+  </div>
+
+  <div class="miniGrid miniGrid--4">
+    <div class="mini">
+      <b>Finals / Week</b>
+      <span id="outFinalPerWk">—</span>
+    </div>
+    <div class="mini">
+      <b>Offers / Week</b>
+      <span id="outOffersPerWk">—</span>
+    </div>
+    <div class="mini">
+      <b>—</b>
+      <span>—</span>
+    </div>
+    <div class="mini">
+      <b>—</b>
+      <span>—</span>
     </div>
   </div>
 </section>
 
+<!-- PLANNER FULL WIDTH -->
 <section class="full">
   <h2 class="section-title">Weekly Time-to-Fill Planner</h2>
-  <p class="section-sub">
-    Full-width weekly planner: shows week ranges from Req Open → New Hire Start, plus interview-week load targets.
-  </p>
+  <p class="section-sub">Full-width weekly plan with staggered stage timing and stage-by-stage stop points.</p>
 
   <div class="table-wrap">
     <table>
@@ -271,15 +289,9 @@ sub: "Inputs → Funnel → Outputs across the top, with the weekly time-to-fill
   }
 
   function parseDateInput(v) {
-    // v is "YYYY-MM-DD" or ""
     if (!v) return null;
     const d = new Date(v + "T00:00:00");
     return Number.isNaN(d.getTime()) ? null : d;
-  }
-
-  function fmtDate(d) {
-    if (!d) return "—";
-    return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" });
   }
 
   function addDays(d, days) {
@@ -288,9 +300,32 @@ sub: "Inputs → Funnel → Outputs across the top, with the weekly time-to-fill
     return out;
   }
 
-  function diffDays(a, b) {
-    const ms = b.getTime() - a.getTime();
-    return Math.round(ms / (24 * 60 * 60 * 1000));
+  function fmtDate(d) {
+    if (!d) return "—";
+    return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" });
+  }
+
+  function startOfWeek(d) {
+    const out = new Date(d.getTime());
+    const day = out.getDay(); // 0=Sun
+    const diffToMon = (day === 0 ? -6 : 1) - day;
+    out.setDate(out.getDate() + diffToMon);
+    out.setHours(0,0,0,0);
+    return out;
+  }
+
+  function weekKey(d) {
+    return d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "2-digit" });
+  }
+
+  function diffWeeks(a, b) {
+    const ms = startOfWeek(b).getTime() - startOfWeek(a).getTime();
+    return Math.round(ms / (7 * 24 * 60 * 60 * 1000));
+  }
+
+  function fmt(x, decimals = 1) {
+    if (!Number.isFinite(x)) return "—";
+    return x.toLocaleString(undefined, { maximumFractionDigits: decimals });
   }
 
   function readInputs() {
@@ -356,27 +391,6 @@ sub: "Inputs → Funnel → Outputs across the top, with the weekly time-to-fill
     return null;
   }
 
-  function computeTimeline(inp) {
-    const offerStartDate = addDays(inp.newHireStartDate, -7 * inp.weeksAcceptanceToStart);
-    const acceptDate = addDays(offerStartDate, 7 * inp.weeksOfferToAccept);
-
-    const interviewStartDate = addDays(inp.reqOpenDate, 7 * inp.weeksSourcingBeforeInterviews);
-
-    const activeInterviewDays = Math.max(0, diffDays(interviewStartDate, offerStartDate));
-    const activeInterviewWeeks = Math.max(1, Math.ceil(activeInterviewDays / 7));
-
-    const timeToFillDays = diffDays(inp.reqOpenDate, acceptDate);
-    const timeToFillWeeks = Math.ceil(timeToFillDays / 7);
-
-    return {
-      interviewStartDate,
-      offerStartDate,
-      acceptDate,
-      activeInterviewWeeks,
-      timeToFillWeeks
-    };
-  }
-
   function calcFunnel(inp) {
     const hires = inp.hires;
 
@@ -395,68 +409,203 @@ sub: "Inputs → Funnel → Outputs across the top, with the weekly time-to-fill
     };
   }
 
-  function fmt(x, decimals = 1) {
-    if (!Number.isFinite(x)) return "—";
-    return x.toLocaleString(undefined, { maximumFractionDigits: decimals });
+  function computeMilestones(inp) {
+    const startW = startOfWeek(inp.newHireStartDate);
+
+    // Acceptance week is delayed by Acceptance->Start weeks (THIS fixes your “start right after acceptance” issue)
+    const acceptW = addDays(startW, -7 * inp.weeksAcceptanceToStart);
+
+    // Offer start week is delayed by Offer->Accept weeks
+    const offerW = addDays(acceptW, -7 * inp.weeksOfferToAccept);
+
+    // Interview stage anchor: RI starts after sourcing lead time
+    const reqW = startOfWeek(inp.reqOpenDate);
+    const riStartW = addDays(reqW, 7 * inp.weeksSourcingBeforeInterviews);
+
+    // Stagger rules you specified:
+    // HM starts week after RI
+    // Finals start week after HM
+    // Offers start week after Finals
+    const hmStartW = addDays(riStartW, 7 * 1);
+    const finalStartW = addDays(riStartW, 7 * 2);
+    const offerStartW_rule = addDays(riStartW, 7 * 3);
+
+    // We must reconcile rule-based offer start with date-based offerW.
+    // If date-based offerW is earlier than rule-based offer start, the configuration is impossible.
+    const offerW_start = startOfWeek(offerW);
+    const offerW_rule = startOfWeek(offerStartW_rule);
+
+    return {
+      reqW,
+      riStartW,
+      hmStartW,
+      finalStartW,
+      offerW_start,
+      acceptW: startOfWeek(acceptW),
+      startW,
+      offerW_rule
+    };
   }
 
-  function weekKey(d) {
-    // simple label: "Mon Feb 03" based on the start-of-week date
-    return d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "2-digit" });
+  function buildPlan(inp, milestones, funnel) {
+    const err = [];
+
+    // “Week 1 sourcing has no apps”: apps start one week AFTER req open week.
+    const appsStartW = addDays(milestones.reqW, 7 * 1);
+
+    // Production window is the number of weeks we have from RI start up to the offer start week.
+    // Within that window, stages stagger and stop in order.
+    const productionWeeks = diffWeeks(milestones.riStartW, milestones.offerW_start);
+
+    if (productionWeeks < 1) {
+      err.push("Offer start week is not after interview start. Increase dates or reduce admin timing.");
+    }
+    // Ensure offer week isn’t earlier than the rule-based “offers start the week after finals”
+    if (milestones.offerW_start.getTime() < milestones.offerW_rule.getTime()) {
+      err.push("Offer start week is too early for the staged interview cadence (RI→HM→Final→Offer). Increase time between interview start and offer start.");
+    }
+    // Ensure apps start isn’t after RI start (otherwise no candidates)
+    if (appsStartW.getTime() >= milestones.riStartW.getTime()) {
+      err.push("Apps start week must be before RI start week. Increase sourcing lead time or move req open earlier.");
+    }
+
+    if (err.length) return { errors: err, productionWeeks: Math.max(1, productionWeeks), appsStartW };
+
+    // Staggered weekly targets:
+    // Apps run for N weeks starting appsStartW
+    // RI runs for N weeks starting riStartW
+    // HM runs for N weeks starting hmStartW
+    // Final runs for N weeks starting finalStartW
+    // Offer runs for N weeks starting offerW_start (and then accept/start sit after)
+    const N = productionWeeks;
+
+    const appsPerWk = funnel.apps / N;
+    const riPerWk = funnel.ri / N;
+    const hmPerWk = funnel.hm / N;
+    const finalsPerWk = funnel.finals / N;
+    const offersPerWk = funnel.offers / N;
+
+    return {
+      errors: [],
+      N,
+      appsStartW,
+      rates: { appsPerWk, riPerWk, hmPerWk, finalsPerWk, offersPerWk }
+    };
   }
 
-  function startOfWeek(d) {
-    // Monday as start of week
-    const out = new Date(d.getTime());
-    const day = out.getDay(); // 0=Sun
-    const diffToMon = (day === 0 ? -6 : 1) - day;
-    out.setDate(out.getDate() + diffToMon);
-    out.setHours(0,0,0,0);
-    return out;
+  function renderOutputs(inp, milestones, funnel, plan) {
+    const notes = [];
+
+    const timeToFillWeeks = diffWeeks(milestones.reqW, milestones.acceptW);
+
+    $("outActiveInterviewWeeks").textContent = (plan.N || "—").toString();
+    $("outTimeToFill").textContent = timeToFillWeeks.toLocaleString();
+    $("outHireByDate").textContent = fmtDate(addDays(milestones.acceptW, 0));
+
+    $("outOfferStartWeek").textContent = weekKey(milestones.offerW_start);
+    $("outAcceptStartWeek").textContent = weekKey(milestones.acceptW);
+    $("outStartWeek").textContent = weekKey(milestones.startW);
+
+    $("outApps").textContent = funnel.apps.toLocaleString();
+    $("outRi").textContent = funnel.ri.toLocaleString();
+    $("outHm").textContent = funnel.hm.toLocaleString();
+    $("outFinal").textContent = funnel.finals.toLocaleString();
+    $("outOffers").textContent = funnel.offers.toLocaleString();
+
+    if (plan.errors && plan.errors.length) {
+      $("outAppsPerWk").textContent = "—";
+      $("outRiPerWk").textContent = "—";
+      $("outHmPerWk").textContent = "—";
+      $("outFinalPerWk").textContent = "—";
+      $("outOffersPerWk").textContent = "—";
+      $("outRatio").textContent = "—";
+      $("outNotes").textContent = plan.errors.join(" ");
+      $("constraintText").textContent = plan.errors.join(" ");
+      return;
+    }
+
+    $("outAppsPerWk").textContent = `${fmt(plan.rates.appsPerWk, 1)} / week`;
+    $("outRiPerWk").textContent = `${fmt(plan.rates.riPerWk, 1)} / week`;
+    $("outHmPerWk").textContent = `${fmt(plan.rates.hmPerWk, 1)} / week`;
+    $("outFinalPerWk").textContent = `${fmt(plan.rates.finalsPerWk, 1)} / week`;
+    $("outOffersPerWk").textContent = `${fmt(plan.rates.offersPerWk, 1)} / week`;
+
+    const ratio = funnel.apps / inp.hires;
+    $("outRatio").textContent = fmt(ratio, 2);
+
+    notes.push("Stages are staggered week-by-week (Apps → RI → HM → Final → Offer).");
+    $("outNotes").textContent = notes.join(" ");
+
+    const weekly = [
+      ["Applications", plan.rates.appsPerWk],
+      ["Recruiter interviews", plan.rates.riPerWk],
+      ["HM interviews", plan.rates.hmPerWk],
+      ["Final interviews", plan.rates.finalsPerWk],
+      ["Offers", plan.rates.offersPerWk]
+    ].sort((a,b) => b[1] - a[1]);
+
+    const [topLabel, topVal] = weekly[0];
+    $("constraintText").textContent = `Constraint signal: ~${fmt(topVal,1)} ${topLabel.toLowerCase()} per week during the active plan window.`;
   }
 
-  function buildPlanner(inp, timeline, funnel) {
+  function buildPlanner(inp, milestones, funnel, plan) {
     const tbody = $("plannerBody");
     tbody.innerHTML = "";
 
-    const start = startOfWeek(inp.reqOpenDate);
-    const end = startOfWeek(inp.newHireStartDate);
+    if (plan.errors && plan.errors.length) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td colspan="9" class="muted">${plan.errors.join(" ")}</td>`;
+      tbody.appendChild(tr);
+      return;
+    }
 
-    const totalWeeks = Math.max(1, Math.ceil(diffDays(start, end) / 7));
-    const interviewStartWk = Math.max(0, Math.floor(diffDays(start, startOfWeek(timeline.interviewStartDate)) / 7));
-    const offerStartWk = Math.max(0, Math.floor(diffDays(start, startOfWeek(timeline.offerStartDate)) / 7));
-    const acceptWk = Math.max(0, Math.floor(diffDays(start, startOfWeek(timeline.acceptDate)) / 7));
+    // Show weeks from req open to start week (inclusive)
+    const start = milestones.reqW;
+    const end = milestones.startW;
 
-    const activeWks = timeline.activeInterviewWeeks;
+    const totalWeeks = Math.max(1, diffWeeks(start, addDays(end, 7)) );
 
-    const appsPerWk = funnel.apps / activeWks;
-    const riPerWk = funnel.ri / activeWks;
-    const hmPerWk = funnel.hm / activeWks;
-    const finalsPerWk = funnel.finals / activeWks;
-    const offersPerWk = funnel.offers / activeWks;
+    const appsStart = plan.appsStartW;
+    const riStart = milestones.riStartW;
+    const hmStart = milestones.hmStartW;
+    const finalStart = milestones.finalStartW;
+    const offerStart = milestones.offerW_start;
+
+    // Each stage runs N weeks, staggered, so they stop in order.
+    const N = plan.N;
+
+    function inWindow(wStart, stageStart, lenWeeks) {
+      const d = diffWeeks(stageStart, wStart);
+      return d >= 0 && d < lenWeeks;
+    }
 
     for (let i = 0; i < totalWeeks; i++) {
       const wkStart = addDays(start, i * 7);
       const wkEnd = addDays(wkStart, 6);
 
       let phase = "Sourcing";
-      if (i >= interviewStartWk && i < offerStartWk) phase = "Interviews";
-      if (i >= offerStartWk && i < acceptWk) phase = "Offer";
-      if (i >= acceptWk) phase = "Post-accept";
+      const wkMs = wkStart.getTime();
 
-      const inInterviewWindow = (i >= interviewStartWk && i < (interviewStartWk + activeWks));
+      if (wkMs >= riStart.getTime() && wkMs < offerStart.getTime()) phase = "Interviews";
+      if (wkMs >= offerStart.getTime() && wkMs < milestones.acceptW.getTime()) phase = "Offer";
+      if (wkMs >= milestones.acceptW.getTime() && wkMs < milestones.startW.getTime()) phase = "Pre-start";
+      if (wkMs >= milestones.startW.getTime()) phase = "Start";
 
-      const apps = inInterviewWindow ? fmt(appsPerWk, 1) : "—";
-      const ri = inInterviewWindow ? fmt(riPerWk, 1) : "—";
-      const hm = inInterviewWindow ? fmt(hmPerWk, 1) : "—";
-      const finals = inInterviewWindow ? fmt(finalsPerWk, 1) : "—";
-      const offers = inInterviewWindow ? fmt(offersPerWk, 1) : "—";
+      const apps = inWindow(wkStart, appsStart, N) ? fmt(plan.rates.appsPerWk, 1) : "—";
+      const ri = inWindow(wkStart, riStart, N) ? fmt(plan.rates.riPerWk, 1) : "—";
+      const hm = inWindow(wkStart, hmStart, N) ? fmt(plan.rates.hmPerWk, 1) : "—";
+      const finals = inWindow(wkStart, finalStart, N) ? fmt(plan.rates.finalsPerWk, 1) : "—";
+      const offers = inWindow(wkStart, offerStart, N) ? fmt(plan.rates.offersPerWk, 1) : "—";
 
       const notes = [];
-      if (i === interviewStartWk) notes.push("Interviewing starts");
-      if (i === offerStartWk) notes.push("Offers start");
-      if (i === acceptWk) notes.push("Acceptance week");
-      if (i === Math.max(0, totalWeeks - 1)) notes.push("Start week");
+      if (wkMs === start.getTime()) notes.push("Req open week");
+      if (wkMs === appsStart.getTime()) notes.push("Apps begin");
+      if (wkMs === riStart.getTime()) notes.push("RI begins");
+      if (wkMs === hmStart.getTime()) notes.push("HM begins");
+      if (wkMs === finalStart.getTime()) notes.push("Finals begin");
+      if (wkMs === offerStart.getTime()) notes.push("Offers begin");
+      if (wkMs === milestones.acceptW.getTime()) notes.push("Acceptance week");
+      if (wkMs === milestones.startW.getTime()) notes.push("Start week");
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
@@ -472,50 +621,6 @@ sub: "Inputs → Funnel → Outputs across the top, with the weekly time-to-fill
       `;
       tbody.appendChild(tr);
     }
-  }
-
-  function render(inp, timeline, funnel) {
-    $("outActiveInterviewWeeks").textContent = timeline.activeInterviewWeeks.toLocaleString();
-    $("outTimeToFill").textContent = timeline.timeToFillWeeks.toLocaleString();
-    $("outHireByDate").textContent = fmtDate(timeline.acceptDate);
-
-    $("outOfferStartWeek").textContent = weekKey(startOfWeek(timeline.offerStartDate));
-    $("outAcceptStartWeek").textContent = weekKey(startOfWeek(timeline.acceptDate));
-
-    const appsPerWk = funnel.apps / timeline.activeInterviewWeeks;
-    const riPerWk = funnel.ri / timeline.activeInterviewWeeks;
-    const hmPerWk = funnel.hm / timeline.activeInterviewWeeks;
-    const finalsPerWk = funnel.finals / timeline.activeInterviewWeeks;
-    const offersPerWk = funnel.offers / timeline.activeInterviewWeeks;
-
-    $("outApps").textContent = funnel.apps.toLocaleString();
-    $("outRi").textContent = funnel.ri.toLocaleString();
-    $("outHm").textContent = funnel.hm.toLocaleString();
-    $("outFinal").textContent = funnel.finals.toLocaleString();
-    $("outOffers").textContent = funnel.offers.toLocaleString();
-
-    $("outAppsPerWk").textContent = `${fmt(appsPerWk, 1)} / week`;
-    $("outRiPerWk").textContent = `${fmt(riPerWk, 1)} / week`;
-    $("outHmPerWk").textContent = `${fmt(hmPerWk, 1)} / week`;
-    $("outFinalPerWk").textContent = `${fmt(finalsPerWk, 1)} / week`;
-    $("outOffersPerWk").textContent = `${fmt(offersPerWk, 1)} / week`;
-
-    const ratio = funnel.apps / inp.hires;
-    $("outRatio").textContent = fmt(ratio, 2);
-
-    const weekly = [
-      ["Applications", appsPerWk],
-      ["Recruiter interviews", riPerWk],
-      ["HM interviews", hmPerWk],
-      ["Final interviews", finalsPerWk],
-      ["Offers", offersPerWk]
-    ].sort((a,b) => b[1] - a[1]);
-
-    const [topLabel, topVal] = weekly[0];
-    $("constraintText").textContent =
-      `Constraint signal: the plan demands ~${fmt(topVal,1)} ${topLabel.toLowerCase()} per week during active interviews.`;
-
-    buildPlanner(inp, timeline, funnel);
   }
 
   function applyScenario(key) {
@@ -534,10 +639,11 @@ sub: "Inputs → Funnel → Outputs across the top, with the weekly time-to-fill
 
   function setDefaultDates() {
     const today = new Date();
-    const req = new Date(today.getTime());
-    req.setHours(0,0,0,0);
+    today.setHours(0,0,0,0);
 
-    const start = addDays(req, 7 * 8);
+    const req = startOfWeek(today);
+    const start = addDays(req, 7 * 10);
+
     $("reqOpenDate").value = req.toISOString().slice(0,10);
     $("newHireStartDate").value = start.toISOString().slice(0,10);
   }
@@ -551,29 +657,25 @@ sub: "Inputs → Funnel → Outputs across the top, with the weekly time-to-fill
       return;
     }
 
-    const timeline = computeTimeline(inp);
     const funnel = calcFunnel(inp);
-    render(inp, timeline, funnel);
+    const milestones = computeMilestones(inp);
+    const plan = buildPlan(inp, milestones, funnel);
+
+    renderOutputs(inp, milestones, funnel, plan);
+    buildPlanner(inp, milestones, funnel, plan);
   }
 
   function onReset() {
     setDefaultDates();
-
     $("weeksSourcingBeforeInterviews").value = 3;
     $("weeksOfferToAccept").value = 2;
     $("weeksAcceptanceToStart").value = 2;
     $("hires").value = 4;
 
-    applyScenario("base");
-
     $("error").textContent = "";
     $("constraintText").textContent = "Enter values and click Calculate.";
 
-    $("plannerBody").innerHTML = `
-      <tr>
-        <td colspan="9" class="muted">Enter values and click Calculate.</td>
-      </tr>
-    `;
+    applyScenario("base");
   }
 
   document.querySelectorAll("[data-scn]").forEach(btn => {
@@ -583,9 +685,9 @@ sub: "Inputs → Funnel → Outputs across the top, with the weekly time-to-fill
   $("calcBtn").addEventListener("click", onCalculate);
   $("resetBtn").addEventListener("click", onReset);
 
-  // Light auto-calc on input changes
   [
-    "reqOpenDate","newHireStartDate","weeksSourcingBeforeInterviews","weeksOfferToAccept","weeksAcceptanceToStart",
+    "reqOpenDate","newHireStartDate",
+    "weeksSourcingBeforeInterviews","weeksOfferToAccept","weeksAcceptanceToStart",
     "hires","offerAccept","finalToOffer","hmToFinal","riToHm","appToRi"
   ].forEach(id => $(id).addEventListener("input", () => {
     window.clearTimeout(window.__t);
