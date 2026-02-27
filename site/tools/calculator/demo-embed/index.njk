@@ -1,0 +1,275 @@
+---
+layout: templates/base.njk
+title: "Recruiting Funnel Calculator — Demo"
+description: "Interactive funnel + weekly planning calculator demo."
+pageId: "tool-demo"
+permalink: "/tools/calculator/demo-embed/"
+---
+
+<section class="hero hero--tool">
+  <div class="crumbs">
+    <a class="btnGhost" href="/tools/">Tools</a>
+    <span> / </span>
+    <a class="btnGhost" href="/tools/recruiting-funnel-calculator/">Recruiting Funnel Calculator</a>
+    <span> / </span>
+    <span>Demo</span>
+  </div>
+
+  <h1>Recruiting Funnel Calculator <span class="accent">Demo</span></h1>
+  <p class="muted">
+    Enter hiring target + conversion rates + lead times. Get required stage volume and a weekly plan.
+  </p>
+
+  <div class="navlinks">
+    <a class="btnGhost" href="/tools/recruiting-funnel-calculator/">Overview</a>
+    <a class="btnGhost" href="/tools/recruiting-funnel-calculator/playbook/">Playbook</a>
+    <a class="btn" href="/tools/recruiting-funnel-calculator/demo/">Demo</a>
+    <a class="btnGhost" href="/tools/recruiting-funnel-calculator/cases/">Cases</a>
+  </div>
+</section>
+
+<section class="panel panel--cool" style="margin-top:16px;">
+  <h2>Inputs</h2>
+
+  <div style="display:grid; gap:12px; grid-template-columns: repeat(2, minmax(0, 1fr));">
+    <label>
+      Target hires
+      <input id="hires" type="number" min="1" step="1" value="4" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:12px;" />
+    </label>
+
+    <label>
+      Active interview weeks
+      <input id="weeks" type="number" min="1" step="1" value="15" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:12px;" />
+    </label>
+
+    <label>
+      Offer accept rate (0–1)
+      <input id="offerAccept" type="number" min="0" max="1" step="0.01" value="0.85" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:12px;" />
+    </label>
+
+    <label>
+      Final → Offer (0–1)
+      <input id="finalToOffer" type="number" min="0" max="1" step="0.01" value="0.25" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:12px;" />
+    </label>
+
+    <label>
+      HM → Final (0–1)
+      <input id="hmToFinal" type="number" min="0" max="1" step="0.01" value="0.75" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:12px;" />
+    </label>
+
+    <label>
+      Recruiter Interview → HM (0–1)
+      <input id="riToHm" type="number" min="0" max="1" step="0.01" value="0.50" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:12px;" />
+    </label>
+
+    <label style="grid-column: 1 / -1;">
+      App → Recruiter Interview (0–1)
+      <input id="appToRi" type="number" min="0" max="1" step="0.01" value="0.10" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:12px;" />
+    </label>
+  </div>
+
+  <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+    <button class="btn" id="calcBtn" type="button">Calculate</button>
+    <button class="btnGhost" id="resetBtn" type="button">Reset</button>
+    <span id="error" class="muted" style="color:#b91c1c;"></span>
+  </div>
+</section>
+
+<section class="panel" style="margin-top:16px;">
+  <h2>Outputs</h2>
+
+  <div style="display:grid; gap:12px; grid-template-columns: repeat(3, minmax(0, 1fr));">
+    <div class="card" style="padding:14px; border:1px solid var(--border); border-radius:16px;">
+      <div class="muted">Applications needed</div>
+      <div style="font-size:28px; font-weight:700;" id="outApps">—</div>
+      <div class="muted" id="outAppsPerWk">—</div>
+    </div>
+
+    <div class="card" style="padding:14px; border:1px solid var(--border); border-radius:16px;">
+      <div class="muted">Recruiter interviews needed</div>
+      <div style="font-size:28px; font-weight:700;" id="outRi">—</div>
+      <div class="muted" id="outRiPerWk">—</div>
+    </div>
+
+    <div class="card" style="padding:14px; border:1px solid var(--border); border-radius:16px;">
+      <div class="muted">HM interviews needed</div>
+      <div style="font-size:28px; font-weight:700;" id="outHm">—</div>
+      <div class="muted" id="outHmPerWk">—</div>
+    </div>
+
+    <div class="card" style="padding:14px; border:1px solid var(--border); border-radius:16px;">
+      <div class="muted">Final interviews needed</div>
+      <div style="font-size:28px; font-weight:700;" id="outFinal">—</div>
+      <div class="muted" id="outFinalPerWk">—</div>
+    </div>
+
+    <div class="card" style="padding:14px; border:1px solid var(--border); border-radius:16px;">
+      <div class="muted">Offers needed</div>
+      <div style="font-size:28px; font-weight:700;" id="outOffers">—</div>
+      <div class="muted" id="outOffersPerWk">—</div>
+    </div>
+
+    <div class="card" style="padding:14px; border:1px solid var(--border); border-radius:16px;">
+      <div class="muted">App-to-1-hire ratio</div>
+      <div style="font-size:28px; font-weight:700;" id="outRatio">—</div>
+      <div class="muted">Higher = more top-of-funnel needed</div>
+    </div>
+  </div>
+
+  <div class="panel panel--cool" style="margin-top:14px;">
+    <h3>Constraint signal</h3>
+    <p class="muted" id="constraintText">Enter values and click Calculate.</p>
+  </div>
+</section>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+
+  function clamp01(x) {
+    if (!Number.isFinite(x)) return NaN;
+    return Math.max(0, Math.min(1, x));
+  }
+
+  function safeCeil(x) {
+    if (!Number.isFinite(x)) return NaN;
+    return Math.ceil(x);
+  }
+
+  function readInputs() {
+    const hires = parseInt($("hires").value, 10);
+    const weeks = parseInt($("weeks").value, 10);
+
+    const offerAccept = clamp01(parseFloat($("offerAccept").value));
+    const finalToOffer = clamp01(parseFloat($("finalToOffer").value));
+    const hmToFinal = clamp01(parseFloat($("hmToFinal").value));
+    const riToHm = clamp01(parseFloat($("riToHm").value));
+    const appToRi = clamp01(parseFloat($("appToRi").value));
+
+    return { hires, weeks, offerAccept, finalToOffer, hmToFinal, riToHm, appToRi };
+  }
+
+  function validate(inp) {
+    if (!Number.isFinite(inp.hires) || inp.hires <= 0) return "Target hires must be >= 1.";
+    if (!Number.isFinite(inp.weeks) || inp.weeks <= 0) return "Active interview weeks must be >= 1.";
+
+    const rates = [
+      ["Offer accept rate", inp.offerAccept],
+      ["Final → Offer", inp.finalToOffer],
+      ["HM → Final", inp.hmToFinal],
+      ["RI → HM", inp.riToHm],
+      ["App → RI", inp.appToRi],
+    ];
+
+    for (const [name, v] of rates) {
+      if (!Number.isFinite(v)) return `${name} must be a number between 0 and 1.`;
+      if (v <= 0) return `${name} must be > 0 (or the funnel becomes infinite).`;
+      if (v > 1) return `${name} must be <= 1.`;
+    }
+
+    return null;
+  }
+
+  function calc(inp) {
+    // Work backwards from hires
+    const hires = inp.hires;
+
+    const offersNeeded = hires / inp.offerAccept;
+    const finalsNeeded = offersNeeded / inp.finalToOffer;
+    const hmNeeded = finalsNeeded / inp.hmToFinal;
+    const riNeeded = hmNeeded / inp.riToHm;
+    const appsNeeded = riNeeded / inp.appToRi;
+
+    // Round to whole people/events
+    const out = {
+      offers: safeCeil(offersNeeded),
+      finals: safeCeil(finalsNeeded),
+      hm: safeCeil(hmNeeded),
+      ri: safeCeil(riNeeded),
+      apps: safeCeil(appsNeeded),
+    };
+
+    // Weekly plan (simple: evenly spread across active weeks)
+    out.offersPerWk = out.offers / inp.weeks;
+    out.finalsPerWk = out.finals / inp.weeks;
+    out.hmPerWk = out.hm / inp.weeks;
+    out.riPerWk = out.ri / inp.weeks;
+    out.appsPerWk = out.apps / inp.weeks;
+
+    out.appToHireRatio = out.apps / hires;
+
+    return out;
+  }
+
+  function fmt(x, decimals = 1) {
+    if (!Number.isFinite(x)) return "—";
+    return x.toLocaleString(undefined, { maximumFractionDigits: decimals });
+  }
+
+  function render(inp, out) {
+    $("outApps").textContent = out.apps.toLocaleString();
+    $("outRi").textContent = out.ri.toLocaleString();
+    $("outHm").textContent = out.hm.toLocaleString();
+    $("outFinal").textContent = out.finals.toLocaleString();
+    $("outOffers").textContent = out.offers.toLocaleString();
+    $("outRatio").textContent = fmt(out.appToHireRatio, 2);
+
+    $("outAppsPerWk").textContent = `${fmt(out.appsPerWk, 1)} / week`;
+    $("outRiPerWk").textContent = `${fmt(out.riPerWk, 1)} / week`;
+    $("outHmPerWk").textContent = `${fmt(out.hmPerWk, 1)} / week`;
+    $("outFinalPerWk").textContent = `${fmt(out.finalsPerWk, 1)} / week`;
+    $("outOffersPerWk").textContent = `${fmt(out.offersPerWk, 1)} / week`;
+
+    // Simple constraint callout (you can refine later):
+    // whichever weekly requirement is "largest" is the operational pressure point.
+    const weekly = [
+      ["Applications", out.appsPerWk],
+      ["Recruiter interviews", out.riPerWk],
+      ["HM interviews", out.hmPerWk],
+      ["Final interviews", out.finalsPerWk],
+      ["Offers", out.offersPerWk],
+    ].sort((a,b) => b[1] - a[1]);
+
+    const [topLabel, topVal] = weekly[0];
+    $("constraintText").textContent =
+      `Constraint signal: the plan demands ~${fmt(topVal,1)} ${topLabel.toLowerCase()} per week. ` +
+      `If that capacity isn’t real, the target date will slip unless CVRs improve or hires/weeks change.`;
+  }
+
+  function onCalculate() {
+    $("error").textContent = "";
+    const inp = readInputs();
+    const err = validate(inp);
+    if (err) { $("error").textContent = err; return; }
+
+    const out = calc(inp);
+    render(inp, out);
+  }
+
+  function onReset() {
+    $("hires").value = 4;
+    $("weeks").value = 15;
+    $("offerAccept").value = 0.85;
+    $("finalToOffer").value = 0.25;
+    $("hmToFinal").value = 0.75;
+    $("riToHm").value = 0.50;
+    $("appToRi").value = 0.10;
+
+    $("error").textContent = "";
+    $("constraintText").textContent = "Enter values and click Calculate.";
+
+    ["outApps","outRi","outHm","outFinal","outOffers","outRatio",
+     "outAppsPerWk","outRiPerWk","outHmPerWk","outFinalPerWk","outOffersPerWk"
+    ].forEach(id => $(id).textContent = "—");
+  }
+
+  $("calcBtn").addEventListener("click", onCalculate);
+  $("resetBtn").addEventListener("click", onReset);
+
+  // Optional: auto-calc on input change (comment out if you prefer manual)
+  ["hires","weeks","offerAccept","finalToOffer","hmToFinal","riToHm","appToRi"]
+    .forEach(id => $(id).addEventListener("input", () => {
+      // light debounce
+      window.clearTimeout(window.__t);
+      window.__t = window.setTimeout(onCalculate, 180);
+    }));
+</script>
