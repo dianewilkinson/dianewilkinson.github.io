@@ -99,7 +99,7 @@
       "summary": "Cross-tool coordination layer that aligns sourcing, screening, and forecasting decisions. Ensures hiring systems operate as a connected workflow—not isolated tools.",
       "href": "/tools/chief/",
       "featured": false,
-      "listed": true,
+      "listed": false,
       "section": "workflow"
     }
   },
