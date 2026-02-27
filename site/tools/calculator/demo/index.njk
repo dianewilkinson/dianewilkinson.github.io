@@ -427,9 +427,10 @@ body[data-page="tool-demo"] .grid2 {
   }
 
   function weekKey(d){
-    const m = d.toLocaleDateString(undefined, { month:"short" });
-    const day = String(d.getDate()).padStart(2,"0");
-    return `${m} ${day}`;
+  if (!d) return ""; // Week 0 placeholder
+  const m = d.toLocaleDateString(undefined, { month:"short" });
+  const day = String(d.getDate()).padStart(2,"0");
+  return `${m} ${day}`;
   }
 
   function fmtDate(d){
@@ -593,56 +594,119 @@ body[data-page="tool-demo"] .grid2 {
 }
 
   function buildPlanner(inp, ms, totals){
-    const riWeeks    = ms.activeInterviewWeeks;
-    const appsWeeks  = Math.max(0, riWeeks - 1 + inp.weeksSourcingBeforeInterviews);
-    const hmWeeks    = Math.max(0, riWeeks - 1);
-    const finalWeeks = Math.max(0, riWeeks - 2);
+  // Sheet behavior:
+  // - Week 0 = placeholder (no date)
+  // - Week 1 date = Req Open week start
+  // - Table ends on the week BEFORE hire-by (accepts) week
+  //   (hire-by can be the Monday after the last work week)
 
-    const startW    = ms.reqW;
-    const endW      = ms.acceptW;
-    const totalRows = Math.max(2, diffWeeks(startW, addDays(endW, 7)));
-    const weeks     = Array.from({ length: totalRows }, (_, i) => addDays(startW, i * 7));
+  const ttfWeeks = ms.ttfWeeks;                 // e.g., 16
+  const rows = ttfWeeks + 1;                    // include week 0
+  const weeks = Array.from({ length: rows }, (_, i) => {
+    if (i === 0) return null;                   // week 0 placeholder
+    return addDays(ms.reqW, (i - 1) * 7);       // week 1 = req week
+  });
 
-    const idxReq   = 0;
-    const idxRi    = idxReq + inp.weeksSourcingBeforeInterviews;
-    const idxHm    = idxRi + 1;
-    const idxFinal = idxRi + 2;
-    const idxOffer = weeks.findIndex(w =>
-      startOfWeek(w).getTime() === startOfWeek(ms.offerStartW).getTime()
-    );
+  // Determine interview production window (weeks where RI runs)
+  // Active interview weeks should be between RI start and offer-start boundary in your model.
+  // Here we treat "active interview weeks" as the RI production weeks count.
+  const riWeeks = Math.max(1, ms.activeInterviewWeeks);
 
-    const appsArr  = Array.from({ length: totalRows }, () => 0);
-    const riArr    = Array.from({ length: totalRows }, () => 0);
-    const hmArr    = Array.from({ length: totalRows }, () => 0);
-    const finalArr = Array.from({ length: totalRows }, () => 0);
-    const offerArr = Array.from({ length: totalRows }, () => 0);
+  // Indices in the planner table
+  const idxReq = 1; // week 1 = req open week
+  const idxRi = idxReq + inp.weeksSourcingBeforeInterviews; // if 0, RI can start week 1
+  const idxHm = idxRi + 1;
+  const idxFinal = idxRi + 2;
 
-    const place = (dist, startIdx, arr) => {
-      dist.forEach((v, i) => {
-        const idx = startIdx + i;
-        if (idx >= 0 && idx < totalRows) arr[idx] = v;
-      });
-    };
+  // Stage durations (feed-next-week style like your sheet)
+  const hmWeeks = Math.max(0, riWeeks - 1);
+  const finalWeeks = Math.max(0, riWeeks - 2);
 
-    place(distribute(totals.apps,   appsWeeks),  idxReq,   appsArr);
-    place(distribute(totals.ri,     riWeeks),    idxRi,    riArr);
-    place(distribute(totals.hm,     hmWeeks),    idxHm,    hmArr);
-    place(distribute(totals.finals, finalWeeks), idxFinal, finalArr);
-    const offersFromFinals = scheduleOffersFromFinals(finalArr, totals.offers, 4);
-    for (let i = 0; i < totalRows; i++) offerArr[i] = offersFromFinals[i] || 0;
+  // Apps can run starting at req open week (week 1), and can extend into sourcing lead time
+  // If sourcing lead time is 0, this still works (appsWeeks = riWeeks - 1, can be 0).
+  const appsWeeks = Math.max(0, riWeeks - 1 + inp.weeksSourcingBeforeInterviews);
 
+  // Allocate stage volumes across their production windows (integer distribution)
+  const appsArr  = Array.from({ length: rows }, () => 0);
+  const riArr    = Array.from({ length: rows }, () => 0);
+  const hmArr    = Array.from({ length: rows }, () => 0);
+  const finalArr = Array.from({ length: rows }, () => 0);
+  const offerArr = Array.from({ length: rows }, () => 0);
+  const hireArr  = Array.from({ length: rows }, () => 0);
 
-    const rates = {
-      appsPerWk:   appsWeeks   > 0 ? totals.apps   / appsWeeks   : NaN,
-      riPerWk:     riWeeks     > 0 ? totals.ri      / riWeeks     : NaN,
-      hmPerWk:     hmWeeks     > 0 ? totals.hm      / hmWeeks     : NaN,
-      finalPerWk:  finalWeeks  > 0 ? totals.finals  / finalWeeks  : NaN,
-      offersPerWk: riWeeks > 0 ? totals.offers / riWeeks : NaN,
-      hiresPerWk:  riWeeks     > 0 ? totals.hires   / riWeeks     : NaN
-    };
+  const place = (dist, startIdx, arr) => {
+    dist.forEach((v, i) => {
+      const idx = startIdx + i;
+      if (idx >= 0 && idx < rows) arr[idx] = v;
+    });
+  };
 
-    return { weeks, series: { appsArr, riArr, hmArr, finalArr, offerArr }, rates };
+  place(distribute(totals.apps,   appsWeeks),  idxReq,   appsArr);
+  place(distribute(totals.ri,     riWeeks),    idxRi,    riArr);
+  place(distribute(totals.hm,     hmWeeks),    idxHm,    hmArr);
+  place(distribute(totals.finals, finalWeeks), idxFinal, finalArr);
+
+  // === Offers from Finals (sheet-style progressive issuance) ===
+  // Offers accumulate as finals accumulate:
+  // offersByNow = floor(cumFinals * finalToOffer)
+  // offersThisWeek = offersByNow - offersSoFar
+  let cumFinals = 0;
+  let offersSoFar = 0;
+  for (let i = 0; i < rows; i++){
+    cumFinals += finalArr[i];
+    const targetOffersByNow = Math.floor(cumFinals * inp.finalToOffer + 1e-9);
+    let add = targetOffersByNow - offersSoFar;
+    if (add < 0) add = 0;
+
+    // cap to total offers needed
+    if (offersSoFar + add > totals.offers) add = totals.offers - offersSoFar;
+
+    offerArr[i] = add;
+    offersSoFar += add;
   }
+
+  // === Hires from Offers (accepts) ===
+  // hiresByNow = floor(cumOffers * offerAccept)
+  let cumOffers = 0;
+  let hiresSoFar = 0;
+  for (let i = 0; i < rows; i++){
+    cumOffers += offerArr[i];
+    const targetHiresByNow = Math.floor(cumOffers * inp.offerAccept + 1e-9);
+    let add = targetHiresByNow - hiresSoFar;
+    if (add < 0) add = 0;
+
+    if (hiresSoFar + add > totals.hires) add = totals.hires - hiresSoFar;
+
+    hireArr[i] = add;
+    hiresSoFar += add;
+  }
+
+  // Offer start week = first row where offers appear (date belongs to that row)
+  let offerStartW = null;
+  for (let i = 0; i < rows; i++){
+    if (offerArr[i] > 0){
+      offerStartW = weeks[i]; // can be null if somehow in week 0, but that won't happen here
+      break;
+    }
+  }
+
+  // Per-week pace numbers (for your header text)
+  const rates = {
+    appsPerWk:   appsWeeks   > 0 ? totals.apps   / appsWeeks   : NaN,
+    riPerWk:     riWeeks     > 0 ? totals.ri     / riWeeks     : NaN,
+    hmPerWk:     hmWeeks     > 0 ? totals.hm     / hmWeeks     : NaN,
+    finalPerWk:  finalWeeks  > 0 ? totals.finals / finalWeeks  : NaN,
+    offersPerWk: riWeeks     > 0 ? totals.offers / riWeeks     : NaN, // pace across active window (sheet-like)
+    hiresPerWk:  riWeeks     > 0 ? totals.hires  / riWeeks     : NaN
+  };
+
+  return {
+    weeks,
+    series: { appsArr, riArr, hmArr, finalArr, offerArr, hireArr },
+    rates,
+    offerStartW
+  };
+}
 
   function render(inp, ms, totals, plan){
     // Funnel stage volumes
@@ -669,7 +733,7 @@ body[data-page="tool-demo"] .grid2 {
     $("outRatio").textContent                = fmt(totals.apps / inp.hires, 1);
     const firstOfferIdx = plan.series.offerArr.findIndex(v => (v || 0) > 0);
     const firstOfferDate = firstOfferIdx > 0 ? plan.weeks[firstOfferIdx] : null; // idx 0 is placeholder
-    $("outOfferStart").textContent = fmtDate(firstOfferDate);
+    $("outOfferStart").textContent = fmtDate(plan.offerStartW);
     $("outHireBy").textContent               = fmtDate(addDays(inp.newHireStartDate, -7 * inp.weeksAcceptanceToStart));
     $("outHireStart").textContent            = fmtDate(inp.newHireStartDate);
 
@@ -717,16 +781,16 @@ body[data-page="tool-demo"] .grid2 {
       tr.className = "week-row";
       const s = plan.series;
       const cell = (v) => v ? v.toLocaleString() : "";
-      tr.innerHTML = `
-        <td>${i}</td>
-        <td>${weekKey(wkStart)}</td>
-        <td>${cell(s.appsArr[i])}</td>
-        <td>${cell(s.riArr[i])}</td>
-        <td>${cell(s.hmArr[i])}</td>
-        <td>${cell(s.finalArr[i])}</td>
-        <td>${cell(s.offerArr[i])}</td>
-        <td></td>
-      `;
+    tr.innerHTML = `
+     <td>${i}</td>
+     <td>${weekKey(wkStart)}</td>
+     <td>${cell(s.appsArr[i])}</td>
+     <td>${cell(s.riArr[i])}</td>
+     <td>${cell(s.hmArr[i])}</td>
+     <td>${cell(s.finalArr[i])}</td>
+     <td>${cell(s.offerArr[i])}</td>
+     <td>${cell(s.hireArr[i])}</td>
+    `;
       tbody.appendChild(tr);
     });
   }
