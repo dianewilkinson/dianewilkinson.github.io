@@ -69,37 +69,7 @@ heroActions: |
   </div>
 </section>
 
-<section class="panel panel--cool" aria-label="Workflow Infrastructure">
-  <div class="panelInner">
-    <h3 class="section-title">Workflow Infrastructure</h3>
-    <div class="appGrid--scroll" aria-label="Workflow tools scroll row">
 
-      {% for item in tools %}
-        {% if item.card and item.card.listed and item.card.section == "workflow" %}
-          <article class="appCard">
-            <div class="appTop">
-              <div class="appMain">
-                {% if item.card.type %}
-                  <span class="badge" data-kind="{{ item.card.type }}">{{ item.card.type | replace("-", " ") | title }}</span>
-                {% endif %}
-                <h3>{{ item.card.title }}</h3>
-                <p>{{ item.card.summary }}</p>
-              </div>
-            </div>
-            <div class="appActions">
-              <span class="small muted">{{ item.card.function }}</span>
-              <a class="appLink" href="{{ item.card.href }}">Explore →</a>
-            </div>
-          </article>
-        {% endif %}
-      {% endfor %}
-
-    </div>
-    <div class="sys-cta" style="margin-top:12px;">
-      <a class="sys-btn" href="/tools/">Browse all tools →</a>
-    </div>
-  </div>
-</section>
 
 <section class="panel panel--cool" aria-label="Applied Impact">
   <div class="panelInner">
