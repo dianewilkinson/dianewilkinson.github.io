@@ -600,11 +600,17 @@ body[data-page="tool-demo"] .grid2 {
   // - Table ends on the week BEFORE hire-by (accepts) week
   //   (hire-by can be the Monday after the last work week)
 
-  const ttfWeeks = ms.ttfWeeks;                 // e.g., 16
-  const rows = ttfWeeks + 1;                    // include week 0
+
+  const reqWeekStart    = startOfWeek(inp.reqOpenDate);
+  const hireByWeekStart = startOfWeek(ms.hireByW);
+
+  const bucketWeeks = diffWeeks(reqWeekStart, hireByWeekStart) + 1;
+
+  const rows = bucketWeeks + 1;
+
   const weeks = Array.from({ length: rows }, (_, i) => {
-    if (i === 0) return null;                   // week 0 placeholder
-    return addDays(ms.reqW, (i - 1) * 7);       // week 1 = req week
+    if (i === 0) return null; // week 0 placeholder
+    return addDays(reqWeekStart, (i - 1) * 7);
   });
 
   // Determine interview production window (weeks where RI runs)
@@ -808,7 +814,7 @@ body[data-page="tool-demo"] .grid2 {
 
   function setDefaultDates(){
     const today = new Date(); today.setHours(0,0,0,0);
-    const req   = startOfWeek(today);
+    const req = today;
     const start = addDays(req, 7 * 20);
     $("reqOpenDate").value      = req.toISOString().slice(0,10);
     $("newHireStartDate").value = start.toISOString().slice(0,10);
