@@ -2,16 +2,16 @@
 layout: templates/system.njk
 permalink: "/system/core/metrics/dictionary/"
 
-title: "Core — Metrics Dictionary (Full CSV)"
+title: "Core — Metrics Dictionary (Full)"
 description: "Full governed metrics dictionary (CSV): names, categories, definitions, formulas, grain, filters, and ownership."
 pageId: "system"
 heroClass: "hero--tool-strong"
 
-kicker: "Core · Metrics Dictionary · Full CSV"
+kicker: "Core · Metrics Dictionary · Full"
 backHref: "/system/core/metrics/"
 backLabel: "Back to Metrics Overview"
 
-heroTitle: "Metrics Dictionary: <span class='accent'>Full CSV</span>"
+heroTitle: "Metrics <span class='accent'>Dictionary: Full</span>"
 sub: "This page renders the full metrics dictionary from the CSV used across the portfolio — so definitions stay consistent and tools can reference stable IDs."
 callout: "<b>Source of truth:</b> <a href='/assets/documents/metrics.csv'>/assets/documents/metrics.csv</a>"
 ---
@@ -184,6 +184,8 @@ callout: "<b>Source of truth:</b> <a href='/assets/documents/metrics.csv'>/asset
             obj[h] = (r[idx] == null ? "" : String(r[idx])).trim();
           });
           return obj;
+        }).filter(function (obj) {
+          return headers.some(function (h) { return obj[h] !== ""; });
         });
 
         var filtered = records.slice();
