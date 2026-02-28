@@ -42,7 +42,7 @@ heroActions: |
     <h3 class="section-title">Core Intelligence Tools</h3>
     <div class="appGrid--scroll" aria-label="Core tools scroll row">
 
-      {% for item in tools %}
+      {% for item in tools | sort(false, false, "card.rank") %}
         {% if item.card and item.card.featured and item.card.section == "core" %}
           <article class="appCard">
             <div class="appTop">
@@ -76,7 +76,7 @@ heroActions: |
     <h3 class="section-title">Applied Impact</h3>
     <div class="appGrid--scroll" aria-label="Case studies scroll row">
 
-      {% for item in useCases %}
+      {% for item in useCases | sort(false, false, "card.rank") %}
         {% if item.card and item.card.featured %}
           <article class="appCard">
             <div class="appTop">
@@ -134,8 +134,6 @@ heroActions: |
 
             <div class="sys-cta">
               <a class="sys-btn primary" href="/system/">Explore the system →</a>
-              <a class="sys-btn" href="/tools/">Browse tools →</a>
-              <a class="sys-btn" href="/system/core/">Open the Core →</a>
             </div>
           </div>
         </div>

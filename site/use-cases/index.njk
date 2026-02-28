@@ -20,7 +20,7 @@ sub: "Real problems, real constraints, real outcomes. Each case study shows what
 <section class="full" aria-label="Case study library">
   <div class="grid2" style="grid-template-columns: 1fr 1fr">
 
-    {% for item in useCases %}
+    {% for item in useCases | sort(false, false, "card.rank") %}
       {% if item.card and item.card.listed %}
     <article class="card">
       <p class="small muted">{{ item.card.function }}</p>

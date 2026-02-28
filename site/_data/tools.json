@@ -9,7 +9,8 @@
       "href": "/tools/metrics/",
       "featured": true,
       "listed": true,
-      "section": "core"
+      "section": "core",
+      "rank": 1
     }
   },
   {
@@ -22,7 +23,8 @@
       "href": "/tools/screening/",
       "featured": true,
       "listed": true,
-      "section": "core"
+      "section": "core",
+      "rank": 2
     }
   },
   {
@@ -35,7 +37,8 @@
       "href": "/tools/calculator/",
       "featured": true,
       "listed": true,
-      "section": "core"
+      "section": "core",
+      "rank": 3
     }
   },
   {
@@ -48,7 +51,8 @@
       "href": "/tools/listening/",
       "featured": false,
       "listed": false,
-      "section": "core"
+      "section": "core",
+      "rank": 4
     }
   },
   {
@@ -61,7 +65,8 @@
       "href": "/tools/innovation/",
       "featured": false,
       "listed": false,
-      "section": "core"
+      "section": "core",
+      "rank": 5
     }
   },
   {
@@ -74,7 +79,8 @@
       "href": "/tools/sourcing/",
       "featured": false,
       "listed": true,
-      "section": "workflow"
+      "section": "workflow",
+      "rank": 6
     }
   },
   {
@@ -87,7 +93,8 @@
       "href": "/tools/planner/",
       "featured": false,
       "listed": true,
-      "section": "workflow"
+      "section": "workflow",
+      "rank": 7
     }
   },
   {
@@ -100,7 +107,8 @@
       "href": "/tools/chief/",
       "featured": false,
       "listed": false,
-      "section": "workflow"
+      "section": "workflow",
+      "rank": 8
     }
   },
   {
@@ -113,7 +121,8 @@
       "href": "/tools/candidate-journey/playbook/",
       "featured": false,
       "listed": true,
-      "section": "workflow"
+      "section": "workflow",
+      "rank": 9
     }
   },
   {
@@ -126,7 +135,8 @@
       "href": "/tools/ai-first-ops/playbook/",
       "featured": false,
       "listed": false,
-      "section": "workflow"
+      "section": "workflow",
+      "rank": 10
     }
   },
   {
@@ -139,7 +149,8 @@
       "href": "/system/core/",
       "featured": false,
       "listed": false,
-      "section": "workflow"
+      "section": "workflow",
+      "rank": 11
     }
   },
   {
@@ -152,7 +163,8 @@
       "href": "/system/core/metrics/",
       "featured": false,
       "listed": false,
-      "section": "workflow"
+      "section": "workflow",
+      "rank": 12
     }
   },
   {
@@ -165,7 +177,8 @@
       "href": "/articles/why-ai-pilots-fail/",
       "featured": false,
       "listed": false,
-      "section": "workflow"
+      "section": "workflow",
+      "rank": 13
     }
   },
   {
@@ -178,7 +191,8 @@
       "href": "/system/",
       "featured": false,
       "listed": false,
-      "section": "workflow"
+      "section": "workflow",
+      "rank": 14
     }
   },
   {
@@ -191,7 +205,8 @@
       "href": "/tools/workflow/",
       "featured": false,
       "listed": true,
-      "section": "workflow"
+      "section": "workflow",
+      "rank": 15
     }
   }
 ]

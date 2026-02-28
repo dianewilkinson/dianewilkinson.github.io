@@ -8,7 +8,8 @@
       "summary": "Consolidated 40–50 inconsistent source tags, enabled 60+ interviewers, and built reliable reporting infrastructure in a two-month rollout.",
       "href": "/use-cases/greenhouse-migration/",
       "featured": true,
-      "listed": true
+      "listed": true,
+      "rank": 1
     }
   },
   {
@@ -20,19 +21,8 @@
       "summary": "Preventing bottlenecks and saving 8+ recruiter hours per week.",
       "href": "/use-cases/pipeline-health/",
       "featured": true,
-      "listed": true
-    }
-  },
-  {
-    "id": "lifecycle-automation",
-    "card": {
-      "type": "use-case",
-      "function": "Hiring & Mobility",
-      "title": "Increasing Offer Acceptance from 70% to 90% with Candidate Lifecycle Orchestration",
-      "summary": "Eliminating 32 HM interviews and 40–60 hours of recruiter workload per quarter.",
-      "href": "/use-cases/lifecycle-automation/",
-      "featured": false,
-      "listed": true
+      "listed": true,
+      "rank": 2
     }
   },
   {
@@ -44,19 +34,8 @@
       "summary": "Prevented 500 stalled candidates per quarter by anchoring recruiter KPIs to hiring manager interview capacity rather than activity volume.",
       "href": "/use-cases/throughput-modeling/",
       "featured": true,
-      "listed": true
-    }
-  },
-  {
-    "id": "document-management",
-    "card": {
-      "type": "use-case",
-      "function": "Governance & Infrastructure",
-      "title": "Centralizing Recruiting Assets Through a Structured Document Repository",
-      "summary": "Reduced duplicate effort, improved messaging consistency, and made employer branding wins usable in every candidate conversation.",
-      "href": "/use-cases/document-management/",
-      "featured": false,
-      "listed": true
+      "listed": true,
+      "rank": 3
     }
   },
   {
@@ -68,7 +47,34 @@
       "summary": "Solving Bias, False Negatives & Lost Revenue in High Volume Recruiting.",
       "href": "/use-cases/screening-failure/",
       "featured": true,
-      "listed": true
+      "listed": true,
+      "rank": 4
+    }
+  },
+  {
+    "id": "lifecycle-automation",
+    "card": {
+      "type": "use-case",
+      "function": "Hiring & Mobility",
+      "title": "Increasing Offer Acceptance from 70% to 90% with Candidate Lifecycle Orchestration",
+      "summary": "Eliminating 32 HM interviews and 40–60 hours of recruiter workload per quarter.",
+      "href": "/use-cases/lifecycle-automation/",
+      "featured": false,
+      "listed": true,
+      "rank": 5
+    }
+  },
+  {
+    "id": "document-management",
+    "card": {
+      "type": "use-case",
+      "function": "Governance & Infrastructure",
+      "title": "Centralizing Recruiting Assets Through a Structured Document Repository",
+      "summary": "Reduced duplicate effort, improved messaging consistency, and made employer branding wins usable in every candidate conversation.",
+      "href": "/use-cases/document-management/",
+      "featured": false,
+      "listed": true,
+      "rank": 6
     }
   },
   {
@@ -80,7 +86,8 @@
       "summary": "Source-to-hire conversion analysis across inbound, outbound, and referrals — and what the 12x gap means for where you spend recruiter time and budget.",
       "href": "/use-cases/sourcing-quality/",
       "featured": false,
-      "listed": true
+      "listed": true,
+      "rank": 7
     }
   }
 ]

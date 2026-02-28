@@ -37,7 +37,7 @@ permalink: "/tools/"
 
       <div class="appGrid" aria-label="Core tools grid">
 
-        {% for item in tools %}
+        {% for item in tools | sort(false, false, "card.rank") %}
           {% if item.card and item.card.listed and item.card.section == "core" %}
             <article class="appCard">
               <div class="appTop">
@@ -71,7 +71,7 @@ permalink: "/tools/"
 
       <div class="appGrid" aria-label="Workflow tools grid">
 
-        {% for item in tools %}
+        {% for item in tools | sort(false, false, "card.rank") %}
           {% if item.card and item.card.listed and item.card.section == "workflow" %}
             <article class="appCard">
               <div class="appTop">
