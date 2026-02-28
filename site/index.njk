@@ -43,7 +43,7 @@ heroActions: |
     <div class="appGrid--scroll" aria-label="Core tools scroll row">
 
       {% for item in tools %}
-        {% if item.card and item.card.listed and item.card.section == "core" %}
+        {% if item.card and item.card.featured and item.card.section == "core" %}
           <article class="appCard">
             <div class="appTop">
               <div class="appMain">
@@ -77,7 +77,7 @@ heroActions: |
     <div class="appGrid--scroll" aria-label="Case studies scroll row">
 
       {% for item in useCases %}
-        {% if item.card and item.card.listed %}
+        {% if item.card and item.card.featured %}
           <article class="appCard">
             <div class="appTop">
               <div class="appMain">
