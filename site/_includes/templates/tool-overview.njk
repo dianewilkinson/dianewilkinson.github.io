@@ -18,7 +18,7 @@
 <span class="btn primary">Overview</span>
 <a class="btn" href="/tools/{{ toolSlug }}/playbook/">Playbook</a>
 <a class="btn" href="/tools/{{ toolSlug }}/demo/">Demo</a>
-<a class="btn" href="/use-cases/">Cases</a>
+<a class="btn" href="{{ casesHref or '/use-cases/' }}">Cases</a>
 {% endblock %}
 
 {% block content %}
