@@ -146,7 +146,7 @@
       "function": "Governance & Infrastructure",
       "title": "Shared Systems Core",
       "summary": "Shared systems overview, metrics, definitions, used by multi-agent tools & workflows.",
-      "href": "/system/core/",
+      "href": "/system/core/metrics/",
       "featured": false,
       "listed": false,
       "section": "workflow",
