@@ -12,41 +12,78 @@ backHref: "/system/"
 backLabel: "Back to System"
 
 heroTitle: "The <span class='accent'>Core</span>"
-sub: "Every People Ops team hits the same wall: dashboards disagree, tools drift, and the org ends up debating <em>what a number means</em> instead of acting. The Core is how you stop that."
-
-callout: "<b>Core premise:</b> definitions are infrastructure. If the meaning changes by tool, team, or month, you don’t have analytics — you have metric folklore."
+sub: "The Core is the contract behind the tools: shared definitions, stable thresholds, and change control — so teams stop debating numbers and start acting."
+callout: "<b>Core premise:</b> definitions are infrastructure. If meaning changes by tool, team, or month, you don’t have analytics — you have metric folklore."
 ---
 
 {# PAGE CONTENT ONLY — template handles head, bar, wrap, crumbs, hero, footer, exploreNext #}
 
-<section class="full" aria-label="The Core narrative">
-  <h2 class="section-title">The Core</h2>
+<section class="grid2" aria-label="Core overview and links">
+  <div class="card">
+    <h2 class="section-title">What The Core is</h2>
+    <p class="muted">
+      Most People Ops breakdowns that look like “dashboard problems” are really contract problems:
+      different definitions, different thresholds, and no clear ownership.
+      The Core makes those rules explicit — so tools execute against shared truth.
+    </p>
 
-  <p class="muted">
-    Most People Ops “AI” fails for the same reason dashboards fail:
-    <b>everyone is arguing about what the numbers mean</b>.
-    Different definitions. Different thresholds. Different owners. Different “truth.”
-  </p>
+    <div class="miniGrid" aria-label="What it prevents">
+      <div class="mini">
+        <b>Definition drift</b>
+        <span>“Time-to-fill” means different things in different places.</span>
+      </div>
+      <div class="mini">
+        <b>Threshold drift</b>
+        <span>Flags and escalations change silently over time.</span>
+      </div>
+      <div class="mini">
+        <b>Ownership drift</b>
+        <span>No one is accountable for correctness or changes.</span>
+      </div>
+    </div>
 
-  <p class="muted">
-    <b>The Core fixes that.</b> It’s the shared contract that every tool, metric, and A[i]gent references —
-    so decisions stay consistent as teams, systems, and workflows change.
-  </p>
-
-  <div class="callout">
-    <b>When The Core is missing:</b> teams ship isolated tools, debate definitions in meetings, and lose weeks to reconciliation.
-    <br><b>When The Core is present:</b> signals route cleanly → actions trigger safely → humans stay accountable.
+    <div class="callout">
+      <b>When The Core is present:</b> signals route cleanly → decisions stay consistent → automation stays safe → humans remain accountable.
+    </div>
   </div>
 
-  <h3>What lives here</h3>
+  <aside class="card">
+    <h2 class="section-title">Start here</h2>
+    <p class="small">
+      The most concrete Core artifact is the Metrics Dictionary. It’s the shared contract that dashboards and tools reference.
+    </p>
+
+    <div class="rule"></div>
+
+    <p>
+      <a href="/system/core/metrics/"><strong>Metrics Dictionary (Overview)</strong></a><br />
+      <span class="small">What a governed dictionary contains, how it’s used, and why it prevents drift.</span>
+    </p>
+
+    <p>
+      <a href="/system/core/metrics/dictionary/"><strong>Metrics Dictionary (Full CSV)</strong></a><br />
+      <span class="small">Searchable browser rendered from the CSV.</span><br />
+      <span class="small"><a href="/assets/documents/metrics.csv">Download metrics.csv →</a></span>
+    </p>
+
+    <div class="rule"></div>
+
+    <p class="small">
+      <b>Core modules (in build order):</b> Metrics → Thresholds → Ownership → Change control.
+    </p>
+  </aside>
+</section>
+
+<section class="full" aria-label="Core pillars">
+  <h2 class="section-title">What lives in The Core</h2>
   <p class="small">
-    Not “documentation.” Operating rules. This is how a People Operating System stays auditable, repeatable, and trusted.
+    Not “documentation.” Operating rules that keep systems stable as workflows, tools, and teams change.
   </p>
 
   <div class="miniGrid miniGrid--4" aria-label="Core pillars">
     <div class="mini">
       <b>Definitions</b>
-      <span>Shared language so “pipeline health” and “quality” mean the same thing everywhere.</span>
+      <span>Shared language so the same metric means the same thing everywhere.</span>
     </div>
     <div class="mini">
       <b>Logic</b>
@@ -54,27 +91,19 @@ callout: "<b>Core premise:</b> definitions are infrastructure. If the meaning ch
     </div>
     <div class="mini">
       <b>Thresholds</b>
-      <span>Clear triggers for flags, recommendations, and escalation — no vibes-based decisions.</span>
+      <span>Explicit triggers for flags, recommendations, and escalation — no vibes-based decisions.</span>
     </div>
     <div class="mini">
       <b>Ownership</b>
-      <span>Who can change what, why, and how changes roll out safely without breaking trust.</span>
+      <span>Named stewards, change control, and versioning so meaning doesn’t change silently.</span>
     </div>
   </div>
 
   <div class="rule"></div>
 
-  <p class="muted">
-    <b>The point:</b> tools shouldn’t “create truth.” They should <b>execute against shared truth</b>.
-  </p>
-
-  <p class="small">
-    If you want AI embedded in real workflows, The Core is how you avoid Franken-systems and keep decision logic stable.
-  </p>
-
   <div class="ctaRow ctaRow--left">
-    <a class="btn primary" href="/tools/metrics/">Open Metrics Tool →</a>
+    <a class="btn primary" href="/system/core/metrics/dictionary/">Open Full Dictionary →</a>
+    <a class="btn" href="/system/core/metrics/">Metrics Overview →</a>
     <a class="btn" href="/tools/">Browse Tools →</a>
-    <a class="btn" href="/use-cases/">See Use Cases →</a>
   </div>
 </section>
