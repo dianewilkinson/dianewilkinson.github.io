@@ -474,6 +474,22 @@ body[data-page="home"] .panel--pink .panelInner{
   border-collapse: collapse;
   min-width: 640px;
 }
+.table-wrap th,
+.table-wrap td {
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  vertical-align: top;
+  text-align: left;
+  white-space: nowrap;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.table-wrap th {
+  background: rgba(79,70,229,.06);
+  font-weight: 700;
+}
 
 /* Keep lists from leaking */
 .card ul, .full ul, .hero-meta ul, .toc-card ul, .persona-card ul, .prose ul{
