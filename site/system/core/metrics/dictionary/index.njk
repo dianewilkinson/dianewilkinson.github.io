@@ -140,6 +140,15 @@ callout: "<b>Source of truth:</b> <a href='/assets/documents/metrics.csv'>/asset
         .replace(/'/g, "&#039;");
     }
 
+    function normalize(s) {
+      return String(s || "").toLowerCase();
+    }
+
+    function cleanCellValue(v) {
+      // Keep the table dense + avoid massive row height from embedded newlines.
+      return String(v || "").replace(/\s+/g, " ").trim();
+    }
+
     function buildTable(headers, records) {
       headEl.innerHTML = "";
       bodyEl.innerHTML = "";
@@ -156,7 +165,7 @@ callout: "<b>Source of truth:</b> <a href='/assets/documents/metrics.csv'>/asset
         var trb = document.createElement("tr");
         headers.forEach(function (h) {
           var td = document.createElement("td");
-          td.innerHTML = escapeHTML(r[h] || "");
+          td.innerHTML = escapeHTML(cleanCellValue(r[h] || ""));
           trb.appendChild(td);
         });
         bodyEl.appendChild(trb);
@@ -165,27 +174,56 @@ callout: "<b>Source of truth:</b> <a href='/assets/documents/metrics.csv'>/asset
       countEl.textContent = records.length + " rows shown";
     }
 
-    function normalize(s) {
-      return String(s || "").toLowerCase();
-    }
-
     fetch(CSV_URL, { cache: "no-store" })
       .then(function (res) { return res.text(); })
       .then(function (text) {
         var parsed = parseCSV(text);
         if (!parsed || parsed.length < 2) return;
 
-        var headers = parsed[0].map(function (h) { return (h || "").trim(); }).filter(Boolean);
+        var rawHeaders = parsed[0].map(function (h) { return (h || "").trim(); }).filter(Boolean);
+
+        // Hide “wide / verbose / mapping” columns from the on-page view.
+        // CSV remains downloadable as source of truth.
+        var HIDE_COLS = new Set([
+          "Commentary / Interpretation",
+          "Commentary",
+          "Interpretation",
+          "Notes",
+          "Data Source - Object",
+          "Data Source - Field",
+          "Data Store - Object Field",
+          "Data Store - Time Field",
+          "A[i]gent"
+        ]);
+
+        var filteredHeaders = rawHeaders.filter(function (h) { return !HIDE_COLS.has(h); });
+
+        // Prefer a compact “portfolio view” if the headers exist.
+        // If header names differ, we fall back to filteredHeaders automatically.
+        var SHOW_COLS = [
+          "Metric ID",
+          "Group",
+          "Metrics Category",
+          "Metric",
+          "Definition / Description",
+          "Formula",
+          "Numerator",
+          "Denominator"
+        ];
+
+        var headers = SHOW_COLS.filter(function (h) { return filteredHeaders.indexOf(h) !== -1; });
+        if (!headers.length) headers = filteredHeaders;
+
         var dataRows = parsed.slice(1);
 
         var records = dataRows.map(function (r) {
           var obj = {};
-          headers.forEach(function (h, idx) {
-            obj[h] = (r[idx] == null ? "" : String(r[idx])).trim();
+          rawHeaders.forEach(function (h, idx) {
+            obj[h] = (r[idx] == null ? "" : String(r[idx]));
           });
           return obj;
         }).filter(function (obj) {
-          return headers.some(function (h) { return obj[h] !== ""; });
+          return rawHeaders.some(function (h) { return cleanCellValue(obj[h]) !== ""; });
         });
 
         var filtered = records.slice();
@@ -201,7 +239,7 @@ callout: "<b>Source of truth:</b> <a href='/assets/documents/metrics.csv'>/asset
 
           filtered = records.filter(function (rec) {
             for (var i = 0; i < headers.length; i++) {
-              var v = normalize(rec[headers[i]]);
+              var v = normalize(cleanCellValue(rec[headers[i]]));
               if (v.indexOf(q) !== -1) return true;
             }
             return false;
