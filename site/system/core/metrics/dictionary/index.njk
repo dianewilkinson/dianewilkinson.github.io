@@ -13,7 +13,7 @@ backLabel: "Back to Metrics Overview"
 
 heroTitle: "Metrics <span class='accent'>Dictionary: Full</span>"
 sub: "This page renders the full metrics dictionary from the CSV used across the portfolio — so definitions stay consistent and tools can reference stable IDs."
-callout: "<b>Source of truth:</b> <a href='/assets/documents/metrics.csv'>/assets/documents/metrics.csv</a>"
+callout: "<b>Source of truth:</b> <a href='/assets/documents/metricsv2.csv'>/assets/documents/metricsv2.csv</a>"
 ---
 
 {# PAGE CONTENT ONLY — template handles head, bar, wrap, crumbs, hero, footer, exploreNext #}
@@ -21,7 +21,7 @@ callout: "<b>Source of truth:</b> <a href='/assets/documents/metrics.csv'>/asset
 <section class="full" aria-label="Download and usage">
   <h2 class="section-title">Download</h2>
   <p class="muted">
-    <a href="/assets/documents/metrics.csv"><strong>Download metrics.csv →</strong></a>
+    <a href="/assets/documents/metricsv2.csv"><strong>Download metricsv2.csv →</strong></a>
   </p>
   <div class="callout">
     <strong>Tip:</strong> When you update the CSV, this page updates automatically on next build — no manual page edits needed.
@@ -57,7 +57,7 @@ callout: "<b>Source of truth:</b> <a href='/assets/documents/metrics.csv'>/asset
 
 <script>
   (function () {
-    var CSV_URL = "/assets/documents/metrics.csv";
+    var CSV_URL = "/assets/documents/metricsv2.csv";
 
     var headEl = document.getElementById("metricsHead");
     var bodyEl = document.getElementById("metricsBody");
@@ -251,7 +251,7 @@ callout: "<b>Source of truth:</b> <a href='/assets/documents/metrics.csv'>/asset
         searchEl.addEventListener("input", applyFilter);
       })
       .catch(function () {
-        countEl.textContent = "Could not load metrics.csv.";
+        countEl.textContent = "Could not load metricsv2.csv.";
       });
   })();
 </script>
