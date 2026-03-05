@@ -1,0 +1,240 @@
+---
+layout: layouts/base.njk
+permalink: "/system/core/recommendations/"
+title: "Core: Recommendations"
+description: "A searchable, governed recommendations table (CSV): candidates, hiring managers, managers, and coworkers."
+pageId: "system"
+kicker: "Evidence · Credentials · Recommendations"
+backHref: "/contact/credentials/"
+backLabel: "Back to Credentials"
+sub: "Search and filter feedback from hiring managers, managers, coworkers, and candidates."
+---
+
+<section class="panel panel--cool" aria-label="Recommendations table">
+  <div class="panelInner">
+
+    <h2 class="section-title">Recommendations</h2>
+    <p class="section-sub">
+      Filter by audience type (Hiring Managers, Managers, Candidates, Coworkers) or search by company, title, or quote.
+    </p>
+
+    <div class="rule"></div>
+
+    <p class="small">
+      <b>Source of truth:</b> <a href="/assets/documents/recommendations.csv">/assets/documents/recommendations.csv</a>
+    </p>
+
+    <div class="rule"></div>
+
+    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+      <button class="btnGhost" type="button" data-filter="all">All</button>
+      <button class="btnGhost" type="button" data-filter="hiring_manager">Hiring Managers</button>
+      <button class="btnGhost" type="button" data-filter="manager">Managers</button>
+      <button class="btnGhost" type="button" data-filter="candidate">Candidates</button>
+      <button class="btnGhost" type="button" data-filter="coworker">Coworkers</button>
+
+      <span class="small muted" id="recCount" style="margin-left:auto;"></span>
+    </div>
+
+    <div style="margin-top:10px;">
+      <label class="small muted" for="recSearch">Search</label><br>
+      <input id="recSearch" type="text" placeholder="Try: ‘hiring manager’, ‘fast’, ‘Sales’, ‘AdTech’" />
+    </div>
+
+    <div class="rule"></div>
+
+    <div style="overflow:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Quote</th>
+            <th>Related Company</th>
+            <th>Related Job Title</th>
+            <th>Current Company</th>
+            <th>Current Job Title</th>
+            <th>Source</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody id="recBody">
+          <tr><td class="muted" colspan="8">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="small muted" style="margin-top:10px;">
+      Tip: Use <b>Listed</b> + <b>Featured</b> + <b>Rank</b> in the CSV to control what shows and the order.
+    </p>
+
+  </div>
+</section>
+
+<script>
+  // ---- CONFIG ----
+  const CSV_URL = "/assets/documents/recommendations.csv";
+
+  // ---- STATE ----
+  let rows = [];
+  let activeFilter = "all";
+  let query = "";
+
+  // ---- HELPERS ----
+  function norm(s) {
+    return String(s || "").trim();
+  }
+
+  // Simple CSV parser that handles quotes
+  function parseCSV(text) {
+    const out = [];
+    let i = 0, field = "", row = [], inQuotes = false;
+
+    function pushField() {
+      row.push(field);
+      field = "";
+    }
+    function pushRow() {
+      // skip empty trailing row
+      if (row.length === 1 && row[0] === "") return;
+      out.push(row);
+      row = [];
+    }
+
+    while (i < text.length) {
+      const c = text[i];
+
+      if (c === '"') {
+        if (inQuotes && text[i + 1] === '"') { field += '"'; i += 2; continue; }
+        inQuotes = !inQuotes; i++; continue;
+      }
+
+      if (!inQuotes && (c === ",")) { pushField(); i++; continue; }
+      if (!inQuotes && (c === "\n")) { pushField(); pushRow(); i++; continue; }
+      if (!inQuotes && (c === "\r")) { i++; continue; }
+
+      field += c;
+      i++;
+    }
+
+    pushField();
+    pushRow();
+    return out;
+  }
+
+  function toBool(v) {
+    const s = norm(v).toLowerCase();
+    return s === "true" || s === "yes" || s === "1";
+  }
+
+  function classifyType(typeCell) {
+    const t = norm(typeCell).toLowerCase();
+    return {
+      hiring_manager: t.includes("hiring manager"),
+      manager: t === "manager" || t.includes(" manager"),
+      candidate: t.includes("candidate"),
+      coworker: t.includes("co-worker") || t.includes("coworker") || t.includes("peer")
+    };
+  }
+
+  function matchesFilter(r) {
+    if (activeFilter === "all") return true;
+    const flags = classifyType(r.Type);
+    return !!flags[activeFilter];
+  }
+
+  function matchesQuery(r) {
+    if (!query) return true;
+    const hay = [
+      r.Type, r.Quote, r.Source, r["Related Company"], r["Related Job Title"],
+      r["Current Company"], r["Current Job Title"]
+    ].map(norm).join(" ").toLowerCase();
+    return hay.includes(query.toLowerCase());
+  }
+
+  function compareRank(a, b) {
+    const ra = Number(a.Rank || 9999);
+    const rb = Number(b.Rank || 9999);
+    return ra - rb;
+  }
+
+  function escapeHtml(s) {
+    return String(s || "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;");
+  }
+
+  function render() {
+    const body = document.getElementById("recBody");
+    const count = document.getElementById("recCount");
+
+    const filtered = rows
+      .filter(r => toBool(r.Listed))
+      .filter(matchesFilter)
+      .filter(matchesQuery)
+      .sort(compareRank);
+
+    count.textContent = `${filtered.length} shown`;
+
+    if (!filtered.length) {
+      body.innerHTML = `<tr><td class="muted" colspan="8">No matches. Try clearing filters or search.</td></tr>`;
+      return;
+    }
+
+    body.innerHTML = filtered.map(r => {
+      const link = norm(r.Link);
+      const linkCell = link
+        ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener">View</a>`
+        : `<span class="muted">—</span>`;
+
+      const sourceName = [r["First Name"], r["Last Name"]].map(norm).filter(Boolean).join(" ");
+      const source = sourceName ? `${sourceName}` : norm(r.Source);
+
+      return `
+        <tr>
+          <td>${escapeHtml(r.Type)}</td>
+          <td>${escapeHtml(r.Quote)}</td>
+          <td>${escapeHtml(r["Related Company"])}</td>
+          <td>${escapeHtml(r["Related Job Title"])}</td>
+          <td>${escapeHtml(r["Current Company"])}</td>
+          <td>${escapeHtml(r["Current Job Title"])}</td>
+          <td>${escapeHtml(source)}</td>
+          <td>${linkCell}</td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  async function init() {
+    const res = await fetch(CSV_URL, { cache: "no-store" });
+    const text = await res.text();
+    const parsed = parseCSV(text);
+
+    const headers = parsed[0].map(h => norm(h));
+    const data = parsed.slice(1);
+
+    rows = data.map(cells => {
+      const obj = {};
+      headers.forEach((h, idx) => obj[h] = cells[idx] ?? "");
+      return obj;
+    });
+
+    // Wire buttons
+    document.querySelectorAll("[data-filter]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        activeFilter = btn.getAttribute("data-filter");
+        render();
+      });
+    });
+
+    // Wire search
+    document.getElementById("recSearch").addEventListener("input", (e) => {
+      query = e.target.value || "";
+      render();
+    });
+
+    render();
+  }
+
+  init();
+</script>
