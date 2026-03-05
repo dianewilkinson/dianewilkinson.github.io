@@ -13,7 +13,7 @@
     {% set _path = page.url %}
   {% endif %}
   {% set _canonical = canonical or (_siteUrl ~ _path) %}
-  {% set _metaTitle = metaTitle or ogTitle or title or "Diane Wilkinson" %}
+  {% set _metaTitle = (metaTitle or ogTitle or title or "Diane Wilkinson") | striptags %}
   {% set _metaDescription = metaDescription or ogDescription or description or "AI-native people operations systems, tools, and playbooks by Diane Wilkinson." %}
   {% set _ogType = ogType or "website" %}
   {% set _twitterSite = twitterSite or "" %}
