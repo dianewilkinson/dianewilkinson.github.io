@@ -19,7 +19,7 @@
       </div>
     {% endif %}
 
-    <h1>{{ title | safe }}</h1>
+    <h1>{{ (heroTitle or title) | safe }}</h1>
 
     {% if sub %}
       <p class="sub">{{ sub | safe }}</p>
