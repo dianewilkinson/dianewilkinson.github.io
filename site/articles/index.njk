@@ -35,18 +35,22 @@ permalink: "/articles/"
       <p class="sub">More coming soon. For now:</p>
 
       <div class="tools-grid" aria-label="Article links">
-        <article class="tool-card">
-          <div class="tool-top">
-            <div>
-              <h3>Why AI Pilots Fail</h3>
-              <p>What the successful 5% do differently.</p>
-            </div>
-            <span class="badge">Article</span>
-          </div>
-          <div class="tool-actions">
-            <a href="/articles/why-ai-pilots-fail/">Read →</a>
-          </div>
-        </article>
+        {% for item in articles | sort(false, false, "card.rank") %}
+          {% if item.card and item.card.listed %}
+            <article class="tool-card">
+              <div class="tool-top">
+                <div>
+                  <h3>{{ item.card.title }}</h3>
+                  <p>{{ item.card.summary }}</p>
+                </div>
+                <span class="badge">Article</span>
+              </div>
+              <div class="tool-actions">
+                <a href="{{ item.card.href }}">Read →</a>
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
   </section>
