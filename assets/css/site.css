@@ -300,7 +300,7 @@ body[data-page="home"] .hero-subtitle{
 body[data-page="home"] .hero-actions{
   margin-top:auto;
   display:flex;
-  justify-content:flex-end;
+  justify-content:flex-start;
   gap:10px;
   flex-wrap:wrap;
 }
@@ -321,6 +321,15 @@ body[data-page="home"] .hero-pill{
 body[data-page="home"] .hero-pill:hover{
   background: rgba(255,255,255,.92);
   text-decoration:none;
+}
+body[data-page="home"] a.hero-pill[href="/tools/"]{
+  background: var(--accent);
+  border-color: var(--accent);
+  color:#fff;
+}
+body[data-page="home"] a.hero-pill[href="/tools/"]:hover{
+  background: #4338ca;
+  border-color: #4338ca;
 }
 
 @media (max-width:720px){
