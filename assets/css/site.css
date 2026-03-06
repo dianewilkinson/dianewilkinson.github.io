@@ -279,10 +279,10 @@ body[data-page="home"] .hero-headline{
 
 body[data-page="home"] .hero-role{
   margin: 2px 0 0;
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 600;
   letter-spacing: normal;
-  color: var(--muted);
+  color: var(--text);
 }
 
 body[data-page="home"] .hero-subtitle{
