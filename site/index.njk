@@ -38,7 +38,6 @@ heroActions: |
           <article class="appCard">
             <div class="appTop">
               <div class="appMain">
-                <span class="badge" data-kind="article">Article</span>
                 <h3>{{ item.card.title }}</h3>
                 <p>{{ item.card.summary }}</p>
               </div>
@@ -67,9 +66,6 @@ heroActions: |
           <article class="appCard">
             <div class="appTop">
               <div class="appMain">
-                {% if item.card.type %}
-                  <span class="badge" data-kind="{{ item.card.type }}">{{ item.card.type | replace("-", " ") | title }}</span>
-                {% endif %}
                 <h3>{{ item.card.title }}</h3>
                 <p>{{ item.card.summary }}</p>
               </div>
