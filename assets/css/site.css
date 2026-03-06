@@ -463,8 +463,8 @@ body[data-page="home"] .panel--pink .panelInner{
 .rule{height:1px; background:var(--border); margin:14px 0}
 .card h3{
   margin:0 0 10px;
-  font-size:24px;
-  font-weight:600;
+  font-size:21px;
+  font-weight:550;
   line-height:1.25;
   letter-spacing:normal;
 }
@@ -646,8 +646,8 @@ body[data-page="use-case"] .grid2{
 
 .tool-card h3{
   margin:8px 0 6px;
-  font-size:24px;
-  font-weight:600;
+  font-size:21px;
+  font-weight:550;
   letter-spacing:-.01em;
 }
 
@@ -1164,8 +1164,8 @@ body[data-page="article"] .callout{
 }
 .appCard h3{
   margin:0 0 6px;
-  font-size:24px;
-  font-weight:600;
+  font-size:21px;
+  font-weight:550;
   letter-spacing:-.01em;
 }
 .appCard p{
