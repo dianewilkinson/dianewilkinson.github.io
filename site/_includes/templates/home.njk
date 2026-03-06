@@ -15,7 +15,11 @@
     {% endif %}
 
     {% if heroSubtitle %}
-      <p class="hero-subtitle">{{ heroSubtitle }}</p>
+      <p class="hero-subtitle">{{ heroSubtitle | safe }}</p>
+    {% endif %}
+
+    {% if heroBody %}
+      <div class="hero-body">{{ heroBody | safe }}</div>
     {% endif %}
 
     {% if heroActions %}
