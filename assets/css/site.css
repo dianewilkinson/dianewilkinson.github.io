@@ -73,19 +73,12 @@
 html,body{height:100%}
 body{
   margin:0;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', ui-sans-serif, sans-serif;
   background: var(--page-bg);
   color:var(--text);
   line-height:1.55;
 }
 
-.hero-headline,
-.section-title,
-.prose h1,
-.prose h2{
-  font-family: ui-serif, Georgia, "Times New Roman", serif;
-}
 
 a{color:var(--link); text-decoration:none}
 a:hover{text-decoration:underline}
@@ -202,7 +195,7 @@ a:hover{text-decoration:underline}
   box-shadow:0 0 0 3px rgba(79,70,229,.12);
 }
 
-h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
+h1{margin:12px 0 8px; font-size:34px; font-weight:700; line-height:1.25; letter-spacing:normal}
 .sub{
   margin:0;
   color:var(--muted);
@@ -214,7 +207,7 @@ h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.02em}
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  font-weight:900;
+  font-weight:800;
 }
 
 .backRow{
@@ -279,18 +272,17 @@ body[data-page="home"] .hero--home{
 body[data-page="home"] .hero-headline{
   margin: 8px 0 0;
   font-size:34px;
-  font-weight:900;
-  letter-spacing:-0.02em;
-  line-height:1.15;
+  font-weight:800;
+  letter-spacing:-0.01em;
+  line-height:1.25;
 }
 
 body[data-page="home"] .hero-role{
   margin: 2px 0 0;
   font-size: 20px;
   font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   color: var(--muted);
-  font-family: ui-serif, Georgia, "Times New Roman", serif;
 }
 
 body[data-page="home"] .hero-subtitle{
@@ -430,8 +422,9 @@ body[data-page="home"] .panel--pink .panelInner{
   align-items:center;
   gap:12px;
   font-size:20px;
-  font-weight:900;
-  letter-spacing:-.015em;
+  font-weight:700;
+  line-height:1.25;
+  letter-spacing:normal;
   margin:0 0 12px;
 }
 .section-title::before{
@@ -463,15 +456,17 @@ body[data-page="home"] .panel--pink .panelInner{
   display:block;
 }
 
-.card h2{ margin:0 0 10px; font-size:18px; letter-spacing:-.01em; }
+.card h2{ margin:0 0 10px; font-size:18px; font-weight:600; line-height:1.25; letter-spacing:normal; }
 .card p{ margin:10px 0; color:var(--text); }
-.small{font-size:13px; color:var(--muted2)}
+.small{font-size:13px; font-weight:500; color:var(--muted2)}
 .muted{color:var(--muted)}
 .rule{height:1px; background:var(--border); margin:14px 0}
 .card h3{
   margin:0 0 10px;
   font-size:16px;
-  letter-spacing:-.01em;
+  font-weight:600;
+  line-height:1.25;
+  letter-spacing:normal;
 }
 
 /* =========================
@@ -653,6 +648,7 @@ body[data-page="use-case"] .grid2{
 .tool-card h4{
   margin:8 0 6px;
   font-size:14px;
+  font-weight:600;
   font-weight:900;
   letter-spacing:-.01em;
 }
@@ -668,7 +664,7 @@ body[data-page="use-case"] .grid2{
 
 .badge{
   font-size:11px;
-  font-weight:900;
+  font-weight:500;
   color:var(--muted2);
   border:1px solid rgba(226,232,240,.95);
   border-radius:999px;
@@ -1055,18 +1051,19 @@ body[data-page="article"] .prose p > a{
 /* Headings */
 body[data-page="article"] .prose h1{
   font-size:44px;
-  line-height:1.15;
-  letter-spacing:-.02em;
+  font-weight:800;
+  line-height:1.25;
+  letter-spacing:-0.01em;
   margin:18px 0 12px;
 }
 
 body[data-page="article"] .prose h2{
   font-size:30px;
-  line-height:1.18;
-  letter-spacing:-.012em;
+  font-weight:700;
+  line-height:1.25;
+  letter-spacing:normal;
   margin:34px 0 12px;
   color:var(--text);
-  font-weight:520;  /* instead of default 900 inheritance */
 }
 
 /* Accent ONLY the number token (your markup uses <b>#1</b>) */
@@ -1164,7 +1161,7 @@ body[data-page="article"] .callout{
 .appCard h3{
   margin:0 0 6px;
   font-size:14px;
-  font-weight:900;
+  font-weight:600;
   letter-spacing:-.01em;
 }
 .appCard p{
