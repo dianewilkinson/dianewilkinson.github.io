@@ -26,11 +26,11 @@
   {
     "id": "why-ai-pilots-fail",
     "card": {
-      "title": "🤖 Why AI Pilots Fail",
-      "heroTitle": "<span class='accent'>Article:</span>Why AI Pilots Fail",
-      "summary": "What the successful 5% do differently.",
+      "title": "🤖 Why MIT Says 95% ofAI Pilots Fail",
+      "heroTitle": "<span class='accent'>Article:</span> Why MIT Says 95% of <span class='accent'>AI Pilots Fail</span>",
+      "summary": "And what the successful 5% do differently.",
       "href": "/articles/why-ai-pilots-fail/",
-      "featured": false,
+      "featured": true,
       "listed": true,
       "rank": 3
     }
