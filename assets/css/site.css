@@ -20,7 +20,7 @@
   --muted2:#64748b;
   --border:#e5e7eb;
   --shadow:rgba(15,23,42,0.05);
-  --radius:8px;
+  --radius:4px;
   --link:#2563eb;
 
   --grad:linear-gradient(135deg, rgba(79,70,229,.16), rgba(96,165,250,.14), rgba(167,139,250,.14));
@@ -477,7 +477,7 @@ body[data-page="home"] .panel--pink .panelInner{
   padding: 10px 14px;
   background: rgba(79,70,229,.05);
   border-left: 2px solid rgba(79,70,229,.55);
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 14px;
   line-height: 1.45;
 }
@@ -564,7 +564,7 @@ body[data-page="use-case"] .grid2{
 .mini{
   border:1px solid rgba(226,232,240,0.9);
   background:rgba(255,255,255,.75);
-  border-radius:8px;
+  border-radius:4px;
   padding:12px 12px;
 }
 .mini b{ display:block; font-size:13px; letter-spacing:-.01em; margin-bottom:6px; }
@@ -621,7 +621,7 @@ body[data-page="use-case"] .grid2{
 .tool-card{
   border:1px solid rgba(226,232,240,0.9);
   background: rgba(255,255,255,.90);
-  border-radius:8px;
+  border-radius:4px;
   padding:12px;
   box-shadow: 0 10px 30px rgba(15,23,42,.06);
   min-width:0;
@@ -841,7 +841,7 @@ body[data-page="use-case"] .grid2{
 .sys-diagram{
   border:1px solid rgba(226,232,240,.9);
   background: rgba(255,255,255,.75);
-  border-radius:8px;
+  border-radius:4px;
   padding:12px;
   box-shadow: 0 10px 30px rgba(15,23,42,.06);
 }
@@ -850,14 +850,14 @@ body[data-page="use-case"] .grid2{
   height:auto;
   max-height:420px;
   object-fit:contain;
-  border-radius:6px;
+  border-radius:4px;
   display:block;
 }
 
 .sys-bullets{
   border:1px solid rgba(226,232,240,.9);
   background: rgba(255,255,255,.75);
-  border-radius:8px;
+  border-radius:4px;
   padding:12px;
   box-shadow: 0 10px 30px rgba(15,23,42,.06);
 }
@@ -1139,7 +1139,7 @@ body[data-page="article"] .callout{
 .appCard{
   border:1px solid rgba(226,232,240,0.95);
   background: rgba(255,255,255,.90);
-  border-radius:8px;
+  border-radius:4px;
   padding:12px;
   box-shadow: 0 10px 30px rgba(15,23,42,.06);
   display:flex;
