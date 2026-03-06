@@ -177,8 +177,8 @@ a:hover{text-decoration:underline}
 }
 .hero > *{position:relative}
 
-/* Landing hero: pink overlay ONLY here */
-.hero--home::before{ background: var(--pink-grad); }
+/* Landing hero: purple overlay */
+.hero--home::before{ background: var(--cool-grad); }
 
 /* Tools + system + playbooks: cool overlay */
 .hero--tool::before{ background: var(--cool-grad); }
