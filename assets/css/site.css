@@ -672,9 +672,9 @@ body[data-page="use-case"] .grid2{
 }
 
 .badge[data-kind="article"]{
-  border-color: rgba(234,179,8,.32);
-  background: rgba(234,179,8,.12);
-  color: rgba(133,77,14,.95);
+  border-color: rgba(251,113,133,.35);
+  background: rgba(251,113,133,.12);
+  color: rgba(159,18,57,.92);
 }
 
 .badge[data-kind="use-case"]{
