@@ -290,7 +290,7 @@ body[data-page="home"] .hero-role{
   font-weight: 400;
   letter-spacing: -0.01em;
   color: var(--muted);
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: ui-serif, Georgia, "Times New Roman", serif;
 }
 
 body[data-page="home"] .hero-subtitle{
