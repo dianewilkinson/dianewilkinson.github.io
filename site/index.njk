@@ -13,15 +13,6 @@ heroActions: |
   <a class="hero-pill" href="/system/">Explore the system →</a>
 ---
 
-<section class="chapter" aria-label="Featured article">
-  <div class="chapter__inner">
-    <h3 class="section-title"><span class='accent'>Featured Article:</span> Why MIT Says <span class='accent'>95% of AI Pilots Fail</span> &amp; What the Successful 5% Do Differently</h3>
-    <div class="tool-actions">
-      <a class="appLink" href="/articles/why-ai-pilots-fail/">Read the article →</a>
-    </div>
-  </div>
-</section>
-
 <section class="card" aria-label="Identity">
   <h2 align="center">👋 Diane Wilkinson — Talent Acquisition Operations</h2>
 
@@ -35,6 +26,35 @@ heroActions: |
     Today, I design structured talent operations systems that hold up under real-world constraints — aligning data, workflows, and human judgment.
   </p>
 
+</section>
+
+<section class="panel panel--cool" aria-label="Articles">
+  <div class="panelInner">
+    <h3 class="section-title">Articles</h3>
+    <div class="appGrid--scroll" aria-label="Articles scroll row">
+
+      {% for item in articles | sort(false, false, "card.rank") %}
+        {% if item.card and item.card.listed %}
+          <article class="appCard">
+            <div class="appTop">
+              <div class="appMain">
+                <span class="badge" data-kind="article">Article</span>
+                <h3>{{ item.card.title }}</h3>
+                <p>{{ item.card.summary }}</p>
+              </div>
+            </div>
+            <div class="appActions">
+              <a class="appLink" href="{{ item.card.href }}">Read →</a>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+    <div class="sys-cta" style="margin-top:12px;">
+      <a class="sys-btn" href="/articles/">Browse all articles →</a>
+    </div>
+  </div>
 </section>
 
 <section class="panel panel--cool" aria-label="Core Intelligence Tools">
@@ -160,31 +180,6 @@ heroActions: |
           <span class="small muted">Assumed</span>
         </div>
       </article>
-    </div>
-  </div>
-</section>
-
-<section class="chapter" aria-label="Article">
-  <div class="chapter__inner">
-    <h3 class="section-title"><span class="accent">Article:</span>Don’t Make Soft Metrics Hard. <span class="accent">5 Decision Quality Metrics</span> Every Team Should Track</h3>
-    <div class="tool-actions">
-      <a class="appLink" href="/articles/decision-science-metrics/">
-        Read the article →
-      </a>
-    </div>
-  </div>
-</section>
-<section class="chapter" aria-label="Article">
-  <div class="chapter__inner">
-    <h3 class="section-title">
-      <span class="accent">Article:</span>
-      Decision Metrics: What's Your <span class="accent">Interviewer Scoring Style</span>?
-    </h3>
-
-    <div class="tool-actions">
-      <a class="appLink" href="/articles/interviewer-scoring-style/">
-        Read the article →
-      </a>
     </div>
   </div>
 </section>
