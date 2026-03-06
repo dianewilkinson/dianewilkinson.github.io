@@ -271,16 +271,16 @@ body[data-page="home"] .hero--home{
 
 body[data-page="home"] .hero-headline{
   margin: 8px 0 0;
-  font-size:34px;
-  font-weight:800;
+  font-size:38px;
+  font-weight:700;
   letter-spacing:-0.01em;
   line-height:1.25;
 }
 
 body[data-page="home"] .hero-role{
   margin: 2px 0 0;
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 22px;
+  font-weight: 500;
   letter-spacing: normal;
   color: var(--muted);
 }
