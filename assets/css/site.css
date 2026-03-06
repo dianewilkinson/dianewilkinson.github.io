@@ -20,7 +20,7 @@
   --muted2:#64748b;
   --border:#e5e7eb;
   --shadow:rgba(15,23,42,0.08);
-  --radius:18px;
+  --radius:14px;
   --link:#2563eb;
 
   --grad:linear-gradient(135deg, rgba(79,70,229,.16), rgba(96,165,250,.14), rgba(167,139,250,.14));
@@ -73,10 +73,14 @@
 html,body{height:100%}
 body{
   margin:0;
-  font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+  font-family: 'Inter', system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
   background: var(--page-bg);
   color:var(--text);
   line-height:1.55;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Fraunces', Georgia, serif;
 }
 
 a{color:var(--link); text-decoration:none}
