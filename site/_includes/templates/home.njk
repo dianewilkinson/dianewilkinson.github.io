@@ -10,6 +10,10 @@
   <section class="hero hero--home" aria-label="Hero">
     <h2 class="hero-headline">{{ heroHeadline | safe }}</h2>
 
+    {% if heroRole %}
+      <p class="hero-role">{{ heroRole | safe }}</p>
+    {% endif %}
+
     {% if heroSubtitle %}
       <p class="hero-subtitle">{{ heroSubtitle }}</p>
     {% endif %}
