@@ -179,6 +179,9 @@ a:hover{text-decoration:underline}
 /* Optional darker tools hero gradient (explicit opt-in) */
 .hero--tool-strong::before{ background: var(--tool-hero-grad); }
 
+/* Tools page: Playfair h1 */
+body[data-page="tools"] h1{font-family:'Playfair Display', Georgia, serif; font-weight:700;}
+
 /* Hero typography helpers */
 .kicker{
   display:inline-flex; gap:8px; align-items:center;

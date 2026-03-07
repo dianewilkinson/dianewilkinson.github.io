@@ -208,5 +208,89 @@
       "section": "workflow",
       "rank": 15
     }
+  },
+  {
+    "id": "ats-workflow",
+    "card": {
+      "type": "baseline",
+      "function": "Infrastructure",
+      "title": "ATS workflow + writeback",
+      "summary": "Stage changes, dispositions, structured fields, and clean updates where the work actually lives.",
+      "href": null,
+      "featured": false,
+      "listed": true,
+      "section": "foundational",
+      "rank": 16
+    }
+  },
+  {
+    "id": "ai-note-capture",
+    "card": {
+      "type": "baseline",
+      "function": "Infrastructure",
+      "title": "AI note capture + indexing",
+      "summary": "Transcript capture, highlights, and searchable summaries to reduce loss and improve continuity.",
+      "href": null,
+      "featured": false,
+      "listed": true,
+      "section": "foundational",
+      "rank": 17
+    }
+  },
+  {
+    "id": "scheduling-automation",
+    "card": {
+      "type": "baseline",
+      "function": "Infrastructure",
+      "title": "Scheduling automation",
+      "summary": "Routing, availability capture, and coordination so throughput isn't limited by calendar friction.",
+      "href": null,
+      "featured": false,
+      "listed": true,
+      "section": "foundational",
+      "rank": 18
+    }
+  },
+  {
+    "id": "standardized-scorecards",
+    "card": {
+      "type": "baseline",
+      "function": "Infrastructure",
+      "title": "Standardized scorecards",
+      "summary": "Consistent evaluation inputs so decisions can be compared, audited, and improved over time.",
+      "href": null,
+      "featured": false,
+      "listed": true,
+      "section": "foundational",
+      "rank": 19
+    }
+  },
+  {
+    "id": "offer-routing",
+    "card": {
+      "type": "baseline",
+      "function": "Infrastructure",
+      "title": "Offer routing + approvals",
+      "summary": "Comp inputs, approvals, and handoffs that move fast while staying accountable.",
+      "href": null,
+      "featured": false,
+      "listed": true,
+      "section": "foundational",
+      "rank": 20
+    }
+  },
+  {
+    "id": "compliance-reporting",
+    "card": {
+      "type": "baseline",
+      "function": "Infrastructure",
+      "title": "Compliance + reporting",
+      "summary": "EEO/OFCCP hygiene, audit trails, and reporting surfaces that teams can trust.",
+      "href": null,
+      "featured": false,
+      "listed": true,
+      "section": "foundational",
+      "rank": 21
+    }
   }
 ]

@@ -62,6 +62,12 @@ permalink: "/tools/"
     </div>
   </section>
 
+  <section class="panel tagline-panel" aria-label="Tagline">
+    <div class="panelInner">
+      <p class="tagline-statement"><span class="accent">Decision Science Tools</span> designed to improve hiring, not just automate workflows.</p>
+    </div>
+  </section>
+
   <section class="panel panel--cool" aria-label="Workflow Infrastructure Tools">
     <div class="panelInner">
       <h2 class="section-title">Foundational Tools</h2>
@@ -69,7 +75,7 @@ permalink: "/tools/"
       <div class="appGrid" aria-label="Workflow tools grid">
 
         {% for item in tools | sort(false, false, "card.rank") %}
-          {% if item.card and item.card.listed and item.card.section == "workflow" %}
+          {% if item.card and item.card.listed and (item.card.section == "workflow" or item.card.section == "foundational") %}
             <article class="appCard">
               <div class="appTop">
                 <div class="appMain">
@@ -83,7 +89,11 @@ permalink: "/tools/"
                 {% else %}
                   <span class="small muted"></span>
                 {% endif %}
-                <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+                {% if item.card.href %}
+                  <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+                {% else %}
+                  <span class="small muted">Assumed</span>
+                {% endif %}
               </div>
             </article>
           {% endif %}
