@@ -17,7 +17,7 @@
     "card": {
       "type": "use-case",
       "function": "Hiring & Mobility",
-      "title": "Preventing Quarter-End Misses",
+      "title": "Preventing KPI Misses",
       "summary": "Preventing bottlenecks and saving 8+ recruiter hours per week.",
       "href": "/use-cases/pipeline-health/",
       "featured": true,
