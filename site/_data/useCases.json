@@ -4,8 +4,8 @@
     "card": {
       "type": "use-case",
       "function": "Improvement & Strategy",
-      "title": "Scaling Infrastructure: Global ATS Migration",
-      "summary": "Fixed inconsistencies, enabled 60+ interviewers, and built reliable reporting in a two-month rollout.",
+      "title": "Global ATS Migration",
+      "summary": "Fixed inconsistencies, enabled 60+ interviewers, and built reliable reporting.",
       "href": "/use-cases/greenhouse-migration/",
       "featured": true,
       "listed": true,
@@ -17,7 +17,7 @@
     "card": {
       "type": "use-case",
       "function": "Hiring & Mobility",
-      "title": "Preventing Quarter-End Miss Before It Happens",
+      "title": "Preventing Quarter-End Misses",
       "summary": "Preventing bottlenecks and saving 8+ recruiter hours per week.",
       "href": "/use-cases/pipeline-health/",
       "featured": true,
@@ -30,7 +30,7 @@
     "card": {
       "type": "use-case",
       "function": "Improvement & Strategy",
-      "title": "Preventing 39 Stalled Candidates per Week",
+      "title": "39 Stalled Candidates per Week",
       "summary": "500 stalled candidates per quarter prevented with throughput modeling.",
       "href": "/use-cases/throughput-modeling/",
       "featured": true,
@@ -82,7 +82,7 @@
     "card": {
       "type": "use-case",
       "function": "Hiring & Mobility",
-      "title": "Sourcing Quality — Not All Pipelines Are Created Equal",
+      "title": "Not All Pipelines Are Created Equal",
       "summary": "Source-to-hire analysis revealed 12x performance gap in lead sourcing.",
       "href": "/use-cases/sourcing-quality/",
       "featured": false,
