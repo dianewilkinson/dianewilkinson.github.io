@@ -195,7 +195,7 @@ a:hover{text-decoration:underline}
   box-shadow:0 0 0 3px rgba(79,70,229,.12);
 }
 
-h1{margin:12px 0 8px; font-size:34px; font-weight:700; line-height:1.25; letter-spacing:normal}
+h1{margin:12px 0 8px; font-size:38px; font-weight:700; line-height:1.25; letter-spacing:normal}
 .sub{
   margin:0;
   color:var(--muted);
@@ -285,9 +285,12 @@ body[data-page="home"] .hero-role{
   letter-spacing: normal;
   color: var(--text);
 }
+body[data-page="home"] .hero-role a,
+body[data-page="home"] .hero-subtitle a {
+  white-space: nowrap;
+}
 
 body[data-page="home"] .hero-subtitle{
-  max-width:90ch;
   color:var(--muted);
   font-size:14px;
   margin:0;
@@ -309,7 +312,7 @@ body[data-page="home"] .hero-pill{
   padding:7px 12px;
   border-radius:999px;
   font-size:12px;
-  font-weight:900;
+  font-weight:600;
   color:#334155;
   border:1px solid rgba(226,232,240,.95);
   background: rgba(255,255,255,.80);
