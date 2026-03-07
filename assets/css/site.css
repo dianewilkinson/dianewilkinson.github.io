@@ -350,8 +350,6 @@ body[data-page="home"] a.hero-pill[href="/tools/"]:hover{
   box-shadow: 0 16px 48px var(--shadow);
   background: rgba(255,255,255,.70);
 }
-.panel--cool{ background: var(--cool-grad); }
-
 /* Landing-only panel tint (pink is allowed ONLY on home) */
 body[data-page="home"] .panel--pink{
   background: var(--pink-grad);
