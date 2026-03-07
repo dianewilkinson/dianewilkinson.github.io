@@ -74,7 +74,7 @@
     "card": {
       "type": "tool",
       "function": "Hiring & Mobility",
-      "title": "Candidate Sourcing & Matching",
+      "title": "Candidate Sourcing",
       "summary": "Improves response rates while reducing wasted outreach.",
       "href": "/tools/sourcing/",
       "featured": false,
@@ -116,7 +116,7 @@
     "card": {
       "type": "playbook",
       "function": "Hiring & Mobility",
-      "title": "Candidate Journey Playbook",
+      "title": "Candidate Journey",
       "summary": "Workflows & best practices to keep CSATs up and pipelines flowing.",
       "href": "/tools/candidate-journey/playbook/",
       "featured": false,
@@ -162,7 +162,7 @@
       "summary": "A single source of truth for metric names, definitions, formulas, grain, filters, & ownership.",
       "href": "/system/core/metrics/",
       "featured": false,
-      "listed": false,
+      "listed": true,
       "section": "workflow",
       "rank": 12
     }
@@ -200,8 +200,8 @@
     "card": {
       "type": "tool",
       "function": "Improvement & Strategy",
-      "title": "Automated Workflows for Recruiting & Hiring",
-      "summary": "Recruiting workflows to increase efficiency, engagement, branding, & CSAT scores.",
+      "title": "Automated Workflows",
+      "summary": "Recruiting workflows to increase efficiency, engagement, branding, & CSAT.",
       "href": "/tools/workflow/",
       "featured": false,
       "listed": true,
