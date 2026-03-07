@@ -429,7 +429,6 @@ body[data-page="home"] .panel--pink .panelInner{
   display:flex;
   align-items:center;
   gap:12px;
-  font-family:'Playfair Display', Georgia, serif;
   font-size:24px;
   font-weight:700;
   line-height:1.25;
@@ -465,13 +464,14 @@ body[data-page="home"] .panel--pink .panelInner{
   display:block;
 }
 
-.card h2{ margin:0 0 10px; font-size:20px; font-weight:600; line-height:1.25; letter-spacing:normal; }
+.card h2{ margin:0 0 10px; font-family:'Playfair Display', Georgia, serif; font-size:20px; font-weight:600; line-height:1.25; letter-spacing:normal; }
 .card p{ margin:10px 0; color:var(--text); }
 .small{font-size:13px; font-weight:500; color:var(--muted2)}
 .muted{color:var(--muted)}
 .rule{height:1px; background:var(--border); margin:14px 0}
 .card h3{
   margin:0 0 10px;
+  font-family:'Playfair Display', Georgia, serif;
   font-size:21px;
   font-weight:550;
   line-height:1.25;
@@ -655,6 +655,7 @@ body[data-page="use-case"] .grid2{
 
 .tool-card h3{
   margin:8px 0 6px;
+  font-family:'Playfair Display', Georgia, serif;
   font-size:21px;
   font-weight:550;
   letter-spacing:-.01em;
@@ -1173,6 +1174,7 @@ body[data-page="article"] .callout{
 }
 .appCard h3{
   margin:0 0 6px;
+  font-family:'Playfair Display', Georgia, serif;
   font-size:21px;
   font-weight:550;
   letter-spacing:-.01em;
