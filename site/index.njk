@@ -178,7 +178,7 @@ heroActions: |
 
 <section class="panel" aria-label="Applied Impact">
   <div class="panelInner">
-    <h3 class="section-title">Applied Impact</h3>
+    <h3 class="section-title">Case Studies</h3>
     <div class="appGrid--scroll" aria-label="Case studies scroll row">
 
       {% for item in useCases | sort(false, false, "card.rank") %}
@@ -186,7 +186,6 @@ heroActions: |
           <article class="appCard">
             <div class="appTop">
               <div class="appMain">
-                <span class="badge" data-kind="use-case">Case Study</span>
                 <h3>{{ item.card.title }}</h3>
                 <p>{{ item.card.summary }}</p>
               </div>
