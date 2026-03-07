@@ -180,7 +180,7 @@ a:hover{text-decoration:underline}
 .hero--tool-strong::before{ background: var(--tool-hero-grad); }
 
 /* Tools page: Playfair h1 */
-body[data-page="tools"] h1{font-family:'Playfair Display', Georgia, serif; font-weight:700;}
+body[data-page="tools"] h1{font-family:'Playfair Display', Georgia, serif; font-weight:700; font-size:clamp(44px, 6vw, 60px);}
 
 /* Hero typography helpers */
 .kicker{
