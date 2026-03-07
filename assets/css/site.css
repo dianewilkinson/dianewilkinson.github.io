@@ -472,7 +472,7 @@ body[data-page="home"] .panel--pink .panelInner{
 .card h3{
   margin:0 0 10px;
   font-family:'Playfair Display', Georgia, serif;
-  font-size:21px;
+  font-size:23px;
   font-weight:550;
   line-height:1.25;
   letter-spacing:normal;
@@ -656,7 +656,7 @@ body[data-page="use-case"] .grid2{
 .tool-card h3{
   margin:8px 0 6px;
   font-family:'Playfair Display', Georgia, serif;
-  font-size:21px;
+  font-size:23px;
   font-weight:550;
   letter-spacing:-.01em;
 }
@@ -1175,7 +1175,7 @@ body[data-page="article"] .callout{
 .appCard h3{
   margin:0 0 6px;
   font-family:'Playfair Display', Georgia, serif;
-  font-size:21px;
+  font-size:23px;
   font-weight:550;
   letter-spacing:-.01em;
 }
