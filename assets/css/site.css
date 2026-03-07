@@ -289,7 +289,7 @@ body[data-page="home"] .hero-role{
 body[data-page="home"] .hero-subtitle{
   max-width:90ch;
   color:var(--muted);
-  font-size:16px;
+  font-size:14px;
   margin:0;
   line-height:1.55;
 }
