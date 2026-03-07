@@ -4,12 +4,12 @@
     "card": {
       "type": "use-case",
       "function": "Improvement & Strategy",
-      "title": "Designing Scalable Hiring Infrastructure During a Global ATS Migration",
-      "summary": "Consolidated 40–50 inconsistent source tags, enabled 60+ interviewers, and built reliable reporting infrastructure in a two-month rollout.",
+      "title": "Scalabling Hiring Infrastructure: Global ATS Migration",
+      "summary": "Fixed inconsistencies, enabled 60+ interviewers, and built reliable reporting in a two-month rollout.",
       "href": "/use-cases/greenhouse-migration/",
       "featured": true,
       "listed": true,
-      "rank": 1
+      "rank": 4
     }
   },
   {
@@ -30,8 +30,8 @@
     "card": {
       "type": "use-case",
       "function": "Improvement & Strategy",
-      "title": "Preventing 39 Stalled Candidates per Week with Throughput Modeling",
-      "summary": "Prevented 500 stalled candidates per quarter by anchoring recruiter KPIs to hiring manager interview capacity rather than activity volume.",
+      "title": "Preventing 39 Stalled Candidates per Week",
+      "summary": "500 stalled candidates per quarter prevented with throughput modeling.",
       "href": "/use-cases/throughput-modeling/",
       "featured": true,
       "listed": true,
@@ -43,12 +43,12 @@
     "card": {
       "type": "use-case",
       "function": "Hiring & Mobility",
-      "title": "Internal Screening Failure Cost Org $25K+ in Avoidable Fees",
+      "title": "When Screening Failure Cost $25K+",
       "summary": "Solving Bias, False Negatives & Lost Revenue in High Volume Recruiting.",
       "href": "/use-cases/screening-failure/",
       "featured": true,
       "listed": true,
-      "rank": 4
+      "rank": 1
     }
   },
   {
@@ -56,8 +56,8 @@
     "card": {
       "type": "use-case",
       "function": "Hiring & Mobility",
-      "title": "Increasing Offer Acceptance from 70% to 90% with Candidate Lifecycle Orchestration",
-      "summary": "Eliminating 32 HM interviews and 40–60 hours of recruiter workload per quarter.",
+      "title": "Increasing Offer Acceptance from 70% to 90%",
+      "summary": "Eliminating 32 HM interviews and 40–60 workload hours with lifecycle orchestration.",
       "href": "/use-cases/lifecycle-automation/",
       "featured": false,
       "listed": true,
@@ -69,8 +69,8 @@
     "card": {
       "type": "use-case",
       "function": "Governance & Infrastructure",
-      "title": "Centralizing Recruiting Assets Through a Structured Document Repository",
-      "summary": "Reduced duplicate effort, improved messaging consistency, and made employer branding wins usable in every candidate conversation.",
+      "title": "Centralizing Recruiting Assets",
+      "summary": "Structured document repository reduced duplicate work and improved messaging consistency.",
       "href": "/use-cases/document-management/",
       "featured": false,
       "listed": true,
@@ -83,7 +83,7 @@
       "type": "use-case",
       "function": "Hiring & Mobility",
       "title": "Sourcing Quality — Not All Pipelines Are Created Equal",
-      "summary": "Source-to-hire conversion analysis across inbound, outbound, and referrals — and what the 12x gap means for where you spend recruiter time and budget.",
+      "summary": "Source-to-hire analysis revealed 12x performance gap in lead sourcing.",
       "href": "/use-cases/sourcing-quality/",
       "featured": false,
       "listed": true,
