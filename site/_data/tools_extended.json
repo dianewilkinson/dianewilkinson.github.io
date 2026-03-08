@@ -14,7 +14,7 @@
         "index": "/tools/metrics/",
         "playbook": "/tools/metrics/playbook/",
         "demo": "/tools/metrics/demo/",
-        "dictionary": "/system/core/metrics/"
+        "dictionary": "/system/metrics/"
       },
       "relations": {
         "fedBy": ["screening", "interviews", "outreach", "offer"],
