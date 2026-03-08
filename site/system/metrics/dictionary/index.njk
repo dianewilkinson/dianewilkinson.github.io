@@ -1,0 +1,257 @@
+---
+layout: templates/system.njk
+permalink: "/system/metrics/dictionary/"
+
+title: "Core — Metrics Dictionary (Full)"
+description: "Full governed metrics dictionary (CSV): names, categories, definitions, formulas, grain, filters, and ownership."
+pageId: "system"
+heroClass: "hero--tool-strong"
+
+kicker: "Core · Metrics Dictionary · Full"
+backHref: "/system/core/metrics/"
+backLabel: "Back to Metrics Overview"
+
+heroTitle: "Metrics <span class='accent'>Dictionary: Full</span>"
+sub: "This page renders the full metrics dictionary from the CSV used across the portfolio — so definitions stay consistent and tools can reference stable IDs."
+callout: "<b>Source of truth:</b> <a href='/assets/documents/metricsv2.csv'>/assets/documents/metricsv2.csv</a>"
+---
+
+{# PAGE CONTENT ONLY — template handles head, bar, wrap, crumbs, hero, footer, exploreNext #}
+
+<section class="full" aria-label="Download and usage">
+  <h2 class="section-title">Download</h2>
+  <p class="muted">
+    <a href="/assets/documents/metricsv2.csv"><strong>Download metricsv2.csv →</strong></a>
+  </p>
+  <div class="callout">
+    <strong>Tip:</strong> When you update the CSV, this page updates automatically on next build — no manual page edits needed.
+  </div>
+</section>
+
+<section class="full" aria-label="Dictionary table">
+  <h2 class="section-title">Browse the dictionary</h2>
+  <p class="small">
+    Use search to filter rows. The table is rendered client-side from the CSV.
+  </p>
+
+  <p>
+    <label class="small" for="metricsSearch"><strong>Search</strong></label><br />
+    <input id="metricsSearch" type="search" placeholder="Type to filter (e.g., 'Time-to-Fill', 'Decision Integrity', '14.15')" />
+  </p>
+
+  <div class="table-wrap" role="region" aria-label="Metrics dictionary table">
+    <table>
+      <thead id="metricsHead"></thead>
+      <tbody id="metricsBody"></tbody>
+    </table>
+  </div>
+
+  <noscript>
+    <p class="small muted">
+      JavaScript is required to render the CSV table. You can still download the CSV above.
+    </p>
+  </noscript>
+
+  <p class="small muted" id="metricsCount"></p>
+</section>
+
+<script>
+  (function () {
+    var CSV_URL = "/assets/documents/metricsv2.csv";
+
+    var headEl = document.getElementById("metricsHead");
+    var bodyEl = document.getElementById("metricsBody");
+    var searchEl = document.getElementById("metricsSearch");
+    var countEl = document.getElementById("metricsCount");
+
+    if (!headEl || !bodyEl || !searchEl || !countEl) return;
+
+    function parseCSV(text) {
+      var rows = [];
+      var row = [];
+      var field = "";
+      var i = 0;
+      var inQuotes = false;
+
+      while (i < text.length) {
+        var c = text[i];
+
+        if (inQuotes) {
+          if (c === '"') {
+            if (text[i + 1] === '"') {
+              field += '"';
+              i += 2;
+              continue;
+            }
+            inQuotes = false;
+            i += 1;
+            continue;
+          }
+          field += c;
+          i += 1;
+          continue;
+        }
+
+        if (c === '"') {
+          inQuotes = true;
+          i += 1;
+          continue;
+        }
+
+        if (c === ",") {
+          row.push(field);
+          field = "";
+          i += 1;
+          continue;
+        }
+
+        if (c === "\n") {
+          row.push(field);
+          rows.push(row);
+          row = [];
+          field = "";
+          i += 1;
+          continue;
+        }
+
+        if (c === "\r") {
+          i += 1;
+          continue;
+        }
+
+        field += c;
+        i += 1;
+      }
+
+      if (field.length || row.length) {
+        row.push(field);
+        rows.push(row);
+      }
+
+      return rows;
+    }
+
+    function escapeHTML(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function normalize(s) {
+      return String(s || "").toLowerCase();
+    }
+
+    function cleanCellValue(v) {
+      // Keep the table dense + avoid massive row height from embedded newlines.
+      return String(v || "").replace(/\s+/g, " ").trim();
+    }
+
+    function buildTable(headers, records) {
+      headEl.innerHTML = "";
+      bodyEl.innerHTML = "";
+
+      var tr = document.createElement("tr");
+      headers.forEach(function (h) {
+        var th = document.createElement("th");
+        th.textContent = h;
+        tr.appendChild(th);
+      });
+      headEl.appendChild(tr);
+
+      records.forEach(function (r) {
+        var trb = document.createElement("tr");
+        headers.forEach(function (h) {
+          var td = document.createElement("td");
+          td.innerHTML = escapeHTML(cleanCellValue(r[h] || ""));
+          trb.appendChild(td);
+        });
+        bodyEl.appendChild(trb);
+      });
+
+      countEl.textContent = records.length + " rows shown";
+    }
+
+    fetch(CSV_URL, { cache: "no-store" })
+      .then(function (res) { return res.text(); })
+      .then(function (text) {
+        var parsed = parseCSV(text);
+        if (!parsed || parsed.length < 2) return;
+
+        var rawHeaders = parsed[0].map(function (h) { return (h || "").trim(); }).filter(Boolean);
+
+        // Hide “wide / verbose / mapping” columns from the on-page view.
+        // CSV remains downloadable as source of truth.
+        var HIDE_COLS = new Set([
+          "Commentary / Interpretation",
+          "Commentary",
+          "Interpretation",
+          "Notes",
+          "Data Source - Object",
+          "Data Source - Field",
+          "Data Store - Object Field",
+          "Data Store - Time Field",
+          "A[i]gent"
+        ]);
+
+        var filteredHeaders = rawHeaders.filter(function (h) { return !HIDE_COLS.has(h); });
+
+        // Prefer a compact “portfolio view” if the headers exist.
+        // If header names differ, we fall back to filteredHeaders automatically.
+        var SHOW_COLS = [
+          "Metric ID",
+          "Group",
+          "Metrics Category",
+          "Metric",
+          "Definition / Description",
+          "Formula",
+          "Numerator",
+          "Denominator"
+        ];
+
+        var headers = SHOW_COLS.filter(function (h) { return filteredHeaders.indexOf(h) !== -1; });
+        if (!headers.length) headers = filteredHeaders;
+
+        var dataRows = parsed.slice(1);
+
+        var records = dataRows.map(function (r) {
+          var obj = {};
+          rawHeaders.forEach(function (h, idx) {
+            obj[h] = (r[idx] == null ? "" : String(r[idx]));
+          });
+          return obj;
+        }).filter(function (obj) {
+          return rawHeaders.some(function (h) { return cleanCellValue(obj[h]) !== ""; });
+        });
+
+        var filtered = records.slice();
+        buildTable(headers, filtered);
+
+        function applyFilter() {
+          var q = normalize(searchEl.value).trim();
+          if (!q) {
+            filtered = records.slice();
+            buildTable(headers, filtered);
+            return;
+          }
+
+          filtered = records.filter(function (rec) {
+            for (var i = 0; i < headers.length; i++) {
+              var v = normalize(cleanCellValue(rec[headers[i]]));
+              if (v.indexOf(q) !== -1) return true;
+            }
+            return false;
+          });
+
+          buildTable(headers, filtered);
+        }
+
+        searchEl.addEventListener("input", applyFilter);
+      })
+      .catch(function () {
+        countEl.textContent = "Could not load metricsv2.csv.";
+      });
+  })();
+</script>
