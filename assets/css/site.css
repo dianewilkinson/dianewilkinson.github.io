@@ -384,6 +384,10 @@ body[data-page="home"] .panel--pink .panelInner{
 .chapter__inner h3{ margin:0 0 6px; }
 .chapter__inner h3 + p{ margin:0 0 10px; }
 
+/* System pages: strip purple gradient from chapter sections */
+body[data-page="system"] .chapter{ background: rgba(255,255,255,.70); }
+body[data-page="system"] .chapter__inner{ background: transparent; border: none; padding: 2px 0; }
+
 /* =========================
    EXPLORE NEXT (terminal)
    - Use on EVERY page as the final section

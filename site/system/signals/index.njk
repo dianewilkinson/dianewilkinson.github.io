@@ -1,0 +1,220 @@
+---
+layout: templates/system.njk
+permalink: "/system/signals/"
+
+title: "System — Signals"
+description: "Signals are the comparable inputs that make work measurable: throughput, behavior patterns, risk indicators, and operational constraints captured across workflows."
+
+pageId: "system"
+heroClass: "hero--tool-strong"
+
+kicker: "System · Signals Layer"
+backHref: "/system/"
+backLabel: "Back to System"
+
+heroTitle: "Signals: <span class='accent'>Comparable Inputs</span>"
+sub: "Signals capture the comparable inputs across workflows — so patterns, drift, and impact become measurable instead of anecdotal."
+
+callout: "<b>Design principle:</b> a signal should mean the same thing everywhere it appears — across dashboards, tools, and decision logic."
+
+ogTitle: "Signals — System Layer"
+ogDescription: "Signals are the comparable inputs that make operational patterns visible and decisions consistent."
+ogUrl: "https://dianewilkinson.github.io/system/signals/"
+---
+
+<section class="chapter" aria-label="What signals are">
+  <div class="chapter__inner">
+    <h2 class="section-title">What signals are</h2>
+
+    <p class="muted">
+      A signal is a <strong>comparable input captured consistently across workflows</strong>.
+      Signals allow the system to detect patterns, measure performance, and identify bottlenecks
+      without relying on interpretation or memory.
+    </p>
+
+    <p>
+      Signals are not dashboards and they are not opinions.
+      They are the structured inputs that make measurement possible.
+    </p>
+
+    <div class="miniGrid miniGrid--4">
+      <div class="mini">
+        <b>Comparable</b>
+        <span>Signals must mean the same thing across teams and tools.</span>
+      </div>
+
+      <div class="mini">
+        <b>Observable</b>
+        <span>Signals are derived from real events or structured inputs.</span>
+      </div>
+
+      <div class="mini">
+        <b>Traceable</b>
+        <span>Every signal can be tied to a workflow event or input.</span>
+      </div>
+
+      <div class="mini">
+        <b>Actionable</b>
+        <span>Signals exist to support decisions, not reporting vanity.</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      Without shared signals, organizations end up arguing about numbers instead of fixing the system.
+    </div>
+  </div>
+</section>
+
+<section class="chapter" aria-label="Signals vs metrics">
+  <div class="chapter__inner">
+    <h2 class="section-title">Signals vs Metrics</h2>
+
+    <p class="muted">
+      Signals and metrics are related but not identical.
+      Signals describe what the system observes; metrics define how those observations are measured.
+    </p>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Signals</h3>
+        <p class="muted">
+          Signals are the <strong>inputs</strong> the system monitors across workflows.
+        </p>
+        <ul>
+          <li>Candidate responsiveness</li>
+          <li>Pass-through rates</li>
+          <li>Decision latency</li>
+          <li>Interview loop capacity</li>
+          <li>Communication quality</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Metrics</h3>
+        <p class="muted">
+          Metrics define <strong>how signals are measured</strong> and calculated.
+        </p>
+        <ul>
+          <li>Formula</li>
+          <li>Grain and filters</li>
+          <li>Data fields</li>
+          <li>Owner and governance</li>
+        </ul>
+
+        <p class="small">
+          See the metrics layer for the governed definitions behind each signal.
+        </p>
+      </div>
+    </div>
+
+    <div class="ctaRow ctaRow--left">
+      <a class="btn primary" href="/system/metrics/">Open Metrics Layer →</a>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" aria-label="Types of signals">
+  <div class="chapter__inner">
+    <h2 class="section-title">Types of signals</h2>
+
+    <p class="muted">
+      Signals can capture operational performance, behavioral patterns, or decision quality.
+      Together they provide a more complete picture of how the system actually works.
+    </p>
+
+    <div class="grid3">
+
+      <div class="card">
+        <h3>Operational Signals</h3>
+        <ul>
+          <li>Throughput and pass-through rates</li>
+          <li>Time-to-stage and cycle times</li>
+          <li>Scheduling and coordination delays</li>
+          <li>Capacity constraints</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Behavioral Signals</h3>
+        <ul>
+          <li>Responsiveness</li>
+          <li>Communication quality</li>
+          <li>Attention to detail</li>
+          <li>Interview feedback completeness</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Decision Signals</h3>
+        <ul>
+          <li>Decision consistency</li>
+          <li>Rubric adherence</li>
+          <li>Predictive strength of screening</li>
+          <li>Calibration drift</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="chapter" aria-label="Why signals matter">
+  <div class="chapter__inner">
+    <h2 class="section-title">Why signals matter</h2>
+
+    <p class="muted">
+      Most organizations attempt to improve outcomes without measuring the inputs that produce them.
+      Signals make operational patterns visible so root causes can be identified and addressed.
+    </p>
+
+    <ul>
+      <li>Reveal bottlenecks that slow hiring.</li>
+      <li>Detect evaluation drift across recruiters and hiring managers.</li>
+      <li>Measure behavioral factors that normally stay subjective.</li>
+      <li>Provide consistent inputs for automation and decision support.</li>
+    </ul>
+
+    <div class="callout">
+      Signals turn operational intuition into measurable patterns — enabling faster diagnosis and more consistent decisions.
+    </div>
+  </div>
+</section>
+
+<section class="chapter" aria-label="Signals in the system">
+  <div class="chapter__inner">
+    <h2 class="section-title">Signals inside the system</h2>
+
+    <p class="muted">
+      Signals power the rest of the operating model. They feed metrics,
+      decision logic, and automation.
+    </p>
+
+    <div class="grid3">
+
+      <div class="card">
+        <h3>Metrics Layer</h3>
+        <p class="muted">
+          Metrics define the formulas and definitions behind each signal.
+        </p>
+        <p>
+          <a href="/system/metrics/">Explore metrics →</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Decision Logic</h3>
+        <p class="muted">
+          Decision logic interprets signals and determines when action is required.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Execution</h3>
+        <p class="muted">
+          Tools execute recommendations and capture outcomes that feed signals back into the system.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>

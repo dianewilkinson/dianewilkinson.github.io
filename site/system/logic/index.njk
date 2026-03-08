@@ -1,0 +1,281 @@
+---
+layout: templates/system.njk
+permalink: "/system/logic/"
+
+title: "System — Decision Logic"
+description: "Decision logic turns signals into action using explicit thresholds, routing rules, autonomy tiers, and escalation paths."
+
+pageId: "system"
+heroClass: "hero--tool-strong"
+
+kicker: "System · Decision Logic"
+backHref: "/system/"
+backLabel: "Back to System"
+
+heroTitle: "Decision Logic: <span class='accent'>From Signal to Action</span>"
+sub: "Signals only matter if the system knows what to do with them. Decision logic defines how signals are interpreted, when action is triggered, and where automation stops and human judgement takes over."
+
+callout: "<b>Design principle:</b> decision logic should be explicit, reviewable, and stable enough that two people looking at the same signal do not invent two different next steps."
+
+ogTitle: "Decision Logic — System Layer"
+ogDescription: "How signals become actions through thresholds, routing, escalation, and accountable execution."
+ogUrl: "https://dianewilkinson.github.io/system/decision-logic/"
+---
+
+<section class="chapter" aria-label="What decision logic is">
+  <div class="chapter__inner">
+    <h2 class="section-title">What decision logic is</h2>
+
+    <p class="muted">
+      Decision logic is the layer that translates <strong>shared signals</strong> into
+      <strong>recommended actions, routing, monitoring, or escalation</strong>.
+      It sits between measurement and execution.
+    </p>
+
+    <p>
+      Without decision logic, teams can see the same pattern and still act inconsistently.
+      With explicit logic, the system can interpret comparable inputs in comparable ways.
+    </p>
+
+    <div class="miniGrid miniGrid--4" aria-label="Decision logic principles">
+      <div class="mini">
+        <b>Explicit</b>
+        <span>Rules are written down instead of living in tribal knowledge.</span>
+      </div>
+
+      <div class="mini">
+        <b>Reviewable</b>
+        <span>People can inspect why an action or recommendation occurred.</span>
+      </div>
+
+      <div class="mini">
+        <b>Bounded</b>
+        <span>Logic determines where AI can monitor, recommend, or act.</span>
+      </div>
+
+      <div class="mini">
+        <b>Consistent</b>
+        <span>The same signal pattern should not create different outcomes by person or mood.</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      Signals make patterns visible. Decision logic determines what those patterns mean operationally.
+    </div>
+  </div>
+</section>
+
+<section class="chapter" aria-label="How decision logic works">
+  <div class="chapter__inner">
+    <h2 class="section-title">How decision logic works</h2>
+
+    <p class="muted">
+      The logic layer usually follows a simple sequence: detect, interpret, route, and log.
+    </p>
+
+    <div class="grid3" aria-label="Logic flow">
+      <div class="card">
+        <h3>Detect</h3>
+        <p class="muted">The system identifies movement in a signal or threshold condition.</p>
+        <ul>
+          <li>Metric crosses expected range</li>
+          <li>Behavior pattern repeats</li>
+          <li>Variance or drift becomes visible</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Interpret</h3>
+        <p class="muted">The system applies shared definitions and logic to determine what the pattern likely means.</p>
+        <ul>
+          <li>Capacity bottleneck</li>
+          <li>Decision inconsistency</li>
+          <li>Execution hygiene problem</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Route</h3>
+        <p class="muted">The system decides whether to monitor, recommend, auto-execute, or escalate.</p>
+        <ul>
+          <li>Low-risk work moves automatically</li>
+          <li>Higher-risk actions require review</li>
+          <li>High-stakes decisions always route to humans</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" aria-label="Core components of decision logic">
+  <div class="chapter__inner">
+    <h2 class="section-title">Core components of decision logic</h2>
+
+    <div class="grid2" aria-label="Decision logic components">
+      <div class="card">
+        <h3>Thresholds</h3>
+        <p class="muted">
+          Thresholds define when a signal should trigger attention, intervention, or escalation.
+        </p>
+        <ul>
+          <li>Expected ranges</li>
+          <li>Alert triggers</li>
+          <li>Escalation boundaries</li>
+          <li>Minimum acceptable conditions</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Routing Rules</h3>
+        <p class="muted">
+          Routing rules define where work goes once a condition is met.
+        </p>
+        <ul>
+          <li>Who owns the next step</li>
+          <li>Whether action is automated or approved</li>
+          <li>What context accompanies the handoff</li>
+          <li>What gets logged for auditability</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid2" aria-label="Decision logic components continued">
+      <div class="card">
+        <h3>Decision Rights</h3>
+        <p class="muted">
+          Not every action belongs to the same actor. Decision rights make authority explicit.
+        </p>
+        <ul>
+          <li>AI may observe, recommend, or act</li>
+          <li>Humans retain authority where stakes are material</li>
+          <li>Approvals are structured rather than improvised</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Receipts</h3>
+        <p class="muted">
+          Every recommendation or action should be traceable to the signal and logic that produced it.
+        </p>
+        <ul>
+          <li>Why this surfaced</li>
+          <li>What threshold was crossed</li>
+          <li>What action was taken</li>
+          <li>What happened next</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" aria-label="Types of decision logic">
+  <div class="chapter__inner">
+    <h2 class="section-title">Types of decision logic</h2>
+
+    <p class="muted">
+      Different signal types require different logic. Operational issues, behavioral patterns,
+      and decision-quality drift do not route the same way.
+    </p>
+
+    <div class="grid3" aria-label="Logic types">
+      <div class="card">
+        <h3>Operational Logic</h3>
+        <ul>
+          <li>Detects bottlenecks, delays, capacity strain, and missed SLAs</li>
+          <li>Routes to recruiter, coordinator, or hiring manager workflow owners</li>
+          <li>Often suitable for low-risk automation</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Behavioral Logic</h3>
+        <ul>
+          <li>Interprets communication quality, responsiveness, and execution hygiene</li>
+          <li>Supports review, coaching, or structured follow-up</li>
+          <li>Often needs human judgement before action</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Decision Integrity Logic</h3>
+        <ul>
+          <li>Detects calibration drift, rubric override, or inconsistency across reviewers</li>
+          <li>Routes to review, calibration, or threshold adjustment</li>
+          <li>High-stakes use cases require explicit governance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" aria-label="Autonomy and escalation">
+  <div class="chapter__inner">
+    <h2 class="section-title">Autonomy and escalation</h2>
+
+    <p class="muted">
+      Decision logic should make clear where automation is safe and where escalation is required.
+    </p>
+
+    <div class="miniGrid miniGrid--4" aria-label="Autonomy tiers">
+      <div class="mini">
+        <b>Tier 0 — Monitor</b>
+        <span>Surface the signal. No action is taken.</span>
+      </div>
+
+      <div class="mini">
+        <b>Tier 1 — Auto-execute</b>
+        <span>Low-risk reminders, nudges, routing, and hygiene actions.</span>
+      </div>
+
+      <div class="mini">
+        <b>Tier 2 — Recommend</b>
+        <span>AI proposes an action, but a human approves it.</span>
+      </div>
+
+      <div class="mini">
+        <b>Tier 3 — Escalate</b>
+        <span>High-stakes outcomes always route to humans.</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      Good decision logic does not maximize automation. It maximizes safe, explainable, and accountable action.
+    </div>
+  </div>
+</section>
+
+<section class="chapter" aria-label="Decision logic in the system">
+  <div class="chapter__inner">
+    <h2 class="section-title">Decision Logic Inside the System</h2>
+
+    <p class="muted">
+      Decision logic sits between the signals layer and the tools that execute work.
+    </p>
+
+    <div class="grid3" aria-label="System connections">
+      <div class="card">
+        <h3>Signals</h3>
+        <p class="muted">
+          Signals provide the comparable inputs that logic interprets.
+        </p>
+        <p><a href="/system/signals/">Explore signals →</a></p>
+      </div>
+
+      <div class="card">
+        <h3>Metrics</h3>
+        <p class="muted">
+          Metrics define how signals are measured, filtered, and governed.
+        </p>
+        <p><a href="/system/metrics/">Explore metrics →</a></p>
+      </div>
+
+      <div class="card">
+        <h3>Tools</h3>
+        <p class="muted">
+          Tools apply the logic in production workflows and capture outcomes for learning.
+        </p>
+        <p><a href="/tools/">See tools in context →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
