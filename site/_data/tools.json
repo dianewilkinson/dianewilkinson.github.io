@@ -130,8 +130,8 @@
     "card": {
       "type": "playbook",
       "function": "Governance & Infrastructure",
-      "title": "AI-Integrated Operating Model Framework",
-      "summary": "Systems structures and best practices for a technology forward organization.",
+      "title": "AI-Integrated Operating Model",
+      "summary": "Systems structures and best practices.",
       "href": "/system/operating-model/",
       "featured": false,
       "listed": true,
