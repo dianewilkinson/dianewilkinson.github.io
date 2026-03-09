@@ -28,7 +28,7 @@
   <span class="ctaLabel">Explore →</span>
   <a class="btn" href="/tools/{{ toolSlug }}/">Overview</a>
   <span class="btn primary">{{ playbookLabel or "Playbook" }}</span>
-  <a class="btn" href="/tools/{{ toolSlug }}/demo/">Demo</a>
+  {% if not hideDemo %}<a class="btn" href="/tools/{{ toolSlug }}/demo/">Demo</a>{% endif %}
   <a class="btn" href="/use-cases/">Cases</a>
 {% endblock %}
 
