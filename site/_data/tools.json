@@ -60,10 +60,10 @@
     "card": {
       "type": "tool",
       "function": "Improvement & Strategy",
-      "title": "Innovation Signaling & Routing",
-      "summary": "Nurture organizational innovation, inspiration & employee engagement.",
+      "title": "Insight Signaling & Routing",
+      "summary": "Nurture innovation, inspiration & engagement.",
       "href": "/tools/innovation/",
-      "featured": false,
+      "featured": true,
       "listed": true,
       "section": "core",
       "rank": 5
