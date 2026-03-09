@@ -16,7 +16,7 @@
 {% block ctas %}
 <span class="ctaLabel">Explore →</span>
 <span class="btn primary">Overview</span>
-<a class="btn" href="/tools/{{ toolSlug }}/playbook/">Playbook</a>
+<a class="btn" href="/tools/{{ toolSlug }}/playbook/">{{ playbookLabel or "Playbook" }}</a>
 {% if not hideDemo %}<a class="btn" href="/tools/{{ toolSlug }}/demo/">Demo</a>{% endif %}
 <a class="btn" href="{{ casesHref or '/use-cases/' }}">Cases</a>
 {% endblock %}
