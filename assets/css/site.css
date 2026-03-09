@@ -436,7 +436,7 @@ body[data-page="system"] .chapter__inner{ background: transparent; border: none;
   display:flex;
   align-items:center;
   gap:12px;
-  font-size:24px;
+  font-size:26px;
   font-weight:700;
   line-height:1.25;
   letter-spacing:normal;
