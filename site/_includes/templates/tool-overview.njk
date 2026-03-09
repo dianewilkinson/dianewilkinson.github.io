@@ -23,16 +23,20 @@
 
 {% block content %}
 
-{# Above-the-fold: iframe demo #}
+{# Above-the-fold: image or iframe demo #}
 <section class="demo" aria-label="{{ toolName }} Demo">
-  <div class="demoHead">
-    <div class="label"><span class="dot"></span> Demo Preview</div>
-    <a href="/tools/{{ toolSlug }}/demo/">Open full demo →</a>
-  </div>
-  <iframe
-    class="demoFrame"
-    src="/tools/{{ toolSlug }}/demo-embed/"
-    title="{{ toolName }} Demo (embedded)"></iframe>
+  {% if demoImage %}
+    <img src="{{ demoImage }}" alt="{{ toolName }} flow diagram" style="width:100%;display:block;border-radius:4px;">
+  {% else %}
+    <div class="demoHead">
+      <div class="label"><span class="dot"></span> Demo Preview</div>
+      <a href="/tools/{{ toolSlug }}/demo/">Open full demo →</a>
+    </div>
+    <iframe
+      class="demoFrame"
+      src="/tools/{{ toolSlug }}/demo-embed/"
+      title="{{ toolName }} Demo (embedded)"></iframe>
+  {% endif %}
 </section>
 
 {# What it solves (directly under iframe) #}
