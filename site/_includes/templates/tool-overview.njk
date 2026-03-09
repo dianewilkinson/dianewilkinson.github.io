@@ -37,6 +37,15 @@
 </section>
 {% endif %}
 
+{# Optional tagline #}
+{% if tagline %}
+<section class="panel tagline-panel" aria-label="Tool tagline">
+  <div class="panelInner">
+    <p class="tagline-statement">{{ tagline | safe }}</p>
+  </div>
+</section>
+{% endif %}
+
 {# What it solves (directly under demo) #}
 {% if solves %}
 <section class="full" aria-label="What {{ toolName }} solves">
