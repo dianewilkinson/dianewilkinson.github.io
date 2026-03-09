@@ -85,9 +85,14 @@
         {% endif %}
 
         <div class="backRow backRow--split">
-          <a class="backLink" href="{{ backHref or '/' }}">← {{ backLabel or 'Back' }}</a>
+          <a class="backLink" href="{{ backHref or '/' }}">← {{ backLabel or 'Back to Home' }}</a>
           <div class="ctaRow">
-            {% block ctas %}{% endblock %}
+            {% block ctas %}
+              <a class="btn" href="/tools/">Tools</a>
+              <a class="btn" href="/system/">System</a>
+              <a class="btn" href="/use-cases/">Cases</a>
+              <a class="btn" href="/articles/">Articles</a>
+            {% endblock %}
           </div>
         </div>
       </header>
