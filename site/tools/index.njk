@@ -97,4 +97,39 @@ permalink: "/tools/"
     </div>
   </section>
 
+  <section class="panel panel--cool" aria-label="Playbooks">
+    <div class="panelInner">
+      <h2 class="section-title">Playbooks</h2>
+
+      <div class="appGrid" aria-label="Playbooks grid">
+
+        {% for item in tools | sort(false, false, "card.rank") %}
+          {% if item.card and item.card.listed and item.card.section == "playbook" %}
+            <article class="appCard">
+              <div class="appTop">
+                <div class="appMain">
+                  <h3>{{ item.card.title }}</h3>
+                  <p>{{ item.card.summary }}</p>
+                </div>
+              </div>
+              <div class="appActions">
+                {% if item.card.function %}
+                  <span class="small muted">{{ item.card.function }}</span>
+                {% else %}
+                  <span class="small muted"></span>
+                {% endif %}
+                {% if item.card.href %}
+                  <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+                {% else %}
+                  <span class="small muted">Coming soon</span>
+                {% endif %}
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
+
+      </div>
+    </div>
+  </section>
+
 {% endblock %}

@@ -120,8 +120,8 @@
       "summary": "Workflows & best practices to keep CSATs up and pipelines flowing.",
       "href": "/tools/candidate-journey/playbook/",
       "featured": false,
-      "listed": false,
-      "section": "workflow",
+      "listed": true,
+      "section": "playbook",
       "rank": 9
     }
   },
@@ -204,8 +204,8 @@
       "summary": "Recruiting workflows to increase efficiency, engagement, branding, & CSAT.",
       "href": "/tools/workflow/",
       "featured": false,
-      "listed": false,
-      "section": "workflow",
+      "listed": true,
+      "section": "playbook",
       "rank": 15
     }
   },
