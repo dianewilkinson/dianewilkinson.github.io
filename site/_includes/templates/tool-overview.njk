@@ -23,27 +23,32 @@
 
 {% block content %}
 
-{# Above-the-fold: image or iframe demo #}
+{# Above-the-fold: iframe demo (only when no demoImage) #}
+{% if not demoImage %}
 <section class="demo" aria-label="{{ toolName }} Demo">
-  {% if demoImage %}
-    <img src="{{ demoImage }}" alt="{{ toolName }} flow diagram" style="width:100%;display:block;border-radius:4px;">
-  {% else %}
-    <div class="demoHead">
-      <div class="label"><span class="dot"></span> Demo Preview</div>
-      <a href="/tools/{{ toolSlug }}/demo/">Open full demo →</a>
-    </div>
-    <iframe
-      class="demoFrame"
-      src="/tools/{{ toolSlug }}/demo-embed/"
-      title="{{ toolName }} Demo (embedded)"></iframe>
-  {% endif %}
+  <div class="demoHead">
+    <div class="label"><span class="dot"></span> Demo Preview</div>
+    <a href="/tools/{{ toolSlug }}/demo/">Open full demo →</a>
+  </div>
+  <iframe
+    class="demoFrame"
+    src="/tools/{{ toolSlug }}/demo-embed/"
+    title="{{ toolName }} Demo (embedded)"></iframe>
 </section>
+{% endif %}
 
-{# What it solves (directly under iframe) #}
+{# What it solves (directly under demo) #}
 {% if solves %}
 <section class="full" aria-label="What {{ toolName }} solves">
   <h2 class="section-title">What the Tool Solves</h2>
   <p class="muted">{{ solves | safe }}</p>
+</section>
+{% endif %}
+
+{# demoImage: shown below What it Solves #}
+{% if demoImage %}
+<section class="demo" aria-label="{{ toolName }} flow diagram">
+  <img src="{{ demoImage }}" alt="{{ toolName }} flow diagram" style="width:100%;display:block;border-radius:4px;">
 </section>
 {% endif %}
 
