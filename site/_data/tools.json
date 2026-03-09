@@ -134,8 +134,8 @@
       "summary": "Systems structures and best practices for a technology forward organization.",
       "href": "/system/operating-model/",
       "featured": false,
-      "listed": false,
-      "section": "workflow",
+      "listed": true,
+      "section": "playbook",
       "rank": 10
     }
   },
