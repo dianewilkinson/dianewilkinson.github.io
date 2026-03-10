@@ -23,7 +23,7 @@ ogUrl: "https://dianewilkinson.github.io/system/"
 
 <section class="chapter" aria-label="Shared architecture">
   <div class="chapter__inner">
-    <h2 class="section-title">Shared Architecture</h2>
+    <h2 class="section-title">How the system works</h2>
     <p class="muted">
       <b>Tools are the interface. The system is the operating model.</b>
       One shared layer of signals, logic, and guardrails runs across tools — so decisions stay consistent, work routes correctly, and automation remains reviewable.
@@ -43,7 +43,7 @@ ogUrl: "https://dianewilkinson.github.io/system/"
       </div>
 
       <div class="card">
-        <h3>Decision Logic</h3>
+        <h3>Decisions</h3>
         <p class="muted">Rules that turn signals into action — with thresholds, tradeoffs, and escalation paths made explicit.</p>
         <ul>
           <li>Expected ranges and alert thresholds</li>
@@ -55,7 +55,7 @@ ogUrl: "https://dianewilkinson.github.io/system/"
       </div>
 
       <div class="card">
-        <h3>Execution</h3>
+        <h3>Action</h3>
         <p class="muted">Actions happen inside the tools — and every action is visible, logged, and attributable.</p>
         <ul>
           <li>Receipts attached to recommendations</li>
@@ -77,7 +77,7 @@ ogUrl: "https://dianewilkinson.github.io/system/"
 
 <section class="chapter" aria-label="Operating loop">
   <div class="chapter__inner">
-    <h2 class="section-title">The Operating Loop</h2>
+    <h2 class="section-title">The Action Loop</h2>
     <p class="muted">The system only works if insight turns into action and outcomes feed the model back.</p>
 
     <div class="grid3" aria-label="Operating loop blocks">
@@ -125,14 +125,19 @@ ogUrl: "https://dianewilkinson.github.io/system/"
   </div>
 </section>
 
-<section class="chapter" aria-label="Governance and safety">
+<section class="chapter" aria-label="Governance and system definitions">
   <div class="chapter__inner">
-    <h2 class="section-title">Governance &amp; Safety</h2>
+
+    <h2 class="section-title">Governance & System Definitions</h2>
+
     <p class="muted">
-      Autonomy is not assumed. It is explicitly tiered so low-risk work can move quickly and high-stakes decisions always remain accountable.
+      Autonomy is not assumed. Safe automation depends on clear decision rights,
+      stable definitions, and explicit thresholds so systems remain accountable
+      and consistent across tools.
     </p>
 
-    <div class="miniGrid miniGrid--4" aria-label="Autonomy tiers">
+    <div class="miniGrid miniGrid--4">
+
       <div class="mini">
         <b>Tier 0 — Monitor</b>
         <span>Measure, detect drift, and surface risks. No action.</span>
@@ -152,46 +157,32 @@ ogUrl: "https://dianewilkinson.github.io/system/"
         <b>Tier 3 — Escalate</b>
         <span>High-stakes decisions always route to humans. Governance applies.</span>
       </div>
+
     </div>
 
-    <div class="callout">
-      The goal is not maximum autonomy. It is safe autonomy: explicit thresholds, visible reasoning, and accountable escalation.
-    </div>
-  </div>
-</section>
+    <div class="miniGrid miniGrid--4">
 
-<section class="chapter" aria-label="Spec layer">
-  <div class="chapter__inner">
-    <h2 class="section-title">The Spec Layer</h2>
-    <p class="muted">
-      The system only stays trustworthy if the underlying definitions remain stable. Shared definitions, thresholds, and ownership prevent silent metric drift and inconsistent tool behavior.
-    </p>
-
-    <div class="miniGrid miniGrid--4" aria-label="Spec layer scope">
       <div class="mini">
         <b>Definitions</b>
-        <span>What a signal or metric means, including grain, filters, and edge cases.</span>
+        <span>Shared meanings for signals and metrics so comparisons stay valid.</span>
       </div>
 
       <div class="mini">
         <b>Logic</b>
-        <span>How interpretation works so two people do not get two different answers.</span>
+        <span>Interpretation rules ensure two people don't reach two different conclusions.</span>
       </div>
 
       <div class="mini">
         <b>Thresholds</b>
-        <span>What triggers alerts, actions, escalation, or required human review.</span>
+        <span>Explicit triggers for alerts, automation, escalation, or human review.</span>
       </div>
 
       <div class="mini">
         <b>Ownership</b>
-        <span>Who can change what, when, and why — with lightweight change control.</span>
+        <span>Clear control over who can change rules, thresholds, and definitions.</span>
       </div>
+
     </div>
 
-    <div class="ctaRow ctaRow--left">
-      <a class="btn primary" href="/system/metrics/">Open Metrics Overview →</a>
-      <a class="btnGhost" href="/tools/">See tools in context →</a>
-    </div>
   </div>
 </section>
