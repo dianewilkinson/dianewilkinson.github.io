@@ -841,6 +841,7 @@ a.mini:hover{ background:rgba(255,255,255,1); transform:translateY(-1px); box-sh
 
 .sys-sum h3{
   margin:0 0 6px;
+  font-family:'Playfair Display', Georgia, serif;
   font-size:18px;
   font-weight:900;
   letter-spacing:-.01em;
