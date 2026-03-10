@@ -391,6 +391,16 @@ body[data-page="home"] .panel--pink .panelInner{
 body[data-page="system"] .chapter{ background: rgba(255,255,255,.70); }
 body[data-page="system"] .chapter__inner{ background: transparent; border: none; padding: 2px 0; }
 
+.tagline{
+  font-size: clamp(22px, 4vw, 42px);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  text-align: center;
+  color: var(--text);
+}
+
 /* =========================
    EXPLORE NEXT (terminal)
    - Use on EVERY page as the final section
