@@ -3,7 +3,7 @@ layout: templates/system.njk
 permalink: "/system/signals/"
 
 title: "System — Signals"
-description: "Signals are the comparable inputs that make work measurable: throughput, behavior patterns, risk indicators, and operational constraints captured across workflows."
+description: "Signals capture observable patterns in how work moves, how people behave, and how decisions are made — turning everyday activity into measurable evidence."
 
 pageId: "system"
 heroClass: "hero--tool-strong"
@@ -18,7 +18,7 @@ sub: "Signals are observable patterns hidden inside everyday activity."
 callout: "<b>Design principle:</b> a signal should mean the same thing everywhere it appears — across dashboards, tools, and decision logic."
 
 ogTitle: "Signals — System Layer"
-ogDescription: "Signals are the comparable inputs that make operational patterns visible and decisions consistent."
+ogDescription: "Signals reveal patterns in how work actually happens — turning everyday activity into measurable evidence for decision systems."
 ogUrl: "https://dianewilkinson.github.io/system/signals/"
 ---
 
@@ -31,7 +31,7 @@ ogUrl: "https://dianewilkinson.github.io/system/signals/"
     </p>
 
     <p>
-    Every hiring process generates thousands of small cues about how work moves, how people respond, how decisions are made. Individually they look like noise. Collectively, they reveal how the system actually operates.
+    Every hiring process generates thousands of small cues about how work moves, how people respond, and how decisions are made. Individually they look like noise. Collectively, they reveal how the system actually operates.
     </p>
 
     <p>
@@ -39,11 +39,7 @@ ogUrl: "https://dianewilkinson.github.io/system/signals/"
     </p>
 
     <p>
-    They are not dashboards and they are not opinions.
-    </p>
-    
-    <p>
-    They are the <strong>observable evidence behind how work actually happens</strong>.
+    Signals are not dashboards and they are not opinions. They are the <strong>observable evidence behind how work actually happens</strong>.
     </p>
 
 
@@ -93,27 +89,29 @@ ogUrl: "https://dianewilkinson.github.io/system/signals/"
       <div class="card">
         <h3>Signals</h3>
         <p class="muted">
-          Signals are the <strong>inputs</strong> the system monitors across workflows.
+          Signals are the <strong>oberservable patterns</strong> the system monitors.
         </p>
         <ul>
           <li>Candidate responsiveness</li>
           <li>Pass-through rates</li>
-          <li>Decision latency</li>
-          <li>Interview loop capacity</li>
-          <li>Communication quality</li>
+          <li>Decision timing</li>
+          <li>Communnication patterns</li>
+          <li>Workflow transitions</li>
         </ul>
+
       </div>
 
       <div class="card">
         <h3>Metrics</h3>
         <p class="muted">
-          Metrics define <strong>how signals are measured</strong> and calculated.
+          Metrics define <strong>how signals are measured </strong> and calculated.
         </p>
         <ul>
-          <li>Formula</li>
-          <li>Grain and filters</li>
-          <li>Data fields</li>
-          <li>Owner and governance</li>
+          <li>Formulas & calculations</li>
+          <li>Aggregation rules</li>
+          <li>Time windows</li>
+          <li>Data fields & sources</li>
+          <li>Ownership & governance</li>
         </ul>
 
       </div>
@@ -126,43 +124,44 @@ ogUrl: "https://dianewilkinson.github.io/system/signals/"
     <h2 class="section-title">Types of signals</h2>
 
     <p class="muted">
-      Signals can capture operational performance, behavioral patterns, or decision quality.
-      Together they provide a more complete picture of how the system actually works.
+      Signals reveal different layers of how the system operates. 
+      Some describe how work moves through the process, some capture how people behave inside it, and others evaluate the quality of the decisions being made.
     </p>
 
     <div class="grid3">
 
       <div class="card">
         <h3>Workflow Signals</h3>
-        <p class="muted">Reveal how the process itself is performing.</p>
+        <p class="muted"><strong>Traditional People Analytics</strong>: How <strong>work moves</strong> through the process.</p>
         <ul>
-          <li>Throughput and pass-through rates</li>
-          <li>Time-to-stage and cycle times</li>
+          <li>Pass-through rates</li>
+          <li>Stage transitions and pass-through patterns</li>
+          <li>Cycle time between workflow events</li>
           <li>Scheduling and coordination delays</li>
-          <li>Capacity constraints</li>
         </ul>
         <p><a href="/tools/metrics/">See Metrics A[i]gent →</a></p>
       </div>
 
       <div class="card">
         <h3>Behavioral Signals</h3>
-        <p class="muted">Reveal how people interact inside the workflow.</p>
+        <p class="muted"><strong>Emerging People Analytics</strong>: How <strong>people perform</strong> inside the process.</p>
         <ul>
-          <li>Responsiveness</li>
-          <li>Communication quality</li>
+          <li>Responsiveness to communication</li>
+          <li>Communication clarity</li>
           <li>Attention to detail</li>
-          <li>Interview feedback completeness</li>
+          <li>Follow-through and preparation</li>
         </ul>
         <p class="muted">Article coming soon.</p>
       </div>
 
       <div class="card">
         <h3>Decision Signals</h3>
-        <p class="muted">Reveal whether hiring decisions themselves are reliable.</p>
+        <p class="muted"><strong>Decision Science</strong>: Whether <strong>hiring decisions</strong> themselves are reliable.</p>
         <ul>
           <li>Decision consistency</li>
+          <li>Interviewer scoring variance</li>
           <li>Rubric adherence</li>
-          <li>Predictive strength of screening</li>
+          <li>Override frequency</li>
           <li>Calibration drift</li>
         </ul>
         <p><a href="/articles/decision-science-metrics/">Related article →</a></p>
@@ -179,54 +178,54 @@ ogUrl: "https://dianewilkinson.github.io/system/signals/"
     <details class="sys-details">
       <summary>
         <div class="sys-sum">
-          <h3 class="section-title">Operational Signals</h3>
-          <p>Reveal how the hiring system is performing at a process level.</p>
+          <h3 class="section-title">Workflow Signals</h3>
+          <p>Reveal how work moves through the hiring process and where the system slows down.</p>
           <span class="small">[ Expand section ]</span>
         </div>
         <span class="sys-chev">›</span>
       </summary>
       <div class="sys-body">
         <p class="muted">
-          Operational signals reveal how the hiring system is performing at a process level.
-          They surface patterns that are invisible until they become bottlenecks.
+          Workflow signals capture how the hiring process operates at a system level.
+          They surface patterns in movement, timing, and coordination that often stay invisible until they become bottlenecks.
         </p>
 
         <div class="miniGrid miniGrid--4">
           <div class="mini">
             <b>Throughput</b>
-            <span>Placeholder — volume of candidates or work moving through the system over time.</span>
+            <span>The volume of candidates or work moving through the system over time.</span>
           </div>
 
           <div class="mini">
             <b>Pass-through rates</b>
-            <span>Placeholder — percentage of candidates advancing from each stage to the next.</span>
+            <span>The share of candidates advancing from one stage to the next.</span>
           </div>
 
           <div class="mini">
             <b>Cycle time</b>
-            <span>Placeholder — elapsed time between workflow events or stage transitions.</span>
+            <span>The elapsed time between workflow events or stage transitions.</span>
           </div>
 
           <div class="mini">
             <b>Scheduling delays</b>
-            <span>Placeholder — time lost to coordination failures, rescheduling, or missed SLAs.</span>
+            <span>Time lost to coordination failures, rescheduling, or missed service expectations.</span>
           </div>
         </div>
 
         <div class="miniGrid miniGrid--4">
           <div class="mini">
             <b>Bottlenecks</b>
-            <span>Placeholder — stages where work accumulates faster than it moves forward.</span>
+            <span>Points where work accumulates faster than it moves forward.</span>
           </div>
 
           <div class="mini">
             <b>Capacity constraints</b>
-            <span>Placeholder — limits on interviewer availability, coordinator bandwidth, or tool throughput.</span>
+            <span>Limits on interviewer availability, coordinator bandwidth, or tool throughput.</span>
           </div>
         </div>
 
         <div class="callout">
-          Operational signals reveal how the system is performing — not how people feel about it.
+          Workflow signals reveal how the process is functioning — not how people feel about it.
         </div>
 
         <h3 class="section-title--sub">Connected tools</h3>
@@ -234,17 +233,17 @@ ogUrl: "https://dianewilkinson.github.io/system/signals/"
         <div class="grid3">
           <div class="card">
             <h3>Pipeline Health</h3>
-            <p class="muted">Placeholder — tool or view for monitoring live pipeline performance across stages.</p>
+            <p class="muted">Monitors live pipeline performance across stages to surface slowdowns and bottlenecks.</p>
           </div>
 
           <div class="card">
             <h3>Funnel Calculator</h3>
-            <p class="muted">Placeholder — models expected throughput and pass-through rates against actuals.</p>
+            <p class="muted">Models expected throughput and pass-through patterns against actual hiring volume.</p>
           </div>
 
           <div class="card">
             <h3>Workflow Diagnostics</h3>
-            <p class="muted">Placeholder — surfaces scheduling, coordination, and cycle time anomalies.</p>
+            <p class="muted">Surfaces scheduling, coordination, and cycle-time anomalies inside the hiring process.</p>
           </div>
         </div>
       </div>
@@ -254,29 +253,29 @@ ogUrl: "https://dianewilkinson.github.io/system/signals/"
       <summary>
         <div class="sys-sum">
           <h3 class="section-title">Behavioral Signals</h3>
-          <p>Reveal how people interact inside the workflow — making subjective patterns measurable.</p>
+          <p>Reveal how people perform inside the workflow — turning subjective patterns into measurable evidence.</p>
           <span class="small">[ Expand section ]</span>
         </div>
         <span class="sys-chev">›</span>
       </summary>
       <div class="sys-body">
         <p class="muted">
-          Behavioral signals reveal how people interact inside the workflow.
-          They capture patterns that are usually treated as subjective — and make them measurable.
+          Behavioral signals capture how people actually perform inside the hiring process.
+          They make visible the patterns that are usually reduced to impressions, instincts, or scattered notes.
         </p>
 
         <div class="grid2 grid2--equal">
           <div class="card">
             <h3>Behaviors vs Impressions</h3>
             <p class="muted">
-              Placeholder — the distinction between observable behavioral inputs and subjective impressions.
-              Signals hiding in plain sight: the data is already there, it just isn't being captured consistently.
+              Most hiring systems ask interviewers to interpret what they observed. Behavioral signals take a different approach:
+              they focus on observable evidence rather than subjective impressions. The data is often already there — it simply is not being captured consistently.
             </p>
           </div>
 
           <div class="card">
             <h3>Candidate Signal Model</h3>
-            <p class="muted">Placeholder — how candidate behaviors map to signal categories the system can track.</p>
+            <p class="muted">Examples of behavioral signals the system can capture during the hiring process include:</p>
             <ul>
               <li>Responsiveness</li>
               <li>Communication clarity</li>
@@ -290,17 +289,17 @@ ogUrl: "https://dianewilkinson.github.io/system/signals/"
         <div class="miniGrid miniGrid--4">
           <div class="mini">
             <b>Execution</b>
-            <span>Placeholder — signals about how tasks are completed and followed through.</span>
+            <span>Signals that reveal follow-through, reliability, and how consistently tasks are completed.</span>
           </div>
 
           <div class="mini">
             <b>Coordination</b>
-            <span>Placeholder — signals about scheduling, responsiveness, and handoff quality.</span>
+            <span>Signals that reveal responsiveness, handoff quality, and how effectively someone works inside the process.</span>
           </div>
 
           <div class="mini">
             <b>Adaptation</b>
-            <span>Placeholder — signals about how candidates or participants adjust to new information.</span>
+            <span>Signals that reveal how people respond to new information, feedback, or changing expectations.</span>
           </div>
         </div>
 
@@ -321,41 +320,41 @@ ogUrl: "https://dianewilkinson.github.io/system/signals/"
       </summary>
       <div class="sys-body">
         <p class="muted">
-          Decision signals evaluate the quality of the decision process itself — not just outcomes.
-          They surface whether hiring decisions are consistent, calibrated, and defensible.
+          Decision signals evaluate whether hiring decisions are consistent, calibrated, and defensible.
+          They reveal how reliably the system is making decisions — not just what was decided.
         </p>
 
         <div class="miniGrid miniGrid--4">
           <div class="mini">
             <b>Interviewer variance</b>
-            <span>Placeholder — divergence in ratings or recommendations across interviewers on similar candidates.</span>
+            <span>Divergence in ratings or recommendations across interviewers reviewing similar candidates.</span>
           </div>
 
           <div class="mini">
             <b>Rubric adherence</b>
-            <span>Placeholder — how consistently structured evaluation criteria are applied across reviews.</span>
+            <span>How consistently structured evaluation criteria are applied across reviews.</span>
           </div>
 
           <div class="mini">
             <b>Override frequency</b>
-            <span>Placeholder — how often recommendations are reversed outside the structured process.</span>
+            <span>How often recommendations are reversed outside the structured process.</span>
           </div>
 
           <div class="mini">
             <b>Calibration drift</b>
-            <span>Placeholder — gradual shift in standards across a hiring team over time.</span>
+            <span>Gradual shifts in evaluation standards across a hiring team over time.</span>
           </div>
         </div>
 
         <div class="miniGrid miniGrid--4">
           <div class="mini">
             <b>Decision latency</b>
-            <span>Placeholder — time elapsed between signal and decision, and what that delay reveals.</span>
+            <span>Time elapsed between signal and decision, and what that delay reveals about process quality.</span>
           </div>
         </div>
 
         <div class="callout">
-          Decision signals evaluate the quality of the decision process itself — not just what was decided.
+          Decision signals evaluate the reliability of the decision process itself — not just the outcome it produced.
         </div>
 
         <div class="ctaRow ctaRow--left">
