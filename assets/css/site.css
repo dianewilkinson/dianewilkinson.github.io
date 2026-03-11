@@ -210,6 +210,8 @@ h1{margin:12px 0 8px; font-size:38px; font-weight:700; line-height:1.25; letter-
   font-size:16px;
   max-width:86ch;
 }
+.sub p{margin:0 0 0.75em}
+.sub p:last-child{margin-bottom:0}
 .accent{
   background: linear-gradient(90deg, var(--accent), var(--accent3));
   -webkit-background-clip:text;
