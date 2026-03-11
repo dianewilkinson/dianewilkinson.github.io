@@ -186,6 +186,8 @@ body[data-page="use-case"] h1,
 body[data-page="tool-index"] h1,
 body[data-page="tool-playbook"] h1,
 body[data-page="article"] h1{font-family:'Playfair Display', Georgia, serif; font-weight:400; font-size:clamp(22px, 4vw, 44px);}
+/* System page: lower min so long hero title doesn't wrap until very narrow screens */
+body[data-page="system"] h1{font-size:clamp(16px, 4vw, 44px);}
 
 /* Hero typography helpers */
 .kicker{
@@ -653,6 +655,7 @@ a.mini:hover{ background:rgba(255,255,255,1); transform:translateY(-1px); box-sh
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap:14px;
   margin-top:14px;
+  align-items:center;
 }
 @media (max-width: 1100px){
   .grid5:not(.grid5--persist){ grid-template-columns: repeat(3, minmax(0, 1fr)); }
