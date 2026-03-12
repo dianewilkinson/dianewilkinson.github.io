@@ -194,7 +194,7 @@ body[data-page="system"] h1{font-size:clamp(16px, 4vw, 44px);}
 /* Hero typography helpers */
 .kicker{
   display:inline-flex; gap:8px; align-items:center;
-  font-size:12.5px; color:var(--muted2);
+  font-size:13px; color:var(--muted2);
   background:rgba(255,255,255,.78);
   border:1px solid rgba(79,70,229,.18);
   padding:6px 10px;
@@ -211,7 +211,7 @@ h1{margin:12px 0 8px; font-size:38px; font-weight:700; line-height:1.25; letter-
 .sub{
   margin:0;
   color:var(--muted);
-  font-size:16px;
+  font-size:clamp(14px, 2vw, 16px);
 }
 .sub p{margin:0 0 0.75em}
 .sub p:last-child{margin-bottom:0}
@@ -293,7 +293,7 @@ body[data-page="home"] .hero-headline{
 
 body[data-page="home"] .hero-role{
   margin: 2px 0 0;
-  font-size: 24px;
+  font-size: clamp(18px, 3vw, 24px);
   font-weight: 600;
   letter-spacing: normal;
   color: var(--text);
@@ -454,8 +454,9 @@ body[data-page="system"] .chapter__inner{ background: transparent; border: none;
   display:flex;
   align-items:center;
   gap:12px;
-  font-size:26px;
-  font-weight:700;
+  font-size:clamp(18px, 2.5vw, 26px);
+  font-weight:600;
+  color:var(--accent);
   line-height:1.25;
   letter-spacing:normal;
   margin:0 0 12px;
@@ -489,7 +490,7 @@ body[data-page="system"] .chapter__inner{ background: transparent; border: none;
   display:block;
 }
 
-.card h2{ margin:0 0 10px; font-family:'Playfair Display', Georgia, serif; font-size:20px; font-weight:600; line-height:1.25; letter-spacing:normal; }
+.card h2{ margin:0 0 10px; font-family:'Playfair Display', Georgia, serif; font-size:clamp(16px, 2vw, 20px); font-weight:600; line-height:1.25; letter-spacing:normal; }
 .card p{ margin:10px 0; color:var(--text); }
 .small{font-size:13px; font-weight:500; color:var(--muted2)}
 .muted{color:var(--muted)}
@@ -497,7 +498,7 @@ body[data-page="system"] .chapter__inner{ background: transparent; border: none;
 .card h3{
   margin:0 0 10px;
   font-family:'Playfair Display', Georgia, serif;
-  font-size:28px;
+  font-size:clamp(20px, 2.8vw, 28px);
   font-weight:550;
   line-height:1.25;
   letter-spacing:normal;
@@ -611,6 +612,10 @@ a.mini{ display:block; text-decoration:none; text-align:center; cursor:pointer; 
 a.mini b{ color:var(--accent); font-size:14px; }
 a.mini:hover{ background:rgba(255,255,255,1); transform:translateY(-1px); box-shadow:0 3px 10px rgba(79,70,229,.12); }
 
+/* Tool nav: keep 3 cards side-by-side down to ~480px */
+.miniGrid--nav{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 480px){ .miniGrid--nav{ grid-template-columns:1fr; } }
+
 /* Mini outcome grid variants */
 .miniGrid--4{
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -710,7 +715,7 @@ a.mini:hover{ background:rgba(255,255,255,1); transform:translateY(-1px); box-sh
   text-decoration:none;
 }
 .flow-num{
-  font-size:11px;
+  font-size:13px;
   font-weight:700;
   color:var(--accent);
   letter-spacing:.08em;
@@ -779,7 +784,7 @@ a.mini:hover{ background:rgba(255,255,255,1); transform:translateY(-1px); box-sh
 .tool-card h3{
   margin:8px 0 6px;
   font-family:'Playfair Display', Georgia, serif;
-  font-size:28px;
+  font-size:clamp(20px, 2.8vw, 28px);
   font-weight:550;
   letter-spacing:-.01em;
 }
@@ -793,14 +798,14 @@ a.mini:hover{ background:rgba(255,255,255,1); transform:translateY(-1px); box-sh
 .tool-card p{
   margin:0;
   color:var(--muted);
-  font-size:12.75px;
+  font-size:13px;
   line-height:1.45;
   word-break:normal;
   overflow-wrap:normal;
 }
 
 .badge{
-  font-size:11px;
+  font-size:12px;
   font-weight:300;
   color:var(--muted2);
   border:1px solid rgba(226,232,240,.95);
@@ -843,7 +848,7 @@ a.mini:hover{ background:rgba(255,255,255,1); transform:translateY(-1px); box-sh
 }
 
 .tool-actions a{
-  font-size:12.5px;
+  font-size:13px;
   font-weight:700;
   color:var(--accent);
   text-decoration:none;
@@ -901,7 +906,7 @@ a.mini:hover{ background:rgba(255,255,255,1); transform:translateY(-1px); box-sh
 }
 .depth-list li{
   margin: 4px 0;
-  font-size: 12.75px;
+  font-size: 13px;
 }
 .depth-list a{
   font-weight: 800;
@@ -1299,20 +1304,20 @@ body[data-page="article"] .callout{
 .appCard h3{
   margin:0 0 6px;
   font-family:'Playfair Display', Georgia, serif;
-  font-size:28px;
+  font-size:clamp(20px, 2.8vw, 28px);
   font-weight:550;
   letter-spacing:-.01em;
 }
 .appCard p{
   margin:0;
   color:var(--muted);
-  font-size:12.75px;
+  font-size:13px;
   line-height:1.45;
   word-break:normal;
   overflow-wrap:normal;
 }
 .appBadge{
-  font-size:11px;
+  font-size:12px;
   font-weight:900;
   color:var(--muted2);
   border:1px solid rgba(226,232,240,0.95);
@@ -1331,7 +1336,7 @@ body[data-page="article"] .callout{
 }
 
 .appLink{
-  font-size:12.5px;
+  font-size:13px;
   font-weight:900;
   color:var(--accent);
   text-decoration:none;
