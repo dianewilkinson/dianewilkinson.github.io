@@ -31,7 +31,7 @@
     "id": "calculator",
     "card": {
       "type": "tool",
-      "function": "Improvement & Strategy",
+      "function": "Improvement",
       "title": "Hiring Forecast Calculator",
       "summary": "Headcount goals into operational reality.",
       "href": "/tools/calculator/",
@@ -59,7 +59,7 @@
     "id": "innovation",
     "card": {
       "type": "tool",
-      "function": "Improvement & Strategy",
+      "function": "Improvement",
       "title": "Insight Signaling & Routing",
       "summary": "Nurture innovation, inspiration & engagement.",
       "href": "/tools/innovation/",
@@ -87,7 +87,7 @@
     "id": "planner",
     "card": {
       "type": "tool",
-      "function": "Improvement & Strategy",
+      "function": "Improvement",
       "title": "Daily Workflow Orchestration",
       "summary": "Prioritized, time-sensitive, automated planning for increased efficiency.",
       "href": "/tools/planner/",
@@ -157,7 +157,7 @@
     "id": "metrics-dictionary",
     "card": {
       "type": "system",
-      "function": "Governance & Infrastructure",
+      "function": "Governance",
       "title": "Metrics Dictionary",
       "summary": "A single source of truth for metric names, definitions, formulas, grain, filters, & ownership.",
       "href": "/system/metrics/",
@@ -171,7 +171,7 @@
     "id": "why-ai-pilots-fail",
     "card": {
       "type": "article",
-      "function": "Governance & Infrastructure",
+      "function": "Infrastructure",
       "title": "Why 95% of AI Pilots Fail",
       "summary": "... & What the Successful 5% Do Differently",
       "href": "/articles/why-ai-pilots-fail/",
@@ -199,7 +199,7 @@
     "id": "workflow",
     "card": {
       "type": "tool",
-      "function": "Improvement & Strategy",
+      "function": "Improvement",
       "title": "Automated Workflows",
       "summary": "Recruiting workflows to increase efficiency, engagement, branding, & CSAT.",
       "href": "/tools/workflow/",
