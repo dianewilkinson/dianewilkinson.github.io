@@ -678,6 +678,67 @@ a.mini:hover{ background:rgba(255,255,255,1); transform:translateY(-1px); box-sh
 }
 
 /* =========================
+   SYSTEM COMPONENTS FLOW STRIP
+   ========================= */
+.flow-strip{
+  display:flex;
+  align-items:stretch;
+  gap:10px;
+  margin-top:14px;
+  flex-wrap:wrap;
+}
+.flow-step{
+  flex:1;
+  min-width:160px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.90);
+  border-radius:var(--radius);
+  padding:14px 16px;
+  box-shadow:0 16px 48px var(--shadow);
+  text-decoration:none;
+  color:var(--text);
+  transition:transform .15s, box-shadow .15s;
+}
+.flow-step:hover{
+  transform:translateY(-2px);
+  box-shadow:0 4px 14px rgba(79,70,229,.15);
+  text-decoration:none;
+}
+.flow-num{
+  font-size:11px;
+  font-weight:700;
+  color:var(--accent);
+  letter-spacing:.08em;
+}
+.flow-step b{
+  font-size:15px;
+  font-family:'Playfair Display', Georgia, serif;
+  font-weight:600;
+}
+.flow-desc{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.45;
+}
+.flow-arrow{
+  display:flex;
+  align-items:center;
+  font-size:22px;
+  color:var(--accent3);
+  flex-shrink:0;
+  font-weight:300;
+  line-height:1;
+  padding-bottom:6px;
+}
+@media (max-width:700px){
+  .flow-strip{ flex-direction:column; }
+  .flow-arrow{ transform:rotate(90deg); align-self:center; padding-bottom:0; }
+}
+
+/* =========================
    TOOLS GRID (landing + anywhere)
    ========================= */
 .tools-grid{
