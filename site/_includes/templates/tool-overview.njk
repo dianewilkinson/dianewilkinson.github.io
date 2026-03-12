@@ -130,6 +130,16 @@
 </section>
 {% endif %}
 
+{# Playbook link #}
+{% if playbookLabel %}
+<section class="full" aria-label="{{ toolName }} {{ playbookLabel }}">
+  <p class="small">
+    <a href="/tools/{{ toolSlug }}/playbook/"><strong>Read the {{ toolName }} {{ playbookLabel }} →</strong></a><br />
+    Step-by-step guidance for getting the most out of this tool.
+  </p>
+</section>
+{% endif %}
+
 {# Page-specific content (must appear exactly once) #}
 {{ content | safe }}
 
