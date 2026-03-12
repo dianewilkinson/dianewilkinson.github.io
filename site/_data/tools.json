@@ -120,7 +120,7 @@
       "summary": "Workflows & best practices to keep CSATs up and pipelines flowing.",
       "href": "/tools/candidate-journey/playbook/",
       "featured": false,
-      "listed": true,
+      "listed": false,
       "section": "playbook",
       "rank": 9
     }
