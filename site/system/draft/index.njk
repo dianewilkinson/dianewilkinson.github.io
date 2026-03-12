@@ -238,6 +238,27 @@ ogUrl: "https://dianewilkinson.github.io/system/draft/"
     <h3 class="section-title" style="margin-top:2.5rem;">Metrics</h3>
     <p class="muted">Signals only work if they mean the same thing everywhere. The metrics layer governs definitions, formulas, grain, and ownership so dashboards stay consistent and decisions are auditable.</p>
 
+    <p>Most recruiting analytics measure throughput — time, volume, conversion. The metrics dictionary also tracks decision integrity: whether evaluation is consistent, explainable, and stable over time.</p>
+
+    <div class="miniGrid miniGrid--4">
+      <div class="mini">
+        <b>Decision Consistency</b>
+        <span>Do similar candidates get similar outcomes across reviewers?</span>
+      </div>
+      <div class="mini">
+        <b>Rubric Adherence</b>
+        <span>Are must-haves actually being applied as must-haves?</span>
+      </div>
+      <div class="mini">
+        <b>Calibration Stability</b>
+        <span>Is "what good means" drifting silently over time?</span>
+      </div>
+      <div class="mini">
+        <b>Predictive Strength</b>
+        <span>Does the screening signal actually predict downstream outcomes?</span>
+      </div>
+    </div>
+
     <details class="sys-details">
       <summary>
         <div class="sys-sum">
@@ -322,11 +343,32 @@ ogUrl: "https://dianewilkinson.github.io/system/draft/"
     <h3 class="section-title" style="margin-top:2.5rem;">Decision Logic</h3>
     <p class="muted">Signals need to mean something operationally. Decision logic defines what a pattern implies, when action is triggered, and where automation stops and human judgment takes over.</p>
 
+    <p>Not every signal warrants the same response. The system uses four autonomy tiers to route action based on risk level — so low-stakes work moves fast and high-stakes decisions always reach a human.</p>
+
+    <div class="miniGrid miniGrid--4">
+      <div class="mini">
+        <b>Tier 0 — Monitor</b>
+        <span>Surface the signal. Measure, detect drift, take no action.</span>
+      </div>
+      <div class="mini">
+        <b>Tier 1 — Auto-execute</b>
+        <span>Low-risk reminders, routing, and hygiene. Logged and visible.</span>
+      </div>
+      <div class="mini">
+        <b>Tier 2 — Recommend</b>
+        <span>AI proposes an action. A human approves it before anything happens.</span>
+      </div>
+      <div class="mini">
+        <b>Tier 3 — Escalate</b>
+        <span>High-stakes outcomes always route to humans. No exceptions.</span>
+      </div>
+    </div>
+
     <details class="sys-details">
       <summary>
         <div class="sys-sum">
           <h3 class="section-title">Decision logic in depth</h3>
-          <p>Thresholds, routing rules, and how the system decides what to do next.</p>
+          <p>Thresholds, routing rules, decision rights, and receipts.</p>
           <span class="small">[ Expand ]</span>
         </div>
         <span class="sys-chev">›</span>
