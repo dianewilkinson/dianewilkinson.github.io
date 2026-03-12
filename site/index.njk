@@ -30,7 +30,7 @@ heroActions: |
     <div class="appGrid--scroll" aria-label="Articles scroll row">
 
       {% for item in articles | sort(false, false, "card.rank") %}
-        {% if item.card and item.card.listed %}
+        {% if item.card and item.card.featured %}
           <article class="appCard">
             <div class="appTop">
               <div class="appMain">
