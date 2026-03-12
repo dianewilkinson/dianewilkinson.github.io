@@ -87,10 +87,20 @@ backLabel: "Back to Home"
 
     <section aria-label="What we did">
       <h2 class="section-title">What We Did</h2>
-      <p class="muted">
-        I built a throughput model anchored to interview capacity. Starting from the actual constraint —
-        three HM interviews per week — I reverse-engineered the required recruiter screens and sourcing volume.
-      </p>
+      <p class="muted">I built a throughput model anchored to interview capacity.</p> 
+
+      <p class="muted">To diagnose the pipeline constraint, I built a funnel throughput calculator that models:</p>
+      <ul class="muted">
+        <li>inbound and outbound candidate flow</li>
+        <li>recruiter screen conversion</li>
+        <li>interview capacity</li>
+        <li>projected weekly HM-ready candidates</li>
+     </ul>
+     <p class="muted">The model allows teams to test whether recruiting activity targets match the system’s actual hiring capacity.</p>
+
+
+
+     <p class="muted">Starting from the actual constraint — three HM interviews per week — I reverse-engineered the required recruiter screens and sourcing volume.</p>
       <ul class="muted">
         <li>Balanced inbound/outbound mix to prevent inbound from exceeding 50% of active pipeline</li>
         <li>Aligned recruiter activity targets with what the system could actually process</li>

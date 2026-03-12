@@ -181,6 +181,7 @@ a:hover{text-decoration:underline}
 
 /* Tools, system, use-case pages: Playfair h1 */
 body[data-page="tools"] h1,
+body[data-page="tool-demo"] h1,
 body[data-page="system"] h1,
 body[data-page="use-case"] h1,
 body[data-page="tool-index"] h1,
