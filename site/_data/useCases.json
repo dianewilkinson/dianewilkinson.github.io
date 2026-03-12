@@ -30,8 +30,8 @@
     "card": {
       "type": "use-case",
       "function": "Improvement & Strategy",
-      "title": "39 Stalled Candidates /Week",
-      "summary": "500 stalled candidates per quarter prevented with throughput modeling.",
+      "title": "Preventing 500 Stalled Candidates per Quarter",
+      "summary": "How throughput modeling aligned KPIs with capacity.",
       "href": "/use-cases/throughput-modeling/",
       "featured": true,
       "listed": true,
