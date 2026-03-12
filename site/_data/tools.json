@@ -6,7 +6,7 @@
       "function": "Hiring & Mobility",
       "title": "Recruiting Pipeline Health",
       "summary": "Real-time insights that eliminate bottlenecks and improve time-to-hire.",
-      "href": "/tools/metrics/",
+      "href": "/tools/metrics/dictionary/",
       "featured": true,
       "listed": true,
       "section": "core",
@@ -92,7 +92,7 @@
       "summary": "Prioritized, time-sensitive, automated planning for increased efficiency.",
       "href": "/tools/planner/",
       "featured": false,
-      "listed": true,
+      "listed": false,
       "section": "workflow",
       "rank": 7
     }

@@ -52,7 +52,9 @@
 {# demoImage: shown below What it Solves #}
 {% if demoImage %}
 <section class="demo" aria-label="{{ toolName }} flow diagram">
-  <img src="{{ demoImage }}" alt="{{ toolName }} flow diagram" style="width:100%;display:block;border-radius:4px;">
+  <a href="{{ demoImage }}" target="_blank" rel="noopener">
+    <img src="{{ demoImage }}" alt="{{ toolName }} flow diagram" style="width:100%;display:block;border-radius:4px;">
+  </a>
 </section>
 {% endif %}
 
