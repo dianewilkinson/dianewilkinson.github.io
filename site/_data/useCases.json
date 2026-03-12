@@ -7,8 +7,8 @@
       "title": "Global ATS Migration",
       "summary": "Fixed inconsistencies, enabled 60+ interviewers, and built reliable reporting.",
       "href": "/use-cases/greenhouse-migration/",
-      "featured": true,
-      "listed": true,
+      "featured": false,
+      "listed": false,
       "rank": 4
     }
   },
@@ -73,7 +73,7 @@
       "summary": "Structured document repository reduced duplicate work and improved messaging consistency.",
       "href": "/use-cases/document-management/",
       "featured": false,
-      "listed": true,
+      "listed": false,
       "rank": 6
     }
   },
