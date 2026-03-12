@@ -1,0 +1,30 @@
+{% if toolSlug %}
+<section class="full" aria-label="Tool navigation">
+  <div class="miniGrid">
+    {% if pageId != "tool-index" %}
+    <a class="mini" href="/tools/{{ toolSlug }}/">
+      <b>View Tool Overview</b>
+      <span>What this tool solves, outcomes, and signals.</span>
+    </a>
+    {% endif %}
+    {% if pageId != "tool-playbook" %}
+    <a class="mini" href="/tools/{{ toolSlug }}/playbook/">
+      <b>View Tool {{ playbookLabel or "Blueprint" }}</b>
+      <span>Step-by-step guidance for using this tool.</span>
+    </a>
+    {% endif %}
+    {% if pageId != "tool-demo" %}
+    <a class="mini" href="/tools/{{ toolSlug }}/demo/">
+      <b>View Tool Demo</b>
+      <span>Try the interactive tool.</span>
+    </a>
+    {% endif %}
+    {% if casesHref %}
+    <a class="mini" href="{{ casesHref }}">
+      <b>View Use Case</b>
+      <span>See this tool applied to a real example.</span>
+    </a>
+    {% endif %}
+  </div>
+</section>
+{% endif %}

@@ -16,6 +16,8 @@
 
 {% block content %}
 
+{% include "partials/tool-nav.njk" %}
+
 {# Above-the-fold: iframe demo (only when no demoImage) #}
 {% if not demoImage %}
 <section class="demo" aria-label="{{ toolName }} Demo">
@@ -127,16 +129,6 @@
   </p>
 {% endif %}
 
-</section>
-{% endif %}
-
-{# Playbook link #}
-{% if playbookLabel %}
-<section class="full" aria-label="{{ toolName }} {{ playbookLabel }}">
-  <p class="small">
-    <a href="/tools/{{ toolSlug }}/playbook/"><strong>Read the {{ toolName }} {{ playbookLabel }} →</strong></a><br />
-    Step-by-step guidance for getting the most out of this tool.
-  </p>
 </section>
 {% endif %}
 

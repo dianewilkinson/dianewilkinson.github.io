@@ -4,12 +4,16 @@ title: "Recruiting Funnel <span class='accent'>Pipeline Calculator</span>"
 description: "Interactive funnel + weekly time-to-fill planner."
 pageId: "tool-demo"
 permalink: "/tools/calculator/demo/"
+toolSlug: "calculator"
+toolName: "Recruiting Funnel Calculator"
+playbookLabel: "Blueprint"
+casesHref: "/use-cases/throughput-modeling/"
 
 heroClass: "hero--tool-strong"
 kicker: "Recruiting Ops · Demo"
 backHref: "/"
 backLabel: "Back to Home"
-sub: "Enter your target start date and the tool back-calculates every pipeline stage."
+sub: "Enter your target start date, and number of hires, and the tool back-calculates every pipeline stage to return the number of candidates needed at each stage and produces a time-to-fill weekly planner mapping interview volume to interviewer."
 ---
 
 <style>
@@ -188,6 +192,8 @@ body[data-page="tool-demo"] .grid2 {
 </style>
 
 
+{% include "partials/tool-nav.njk" %}
+
 <!-- Scenario switcher -->
 <section class="panel panel--cool" style="margin-bottom:0;">
   <div class="panelInner">
@@ -241,7 +247,7 @@ body[data-page="tool-demo"] .grid2 {
   <!-- FUNNEL -->
   <div class="card">
     <h2 class="section-title">Recruiting Funnel</h2>
-    <p class="section-sub">Edit any conversion rate — volumes update instantly. Bars show relative scale.</p>
+    <p class="section-sub">Edit any conversion rate — volumes update instantly.</p>
 
     <!-- Applications -->
     <div class="f-stage">

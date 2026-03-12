@@ -1132,7 +1132,7 @@ body[data-page="tool-playbook"] .tocList{
 body[data-page="tool-playbook"] .tocList li{ margin:8px 0; }
 body[data-page="tool-playbook"] .toc a{
   color:var(--text);
-  font-weight:800;
+  font-weight:400;
   text-decoration:none;
 }
 body[data-page="tool-playbook"] .toc a:hover{
