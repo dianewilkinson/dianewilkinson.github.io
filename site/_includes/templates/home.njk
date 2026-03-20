@@ -27,6 +27,10 @@
         {{ heroActions | safe }}
       </div>
     {% endif %}
+
+    {% if heroCallout %}
+      <p class="callout hero-callout">{{ heroCallout | safe }}</p>
+    {% endif %}
   </section>
 
   {{ content | safe }}

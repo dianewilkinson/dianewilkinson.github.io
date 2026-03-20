@@ -6,11 +6,11 @@
       "function": "Hiring & Mobility",
       "title": "Recruiting Pipeline Health",
       "summary": "Real-time insights that eliminate bottlenecks and improve time-to-hire.",
-      "href": "/tools/metrics/dictionary/",
-      "featured": true,
+      "href": "/tools/metrics/",
+      "featured": false ,
       "listed": true,
       "section": "core",
-      "rank": 1
+      "rank": 4
     }
   },
   {
@@ -24,7 +24,7 @@
       "featured": true,
       "listed": true,
       "section": "core",
-      "rank": 2
+      "rank": 1
     }
   },
   {
@@ -38,7 +38,7 @@
       "featured": true,
       "listed": true,
       "section": "core",
-      "rank": 3
+      "rank": 2
     }
   },
   {
@@ -52,7 +52,7 @@
       "featured": false,
       "listed": false,
       "section": "core",
-      "rank": 4
+      "rank":3
     }
   },
   {
@@ -66,7 +66,7 @@
       "featured": true,
       "listed": true,
       "section": "core",
-      "rank": 5
+      "rank": 4
     }
   },
   {
@@ -80,7 +80,7 @@
       "featured": false,
       "listed": true,
       "section": "workflow",
-      "rank": 6
+      "rank": 5
     }
   },
   {

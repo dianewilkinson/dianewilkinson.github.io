@@ -345,6 +345,14 @@ body[data-page="home"] a.hero-pill[href="/tools/"]:hover{
   border-color: #4338ca;
 }
 
+body[data-page="home"] .hero-callout{
+  margin:20px 0 0;
+  font-size:clamp(14px, 1.9vw, 20px);
+  font-weight:600;
+  line-height:1.25;
+  color:inherit;
+}
+
 @media (max-width:720px){
   body[data-page="home"] .hero--home{ min-height:0; }
   body[data-page="home"] .hero-headline{ font-size:26px; }
@@ -1309,6 +1317,25 @@ body[data-page="article"] .callout{
   font-weight:550;
   letter-spacing:-.01em;
 }
+.splitEmbed{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap:24px;
+  align-items:center;
+}
+@media(max-width:768px){
+  .splitEmbed{
+    grid-template-columns:1fr;
+  }
+  .splitEmbed iframe{
+    height:360px;
+  }
+}
+.appCard--compact{
+  padding:8px 12px;
+  gap:4px;
+}
+
 .appCard p{
   margin:0;
   color:var(--muted);
