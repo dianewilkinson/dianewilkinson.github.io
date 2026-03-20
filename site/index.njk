@@ -49,6 +49,26 @@ heroCallout: "I design intelligence systems for <b>hiring operations</b> and I b
     <p>Attention to detail is observable. Conscientiousness is observable. Motivation is observable. We just never tracked it.</p> 
     <p>This scores what candidates actually do: <b>30 behavioral signals</b> across four dimensions science shows <b>predict performance</b>, from the moment they apply to the moment you decide.</p>
     <p>Grounded in evidence, not instinct. Auditable by design.</p>
+    <div id="cid-scroll" style="overflow-y:scroll; border-radius:8px; border:1px solid var(--border); margin-top:20px;">
+      <img id="cid-img" src="/assets/documents/candidate_intelligence_dashboard.png" style="width:100%; display:block;" loading="lazy" alt="Candidate Intelligence Dashboard">
+    </div>
+    <script>
+    (function(){
+      var img = document.getElementById('cid-img');
+      var box = document.getElementById('cid-scroll');
+      var NATURAL_W = 789;
+      var SKIP_PX   = 155;  /* natural px: skip title + intro paragraph */
+      var SHOW_PX   = 377;  /* natural px: show from skip point to bottom of timeline chart */
+      function init(){
+        var scale = img.offsetWidth / NATURAL_W;
+        box.style.height = Math.round(SHOW_PX * scale) + 'px';
+        box.scrollTop    = Math.round(SKIP_PX * scale);
+      }
+      if(img.complete && img.naturalWidth){ init(); }
+      else { img.addEventListener('load', init); }
+      window.addEventListener('resize', init);
+    })();
+    </script>
   </div>
 </section>
 
