@@ -11,7 +11,7 @@ kicker: "System · Process · Behavior · Decision"
 backHref: "/"
 backLabel: "Back to Home"
 
-heroTitle: "Hiring Operations Control <span class='accent'>System</span>"
+heroTitle: "Hiring Operations <span class='accent'>Intelligence</span>"
 sub: |
   <p>Most hiring analytics measure one thing: volume. This system measures three — the process, the people, and the decisions — so every layer of the hiring operation becomes observable, comparable, and improvable.</p>
 
@@ -36,46 +36,26 @@ ogUrl: "https://dianewilkinson.github.io/system/"
 <section class="chapter" aria-label="Process Analytics" id="process-analytics">
   <div class="chapter__inner">
 
-    <div class="kicker"><span class="kdot"></span>Layer 01</div>
     <h2 class="section-title">Workflow Intelligence — <span class="accent">Process Analytics</span></h2>
     <p class="muted">The operational layer. Measures how work actually moves — where it accelerates, where it stalls, and what structural patterns predict outcomes before they happen.</p>
-
     <p>Every stage transition, scheduling delay, and pass-through rate leaves a measurable trace. Process analytics turns that trace into a real-time picture of pipeline health that teams can act on — not just report on.</p>
+    <p>The tools in this layer prevent the chaos of running full force into the unknown. The Funnel Calculator, for example, converts a hire target into the weekly stage volume required to hit it 
+      — applications, screens, HM interviews, finals, offers, making assumptions explicit and flagging where the plan breaks before the quarter does. 
+      Working alongside the Pipeline Health A[i]gent, it surfaces when actuals are drifting from plan so teams can adjust before goals become out of reach.</p>
 
-    <div class="grid3">
-      <div class="card">
-        <h3>Pipeline Velocity</h3>
-        <ul>
-          <li>Time in stage by role and team</li>
-          <li>Stage-to-stage transition rates</li>
-          <li>Scheduling lag and reschedule rates</li>
-          <li>Pipeline age distribution</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Funnel Health</h3>
-        <ul>
-          <li>Pass-through rates by stage</li>
-          <li>Drop-off patterns by source</li>
-          <li>Offer acceptance rates</li>
-          <li>Decline and withdrawal reasons</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Capacity</h3>
-        <ul>
-          <li>Requisition load per recruiter</li>
-          <li>Interview panel utilization</li>
-          <li>Open req aging</li>
-          <li>Throughput vs. headcount plan</li>
-        </ul>
-      </div>
+    <div style="overflow:hidden;height:400px;border-radius:var(--radius,8px);margin-top:2rem;">
+      <iframe
+        src="/tools/calculator/demo-embed/#funnel"
+        title="Workflow Intelligence Calculator"
+        style="width:100%;height:760px;border:none;display:block;margin-top:-200px;"
+        loading="lazy"
+      ></iframe>
     </div>
 
     <div class="callout">Workflow intelligence is the most established layer — most recruiting teams already track some version of it.</div>
 
     <div class="ctaRow ctaRow--left" style="margin-top:1.5rem;">
-      <a class="deepLink" href="/tools/metrics/">Metrics A[i]gent →</a>
+      <a class="deepLink" href="/tools/calculator/">Funnel Calculator Tool →</a>
     </div>
 
   </div>
@@ -85,47 +65,66 @@ ogUrl: "https://dianewilkinson.github.io/system/"
 <section class="chapter" aria-label="Candidate Capability Analytics" id="candidate-analytics">
   <div class="chapter__inner">
 
-    <div class="kicker"><span class="kdot"></span>Layer 02</div>
-    <h2 class="section-title">Behavioral Intelligence — <span class="accent">Performance Analytics</span></h2>
-    <p class="muted">The people layer. Measures what candidate behavior during the hiring process reveals about capability — before a single interview score is submitted.</p>
+    <h2 class="section-title">Candidate Intelligence — <span class="accent">Performance Analytics</span></h2>
+    <p class="muted">The people layer. Measures what candidate behavior during the hiring process reveals across four dimensions — before a single interview score is submitted.</p>
 
-    <p>Behavioral economics research shows that how people engage with a process is itself a signal. Responsiveness, follow-through, communication quality, and attention to detail during hiring predict the same patterns on the job.</p>
+    <p>I/O psychology research shows that how people engage with a process is itself a signal. Responsiveness, follow-through, communication quality, and attention to detail during hiring predict the same patterns on the job.</p>
 
-    <div class="grid3">
+    <div class="grid4">
       <div class="card">
-        <h3>Engagement</h3>
+        <h3>Capability</h3>
         <ul>
-          <li>Response time to outreach</li>
-          <li>Scheduling follow-through</li>
-          <li>Reschedule and no-show rates</li>
-          <li>Application completeness</li>
+          <li>Task quality</li>
+          <li>Knowledge depth</li>
+          <li>Experience fit</li>
+          <li>Held a similar role</li>
+          <li>Tech exposure</li>
+          <li>Tech depth</li>
+          <li>Past Employers</li>
+          <li>Recommendations</li>
         </ul>
       </div>
       <div class="card">
         <h3>Communication</h3>
         <ul>
-          <li>Clarity in written responses</li>
-          <li>Preparation signals in interviews</li>
+          <li>Clarity in communications</li>
+          <li>Verbal skills</li>
           <li>Question quality</li>
-          <li>Attention to stated requirements</li>
+          <li>Sentiment</li>
+          <li>Grammar</li>
+          <li>Syntax</li>
+          <li>Typos</li>
+          <li>Formatting</li>
         </ul>
       </div>
       <div class="card">
-        <h3>Consistency</h3>
+        <h3>Conscientiousness</h3>
         <ul>
-          <li>Alignment across resume, application, and interview</li>
-          <li>Follow-through on next steps</li>
-          <li>Interest signal reliability</li>
-          <li>Pattern vs. one-off behavior</li>
+          <li>Responsiveness</li>
+          <li>Follow-through</li>
+          <li>Reliability</li>
+          <li>Meets deadlines</li>
+          <li>No shows</li>
+          <li>Preparedness</li>
+          <li>Follow up</li>
+          <li>Closes the loop</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Motivation</h3>
+        <ul>
+          <li>Self selection</li>
+          <li>Responsiveness</li>
+          <li>Proactive</li>
+          <li>Engagement</li>
+          <li>Scheduling Urgency</li>
+          <li>Initiative</li>
+          <li>Digital resource use</li>
         </ul>
       </div>
     </div>
 
     <div class="callout">Behavioral intelligence is standard in fields like organizational psychology, sales, and UX research — but almost never applied systematically to hiring. The signals exist. Most teams just aren't measuring them.</div>
-
-    <div class="ctaRow ctaRow--left" style="margin-top:1.5rem;">
-      <a class="deepLink" href="/articles/decision-science-metrics/">Related article →</a>
-    </div>
 
   </div>
 </section>
@@ -134,7 +133,6 @@ ogUrl: "https://dianewilkinson.github.io/system/"
 <section class="chapter" aria-label="Decision Intelligence" id="decision-intelligence">
   <div class="chapter__inner">
 
-    <div class="kicker"><span class="kdot"></span>Layer 03</div>
     <h2 class="section-title">Decision Intelligence — <span class="accent">System Analytics</span></h2>
     <p class="muted">The judgment layer. Measures how reliably internal hiring decisions are made — and where inconsistency, bias, or variance is degrading quality without anyone noticing.</p>
 
