@@ -63,8 +63,8 @@
       "title": "Insight Signaling & Routing",
       "summary": "Nurture innovation, inspiration & engagement.",
       "href": "/tools/innovation/",
-      "featured": true,
-      "listed": true,
+      "featured": false,
+      "listed": false,
       "section": "core",
       "rank": 4
     }
