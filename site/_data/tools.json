@@ -32,7 +32,7 @@
     "card": {
       "type": "tool",
       "function": "Improvement",
-      "title": "Kickoff A[i]gent",
+      "title": "Kickoff Planning A[i]gent",
       "summary": "Headcount goals into operational reality.",
       "href": "/tools/calculator/",
       "featured": true,
