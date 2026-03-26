@@ -1,0 +1,465 @@
+---
+layout: templates/tool-playbook.njk
+title: "Talent Intelligence — Blueprint"
+description: "I/O psychology construct framework, signal architecture, scoring engine, Greenhouse widget, and governance model for behavioral candidate intelligence."
+pageId: "tool-playbook"
+heroClass: "hero--tool-strong"
+kicker: "Blueprint · Talent Intelligence"
+backHref: "/"
+backLabel: "Back to Home"
+sub: "An I/O psychology-grounded scoring engine that reads candidate behavior throughout the hiring process and surfaces behavioral intelligence inline in the ATS."
+
+toolName: "Talent Intelligence"
+toolSlug: "talent-intelligence"
+playbookLabel: "Blueprint"
+heroTitle: "Talent Intelligence <span class='accent'>Blueprint</span>: Behavioral Scoring Across the Full Process"
+
+playbookWhat: "This blueprint documents the construct framework, signal architecture, scoring engine, Greenhouse widget, and governance model behind Talent Intelligence — the system that converts candidate behavior into structured, auditable intelligence across four I/O psychology constructs."
+playbookWho: "Recruiting Ops, TA leaders, and People Analytics teams who want consistent, research-grounded candidate scoring that lives inside the ATS and feeds downstream decision quality."
+playbookSolves: "Behavioral signals exist throughout the hiring process but are never captured | Evaluation compressed into one interview instead of accumulating across the process | No consistent framework to compare soft-skill dimensions | Decisions made without a signal trail to audit or improve"
+
+toc:
+  - { id: "problem", label: "1. Problem & Mission" }
+  - { id: "constructs", label: "2. Construct Framework" }
+  - { id: "signals", label: "3. Signal Architecture" }
+  - { id: "scoring", label: "4. Scoring Engine" }
+  - { id: "widget", label: "5. Greenhouse Widget" }
+  - { id: "evolution", label: "6. Score Evolution Timeline" }
+  - { id: "governance", label: "7. Governance & Override Model" }
+  - { id: "stack", label: "8. Technical Stack" }
+  - { id: "outputs", label: "9. Metrics & Outputs" }
+---
+
+<section class="chapter" id="problem">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">1. Problem &amp; Mission</h2>
+
+      <h3>1.1 What Candidates Show You Before the Interview</h3>
+      <p>
+        Candidates reveal behavioral signals from the first moment they engage with a process.
+        How carefully they write. How quickly they respond to outreach. Whether they confirm a calendar
+        invite or let it expire. How deeply they explore a portal before an interview. Whether they
+        send a follow-up after.
+      </p>
+      <p>
+        These are not soft impressions. They are observable, repeatable, measurable behaviors that
+        I/O psychology research connects to on-the-job performance. Most hiring teams ignore them —
+        not because they don't matter, but because there is no infrastructure to capture them.
+      </p>
+
+      <h3>1.2 The Infrastructure Problem</h3>
+      <p>
+        Without a structured scoring layer, evaluation compresses into a single interview. The behavioral
+        context that accumulated across six, eight, or twelve process events is invisible. Recruiters rely
+        on pattern recognition that is undocumented, inconsistent across reviewers, and impossible to audit.
+      </p>
+      <p>
+        The signals exist. They are already being generated at every stage of the process. The gap is not
+        data — it is a system to capture, score, and surface them consistently.
+      </p>
+
+      <h3>1.3 Mission</h3>
+      <p>
+        Talent Intelligence exists to make behavioral signals observable, comparable, and auditable —
+        without adding work for recruiters. Scores surface inside the tools recruiters already use.
+        Decisions remain with humans. The system informs judgment; it does not replace it.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="constructs">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">2. Construct Framework</h2>
+
+      <h3>2.1 Research Foundation</h3>
+      <p>
+        The four constructs are grounded in three bodies of I/O psychology research:
+        Schmidt &amp; Hunter (1998) on general cognitive ability and structured task performance as job
+        performance predictors; Barrick &amp; Mount (1991) on conscientiousness as the most consistent
+        Big Five predictor across job types; and Kristof-Brown on person-environment fit signaled through
+        motivation and communication behavior.
+      </p>
+      <p>
+        Constructs are not reverse-engineered from available signal categories. They represent
+        theoretically grounded dimensions of on-the-job performance that candidate behavior during
+        the hiring process can partially illuminate.
+      </p>
+
+      <h3>2.2 The Four Constructs</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Construct</th>
+            <th>Weight</th>
+            <th>What It Measures</th>
+            <th>Research Basis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Capability</strong></td>
+            <td>40%</td>
+            <td>Task quality, experience fit, technical depth, knowledge demonstrated during process</td>
+            <td>Schmidt &amp; Hunter — GCA and structured task performance</td>
+          </tr>
+          <tr>
+            <td><strong>Conscientiousness</strong></td>
+            <td>25%</td>
+            <td>Attention to detail, follow-through, reliability, meeting commitments</td>
+            <td>Barrick &amp; Mount — conscientiousness as cross-context performance predictor</td>
+          </tr>
+          <tr>
+            <td><strong>Motivation</strong></td>
+            <td>20%</td>
+            <td>Self-selection, proactive engagement, initiative, interest signals</td>
+            <td>Kristof-Brown — person-role fit expressed through engagement behavior</td>
+          </tr>
+          <tr>
+            <td><strong>Communication</strong></td>
+            <td>15%</td>
+            <td>Responsiveness, sentiment, clarity in written and verbal exchanges</td>
+            <td>Kristof-Brown — communication as person-environment fit signal</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>2.3 Design Principles</h3>
+      <ul>
+        <li>Constructs are theoretically grounded first. Signal assignment follows from construct definition — not the other way around.</li>
+        <li>Weights reflect research-supported predictive validity, not arbitrary balance.</li>
+        <li>Scores are independent of recruiter decisions by design. The system surfaces intelligence; humans own the outcome.</li>
+        <li>Null signals are excluded from scoring gracefully — weight redistributes to present constructs.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="signals">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">3. Signal Architecture</h2>
+
+      <h3>3.1 Signal Sources by Event Type</h3>
+      <p>
+        Signals are generated at each process event and stored in a signal layer that feeds the scoring engine.
+        Raw observations (counts, durations, booleans, ratings) are normalized to a 0–1 scale before scoring.
+      </p>
+      <table>
+        <thead>
+          <tr><th>Event Type</th><th>Signals Generated</th><th>Construct(s) Fed</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>application_submitted</td>
+            <td>Typo count, grammar errors, syntax issues, word count, formatting, experience fit, tech stack overlap, employer context, role similarity</td>
+            <td>Capability, Conscientiousness</td>
+          </tr>
+          <tr>
+            <td>interview_rsvp / scheduling</td>
+            <td>Response delay, scheduling distance, calendar confirmation, reschedule count</td>
+            <td>Conscientiousness, Motivation</td>
+          </tr>
+          <tr>
+            <td>portal_session</td>
+            <td>Session duration, pages viewed, content downloaded, prep material accessed</td>
+            <td>Motivation, Conscientiousness</td>
+          </tr>
+          <tr>
+            <td>task_submitted</td>
+            <td>Task quality, timeliness, follow-through</td>
+            <td>Capability, Conscientiousness</td>
+          </tr>
+          <tr>
+            <td>recruiter_screen / interview</td>
+            <td>Verbal communication, question quality, knowledge depth, interviewer impression</td>
+            <td>Capability, Communication</td>
+          </tr>
+          <tr>
+            <td>candidate_outreach / follow-up</td>
+            <td>Follow-up sent, unprompted follow-up, message sentiment, responsiveness</td>
+            <td>Motivation, Communication</td>
+          </tr>
+          <tr>
+            <td>opt_in_submission</td>
+            <td>Opt-in engagement quality</td>
+            <td>Motivation</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3.2 Signal Normalization Rules</h3>
+      <ul>
+        <li><strong>Inverse normalization:</strong> Signals where lower raw values mean stronger performance (typo count, response delay, reschedule count) are inverted so 1.0 always means strong.</li>
+        <li><strong>Cap normalization:</strong> Continuous values (years experience, session duration, pages viewed) are capped at a defined maximum and scaled 0–1.</li>
+        <li><strong>Boolean signals:</strong> TRUE maps to 1.0, FALSE maps to 0.0.</li>
+        <li><strong>Null handling:</strong> Null signals are excluded from construct averages. Weight redistributes proportionally to present signals.</li>
+      </ul>
+
+      <h3>3.3 Excluded Signals</h3>
+      <p>
+        <code>interviewer_impression_signal</code> is intentionally excluded from construct scores.
+        It feeds only the Decision Quality dashboard — keeping behavioral scores independent of
+        human judgment inputs and preserving the separation between what candidates show and what
+        interviewers concluded.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="scoring">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">4. Scoring Engine</h2>
+
+      <h3>4.1 Architecture</h3>
+      <p>
+        The scoring engine runs in two layers. A Python layer (Google Colab notebook) handles
+        data processing, signal computation, and construct scoring for the full candidate population
+        and produces the score history used in the evolution timeline. A Google Sheets + Apps Script
+        layer handles real-time scoring as new observations arrive and populates the output tables
+        that feed Looker Studio and the Greenhouse widget.
+      </p>
+
+      <h3>4.2 Scoring Logic</h3>
+      <p>Within each construct, score is the equal-weight mean of available signal values:</p>
+      <pre><code>construct_score = mean(signal_values)  — nulls excluded, weights redistribute</code></pre>
+      <p>Overall score is a weighted sum across constructs, null-safe:</p>
+      <pre><code>overall_score = Σ(construct_score × weight) / Σ(weights of present constructs)</code></pre>
+
+      <h3>4.3 Recommendation Thresholds</h3>
+      <table>
+        <thead><tr><th>Recommendation</th><th>Overall Score</th></tr></thead>
+        <tbody>
+          <tr><td>Advance</td><td>≥ 0.60</td></tr>
+          <tr><td>Review</td><td>0.40 – 0.59</td></tr>
+          <tr><td>Pass</td><td>&lt; 0.40</td></tr>
+        </tbody>
+      </table>
+      <p>Thresholds are configurable in the <code>scoring_config</code> tab via named ranges. No code change required.</p>
+
+      <h3>4.4 Motivation Floor</h3>
+      <p>
+        Any candidate who has submitted an application receives a Motivation floor of 0.20.
+        Self-selection is itself a motivation signal — a candidate who applied has demonstrated
+        minimum intent. The floor prevents a null Motivation score from misrepresenting that fact.
+      </p>
+
+      <h3>4.5 Scoring Config (Google Sheets)</h3>
+      <p>All scoring parameters are controlled from a single <code>scoring_config</code> tab:</p>
+      <ul>
+        <li><strong>Construct weights</strong> — named ranges: <code>capability_weight</code>, <code>conscientiousness_weight</code>, <code>motivation_weight</code>, <code>communication_weight</code></li>
+        <li><strong>Thresholds</strong> — named ranges: <code>advance_threshold</code>, <code>review_threshold</code></li>
+        <li><strong>Signal mapping</strong> — named range: <code>signal_mapping</code> — maps each signal field to a construct with an active flag</li>
+      </ul>
+      <p><a href="/tools/talent-intelligence/demo/">View the live scoring notebook →</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="widget">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">5. Greenhouse Widget</h2>
+
+      <h3>5.1 What It Is</h3>
+      <p>
+        The Greenhouse widget is the recruiter-facing surface of Talent Intelligence. It renders
+        inline inside a candidate's Greenhouse profile — no separate tool, no context switching.
+        It is fed by all agents across the full hiring process, not limited to any single stage.
+      </p>
+
+      <h3>5.2 What It Shows</h3>
+      <ul>
+        <li>Four construct scores with visual bar indicators</li>
+        <li>Overall score and department percentile</li>
+        <li>Current stage with A[i]gent recommendation (Advance / Review / Pass)</li>
+        <li>Top signals driving the current score</li>
+        <li>Action buttons (Advance, Flag for Review, Pass) — human-in-the-loop</li>
+        <li>Override log linking to Decision Quality dashboard</li>
+      </ul>
+
+      <h3>5.3 Candidate Navigation</h3>
+      <p>
+        The widget supports Next / Previous candidate navigation so recruiters can move through
+        a cohort without leaving the panel. Department and requisition context carries across navigation.
+      </p>
+
+      <h3>5.4 Governance Note</h3>
+      <p>
+        Scores are labeled clearly as behavioral indicators. Every action taken in the widget is
+        logged with candidate reference, event timestamp, action, and current score at time of
+        decision. Overrides are captured and visible in the Decision Quality dashboard to support
+        calibration over time.
+      </p>
+
+      <p><a href="/tools/talent-intelligence/demo/">Open the interactive widget demo →</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="evolution">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">6. Score Evolution Timeline</h2>
+
+      <h3>6.1 What It Shows</h3>
+      <p>
+        The score evolution timeline tracks cumulative construct scores at each process event —
+        showing how behavioral signals accumulate across the hiring journey, not just at a single
+        snapshot in time.
+      </p>
+      <p>
+        Each point represents an expanding window mean: the score at event N reflects all signals
+        from event 1 through N. Scores stabilize and become more reliable as more evidence accumulates.
+      </p>
+
+      <h3>6.2 What It Enables</h3>
+      <ul>
+        <li>See which stage produced the most signal movement for a given candidate</li>
+        <li>Identify candidates whose scores improved or declined significantly mid-process</li>
+        <li>Detect cohort patterns — e.g., portal engagement consistently predicting late-stage performance</li>
+        <li>Audit score changes relative to specific events for governance and calibration</li>
+      </ul>
+
+      <h3>6.3 Technical Note</h3>
+      <p>
+        The <code>score_history</code> table is populated by <code>buildScoreHistory()</code> in
+        Apps Script, which mirrors the cumulative scoring logic in the Colab notebook exactly.
+        The Candidate Intelligence dashboard reads from this table to render the timeline.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="governance">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">7. Governance &amp; Override Model</h2>
+
+      <h3>7.1 Scores Are Independent of Decisions</h3>
+      <p>
+        Talent Intelligence scores are computed from behavioral signals only — explicitly separated
+        from recruiter decisions. A candidate can be advanced despite a low score, or passed despite
+        a high one. The system does not enforce its recommendations.
+      </p>
+
+      <h3>7.2 Override Logging</h3>
+      <p>
+        Every action in the widget (Advance, Flag, Pass) is logged with candidate reference,
+        timestamp, action taken, and the score at time of decision. Actions that diverge from
+        the system recommendation are flagged as overrides and flow to the Decision Quality dashboard.
+      </p>
+
+      <h3>7.3 Autonomy Tiers</h3>
+      <table>
+        <thead><tr><th>Tier</th><th>What It Means</th><th>Talent Intelligence Role</th></tr></thead>
+        <tbody>
+          <tr><td>Tier 0 — Monitor</td><td>Measure and surface. No action.</td><td>Score computation and display</td></tr>
+          <tr><td>Tier 1 — Auto-execute</td><td>Low-risk updates. Logged and visible.</td><td>Score updates on new events</td></tr>
+          <tr><td>Tier 2 — Recommend</td><td>Actions affecting outcomes require human approval.</td><td>Advance / Review / Pass recommendation</td></tr>
+          <tr><td>Tier 3 — Escalate</td><td>High-stakes decisions route to humans.</td><td>Final disposition always human-owned</td></tr>
+        </tbody>
+      </table>
+
+      <h3>7.4 Bias Considerations</h3>
+      <p>
+        Signals are behavioral and process-based — not demographic. The system does not infer or
+        store protected characteristics. Override patterns in the Decision Quality dashboard provide
+        a structured mechanism for identifying and addressing systematic bias in human decisions over time.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="stack">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">8. Technical Stack</h2>
+
+      <h3>8.1 Components</h3>
+      <table>
+        <thead><tr><th>Component</th><th>Tool</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Scoring engine (full population)</td>
+            <td>Google Colab (Python)</td>
+            <td>Signal computation, construct scoring, score history generation, candidate profile output</td>
+          </tr>
+          <tr>
+            <td>Scoring config</td>
+            <td>Google Sheets</td>
+            <td>Construct weights, thresholds, signal mapping — editable without code changes</td>
+          </tr>
+          <tr>
+            <td>Real-time scoring</td>
+            <td>Google Apps Script</td>
+            <td>onEdit trigger processes new observations, appends to signals, updates candidate profile and score history</td>
+          </tr>
+          <tr>
+            <td>Analytics dashboards</td>
+            <td>Looker Studio</td>
+            <td>Candidate Intelligence dashboard, score evolution timeline, department percentile views</td>
+          </tr>
+          <tr>
+            <td>Recruiter surface</td>
+            <td>Greenhouse widget (HTML/JS)</td>
+            <td>Inline construct scores, recommendation, action buttons, override log</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>8.2 Data Flow</h3>
+      <p>
+        ATS events → observations tab → Apps Script (onEdit) → signals tab → candidate_profile
+        + score_history → Looker Studio dashboards + Greenhouse widget
+      </p>
+      <p>
+        Full-population run: signals.csv + observations.csv → Colab notebook →
+        candidate_profile.csv + score_history.csv → Google Sheets → Looker Studio
+      </p>
+
+      <h3>8.3 Source of Truth</h3>
+      <p>
+        The metrics dictionary is the single source of truth for all signal definitions, formulas,
+        and construct mapping. When scoring evolves, the dictionary is updated first — the scoring
+        engine and Apps Script follow.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="outputs">
+  <div class="panel panel--cool">
+    <div class="chapter__inner">
+      <h2 class="section-title">9. Metrics &amp; Outputs</h2>
+
+      <h3>9.1 Candidate-Level Outputs</h3>
+      <ul>
+        <li>Capability score (0–1)</li>
+        <li>Conscientiousness score (0–1)</li>
+        <li>Motivation score (0–1)</li>
+        <li>Communication score (0–1)</li>
+        <li>Overall weighted score (0–1)</li>
+        <li>Recommendation (Advance / Review / Pass)</li>
+        <li>Department percentile (0–100)</li>
+        <li>Score history by event (for evolution timeline)</li>
+      </ul>
+
+      <h3>9.2 Dashboard Views</h3>
+      <ul>
+        <li><strong>Single-candidate view</strong> — Four construct scores with department percentile, score evolution timeline, stage indicator, top signals, action buttons</li>
+        <li><strong>Requisition view</strong> — All candidates for a role ranked by overall score with construct breakdowns</li>
+        <li><strong>Department view</strong> — Score distributions across the active pool, source channel comparisons, percentile bands</li>
+      </ul>
+
+      <h3>9.3 Feeds Into</h3>
+      <ul>
+        <li><strong>Decision Quality dashboard</strong> — Override logs, interviewer calibration, score-to-decision correlation</li>
+        <li><strong>Pipeline Health A[i]gent</strong> — Source channel quality signals, stage-level score distributions</li>
+      </ul>
+    </div>
+  </div>
+</section>
