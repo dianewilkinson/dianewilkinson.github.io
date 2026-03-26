@@ -18,8 +18,8 @@
 
 {% include "partials/tool-nav.njk" %}
 
-{# Above-the-fold: iframe demo (only when no demoImage) #}
-{% if not demoImage %}
+{# Above-the-fold: iframe demo (only when no demoImage and not hidden) #}
+{% if not demoImage and not hideDemo %}
 <section class="demo" aria-label="{{ toolName }} Demo">
   <div class="demoHead">
     <div class="label"><span class="dot"></span> Demo Preview</div>
