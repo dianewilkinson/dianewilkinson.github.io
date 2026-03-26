@@ -4,10 +4,10 @@
     "card": {
       "type": "tool",
       "function": "Hiring & Mobility",
-      "title": "Recruiting Pipeline Health",
+      "title": "Pipeline Health A[i]gent",
       "summary": "Real-time insights that eliminate bottlenecks and improve time-to-hire.",
       "href": "/tools/metrics/",
-      "featured": false ,
+      "featured": true,
       "listed": true,
       "section": "core",
       "rank": 4
@@ -18,7 +18,7 @@
     "card": {
       "type": "tool",
       "function": "Hiring & Mobility",
-      "title": "High-Volume Screening",
+      "title": "Screening A[i]gent",
       "summary": "Frameworks for higher-quality, lower-bias application evaluations.",
       "href": "/tools/screening/",
       "featured": true,
@@ -32,7 +32,7 @@
     "card": {
       "type": "tool",
       "function": "Improvement",
-      "title": "Hiring Forecast Calculator",
+      "title": "Kickoff A[i]gent",
       "summary": "Headcount goals into operational reality.",
       "href": "/tools/calculator/",
       "featured": true,
@@ -45,8 +45,8 @@
     "id": "listening",
     "card": {
       "type": "tool",
-      "function": "Listening & Engagement",
-      "title": "Employee Listening",
+      "function": "Listening & Insights",
+      "title": "Employee Listening A[i]gent",
       "summary": "Transforms qualitative signals into measurable workflow insights.",
       "href": "/tools/listening/",
       "featured": false,
@@ -75,10 +75,10 @@
     "card": {
       "type": "tool",
       "function": "Hiring & Mobility",
-      "title": "Candidate Sourcing",
+      "title": "Sourcing A[i]gent",
       "summary": "Improves response rates while reducing wasted outreach.",
       "href": "/tools/sourcing/",
-      "featured": false,
+      "featured": true,
       "listed": true,
       "section": "workflow",
       "rank": 5
@@ -89,7 +89,7 @@
     "card": {
       "type": "tool",
       "function": "Improvement",
-      "title": "Daily Workflow Orchestration",
+      "title": "Daily Planner A[i]gent",
       "summary": "Prioritized, time-sensitive, automated planning for increased efficiency.",
       "href": "/tools/planner/",
       "featured": false,
@@ -98,20 +98,7 @@
       "rank": 7
     }
   },
-  {
-    "id": "chief",
-    "card": {
-      "type": "tool",
-      "function": "Governance & Infrastructure",
-      "title": "Chief Orchestration Layer",
-      "summary": "Ensures hiring systems operate as a connected workflow—not isolated tools.",
-      "href": "/tools/chief/",
-      "featured": false,
-      "listed": false,
-      "section": "workflow",
-      "rank": 8
-    }
-  },
+
   {
     "id": "candidate",
     "card": {
