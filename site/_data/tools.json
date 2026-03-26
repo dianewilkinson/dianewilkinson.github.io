@@ -10,7 +10,7 @@
       "featured": true,
       "listed": true,
       "section": "core",
-      "rank": 4
+      "rank": 2
     }
   },
   {
@@ -38,7 +38,7 @@
       "featured": true,
       "listed": true,
       "section": "core",
-      "rank": 2
+      "rank": 3
     }
   },
   {
@@ -52,24 +52,10 @@
       "featured": false,
       "listed": false,
       "section": "core",
-      "rank":3
+      "rank":4
     }
   },
-  {
-    "id": "innovation",
-    "card": {
-      "type": "tool",
-      "function": "Improvement",
-      "title": "Insight Signaling & Routing",
-      "summary": "Nurture innovation, inspiration & engagement.",
-      "href": "/tools/innovation/",
-      "featured": false,
-      "listed": false
-      ,
-      "section": "core",
-      "rank": 4
-    }
-  },
+
   {
     "id": "sourcing",
     "card": {
@@ -82,6 +68,20 @@
       "listed": true,
       "section": "workflow",
       "rank": 5
+    }
+  },
+    {
+    "id": "talent-intelligence",
+    "card": {
+      "type": "tool",
+      "function": "Hiring & Mobility",
+      "title": "Talent Intelligence A[i]gent",
+      "summary": "Candidate behavioral scoring & insights.",
+      "href": "/tools/talent-intelligence/",
+      "featured": true,
+      "listed": true,
+      "section": "core",
+      "rank": 6
     }
   },
   {
