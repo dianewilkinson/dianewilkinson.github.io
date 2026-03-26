@@ -1,0 +1,693 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Talent Intelligence — Widget Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f0f3;
+      color: #1a1a2e;
+      min-height: 100vh;
+      padding: 40px 20px 80px;
+    }
+
+    /* ── NAV ── */
+    .breadcrumb {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 24px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .breadcrumb a { color: #888; text-decoration: none; }
+    .breadcrumb a:hover { color: #4f46e5; }
+    .breadcrumb span { margin: 0 6px; }
+
+    /* ── SHELL ── */
+    .shell {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    /* ── HEADER ── */
+    .shell-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 28px 32px 20px;
+      border-bottom: 1px solid #eee;
+    }
+    .shell-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .shell-header h1 .bracket { color: #4f46e5; }
+    .shell-context {
+      font-size: 13px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    /* ── CANDIDATE TABS ── */
+    .candidate-tabs {
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      border-bottom: 1px solid #eee;
+      gap: 0;
+    }
+    .tab-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #aaa;
+      margin-right: 16px;
+    }
+    .tab {
+      padding: 12px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      background: none;
+    }
+    .tab:hover { color: #4f46e5; }
+    .tab.active {
+      color: #4f46e5;
+      border-bottom-color: #4f46e5;
+      font-weight: 600;
+    }
+    .tab-nav {
+      margin-left: auto;
+      display: flex;
+      gap: 4px;
+    }
+    .tab-nav button {
+      padding: 5px 10px;
+      font-size: 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      background: #fafafa;
+      color: #555;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .tab-nav button:hover { background: #f0f0f3; border-color: #ccc; }
+
+    /* ── BODY ── */
+    .shell-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    /* ── LEFT PANEL ── */
+    .panel-left {
+      padding: 24px 28px;
+      border-right: 1px solid #eee;
+    }
+
+    .stage-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f5f3ff;
+      color: #4f46e5;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .stage-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4f46e5;
+    }
+
+    .construct-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px; }
+
+    .construct-row { display: flex; flex-direction: column; gap: 5px; }
+    .construct-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .construct-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #444;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .construct-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+    .construct-score-val {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .bar-track {
+      height: 6px;
+      background: #f0f0f3;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+    .bar-fill.capability    { background: #4f46e5; }
+    .bar-fill.conscientiousness { background: #0891b2; }
+    .bar-fill.motivation    { background: #7c3aed; }
+    .bar-fill.communication { background: #059669; }
+
+    /* ── OVERALL ROW ── */
+    .overall-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+    }
+    .overall-left { display: flex; flex-direction: column; gap: 2px; }
+    .overall-label { font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; }
+    .overall-score { font-size: 24px; font-weight: 800; color: #1a1a2e; letter-spacing: -0.5px; }
+    .overall-pctile { font-size: 11px; color: #888; }
+    .rec-badge {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .rec-badge.advance { background: #d1fae5; color: #065f46; }
+    .rec-badge.review  { background: #fef3c7; color: #92400e; }
+    .rec-badge.pass    { background: #fee2e2; color: #991b1b; }
+
+    /* ── TOP SIGNALS ── */
+    .signals-section h3 {
+      font-size: 11px;
+      font-weight: 600;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .signal-chip-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .signal-chip {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+    .signal-chip.positive { background: #d1fae5; color: #065f46; }
+    .signal-chip.neutral  { background: #f0f0f3; color: #555; }
+    .signal-chip.flag     { background: #fef3c7; color: #92400e; }
+
+    /* ── RIGHT PANEL ── */
+    .panel-right { padding: 24px 28px; }
+
+    .panel-right h3 {
+      font-size: 11px;
+      font-weight: 600;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    /* ── TIMELINE CHART ── */
+    .timeline-wrap {
+      margin-bottom: 24px;
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .timeline-chart { position: relative; height: 120px; }
+    svg.chart { width: 100%; height: 100%; overflow: visible; }
+
+    /* ── EVENT LIST ── */
+    .event-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
+    .event-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: #fafafa;
+      border: 1px solid #eee;
+    }
+    .event-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .event-dot.application  { background: #4f46e5; }
+    .event-dot.screening    { background: #0891b2; }
+    .event-dot.interview    { background: #7c3aed; }
+    .event-dot.task         { background: #059669; }
+    .event-dot.followup     { background: #f59e0b; }
+    .event-name { font-size: 12px; color: #444; font-weight: 500; flex: 1; }
+    .event-score { font-size: 12px; font-weight: 700; color: #1a1a2e; }
+    .event-delta { font-size: 11px; }
+    .event-delta.up   { color: #059669; }
+    .event-delta.down { color: #dc2626; }
+    .event-delta.flat { color: #aaa; }
+
+    /* ── ACTIONS ── */
+    .shell-footer {
+      padding: 18px 32px;
+      border-top: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #aaa;
+      margin-right: 4px;
+    }
+    .action-btn {
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+    .action-btn.advance {
+      background: #4f46e5; color: #fff; border-color: #4f46e5;
+    }
+    .action-btn.advance:hover { background: #4338ca; }
+    .action-btn.flag {
+      background: #fff; color: #92400e; border-color: #fcd34d;
+    }
+    .action-btn.flag:hover { background: #fef3c7; }
+    .action-btn.pass {
+      background: #fff; color: #666; border-color: #e0e0e0;
+    }
+    .action-btn.pass:hover { background: #f5f5f5; }
+    .footer-right {
+      margin-left: auto;
+      font-size: 11px;
+      color: #bbb;
+    }
+    .footer-right a { color: #4f46e5; text-decoration: none; font-weight: 500; }
+    .footer-right a:hover { text-decoration: underline; }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: #1a1a2e;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.25s;
+      pointer-events: none;
+      z-index: 100;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="/">Home</a><span>/</span>
+  <a href="/tools/">Tools</a><span>/</span>
+  <a href="/tools/talent-intelligence/">Talent Intelligence</a><span>/</span>
+  Demo
+</div>
+
+<div class="shell">
+
+  <!-- HEADER -->
+  <div class="shell-header">
+    <h1>Talent Intelligence <span class="bracket">A[i]</span></h1>
+    <div class="shell-context">Candidate Intelligence · Engineering · Mid</div>
+  </div>
+
+  <!-- TABS -->
+  <div class="candidate-tabs">
+    <span class="tab-label">Active Candidates</span>
+    <button class="tab" onclick="selectCandidate(0)">Alex R.</button>
+    <button class="tab active" onclick="selectCandidate(1)">Jordan M.</button>
+    <button class="tab" onclick="selectCandidate(2)">Sam T.</button>
+    <div class="tab-nav">
+      <button onclick="prevCandidate()">← Prev</button>
+      <button onclick="nextCandidate()">Next →</button>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="shell-body">
+
+    <!-- LEFT: SCORES -->
+    <div class="panel-left">
+
+      <div class="stage-badge">
+        <span class="dot"></span>
+        <span id="stage-label">Interview Stage</span>
+      </div>
+
+      <div class="construct-list">
+        <div class="construct-row">
+          <div class="construct-top">
+            <span class="construct-name">Capability</span>
+            <div>
+              <span class="construct-meta">40% · </span>
+              <span class="construct-score-val" id="score-capability">0.00</span>
+            </div>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill capability" id="bar-capability" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="construct-row">
+          <div class="construct-top">
+            <span class="construct-name">Conscientiousness</span>
+            <div>
+              <span class="construct-meta">25% · </span>
+              <span class="construct-score-val" id="score-conscientiousness">0.00</span>
+            </div>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill conscientiousness" id="bar-conscientiousness" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="construct-row">
+          <div class="construct-top">
+            <span class="construct-name">Motivation</span>
+            <div>
+              <span class="construct-meta">20% · </span>
+              <span class="construct-score-val" id="score-motivation">0.00</span>
+            </div>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill motivation" id="bar-motivation" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="construct-row">
+          <div class="construct-top">
+            <span class="construct-name">Communication</span>
+            <div>
+              <span class="construct-meta">15% · </span>
+              <span class="construct-score-val" id="score-communication">0.00</span>
+            </div>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill communication" id="bar-communication" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="overall-row">
+        <div class="overall-left">
+          <span class="overall-label">Overall Score</span>
+          <span class="overall-score" id="overall-score">0.00</span>
+          <span class="overall-pctile" id="dept-pctile">— dept percentile</span>
+        </div>
+        <span class="rec-badge" id="rec-badge">—</span>
+      </div>
+
+      <div class="signals-section">
+        <h3>Top Signals</h3>
+        <div class="signal-chip-list" id="signal-chips"></div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: EVOLUTION + EVENTS -->
+    <div class="panel-right">
+
+      <h3>Score Evolution — Overall</h3>
+      <div class="timeline-wrap">
+        <div class="timeline-chart">
+          <svg class="chart" id="evolution-chart" viewBox="0 0 400 120" preserveAspectRatio="none"></svg>
+        </div>
+      </div>
+
+      <h3>Stage History</h3>
+      <div class="event-list" id="event-list"></div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER ACTIONS -->
+  <div class="shell-footer">
+    <span class="footer-label">Recruiter Decision</span>
+    <button class="action-btn advance" onclick="doAction('Advance')">Advance</button>
+    <button class="action-btn flag"    onclick="doAction('Flag for Review')">Flag for Review</button>
+    <button class="action-btn pass"    onclick="doAction('Pass')">Pass</button>
+    <div class="footer-right">
+      Override log →
+      <a href="/tools/talent-intelligence/playbook/#governance">Decision Quality</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const CANDIDATES = [
+    {
+      name: "Alex R.",
+      stage: "Screening Stage",
+      capability: 0.61,
+      conscientiousness: 0.74,
+      motivation: 0.52,
+      communication: 0.58,
+      overall: 0.63,
+      pctile: 42,
+      rec: "review",
+      recLabel: "Review",
+      signals: [
+        { label: "Strong resume fit", type: "positive" },
+        { label: "Responsive", type: "positive" },
+        { label: "Low tech depth", type: "flag" },
+        { label: "No task yet", type: "neutral" },
+      ],
+      events: [
+        { name: "Application submitted", dot: "application", score: 0.58, delta: null },
+        { name: "Interview invited", dot: "screening", score: 0.58, delta: 0 },
+        { name: "Interview RSVP", dot: "screening", score: 0.63, delta: 0.05 },
+      ]
+    },
+    {
+      name: "Jordan M.",
+      stage: "Interview Stage",
+      capability: 0.79,
+      conscientiousness: 0.88,
+      motivation: 0.91,
+      communication: 0.72,
+      overall: 0.83,
+      pctile: 78,
+      rec: "advance",
+      recLabel: "Advance",
+      signals: [
+        { label: "Task quality: 0.89", type: "positive" },
+        { label: "Prep materials accessed", type: "positive" },
+        { label: "Unprompted follow-up", type: "positive" },
+        { label: "Strong verbal comms", type: "positive" },
+        { label: "Reschedule: 1", type: "flag" },
+      ],
+      events: [
+        { name: "Application submitted", dot: "application", score: 0.64, delta: null },
+        { name: "Portal session", dot: "screening", score: 0.71, delta: 0.07 },
+        { name: "Task submitted", dot: "task", score: 0.76, delta: 0.05 },
+        { name: "Recruiter screen", dot: "screening", score: 0.79, delta: 0.03 },
+        { name: "HM interview", dot: "interview", score: 0.83, delta: 0.04 },
+      ]
+    },
+    {
+      name: "Sam T.",
+      stage: "Final Interview",
+      capability: 0.55,
+      conscientiousness: 0.62,
+      motivation: 0.44,
+      communication: 0.66,
+      overall: 0.57,
+      pctile: 29,
+      rec: "review",
+      recLabel: "Review",
+      signals: [
+        { label: "Solid comms score", type: "positive" },
+        { label: "No follow-up sent", type: "flag" },
+        { label: "Low motivation signals", type: "flag" },
+        { label: "Late task submission", type: "flag" },
+      ],
+      events: [
+        { name: "Application submitted", dot: "application", score: 0.51, delta: null },
+        { name: "Interview RSVP", dot: "screening", score: 0.53, delta: 0.02 },
+        { name: "Task submitted", dot: "task", score: 0.54, delta: 0.01 },
+        { name: "Recruiter screen", dot: "screening", score: 0.55, delta: 0.01 },
+        { name: "HM interview", dot: "interview", score: 0.56, delta: 0.01 },
+        { name: "Final interview", dot: "interview", score: 0.57, delta: 0.01 },
+      ]
+    }
+  ];
+
+  let current = 1;
+
+  function selectCandidate(idx) {
+    current = idx;
+    render();
+    document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  }
+
+  function prevCandidate() {
+    current = (current - 1 + CANDIDATES.length) % CANDIDATES.length;
+    selectCandidate(current);
+  }
+  function nextCandidate() {
+    current = (current + 1) % CANDIDATES.length;
+    selectCandidate(current);
+  }
+
+  function render() {
+    const c = CANDIDATES[current];
+
+    // Stage
+    document.getElementById('stage-label').textContent = c.stage;
+
+    // Construct scores
+    ['capability','conscientiousness','motivation','communication'].forEach(k => {
+      const val = c[k];
+      document.getElementById('score-' + k).textContent = val.toFixed(2);
+      document.getElementById('bar-' + k).style.width = (val * 100) + '%';
+    });
+
+    // Overall
+    document.getElementById('overall-score').textContent = c.overall.toFixed(2);
+    document.getElementById('dept-pctile').textContent = c.pctile + 'th dept percentile';
+
+    const badge = document.getElementById('rec-badge');
+    badge.textContent = c.recLabel;
+    badge.className = 'rec-badge ' + c.rec;
+
+    // Signals
+    const chips = document.getElementById('signal-chips');
+    chips.innerHTML = c.signals.map(s =>
+      `<span class="signal-chip ${s.type}">${s.label}</span>`
+    ).join('');
+
+    // Events
+    const el = document.getElementById('event-list');
+    el.innerHTML = c.events.map((e, i) => {
+      let deltaHtml = '';
+      if (e.delta !== null && e.delta !== undefined) {
+        if (e.delta > 0) deltaHtml = `<span class="event-delta up">+${e.delta.toFixed(2)}</span>`;
+        else if (e.delta < 0) deltaHtml = `<span class="event-delta down">${e.delta.toFixed(2)}</span>`;
+        else deltaHtml = `<span class="event-delta flat">—</span>`;
+      }
+      return `<div class="event-row">
+        <span class="event-dot ${e.dot}"></span>
+        <span class="event-name">${e.name}</span>
+        <span class="event-score">${e.score.toFixed(2)}</span>
+        ${deltaHtml}
+      </div>`;
+    }).join('');
+
+    // Chart
+    drawChart(c.events.map(e => e.score));
+  }
+
+  function drawChart(scores) {
+    const svg = document.getElementById('evolution-chart');
+    if (!scores.length) { svg.innerHTML = ''; return; }
+
+    const W = 400, H = 120;
+    const pad = { top: 12, bottom: 20, left: 28, right: 12 };
+    const iW = W - pad.left - pad.right;
+    const iH = H - pad.top - pad.bottom;
+
+    const minS = 0.3, maxS = 1.0;
+    const xStep = scores.length > 1 ? iW / (scores.length - 1) : iW;
+
+    const pts = scores.map((s, i) => ({
+      x: pad.left + (scores.length > 1 ? i * xStep : iW / 2),
+      y: pad.top + iH - ((s - minS) / (maxS - minS)) * iH
+    }));
+
+    // Grid lines
+    let grid = '';
+    [0.4, 0.6, 0.8].forEach(v => {
+      const y = pad.top + iH - ((v - minS) / (maxS - minS)) * iH;
+      grid += `<line x1="${pad.left}" y1="${y}" x2="${W - pad.right}" y2="${y}"
+        stroke="#e8e8ec" stroke-width="1" stroke-dasharray="3,3"/>`;
+      grid += `<text x="${pad.left - 4}" y="${y + 4}" text-anchor="end"
+        font-size="9" fill="#bbb">${v.toFixed(1)}</text>`;
+    });
+
+    // Area fill
+    const lineD = pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x},${p.y}`).join(' ');
+    const areaD = lineD
+      + ` L${pts[pts.length-1].x},${pad.top + iH}`
+      + ` L${pts[0].x},${pad.top + iH} Z`;
+
+    // Dots
+    const dots = pts.map(p =>
+      `<circle cx="${p.x}" cy="${p.y}" r="4" fill="#4f46e5" stroke="#fff" stroke-width="2"/>`
+    ).join('');
+
+    svg.innerHTML = grid
+      + `<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#4f46e5" stop-opacity="0.01"/>
+         </linearGradient></defs>`
+      + `<path d="${areaD}" fill="url(#areaGrad)"/>`
+      + `<path d="${lineD}" fill="none" stroke="#4f46e5" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`
+      + dots;
+  }
+
+  function doAction(label) {
+    const toast = document.getElementById('toast');
+    toast.textContent = `Action logged: ${label} — ${CANDIDATES[current].name}`;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  // Init
+  render();
+</script>
+
+</body>
+</html>
