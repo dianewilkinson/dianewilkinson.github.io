@@ -75,7 +75,7 @@
     "card": {
       "type": "tool",
       "function": "Hiring & Mobility",
-      "title": "Talent Intelligence A[i]gent",
+      "title": "Candidate Scoring A[i]gent",
       "summary": "Candidate behavioral scoring & insights.",
       "href": "/tools/talent-intelligence/",
       "featured": true,
