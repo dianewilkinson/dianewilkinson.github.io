@@ -85,16 +85,16 @@
     }
   },
   {
-    "id": "planner",
+    "id": "innovation",
     "card": {
       "type": "tool",
       "function": "Improvement",
-      "title": "Daily Planner A[i]gent",
-      "summary": "Prioritized, time-sensitive, automated planning for increased efficiency.",
-      "href": "/tools/planner/",
+      "title": "Insight A[i]gent",
+      "summary": "Prevent good ideas from dying between insight and action.",
+      "href": "/tools/innovation/",
       "featured": false,
-      "listed": false,
-      "section": "workflow",
+      "listed": true,
+      "section": "core",
       "rank": 7
     }
   },
@@ -192,7 +192,7 @@
       "summary": "Recruiting workflows to increase efficiency, engagement, branding, & CSAT.",
       "href": "/tools/workflow/",
       "featured": false,
-      "listed": true,
+      "listed": false,
       "section": "playbook",
       "rank": 15
     }
