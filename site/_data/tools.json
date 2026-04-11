@@ -18,7 +18,7 @@
     "card": {
       "type": "tool",
       "function": "Hiring & Mobility",
-      "title": "Resume Screening A[i]gent",
+      "title": "Screening A[i]gent",
       "summary": "Frameworks for higher-quality, lower-bias application evaluations.",
       "href": "/tools/screening/",
       "featured": true,
