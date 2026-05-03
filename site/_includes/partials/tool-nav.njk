@@ -1,4 +1,5 @@
-{% if toolSlug %}
+{% set hasNavLinks = (pageId != "tool-index") or (pageId != "tool-playbook" and not hidePlaybook) or (pageId != "tool-demo" and not hideDemo) or casesHref %}
+{% if toolSlug and hasNavLinks %}
 <section class="full" aria-label="Tool navigation">
   <div class="miniGrid miniGrid--nav">
     {% if pageId != "tool-index" %}
@@ -7,7 +8,7 @@
       <span>What this tool solves, outcomes, and signals.</span>
     </a>
     {% endif %}
-    {% if pageId != "tool-playbook" %}
+    {% if pageId != "tool-playbook" and not hidePlaybook %}
     <a class="mini" href="/tools/{{ toolSlug }}/playbook/">
       <b>View Tool {{ playbookLabel or "Blueprint" }}</b>
       <span>Step-by-step guidance for using this tool.</span>

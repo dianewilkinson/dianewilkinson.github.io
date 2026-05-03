@@ -1452,12 +1452,25 @@ body[data-page="use-case"] .miniGrid{
 /* =========================
    TAGLINE STATEMENT (landing)
    ========================= */
-.tagline-panel{
-  padding-top:0;
-  padding-bottom:0;
+.tagline-panel{ margin-top:14px; }
+.questions-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px 40px;
+}
+.question-item{
+  font-family:'DM Sans', ui-sans-serif, sans-serif;
+  font-size:clamp(14px, 1.4vw, 17px);
+  font-weight:600;
+  font-style:italic;
+  color:var(--accent);
+  margin:0;
+}
+@media(max-width:640px){
+  .questions-grid{ grid-template-columns:1fr; }
 }
 .tagline-statement{
-  font-family:'Playfair Display', Georgia, serif;
+  font-family:'DM Sans', ui-sans-serif, sans-serif;
   font-size:clamp(22px, 4vw, 44px);
   font-weight:600;
   line-height:1.25;

@@ -32,11 +32,15 @@
 </section>
 {% endif %}
 
-{# Optional tagline #}
-{% if tagline %}
-<section class="panel tagline-panel" aria-label="Tool tagline">
+{# Questions grid #}
+{% if questions %}
+<section class="panel tagline-panel" aria-label="Questions this tool answers">
   <div class="panelInner">
-    <p class="tagline-statement">{{ tagline | safe }}</p>
+    <div class="questions-grid">
+      {% for q in questions %}
+      <p class="question-item">{{ q }}</p>
+      {% endfor %}
+    </div>
   </div>
 </section>
 {% endif %}
@@ -45,7 +49,7 @@
 {% if solves %}
 <section class="full" aria-label="What {{ toolName }} solves">
   <h2 class="section-title">What the Tool Solves</h2>
-  <p class="muted">{{ solves | safe }}</p>
+  <div class="muted">{{ solves | safe }}</div>
 </section>
 {% endif %}
 
@@ -55,6 +59,15 @@
   <a href="{{ demoImage }}" target="_blank" rel="noopener">
     <img src="{{ demoImage }}" alt="{{ toolName }} flow diagram" style="width:100%;display:block;border-radius:4px;">
   </a>
+</section>
+{% endif %}
+
+{# Optional tagline #}
+{% if tagline %}
+<section class="panel tagline-panel" aria-label="Tool tagline">
+  <div class="panelInner">
+    <p class="tagline-statement">{{ tagline | safe }}</p>
+  </div>
 </section>
 {% endif %}
 
