@@ -61,7 +61,7 @@
       "type": "tool",
       "function": "Hiring & Mobility",
       "title": "Scoring A[i]gent",
-      "summary": "Captures behavioral signals at every process event, scores them across four I/O psychology constructs, and surfaces the results inside Greenhouse before the interview starts. Evaluation becomes evidence-based, not instinct-based.",
+      "summary": "Captures candidate behavioral signals, scoring them across four I/O psychology constructs, and surfaces the results inside the ATS. Evaluation becomes evidence-based, not instinct-based.",
       "href": "/tools/talent-intelligence/",
       "featured": true,
       "listed": true,
