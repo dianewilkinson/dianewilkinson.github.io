@@ -7,8 +7,8 @@
       "summary": "5 decision quality metrics every team should track.",
       "href": "/articles/decision-science-metrics/",
       "featured": true,
-      "listed": false,
-      "rank": 1
+      "listed": true,
+      "rank": 4
     }
   },
   {
@@ -32,7 +32,7 @@
       "href": "/articles/why-ai-pilots-fail/",
       "featured": true,
       "listed": true,
-      "rank": 3
+      "rank": 5
     }
   },
   {
@@ -44,7 +44,7 @@
       "href": "/articles/neurodivergent-hiring-ai/",
       "featured": true,
       "listed": true,
-      "rank": 4
+      "rank": 3
     }
   },
   {
@@ -56,7 +56,7 @@
       "href": "/articles/opting-out-ai-hiring/",
       "featured": true,
       "listed": true,
-      "rank": 5
+      "rank": 1
     }
   }
 ]
