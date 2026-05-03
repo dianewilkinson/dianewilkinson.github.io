@@ -6,8 +6,8 @@
       "heroTitle": "<span class='accent'>Article:</span>Don't Make Soft Metrics Hard. <span class='accent'>5 Decision Quality Metrics</span> Every Team Should Track",
       "summary": "5 decision quality metrics every team should track.",
       "href": "/articles/decision-science-metrics/",
-      "featured": false,
-      "listed": true,
+      "featured": true,
+      "listed": false,
       "rank": 1
     }
   },
@@ -33,6 +33,30 @@
       "featured": true,
       "listed": true,
       "rank": 3
+    }
+  },
+  {
+    "id": "neurodivergent-hiring-ai",
+    "card": {
+      "title": "Accommodations Upon Request",
+      "heroTitle": "<span class='accent'>Article:</span> Accommodations Upon Request: Hiring for <span class='accent'>Competitive Advantage</span> in the Age of AI",
+      "summary": "If neurodivergent minds are the future of talent, why are we screening them out?",
+      "href": "/articles/neurodivergent-hiring-ai/",
+      "featured": true,
+      "listed": true,
+      "rank": 4
+    }
+  },
+  {
+    "id": "opting-out-ai-hiring",
+    "card": {
+      "title": "Opting Out Isn't an Option",
+      "heroTitle": "<span class='accent'>Article:</span> Opting Out Isn't an Option: How <span class='accent'>AI Changed Hiring</span>",
+      "summary": "AI regulatory deadlines are coming. Intention is not a legal defense.",
+      "href": "/articles/opting-out-ai-hiring/",
+      "featured": true,
+      "listed": true,
+      "rank": 5
     }
   }
 ]
