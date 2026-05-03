@@ -1,25 +1,11 @@
 [
   {
-    "id": "metrics",
-    "card": {
-      "type": "tool",
-      "function": "Hiring & Mobility",
-      "title": "Pipeline Health A[i]gent",
-      "summary": "Real-time insights that eliminate bottlenecks and improve time-to-hire.",
-      "href": "/tools/metrics/",
-      "featured": false,
-      "listed": true,
-      "section": "core",
-      "rank": 2
-    }
-  },
-  {
     "id": "screening",
     "card": {
       "type": "tool",
       "function": "Hiring & Mobility",
       "title": "Screening A[i]gent",
-      "summary": "Frameworks for higher-quality, lower-bias application evaluations.",
+      "summary": "Replaces fast, inconsistent resume skims with rubric-driven evaluation. Every application gets the same deep dive, an explainable recommendation, and structured outputs that clean up downstream hiring signals.",
       "href": "/tools/screening/",
       "featured": true,
       "listed": true,
@@ -28,17 +14,101 @@
     }
   },
   {
+    "id": "metrics",
+    "card": {
+      "type": "tool",
+      "function": "Hiring & Mobility",
+      "title": "Pipeline A[i]gent",
+      "summary": "Monitors funnel metrics in the background and surfaces bottlenecks before KPIs slip. Prepares corrective action plans automatically, saving recruiting leaders 4–8 hours of manual analysis every week.",
+      "href": "/tools/metrics/",
+      "featured": true,
+      "listed": true,
+      "section": "core",
+      "rank": 2
+    }
+  },
+  {
     "id": "calculator",
     "card": {
       "type": "tool",
       "function": "Improvement",
-      "title": "Kickoff Planning A[i]gent",
-      "summary": "Headcount goals into operational reality.",
+      "title": "Planning A[i]gent",
+      "summary": "Converts hiring goals into stage-by-stage weekly volume. Applications, screens, HM interviews, offers — so teams can see where the plan breaks before the quarter does.",
       "href": "/tools/calculator/",
       "featured": true,
       "listed": true,
       "section": "core",
       "rank": 3
+    }
+  },
+  {
+    "id": "attribution",
+    "card": {
+      "type": "tool",
+      "function": "Hiring & Mobility",
+      "title": "Attribution A[i]gent",
+      "summary": "Cookie-based view-through attribution that credits every sourcing channel and automates referral bonus tracking.",
+      "href": "/tools/attribution/",
+      "featured": true,
+      "listed": true,
+      "section": "core",
+      "rank": 4
+    }
+  },
+  {
+    "id": "talent-intelligence",
+    "card": {
+      "type": "tool",
+      "function": "Hiring & Mobility",
+      "title": "Scoring A[i]gent",
+      "summary": "Captures behavioral signals at every process event, scores them across four I/O psychology constructs, and surfaces the results inside Greenhouse before the interview starts. Evaluation becomes evidence-based, not instinct-based.",
+      "href": "/tools/talent-intelligence/",
+      "featured": true,
+      "listed": true,
+      "section": "core",
+      "rank": 5
+    }
+  },
+  {
+    "id": "innovation",
+    "card": {
+      "type": "tool",
+      "function": "Improvement",
+      "title": "Insight A[i]gent",
+      "summary": "Checks institutional memory before escalating anything, routes net-new ideas to the right owner with context attached, and responds to employees immediately. Good ideas don't die in the space between insight and response.",
+      "href": "/tools/innovation/",
+      "featured": false,
+      "listed": true,
+      "section": "core",
+      "rank": 8
+    }
+  },
+  {
+    "id": "headcount",
+    "card": {
+      "type": "tool",
+      "function": "Hiring & Mobility",
+      "title": "Headcount A[i]gent",
+      "summary": "Turns headcount approvals into locked timeline commitments — synced automatically between HRIS and ATS so finance, HR, and recruiting always work from the same intelligent plan.",
+      "href": null,
+      "featured": true,
+      "listed": true,
+      "section": "core",
+      "rank": 7
+    }
+  },
+  {
+    "id": "referral",
+    "card": {
+      "type": "tool",
+      "function": "Hiring & Mobility",
+      "title": "Referral A[i]gent",
+      "summary": "Surfaces employee network matches against open reqs and turns a Slack nudge into a ready-to-send referral — before a connection slips through.",
+      "href": null,
+      "featured": true,
+      "listed": true,
+      "section": "core",
+      "rank": 6
     }
   },
   {
@@ -52,10 +122,9 @@
       "featured": false,
       "listed": false,
       "section": "core",
-      "rank":4
+      "rank": 8
     }
   },
-
   {
     "id": "sourcing",
     "card": {
@@ -67,35 +136,7 @@
       "featured": true,
       "listed": true,
       "section": "workflow",
-      "rank": 5
-    }
-  },
-    {
-    "id": "talent-intelligence",
-    "card": {
-      "type": "tool",
-      "function": "Hiring & Mobility",
-      "title": "Candidate Scoring A[i]gent",
-      "summary": "Candidate behavioral scoring & insights.",
-      "href": "/tools/talent-intelligence/",
-      "featured": true,
-      "listed": true,
-      "section": "core",
-      "rank": 6
-    }
-  },
-  {
-    "id": "innovation",
-    "card": {
-      "type": "tool",
-      "function": "Improvement",
-      "title": "Insight A[i]gent",
-      "summary": "Prevent good ideas from dying between insight and action.",
-      "href": "/tools/innovation/",
-      "featured": false,
-      "listed": true,
-      "section": "core",
-      "rank": 7
+      "rank": 8
     }
   },
 

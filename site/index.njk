@@ -115,22 +115,6 @@ heroActions: |
   <div class="panelInner">
     <h3 class="section-title">The Tools Behind the System</h3>
     <div class="appGrid--scroll" aria-label="Foundational infrastructure row">
-      {% for item in tools %}
-        {% if item.id == "metrics" %}
-          <article class="appCard appCard--compact">
-            <div class="appTop">
-              <div class="appMain">
-                <h3>{{ item.card.title }}</h3>
-                <p>{{ item.card.summary }}</p>
-              </div>
-            </div>
-            <div class="appActions">
-              <span class="small muted">{{ item.card.function }}</span>
-              <a class="appLink" href="{{ item.card.href }}">Explore the Tool →</a>
-            </div>
-          </article>
-        {% endif %}
-      {% endfor %}
       {% for item in tools | sort(false, false, "card.rank") %}
         {% if item.card and item.card.featured and item.card.section == "core" %}
           <article class="appCard">
@@ -142,7 +126,11 @@ heroActions: |
             </div>
             <div class="appActions">
               <span class="small muted">{{ item.card.function }}</span>
-              <a class="appLink" href="{{ item.card.href }}">Explore the Tool →</a>
+              {% if item.card.href %}
+                <a class="appLink" href="{{ item.card.href }}">Explore the Tool →</a>
+              {% else %}
+                <span class="small muted">Details soon</span>
+              {% endif %}
             </div>
           </article>
         {% endif %}

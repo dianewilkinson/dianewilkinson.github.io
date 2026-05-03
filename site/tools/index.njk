@@ -46,7 +46,11 @@ permalink: "/tools/"
                 {% else %}
                   <span class="small muted"></span>
                 {% endif %}
-                <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+                {% if item.card.href %}
+                  <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+                {% else %}
+                  <span class="small muted">Details soon</span>
+                {% endif %}
               </div>
             </article>
           {% endif %}
