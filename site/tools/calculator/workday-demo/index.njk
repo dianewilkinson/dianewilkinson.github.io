@@ -1,0 +1,417 @@
+---
+permalink: /tools/calculator/workday-demo/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workday Sana — Request for Headcount</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  height:100%;overflow:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:#e8eaed;
+}
+
+/* ── Background image — cover fills edge-to-edge, no letterboxing ── */
+.bg-img-wrap{
+  position:fixed;inset:0;z-index:0;
+  pointer-events:none;overflow:hidden;
+}
+.bg-img-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:left center;
+  display:block;
+}
+
+/* ── Dark overlay dims the screenshot ── */
+.overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.40);
+  z-index:1;pointer-events:none;
+}
+
+/* ── Popout widget — scales with viewport ── */
+.pop{
+  position:fixed;
+  top:0;right:0;bottom:0;
+  width:clamp(420px, 38vw, 560px);
+  background:#fff;
+  border-left:1px solid #e0e0e0;
+  box-shadow:-8px 0 40px rgba(0,0,0,0.28);
+  display:flex;flex-direction:column;
+  z-index:10;overflow:hidden;
+}
+
+/* Header */
+.ph{
+  height:52px;border-bottom:1px solid #e8eaed;
+  display:flex;align-items:center;padding:0 16px;gap:10px;flex-shrink:0;
+}
+.ph-ico{color:#5f6368;display:flex;align-items:center}
+.ph-ico svg{width:16px;height:16px}
+.ph-title{font-size:14px;font-weight:500;color:#202124;flex:1}
+.ph-dot{
+  display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:#9aa0a6;margin-left:5px;vertical-align:middle;
+}
+.ph-acts{display:flex;gap:12px;color:#9aa0a6}
+.ph-acts svg{width:16px;height:16px;cursor:pointer}
+.ph-acts svg:hover{color:#202124}
+
+/* Body scroll area */
+.pb{
+  flex:1;padding:16px;overflow-y:auto;
+  display:flex;flex-direction:column;gap:11px;
+}
+
+/* Message animation */
+.msg{opacity:0;transform:translateY(5px);transition:opacity .28s ease,transform .28s ease}
+.msg.show{opacity:1;transform:translateY(0)}
+
+/* Intro */
+.intro-star{font-size:18px;color:#4338ca;margin-bottom:5px;font-weight:700}
+.intro-h{font-size:15px;font-weight:700;color:#202124;line-height:1.3;margin-bottom:3px}
+.intro-s{font-size:13px;color:#444746;line-height:1.5}
+
+/* Question text */
+.q-text{font-size:13px;font-weight:600;color:#202124;line-height:1.4}
+
+/* Fields */
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fl{font-size:11px;color:#5f6368;margin-bottom:5px;font-weight:500}
+.req{color:#d93025}
+.inp{
+  height:32px;border:1px solid #dadce0;border-radius:6px;
+  padding:0 10px;font-size:13px;color:#202124;
+  background:#fff;width:100%;font-family:inherit;
+}
+.inp:focus{outline:none;border-color:#1a73e8;box-shadow:0 0 0 2px rgba(26,115,232,.15)}
+.err{font-size:11px;color:#d93025;min-height:14px;margin-top:3px}
+
+/* Conversion rates */
+.cvr-hd{display:flex;align-items:center;gap:6px;margin-bottom:7px}
+.cvr-lbl{font-size:11px;color:#5f6368;font-weight:500}
+.cvr-chip{
+  font-size:9px;background:#e8f0fe;color:#1967d2;
+  border:1px solid #c5d7f7;border-radius:4px;
+  padding:1px 7px;font-weight:600;
+}
+.cvrs{display:flex;gap:4px}
+.cc{flex:1;background:#f8f9fa;border:1px solid #e8eaed;border-radius:6px;padding:5px 4px;text-align:center}
+.cv{font-size:12px;font-weight:600;color:#202124}
+.cl{font-size:8.5px;color:#9aa0a6;line-height:1.25;margin-top:2px}
+
+/* Plan output strip */
+.plan-h{font-size:15px;font-weight:700;color:#202124;margin-bottom:9px}
+.plan-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.ps{background:#f8f9fa;border:1px solid #e8eaed;border-radius:8px;padding:8px 6px}
+.ps-l{font-size:9px;color:#9aa0a6;margin-bottom:3px;line-height:1.2}
+.ps-v{font-size:13px;font-weight:700;color:#202124}
+.ps-v.acc{color:#1967d2}
+.plink{font-size:11px;color:#1967d2;display:flex;align-items:center;gap:3px;margin-top:7px;text-decoration:none}
+.plink:hover{text-decoration:underline}
+
+/* Commitment */
+.commit{background:#e8f0fe;border:1px solid #c5d7f7;border-radius:10px;padding:14px}
+.cmain{font-size:13px;color:#1a3461;line-height:1.65;margin-bottom:8px}
+.cmain strong{font-weight:700;color:#1a3461}
+.cwarn{
+  font-size:11px;color:#3c4043;line-height:1.5;
+  padding:8px 10px;background:rgba(26,115,232,.08);
+  border-radius:6px;border-left:3px solid #1a73e8;margin-bottom:8px;
+}
+.cwarn strong{font-weight:600}
+.cdisc{font-size:10px;color:#80868b;font-style:italic;line-height:1.5;margin-bottom:12px}
+.sig-lbl{font-size:12px;color:#3c4043;font-weight:600;margin-bottom:5px}
+.sdate{font-size:10px;color:#9aa0a6;margin-top:4px;font-style:italic}
+
+/* Buttons */
+.btn-sub{
+  width:100%;height:36px;border:none;border-radius:6px;
+  font-size:14px;font-weight:500;cursor:pointer;
+  background:#1a73e8;color:#fff;font-family:inherit;margin-top:10px;
+}
+.btn-sub:hover:not(:disabled){background:#1557b0}
+.btn-sub:disabled{background:#c5d7f7;cursor:not-allowed;color:#80868b}
+.btn-rst{
+  width:100%;height:32px;border:1px solid #dadce0;border-radius:6px;
+  font-size:12px;cursor:pointer;background:#fff;color:#444746;
+  font-family:inherit;margin-top:5px;
+}
+.btn-rst:hover{background:#f8f9fa}
+
+/* Success */
+.succ{background:#e6f4ea;border:1px solid #a8d5b5;border-radius:10px;padding:20px 14px;text-align:center}
+.succ-ico{
+  width:42px;height:42px;border-radius:50%;background:#ceead6;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 10px;color:#137333;font-size:22px;font-weight:700;
+}
+.ref-pill{
+  font-size:11px;background:#fff;border-radius:5px;padding:4px 12px;
+  display:inline-block;color:#137333;border:1px solid #a8d5b5;
+  margin-top:7px;font-weight:600;
+}
+
+/* Footer */
+.pf{padding:10px 14px 14px;border-top:1px solid #e8eaed;flex-shrink:0}
+.pf-wrap{
+  background:#f1f3f4;border-radius:22px;height:38px;
+  display:flex;align-items:center;padding:0 6px 0 16px;gap:6px;
+}
+.pf-inp{flex:1;font-size:13px;color:#9aa0a6;border:none;background:transparent;outline:none;font-family:inherit}
+.pf-send{
+  width:28px;height:28px;border-radius:50%;background:#1a73e8;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:15px;flex-shrink:0;border:none;cursor:pointer;
+}
+.pf-src{font-size:10px;color:#5f6368;margin-top:6px;display:flex;align-items:center;gap:3px}
+.pf-disc{font-size:9px;color:#9aa0a6;margin-top:2px}
+</style>
+</head>
+<body>
+
+<!-- Background screenshot — rendered via img for precise DPR-safe scaling -->
+<div class="bg-img-wrap" aria-hidden="true">
+  <img src="/assets/images/wd_sana_background.png" alt="">
+</div>
+
+<div class="overlay"></div>
+
+<div class="pop" role="dialog" aria-modal="true" aria-labelledby="pop-title">
+
+  <!-- Header -->
+  <div class="ph">
+    <span class="ph-ico">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+    </span>
+    <span class="ph-title" id="pop-title">Request for Headcount<span class="ph-dot"></span></span>
+    <div class="ph-acts">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" title="Expand">
+        <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+        <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+      </svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" title="Close">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="pb" id="pb">
+
+    <div class="msg" id="m0">
+      <div class="intro-star">❖</div>
+      <div class="intro-h">Hi! Let's submit your headcount request.</div>
+      <div class="intro-s">Fill in the details here &amp; I'll calculate your recruiting plan.</div>
+    </div>
+
+    <div class="msg" id="m1">
+      <div class="row2">
+        <div>
+          <div class="fl">Job title <span class="req">*</span></div>
+          <input class="inp" id="jobTitle" type="text" placeholder="e.g. Senior Software Engineer" />
+        </div>
+        <div>
+          <div class="fl">Location</div>
+          <select class="inp" id="loc">
+            <option>Mountain View, CA</option>
+            <option>San Francisco, CA</option>
+            <option>Seattle, WA</option>
+            <option>New York, NY</option>
+            <option>Remote</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="msg" id="m2">
+      <div class="q-text">When do you need new hire(s) to start &amp; how many?</div>
+    </div>
+
+    <div class="msg" id="m3">
+      <div class="row2">
+        <div>
+          <div class="fl">New hire start date <span class="req">*</span></div>
+          <input class="inp" id="sd" type="date" oninput="calc()" />
+        </div>
+        <div>
+          <div class="fl">Number of hires <span class="req">*</span></div>
+          <input class="inp" id="nh" type="number" min="1" step="1" value="3" oninput="calc()" />
+        </div>
+      </div>
+      <div class="err" id="perr"></div>
+    </div>
+
+    <div class="msg" id="m4">
+      <div class="cvr-hd">
+        <span class="cvr-lbl">Dept conversion rates</span>
+        <span class="cvr-chip">Prism · last 12 mo</span>
+      </div>
+      <div class="cvrs">
+        <div class="cc"><div class="cv">10%</div><div class="cl">App → Screen</div></div>
+        <div class="cc"><div class="cv">50%</div><div class="cl">Screen → HMI</div></div>
+        <div class="cc"><div class="cv">75%</div><div class="cl">HMI → Final</div></div>
+        <div class="cc"><div class="cv">25%</div><div class="cl">Final → Offer</div></div>
+        <div class="cc"><div class="cv">85%</div><div class="cl">Accept rate</div></div>
+      </div>
+    </div>
+
+    <div class="msg" id="m5" style="display:none">
+      <div class="plan-h">Here's your recruiting plan!</div>
+      <div class="plan-strip">
+        <div class="ps"><div class="ps-l">Interview weeks</div><div class="ps-v" id="oIV">—</div></div>
+        <div class="ps"><div class="ps-l">Req open date</div><div class="ps-v acc" id="oReq">—</div></div>
+        <div class="ps"><div class="ps-l">TTF (weeks)</div><div class="ps-v" id="oTTF">—</div></div>
+        <div class="ps"><div class="ps-l">Hire-by date</div><div class="ps-v" id="oHB">—</div></div>
+      </div>
+      <a class="plink" href="https://dianewilkinson.github.io/tools/calculator/demo/" target="_blank" rel="noopener">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+        View full weekly planner →
+      </a>
+    </div>
+
+    <div class="msg" id="m6" style="display:none">
+      <div class="commit">
+        <div class="cmain" id="cmain"></div>
+        <div class="cwarn" id="cwarn"></div>
+        <div class="cdisc">Note: actual weekly volume may vary based on pipeline activity and candidate availability. This plan is monitored in real time — you will be notified if the timeline is at risk.</div>
+        <div class="sig-lbl">Type your full name to confirm <span class="req">*</span></div>
+        <input class="inp" id="sig" type="text" placeholder="Full name" oninput="chkSig()" style="background:#fff" />
+        <div class="err" id="serr"></div>
+        <div class="sdate" id="sdate"></div>
+        <button class="btn-sub" id="bsub" onclick="doSub()" disabled>Submit for approval</button>
+        <button class="btn-rst" onclick="doReset()">Start over</button>
+      </div>
+    </div>
+
+    <div class="msg" id="m7" style="display:none">
+      <div class="succ">
+        <div class="succ-ico">✓</div>
+        <div style="font-size:15px;font-weight:700;color:#137333;margin-bottom:6px">Request submitted</div>
+        <div style="font-size:13px;color:#137333;line-height:1.6;margin-bottom:6px">
+          Routed for approval. Once approved a job requisition will be created automatically.
+        </div>
+        <div class="ref-pill" id="ref"></div>
+      </div>
+    </div>
+
+  </div><!-- /pb -->
+
+  <div class="pf">
+    <div class="pf-wrap">
+      <input class="pf-inp" placeholder="What would you like to do?" readonly tabindex="-1" />
+      <button class="pf-send" tabindex="-1" aria-hidden="true">↑</button>
+    </div>
+    <div class="pf-src"><span style="font-size:13px;font-weight:700">+</span> Sources</div>
+    <div class="pf-disc">This content was generated by AI. Review before use.</div>
+  </div>
+
+</div><!-- /pop -->
+
+<script>
+(function(){
+  'use strict';
+  const CVR={r:.10,h:.50,f:.75,o:.25,a:.85};
+  let calcDone=false;
+
+  function addDays(d,n){const o=new Date(d.getTime());o.setDate(o.getDate()+n);return o;}
+  function startOfWeek(d){const o=new Date(d.getTime());const day=o.getDay();o.setDate(o.getDate()+(day===0?1:1-day));o.setHours(0,0,0,0);return o;}
+  function diffWeeks(a,b){return Math.round((startOfWeek(b).getTime()-startOfWeek(a).getTime())/(7*864e5));}
+  function fd(d){if(!d)return'—';return(d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear();}
+  function fs(d){if(!d)return'—';return d.toLocaleDateString(undefined,{month:'short',day:'numeric'});}
+
+  window.calc=function(){
+    const sdv=document.getElementById('sd').value;
+    const hv=parseInt(document.getElementById('nh').value,10);
+    document.getElementById('perr').textContent='';
+    if(!sdv||!hv||hv<1){hideOut();return;}
+    const sd=new Date(sdv+'T00:00:00');
+    if(isNaN(sd.getTime())){hideOut();return;}
+    const today=new Date();today.setHours(0,0,0,0);
+    const reqW=startOfWeek(addDays(today,14));
+    const riStartW=addDays(reqW,7);
+    const hireStartW=startOfWeek(sd);
+    const acceptW=addDays(hireStartW,-21);
+    const offerStartW=addDays(acceptW,-7);
+    const hireByW=acceptW;
+    const ttf=Math.max(1,diffWeeks(reqW,hireByW));
+    const aiw=Math.max(1,diffWeeks(riStartW,offerStartW));
+    const hmW=Math.max(1,aiw-1);
+    const hmTotal=Math.ceil(Math.ceil(Math.ceil(hv/CVR.a)/CVR.o)/CVR.f);
+    const hmPW=hmTotal/hmW;
+    const lo=Math.floor(hmPW),hi=Math.ceil(hmPW);
+    const range=lo===hi?String(lo):lo+'-'+hi;
+    const hmStartW=addDays(riStartW,7);
+
+    document.getElementById('oIV').textContent=aiw;
+    document.getElementById('oReq').textContent=fd(reqW);
+    document.getElementById('oTTF').textContent=ttf;
+    document.getElementById('oHB').textContent=fd(hireByW);
+
+    const startFmt=sd.toLocaleDateString(undefined,{month:'numeric',day:'numeric',year:'numeric'});
+    document.getElementById('cmain').innerHTML=
+      'Based on your request for <strong>'+hv+' hire'+(hv>1?'s':'')+'</strong>'+
+      ' with a new hire <strong>start date of '+startFmt+'</strong>,'+
+      ' you are committing to completing <strong>'+range+' HM interviews per week</strong>'+
+      ' starting the week of <strong>'+fs(hmStartW)+'</strong>'+
+      ' and ending the week of <strong>'+fs(addDays(offerStartW,-7))+'</strong>.';
+    document.getElementById('cwarn').innerHTML=
+      'This is a binding commitment. If you fall behind the agreed interview pace,'+
+      ' this request will be flagged and escalated. Your availability is what makes'+
+      ' the hire-by date of <strong>'+fd(hireByW)+'</strong> achievable.';
+    document.getElementById('sdate').textContent=
+      today.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
+
+    if(!calcDone){showM('m5',0);showM('m6',280);calcDone=true;}
+    chkSig();
+  };
+
+  function hideOut(){
+    ['m5','m6'].forEach(function(id){const e=document.getElementById(id);e.style.display='none';e.classList.remove('show');});
+    calcDone=false;
+  }
+  function showM(id,delay){
+    const e=document.getElementById(id);e.style.display='block';
+    setTimeout(function(){e.classList.add('show');},delay+10);
+  }
+  window.chkSig=function(){
+    const v=(document.getElementById('sig')||{}).value||'';
+    const b=document.getElementById('bsub');if(b)b.disabled=v.trim().length<2;
+  };
+  window.doSub=function(){
+    const n=(document.getElementById('sig')||{}).value||'';
+    if(n.trim().length<2){document.getElementById('serr').textContent='Please enter your full name.';return;}
+    document.getElementById('ref').textContent='HC-'+Math.floor(Math.random()*90000+10000);
+    ['m5','m6'].forEach(function(id){const e=document.getElementById(id);e.style.display='none';e.classList.remove('show');});
+    showM('m7',0);calcDone=false;
+  };
+  window.doReset=function(){
+    document.getElementById('jobTitle').value='';
+    document.getElementById('sd').value='2026-08-17';
+    document.getElementById('nh').value='3';
+    document.getElementById('sig').value='';
+    document.getElementById('serr').textContent='';
+    const m7=document.getElementById('m7');m7.style.display='none';m7.classList.remove('show');
+    hideOut();calc();
+  };
+
+  ['m0','m1','m2','m3','m4'].forEach(function(id,i){
+    const e=document.getElementById(id);e.style.display='block';
+    setTimeout(function(){e.classList.add('show');},i*90+10);
+  });
+  document.getElementById('sd').value='2026-08-17';
+  setTimeout(calc,600);
+})();
+</script>
+</body>
+</html>
