@@ -41,13 +41,15 @@ permalink: "/tools/"
                 </div>
               </div>
               <div class="appActions">
-                {% if item.card.function %}
+                {% if item.card.demoHref %}
+                  <a class="appLink" href="{{ item.card.demoHref }}">Demo →</a>
+                {% elif item.card.function %}
                   <span class="small muted">{{ item.card.function }}</span>
                 {% else %}
                   <span class="small muted"></span>
                 {% endif %}
                 {% if item.card.href %}
-                  <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+                  <a class="appLink" href="{{ item.card.href }}">{{ item.card.linkLabel or "Explore →" }}</a>
                 {% else %}
                   <span class="small muted">Details soon</span>
                 {% endif %}
@@ -77,13 +79,15 @@ permalink: "/tools/"
                 </div>
               </div>
               <div class="appActions">
-                {% if item.card.function %}
+                {% if item.card.demoHref %}
+                  <a class="appLink" href="{{ item.card.demoHref }}">Demo →</a>
+                {% elif item.card.function %}
                   <span class="small muted">{{ item.card.function }}</span>
                 {% else %}
                   <span class="small muted"></span>
                 {% endif %}
                 {% if item.card.href %}
-                  <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+                  <a class="appLink" href="{{ item.card.href }}">{{ item.card.linkLabel or "Explore →" }}</a>
                 {% else %}
                   <span class="small muted">Assumed</span>
                 {% endif %}
@@ -112,13 +116,15 @@ permalink: "/tools/"
                 </div>
               </div>
               <div class="appActions">
-                {% if item.card.function %}
+                {% if item.card.demoHref %}
+                  <a class="appLink" href="{{ item.card.demoHref }}">Demo →</a>
+                {% elif item.card.function %}
                   <span class="small muted">{{ item.card.function }}</span>
                 {% else %}
                   <span class="small muted"></span>
                 {% endif %}
                 {% if item.card.href %}
-                  <a class="appLink" href="{{ item.card.href }}">Explore →</a>
+                  <a class="appLink" href="{{ item.card.href }}">{{ item.card.linkLabel or "Explore →" }}</a>
                 {% else %}
                   <span class="small muted">Coming soon</span>
                 {% endif %}
